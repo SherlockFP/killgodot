@@ -54,18 +54,30 @@
   (`UI/Menu/SKGLobbyRoom`). Koltuklar adı kendi taşır (`FKGLobbyEntry::Name`): katılan oyuncu, oyuncu durumu
   replike olmadan önce, her makinede **1 sn içinde adıyla** görünür (`Tools/Unreal/kg_lobby_smoke.ps1`).
 - Host başlatınca maç **ısınma olmadan doğrudan `RoleReveal` fazına** geçer. Köy, tören bitene kadar görünmez.
-- **Rol töreni** (`UI/Reveal/SKGRoleReveal`, tam ekran, çizimle, asset yok): krupiye masası → iki riffle karıştırma →
-  her koltuğa bir kart, seninki öne kayar → kart döner → rol adı, taraf rengi ve kurdelesi, ekip satırı, **hedef**,
-  1–2 **yetenek** satırı, lore'dan **rol sözü** (italik, `Docs/Lore/KillGo_Lore.md §2.4`). Sabırsız takımlar
-  (Saat Kırıcılar) **suç ortaklarını** ad + rol olarak görür, yalnız katiller "Yalnız çalışırsın" görür.
-- Zamanlama sunucuda: faz `FKGMatchClock` ile **10 sn** (`KGReveal::PhaseSeconds`, sözleşme 8–12). Vuruşlar:
-  masa 0–1, karıştırma 1–3.2, dağıtma 3.2–4.2, çevirme 4.2–5, yüz 5–5.8. Kart açılınca **Boşluk / A / sol tık = hazır**;
-  herkes hazırsa sunucu fazı 0.75 sn'ye (kararma) indirir. Tören bitince beden girdisi geri verilir, köy kararmanın
-  altından belirir.
+- **Rol anı** (`UI/Reveal/SKGRoleReveal`, SPRINT-037; SPRINT-015'in krupiye masası kullanıcı tarafından "sıkıcı,
+  okunmuyor" diye reddedildi). Hedef: Among Us "Impostor" ekranı enerjisi, **2 saniyede okunur**. Akış: karanlık oda →
+  kart dönerek karanlıktan yükselir → "SEN KİMSİN?" yazısı altında kart titrer, ışık birikir (saat tıkırtılı riser) →
+  **kart döner: beyaz flaş, ekran taraf rengine boyanır, kamera vuruşu + sarsıntı, patlama** (Kasaba konfeti, Sabırsız
+  kor kıvılcımı, Nötr sim) **ve taraf sesi** (`S_Reveal_Town|Impatient|Neutral`) → üç şey çarpar:
+  - **DEV rol adı** (büyük harf, Türkçe İ/I doğru, koyu kontur), üstten iner ve oturur;
+  - **taraf bandı** kendi renginde: "SEN SABIRSIZSIN" / "KASABAYLA BEKLİYORSUN" / "KENDİ OYUNUNU OYNUYORSUN";
+  - **tek satır, düz sözcüklerle ne yaptığın** (≤ 6 sözcük, 51 rolün hepsi EN/TR: `KGRoleCardText.cpp` `DoRows`).
+  Ana ekranda toplam **≤ 12 sözcük** (test `KillGodot.Reveal.MomentText`); paragraf yok.
+- **Suç ortakları** (Sabırsız takımlar): kartın iki yanına sırayla çıkan **büyük silüetler**, başlarının üstünde ad
+  (yayıncı modunda takma ad) ve küçük rol adı - Among Us dizilişi, tablo değil.
+- **Detaylar isteğe bağlı:** **Tab basılı tut** → hedef, yetenekler, lore sözü (ve yayıncı notu) bir panelde. Oyun
+  içinde HUD rol kartı da aynı bilgiyi verir. Alt satır: `BOŞLUK HAZIRIM` · `TAB DETAY`, en altta kalan süre çubuğu.
+- Görseller: `Tools/UI/kg_make_reveal_art.py` → `Art/UI/Reveal` (fener / hançerli kırık cep saati / iki yüzlü maske,
+  3 köylü büstü), içe aktarma `Tools/Unreal/kg_import_reveal_art.py` → `/Game/KillGodot/UI/Reveal`. Sesler
+  `Tools/Audio/kg_synth_sfx_reveal.py` → `kg_import_audio.py --only S_Reveal_`. Doku yoksa boyalı yedekler çizilir.
+- Zamanlama sunucuda: faz `FKGMatchClock` ile **6 sn** (`KGReveal::PhaseSeconds`, sözleşme 5–7). Vuruşlar: dönüş
+  0–0.7, bekleyiş 0.7–1.1, çevirme 1.1–1.3 (**patlama 1.2**), ad 1.25, bant 1.4, satır 1.7, ortaklar 1.9, hepsi
+  ekranda 2.4. **Hazır** 1.6'dan itibaren (**Boşluk / A / sol tık**); herkes hazırsa sunucu fazı 0.6 sn'ye (kararma)
+  indirir. Tören bitince beden girdisi geri verilir, köy kararmanın altından belirir.
 - Gizlilik: rol `AKGPlayerState::PrivateRoleId` (`COND_OwnerOnly`); suç ortakları ve hazır sayacı her insan
   oyuncunun kontrolcüsündeki `UKGRevealComponent`'te, tüm alanlar `COND_OwnerOnly` (test `KillGodot.Reveal.OwnerOnly`).
-- Kanıt: `Tools/Unreal/kg_reveal_shots.ps1` → `Saved/UIShots/reveal-<rol>-<aşama>_<W>x<H>.png`
-  (`kg.UIShot revealall:<Rol>`).
+- Kanıt: `Tools/Unreal/kg_reveal_shots.ps1` → `Saved/UIShots/reveal-<rol>-<aşama>_<W>x<H>.png`, aşamalar
+  `spin | tease | flip | slam | role | details` (+ `:ready`, `:streamer`); `kg.UIShot reveal:<Rol>:<aşama>`.
 
 ## 5. Lobi: Geç Kalan Meyhanesi (3D)
 - Oyuncular meyhanede **karakter olarak** doğar. Yürürler, konuşurlar (proximity voice) ve mini oyun oynarlar: dart, satranç, bilek güreşi, piyano.

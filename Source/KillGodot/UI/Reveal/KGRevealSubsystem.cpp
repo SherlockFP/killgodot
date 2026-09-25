@@ -9,6 +9,8 @@
 #include "GameFramework/PlayerController.h"
 #include "HAL/IConsoleManager.h"
 #include "InputCoreTypes.h"
+#include "Kismet/GameplayStatics.h"
+#include "Sound/SoundBase.h"
 #include "KillGodot.h"
 #include "Misc/CommandLine.h"
 #include "Misc/Parse.h"
@@ -32,6 +34,21 @@ namespace KGRevealSubsystemPrivate
 	FString AlignmentTag(EKGAlignment Align)
 	{
 		return Align == EKGAlignment::Impatient ? TEXT("Impatient") : Align == EKGAlignment::Neutral ? TEXT("Neutral") : TEXT("Town");
+	}
+
+	/** Reveal sounds (Tools/Audio/kg_synth_sfx_reveal.py -> /Game/KillGodot/Audio). Null when not imported. */
+	USoundBase* RevealSound(const TCHAR* Name)
+	{
+		static TMap<FName, TWeakObjectPtr<USoundBase>> Cache;
+		const FName Key(Name);
+		if (const TWeakObjectPtr<USoundBase>* Hit = Cache.Find(Key); Hit && Hit->IsValid())
+		{
+			return Hit->Get();
+		}
+		USoundBase* Sound = LoadObject<USoundBase>(nullptr, *FString::Printf(TEXT("/Game/KillGodot/Audio/%s.%s"), Name, Name), nullptr,
+		                                           LOAD_NoWarn | LOAD_Quiet);
+		Cache.Add(Key, Sound);
+		return Sound;
 	}
 }
 
@@ -158,6 +175,7 @@ FKGRevealView UKGRevealSubsystem::BuildView() const
 	View.bEnding = bEnding;
 	View.bStreamer = KGStreamer::IsEnabled();
 	View.PeekKey = KGStreamer::GetPeekKeyLabel().ToString();
+	View.bDetails = bActive && !bEnding && PC->IsInputKeyDown(EKeys::Tab);
 	if (const FKGRoleInfo* Info = KGRevealSubsystemPrivate::FindRoleInfo(View.RoleId))
 	{
 		View.bHasTeam = KGRoleCard::IsTeamFaction(Info->Faction);
@@ -258,6 +276,39 @@ void UKGRevealSubsystem::LogBeats(const FKGRevealView& View)
 	}
 }
 
+void UKGRevealSubsystem::PlayBeats(const FKGRevealView& View)
+{
+	// Sound follows the drawn ceremony: the riser while the card spins up, the alignment sting on the flip.
+	if (!Widget.IsValid() || bEnding)
+	{
+		return;
+	}
+	UWorld* World = GetWorld();
+	if (!bRiserPlayed && View.ServerElapsed >= 0.0f && LocalClock < KGReveal::BangAt - 0.4f)
+	{
+		bRiserPlayed = true;
+		if (USoundBase* Sound = KGRevealSubsystemPrivate::RevealSound(TEXT("S_Reveal_Riser")))
+		{
+			UGameplayStatics::PlaySound2D(World, Sound, 0.8f);
+		}
+	}
+	if (!bStingPlayed && !View.RoleId.IsNone() && LocalClock >= KGReveal::BangAt - 0.03f)
+	{
+		bStingPlayed = true;
+		bRiserPlayed = true;
+		const FKGRoleInfo* Info = KGRevealSubsystemPrivate::FindRoleInfo(View.RoleId);
+		const EKGAlignment Align = Info ? Info->GetAlignment() : EKGAlignment::Town;
+		const TCHAR* Name = Align == EKGAlignment::Impatient ? TEXT("S_Reveal_Impatient")
+			: Align == EKGAlignment::Neutral ? TEXT("S_Reveal_Neutral") : TEXT("S_Reveal_Town");
+		USoundBase* Sound = LocalClock < KGReveal::BangAt + 0.6f ? KGRevealSubsystemPrivate::RevealSound(Name) : nullptr;
+		if (Sound)
+		{
+			UGameplayStatics::PlaySound2D(World, Sound, 1.0f);
+		}
+		UE_LOG(LogKillGodot, Log, TEXT("KG_REVEAL sting %s at %.2fs (%s)"), Name, LocalClock, Sound ? TEXT("played") : TEXT("skipped"));
+	}
+}
+
 void UKGRevealSubsystem::TickLocal(float DeltaTime)
 {
 	UWorld* World = GetWorld();
@@ -281,6 +332,8 @@ void UKGRevealSubsystem::TickLocal(float DeltaTime)
 		LoggedStage = -1;
 		bLoggedRole = false;
 		bAutoReadySent = false;
+		bRiserPlayed = false;
+		bStingPlayed = false;
 		ShowOverlay(PC);
 		UE_LOG(LogKillGodot, Log, TEXT("KG_REVEAL begin (%s, phase %s, %d seats, overlay %s)"),
 		       World->GetNetMode() == NM_Client ? TEXT("client") : TEXT("host"), *UEnum::GetValueAsString(Phase),
@@ -311,9 +364,10 @@ void UKGRevealSubsystem::TickLocal(float DeltaTime)
 	else if (View.ServerElapsed >= 0.0f)
 	{
 		LocalClock = FMath::Max(LocalClock + DeltaTime, View.ServerElapsed);
-		LocalClock = View.RoleId.IsNone() ? FMath::Min(LocalClock, KGReveal::DealEnd - 0.02f) : LocalClock;
+		LocalClock = View.RoleId.IsNone() ? FMath::Min(LocalClock, KGReveal::TeaseEnd - 0.02f) : LocalClock;
 	}
 	LogBeats(View);
+	PlayBeats(View);
 	if (bEnding)
 	{
 		EndingSeconds += DeltaTime;
@@ -340,7 +394,7 @@ void UKGRevealSubsystem::TickLocal(float DeltaTime)
 		PressReady();
 	}
 	static const bool bAutoReady = FParse::Param(FCommandLine::Get(), TEXT("KGRevealAutoReady"));
-	if (bAutoReady && !bAutoReadySent && LocalClock >= KGReveal::FlipEnd + 1.0f)
+	if (bAutoReady && !bAutoReadySent && LocalClock >= KGReveal::ReadyFromSeconds + 0.6f)
 	{
 		bAutoReadySent = PressReady();
 	}
@@ -364,22 +418,30 @@ TSharedPtr<SWidget> UKGRevealSubsystem::MakeShotWidget(const FString& Spec, bool
 	}
 	const FString Stage = Parts[1].ToLower();
 	bool bReady = false;
+	bool bDetails = false;
 	for (int32 Index = 2; Index < Parts.Num(); ++Index)
 	{
 		bReady |= Parts[Index].ToLower() == TEXT("ready");
+		bDetails |= Parts[Index].ToLower() == TEXT("details");
 		bStreamer |= Parts[Index].ToLower() == TEXT("streamer");   // file name carries the variant
 	}
+	// SPRINT-037 beats; the SPRINT-015 stage names stay as aliases (kg.UIShot revealall still asks for them).
 	static const TMap<FString, float> Times = {
-		{TEXT("table"), KGReveal::TableEnd * 0.8f},
-		{TEXT("shuffle"), KGReveal::TableEnd + (KGReveal::ShuffleEnd - KGReveal::TableEnd) * 0.5f * 0.5f},
-		{TEXT("deal"), KGReveal::ShuffleEnd + (KGReveal::DealEnd - KGReveal::ShuffleEnd) * 0.55f},
-		{TEXT("flip"), KGReveal::DealEnd + (KGReveal::FlipEnd - KGReveal::DealEnd) * 0.66f},
-		{TEXT("role"), 7.4f}};
+		{TEXT("spin"), KGReveal::SpinEnd * 0.6f},
+		{TEXT("tease"), (KGReveal::SpinEnd + KGReveal::TeaseEnd) * 0.5f},
+		{TEXT("flip"), KGReveal::BangAt + 0.05f},
+		{TEXT("slam"), KGReveal::NameAt + 0.14f},
+		{TEXT("role"), 3.2f},
+		{TEXT("details"), 3.2f},
+		{TEXT("table"), KGReveal::SpinEnd * 0.3f},
+		{TEXT("shuffle"), KGReveal::SpinEnd * 0.6f},
+		{TEXT("deal"), (KGReveal::SpinEnd + KGReveal::TeaseEnd) * 0.5f}};
 	const float* Time = Times.Find(Stage);
 	if (!Time)
 	{
 		return nullptr;
 	}
+	bDetails |= Stage == TEXT("details");
 	FKGRevealView View;
 	View.RoleId = RoleId;
 	View.Players = 12;
@@ -391,6 +453,7 @@ TSharedPtr<SWidget> UKGRevealSubsystem::MakeShotWidget(const FString& Spec, bool
 	View.ServerRemaining = KGReveal::PhaseSeconds - *Time;
 	View.bStreamer = bStreamer;
 	View.PeekKey = TEXT("Tab");
+	View.bDetails = bDetails;
 	if (View.bHasTeam)
 	{
 		// Sample accomplices (a 12-player list has three Clockbreakers).

@@ -8,13 +8,16 @@
 struct FSlateFontInfo;
 
 /**
- * The role reveal ceremony (SPRINT-015, Docs/08_UI_UX.md "Role reveal"): a full-screen, painted dealer's table in the
- * Town of Salem tradition. The deck is shuffled, one card goes to every seat, yours slides up and flips: role name,
- * alignment colour, goal, one or two ability lines, the flavour line from the lore, and (Impatient teams) your
- * accomplices. The match world only shows once the phase ends and this fades out.
+ * The role reveal MOMENT (SPRINT-037, Docs/08_UI_UX.md "Rol töreni"; replaces the SPRINT-015 dealer's table): a dark
+ * room, your card spins up and trembles ("WHO ARE YOU?"), flips - white flash, the screen floods in your alignment's
+ * colour, a camera punch, sparks / confetti / glitter burst out, the sting plays (UKGRevealSubsystem) - and three
+ * things slam in: a HUGE role name, the alignment banner ("YOU ARE IMPATIENT") and one plain "what you do" line.
+ * Impatient teams see their accomplices step up beside the card as silhouettes with names (a lineup, not a table).
+ * Goal, abilities and flavour live in the optional details view (hold Tab) and in the HUD role card afterwards.
  *
  * Timing follows the server's RoleReveal clock (KGReveal beats, KGRevealTypes.h); FixedTime pins a moment for
- * off-screen screenshots (kg.UIShot reveal:<Role>:<stage>). Everything is vertex-painted: no assets.
+ * off-screen screenshots (kg.UIShot reveal:<Role>:<stage>). Art: /Game/KillGodot/UI/Reveal textures
+ * (Tools/UI/kg_make_reveal_art.py), with painted fallbacks when they are missing.
  */
 class KILLGODOT_API SKGRoleReveal : public SLeafWidget
 {
@@ -54,4 +57,8 @@ private:
 	float OutroTime = 0.0f;
 	/** Seconds since the face-up card was first drawn with ready pressed (for the "ready" pop). */
 	float ReadyAge = 0.0f;
+	/** Free-running clock for idle loops (tremble, rays, motes) that must keep moving while Time waits for the role. */
+	float AnimTime = 0.0f;
+	/** 0..1 fade of the details view (Tab held). */
+	float DetailsAlpha = 0.0f;
 };

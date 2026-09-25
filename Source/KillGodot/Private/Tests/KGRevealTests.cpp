@@ -142,19 +142,73 @@ IMPLEMENT_SIMPLE_AUTOMATION_TEST(FKGRevealTimelineTest, "KillGodot.Reveal.Timeli
 bool FKGRevealTimelineTest::RunTest(const FString& Parameters)
 {
 	using namespace KGReveal;
-	TestTrue(TEXT("Reveal lasts 8-12 s (contract)"), PhaseSeconds >= 8.0f && PhaseSeconds <= 12.0f);
+	TestTrue(TEXT("Reveal lasts 5-7 s (SPRINT-037 contract)"), PhaseSeconds >= 5.0f && PhaseSeconds <= 7.0f);
 	for (int32 Players = 6; Players <= 20; ++Players)
 	{
 		TestEqual(TEXT("Phase duration comes from the reveal timeline"), AKGGameMode::GetPhaseDuration(EKGPhase::RoleReveal, Players),
 		          PhaseSeconds);
 	}
-	TestTrue(TEXT("Beats in order"), 0.0f < TableEnd && TableEnd < ShuffleEnd && ShuffleEnd < DealEnd && DealEnd < FlipEnd && FlipEnd < FaceEnd);
-	TestTrue(TEXT("The card is read before the phase can end"), FaceEnd + 2.0f <= PhaseSeconds);
-	TestTrue(TEXT("Skipping leaves a fade-out"), SkipToSeconds > 0.0f && SkipToSeconds < PhaseSeconds - FlipEnd);
-	TestEqual(TEXT("Stage at 0"), StageAt(0.0f), EStage::Table);
-	TestEqual(TEXT("Stage mid shuffle"), StageAt((TableEnd + ShuffleEnd) * 0.5f), EStage::Shuffle);
-	TestEqual(TEXT("Stage mid flip"), StageAt((DealEnd + FlipEnd) * 0.5f), EStage::Flip);
+	TestTrue(TEXT("Beats in order"), 0.0f < SpinEnd && SpinEnd < TeaseEnd && TeaseEnd < BangAt && BangAt < FlipEnd);
+	TestTrue(TEXT("Words in order"), BangAt <= NameAt && NameAt < BannerAt && BannerAt < LineAt && LineAt < MatesAt && MatesAt < ReadEnd);
+	TestTrue(TEXT("The moment lands fast (face up within 1.5 s)"), BangAt <= 1.5f);
+	TestTrue(TEXT("Everything is on screen within 2.5 s"), ReadEnd <= 2.5f);
+	TestTrue(TEXT("At least 3 s to read before the phase can end"), ReadEnd + 3.0f <= PhaseSeconds);
+	TestTrue(TEXT("Ready only once the name is up"), ReadyFromSeconds > NameAt && ReadyFromSeconds <= ReadEnd);
+	TestTrue(TEXT("Skipping leaves a fade-out"), SkipToSeconds > 0.0f && SkipToSeconds >= OutroSeconds && SkipToSeconds < PhaseSeconds - FlipEnd);
+	TestEqual(TEXT("Stage at 0"), StageAt(0.0f), EStage::Spin);
+	TestEqual(TEXT("Stage mid tease"), StageAt((SpinEnd + TeaseEnd) * 0.5f), EStage::Tease);
+	TestEqual(TEXT("Stage at the bang"), StageAt(BangAt), EStage::Flip);
 	TestEqual(TEXT("Stage after flip"), StageAt(PhaseSeconds), EStage::Role);
+	TestEqual(TEXT("Stage names"), FString(StageName(EStage::Role)), FString(TEXT("role")));
+	return true;
+}
+
+// SPRINT-037 acceptance 1: the main reveal says at most ~12 words - the role name, the alignment banner and ONE plain
+// "what you do" line (<= 6 words) - in both languages, for every role in the catalog.
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FKGRevealMomentTextTest, "KillGodot.Reveal.MomentText",
+                                 EAutomationTestFlags_ApplicationContextMask | EAutomationTestFlags::ProductFilter)
+
+bool FKGRevealMomentTextTest::RunTest(const FString& Parameters)
+{
+	int32 Worst = 0;
+	FString WorstRole;
+	for (const FKGRoleInfo& Role : FKGRoleListGenerator::GetDefaultCatalog())
+	{
+		for (const bool bTr : {false, true})
+		{
+			const FKGRoleCardText Card = KGRoleCard::GetIn(Role.RoleId, bTr);
+			const FString Banner = KGRoleCard::AlignmentBannerIn(Role.GetAlignment(), bTr);
+			const TCHAR* Lang = bTr ? TEXT("tr") : TEXT("en");
+			const FString Id = Role.RoleId.ToString();
+			TestFalse(*FString::Printf(TEXT("%s/%s has a 'what you do' line"), *Id, Lang), Card.Do.IsEmpty());
+			const int32 DoWords = KGRoleCard::CountWords(Card.Do);
+			TestTrue(*FString::Printf(TEXT("%s/%s line '%s' is <= 6 words (%d)"), *Id, Lang, *Card.Do, DoWords), DoWords >= 2 && DoWords <= 6);
+			const int32 Total = KGRoleCard::CountWords(Card.Name) + KGRoleCard::CountWords(Banner) + DoWords;
+			TestTrue(*FString::Printf(TEXT("%s/%s main reveal is <= 12 words (%d)"), *Id, Lang, Total), Total <= 12);
+			if (Total > Worst)
+			{
+				Worst = Total;
+				WorstRole = FString::Printf(TEXT("%s/%s"), *Id, Lang);
+			}
+		}
+	}
+	AddInfo(FString::Printf(TEXT("Longest main reveal: %d words (%s)"), Worst, *WorstRole));
+	for (const EKGAlignment Align : {EKGAlignment::Town, EKGAlignment::Impatient, EKGAlignment::Neutral})
+	{
+		for (const bool bTr : {false, true})
+		{
+			const FString Banner = KGRoleCard::AlignmentBannerIn(Align, bTr);
+			TestTrue(*FString::Printf(TEXT("Banner '%s' is short"), *Banner), KGRoleCard::CountWords(Banner) >= 2 && KGRoleCard::CountWords(Banner) <= 5);
+			TestEqual(TEXT("Banner is upper case"), KGRoleCard::ToDisplayUpper(Banner, bTr), Banner);
+		}
+	}
+	// Turkish upper case (the huge role name is shown in capitals).
+	TestEqual(TEXT("Turkish i gets its dot"), KGRoleCard::ToDisplayUpper(TEXT("Şerif"), true), FString(TEXT("ŞERİF")));
+	TestEqual(TEXT("Turkish dotless i"), KGRoleCard::ToDisplayUpper(TEXT("Kapı"), true), FString(TEXT("KAPI")));
+	TestEqual(TEXT("Circumflex and umlauts"), KGRoleCard::ToDisplayUpper(TEXT("Kâhin Gözcü Çoban Doğu"), true),
+	          FString(TEXT("KÂHİN GÖZCÜ ÇOBAN DOĞU")));
+	TestEqual(TEXT("English stays English"), KGRoleCard::ToDisplayUpper(TEXT("Serial Killer"), false), FString(TEXT("SERIAL KILLER")));
+	TestEqual(TEXT("Word count ignores punctuation"), KGRoleCard::CountWords(TEXT("Kill at night. Don't get caught.")), 6);
 	return true;
 }
 

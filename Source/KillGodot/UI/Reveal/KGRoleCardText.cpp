@@ -244,6 +244,91 @@ namespace KGRoleCardPrivate
 		 TEXT("Win two duels, then sail into the fog."), TEXT("İki düello kazan, sonra sise yelken aç.")},
 	};
 
+	/** The reveal moment's one line per role (SPRINT-037): plain words, at most six. */
+	struct FDoRow
+	{
+		const TCHAR* Id;
+		const TCHAR* En;
+		const TCHAR* Tr;
+	};
+
+	const FDoRow DoRows[] = {
+		{TEXT("Sheriff"), TEXT("Question one villager each night."), TEXT("Her gece birini sorgula.")},
+		{TEXT("Investigator"), TEXT("Find out who people really are."), TEXT("Kimin ne olduğunu ortaya çıkar.")},
+		{TEXT("Lookout"), TEXT("Watch a door. See who visits."), TEXT("Bir kapıyı gözle. Geleni gör.")},
+		{TEXT("Tracker"), TEXT("Follow the glowing footprints."), TEXT("Parlayan ayak izlerini takip et.")},
+		{TEXT("Coroner"), TEXT("Read the dead. Name the killer."), TEXT("Ölüleri incele. Katili bul.")},
+		{TEXT("Eavesdropper"), TEXT("Listen in on the killers."), TEXT("Katilleri gizlice dinle.")},
+		{TEXT("Medium"), TEXT("Talk to the dead at night."), TEXT("Gece ölülerle konuş.")},
+		{TEXT("Seer"), TEXT("Compare two souls each night."), TEXT("Her gece iki kişiyi kıyasla.")},
+		{TEXT("Doctor"), TEXT("Save one life each night."), TEXT("Her gece bir can kurtar.")},
+		{TEXT("Bodyguard"), TEXT("Guard someone. Die a hero."), TEXT("Birini koru. Kahraman gibi öl.")},
+		{TEXT("Watchman"), TEXT("Patrol at night. Cuff the guilty."), TEXT("Gece devriye gez. Suçluyu kelepçele.")},
+		{TEXT("Priest"), TEXT("Bless a house. Hear the bell."), TEXT("Bir evi kutsa. Çanı dinle.")},
+		{TEXT("Locksmith"), TEXT("Seal one door each night."), TEXT("Her gece bir kapıyı mühürle.")},
+		{TEXT("Vigilante"), TEXT("Three bullets. Don't miss."), TEXT("Üç mermi. Iskalama.")},
+		{TEXT("Veteran"), TEXT("Shoot anyone at your door."), TEXT("Kapına geleni vur.")},
+		{TEXT("Hunter"), TEXT("Set traps. Catch a killer."), TEXT("Kapan kur. Katili yakala.")},
+		{TEXT("Mayor"), TEXT("Reveal yourself. Swing the vote."), TEXT("Kendini açıkla. Oylamayı çevir.")},
+		{TEXT("Jailor"), TEXT("Jail someone. Execute the guilty."), TEXT("Birini hapset. Suçluyu infaz et.")},
+		{TEXT("TavernKeeper"), TEXT("Get people drunk. Ruin plans."), TEXT("Sarhoş et. Planları boz.")},
+		{TEXT("BellRinger"), TEXT("Ring the bell. Expose everyone."), TEXT("Çanı çal. Herkesi göster.")},
+		{TEXT("Shepherd"), TEXT("Your dog sniffs out liars."), TEXT("Köpeğin yalancıları koklar.")},
+		{TEXT("PowderMaster"), TEXT("Find bombs. Defuse them fast."), TEXT("Bombaları bul, hızla sök.")},
+		{TEXT("Clockmaster"), TEXT("Pick the victim. Lead the kill."), TEXT("Kurbanı seç. Cinayeti yönet.")},
+		{TEXT("Enforcer"), TEXT("Kill at night. Don't get caught."), TEXT("Gece öldür. Yakalanma.")},
+		{TEXT("Informant"), TEXT("Learn anyone's true role."), TEXT("Herkesin gerçek rolünü öğren.")},
+		{TEXT("Framer"), TEXT("Make the innocent look guilty."), TEXT("Masumu suçlu göster.")},
+		{TEXT("Cleaner"), TEXT("Hide the bodies. Erase clues."), TEXT("Cesetleri sakla. İzleri sil.")},
+		{TEXT("Blackmailer"), TEXT("Silence anyone for a day."), TEXT("Birini bir gün sustur.")},
+		{TEXT("Forger"), TEXT("Rewrite the dead's last words."), TEXT("Ölülerin vasiyetini değiştir.")},
+		{TEXT("Spy"), TEXT("Stab someone. Steal their face."), TEXT("Arkadan vur. Yüzünü çal.")},
+		{TEXT("Charmer"), TEXT("Cancel someone's night plans."), TEXT("Birinin gece planını boz.")},
+		{TEXT("Saboteur"), TEXT("Break the village. Blame others."), TEXT("Köyü boz. Suçu başkasına at.")},
+		{TEXT("Smuggler"), TEXT("Sneak through the secret tunnels."), TEXT("Gizli tünellerden sız.")},
+		{TEXT("Ambusher"), TEXT("Set an ambush. Wait."), TEXT("Pusu kur. Bekle.")},
+		{TEXT("Bomber"), TEXT("Plant bombs. Stay far away."), TEXT("Bomba kur. Uzak dur.")},
+		{TEXT("SerialKiller"), TEXT("Kill every night. Trust nobody."), TEXT("Her gece öldür. Kimseye güvenme.")},
+		{TEXT("Werewolf"), TEXT("Full moon: hunt them all."), TEXT("Dolunayda hepsini avla.")},
+		{TEXT("Arsonist"), TEXT("Douse houses. Burn them all."), TEXT("Evlere yağ dök. Hepsini yak.")},
+		{TEXT("Poisoner"), TEXT("Poison the food. Watch them fall."), TEXT("Yemeği zehirle. Düşüşlerini izle.")},
+		{TEXT("Vampire"), TEXT("Bite. Turn them. Rule the night."), TEXT("Isır. Dönüştür. Geceye hükmet.")},
+		{TEXT("Plaguebearer"), TEXT("Infect everyone you meet."), TEXT("Tanıştığın herkese bulaştır.")},
+		{TEXT("Drowned"), TEXT("Drag them into the sea."), TEXT("Onları denize çek.")},
+		{TEXT("Doppelganger"), TEXT("Kill someone. Become them."), TEXT("Birini öldür. Onun yerine geç.")},
+		{TEXT("Fool"), TEXT("Act guilty. Get yourself hanged."), TEXT("Suçlu görün. Kendini astır.")},
+		{TEXT("Executioner"), TEXT("Get your target hanged."), TEXT("Hedefini darağacına gönder.")},
+		{TEXT("Witch"), TEXT("Steer other people's night actions."), TEXT("Başkalarının gece eylemini yönet.")},
+		{TEXT("Survivor"), TEXT("Just stay alive."), TEXT("Sadece hayatta kal.")},
+		{TEXT("Amnesiac"), TEXT("Become a dead villager's role."), TEXT("Bir ölünün rolüne bürün.")},
+		{TEXT("Pozzo"), TEXT("Pick your Lucky. Keep them close."), TEXT("Lucky'ni seç. Yakında tut.")},
+		{TEXT("Collector"), TEXT("Steal five marked items."), TEXT("İşaretli beş eşyayı çal.")},
+		{TEXT("Pirate"), TEXT("Win two duels. Sail away."), TEXT("İki düello kazan. Yelken aç.")},
+	};
+
+	const FDoRow* FindDoRow(FName RoleId)
+	{
+		for (const FDoRow& Row : DoRows)
+		{
+			if (RoleId == FName(Row.Id))
+			{
+				return &Row;
+			}
+		}
+		return nullptr;
+	}
+
+	/** Fallback when a role has no hand-written line: the side's job in plain words. */
+	const TCHAR* FactionDo(const FKGRoleInfo* Info, bool bTr)
+	{
+		switch (Info ? Info->GetAlignment() : EKGAlignment::Town)
+		{
+		case EKGAlignment::Impatient: return bTr ? TEXT("Gece öldür. Yakalanma.") : TEXT("Kill at night. Don't get caught.");
+		case EKGAlignment::Neutral: return bTr ? TEXT("Kendi hedefin için oyna.") : TEXT("Play for your own goal.");
+		default: return bTr ? TEXT("Katilleri bul. Onları astır.") : TEXT("Find the killers. Hang them.");
+		}
+	}
+
 	const FRow* FindRow(FName RoleId)
 	{
 		for (const FRow& Row : Rows)
@@ -329,9 +414,12 @@ FKGRoleCardText KGRoleCard::GetIn(FName RoleId, bool bTr)
 		}
 		Out.Team = Info ? KGRoleCardPrivate::TeamLine(*Info, bTr) : FString();
 		Out.Goal = Info ? KGRoleCardPrivate::FactionGoal(*Info, bTr) : FString();
+		Out.Do = KGRoleCardPrivate::FactionDo(Info, bTr);
 		return Out;
 	}
 	Out.Name = bTr ? Row->NameTr : Row->NameEn;
+	const KGRoleCardPrivate::FDoRow* DoRow = KGRoleCardPrivate::FindDoRow(RoleId);
+	Out.Do = DoRow ? (bTr ? DoRow->Tr : DoRow->En) : KGRoleCardPrivate::FactionDo(Info, bTr);
 	for (int32 Index = 0; Index < 2; ++Index)
 	{
 		const TCHAR* Line = bTr ? Row->AbilityTr[Index] : Row->AbilityEn[Index];
@@ -356,6 +444,62 @@ FString KGRoleCard::AlignmentName(EKGAlignment Alignment)
 	case EKGAlignment::Neutral: return bTr ? TEXT("NÖTR") : TEXT("NEUTRAL");
 	default: return bTr ? TEXT("KASABA") : TEXT("TOWN");
 	}
+}
+
+FString KGRoleCard::AlignmentBanner(EKGAlignment Alignment)
+{
+	return AlignmentBannerIn(Alignment, IsTurkish());
+}
+
+FString KGRoleCard::AlignmentBannerIn(EKGAlignment Alignment, bool bTr)
+{
+	switch (Alignment)
+	{
+	case EKGAlignment::Impatient: return bTr ? TEXT("SEN SABIRSIZSIN") : TEXT("YOU ARE IMPATIENT");
+	case EKGAlignment::Neutral: return bTr ? TEXT("KENDİ OYUNUNU OYNUYORSUN") : TEXT("YOU PLAY YOUR OWN GAME");
+	default: return bTr ? TEXT("KASABAYLA BEKLİYORSUN") : TEXT("YOU WAIT WITH THE TOWN");
+	}
+}
+
+FString KGRoleCard::ToDisplayUpper(const FString& Text, bool bTr)
+{
+	FString Out;
+	Out.Reserve(Text.Len());
+	for (const TCHAR Ch : Text)
+	{
+		TCHAR Up = Ch;
+		if (Ch >= TEXT('a') && Ch <= TEXT('z'))
+		{
+			Up = (bTr && Ch == TEXT('i')) ? TCHAR(0x0130) : TCHAR(Ch - 32);
+		}
+		else if (Ch == TCHAR(0x0131))
+		{
+			Up = TEXT('I');   // dotless i
+		}
+		else if (Ch == TCHAR(0x011F) || Ch == TCHAR(0x015F))
+		{
+			Up = TCHAR(Ch - 1);   // g-breve, s-cedilla
+		}
+		else if (Ch >= TCHAR(0x00E0) && Ch <= TCHAR(0x00FE) && Ch != TCHAR(0x00F7))
+		{
+			Up = TCHAR(Ch - 32);  // Latin-1 lower case (c-cedilla, o/u-umlaut, circumflex vowels...)
+		}
+		Out.AppendChar(Up);
+	}
+	return Out;
+}
+
+int32 KGRoleCard::CountWords(const FString& Text)
+{
+	int32 Words = 0;
+	bool bIn = false;
+	for (const TCHAR Ch : Text)
+	{
+		const bool bLetter = FChar::IsAlnum(Ch) || Ch > 0x7F || Ch == TEXT('\'');
+		Words += bLetter && !bIn ? 1 : 0;
+		bIn = bLetter;
+	}
+	return Words;
 }
 
 FLinearColor KGRoleCard::AlignmentColor(EKGAlignment Alignment)

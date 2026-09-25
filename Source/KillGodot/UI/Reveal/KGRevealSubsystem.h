@@ -17,7 +17,8 @@ class SWidget;
  *    phase starts, keeps the ready tally (and cuts the phase short when everyone is ready),
  *  - local player: shows SKGRoleReveal full screen from the moment the lobby starts until the RoleReveal phase is
  *    over (the village is never seen before the card), freezes the pawn's input meanwhile, turns Space / A / left
- *    click into the "ready" press, and logs every beat (KG_REVEAL lines, also under -nullrhi for smokes),
+ *    click into the "ready" press, Tab (held) into the details view, plays the riser and the alignment sting on the
+ *    flip, and logs every beat (KG_REVEAL lines, also under -nullrhi for smokes),
  *  - dev: kg.Reveal.Ready, -KGRevealAutoReady (headless smokes), kg.UIShot reveal:<Role>:<stage> via MakeShotWidget.
  */
 UCLASS()
@@ -41,8 +42,9 @@ public:
 	FKGRevealView BuildView() const;
 
 	/**
-	 * Screenshot widget: Spec = "<RoleId>:<stage>[:ready][:streamer]", stage = table | shuffle | deal | flip | role. Sample
-	 * data (12 seats, two accomplices for a Clockbreaker). Null when the spec is not understood.
+	 * Screenshot widget: Spec = "<RoleId>:<stage>[:ready][:streamer][:details]", stage = spin | tease | flip | slam | role |
+	 * details (old names table | shuffle | deal still work). Sample data (12 seats, two accomplices for a Clockbreaker).
+	 * Null when the spec is not understood.
 	 */
 	static TSharedPtr<SWidget> MakeShotWidget(const FString& Spec, bool bStreamer);
 
@@ -56,6 +58,7 @@ private:
 	void ShowOverlay(APlayerController* PC);
 	void HideOverlay();
 	void LogBeats(const FKGRevealView& View);
+	void PlayBeats(const FKGRevealView& View);
 
 	FDelegateHandle SpawnHandle;
 	TArray<TWeakObjectPtr<APlayerController>> Pending;
@@ -78,4 +81,6 @@ private:
 	int32 LoggedStage = -1;
 	bool bLoggedRole = false;
 	bool bAutoReadySent = false;
+	bool bRiserPlayed = false;
+	bool bStingPlayed = false;
 };

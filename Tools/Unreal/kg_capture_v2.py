@@ -90,12 +90,30 @@ SHOTS = {
     "pol_basin": ((25.0, 38.0, 6.0), (25.0, 70.0, 0.0), 80.0),
     "pol_dormers": ((-8.0, 8.0, 21.0), (-26.0, -14.0, 11.0), 65.0),
     "pol_maypole": ((14.5, 11.0, 6.8), (6.5, 16.0, 8.0), 75.0),
+    # SPRINT-022 visual pass: garden (3 angles), water, towers, cliffs, dusk sea
+    "jp_garden2": ((48.3, 12.6, 9.7), (53.5, 18.0, 8.6), 75.0),
+    "jp_garden3": ((46.2, 25.0, 9.7), (52.5, 16.5, 8.4), 75.0),
+    "jp_bridge": ((57.0, 14.6, 9.6), (50.0, 21.5, 8.6), 70.0),
+    "wt_koi": ((47.4, 15.2, 9.9), (51.4, 20.0, 8.2), 70.0),
+    "wt_brook": ((-58.0, 38.0, 7.5), (-68.0, 33.0, 5.2), 70.0),
+    "wt_quay": ((14.0, 43.0, 3.9), (26.0, 60.0, 0.0), 75.0),
+    "wt_sea_dusk": ((17.0, 98.0, 5.5), (30.0, 175.0, 0.0), 75.0, "dusk"),
+    "tw_clock_harbour": ((26.5, 74.0, 3.0), (12.6, -14.4, 24.0), 55.0),
+    "tw_clock": ((16.5, -1.0, 6.8), (12.6, -14.4, 21.0), 70.0),
+    "tw_bell": ((-12.0, -44.0, 16.0), (-5.6, -61.4, 25.0), 70.0),
+    "tw_lighthouse": ((38.0, 72.0, 3.0), (68.0, 95.0, 31.0), 60.0),
+    "cl_basin": ((22.0, 64.0, 2.4), (52.0, 74.0, 6.0), 80.0),
+    "cl_jetty": ((24.5, 71.0, 3.2), (56.0, 86.0, 7.0), 75.0),
+    "cl_point": ((42.0, 124.0, 4.5), (80.0, 104.0, 8.0), 70.0),
+    "lm_waterwheel": ((-72.5, 9.0, 9.5), (-80.0, 3.5, 9.5), 70.0),
+    "lm_telescope": ((-2.0, -45.0, 15.9), (6.3, -48.8, 15.0), 70.0),
     "night_square": ((12.0, 16.0, 6.8), (0.0, -10.0, 9.0), 80.0, "night"),
     "night_harbour": ((-6.0, 84.0, 5.0), (25.0, 45.0, 6.0), 75.0, "night"),
     "night_town": ((20.0, 95.0, 40.0), (10.0, 5.0, 5.0), 60.0, "night"),
     "night_lighthouse": ((10.0, 75.0, 12.0), (68.0, 95.0, 25.0), 70.0, "night"),
 }
 NIGHT = {"pitch": -22.0, "yaw": 200.0, "lux": 0.9, "color": (0.45, 0.58, 1.0), "sky": 0.35}   # AKGGameState Night look
+DUSK = {"pitch": -6.0, "yaw": 95.0, "lux": 4.0, "color": (1.0, 0.52, 0.28), "sky": 0.55}      # low sun over the sea
 
 
 def log(m):
@@ -111,7 +129,7 @@ def look(eye, tgt):
 def game_world():
     for w in unreal.ObjectIterator(unreal.World):
         try:
-            if w.get_name() == "L_Morrowmere_v2" and unreal.GameplayStatics.get_player_controller(w, 0):
+            if w.get_name() == os.environ.get("KG_V2_MAPNAME", "L_Morrowmere_v2") and                     unreal.GameplayStatics.get_player_controller(w, 0):
                 return w
         except Exception:
             continue
@@ -158,7 +176,7 @@ class Tour:
                                                      unreal.Rotator(roll=0.0, pitch=-90.0, yaw=-90.0), False, False)
         else:
             eye, tgt, fov = spec[:3]
-            self.set_night(len(spec) > 3 and spec[3] == "night")
+            self.set_night(spec[3] if len(spec) > 3 else False)
             cc.set_editor_property("projection_mode", unreal.CameraProjectionMode.PERSPECTIVE)
             cc.set_editor_property("field_of_view", fov)
             self.cam.set_actor_location_and_rotation(unreal.Vector(eye[0] * 100, eye[1] * 100, eye[2] * 100),
@@ -168,17 +186,19 @@ class Tour:
         self.hide_ui()
 
     def set_night(self, night):
-        """The game's Night phase look (AKGGameState::GetLook): low moonlight, dim sky; day = the level's own light."""
+        """The game's Night phase look (AKGGameState::GetLook): low moonlight, dim sky; day = the level's own light.
+        night may also be "dusk" (SPRINT-022: a low warm sun for the sea shots)."""
         if getattr(self, "_night", False) == night:
             return
+        look = DUSK if night == "dusk" else NIGHT
         for a in unreal.GameplayStatics.get_all_actors_of_class(self.world, unreal.DirectionalLight):
             lc = a.get_component_by_class(unreal.DirectionalLightComponent)
             if not hasattr(self, "_day"):
                 self._day = (a.get_actor_rotation(), lc.intensity, lc.get_editor_property("light_color"))
             if night:
-                a.set_actor_rotation(unreal.Rotator(roll=0.0, pitch=NIGHT["pitch"], yaw=NIGHT["yaw"]), False)
-                lc.set_intensity(NIGHT["lux"])
-                c = NIGHT["color"]
+                a.set_actor_rotation(unreal.Rotator(roll=0.0, pitch=look["pitch"], yaw=look["yaw"]), False)
+                lc.set_intensity(look["lux"])
+                c = look["color"]
                 lc.set_light_color(unreal.LinearColor(c[0], c[1], c[2], 1.0))
             else:
                 a.set_actor_rotation(self._day[0], False)
@@ -188,7 +208,7 @@ class Tour:
             sc = a.get_component_by_class(unreal.SkyLightComponent)
             if not hasattr(self, "_sky"):
                 self._sky = sc.intensity
-            sc.set_intensity(NIGHT["sky"] if night else self._sky)
+            sc.set_intensity(look["sky"] if night else self._sky)
             sc.recapture_sky()
         self._night = night
 

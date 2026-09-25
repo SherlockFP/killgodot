@@ -1,6 +1,8 @@
 #include "Chores/WorldChores/KGWorldChoreComponent.h"
 
 #include "AIController.h"
+#include "Engine/World.h"   // before KGAudio.h (it uses UWorld)
+#include "Audio/KGAudio.h"
 #include "Character/KGCharacter.h"
 #include "Chores/KGChoreComponent.h"
 #include "Chores/KGChoreFx.h"
@@ -192,6 +194,16 @@ void UKGWorldChoreComponent::TickServer(float DeltaTime)
 	for (FKGWorldProgress& P : Progress)
 	{
 		ValidateItems(P);
+	}
+	// Bots only do chores by day (AKGBotController::UpdateChores): at night and in meetings they put their chore things
+	// down (hunting with a bread basket in your arms is no good) and pick them up again the next day.
+	if (!Char->IsPlayerControlled() && KGWorldChoreComp::CVarAnyPhase.GetValueOnGameThread() == 0)
+	{
+		const AKGGameState* GS = GetWorld() ? GetWorld()->GetGameState<AKGGameState>() : nullptr;
+		if (GS && GS->GetPhase() != EKGPhase::Day && GS->GetPhase() != EKGPhase::Dawn)
+		{
+			BotDropCarried(TEXT("not a chore time for bots"));
+		}
 	}
 	if (!PhaseAllows())
 	{
@@ -641,6 +653,19 @@ void UKGWorldChoreComponent::CompleteStep(FKGWorldProgress& P, int32 AnchorIndex
 			Fx->AuthTrigger(P.Chore, KGWorldChoreComp::FxFromName(S.FxName), SpotAt, FRotator(0.0f, A.Yaw, 0.0f));
 		}
 	}
+	// Thrown in from a distance (letters at a letterbox, the bundle into the woodbox): it counts, and it says so.
+	if (S.Verb == EKGWorldVerb::Bring && IsValid(P.Item) && !P.Item->IsCarried() && GetCharacter() &&
+	    FVector::Dist2D(GetCharacter()->GetActorLocation(), SpotAt) > FKGWorldChoreRules::ThrowInCm)
+	{
+		UE_LOG(LogKillGodot, Log, TEXT("KG_WORLDCHORE_THROW %s by %s into %s from %.0f cm"), *P.Chore.ToString(), PS ? *PS->GetPlayerName() : TEXT("?"),
+		       *A.Id.ToString(), FVector::Dist2D(GetCharacter()->GetActorLocation(), SpotAt));
+		NoticeCooldown = 0.0f;
+		Say(FString::Printf(TEXT("Nice throw! Right into %s"), *A.Label));
+		if (Dir)
+		{
+			Dir->AuthCue(EKGWorldCue::Whoosh, AnchorIndex, SpotAt, 0.9f);
+		}
+	}
 	// The item.
 	if (IsValid(P.Item))
 	{
@@ -706,6 +731,10 @@ void UKGWorldChoreComponent::CompleteStep(FKGWorldProgress& P, int32 AnchorIndex
 		const float Along = FMath::Min(FMath::Max(60.0f, static_cast<float>(FVector::Dist2D(From, SpotAt)) * 0.55f), A.RadiusCm * 0.8f);
 		const FVector Where = SpotAt + Toward * Along + FVector(0.0f, 0.0f, 5.0f);
 		P.Item = AKGChoreItem::AuthSpawn(World, S.Spawn, Where, A.Yaw, GetPlayerState(), P.Chore);
+		if (IsValid(P.Item) && S.Fill >= 0.0f)
+		{
+			P.Item->AuthSetFill(S.Fill);   // the well cranks the bucket up full
+		}
 		if (IsValid(P.Item) && Def->Steps.IsValidIndex(P.Step + 1) && Def->Steps[P.Step + 1].Verb == EKGWorldVerb::Bring)
 		{
 			const int32 NextTargets = Def->Targets(P.Step + 1, P.Variant).Num();
@@ -928,6 +957,8 @@ void UKGWorldChoreComponent::ClientStepDone_Implementation(FName Chore, uint8 St
 {
 	StepDoneText = bChoreDone ? FString::Printf(TEXT("%s - done!"), *Text) : Text;
 	StepDoneAt = GetWorld() ? GetWorld()->GetTimeSeconds() : 0.0f;
+	// The owner's own tick: a bright chime per step, a bigger flourish when the whole chore is done.
+	KGAudio::UI(this, bChoreDone ? TEXT("S_Chore_Stage") : TEXT("S_UI_Good"), bChoreDone ? 0.9f : 0.6f);
 	UE_LOG(LogKillGodot, Log, TEXT("KG_WORLDCHORE_CLIENT_STEP %s step=%d/%d done=%d authority=%d: %s"), *Chore.ToString(), Step + 1, NumSteps,
 	       bChoreDone ? 1 : 0, GetOwner() && GetOwner()->HasAuthority() ? 1 : 0, *Text);
 }
@@ -939,6 +970,53 @@ void UKGWorldChoreComponent::ClientNotice_Implementation(const FString& Text)
 }
 
 // ---- bots --------------------------------------------------------------------------------------------------------------
+
+void UKGWorldChoreComponent::BotDropCarried(const TCHAR* Why)
+{
+	const AKGCharacter* Me = GetCharacter();
+	for (FKGWorldProgress& P : Progress)
+	{
+		if (IsValid(P.Item) && P.Item->IsAttached() && P.Item->IsCarriedBy(Me))
+		{
+			P.Item->AuthDetach(FVector::ZeroVector);
+			UE_LOG(LogKillGodot, Log, TEXT("KG_WORLDCHORE_BOT %s puts down its %s (%s)"), *GetNameSafe(Me), *P.Item->GetKind().ToString(), Why);
+		}
+	}
+	if (Dwell.Kind != EKGDwell::None)
+	{
+		Dwell = FKGWorldDwell();
+	}
+}
+
+FVector UKGWorldChoreComponent::BotWalkGoal(int32 AnchorIndex) const
+{
+	// The spot's stand point when it has one (tower doors, the well kerb); else the navmesh point on our side of the
+	// prop (a trough, a table, a letterbox on a wall sit off the navmesh).
+	const UKGWorldChoreSubsystem* Sub = UKGWorldChoreSubsystem::Get(GetWorld());
+	const FKGWorldChoreCatalog& Cat = FKGWorldChoreCatalog::Get();
+	const AKGCharacter* Me = GetCharacter();
+	if (!Sub || !Me || !Cat.Anchors.IsValidIndex(AnchorIndex))
+	{
+		return Me ? Me->GetActorLocation() : FVector::ZeroVector;
+	}
+	const FKGWorldAnchor& A = Cat.Anchors[AnchorIndex];
+	const FVector Spot = Sub->SpotLocation(AnchorIndex);
+	FVector Want = Sub->StandLocation(AnchorIndex);
+	if (Want.Equals(Spot, 10.0))
+	{
+		Want = Spot + (Me->GetActorLocation() - Spot).GetSafeNormal2D() * FMath::Min(A.RadiusCm * 0.55f, 100.0f);
+	}
+	if (UNavigationSystemV1* Nav = FNavigationSystem::GetCurrent<UNavigationSystemV1>(GetWorld()))
+	{
+		FNavLocation Out;
+		const FVector Extent(A.RadiusCm * 0.8f, A.RadiusCm * 0.8f, 300.0f);
+		if (Nav->ProjectPointToNavigation(Want, Out, Extent) || Nav->ProjectPointToNavigation(Spot, Out, Extent))
+		{
+			return Out.Location;
+		}
+	}
+	return Want;
+}
 
 UKGWorldChoreComponent::EBot UKGWorldChoreComponent::BotDrive(AAIController* AI, FName Chore, float DeltaSeconds)
 {
@@ -968,11 +1046,18 @@ UKGWorldChoreComponent::EBot UKGWorldChoreComponent::BotDrive(AAIController* AI,
 		BotRepath = 0.0f;
 		BotProgressClock = 0.0f;
 		BotProgressFrom = Me->GetActorLocation();
+		BotSnags = 0;
+		BotGoalAnchor = INDEX_NONE;
 	}
 	BotElapsed += DeltaSeconds;
-	if (BotElapsed > 240.0f)
+	// The Impatient only put on a short show (they have hunting to do): a fake world chore lasts BotFakeSecs, then the
+	// bot drops whatever it carried and moves on. Villagers get up to 240 s.
+	const bool bFake = IsImpatient();
+	if (BotElapsed > (bFake ? FKGWorldChoreRules::BotFakeSecs : 240.0f))
 	{
-		UE_LOG(LogKillGodot, Log, TEXT("KG_WORLDCHORE_BOT %s gives up %s at step %d (too long)"), *Me->GetName(), *Chore.ToString(), P->Step + 1);
+		UE_LOG(LogKillGodot, Log, TEXT("KG_WORLDCHORE_BOT %s gives up %s at step %d (%s)"), *Me->GetName(), *Chore.ToString(), P->Step + 1,
+		       bFake ? TEXT("fake, done pretending") : TEXT("too long"));
+		BotDropCarried(bFake ? TEXT("done pretending") : TEXT("gave up"));
 		BotChore = NAME_None;
 		return EBot::Failed;
 	}
@@ -1024,7 +1109,12 @@ UKGWorldChoreComponent::EBot UKGWorldChoreComponent::BotDrive(AAIController* AI,
 		{
 			return EBot::Failed;   // bots don't climb ladders (never dealt; dev-given only)
 		}
-		Goal = Sub->SpotLocation(GoalAnchor);
+		if (GoalAnchor != BotGoalAnchor)
+		{
+			BotGoalAnchor = GoalAnchor;
+			BotGoalCached = BotWalkGoal(GoalAnchor);   // once per target: it depends on where we came from
+		}
+		Goal = BotGoalCached;
 		if (S.Verb != EKGWorldVerb::Bring && InReach(GoalAnchor, 20.0f))
 		{
 			AI->StopMovement();
@@ -1056,18 +1146,29 @@ UKGWorldChoreComponent::EBot UKGWorldChoreComponent::BotDrive(AAIController* AI,
 			}
 		}
 	}
-	// Progress watchdog: 8 s without getting 1 m closer = stuck.
+	// Progress watchdog: 3 s without moving 1 m = snagged (a head-height lamp bracket the navmesh can't see, a crowd at
+	// a door): step to the side and path again, alternating sides; after 6 snags in a row give the chore up.
 	BotProgressClock += DeltaSeconds;
-	if (BotProgressClock > 8.0f)
+	if (BotProgressClock > 3.0f)
 	{
 		const bool bMoved = FVector::Dist(Me->GetActorLocation(), BotProgressFrom) > 100.0f;
 		BotProgressClock = 0.0f;
 		BotProgressFrom = Me->GetActorLocation();
-		if (!bMoved && ++BotFails > 4)
+		BotSnags = bMoved ? 0 : BotSnags + 1;
+		if (BotSnags > 6)
 		{
-			UE_LOG(LogKillGodot, Log, TEXT("KG_WORLDCHORE_BOT %s stuck on %s step %d"), *Me->GetName(), *Chore.ToString(), P->Step + 1);
+			UE_LOG(LogKillGodot, Log, TEXT("KG_WORLDCHORE_BOT %s stuck on %s step %d at %s (goal %s)"), *Me->GetName(), *Chore.ToString(), P->Step + 1,
+			       *Me->GetActorLocation().ToCompactString(), *Goal.ToCompactString());
 			BotChore = NAME_None;
 			return EBot::Failed;
+		}
+		if (BotSnags > 0)
+		{
+			const FVector Toward = (Goal - Me->GetActorLocation()).GetSafeNormal2D();
+			const FVector Side = FVector(-Toward.Y, Toward.X, 0.0f) * ((BotSnags % 2) ? 1.0f : -1.0f);
+			AI->MoveToLocation(Me->GetActorLocation() + Side * 160.0f + Toward * 60.0f, 30.0f, true, true, true, false);
+			BotRepath = 1.3f;   // then the real path again
+			UE_LOG(LogKillGodot, Verbose, TEXT("KG_WORLDCHORE_BOT %s snag %d on %s: side-step"), *Me->GetName(), BotSnags, *Chore.ToString());
 		}
 	}
 	return EBot::Busy;
@@ -1145,7 +1246,6 @@ FString UKGWorldChoreComponent::AuthDev(const FString& Line)
 		const FVector Stand = Sub->StandLocation(Index);
 		const FVector Spot = Sub->SpotLocation(Index);
 		// Stop short of the spot so the carried item (held ~1.7 m ahead) lands inside it.
-		const FVector Dir = (Spot - Stand).GetSafeNormal2D();
 		const FVector Goal = Stand.Equals(Spot, 10.0f) ? Spot - (Spot - Char->GetActorLocation()).GetSafeNormal2D() * 120.0f : Stand;
 		if (Verb.Equals(TEXT("Goto"), ESearchCase::IgnoreCase))
 		{
@@ -1176,7 +1276,7 @@ FString UKGWorldChoreComponent::AuthDev(const FString& Line)
 		{
 			Points.Add(Goal);
 		}
-		Points.Add(Goal + Dir * 30.0f);
+		Points.Add(Spot);   // the last point is not walked to: the autopilot turns to face the spot when it arrives
 		ClientDevPath(Points);
 		return FString::Printf(TEXT("path to %s: %d points, %.1f m"), *Cat.Anchors[Index].Id.ToString(), Points.Num(),
 		                       Path ? Path->GetPathLength() / 100.0f : -1.0f);
@@ -1219,6 +1319,11 @@ void UKGWorldChoreComponent::ClientDevPath_Implementation(const TArray<FVector_N
 	{
 		AutoPath.Add(P);
 	}
+	AutoFace = AutoPath.Num() > 1 ? AutoPath.Pop() : FVector::ZeroVector;
+	AutoBestDist = TNumericLimits<float>::Max();
+	AutoStuckClock = 0.0f;
+	AutoSideClock = 0.0f;
+	AutoUnstucks = 0;
 	UE_LOG(LogKillGodot, Log, TEXT("KG_WORLDCHORE_AUTOPILOT %d points"), AutoPath.Num());
 }
 
@@ -1232,12 +1337,51 @@ void UKGWorldChoreComponent::TickAutopilot(float DeltaTime)
 	}
 	FVector Delta = AutoPath[0] - Char->GetActorLocation();
 	Delta.Z = 0.0f;
-	if (Delta.Size() < 55.0f)
+	const float Dist = static_cast<float>(Delta.Size());
+	if (Dist < 55.0f)
 	{
 		AutoPath.RemoveAt(0);
+		AutoBestDist = TNumericLimits<float>::Max();
+		AutoStuckClock = 0.0f;
+		if (AutoPath.Num() == 0 && !AutoFace.IsZero())
+		{
+			if (AController* C = Char->GetController())
+			{
+				// Arrived: face the spot (what you carry is held out in front of you).
+				C->SetControlRotation(FRotator(-12.0f, (AutoFace - Char->GetActorLocation()).GetSafeNormal2D().Rotation().Yaw, 0.0f));
+			}
+		}
 		return;
 	}
 	const FVector Dir = Delta.GetSafeNormal();
+	if (AutoSideClock > 0.0f)
+	{
+		// Unstick: a step to the side (and a little forward), like a player steering around a lamp bracket.
+		AutoSideClock -= DeltaTime;
+		Char->AddMovementInput((FVector(-Dir.Y, Dir.X, 0.0f) * AutoSideSign + Dir * 0.35f).GetSafeNormal(), 1.0f);
+		return;
+	}
+	if (Dist < AutoBestDist - 20.0f)
+	{
+		AutoBestDist = Dist;
+		AutoStuckClock = 0.0f;
+	}
+	else if ((AutoStuckClock += DeltaTime) > 0.8f)
+	{
+		++AutoUnstucks;
+		AutoSideSign = (AutoUnstucks % 2) ? 1.0f : -1.0f;
+		AutoSideClock = FMath::Min(0.45f + 0.25f * ((AutoUnstucks - 1) / 2), 1.6f);
+		AutoStuckClock = 0.0f;
+		AutoBestDist = Dist;
+		UE_LOG(LogKillGodot, Log, TEXT("KG_WORLDCHORE_AUTOPILOT stuck at %s (%.0f cm to the next point): side-step %s for %.2fs"),
+		       *Char->GetActorLocation().ToCompactString(), Dist, AutoSideSign > 0.0f ? TEXT("right") : TEXT("left"), AutoSideClock);
+		if (AutoUnstucks > 14)
+		{
+			UE_LOG(LogKillGodot, Warning, TEXT("KG_WORLDCHORE_AUTOPILOT gave up"));
+			AutoPath.Reset();
+		}
+		return;
+	}
 	Char->AddMovementInput(Dir, 1.0f);
 	if (AController* C = Char->GetController())
 	{

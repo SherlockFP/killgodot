@@ -14,13 +14,15 @@
                   flags + a check of every material on the map's (H)ISMs -> Saved/KG_V2_MaterialCheck.json
     8. Capture  : Tools/Unreal/kg_capture_v2.ps1        -> Saved/Screenshots/V2/*.png + Saved/KG_V2_NavCheck.json
                   (-game -RenderOffScreen -nosound, GameModeBase; real navmesh paths fountain -> doors/chores/starts)
+    9. Placement: Tools/Unreal/kg_placement_check_v2.ps1 -> Saved/KG_V2_PlacementSamples.json (SPRINT-022 geometric
+                  validator data: traces under every exterior prop; verify_v2_build.py evaluates them)
   Bots: powershell -File Tools/Unreal/kg_bot_test_v2.ps1 (20-bot -nullrhi soak -> Saved/KG_V2_BotTest.json)
   Usage: powershell -File Tools/Unreal/kg_build_v2_all.ps1 [-From 1] [-To 7] [-Shots "top,S1_postcard"] [-Zones "square harbour"]
   Then:  python Tools/Level/verify_v2_build.py
   Logs: Saved/Logs/kg_*_v2.log
   UE steps wait while a C++ build (UnrealBuildTool) runs: a commandlet would hold the editor DLLs the linker needs.
 #>
-param([int]$From = 1, [int]$To = 8, [string]$Shots = "", [string]$Zones = "")
+param([int]$From = 1, [int]$To = 9, [string]$Shots = "", [string]$Zones = "")
 $ErrorActionPreference = "Continue"
 $Root = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
 $Blender = "C:\Program Files\Blender Foundation\Blender 5.2\blender.exe"
@@ -60,6 +62,15 @@ Step 2 "terrain import (UE commandlet)" {
     }
     & $Cmd $Proj -run=pythonscript "-script=$R/Tools/Unreal/kg_make_ocean.py" -unattended -nosplash -nopause -nullrhi "-abslog=$R/Saved/Logs/kg_make_ocean.log" | Out-Null
     Grep "$R/Saved/Logs/kg_make_ocean.log" "KG_OCEAN|Traceback"
+    # SPRINT-022: landmark / tower / cliff pack, per-house paint, the water family (+ MPC_KG_Weather)
+    if (Test-Path "$R/Art/Packed/KG_DressLandmarks_Clean.json") {
+        & $Cmd $Proj -run=pythonscript "-script=$R/Tools/Unreal/kg_import_dress_pack.py KG_DressLandmarks_Clean" -unattended -nosplash -nopause -nullrhi "-abslog=$R/Saved/Logs/kg_import_landmarks.log" | Out-Null
+        Grep "$R/Saved/Logs/kg_import_landmarks.log" "KG_DRESS_PACK|Traceback"
+    }
+    & $Cmd $Proj -run=pythonscript "-script=$R/Tools/Unreal/kg_make_paint_v2.py" -unattended -nosplash -nopause -nullrhi "-abslog=$R/Saved/Logs/kg_make_paint_v2.log" | Out-Null
+    Grep "$R/Saved/Logs/kg_make_paint_v2.log" "KG_PAINT|Traceback"
+    & $Cmd $Proj -run=pythonscript "-script=$R/Tools/Unreal/kg_make_water_v2.py" -unattended -nosplash -nopause -nullrhi "-abslog=$R/Saved/Logs/kg_make_water_v2.log" | Out-Null
+    Grep "$R/Saved/Logs/kg_make_water_v2.log" "KG_WATER_V2|Traceback"
 }
 Step 3 "placements (system Python)" {
     python "$R/Tools/Level/prep_v2_placements.py" | ForEach-Object { "   " + $_ }
@@ -91,4 +102,8 @@ Step 8 "capture (-game -RenderOffScreen)" {
     WaitBuild
     if ($Shots) { powershell -File "$R/Tools/Unreal/kg_capture_v2.ps1" -Shots $Shots }
     else { powershell -File "$R/Tools/Unreal/kg_capture_v2.ps1" }
+}
+Step 9 "placement samples (-game -nullrhi, read-only)" {
+    WaitBuild
+    powershell -File "$R/Tools/Unreal/kg_placement_check_v2.ps1"
 }

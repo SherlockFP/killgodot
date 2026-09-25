@@ -120,6 +120,7 @@ private:
 	float SpillCueCooldown = 0.0f;
 	float LastFill = -1.0f;
 	float FlameTime = 0.0f;
+	float CarryLogClock = 0.0f;
 
 	UPROPERTY(Transient)
 	TObjectPtr<UStaticMeshComponent> WaterDisc;
@@ -132,4 +133,18 @@ private:
 
 	UPROPERTY(Transient)
 	TObjectPtr<UPointLightComponent> FlameLight;
+
+	// Playful touches (every machine, visual only): the water sloshes when the carrier hurries, a fish flops on the
+	// crate now and then, the fresh bread steams.
+	UPROPERTY(Transient)
+	TArray<TObjectPtr<UStaticMeshComponent>> FishMeshes;
+
+	UPROPERTY(Transient)
+	TArray<TObjectPtr<UStaticMeshComponent>> SteamPuffs;
+
+	TArray<FVector> FishBase;
+	float SloshAmp = 0.0f;
+	float SloshTime = 0.0f;
+	float FlopClock = 0.0f;
+	int32 FlopIndex = 0;
 };

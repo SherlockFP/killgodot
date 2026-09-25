@@ -1,5 +1,6 @@
 #include "Chores/WorldChores/KGWorldChoreWorld.h"
 
+#include "Engine/World.h"   // before KGAudio.h (it uses UWorld)
 #include "Audio/KGAudio.h"
 #include "Camera/CameraComponent.h"
 #include "Character/KGCharacter.h"
@@ -66,6 +67,30 @@ namespace KGWorldChoreLook
 	FString Harbour(const TCHAR* Name)
 	{
 		return FString::Printf(TEXT("/Game/KillGodot/Env/Dress/KG_DressHarbour_Clean/StaticMeshes/%s.%s"), Name, Name);
+	}
+
+	/**
+	 * The furniture pack's vertex-colour props (M_KG_PropVC: firewood, bread) render plain white in game captures; chore
+	 * spots and items give those a flat colour of their own so the logs read as wood and the loaves as bread.
+	 */
+	void FlattenVertexColour(UStaticMeshComponent* C)
+	{
+		UStaticMesh* Mesh = C ? C->GetStaticMesh() : nullptr;
+		UMaterialInterface* M0 = C ? C->GetMaterial(0) : nullptr;
+		if (!Mesh || !M0 || !M0->GetPathName().Contains(TEXT("M_KG_PropVC")))
+		{
+			return;
+		}
+		const FString Name = Mesh->GetName();
+		const FLinearColor Col = Name.Contains(TEXT("Bread"))    ? FLinearColor(0.80f, 0.48f, 0.17f)
+		                       : Name.Contains(TEXT("Firewood")) ? FLinearColor(0.42f, 0.24f, 0.10f)
+		                                                         : FLinearColor(0.5f, 0.4f, 0.3f);
+		for (int32 i = 0; i < C->GetNumMaterials(); ++i)
+		{
+			UMaterialInstanceDynamic* MID = UMaterialInstanceDynamic::Create(Solid(), C);
+			MID->SetVectorParameterValue(TEXT("Color"), Col);
+			C->SetMaterial(i, MID);
+		}
 	}
 
 	/** Kinds that take E (the others are pure "bring here" spots and must not block the trace to doors). */
@@ -143,7 +168,9 @@ UStaticMeshComponent* AKGChoreSpot::Part(UStaticMesh* Mesh, const FVector& Rel, 
 
 UStaticMeshComponent* AKGChoreSpot::Asset(const TCHAR* Path, const FVector& Rel, const FRotator& Rot, float Scale)
 {
-	return Part(KGWorldChoreLook::Load<UStaticMesh>(Path), Rel, Rot, FVector(Scale));
+	UStaticMeshComponent* C = Part(KGWorldChoreLook::Load<UStaticMesh>(Path), Rel, Rot, FVector(Scale));
+	KGWorldChoreLook::FlattenVertexColour(C);
+	return C;
 }
 
 void AKGChoreSpot::Setup(int32 InAnchorIndex)
@@ -175,8 +202,10 @@ void AKGChoreSpot::BuildLook()
 
 	if (K == TEXT("Well"))
 	{
-		Asset(*P(TEXT("Bucket_Wooden_1")), FVector(60.0f, 75.0f, 0.0f), FRotator(0.0f, 20.0f, 0.0f));
-		Asset(*P(TEXT("Bucket_Wooden_1")), FVector(95.0f, 40.0f, 0.0f), FRotator(0.0f, -35.0f, 0.0f));
+		// Spare buckets by the kerb: they rattle while someone cranks.
+		Jiggle.Add(Asset(*P(TEXT("Bucket_Wooden_1")), FVector(60.0f, 75.0f, 0.0f), FRotator(0.0f, 20.0f, 0.0f)));
+		Jiggle.Add(Asset(*P(TEXT("Bucket_Wooden_1")), FVector(95.0f, 40.0f, 0.0f), FRotator(0.0f, -35.0f, 0.0f)));
+		JiggleAmp = 5.0f;
 		HalfBox = FVector(70.0f, 70.0f, 70.0f);
 	}
 	else if (K == TEXT("Trough"))
@@ -279,14 +308,17 @@ void AKGChoreSpot::BuildLook()
 	{
 		Part(Cyl, FVector(0.0f, 0.0f, 100.0f), FRotator(90.0f, 0.0f, 0.0f), FVector(0.9f, 0.9f, 0.06f), Iron);
 		Part(Cyl, FVector(0.0f, 0.0f, 100.0f), FRotator(90.0f, 0.0f, 0.0f), FVector(0.14f, 0.14f, 0.3f), Gold);
-		Part(Cube, FVector(0.0f, 16.0f, 125.0f), FRotator::ZeroRotator, FVector(0.05f, 0.05f, 0.5f), Wood);
+		Jiggle.Add(Part(Cube, FVector(0.0f, 16.0f, 125.0f), FRotator::ZeroRotator, FVector(0.05f, 0.05f, 0.5f), Wood));   // the crank handle
+		JiggleAmp = 10.0f;
 		Part(Cube, FVector(0.0f, 0.0f, 45.0f), FRotator::ZeroRotator, FVector(0.3f, 0.3f, 0.9f), DarkWood);
 		HalfBox = FVector(45.0f, 45.0f, 80.0f);
 	}
 	else if (K == TEXT("Bell"))
 	{
-		Part(Cyl, FVector(0.0f, 0.0f, 150.0f), FRotator::ZeroRotator, FVector(0.04f, 0.04f, 3.0f), Wood);
-		Part(Sphere, FVector(0.0f, 0.0f, 40.0f), FRotator::ZeroRotator, FVector(0.12f, 0.12f, 0.2f), DarkWood);
+		// The rope and its knob bounce and swing every time it is pulled.
+		Jiggle.Add(Part(Cyl, FVector(0.0f, 0.0f, 150.0f), FRotator::ZeroRotator, FVector(0.04f, 0.04f, 3.0f), Wood));
+		Jiggle.Add(Part(Sphere, FVector(0.0f, 0.0f, 40.0f), FRotator::ZeroRotator, FVector(0.12f, 0.12f, 0.2f), DarkWood));
+		JiggleAmp = 26.0f;
 		HalfBox = FVector(40.0f, 40.0f, 90.0f);
 		BoxZ = 90.0f;
 	}
@@ -322,7 +354,8 @@ void AKGChoreSpot::BuildLook()
 	else if (K == TEXT("ChopBlock"))
 	{
 		Asset(*P(TEXT("Anvil_Log")), FVector::ZeroVector, FRotator::ZeroRotator, 0.75f);
-		Asset(*P(TEXT("Axe_Bronze")), FVector(0.0f, 5.0f, 100.0f), FRotator(0.0f, 0.0f, 25.0f), 1.0f);
+		Jiggle.Add(Asset(*P(TEXT("Axe_Bronze")), FVector(0.0f, 5.0f, 100.0f), FRotator(0.0f, 0.0f, 25.0f), 1.0f));   // hops on every chop
+		JiggleAmp = 14.0f;
 		for (int32 i = 0; i < 2; ++i)
 		{
 			Stacked.Add(Asset(*Interior(TEXT("SM_KG_Firewood")), FVector(-70.0f, -40.0f + 60.0f * i, 0.0f), FRotator(0.0f, 30.0f * i, 0.0f), 0.55f));
@@ -418,6 +451,11 @@ void AKGChoreSpot::BuildLook()
 		Light->SetRelativeLocation(FVector(0.0f, 0.0f, 140.0f));
 		Light->RegisterComponent();
 		HalfBox = FVector(45.0f, 45.0f, 80.0f);
+	}
+	Jiggle.RemoveAll([](const TObjectPtr<UStaticMeshComponent>& C) { return C == nullptr; });
+	for (const UStaticMeshComponent* C : Jiggle)
+	{
+		JiggleBase.Add(C->GetRelativeLocation());
 	}
 	// Burst sparkle pieces (hidden until a step completes here).
 	for (int32 i = 0; i < 8; ++i)
@@ -521,6 +559,21 @@ void AKGChoreSpot::ApplyState(const FKGSpotState& S, float DeltaSeconds)
 		const float Base = K == TEXT("LighthouseLamp") ? 900.0f : 60.0f;
 		Light->SetIntensity(S.bLit ? Base * (1.0f + 0.1f * FMath::Sin(Clock * 17.0f)) : 0.0f);
 	}
+	// Cue bounce: the bell rope jumps and swings, the axe hops, the crank handle kicks, the spare buckets rattle.
+	JiggleAge += DeltaSeconds;
+	if (JiggleAge < 1.4f || DeltaSeconds == 0.0f)
+	{
+		const float Decay = FMath::Exp(-3.5f * JiggleAge);
+		const float Hop = JiggleAge < 1.4f ? JiggleAmp * FMath::Sin(JiggleAge * 26.0f) * Decay : 0.0f;
+		const float Swing = JiggleAge < 1.4f ? 12.0f * FMath::Sin(JiggleAge * 11.0f) * Decay : 0.0f;
+		for (int32 i = 0; i < Jiggle.Num() && i < JiggleBase.Num(); ++i)
+		{
+			if (UStaticMeshComponent* J = Jiggle[i])
+			{
+				J->SetRelativeLocation(JiggleBase[i] + FVector(K == TEXT("Bell") ? Swing * 0.6f : 0.0f, 0.0f, FMath::Abs(Hop)));
+			}
+		}
+	}
 	// Step-done sparkle: eight gold sparks fly up and out, then fade.
 	if (BurstAge < 1.2f)
 	{
@@ -556,6 +609,14 @@ void AKGChoreSpot::PlayBurst(const FLinearColor& Color)
 {
 	BurstAge = 0.0f;
 	BurstColor = Color;
+}
+
+void AKGChoreSpot::PlayCue(EKGWorldCue Cue)
+{
+	if (Cue != EKGWorldCue::None && Jiggle.Num() > 0)
+	{
+		JiggleAge = 0.0f;
+	}
 }
 
 void AKGChoreSpot::Tick(float DeltaSeconds)
@@ -705,6 +766,13 @@ void AKGWorldChoreDirector::MulticastCue_Implementation(uint8 Cue, int16 SpotInd
 		// StepDone: a bright chime for everyone near (the public HUD tick of a world chore).
 		KGAudio::At(this, Sound, Where + FVector(0.0f, 0.0f, 80.0f), C == EKGWorldCue::StepDone ? 0.55f : Volume);
 	}
+	if (const UKGWorldChoreSubsystem* Sub = UKGWorldChoreSubsystem::Get(GetWorld()))
+	{
+		if (AKGChoreSpot* Spot = Sub->GetSpot(SpotIndex))
+		{
+			Spot->PlayCue(C);
+		}
+	}
 	if (C == EKGWorldCue::StepDone || C == EKGWorldCue::Poison || C == EKGWorldCue::Snuff)
 	{
 		if (const UKGWorldChoreSubsystem* Sub = UKGWorldChoreSubsystem::Get(GetWorld()))
@@ -851,8 +919,57 @@ void UKGWorldChoreSubsystem::SetupWorld(bool bForce)
 	{
 		AKGWorldChoreDirector::AuthCreate(World);
 	}
-	UE_LOG(LogKillGodot, Log, TEXT("KG_WORLDCHORE_SETUP %s: %d spots, %d chores, authority=%d"), *World->GetMapName(), Cat.Anchors.Num(),
-	       Cat.Chores.Num(), World->GetNetMode() != NM_Client ? 1 : 0);
+	// Panel stations often stand right where a world chore spot is worked from (DrawWater on the well kerb, MendNets at the
+	// mending rack, ChopWood by the block): their invisible E cylinder would swallow the E meant for the spot. Slide that
+	// hitbox 1.6 m further away from the spot; the panel chore stays usable for whoever is dealt it.
+	int32 Yielded = 0;
+	for (TActorIterator<AKGTaskStation> It(World); It; ++It)
+	{
+		if (It->IsA<AKGWorldChoreStation>())
+		{
+			continue;
+		}
+		UPrimitiveComponent* Box = nullptr;
+		for (UActorComponent* C : It->GetComponents())
+		{
+			if (C && C->GetFName() == TEXT("Hitbox"))
+			{
+				Box = Cast<UPrimitiveComponent>(C);
+			}
+		}
+		if (!Box)
+		{
+			continue;
+		}
+		for (int32 i = 0; i < Cat.Anchors.Num(); ++i)
+		{
+			if (!KGWorldChoreLook::HasHitbox(Cat.Anchors[i].Kind))
+			{
+				continue;
+			}
+			const FVector SpotAt = SpotLocation(i);
+			const FVector StandAt = StandLocation(i);
+			const FVector From = Box->GetComponentLocation();
+			const double Near = FMath::Min(FVector::Dist2D(From, SpotAt), FVector::Dist2D(From, StandAt));
+			if (Near > 250.0 || FMath::Abs(From.Z - SpotAt.Z) > 400.0)
+			{
+				continue;
+			}
+			FVector Away = (From - SpotAt).GetSafeNormal2D();
+			if (Away.IsNearlyZero())
+			{
+				Away = It->GetActorForwardVector().GetSafeNormal2D();
+			}
+			Box->SetMobility(EComponentMobility::Movable);
+			Box->SetWorldLocation(From + Away * 160.0f);
+			++Yielded;
+			UE_LOG(LogKillGodot, Log, TEXT("KG_WORLDCHORE_YIELD panel station %s moved its E box off %s"), *It->TaskId.ToString(),
+			       *Cat.Anchors[i].Id.ToString());
+			break;
+		}
+	}
+	UE_LOG(LogKillGodot, Log, TEXT("KG_WORLDCHORE_SETUP %s: %d spots, %d chores, authority=%d, %d panel stations yielded"), *World->GetMapName(),
+	       Cat.Anchors.Num(), Cat.Chores.Num(), World->GetNetMode() != NM_Client ? 1 : 0, Yielded);
 }
 
 AKGChoreSpot* UKGWorldChoreSubsystem::GetSpot(int32 AnchorIndex) const
@@ -1059,13 +1176,7 @@ void UKGWorldChoreSubsystem::TickSmoke(float DeltaTime)
 	case 5:   // carrying: the bring steps complete on their own when the item is inside the spot
 		if (!PS->HasOpenTask(SmokeChore))
 		{
-			const AKGWorldChoreDirector* Dir = AKGWorldChoreDirector::Get(World);
-			const TArray<FName> Last = Def ? Def->Targets(Def->NumSteps() - 1, 0) : TArray<FName>();
-			const int32 Index = Last.Num() > 0 ? FKGWorldChoreCatalog::Get().AnchorIndex(Last[0]) : INDEX_NONE;
-			const FKGSpotState* S = Dir ? Dir->GetSpot(Index) : nullptr;
-			UE_LOG(LogKillGodot, Log, TEXT("KG_WC_SMOKE_DONE %s done on the client list; spot %s level=%.2f count=%d (replicated) t=%.1fs"),
-			       *SmokeChore.ToString(), Last.Num() > 0 ? *Last[0].ToString() : TEXT("?"), S ? S->Level : -1.0f, S ? S->Count : -1, SmokeClock);
-			Go(100, TEXT("done"));
+			Go(6, TEXT("ticked off the client list; waiting for the spot to show it"));
 			break;
 		}
 		if (!Char->bHoldingObject && P && IsValid(P->Item) && SmokeStateClock > 1.0f)
@@ -1078,7 +1189,29 @@ void UKGWorldChoreSubsystem::TickSmoke(float DeltaTime)
 		{
 			SmokePathStep = Step;
 			SmokeLegClock = 0.0f;
+			SmokeIdleClock = 0.0f;
 			UE_LOG(LogKillGodot, Log, TEXT("KG_WC_SMOKE step %d, item fill=%.2f (client view)"), Step + 1, IsValid(P->Item) ? P->Item->GetFill() : -1.0f);
+			WC->ServerDev(TEXT("Path next"));
+		}
+		if (SmokeLegClock < 1.5f && SmokeLegClock + DeltaTime >= 1.5f)
+		{
+			// Again a moment later: the step and the bucket's fill replicate on separate actors.
+			UE_LOG(LogKillGodot, Log, TEXT("KG_WC_SMOKE step %d, item fill=%.2f (client view, 1.5 s in)"), Step + 1, P && IsValid(P->Item) ? P->Item->GetFill() : -1.0f);
+		}
+		if (FMath::FloorToInt((SmokeLegClock + DeltaTime) / 3.0f) != FMath::FloorToInt(SmokeLegClock / 3.0f))
+		{
+			UE_LOG(LogKillGodot, Log, TEXT("KG_WC_SMOKE leg %d t=%.0fs me=%s vel=%.0f holding=%d item=%s fill=%.2f autopilot=%d"), Step + 1,
+			       SmokeLegClock, *Char->GetActorLocation().ToCompactString(), Char->GetVelocity().Size2D(), Char->bHoldingObject ? 1 : 0,
+			       P && IsValid(P->Item) ? *P->Item->GetActorLocation().ToCompactString() : TEXT("-"), P && IsValid(P->Item) ? P->Item->GetFill() : -1.0f,
+			       WC->IsAutopilotActive() ? 1 : 0);
+		}
+		// Arrived (path walked) but the step did not validate: walk the path again (the item may have snagged).
+		SmokeIdleClock = WC->IsAutopilotActive() ? 0.0f : SmokeIdleClock + DeltaTime;
+		if (SmokeIdleClock > 12.0f && SmokeRepaths < 4)
+		{
+			++SmokeRepaths;
+			SmokeIdleClock = 0.0f;
+			UE_LOG(LogKillGodot, Log, TEXT("KG_WC_SMOKE step %d not validated after the walk - walking it again"), Step + 1);
 			WC->ServerDev(TEXT("Path next"));
 		}
 		SmokeLegClock += DeltaTime;
@@ -1087,6 +1220,22 @@ void UKGWorldChoreSubsystem::TickSmoke(float DeltaTime)
 			Fail(TEXT("carry leg timed out"));
 		}
 		break;
+	case 6:   // the chore list and the spot state replicate on different actors: give the spot a moment
+	{
+		const AKGWorldChoreDirector* Dir = AKGWorldChoreDirector::Get(World);
+		const FKGWorldChoreDef* D = FKGWorldChoreCatalog::Get().FindChore(SmokeChore);
+		const TArray<FName> Last = D ? D->Targets(D->NumSteps() - 1, 0) : TArray<FName>();
+		const int32 Index = Last.Num() > 0 ? FKGWorldChoreCatalog::Get().AnchorIndex(Last[0]) : INDEX_NONE;
+		const FKGSpotState* S = Dir ? Dir->GetSpot(Index) : nullptr;
+		if ((S && (S->Level > 0.3f || S->Count > 0 || S->bLit)) || SmokeStateClock > 6.0f)
+		{
+			UE_LOG(LogKillGodot, Log, TEXT("KG_WC_SMOKE_DONE %s done on the client list; spot %s level=%.2f count=%d (replicated) t=%.1fs"),
+			       *SmokeChore.ToString(), Last.Num() > 0 ? *Last[0].ToString() : TEXT("?"), S ? S->Level : -1.0f, S ? S->Count : -1, SmokeClock);
+			WC->StopAutopilot();
+			Go(100, TEXT("done"));
+		}
+		break;
+	}
 	default:
 		break;
 	}

@@ -71,8 +71,8 @@ def banks():
                 K.clutter(N + "Plant_1", px + 70.0, py + 40.0, C.ground(px, py) - 5.0, None, R.uniform(0.5, 0.8))
                 C.claim(px, py, 80.0)
             elif roll < 0.7:
-                K.solid(N + "Rock_Medium_%d" % R.randint(1, 3), px, py, C.ground(px, py) - 45.0, R.uniform(0, 360),
-                        R.uniform(0.3, 0.5))
+                sc = R.uniform(0.3, 0.5)             # SPRINT-022: bank rocks sink ~30 % of their height, not 45 cm
+                K.solid(N + "Rock_Medium_%d" % R.randint(1, 3), px, py, C.ground_min(px, py, 60.0) - 60.0 * sc, R.uniform(0, 360), sc)
                 C.claim(px, py, 90.0)
     C.stats["bank_trees"] = n_tree
     for cas in C.LAYOUT["stream"]["cascades"]:
@@ -237,10 +237,13 @@ def mill_pond():
     if best:
         x, y, a = best
         dx, dy = -math.cos(math.radians(a)), -math.sin(math.radians(a))
-        z = p["z"] * C.M + 5.0
+        z = p["z"] + 5.0            # SPRINT-022: the anchor z is already in cm (the landing used to hang at 1.48 km)
         for k in range(3):
             K.clutter(V + "Floor_WoodDark", x + dx * (k * 110.0), y + dy * (k * 110.0), z + 20.0, a, (0.55, 0.6, 1.0))
-            K.post(x + dx * (k * 110.0) - dy * 60.0, y + dy * (k * 110.0) + dx * 60.0, 60.0, 0.6, z=z - 40.0)
+            # SPRINT-022: the jetty posts reach the pond bed (0.8 m under the water), they used to stop in mid-water
+            px_, py_ = x + dx * (k * 110.0) - dy * 60.0, y + dy * (k * 110.0) + dx * 60.0
+            zb = C.ground(px_, py_) - 10.0            # the pond bed (or the bank) under each post
+            K.post(px_, py_, z + 20.0 - zb, 0.6, z=zb)
         C.seat(P + "Stool", x + dx * 180.0, y + dy * 180.0, a + 180.0, z=z + 21.0)
         K.clutter(WP + "FishingRod", x + dx * 240.0, y + dy * 240.0, z + 70.0, a + 180.0, 1.0, -20.0, 0.0)
         K.moored_boat(x + dx * 330.0 - dy * 200.0, y + dy * 330.0 + dx * 200.0, a + 90.0)

@@ -53,3 +53,53 @@ witnesses and ambushes.
 - 2 feel-and-look rounds per chore
 - plateau stop
 - ideas beyond the list go in as proposals
+
+## Result (2026-09-25, finishing agent)
+Mid-sprint user feedback (the user played it in the editor): "some chores aren't fun: KEEP IT SIMPLE BUT FUN". The
+coordinator's brief: 1–3 simple steps, one clear verb each, 25–50 s including the walk, a juicy payoff every step, cheap
+playful touches, cut anything that feels like work. The acceptance text above stays as written. The chores below are
+the simplified versions, and each change says what was cut and why.
+
+| Chore | Steps (verbs) | Route | Time* | Simplified |
+|---|---|---|---|---|
+| Water run (fountain / bakery / inn) | crank a full bucket at the well → carry it (walk, don't run) and pour | 61–66 m | 43–45 s | Cut "fetch an empty bucket first", which was a 60 m walk with nothing to do. Farm trough → inn horse trough (the farm was 61 s away) |
+| Fish to market | lift a crate of the catch → haul it to Madam Brine's (slow alone, full speed with two) | 28 m | 29 s | Pickup moved from the far jetty (61 s) to the quay head |
+| Bread delivery (3 variants) | grab the steaming basket → knock at 3 marked doors | 99–124 m | 40–47 s | — |
+| Lamplighter | take a lit taper → light 5 lamps (the taper burns out at the last one) | 109 m | 46 s | Cut the walk back to return the taper |
+| Bell and clock | climb, wind the clock → climb, pull the bell rope (heard village-wide) | 56 m + 2 ladders | 41 s | Work times shortened |
+| Mend and hang the nets | grab the torn net → mend it at the rack (short panel) → hang it on the quay posts | 66 m | 43 s | Cut the separate "bring it to the rack" step (4 → 3 steps) |
+| Firewood | chop 3 logs (E per swing) → feed the bundle to the smithy forge (tossing it in counts) | 18 m | 52 s | Inn hearth (122 m of slow carrying) → the smithy forge next to the camp |
+| Letters (3 variants) | take the sealed letters → post each in the right named box | 96–136 m | 38–51 s | — |
+| Grain to the windmill | shoulder a sack at the barn → tip it into the hopper | 34 m | 49 s | Cut the lever panel and the 95 m flour trip back to the bakery (4 → 2 steps) |
+| Lighthouse oil | take an oil can at the lighthouse door → climb and fill the lamp (the beam blazes) | 2 m + 12 m ladder | ≈51 s | The oil moved from the boathouse (84 m away) to the lighthouse door |
+
+\* Time = the navmesh route at walking/carrying speed + work + ladders, plus the walk from the square
+(`kg.WorldChore.Routes`, `Saved/KG_WorldChoreRoutes.json`). Sprinting the empty-handed approach is faster.
+
+Payoffs and playful touches:
+- Every step: a gold sparkle at the spot and a chime for everyone near. The owner gets the HUD tick pop plus a chime, and
+  a bigger flourish when the whole chore is done.
+- The spots change for good: trough levels, lit lamps, hung nets, loaves on doormats, mail flags, logs in the woodbox.
+- Crank, chop and rope cues make the spot move: the bell rope bounces and swings, the axe hops, the spare buckets
+  rattle.
+- The water sloshes harder the faster you go before it spills. A fish flops on the crate. The bread steams.
+- A delivery thrown in from 3 m or more counts too, with "Nice throw!".
+
+Social twists (acceptance 3):
+- The fish crate is a two-person carry.
+- The Impatient can poison a filled trough (the next villager has to dump it first) or snuff a lit lamp (soot adds 2 s).
+- Fakes look identical and count for nothing. Tested in `KillGodot.WorldChores.FakeSabotageTwoCarry`.
+
+Bots:
+- Bots walk the real steps (their navmesh goals now use the spots' stand points) and side-step head-height snags.
+- They put their chore items down at night and in meetings.
+- The Impatient only fake a world chore for 25 s, then drop the item and get back to hunting (fix for the I4 no-winner
+  regression).
+
+Network:
+- The water-run smoke failed because a wall lantern at head height, which the 144 cm navmesh agent can't see, stopped
+  the carrier.
+- The smoke autopilot now side-steps like a player and faces the spot on arrival.
+- Replication waits were added for the fill and the trough level.
+- Panel stations that stood on a world chore spot (DrawWater on the well kerb, MendNets at the rack, ChopWood at the
+  block) now slide their E box aside, so they no longer swallow the E.

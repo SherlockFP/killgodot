@@ -14,6 +14,12 @@ class UStaticMesh;
 class UStaticMeshComponent;
 class UTextRenderComponent;
 
+namespace KGWorldChoreLook
+{
+	/** Vertex-colour furniture props (firewood, bread) get a flat colour of their own (they render white in game). */
+	void FlattenVertexColour(UStaticMeshComponent* C);
+}
+
 /** Public state of one world spot (replicated by AKGWorldChoreDirector, indexed like the catalog's anchors). */
 USTRUCT()
 struct FKGSpotState
@@ -59,6 +65,8 @@ public:
 	const FKGWorldAnchor* GetAnchor() const;
 	/** A short sparkle + pop when a step completes here (every machine, from the director's cue). */
 	void PlayBurst(const FLinearColor& Color);
+	/** Any cue played here (crank, chop, knock, rope...): the spot's moving bits bounce (the bell rope, the axe, the crank). */
+	void PlayCue(EKGWorldCue Cue);
 
 protected:
 	UPROPERTY(VisibleAnywhere, Category = "Components")
@@ -91,6 +99,10 @@ private:
 	UPROPERTY(Transient) TObjectPtr<UStaticMeshComponent> Flag;
 	UPROPERTY(Transient) TObjectPtr<UPointLightComponent> Light;
 	UPROPERTY(Transient) TObjectPtr<UTextRenderComponent> Plate;
+	UPROPERTY(Transient) TArray<TObjectPtr<UStaticMeshComponent>> Jiggle;       // bounce on a cue
+	TArray<FVector> JiggleBase;
+	float JiggleAge = 10.0f;
+	float JiggleAmp = 0.0f;
 };
 
 /**
@@ -204,4 +216,6 @@ private:
 	int32 SmokeRegrabs = 0;
 	int32 SmokePathStep = -1;
 	float SmokeLegClock = 0.0f;
+	float SmokeIdleClock = 0.0f;
+	int32 SmokeRepaths = 0;
 };

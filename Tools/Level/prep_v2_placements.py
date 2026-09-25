@@ -13,7 +13,8 @@ Output (UE centimetres, degrees):
   lamps : [[x,y,z,yaw]]  lamp posts (arm along local +Y)       starts: [[x,y,z,yaw]]
   water : brook / pond / spill planes (M_KG_PondWater)            stats: counts
 Mesh prefixes: V village kit, N nature, P props, JP japan, PIR pirate, DV/DW/DH dress village/wilds/harbour, E engine,
-DT the plan 11.4 pack KG_DressTerrace (Tools/Blender/kg_make_dress_terrace.py: balustrades, quay wall + steps, stone
+DL the SPRINT-022 pack KG_DressLandmarks (Tools/Blender/kg_make_dress_landmarks.py: cliff cladding, arch portals,
+buttresses, tower crowns), DT the plan 11.4 pack KG_DressTerrace (Tools/Blender/kg_make_dress_terrace.py: balustrades, quay wall + steps, stone
 arch bridge; used when Art/Packed/KG_DressTerrace_Clean.json exists and KG_NO_TERRACE is unset, kit fallbacks otherwise).
 Kit conventions (measured): wall pieces are 2 m wide, exterior faces local -Y, span y -0.31..+0.09, 3.12 m tall;
 Stairs_Exterior_Straight_* climb 1 m toward local +Y over y -1.08..+1.0 (2.08 m run), 2 m wide.
@@ -635,10 +636,10 @@ def brook():
             u = norm(x1 - x0, y1 - y0)
             water.append({"p": [round((x0 + x1) * 50, 1), round((y0 + y1) * 50, 1), round(((z0 + z1) / 2 + 0.42) * 100, 1)],
                           "y": round(yaw_x(*u), 2), "pi": round(math.degrees(math.atan2(z1 - z0, ln)), 3),
-                          "s": [round(ln + 0.6, 3), round(ST["width"] + 1.4, 3), 1.0], "f": "V2/Brook"})
+                          "s": [round(ln + 0.6, 3), round(ST["width"] + 1.4, 3), 1.0], "f": "V2/Water/Brook"})
     for p in ST.get("ponds", []):
         water.append({"p": [p["center"][0] * 100, p["center"][1] * 100, p["z"] * 100], "y": 0.0, "pi": 0.0,
-                      "s": [p["radius"] * 2 + 2.0, p["radius"] * 2 + 2.0, 1.0], "f": "V2/Brook"})
+                      "s": [p["radius"] * 2 + 2.0, p["radius"] * 2 + 2.0, 1.0], "f": "V2/Water/Pond"})
     # koi spill: channel on the garden terrace + a curtain down the Sakura Wall
     sp = L["koi_spill"]["points"]
     sw = next(w for w in L["retaining_walls"] if w["name"].startswith("sakura"))
@@ -727,6 +728,8 @@ def lane_lamps():
             continue
         if abs(x) > 125 or abs(y) > 120:
             continue
+        if HARD.distance(p) < 1.5 or CORRIDORS.distance(p) < 0.6 or relief(x, y, 0.35) > 0.06:
+            continue                                  # SPRINT-022: posts on level ground only (no gap under the foot)
         chosen.append((x, y, arm))
     for x, y, arm in chosen:
         lamps.append([round(x * 100, 1), round(y * 100, 1), round(g1(x, y) * 100, 1), round(yaw_up(*arm), 1), "street"])
@@ -760,7 +763,7 @@ def nature():
         m = (twisted if near_brook and rng.random() < 0.15 else trees)[int(rng.integers(0, 5))]
         if y < -95 and rng.random() < 0.5:
             m = pines[int(rng.integers(0, 5))]
-        inst("forest", m, x, y, z - 0.15, float(rng.uniform(0, 360)), float(rng.uniform(0.9, 1.6)))
+        inst("forest", m, x, y, gmin(x, y, 0.7) - 0.2, float(rng.uniform(0, 360)), float(rng.uniform(0.9, 1.6)))
         n_tr += 1
     stats["grove_trees"] = n_tr
     # --- outer forest + mountain pines (beyond the core rectangle, inside 300 m)
@@ -777,7 +780,10 @@ def nature():
     n_p = 0
     for x, y, z in zip(X[ok], Y[ok], Z[ok]):
         m = pines[int(rng.integers(0, 5))] if (z > 14 or rng.random() < 0.55) else trees[int(rng.integers(0, 5))]
-        inst("forest", m, x, y, z - 0.2, float(rng.uniform(0, 360)), float(rng.uniform(1.2, 2.6)))
+        sc = float(rng.uniform(1.2, 2.6))
+        if relief(x, y, 2.5) > 3.5:
+            continue                                  # SPRINT-022: no trees hanging off the steep rim / coast drops
+        inst("forest", m, x, y, gmin(x, y, 1.2) - 0.3, float(rng.uniform(0, 360)), sc)
         n_p += 1
     stats["outer_trees"] = n_p
     # --- rocks on steep ground / cliff tops, a few boulders in the meadows
@@ -795,8 +801,13 @@ def nature():
     ok = (((slope > 0.55) & (pick < 0.35)) | (pick < 0.012)) & (Z > 1.0) & ~shapely.contains_xy(keep_out, X, Y) & \
         shapely.contains_xy(LAND, X, Y)
     n_r = 0
+    hard = HARD.buffer(4.0)
     for x, y, z in zip(X[ok], Y[ok], Z[ok]):
-        inst("forest", rocks[int(rng.integers(0, 3))], x, y, z - 0.4, float(rng.uniform(0, 360)), float(rng.uniform(0.8, 2.8)))
+        sc = float(rng.uniform(0.8, 2.8))
+        # SPRINT-022: never on a cliff / wall edge or broken ground (they hung in the air there); seated on the low side
+        if hard.contains(Point(x, y)) or relief(x, y, 1.0 * sc) > 0.9 * sc or not LAND.buffer(-6.0).contains(Point(x, y)):
+            continue
+        inst("forest", rocks[int(rng.integers(0, 3))], x, y, gmin(x, y, 0.6 * sc) - 0.12 * sc, float(rng.uniform(0, 360)), sc)
         n_r += 1
     stats["rocks"] = n_r
     # --- brook banks: ferns, bushes (no collision)
@@ -811,6 +822,8 @@ def nature():
             x, y = p.x - u[1] * sg * off, p.y + u[0] * sg * off
             if WALK.buffer(0.8).contains(Point(x, y)) or B_RECTS.buffer(1).contains(Point(x, y)):
                 continue
+            if any(math.dist((x, y), b_["at"]) < b_["span"] / 2 + 1.5 for b_ in L["bridges"]):
+                continue                      # SPRINT-022: nothing growing through a bridge deck
             m = ["N:Fern_1", "N:Bush_Common", "N:Plant_1_Big", "N:Grass_Common_Tall"][int(rng.integers(0, 4))]
             inst("crops", m, x, y, g1(x, y) - 0.05, float(rng.uniform(0, 360)), float(rng.uniform(0.8, 1.4)))
         s += 2.2
@@ -882,6 +895,311 @@ def starts():
     return out
 
 
+# ================================================================================================ SPRINT-022 geometry
+HARD = unary_union([LineString(w["points"]) for w in L["retaining_walls"]] +
+                   [LineString(c["points"]) for c in L["cliffs"]] + [LineString(L["quay"]["edge"])])
+
+
+def gmin(x, y, r):
+    """Lowest terrain (m) of the centre and 8 points on a circle of radius r (a prop's footprint)."""
+    a = np.linspace(0, 2 * np.pi, 8, endpoint=False)
+    return float(min(g1(x, y), ground(x + r * np.cos(a), y + r * np.sin(a)).min()))
+
+
+def relief(x, y, r):
+    a = np.linspace(0, 2 * np.pi, 8, endpoint=False)
+    z = ground(x + r * np.cos(a), y + r * np.sin(a))
+    z = np.append(z, g1(x, y))
+    return float(z.max() - z.min())
+
+
+# ------------------------------------------------------------------------------------------------ Sakura Garden
+# The garden is re-laid-out on the flat garden terrace (the layout's koi_pond / garden_torii anchors sat on the Garden
+# Stair's slope: torii over the stair, lamps on the treads, the arch bridge over the stair cutting). Builder and the
+# japan dressing read PL["garden"]; the FeedKoi chore (layout) stays at the pond's south-west tip.
+JP_RIM = {"half": (4.01, 2.49), "centre_off": (0.39, 0.145)}          # SM_KG_KoiPondRim bounds (m), bbox centre offset
+JP_BRIDGE_HALF = (3.3, 1.0)
+
+
+def _local(c, yaw_deg, lx, ly):
+    a = math.radians(yaw_deg)
+    return c[0] + lx * math.cos(a) - ly * math.sin(a), c[1] + lx * math.sin(a) + ly * math.cos(a)
+
+
+def _obb(c, yaw_deg, hx, hy):
+    return Polygon([_local(c, yaw_deg, sx * hx, sy * hy) for sx, sy in ((-1, -1), (1, -1), (1, 1), (-1, 1))])
+
+
+def garden():
+    walk = LineString(next(l for l in L["lanes"] if l["name"] == "sakura_walk")["points"])
+    pav = rect(L["landmarks"]["pavilion"], 0.0)
+    chores = [Point(t["at"]).buffer(1.4) for t in L["tasks"] if TERR["garden"].buffer(3.0).contains(Point(t["at"]))]
+    keep = unary_union([CORRIDORS.buffer(0.4), LANES.buffer(0.5), pav.buffer(0.6), HARD.buffer(1.2)] + chores)
+    out = {"note": "SPRINT-022 Sakura Garden layout (prep_v2_placements.garden); z in metres"}
+
+    def flat_ok(x, y, r, tol=0.08):
+        return relief(x, y, r) <= tol and TERR["garden"].buffer(-0.3).contains(Point(x, y))
+
+    def spot(x, y, r, avoid, tol=0.1, reach=1.8):
+        """The nearest clear, level spot to (x, y) within `reach` m (a small spiral search), or None."""
+        for rr in np.arange(0.0, reach + 0.01, 0.3):
+            for a in (np.linspace(0, 2 * np.pi, max(1, int(rr * 12)), endpoint=False) if rr else [0.0]):
+                px, py = x + rr * math.cos(a), y + rr * math.sin(a)
+                q = Point(px, py).buffer(r)
+                if not q.intersects(avoid) and flat_ok(px, py, r, tol):
+                    return px, py
+        return None
+
+    # the pond: an oval stone rim on the flat lawn, long axis NE; FeedKoi at its south-west tip
+    pc, pyaw = (51.2, 19.6), 39.8
+    from shapely import affinity
+    rc = _local(pc, pyaw, *JP_RIM["centre_off"])
+    rim = affinity.rotate(affinity.scale(Point(rc).buffer(1.0, 32), JP_RIM["half"][0], JP_RIM["half"][1]), pyaw, origin=rc)
+    assert not rim.intersects(keep.difference(unary_union(chores))), "koi pond clashes with a walkway / stair / pavilion"
+    zg = g1(*pc)
+    out["pond"] = {"at": list(pc), "yaw": pyaw, "ground": round(zg, 3), "rim_z": round(zg + 0.37, 3),
+                   "water_z": round(zg + 0.27, 3), "centre": [round(v, 3) for v in _local(pc, pyaw, *JP_RIM["centre_off"])],
+                   "poly": [list(map(lambda v: round(v, 3), p)) for p in rim.exterior.coords[:-1]]}
+    # the arch bridge across the pond's short axis, its end blocks on the lawn
+    byaw = pyaw + 90.0
+    bc = out["pond"]["centre"]
+    br = _obb(bc, byaw, *JP_BRIDGE_HALF)
+    out["bridge"] = {"at": bc, "yaw": byaw, "z": round(zg + 0.58, 3), "deck_z": round(zg + 0.9, 3),
+                     "poly": [list(map(lambda v: round(v, 3), p)) for p in br.exterior.coords[:-1]],
+                     "ends": [[round(v, 3) for v in _local(bc, byaw, sx * 3.6, 0.0)] for sx in (1, -1)]}
+    assert not br.intersects(CORRIDORS.buffer(0.3)) and not br.intersects(pav)
+    # the torii across the Sakura Walk, on level ground a few metres past the stair head
+    for s in np.arange(4.0, 9.0, 0.25):
+        p = walk.interpolate(s)
+        a, b = walk.interpolate(s - 0.5), walk.interpolate(s + 0.5)
+        hd = math.degrees(math.atan2(b.y - a.y, b.x - a.x))
+        foot = _obb((p.x, p.y), hd, 1.4, 1.8)
+        if flat_ok(p.x, p.y, 2.0) and not foot.intersects(CORRIDORS.buffer(0.5)) and not foot.intersects(rim.buffer(0.8)):
+            out["torii"] = {"at": [round(p.x, 3), round(p.y, 3)], "yaw": round(hd - 90.0, 2), "z": round(gmin(p.x, p.y, 1.6), 3),
+                            "scale": 0.55, "s": round(float(s), 2), "heading": round(hd, 2)}
+            break
+    assert "torii" in out, "no level ground for the torii"
+    # stone lanterns on plinths: a pair beyond the torii flanking the walk, a pair at the bridge's south-east end
+    lanterns = []
+    t = out["torii"]
+    for ds, side in ((3.2, 1), (3.2, -1)):
+        p = walk.interpolate(t["s"] + ds)
+        n = (-math.sin(math.radians(t["heading"])), math.cos(math.radians(t["heading"])))
+        lanterns.append((p.x + n[0] * side * 2.6, p.y + n[1] * side * 2.6))
+    e = out["bridge"]["ends"][1]                                   # the south-east end (towards the stair head)
+    ax = (-math.cos(math.radians(byaw)), -math.sin(math.radians(byaw)))
+    for side in (1, -1):
+        lanterns.append((e[0] + ax[0] * 0.9 - ax[1] * side * 1.9, e[1] + ax[1] * 0.9 + ax[0] * side * 1.9))
+    good = []
+    avoid = unary_union([keep, rim.buffer(0.3), br.buffer(0.3)])
+    for x, y in lanterns:
+        sp = spot(x, y, 0.6, unary_union([avoid] + [Point(g[0], g[1]).buffer(1.6) for g in good]))
+        if sp:
+            good.append([round(sp[0], 3), round(sp[1], 3), round(gmin(sp[0], sp[1], 0.55), 3)])
+    out["lanterns"] = good
+    # small garden lamps along the stepping-stone path stair head -> bridge (1.1 m off it)
+    head = (L["stairs"][[s["name"] for s in L["stairs"]].index("garden_stair")]["to"])
+    nw = out["bridge"]["ends"][0]
+    route = [list(head), [round(e[0] + ax[0] * 1.2, 3), round(e[1] + ax[1] * 1.2, 3)], e, nw,
+             [round(nw[0] - ax[0] * 1.2, 3), round(nw[1] - ax[1] * 1.2, 3)], [47.6, 21.6]]
+    out["route"] = route
+    rl = LineString(route[:3])
+    lamps = []
+    for s in (1.4, 2.8, 4.2):
+        p = rl.interpolate(min(s, rl.length - 0.2))
+        a, b = rl.interpolate(max(0, s - 0.3)), rl.interpolate(min(rl.length, s + 0.3))
+        u = norm(b.x - a.x, b.y - a.y)
+        side = 1 if len(lamps) % 2 == 0 else -1
+        sp = spot(p.x - u[1] * side * 1.1, p.y + u[0] * side * 1.1, 0.25,
+                  unary_union([keep, rim.buffer(0.2), br.buffer(0.2), rl.buffer(0.5)]), tol=0.06, reach=1.0)
+        if sp:
+            lamps.append([round(sp[0], 3), round(sp[1], 3), round(gmin(sp[0], sp[1], 0.22), 3)])
+    out["lamps"] = lamps
+    # rocks grounded around the pond (sunk 12 % of their 1.5 m height) and two by the torii
+    rocks = []
+    for lx, ly, sc in ((5.0, 1.6, 1.0), (-1.4, 3.4, 0.8), (2.0, -3.4, 0.7), (-4.9, -0.4, 0.6), (4.2, -1.8, 0.55)):
+        x, y = _local(pc, pyaw, lx, ly)
+        sp = spot(x, y, 0.8 * sc, unary_union([keep, br.buffer(0.3), rim.buffer(0.1), rl.buffer(0.6)]
+                                               + [Point(r_[0], r_[1]).buffer(1.2) for r_ in rocks]), reach=1.5)
+        if sp:
+            rocks.append([round(sp[0], 3), round(sp[1], 3), round(gmin(sp[0], sp[1], 0.7 * sc) - 0.18 * sc, 3), sc])
+    out["rocks"] = rocks
+    # the garden trees of the old builder list, kept where they are clear, nudged off walkways / ramps otherwise
+    trees = []
+    for name, x, y, sc in [("Sakura_B", 54.0, 8.0, 1.0), ("Sakura_A", 66.0, 18.0, 0.9), ("Maple", 57.5, 31.5, 0.9),
+                           ("BonsaiPine", 60.0, 11.0, 1.0), ("Bamboo", 53.5, 3.5, 1.0), ("Bamboo", 56.0, 2.5, 1.1)]:
+        for dx, dy in ((0, 0), (1.5, 0), (0, 1.5), (-1.5, 0), (0, -1.5), (2.5, 2.5), (-2.5, 2.5)):
+            q = Point(x + dx, y + dy).buffer(0.9)
+            if not q.intersects(keep) and not q.intersects(rim.buffer(0.5)) and TERR["garden"].buffer(-0.5).contains(q):
+                trees.append([name, round(x + dx, 3), round(y + dy, 3), round(gmin(x + dx, y + dy, 0.6) - 0.12, 3), sc])
+                break
+    out["trees"] = trees
+    stats["garden"] = {k: len(v) if isinstance(v, list) else 1 for k, v in out.items() if k != "note"}
+    return out
+
+
+# ------------------------------------------------------------------------------------------------ cliff cladding
+CLIFF_PIECES = [("DL:Cliff_A", 8.9, 5.5, 4.2), ("DL:Cliff_B", 7.0, 4.4, 3.75), ("DL:Cliff_C", 5.85, 6.5, 4.1)]
+
+
+def cliffs():
+    """SPRINT-022 acceptance 6: the smooth terrain faces of the basin east cliff and the Point's sea cliff are clad in
+    layered rock (KG_DressLandmarks Cliff_A/B/C), in two or three tiers from the sea bed to the cliff top, staggered in
+    plan and height so the silhouette steps; a boulder apron at the waterline breaks the base. Pieces overlap along
+    the face (spacing 0.8 x width), their backs sink 0.5 m into the face; the top tier stops at the cliff top."""
+    n_p = 0
+    k = 0
+    for c in L["cliffs"]:
+        if c["name"] == "fish_market_cliff":
+            continue
+        line = LineString(c["points"])
+        S = line.length
+        s = 0.0
+        while s < S + 1.0:
+            p = line.interpolate(min(s, S))
+            a, b = line.interpolate(max(0.0, s - 1.0)), line.interpolate(min(S, s + 1.0))
+            u = norm(b.x - a.x, b.y - a.y)
+            nrm = (-u[1], u[0])
+            if g1(p.x + nrm[0] * 4.0, p.y + nrm[1] * 4.0) > g1(p.x - nrm[0] * 4.0, p.y - nrm[1] * 4.0):
+                nrm = (-nrm[0], -nrm[1])                      # seaward
+            top = g1(p.x - nrm[0] * 1.5, p.y - nrm[1] * 1.5)
+            bed = g1(p.x + nrm[0] * 5.0, p.y + nrm[1] * 5.0)
+            name, w, h, d = CLIFF_PIECES[k % 3]
+            yaw = yaw_face(*nrm) + 180.0                         # piece front (-Y Blender = +Y UE) looks seaward
+            z = bed - 0.15
+            tier = 0
+            while z < top - 1.2:
+                name, w, h, d = CLIFF_PIECES[(k + tier) % 3]
+                room = top + 0.25 - z
+                sz = max(0.55, min(1.25, room / h)) if room < h * 1.25 else 1.0
+                out = -0.5 + (0.35 if tier == 0 else 0.0) + 0.25 * ((k + tier) % 2)
+                jit = 0.6 * (((k * 7 + tier * 3) % 5) / 4.0 - 0.5)
+                x, y = p.x + nrm[0] * out + u[0] * jit, p.y + nrm[1] * out + u[1] * jit
+                if _obb((x + nrm[0] * d / 2, y + nrm[1] * d / 2), yaw_x(*u), w / 2, d / 2).intersects(CORRIDORS.buffer(0.5)):
+                    z += h * sz - 0.35
+                    tier += 1
+                    continue
+                jy = 9.0 * (((k * 5 + tier * 7) % 5) / 2.0 - 1.0)          # a few degrees of yaw: no tidy rows
+                sw = 0.9 + 0.2 * (((k * 3 + tier) % 4) / 3.0)
+                put(name, x, y, z, yaw + jy, s=(sw, 1.0, sz), f="V2/Cliffs")
+                n_p += 1
+                z += h * sz - 0.35
+                tier += 1
+            # boulder apron at the waterline
+            if k % 2 == 0:
+                x, y = p.x + nrm[0] * 3.2, p.y + nrm[1] * 3.2
+                put("DL:CliffTalus", x, y, g1(x, y) - 0.1, yaw + 180.0 * (k % 4 == 0), s=(1.0, 1.0, 1.0 + 0.2 * (k % 3)),
+                    f="V2/Cliffs")
+                n_p += 1
+            k += 1
+            s += CLIFF_PIECES[k % 3][1] * 0.8
+    # second pass: any other tall face near public ground (the east coast past the Point) gets clad the same way
+    covered = unary_union([LineString([(it["p"][0] / 100.0 - math.cos(math.radians(it["y"])) * 3.5,
+                                        it["p"][1] / 100.0 - math.sin(math.radians(it["y"])) * 3.5),
+                                       (it["p"][0] / 100.0 + math.cos(math.radians(it["y"])) * 3.5,
+                                        it["p"][1] / 100.0 + math.sin(math.radians(it["y"])) * 3.5)]).buffer(2.4)
+                           for it in items if it["m"].startswith("DL:Cliff")] or [Point(0, 0).buffer(0.01)])
+    near = WALK.buffer(60.0)
+    keep_clear = unary_union([CORRIDORS.buffer(4.0), LANES.buffer(1.5)])
+    for x, y, hi, lo, ux, uy in sorted(terrain_faces(), key=lambda q: (q[0], q[1])):
+        if hi - lo < 4.0 or covered.contains(Point(x, y)) or not near.contains(Point(x, y)):
+            continue
+        if keep_clear.contains(Point(x, y)) or abs(x) > 126.0 or abs(y) > 122.0:
+            continue                          # never on a stair / ramp / walkway; the core grid only
+        if B_RECTS.buffer(3.0).contains(Point(x, y)) or HARD.distance(Point(x, y)) < 0.5 and not                 any(c["name"] != "fish_market_cliff" and LineString(c["points"]).distance(Point(x, y)) < 0.5 for c in L["cliffs"]):
+            continue                          # retaining walls / quay: the kit walls already dress those steps
+        nrm = (-ux, -uy)                      # seaward / downhill
+        top = g1(x - nrm[0] * 1.5, y - nrm[1] * 1.5)
+        bed = g1(x + nrm[0] * 5.0, y + nrm[1] * 5.0)
+        if top - bed < 4.0:
+            continue
+        yaw = yaw_face(*nrm) + 180.0
+        z = bed - 0.15
+        tier = 0
+        while z < top - 1.2:
+            name, w, h, d = CLIFF_PIECES[(k + tier) % 3]
+            room = top + 0.25 - z
+            sz = max(0.55, min(1.25, room / h)) if room < h * 1.25 else 1.0
+            px, py = x + nrm[0] * (-0.4 + 0.25 * (tier % 2)), y + nrm[1] * (-0.4 + 0.25 * (tier % 2))
+            if not _obb((px + nrm[0] * d / 2, py + nrm[1] * d / 2), yaw_face(*nrm) + 90.0, w / 2, d / 2).intersects(
+                    CORRIDORS.buffer(0.5)):
+                put(name, px, py, z, yaw, s=(1.0, 1.0, sz), f="V2/Cliffs")
+            n_p += 1
+            z += h * sz - 0.35
+            tier += 1
+        ax_ = (-nrm[1], nrm[0])
+        covered = covered.union(LineString([(x - ax_[0] * 3.5, y - ax_[1] * 3.5), (x + ax_[0] * 3.5, y + ax_[1] * 3.5)]).buffer(2.4))
+        k += 1
+    stats["cliff_pieces"] = n_p
+
+
+# ------------------------------------------------------------------------------------------------ small landmarks
+def landmarks_s22():
+    """Arch portals on both faces of every sottoportego, buttresses on the Upper / Crown walls where the low side is
+    open, a wall fountain in Well Court's retaining wall, the Belvedere telescope."""
+    n = 0
+    for j in L["street_joins"]:
+        if j["kind"] != "arch":
+            continue
+        a, b = j["points"]
+        t = norm(b[0] - a[0], b[1] - a[1])
+        ope = next(l for l in L["lanes"] if l["name"] == j["over"][0])
+        od = norm(ope["points"][-1][0] - ope["points"][0][0], ope["points"][-1][1] - ope["points"][0][1])
+        hit = LineString([a, b]).intersection(LineString(ope["points"]))
+        cc = (hit.x, hit.y) if not hit.is_empty and hit.geom_type == "Point" else ((a[0] + b[0]) / 2, (a[1] + b[1]) / 2)
+        z0 = float(ope["z"])
+        for sg in (-1.0, 1.0):
+            nn = (od[0] * sg, od[1] * sg)
+            x, y = cc[0] + nn[0] * 1.32, cc[1] + nn[1] * 1.32
+            put("DL:ArchPortal", x, y, z0, yaw_face(*nn) + 180.0, f="V2/Landmarks/Arch", c=False)
+            n += 1
+    # buttresses: low side of the upper / crown retaining walls, every ~9 m, 1.6 m clear of walkways and buildings
+    blocked = unary_union([WALK.buffer(0.3), B_RECTS.buffer(0.5), AREAS])
+    for w in L["retaining_walls"]:
+        if not (w["name"].startswith("upper_wall") or w["name"].startswith("crown_wall")):
+            continue
+        line = LineString(w["points"])
+        s = 4.5
+        while s < line.length - 4.0:
+            p = line.interpolate(s)
+            a, b = line.interpolate(s - 0.5), line.interpolate(s + 0.5)
+            u = norm(b.x - a.x, b.y - a.y)
+            nrm = (-u[1], u[0])
+            if g1(p.x + nrm[0] * 2.0, p.y + nrm[1] * 2.0) > g1(p.x - nrm[0] * 2.0, p.y - nrm[1] * 2.0):
+                nrm = (-nrm[0], -nrm[1])                        # towards the low side
+            x, y = p.x + nrm[0] * 0.36, p.y + nrm[1] * 0.36    # back on the kit wall face (0.30 m + 6 cm)
+            foot = _obb((x + nrm[0] * 0.5, y + nrm[1] * 0.5), yaw_x(*u), 0.55, 0.55)
+            zb = g1(x + nrm[0] * 0.5, y + nrm[1] * 0.5)
+            if not foot.intersects(blocked) and w["top_z"] - zb > 2.4 and relief(x + nrm[0] * 0.5, y + nrm[1] * 0.5, 0.5) < 0.15:
+                put("DL:Buttress", x, y, zb - 0.04, yaw_face(*nrm) + 180.0, s=(1.0, 1.0, (w["top_z"] - zb - 0.05) / 3.02),
+                    f="V2/Landmarks/Buttress")
+                n += 1
+                s += 9.0
+            else:
+                s += 1.5
+    stats["landmarks_s22"] = n
+
+
+# ------------------------------------------------------------------------------------------------ cliff faces (validator data)
+def terrain_faces(step=0.75):
+    """Steep terrain faces (slope > 65 deg) near public spaces, for verify_v2_build's cliff-face check."""
+    xs = np.arange(-135.0, 135.0, step)
+    ys = np.arange(-128.0, 128.0, step)
+    X, Y = np.meshgrid(xs, ys)
+    gx = (ground(X + 0.4, Y) - ground(X - 0.4, Y)) / 0.8
+    gy = (ground(X, Y + 0.4) - ground(X, Y - 0.4)) / 0.8
+    sl = np.hypot(gx, gy)
+    ok = sl > 2.2
+    pts = []
+    for x, y, a, b in zip(X[ok], Y[ok], gx[ok], gy[ok]):
+        n = math.hypot(a, b)
+        ux, uy = a / n, b / n                      # uphill
+        hi = g1(x + ux * 1.5, y + uy * 1.5)
+        lo = g1(x - ux * 1.5, y - uy * 1.5)
+        pts.append([round(float(x), 2), round(float(y), 2), round(hi, 2), round(lo, 2), round(ux, 3), round(uy, 3)])
+    return pts
+
+
 # ================================================================================================ main
 def main():
     walls()
@@ -896,8 +1214,13 @@ def main():
     nature()
     grass = meadow()
     st = starts()
+    gd = garden()                 # SPRINT-022: Sakura Garden re-layout
+    cliffs()                      # SPRINT-022: clad the big terrain faces
+    landmarks_s22()               # SPRINT-022: arch portals, buttresses
+    faces = terrain_faces()
     data = {"_doc": __doc__.splitlines()[0], "layout": "morrowmere_layout_v2.json", "items": items, "hism": hism,
-            "grass": grass, "lamps": lamps, "water": water, "starts": st, "stats": stats}
+            "grass": grass, "lamps": lamps, "water": water, "starts": st, "stats": stats, "garden": gd,
+            "faces": faces}
     with open(OUT_PATH, "w") as f:
         json.dump(data, f, separators=(",", ":"))
     print(f"KG_V2_PREP items {len(items)}, forest {sum(len(v) for v in hism['forest'].values())}, crops "

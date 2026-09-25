@@ -193,6 +193,10 @@ struct KILLGODOT_API FKGWorldChoreRules
 	static constexpr float ReachSlackCm = 90.0f;
 	/** Owner may be this far from their item when a helper (or gravity) delivers it. */
 	static constexpr float OwnerNearCm = 600.0f;
+	/** Impatient bots fake a world chore for this long, then drop the item and get back to hunting. */
+	static constexpr float BotFakeSecs = 25.0f;
+	/** A delivery that lands while its owner stands at least this far from the spot was thrown in ("Nice throw!"). */
+	static constexpr float ThrowInCm = 300.0f;
 	/** Sabotage takes this long (standing at the spot). */
 	static constexpr float SabotageSecs = 3.0f;
 	/** A poisoned trough: dumping it first. A snuffed lamp: cleaning the soot adds this. */

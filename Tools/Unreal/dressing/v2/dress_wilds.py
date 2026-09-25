@@ -78,7 +78,7 @@ def stone_circle(x, y):
         px, py = x + 520.0 * math.cos(a), y + 520.0 * math.sin(a)
         K.prop(DW + "Menhir_%s" % "ABC"[k % 3], px, py, C.ground_min(px, py, 60.0) - 20.0, yaw=math.degrees(a) + 90.0,
                pitch=R.uniform(-4, 4), roll=R.uniform(-6, 6), sub="Stones", claim=90.0)
-    K.solid(N + "Rock_Medium_2", x, y, C.ground(x, y) - 110.0, R.uniform(0, 360), (0.8, 0.8, 0.5))
+    K.solid(N + "Rock_Medium_2", x, y, C.ground_min(x, y, 120.0) - 30.0, R.uniform(0, 360), (0.8, 0.8, 0.5))
     for k in range(5):
         K.clutter(P + "Candle_2", x + R.uniform(-80, 80), y + R.uniform(-80, 80), C.ground(x, y) + 5.0, None, 1.5)
     K.flower_patch(x, y, 400.0, 10)
@@ -115,7 +115,7 @@ def charcoal(x, y):
 def lookout(x, y):
     face = K.face_dir(x, y, *C.O_BASIN)
     K.log(x, y, C.ground(x, y), face + 90.0, 220.0, 1.8)
-    C.seat(P + "Stool", x, y, face, z=C.ground(x, y) - 20.0, seat_height=45.0)
+    C.seat(P + "Stool", x, y, face, z=C.ground_max(x, y, 25.0) - 6.0, seat_height=45.0)
     bx, by = x + math.cos(math.radians(face + 180.0)) * 200.0, y + math.sin(math.radians(face + 180.0)) * 200.0
     for k in range(4):
         K.clutter(N + "Pebble_Round_%d" % (1 + k), bx, by, C.ground(bx, by) + k * 9.0, None, 2.0 - k * 0.3)

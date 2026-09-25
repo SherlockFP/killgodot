@@ -37,7 +37,7 @@ except ImportError:          # dry run (system Python)
     UE = False
 
 ROOT = "D:/Kill Godot"
-LEVEL = "/Game/KillGodot/Maps/L_Morrowmere_v2"
+LEVEL = os.environ.get("KG_V2_LEVEL") or "/Game/KillGodot/Maps/L_Morrowmere_v2"     # SPRINT-022 test copies
 LAYOUT_FILE = f"{ROOT}/Tools/Level/morrowmere_layout_v2.json"
 HEIGHTS = f"{ROOT}/Art/Packed/KG_Terrain_v2_heights.json"
 PLACEMENTS = f"{ROOT}/Art/Packed/KG_V2_Placements.json"
@@ -850,6 +850,15 @@ def _anchor_table():
     for f_ in LAYOUT["fields"]:
         cx, cy = centroid(f_["polygon"])
         put(f"field:{f_['name']}", cx, cy)
+    # SPRINT-022: the Sakura Garden is re-laid-out by prep_v2_placements.garden (the layout's koi_pond / garden_torii
+    # points sat on the Garden Stair): the modules use the built positions
+    G = PL.get("garden")
+    if G:
+        put("koi_pond", *G["pond"]["centre"], G["pond"]["ground"], yaw=G["pond"]["yaw"], radius=250.0)
+        put("garden_torii", *G["torii"]["at"], G["torii"]["z"], yaw=G["torii"]["yaw"])
+        for k, (bx, by) in enumerate(G["bridge"]["ends"]):
+            put(f"koi_bridge:{k}", bx, by, G["pond"]["ground"])
+        A["line:garden_route"] = dict(pts=cm(G["route"]))
     # Named lines (cm polylines) for the modules
     A["line:quay_edge"] = dict(pts=cm(LAYOUT["quay"]["edge"]))
     A["line:mole"] = dict(pts=cm(LAYOUT["mole"]["points"]))

@@ -84,7 +84,7 @@ def farmyard():
             for k, (lx, ly) in enumerate(((-40, -150), (40, -150), (-40, -70))):
                 f.clutter(PIR + "Barrel_%d" % (1 + k % 3), lx, ly, 78.0, None, 0.7)
             for k, (lx, ly) in enumerate(((-35, 20), (35, 25))):
-                f.clutter(P + "Bag", lx, ly, 78.0, None, 0.9)
+                f.clutter(P + "Bag", lx, ly, 62.0, None, 0.9)            # SPRINT-022: on the wagon bed
             C.claim(x, y, r)
         elif what == "lantern":
             K.lantern_post(x, y, face, light=7.0, radius=900.0)

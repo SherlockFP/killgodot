@@ -12,6 +12,10 @@ import math
 
 import kg_dress_common_v2 as C
 
+import sys as _sys
+_sys.path.insert(0, "D:/Kill Godot/Tools/Level")
+import kg_archetypes_v2 as ARCH  # noqa: E402  (SPRINT-022 house archetypes)
+
 V, N, P, PIR, JP, WP, DV, DH, DW, DX, K, IP = C.V, C.N, C.P, C.PIR, C.JP, C.WP, C.DV, C.DH, C.DW, C.DX, C.K, C.IP
 R = C.rng
 B = C.Batch()
@@ -149,8 +153,23 @@ def exposed(f, side, lvl=0):
     return not (hit and hit is not f)
 
 
+_SPECS = None
+
+
+def spec_of(f):
+    """The layout record (home / infill) of a building frame, or None (civic, towers)."""
+    global _SPECS
+    if _SPECS is None:
+        _SPECS = {b["id"]: b for b in C.LAYOUT["houses"] + C.LAYOUT["infill"]}
+    return _SPECS.get(getattr(f, "id", None))
+
+
 def window_slots(f, side, lvl):
-    """Local t of the windows of one storey of one side (the builder's exact rhythm, kg_build_village_v2.build_house)."""
+    """Local t of the windows of one storey of one side (the builder's exact rhythm): archetype houses follow
+    Tools/Level/kg_archetypes_v2.py (SPRINT-022), the rest the classic district rhythm of build_house_classic."""
+    sp = spec_of(f)
+    if sp is not None and ARCH.arch_of(sp) is not None:
+        return ARCH.window_slots(sp, side, lvl)
     n = f.cells(side)
     ts = []
     for k in range(n):
@@ -178,9 +197,16 @@ def facade_pt(f, side, t, out=0.0):
     return f.at(side, t, FACADE + out)
 
 
+def jetty_out(f, side, lvl):
+    """Extra facade offset (cm) of a jettied archetype's upper front storeys (kg_build_village_v2.JET)."""
+    sp = spec_of(f)
+    A = ARCH.arch_of(sp) if sp else None
+    return 32.0 if (A and A.get("jetty") and side == "front" and lvl >= 1) else 0.0
+
+
 def flower_box(f, side, t, lvl, sub="FlowerBoxes"):
     """DV FlowerBox under a window: pivot = box bottom centre, back face 14 cm behind it, front +Y outwards."""
-    x, y = facade_pt(f, side, t, 16.0)
+    x, y = facade_pt(f, side, t, 16.0 + jetty_out(f, side, lvl))
     z = f.z + lvl * C.FLOOR_H + 92.0
     clutter(DV + "FlowerBox", x, y, z, yaw_front(f.nyaw(side)), 1.0, cull=9000.0)
     C.stats["flower_boxes"] = C.stats.get("flower_boxes", 0) + 1
@@ -189,6 +215,9 @@ def flower_box(f, side, t, lvl, sub="FlowerBoxes"):
 def dress_facade(f, side, boxes_upper=True, boxes_ground=0.5, max_lvl=3):
     """Flower boxes under the windows of one side: every upper window (boxes_upper), ground windows with chance."""
     n = 0
+    sp = spec_of(f)
+    if sp is not None and not (sp.get("details") or {}).get("flower_boxes", True):
+        boxes_upper, boxes_ground = False, min(boxes_ground, 0.25)     # per-house detail: this one has none upstairs
     for lvl in range(min(f.storeys, max_lvl)):
         if not exposed(f, side, lvl):
             continue
@@ -404,10 +433,10 @@ def barrels(x, y, n=3, r=55.0, pirate=True, breakable=0):
         bx, by = x + (r if n > 1 else 0.0) * math.cos(a), y + (r if n > 1 else 0.0) * math.sin(a)
         if k < breakable:
             C.breakable(P + "Barrel", bx, by, gz + 3.0, R.uniform(0, 360))
-        elif pirate:
-            solid(PIR + "Barrel_%d" % R.choice([0, 3, 4, 10]), bx, by, gz, R.uniform(0, 360), 0.72)
+        elif pirate:        # SPRINT-022: each barrel on its own spot of ground (slopes buried the uphill ones)
+            solid(PIR + "Barrel_%d" % R.choice([0, 3, 4, 10]), bx, by, C.ground_min(bx, by, 25.0) - 2.0, R.uniform(0, 360), 0.72)
         else:
-            solid(P + "Barrel", bx, by, gz, R.uniform(0, 360))
+            solid(P + "Barrel", bx, by, C.ground_min(bx, by, 25.0) - 2.0, R.uniform(0, 360))
     C.claim(x, y, r + 50.0)
 
 
@@ -610,6 +639,28 @@ def beached_boat(x, y, yaw, upturned=False, lean=8.0):
 
 
 # ============================================================================================ paving
+_STAIR_SEGS = None
+
+
+def tile_ok(x, y, z, r=90.0, tol=12.0):
+    """SPRINT-022: a paving tile only goes where it lies flat on the ground (centre and four points r cm out within
+    tol cm of z) and never on a stair or ramp corridor (tiles used to hang over stair flights and slopes)."""
+    global _STAIR_SEGS
+    if _STAIR_SEGS is None:
+        _STAIR_SEGS = [(st["from"][0] * C.M, st["from"][1] * C.M, st["to"][0] * C.M, st["to"][1] * C.M, st["width"] * 50.0)
+                       for st in C.LAYOUT["stairs"]]
+        for rp in C.LAYOUT["ramps"]:
+            for (ax, ay), (bx, by) in zip(rp["points"], rp["points"][1:]):
+                _STAIR_SEGS.append((ax * C.M, ay * C.M, bx * C.M, by * C.M, rp["width"] * 50.0))
+    for ax, ay, bx, by, hw in _STAIR_SEGS:
+        if C.seg_dist(x, y, ax, ay, bx, by) < hw + r:
+            return False
+    for dx, dy in ((0, 0), (r, 0), (-r, 0), (0, r), (0, -r)):
+        if abs(C.ground(x + dx, y + dy) - z) > tol:
+            return False
+    return True
+
+
 def pave(poly, yaw, pick, z, origin=None, tile=200.0, inset=40.0, skip=None, cull=0.0, min_corners=4):
     """Lay kit floor tiles (200 x 200, walk-through, flat) over a flat polygon on a grid turned by yaw.
     pick(x, y, i, j) -> mesh path or None (pattern). A tile goes down when its centre and its four corners (pulled in
@@ -632,6 +683,8 @@ def pave(poly, yaw, pick, z, origin=None, tile=200.0, inset=40.0, skip=None, cul
             if sum(1 for cx, cy in corners if C.pip(poly, cx, cy)) < min_corners:
                 continue
             if skip and skip(x, y):
+                continue
+            if not tile_ok(x, y, z, tile * 0.56):
                 continue
             path = pick(x, y, i, j)
             if not path:
@@ -659,6 +712,8 @@ def pave_lane(name, z, mesh=V + "Floor_Brick", step=200.0, trim=0.0, edge_mesh=N
             off = -w * 0.5 + cw * (col + 0.5)
             px, py = x - uy * off, y + ux * off
             if skip and skip(px, py):
+                continue
+            if not tile_ok(px, py, z, max(step, cw) * 0.56):
                 continue
             edge = col in (0, ncol - 1) and ncol > 2
             path = edge_mesh if (edge and edge_mesh) else mesh
@@ -709,11 +764,17 @@ def parapets(zone=None, wall_prefix=None):
         x, y, z = it["p"]
         yaw = it.get("y", 0.0)
         sz = it.get("s", [1, 1, 1])[2]
-        dx, dy = C.fwd(yaw - 90.0, 10.0)        # cap centre: 10 cm towards the piece's -Y face
-        x, y = x + dx, y + dy
+        if it["m"].startswith("DT:"):
+            if it["m"] != "DT:Balustrade_Post":
+                continue                            # SPRINT-022: balustrade rails have no cap to stand a pot on; posts do
+            top = z + 115.0 * sz
+        else:
+            dx, dy = C.fwd(yaw - 90.0, 10.0)        # cap centre: 10 cm towards the piece's -Y face
+            x, y = x + dx, y + dy
+            top = z + 312.0 * sz
         if zone and C.zone_of(x, y) != zone:
             continue
-        out.append((x, y, z + 312.0 * sz, yaw))
+        out.append((x, y, top, yaw))
     return out
 
 
@@ -830,8 +891,9 @@ def rock_cluster(x, y, s=1.0, n=3):
     for k in range(n):
         a = R.uniform(0, 6.28)
         px, py = x + 120.0 * s * math.cos(a) * (k > 0), y + 120.0 * s * math.sin(a) * (k > 0)
-        B.add(N + "Rock_Medium_%d" % R.randint(1, 3), px, py, C.ground(px, py) - 40.0 * s, R.uniform(0, 360),
-              s * R.uniform(0.5, 0.9), collide=True, cull=40000.0)
+        sc = s * R.uniform(0.5, 0.9)
+        B.add(N + "Rock_Medium_%d" % R.randint(1, 3), px, py, C.ground_min(px, py, 90.0 * sc) - 55.0 * sc, R.uniform(0, 360),
+              sc, collide=True, cull=40000.0)
         clutter(N + "Fern_1", px + 90.0, py + 30.0, None, None, R.uniform(0.3, 0.5))
     C.claim(x, y, 170.0 * s)
 

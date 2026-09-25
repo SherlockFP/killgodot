@@ -553,7 +553,7 @@ const TCHAR* KGWorldChores::CueSound(EKGWorldCue Cue)
 	case EKGWorldCue::Thud: return TEXT("S_Chore_Thud");
 	case EKGWorldCue::Crank: return TEXT("S_Chore_Crank");
 	case EKGWorldCue::Pour: return TEXT("S_Chore_Pour");
-	case EKGWorldCue::Knock: return TEXT("S_WC_Knock");
+	case EKGWorldCue::Knock: return TEXT("S_Chore_Stamp");   // (no dedicated knock yet: the stamp's wooden rap)
 	case EKGWorldCue::Flame: return TEXT("S_Chore_Flame");
 	case EKGWorldCue::Whoosh: return TEXT("S_Chore_Whoosh");
 	case EKGWorldCue::Knot: return TEXT("S_Chore_Knot");

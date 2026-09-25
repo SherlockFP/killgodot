@@ -69,3 +69,10 @@ python Tools/Unreal/kg_capture.py "shot:harbour_a:X,Y,Z,PITCH,YAW" "shot:harbour
   `Roof_Dormer_RoundTile` dormers on exposed 6 m-span roofs (upper town, heart, crown) and the `KG_BotHub` marker at the
   fountain. The square module places the ribboned Maypole (SW pocket, by the sea window). Without the pack
   (`KG_NO_TERRACE=1` or no manifest) every piece falls back to the kit version.
+- SPRINT-022: facades follow the house archetypes (`Tools/Level/kg_archetypes_v2.py`): `kit.window_slots` asks the
+  archetype table (flower boxes under the real windows, +32 cm on jettied upper fronts), a house's `details` can switch
+  its upper flower boxes off, `dress_town.house_signs` hangs the per-house trade signs. Paving tiles only go where they
+  lie flat and off every stair / ramp corridor (`kit.tile_ok`). The Sakura Garden positions come from
+  `PL["garden"]` (`kg_dress_common_v2` anchors `koi_pond`, `garden_torii`, `koi_bridge:0/1`, `line:garden_route`).
+  Every placement is checked afterwards by the geometric validator (`kg_placement_check_v2.ps1` + verify_v2_build.py):
+  nothing floating, sunk, on a stair tread or across a stair / ramp / bridge / door apron.

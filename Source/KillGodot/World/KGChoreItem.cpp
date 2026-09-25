@@ -1,7 +1,9 @@
 #include "World/KGChoreItem.h"
 
+#include "Engine/World.h"   // before KGAudio.h (it uses UWorld)
 #include "Audio/KGAudio.h"
 #include "Chores/WorldChores/KGWorldChoreTypes.h"
+#include "Chores/WorldChores/KGWorldChoreWorld.h"
 #include "Components/BoxComponent.h"
 #include "Components/PointLightComponent.h"
 #include "Components/StaticMeshComponent.h"
@@ -152,7 +154,7 @@ void AKGChoreItem::OnRep_Fill()
 	// Clients: a visible drop in the water level splashes (the carrier ran, fell or the bucket tipped).
 	if (LastFill >= 0.0f && Fill < LastFill - 0.04f && SpillCueCooldown <= 0.0f)
 	{
-		KGAudio::At(this, TEXT("S_WC_Slosh"), GetActorLocation(), 0.6f);
+		KGAudio::At(this, TEXT("S_Chore_Splash"), GetActorLocation(), 0.45f);
 		SpillCueCooldown = 0.6f;
 	}
 	LastFill = Fill;
@@ -182,6 +184,7 @@ UStaticMeshComponent* AKGChoreItem::AddPart(UStaticMesh* PartMesh, const FVector
 		MID->SetScalarParameterValue(TEXT("Intensity"), bGlow ? 6.0f : 0.0f);
 		C->SetMaterial(0, MID);
 	}
+	KGWorldChoreLook::FlattenVertexColour(C);
 	return C;
 }
 
@@ -210,6 +213,7 @@ void AKGChoreItem::BuildVisual()
 			Mesh->SetVectorParameterValueOnMaterials(TEXT("BaseColorFactor"), FVector(Def->Tint));
 			Mesh->SetVectorParameterValueOnMaterials(TEXT("Tint"), FVector(Def->Tint));
 		}
+		KGWorldChoreLook::FlattenVertexColour(Mesh);
 	}
 	const FVector E = Def->BoxExtent;
 	if (Def->bLiquid)
@@ -255,8 +259,24 @@ void AKGChoreItem::BuildVisual()
 	else if (Kind == TEXT("Crate"))
 	{
 		UStaticMesh* Fish = Load<UStaticMesh>(TEXT("/Game/KillGodot/Env/WaterProps/KG_WaterProps/StaticMeshes/SM_KG_Fish_Cod.SM_KG_Fish_Cod"));
-		AddPart(Fish, FVector(-6.0f, -8.0f, E.Z + 3.0f), FVector(0.9f), FLinearColor::White, false);
-		AddPart(Fish, FVector(5.0f, 8.0f, E.Z + 4.0f), FVector(0.85f, 0.85f, 0.85f), FLinearColor::White, false);
+		FishMeshes.Add(AddPart(Fish, FVector(-6.0f, -8.0f, E.Z + 3.0f), FVector(0.9f), FLinearColor::White, false));
+		FishMeshes.Add(AddPart(Fish, FVector(5.0f, 8.0f, E.Z + 4.0f), FVector(0.85f, 0.85f, 0.85f), FLinearColor::White, false));
+		FishMeshes.RemoveAll([](const TObjectPtr<UStaticMeshComponent>& C) { return C == nullptr; });
+		for (const UStaticMeshComponent* F : FishMeshes)
+		{
+			FishBase.Add(F->GetRelativeLocation());
+		}
+	}
+	if (Kind == TEXT("Loaves"))
+	{
+		for (int32 i = 0; i < 4; ++i)
+		{
+			if (UStaticMeshComponent* Puff = AddPart(Shape(TEXT("Sphere")), FVector(-14.0f + 9.0f * i, 0.0f, E.Z + 6.0f), FVector(0.04f),
+			                                         FLinearColor(0.92f, 0.92f, 0.9f), false))
+			{
+				SteamPuffs.Add(Puff);
+			}
+		}
 	}
 	OnRep_Attached();
 	LastFill = Fill;
@@ -274,6 +294,45 @@ void AKGChoreItem::UpdateVisual(float DeltaSeconds)
 	{
 		WaterDisc->SetVisibility(Fill > 0.02f);
 		WaterDisc->SetRelativeLocation(FVector(0.0f, 0.0f, -Def->BoxExtent.Z + 3.0f + (2.0f * Def->BoxExtent.Z - 7.0f) * Fill));
+		// Slosh: the surface rocks harder the faster the carrier goes (a warning before it spills).
+		const APawn* By = Carriers.Num() > 0 ? Carriers[0].Get() : nullptr;
+		const float Speed = By ? static_cast<float>(By->GetVelocity().Size2D()) : static_cast<float>(GetVelocity().Size());
+		SloshAmp = FMath::FInterpTo(SloshAmp, FMath::Clamp((Speed - 120.0f) / 260.0f, 0.0f, 1.0f), DeltaSeconds, 5.0f);
+		SloshTime += DeltaSeconds * (5.0f + 9.0f * SloshAmp);
+		WaterDisc->SetRelativeRotation(FRotator(16.0f * SloshAmp * FMath::Sin(SloshTime), 0.0f, 16.0f * SloshAmp * FMath::Cos(SloshTime * 1.3f)));
+	}
+	// A fish flops on the crate every couple of seconds: a quick hop and a twist.
+	if (FishMeshes.Num() > 0)
+	{
+		FlopClock += DeltaSeconds;
+		const float Period = 2.3f + 0.7f * (FlopIndex % 3);
+		if (FlopClock > Period)
+		{
+			FlopClock = 0.0f;
+			++FlopIndex;
+		}
+		for (int32 i = 0; i < FishMeshes.Num() && i < FishBase.Num(); ++i)
+		{
+			UStaticMeshComponent* F = FishMeshes[i];
+			const bool bFlop = F && (FlopIndex % FishMeshes.Num()) == i && FlopClock < 0.5f;
+			const float T = bFlop ? FlopClock / 0.5f : 0.0f;
+			if (F)
+			{
+				F->SetRelativeLocation(FishBase[i] + FVector(0.0f, 0.0f, 9.0f * FMath::Sin(T * UE_PI)));
+				F->SetRelativeRotation(FRotator(0.0f, 0.0f, 40.0f * FMath::Sin(T * UE_PI * 3.0f) * (1.0f - T)));
+			}
+		}
+	}
+	// Steam curls up off the fresh bread while there is bread in the basket.
+	for (int32 i = 0; i < SteamPuffs.Num(); ++i)
+	{
+		if (UStaticMeshComponent* Puff = SteamPuffs[i])
+		{
+			const float T = FMath::Frac(FlameTime * 0.55f + i * 0.27f);
+			Puff->SetVisibility(Pieces > 0);
+			Puff->SetRelativeLocation(FVector(-14.0f + 9.0f * i + 4.0f * FMath::Sin(T * 6.0f + i), 0.0f, Def->BoxExtent.Z + 6.0f + 38.0f * T));
+			Puff->SetRelativeScale3D(FVector(0.03f + 0.07f * FMath::Sin(T * UE_PI)));
+		}
 	}
 	for (int32 i = 0; i < PieceMeshes.Num(); ++i)
 	{
@@ -282,9 +341,9 @@ void AKGChoreItem::UpdateVisual(float DeltaSeconds)
 			PieceMeshes[i]->SetVisibility(i < Pieces);
 		}
 	}
+	FlameTime += DeltaSeconds;   // also the steam clock
 	if (FlameMesh)
 	{
-		FlameTime += DeltaSeconds;
 		const float Flicker = 1.0f + 0.18f * FMath::Sin(FlameTime * 23.0f) + 0.1f * FMath::Sin(FlameTime * 37.0f);
 		FlameMesh->SetRelativeScale3D(FVector(0.05f, 0.05f, 0.08f) * Flicker);
 		if (FlameLight)
@@ -343,6 +402,15 @@ void AKGChoreItem::TickServer(float DeltaSeconds)
 	if (IsCarried())
 	{
 		IdleSeconds = 0.0f;
+		CarryLogClock += DeltaSeconds;
+		if (CarryLogClock >= 3.0f)
+		{
+			CarryLogClock = 0.0f;
+			const APawn* By = Carriers[0];
+			UE_LOG(LogKillGodot, Log, TEXT("KG_WORLDCHORE_CARRYPOS %s at %s by %s at %s vel=%.0f sim=%d fill=%.2f"), *Kind.ToString(),
+			       *GetActorLocation().ToCompactString(), *GetNameSafe(By), By ? *By->GetActorLocation().ToCompactString() : TEXT("-"),
+			       By ? By->GetVelocity().Size2D() : 0.0f, Box->IsSimulatingPhysics() ? 1 : 0, Fill);
+		}
 	}
 	else if (bOrphan || !IsValid(OwnerPlayer))
 	{

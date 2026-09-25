@@ -60,7 +60,7 @@ ROCKS = ((-150.0, -40.0, 1.0), (60.0, 70.0, 0.7), (170.0, -90.0, 0.55))
 
 def zen_garden():
     """Raked gravel with a stone kerb, raked lines and three rock islands (walk-through except the rocks)."""
-    for xm, ym in ((53.5, 16.0), (55.0, 12.0), (51.0, 21.0)):
+    for xm, ym in ((61.0, 21.0), (57.5, 7.5), (63.0, 12.0), (53.5, 16.0)):
         cx, cy = m(xm, ym)
         if C.free(cx, cy, 330.0) and C.slope(cx, cy, 300.0) < 20.0:
             break
@@ -91,11 +91,17 @@ def zen_garden():
 
 
 def stepping_paths():
+    """Stepping stones stair head -> bridge (south-east end) and bridge (north-west end) -> pavilion (SPRINT-022:
+    the route of prep_v2_placements.garden; nothing on the bridge itself)."""
     kx, ky = C.task_spots()["FeedKoi"]
-    head = C.xy("garden_stair:head")
-    pav = C.xy("pavilion")
-    pond = C.xy("koi_pond")
-    routes = [[head, (pond[0] + 380.0, pond[1] - 250.0), (pond[0] + 380.0, pond[1] + 250.0), (pav[0] + 150.0, pav[1] - 250.0)]]
+    if "line:garden_route" in C.ANCHORS:
+        r = C.anchor("line:garden_route")["pts"]
+        routes = [r[:3], r[3:]]
+    else:
+        head = C.xy("garden_stair:head")
+        pav = C.xy("pavilion")
+        pond = C.xy("koi_pond")
+        routes = [[head, (pond[0] + 380.0, pond[1] - 250.0), (pond[0] + 380.0, pond[1] + 250.0), (pav[0] + 150.0, pav[1] - 250.0)]]
     for pts in routes:
         for x, y, ux, uy, s in C.resample(pts, 75.0):
             px, py = x - uy * R.uniform(-12, 12), y + ux * R.uniform(-12, 12)
@@ -149,7 +155,7 @@ def shrine_corner():
     s = C.find(*m(57.0, 5.0), 120.0, reach=300.0)
     if s:
         f = K.F(s[0], s[1], face=pond)
-        f.solid(V + "Stairs_Exterior_Platform", 0, 0, -60.0, 0, (0.45, 0.45, 0.9))
+        f.solid(V + "Stairs_Exterior_Platform", 0, 0, -28.0, 0, (0.45, 0.45, 0.63))    # plinth top at +35 (offerings)
         f.solid(V + "Prop_Chimney2", 0, 20, 30.0, 0, (0.6, 0.6, 0.28))
         f.put(V + "Roof_Wooden_2x1", 0, 30, 118.0, 180.0, scale=(0.5, 0.45, 0.45), collide=False, sub="Shrine")
         f.put(JP + "Torii", 0, -140, 0, 0.0, scale=0.11, collide=False, sub="Shrine", on_ground=True)

@@ -26,7 +26,13 @@ import unreal
 
 TOOLS = "D:/Kill Godot/Tools/Unreal"
 sys.path.insert(0, TOOLS)
+sys.path.insert(0, "D:/Kill Godot/Tools/Level")
+import kg_archetypes_v2 as ARCH  # noqa: E402  (SPRINT-022 house archetypes, pure Python)
 LEVEL = "/Game/KillGodot/Maps/L_Morrowmere_v2"
+# SPRINT-022 test builds: KG_V2_LEVEL=/Game/KillGodot/Maps/Test/<name> builds a copy (while the editor has the real map
+# open); KG_V2_TEST=1 also skips everything that writes shared assets (district MI saves, minimap, underground hook).
+LEVEL = __import__("os").environ.get("KG_V2_LEVEL") or LEVEL
+TEST_BUILD = __import__("os").environ.get("KG_V2_TEST") == "1"
 LAYOUT = json.load(open("D:/Kill Godot/Tools/Level/morrowmere_layout_v2.json", encoding="utf-8"))
 PL = json.load(open("D:/Kill Godot/Art/Packed/KG_V2_Placements.json"))
 HM = json.load(open("D:/Kill Godot/Art/Packed/KG_Terrain_v2_heights.json"))
@@ -47,6 +53,7 @@ PREFIX = {
     "DH": "/Game/KillGodot/Env/Dress/KG_DressHarbour_Clean/StaticMeshes/SM_KG_",
     "WP": "/Game/KillGodot/Env/WaterProps/KG_WaterProps/StaticMeshes/SM_KG_",
     "DT": "/Game/KillGodot/Env/Dress/KG_DressTerrace_Clean/StaticMeshes/SM_KG_",   # plan 11.4 props (kg_make_dress_terrace.py)
+    "DL": "/Game/KillGodot/Env/Dress/KG_DressLandmarks_Clean/StaticMeshes/SM_KG_",   # SPRINT-022 landmarks + cliffs
     "E": "/Engine/BasicShapes/",
 }
 V, N, P, JP, PIR, DV, DW, DH, WP, DT = (PREFIX[k] for k in ("V", "N", "P", "JP", "PIR", "DV", "DW", "DH", "WP", "DT"))
@@ -181,6 +188,14 @@ _slot_kinds = {}    # mesh path -> [(slot, kind)]
 
 def district_materials():
     """MI_KG_<district>_<kind>[_v] children of the kit MIs, overriding BaseColorFactor (created once, re-used)."""
+    if TEST_BUILD:
+        for dist, kinds in TINTS.items():
+            for kind, tints in kinds.items():
+                for v in range(len(tints)):
+                    path = DISTRICT_MATS + f"MI_KG_{dist}_{kind}" + (f"_{v}" if len(tints) > 1 else "")
+                    _dmi[(dist, kind, v)] = unreal.load_asset(path) if unreal.EditorAssetLibrary.does_asset_exist(path)                         else unreal.load_asset(f"{KIT_MATS}MI_{kind}")
+        log(f"district materials: {len(_dmi)} loaded (test build, nothing saved)")
+        return
     tools = unreal.AssetToolsHelpers.get_asset_tools()
     mel = unreal.MaterialEditingLibrary
     eal = unreal.EditorAssetLibrary
@@ -357,18 +372,33 @@ def party_walls(buildings):
     return skip
 
 
-def wall_run(f, cells, edge, floor_z, pieces, side, folder="V2/Houses"):
+# SPRINT-022: the kit wall pieces carry their exterior dressing (stone plinth, beams, window frames and glass, the
+# shutter / balcony mounts) on mesh +Y; the v2 builder used to place them with that face INSIDE the house. They are now
+# turned 180 degrees and moved out by WALL_OUT, so the slab occupies exactly the same space (31 cm outside the
+# footprint edge, 10 cm inside) and the dressed face looks at the street; interiors see the plain plaster face.
+WALL_OUT = 21.0
+
+
+def wall_xf(side, off, edge, out=0.0):
+    """(lx, ly, lyaw) of a flipped wall cell at `off` along `side` (edge = half size, cm; out = extra jetty)."""
+    e = edge + WALL_OUT + out
+    if side == "front":
+        return off, -e, 180.0
+    if side == "back":
+        return -off, e, 0.0
+    if side == "left":
+        return -e, -off, 90.0
+    return e, off, -90.0
+
+
+def wall_run(f, cells, edge, floor_z, pieces, side, folder="V2/Houses", out=0.0):
     for k in range(cells):
         off = -cells * 100.0 + 100.0 + k * 200.0
         piece = pieces(k, cells)
-        if side == "front":
-            f.put(piece, off, -edge, floor_z, 0.0, folder)
-        elif side == "back":
-            f.put(piece, -off, edge, floor_z, 180.0, folder)
-        elif side == "left":
-            f.put(piece, -edge, -off, floor_z, -90.0, folder)
-        else:
-            f.put(piece, edge, off, floor_z, 90.0, folder)
+        if piece is None:
+            continue
+        lx, ly, lyaw = wall_xf(side, off, edge, out)
+        f.put(piece, lx, ly, floor_z, lyaw, folder)
 
 
 def wall_style(district, style):
@@ -418,6 +448,14 @@ def dormers(f, spec, w, d, top, parallel, skip, storeys, folder):
 
 
 def build_house(spec, kind, skip_sides, variant, row_index=0):
+    """Homes and infill shells with an archetype (SPRINT-022) get their own facade grammar; civic buildings and
+    anything without one keep the classic district style."""
+    if kind != "civic" and ARCH.arch_of(spec) is not None:
+        return build_archetype(spec, kind, skip_sides, variant)
+    return build_house_classic(spec, kind, skip_sides, variant, row_index)
+
+
+def build_house_classic(spec, kind, skip_sides, variant, row_index=0):
     """kind: home | infill | civic. Storeys 1-3, party walls skipped, district tint, interior for homes/civic."""
     x, y = spec["at"][0] * M, spec["at"][1] * M
     yaw = spec.get("yaw", spec["face_deg"] + 90.0)
@@ -519,9 +557,350 @@ def build_house(spec, kind, skip_sides, variant, row_index=0):
     return f
 
 
-def tower(spec, levels, light=None, district="crown_hill", clock=False):
+# =================================================================================================== archetypes (S22)
+PAINT_DIR = "/Game/KillGodot/Materials/S22/"
+_paint = {}
+JET = 32.0                  # jetty: the upper front walls stand this much further out (cm)
+FREE_SIDES = {}             # building id -> sides with open ground for an outside stair (set by buildings())
+FACADES = {}                # building id -> what was built (verify_v2_build same-looking-neighbour check)
+
+
+def paint_mi(name):
+    """MI_KG_Paint_<name> (Tools/Unreal/kg_make_paint_v2.py) or None (natural wood)."""
+    if not name or ARCH.PAINTS.get(name) is None:
+        return None
+    if name not in _paint:
+        path = PAINT_DIR + f"MI_KG_Paint_{name}"
+        _paint[name] = unreal.load_asset(path) if unreal.EditorAssetLibrary.does_asset_exist(path) else None
+    return _paint[name]
+
+
+def painted(actor, name, slot=0):
+    mi = paint_mi(name)
+    if actor and mi:
+        actor.static_mesh_component.set_material(slot, mi)
+
+
+def roof_piece(across, along):
+    """Kit round-tile roof `across` m over the eaves and `along` m along the ridge: the exact piece, or a longer one
+    scaled along the ridge (scaling along the ridge keeps the slopes)."""
+    if (across, along) in ROOFS:
+        return f"Roof_RoundTiles_{across}x{along}", 1.0
+    longer = sorted(a for (c, a) in ROOFS if c == across and a >= along)
+    if longer:
+        return f"Roof_RoundTiles_{across}x{longer[0]}", along / float(longer[0])
+    return f"Roof_RoundTiles_{min(across, 8)}x{max(along, 4)}", 1.0
+
+
+WINDOW_FOR = {"Window_Wide_Round": "Window_Wide_Round1", "Window_Wide_Flat": "Window_Wide_Flat1",
+              "Window_Thin_Round": "Window_Thin_Round1"}
+SHUTTER_FOR = {"Window_Wide_Round": "WindowShutters_Wide_Round", "Window_Wide_Flat": "WindowShutters_Wide_Flat",
+               "Window_Thin_Round": "WindowShutters_Thin_Round"}
+
+
+def build_archetype(spec, kind, skip_sides, variant):
+    """One home / shell from its archetype (Tools/Level/kg_archetypes_v2.py): walls with the archetype's window rhythm
+    and materials, roof form (gable / ridge / hip / cross-gable), jetty, balcony, porch canopy, outside stair,
+    chimneys, painted shutters and door. Same pad, floors, party walls and interior as the classic builder."""
+    A = ARCH.arch_of(spec)
+    x, y = spec["at"][0] * M, spec["at"][1] * M
+    yaw = spec.get("yaw", spec["face_deg"] + 90.0)
+    gz = spec["z"] * M + 2.0
+    w, d = spec["size"]
+    storeys = max(1, min(3, int(spec.get("storeys", 2))))
+    style = int(spec.get("style", 0))
+    district = spec.get("district")
+    det = spec.get("details") or ARCH.details(spec)
+    f = Frame(x, y, gz, yaw, district, variant)
+    cw, cd = w // 2, d // 2
+    shell = kind == "infill"
+    folder = "V2/Shells" if shell else "V2/Houses"
+    ex, ey = w * 50.0, d * 50.0
+    skip = skip_sides or {}
+    bid = spec.get("id", "")
+    rec = {"archetype": spec["archetype"], "roof": A["roof"], "storeys": storeys, "ground": A["ground"],
+           "upper": A["upper"], "district": district, "variant": variant, "extras": []}
+
+    # outside stair: only on a free side (decided before the walls: its landing needs a first-floor door)
+    stair_side = None
+    if A["stair"] and storeys >= 2:
+        for sd in ("right", "left"):
+            if skip.get(sd, 0) == 0 and sd in FREE_SIDES.get(bid, ()):
+                stair_side = sd
+                break
+    spec["_stair_side"] = stair_side
+
+    # floors (as the classic builder)
+    if shell:
+        f.put(V + "Floor_Brick", 0.0, 0.0, 1.0, 0.0, folder, scale=(cw, cd, 1.0))
+    else:
+        for i in range(cw):
+            for j in range(cd):
+                lx, ly = -w * 50 + 100 + i * 200, -d * 50 + 100 + j * 200
+                f.put(V + ("Floor_Brick" if style % 3 else "Floor_RedBrick"), lx, ly, 1.0, 0.0, folder)
+                if storeys >= 2 and not (i == 0 and j >= cd - 2):
+                    f.put(V + ("Floor_WoodDark" if style % 2 else "Floor_WoodLight"), lx, ly, FLOOR_H, 0.0, folder)
+    if storeys >= 3 or (shell and storeys >= 2):
+        for lvl in range(1 if shell else 2, storeys):
+            f.put(V + "Floor_WoodDark", 0.0, 0.0, lvl * FLOOR_H, 0.0, folder, scale=(cw, cd, 1.0))
+
+    # balcony cells (the window behind a balcony becomes a door)
+    bal_lvl, bal_cells = None, []
+    if A["balcony"] and storeys >= 2:
+        bal_lvl = storeys - 1 if A["balcony"] == "top_centre" else 1
+        bal_cells = list(range(cw)) if A["balcony"] == "full" else [cw // 2]
+
+    shutters = []
+    for lvl in range(storeys):
+        z = lvl * FLOOR_H
+        jet = JET if (A["jetty"] and lvl >= 1) else 0.0
+        for side, n, e in (("front", cw, ey), ("back", cw, ey), ("left", cd, ex), ("right", cd, ex)):
+            if lvl < skip.get(side, 0):
+                continue
+
+            def pc(k, n_, side=side, lvl=lvl):
+                name = ARCH.piece(spec, side, lvl, k, n_, shell)
+                if side == "front" and lvl == bal_lvl and k in bal_cells:
+                    name = f"Wall_{A['upper']}_Door_Flat"
+                return V + name if name else None
+
+            out = jet if side == "front" else 0.0
+            wall_run(f, n, e, z, pc, side, folder, out=out)
+            # the kit's window frames with glass in every window opening (same transform as the wall cell)
+            for k in range(n):
+                name = pc(k, n)
+                frame_ = next((fr for wk, fr in WINDOW_FOR.items() if name and wk in name), None)
+                if frame_:
+                    lx, ly, lyaw = wall_xf(side, -n * 100.0 + 100.0 + k * 200.0, e, out)
+                    f.put(V + frame_, lx, ly, z, lyaw, "V2/Facade", collide=False, tinted=False)
+            # shutters on the dressed windows (street side and open ends; the back only upstairs)
+            if A["shutters"] and (side != "back" or lvl >= 1):
+                for k in range(n):
+                    name = ARCH.piece(spec, side, lvl, k, n, shell)
+                    kind_ = next((sk for wk, sk in SHUTTER_FOR.items() if name and wk in name), None)
+                    if kind_ and not (side == "front" and lvl == bal_lvl and k in bal_cells):
+                        off = -n * 100.0 + 100.0 + k * 200.0
+                        shutters.append((kind_, side, off, e, z, out))
+        for sx in (-1, 1):
+            for sy in (-1, 1):
+                side = "left" if sx < 0 else "right"
+                if lvl < skip.get(side, 0):
+                    continue
+                oy = -jet if sy < 0 else 0.0
+                f.put(V + ("Corner_Exterior_Brick" if (lvl == 0 and A["ground"] == "UnevenBrick") else "Corner_Exterior_Wood"),
+                      sx * ex, sy * ey + oy, z, 0.0, folder)
+        if jet:
+            _jetty_bits(f, w, ex, ey, lvl, skip, folder)
+    if A["jetty"] and storeys >= 2:
+        rec["extras"].append("jetty")
+
+    closed = det.get("shutters_closed")
+    for kind_, side, off, e, z, out in shutters:
+        lx, ly, lyaw = wall_xf(side, off, e, out)
+        a = f.put(V + kind_ + ("_Closed" if closed and z == 0.0 else "_Open"), lx, ly, z, lyaw, "V2/Facade",
+                  collide=False, tinted=False)
+        painted(a, det.get("shutters"))
+    if shutters:
+        rec["extras"].append(f"shutters:{det.get('shutters')}")
+
+    # balcony: plank floor on brackets, the kit rail on the wall transform, short end rails
+    if bal_cells:
+        z = bal_lvl * FLOOR_H
+        for k in bal_cells:
+            off = -cw * 100.0 + 100.0 + k * 200.0
+            lx, ly, lyaw = wall_xf("front", off, ey)
+            f.put(V + "Balcony_Simple_Straight", lx, ly, z, lyaw, "V2/Facade", tinted=False)
+            f.put(V + "Floor_WoodDark", off, -ey - 31.0 - 52.0, z + 2.0, 0.0, "V2/Facade", scale=(1.0, 0.52, 1.0), tinted=False)
+            for bx in (off - 80.0, off + 80.0):
+                f.put(V + "Roof_Support2", bx, -ey - 31.0, z + 4.0, 180.0, "V2/Facade", collide=False, tinted=False)
+        x0 = -cw * 100.0 + 100.0 + bal_cells[0] * 200.0 - 100.0
+        x1 = -cw * 100.0 + 100.0 + bal_cells[-1] * 200.0 + 100.0
+        for ex_ in (x0 + 4.0, x1 - 4.0):
+            f.put(V + "Prop_WoodenFence_Single", ex_, -ey - 31.0 - 52.0, z + 2.0, 90.0, "V2/Facade", scale=(0.5, 1.0, 1.25),
+                  tinted=False)
+        rec["extras"].append(f"balcony:{A['balcony']}")
+
+    # roof
+    top = storeys * FLOOR_H
+    rf = A["roof"]
+    parallel = False
+    if rf == "gable":
+        piece_, sc = roof_piece(w, d)
+        f.put(V + piece_, 0.0, 0.0, top, 0.0, folder, scale=(1.0, sc, 1.0))
+        if w in (4, 6, 8):
+            f.put(V + f"Roof_Front_Brick{w}", 0.0, -ey, top, 0.0, folder)
+            f.put(V + f"Roof_Front_Brick{w}", 0.0, ey, top, 180.0, folder)
+    elif rf in ("ridge", "cross"):
+        parallel = True
+        piece_, sc = roof_piece(d, w)
+        f.put(V + piece_, 0.0, 0.0, top, 90.0, folder, scale=(1.0, sc, 1.0))
+        for side, lyaw, lx in (("left", -90.0, -ex), ("right", 90.0, ex)):
+            if skip.get(side, 0) < storeys + 1 and d in (4, 6, 8):
+                f.put(V + f"Roof_Front_Brick{d}", lx, 0.0, top, lyaw, folder)
+        if rf == "cross":
+            # a street gable over the door bay: a 4 m roof across the main ridge, its gable end on the facade
+            f.put(V + "Roof_RoundTiles_4x4", door_local(w), -ey + 190.0, top, 0.0, folder, scale=(1.0, 0.9, 1.0))
+            f.put(V + "Roof_Front_Brick4", door_local(w), -ey, top, 0.0, folder)
+    else:   # hip: the kit tower roof stretched over the footprint, flattened to a house pitch
+        f.put(V + "Roof_Tower_RoundTiles", 0.0, 0.0, top - 6.0, 0.0, folder,
+              scale=((w * 100.0 + 150.0) / 569.0, (d * 100.0 + 150.0) / 578.0, 0.52 if storeys >= 2 else 0.45))
+    if A["dormers"]:
+        dormers(f, spec, w, d, top, parallel, skip, storeys, folder)
+
+    # chimneys
+    ch = A["chimney"]
+    if rf == "hip":
+        spots = [(-(ex - 140.0), 0.0), (ex - 140.0, 0.0)] if ch == "both" else [((ex - 140.0) * (1 if "right" in ch else -1), 0.0)]
+    elif ch == "both":
+        spots = [(-(ex - 90.0), ey * 0.4), (ex - 90.0, ey * 0.4)]
+    elif ch == "back":
+        spots = [(0.0, ey - 70.0)]
+    else:
+        spots = [((ex - 90.0) * (1 if "right" in ch else -1), ey * 0.4)]
+    for k, (cx, cy) in enumerate(spots):
+        f.put(V + ("Prop_Chimney2" if (k + style) % 2 else "Prop_Chimney"), cx, cy, top + 60.0, 0.0, folder,
+              scale=(1.0, 1.0, 1.35 if ch == "left_tall" else 1.0))
+
+    # porch canopy over the door
+    door_x = door_local(w)
+    if A["porch"]:
+        lx, ly, lyaw = wall_xf("front", door_x, ey)
+        f.put(V + "Roof_Wooden_2x1", lx, ly, 238.0, lyaw, "V2/Facade", tinted=False)
+        for bx in (door_x - 95.0, door_x + 95.0):
+            f.put(V + "Roof_Support2", bx, -ey - 31.0, 236.0, 180.0, "V2/Facade", collide=False, tinted=False)
+        rec["extras"].append("porch")
+
+    # outside stair up the free side to the first-floor door
+    if stair_side:
+        _outside_stair(f, stair_side, ex, ey)
+        rec["extras"].append(f"stair:{stair_side}")
+
+    FACADES[bid] = rec
+    door_mesh = A["door"]
+    if shell:
+        flat = door_mesh if "Flat" in door_mesh else door_mesh.replace("Round", "Flat")
+        a = f.put(V + flat, door_x - 55.0, -ey - 5.0, 3.0, 0.0, folder, tinted=False)
+        painted(a, det.get("door"), 0)
+        stats["shells"] += 1
+        return f
+    # real door (KGDoor) with the archetype's leaf and paint, bell, lantern, light
+    wx = f.x + (door_x - 61.5) * f.c - (-ey - 11.0) * f.s
+    wy = f.y + (door_x - 61.5) * f.s + (-ey - 11.0) * f.c
+    dcls = unreal.load_class(None, "/Script/KillGodot.KGDoor")
+    door = _real_actors.spawn_actor_from_class(dcls, unreal.Vector(wx, wy, gz + 3.0), unreal.Rotator(roll=0.0, pitch=0.0, yaw=f.yaw - 90.0))
+    door.set_folder_path("V2/Doors")
+    door.set_actor_label(f"Door_{spec.get('id', kind)}")
+    try:
+        leaf = next((c for c in door.get_components_by_class(unreal.StaticMeshComponent) if c.get_name() == "Leaf"), None)
+        lm_ = mesh(V + door_mesh)
+        if leaf and lm_:
+            leaf.set_static_mesh(lm_)
+            mi = paint_mi(det.get("door"))
+            if mi:
+                leaf.set_material(0, mi)
+    except Exception as ex_:
+        log(f"door leaf {bid}: {ex_}")
+    f.put(WP + "Doorbell", door_x - 105.0, -ey - 31.0, 215.0, -90.0, "V2/Props", tinted=False)
+    f.put(P + "Lantern_Wall", door_x + 140.0, -ey - 31.0, 150.0, 180.0, "V2/Props", tinted=False)
+    lx, ly = f.world(door_x + 140.0, -ey - 130.0)
+    warm_light(lx, ly, gz + 205.0, 10.0, 800.0)
+    n0 = stats["pieces"]
+    stats["pieces"] += kg_interiors.furnish(f, w, d, style, warm_light)
+    stats["interior_pieces"] = stats.get("interior_pieces", 0) + stats["pieces"] - n0
+    stats["houses"] += 1
+    return f
+
+
+def _jetty_bits(f, w, ex, ey, lvl, skip, folder):
+    """The overhang of a jettied storey: a beam along the floor line, brackets under it, the side slots closed with
+    wide corner posts, and a floor strip so the room has no gap along the front."""
+    z = lvl * FLOOR_H
+    f.put(V + "Corner_Exterior_Wood", -ex - 25.0, -ey - 31.0 - JET * 0.5, z - 14.0, 0.0, "V2/Facade", pitch=-90.0,
+          scale=(1.3, 1.3, (w * 100.0 + 50.0) / 300.0), tinted=False)
+    for k in range(w // 2 + 1):
+        bx = max(-ex + 12.0, min(ex - 12.0, -ex + k * 200.0))
+        f.put(V + "Roof_Support2", bx, -ey - 31.0, z - 4.0, 180.0, "V2/Facade", collide=False, tinted=False)
+    for sx, side in ((-1, "left"), (1, "right")):
+        if lvl >= skip.get(side, 0):
+            f.put(V + "Corner_ExteriorWide_Wood", sx * (ex + 10.0), -ey - JET * 0.5 - 8.0, z, 0.0, folder, scale=(1.4, 1.6, 1.0))
+    f.put(V + "Floor_WoodDark", 0.0, -ey - JET * 0.5 - 10.0, z + 1.0, 0.0, folder, scale=(w / 2.0, (JET + 22.0) / 200.0, 1.0))
+
+
+STAIR_RISER_YAW = 0.0      # kit riser yaw (frame-relative) that climbs towards local -Y (checked in the S22 lab)
+
+
+def _outside_stair(f, side, ex, ey):
+    """Three 1 m kit risers along a free side wall, climbing from the back towards the front, onto a stone landing
+    (a platform block) in front of the first-floor door the archetype put on the side's front cell."""
+    sx = -1.0 if side == "left" else 1.0
+    xo = sx * (ex + 31.0 + 101.0)
+    y_top = -ey + 100.0                                  # landing beside the first side cell (door cell k = 0)
+    for k in range(3):
+        y = y_top + 200.0 + (2 - k) * 208.0
+        f.put(V + "Stairs_Exterior_Straight", xo, y, k * 100.0, STAIR_RISER_YAW, "V2/Facade", tinted=False)
+    f.put(V + "Stairs_Exterior_Platform", xo, y_top, 0.0, 0.0, "V2/Facade", scale=(1.0, 1.0, 3.0), tinted=False)
+
+DL = "/Game/KillGodot/Env/Dress/KG_DressLandmarks_Clean/StaticMeshes/SM_KG_"   # SPRINT-022 landmark pack
+CLOCK_MINUTE_S = 120.0      # seconds per turn of the minute hand (KGSpinner; see the S22 proposal for match-clock drive)
+
+
+def spinner(path, x, y, z, yaw, rate, folder, label=None):
+    cls = unreal.load_class(None, "/Script/KillGodot.KGSpinner")
+    if not cls or not mesh(path):
+        return spawn(path, x, y, z, yaw, folder=folder, collide=False)
+    a = _real_actors.spawn_actor_from_class(cls, unreal.Vector(x, y, z), unreal.Rotator(roll=0.0, pitch=0.0, yaw=yaw))
+    a.set_mesh(mesh(path))
+    a.set_editor_property("spin_rate", rate)
+    a.set_actor_enable_collision(False)
+    a.set_folder_path(folder)
+    if label:
+        a.set_actor_label(label)
+    stats["pieces"] += 1
+    return a
+
+
+def clock_top(f, levels, folder):
+    """SPRINT-022 clock tower crown on the kit shaft: stone clock stage with four dials and turning hands, an open
+    belfry with a small bell, an octagonal verdigris spire with a gilded weathervane (about +19 m)."""
+    z0 = levels * FLOOR_H
+    f.put(DL + "ClockStage", 0.0, 0.0, z0, 0.0, folder, tinted=False)
+    f.put(DL + "Belfry", 0.0, 0.0, z0 + 348.0, 0.0, folder, tinted=False)
+    f.put(DL + "Spire", 0.0, 0.0, z0 + 348.0 + 382.0, 0.0, folder, tinted=False)
+    zc = z0 + 198.0
+    for lx, ly, lyaw in ((0.0, -236.0, 180.0), (0.0, 236.0, 0.0), (-236.0, 0.0, 90.0), (236.0, 0.0, -90.0)):
+        f.put(DL + "ClockDial", lx, ly, zc, lyaw, folder, collide=False, tinted=False)
+        ux, uy = (lx / 236.0, ly / 236.0)
+        wx, wy = f.world(lx + ux * 10.0, ly + uy * 10.0)
+        yaw = f.yaw + lyaw
+        spinner(DL + "ClockHand_Minute", wx, wy, f.z + zc, yaw, unreal.Rotator(roll=0.0, pitch=-360.0 / CLOCK_MINUTE_S, yaw=0.0),
+                "V2/Towers/Clock")
+        spinner(DL + "ClockHand_Hour", wx, wy, f.z + zc, yaw, unreal.Rotator(roll=0.0, pitch=-30.0 / CLOCK_MINUTE_S, yaw=0.0),
+                "V2/Towers/Clock")
+    stats["clock_faces"] = 4
+    stats["clock_hands"] = 8
+
+
+def bell_top(f, levels, folder):
+    """SPRINT-022 the bell tower's bell: an oak beam across the open lookout under the roof, a bronze bell hanging
+    from it over the RingBell station (AKGChoreFx strikes it at the station, 2.5 m up)."""
+    z = (levels - 1) * FLOOR_H + 275.0
+    f.put(DL + "BellBeam", 0.0, 0.0, z, 0.0, folder, collide=False, tinted=False)
+    f.put(DL + "Bell", 0.0, 0.0, z + 28.0, 0.0, folder, collide=False, tinted=False)
+    stats["bell"] = 1
+
+
+def lighthouse_top(f, levels, folder):
+    """SPRINT-022 lighthouse crown: a corbelled gallery with an iron railing and a glazed lamp room with a copper dome."""
+    z0 = levels * FLOOR_H
+    f.put(DL + "LighthouseGallery", 0.0, 0.0, z0, 0.0, folder, tinted=False)
+    f.put(DL + "LampRoom", 0.0, 0.0, z0 + 50.0, 0.0, folder, tinted=False)
+    stats["lighthouse_top"] = 1
+
+
+def tower(spec, levels, light=None, district="crown_hill", clock=False, crown=None):
     """4x4 m stone tower (v1 recipe) at the JSON pad height; climbable ladder to the lookout floor.
-    clock=True: four ClockFace dials (plan 11.4 pack) on the plain third-storey walls (level 2), one per side."""
+    clock=True: four ClockFace dials (plan 11.4 pack) on the plain third-storey walls (level 2), one per side.
+    crown (SPRINT-022, needs the KG_DressLandmarks pack): "clock" | "bell" | "lighthouse" replaces the plain roof."""
     x, y = spec["at"][0] * M, spec["at"][1] * M
     yaw = spec.get("yaw", spec["face_deg"] + 90.0)
     gz = spec["z"] * M + 2.0
@@ -549,7 +928,16 @@ def tower(spec, levels, light=None, district="crown_hill", clock=False):
                     if top and i > 0 and j < 0:
                         continue
                     f.put(V + "Floor_Brick", i, j, z + 1.0, 0.0, folder)
-    f.put(V + "Roof_Tower_RoundTiles", 0.0, 0.0, levels * FLOOR_H, 0.0, folder)
+    crown = crown if (crown and have(DL + "ClockStage")) else None
+    if crown == "clock":
+        clock_top(f, levels, folder)
+        clock = False
+    elif crown == "lighthouse":
+        lighthouse_top(f, levels, folder)
+    else:
+        f.put(V + "Roof_Tower_RoundTiles", 0.0, 0.0, levels * FLOOR_H, 0.0, folder)
+        if crown == "bell":
+            bell_top(f, levels, folder)
     if clock and levels >= 3 and have(DT + "ClockFace"):
         # the wall pieces stand 31 cm proud of the 2 m edge; the dial's back plane is its pivot, its face local +Y
         for lx, ly, lyaw in ((0.0, -233.0, 180.0), (0.0, 233.0, 0.0), (-233.0, 0.0, 90.0), (233.0, 0.0, -90.0)):
@@ -558,7 +946,8 @@ def tower(spec, levels, light=None, district="crown_hill", clock=False):
     wx, wy = f.world(100.0, -10.0)
     V1["ladder"](wx, wy, gz + 2.0, yaw + 90.0, (levels - 1) * FLOOR_H, folder="V2/Ladders")
     if light:
-        warm_light(x, y, gz + (levels - 1) * FLOOR_H + 170.0, light[0], light[1], folder="V2/Lights", color=light[2] if len(light) > 2 else (255, 170, 95))
+        lz = levels * FLOOR_H + 220.0 if crown == "lighthouse" else (levels - 1) * FLOOR_H + 170.0
+        warm_light(x, y, gz + lz, light[0], light[1], folder="V2/Lights", color=light[2] if len(light) > 2 else (255, 170, 95))
     stats["towers"] += 1
     return f
 
@@ -584,12 +973,67 @@ def open_hall(spec, roof, posts, props=(), folder="V2/Civic", eave=330.0, roof_z
     return f
 
 
+def _in_rect(b, px, py, pad=0.0):
+    w, d = b["size"]
+    yaw = math.radians(b.get("yaw", b["face_deg"] + 90.0))
+    dx, dy = px - b["at"][0], py - b["at"][1]
+    lx = dx * math.cos(yaw) + dy * math.sin(yaw)
+    ly = -dx * math.sin(yaw) + dy * math.cos(yaw)
+    return abs(lx) <= w / 2.0 + pad and abs(ly) <= d / 2.0 + pad
+
+
+def free_sides(allb, skips):
+    """FREE_SIDES[id] = sides (left / right) of outside-stair archetypes with a clear, level 2.6 m strip: no other
+    building, no walkway, no stair or ramp, the ground within 0.4 m of the pad (metres, layout frame)."""
+    segs = []
+    for l in LAYOUT["lanes"]:
+        for a_, b_ in zip(l["points"], l["points"][1:]):
+            segs.append((a_, b_, l["width"] / 2.0 + 0.4))
+    for st in LAYOUT["stairs"]:
+        segs.append((st["from"], st["to"], st["width"] / 2.0 + 0.4))
+    for rp in LAYOUT["ramps"]:
+        for a_, b_ in zip(rp["points"], rp["points"][1:]):
+            segs.append((a_, b_, rp["width"] / 2.0 + 0.4))
+    others = [b for b in allb if b.get("size")] + [v for v in LAYOUT["landmarks"].values() if v.get("size")]
+    for b in allb:
+        A = ARCH.arch_of(b)
+        if not A or not A.get("stair"):
+            continue
+        w, d = b["size"]
+        yaw = math.radians(b.get("yaw", b["face_deg"] + 90.0))
+        c, s_ = math.cos(yaw), math.sin(yaw)
+        ok = []
+        for side, sx in (("left", -1.0), ("right", 1.0)):
+            if skips.get(b["id"], {}).get(side):
+                continue
+            good = True
+            for u in (0.4, 1.3, 2.3):
+                for v in [-d / 2.0 + 0.2 + i * 0.5 for i in range(int(d / 0.5))]:
+                    lx, ly = sx * (w / 2.0 + 0.31 + u), v
+                    px, py = b["at"][0] + lx * c - ly * s_, b["at"][1] + lx * s_ + ly * c
+                    if any(o is not b and _in_rect(o, px, py, 0.3) for o in others):
+                        good = False
+                    elif any(V1["seg_dist"](px, py, a_[0], a_[1], b_[0], b_[1]) < r for a_, b_, r in segs):
+                        good = False
+                    elif abs(ground(px * M, py * M) / M - b["z"]) > 0.4:
+                        good = False
+                    if not good:
+                        break
+                if not good:
+                    break
+            if good:
+                ok.append(side)
+        FREE_SIDES[b["id"]] = ok
+    stats["outside_stair_sides"] = {k: v for k, v in FREE_SIDES.items()}
+
+
 def buildings():
     homes = sorted(LAYOUT["houses"], key=lambda b: b["home_index"])
     infill = LAYOUT["infill"]
     civic_keys = [k for k, b in LAYOUT["landmarks"].items() if b.get("kind") == "civic" and b.get("interior")]
     allb = homes + infill + [dict(lm(k), id=lm(k).get("id", k)) for k in civic_keys]
     skips = party_walls(allb)
+    free_sides(allb, skips)
     block_index = {}
     for b in allb:
         blk = b.get("block")
@@ -599,10 +1043,11 @@ def buildings():
         variant = int(b.get("style", 0)) + ri
         build_house(b, kind, skips.get(b["id"]), variant, ri)
     stats["party_wall_sides"] = sum(len(v) for v in skips.values())
+    stats["facades"] = FACADES
     # towers
-    tower(lm("bell_tower"), 4, light=(10.0, 900.0), district="crown_hill")
-    tower(lm("clock_tower"), 4, light=(8.0, 800.0), district="heart", clock=True)
-    tower(lm("lighthouse"), 5, light=(400.0, 9000.0, (255, 236, 190)), district="lighthouse_point")
+    tower(lm("bell_tower"), 4, light=(10.0, 900.0), district="crown_hill", crown="bell")
+    tower(lm("clock_tower"), 4, light=(8.0, 800.0), district="heart", clock=True, crown="clock")
+    tower(lm("lighthouse"), 5, light=(400.0, 9000.0, (255, 236, 190)), district="lighthouse_point", crown="lighthouse")
     # open halls
     fm = lm("fish_market")
     open_hall(fm, ("Roof_RoundTiles_6x8", 90.0), [(sx * 380.0, sy * 280.0) for sx in (-1, 0, 1) for sy in (-1, 1)],
@@ -611,6 +1056,14 @@ def buildings():
                (DH + "FishBasket", 120.0, -200.0, 0.0), (DH + "FishBarrel", -120.0, -210.0, 0.0)],
               eave=260.0, roof_z=0.55)          # top ~ 2 + 2.6 + 0.55 * 3.7 = 6.7 m < top_z 8.5
     V1["open_shed"](lm("smithy")["at"][0] * M, lm("smithy")["at"][1] * M, lm("smithy")["yaw"], folder="V2/Smithy")
+    # SPRINT-022: the v1 shed drops its tools at pivot height; seat the pickaxe (pivot mid-handle) on the floor
+    for a in _real_actors.get_all_level_actors():
+        if str(a.get_folder_path()) == "V2/Smithy" and a.get_class().get_name() == "StaticMeshActor":
+            sm = a.static_mesh_component.static_mesh
+            if sm and sm.get_name() == "Pickaxe_Bronze":
+                lo = sm.get_bounding_box().min.z
+                p_ = a.get_actor_location()
+                a.set_actor_location(unreal.Vector(p_.x, p_.y, p_.z - lo), False, False)
 
 
 # =================================================================================================== landmarks
@@ -657,10 +1110,21 @@ def windmill(spec):
 
 
 def waterwheel(spec):
-    """Paddle wheel on the brook: a KGSpinner hub with plank paddles attached (spins about the axle)."""
+    """Paddle wheel on the brook. SPRINT-022: the KG_DressLandmarks Waterwheel (rims, spokes, 16 paddles) turning on a
+    KGSpinner about its axle; the older plank hub stays as the fallback without the pack."""
     x, y = spec["at"][0] * M, spec["at"][1] * M
     yaw = spec["face_deg"]          # axle direction; the wheel plane (yaw + 90) follows the brook
     zc = ground(x, y) + 170.0
+    if have(DL + "Waterwheel"):
+        spinner(DL + "Waterwheel", x, y, zc + 60.0, yaw - 90.0, unreal.Rotator(roll=0.0, pitch=-25.0, yaw=0.0),
+                "V2/Waterwheel", label="Waterwheel")
+        c, s_ = math.cos(math.radians(yaw)), math.sin(math.radians(yaw))
+        for sg in (-1, 1):
+            px, py = x + c * sg * 125.0, y + s_ * sg * 125.0
+            spawn(V + "Corner_Exterior_Wood", px, py, ground(px, py) - 20.0, yaw, scale=(1.6, 1.6, (zc + 60.0 - ground(px, py) + 40.0) / 300.0),
+                  folder="V2/Waterwheel")
+        stats["waterwheel"] = "pack"
+        return
     cls = unreal.load_class(None, "/Script/KillGodot.KGSpinner")
     hub = None
     if cls:
@@ -679,6 +1143,44 @@ def waterwheel(spec):
     for sg in (-1, 1):
         px, py = x + c * sg * 120.0, y + s * sg * 120.0
         spawn(V + "Corner_Exterior_Wood", px, py, ground(px, py) - 20.0, yaw, scale=(1.4, 1.4, 0.72), folder="V2/Waterwheel")
+
+
+def landmarks_s22():
+    """SPRINT-022 small landmarks placed by the builder (the geometric ones - arch portals, buttresses, cliffs - come
+    from the placements file): the Belvedere telescope on the crown parapet aimed at the harbour, a wall fountain."""
+    if not have(DL + "Telescope"):
+        return
+    bt = lm("belvedere_telescope")
+    x, y = bt["at"][0] * M, bt["at"][1] * M
+    tx, ty = LAYOUT["basin"]["center"][0] * M, LAYOUT["basin"]["center"][1] * M
+    phi = math.degrees(math.atan2(ty - y, tx - x))
+    spawn(DL + "Telescope", x, y, ground(x, y) - 2.0, phi - 90.0, folder="V2/Landmarks", label="BelvedereTelescope")
+    # wall fountain: on the Upper Wall facing Back Lane west, where the low side is open ground
+    best = None
+    for w in LAYOUT["retaining_walls"]:
+        if not w["name"].startswith("upper_wall"):
+            continue
+        for (ax, ay), (bx, by) in zip(w["points"], w["points"][1:]):
+            L_ = math.hypot(bx - ax, by - ay)
+            if L_ < 4.0:
+                continue
+            mx, my = (ax + bx) / 2, (ay + by) / 2
+            ux, uy = (bx - ax) / L_, (by - ay) / L_
+            nx, ny = -uy, ux
+            if ground((mx + nx * 2) * M, (my + ny * 2) * M) > ground((mx - nx * 2) * M, (my - ny * 2) * M):
+                nx, ny = -nx, -ny
+            fx, fy = mx + nx * 1.6, my + ny * 1.6
+            dl = min(V1["seg_dist"](fx, fy, *l["points"][i], *l["points"][i + 1]) - l["width"] / 2.0
+                     for l in LAYOUT["lanes"] for i in range(len(l["points"]) - 1))
+            clear = all(not _in_rect(b, fx, fy, 0.8) for b in LAYOUT["houses"] + LAYOUT["infill"])
+            if clear and 0.6 < dl < 3.0 and (best is None or dl < best[0]):
+                best = (dl, mx + nx * 0.36, my + ny * 0.36, nx, ny)
+    if best:
+        _, x, y, nx, ny = best
+        z = ground((x + nx * 0.5) * M, (y + ny * 0.5) * M)
+        spawn(DL + "WallFountain", x * M, y * M, z - 2.0, math.degrees(math.atan2(ny, nx)) - 90.0, folder="V2/Landmarks",
+              label="WallFountain")
+        stats["wall_fountain"] = [round(x, 2), round(y, 2)]
 
 
 def graveyard(spec):
@@ -756,38 +1258,68 @@ def fountain_square():
 
 
 def japan_garden():
-    kp = lm("koi_pond")
-    gx, gy, gz = kp["at"][0] * M, kp["at"][1] * M, kp["z"] * M
+    """SPRINT-022: the Sakura Garden from PL["garden"] (prep_v2_placements.garden): the koi pond on the flat lawn with
+    real water and a dark bed, the arch bridge across its short axis (end blocks on the lawn, water under the arch),
+    the torii across the Sakura Walk on level ground past the stair head, stone lanterns on plinths beside the paths,
+    small lamps along the stepping stones, grounded rocks. Nothing stands on the Garden Stair any more."""
+    G = PL.get("garden")
     fo = "V2/Garden"
-    rim = gz + 55.0
-    spawn(JP + "KoiPondRim", gx, gy, rim, 90.0, folder=fo)
-    water = spawn("/Engine/BasicShapes/Plane", gx - 10.0, gy + 40.0, rim - 18.0, 90.0, scale=(7.6, 4.6, 1.0), folder=fo, collide=False)
+    if not G:
+        log("garden: no PL['garden'] (rerun prep_v2_placements.py)")
+        return
+    pd = G["pond"]
+    px, py = pd["at"][0] * M, pd["at"][1] * M
+    spawn(JP + "KoiPondRim", px, py, pd["rim_z"] * M, pd["yaw"], folder=fo, label="KoiPond")
+    cx, cy = pd["centre"][0] * M, pd["centre"][1] * M
+    # oval water and bed (flattened engine cylinders) that fit inside the rim's stones, not rectangles
+    bed = spawn("/Engine/BasicShapes/Cylinder", cx, cy, pd["ground"] * M + 1.5, pd["yaw"], scale=(6.9, 4.1, 0.01), folder=fo,
+                collide=False)
+    bed_mat = unary_first("/Game/KillGodot/Materials/S22/M_KG_PondBed", None)
+    if bed and bed_mat:
+        bed.static_mesh_component.set_material(0, bed_mat)
+    water = spawn("/Engine/BasicShapes/Cylinder", cx, cy, pd["water_z"] * M - 0.5, pd["yaw"], scale=(7.1, 4.3, 0.01), folder=fo,
+                  collide=False, label="KoiPondWater")
     if water:
-        water.static_mesh_component.set_material(0, unreal.load_asset("/Game/KillGodot/Materials/M_KG_PondWater"))
-    spawn(JP + "ArchBridge", gx, gy + 40.0, rim + 5.0, 90.0, folder=fo)
-    koi = _real_actors.spawn_actor_from_class(unreal.load_class(None, "/Script/KillGodot.KGFishSchool"), unreal.Vector(gx, gy + 40.0, rim - 18.0))
+        water.static_mesh_component.set_material(0, unary_first("/Game/KillGodot/Materials/S22/MI_KG_Water_Koi",
+                                                                 "/Game/KillGodot/Materials/M_KG_PondWater"))
+    br = G["bridge"]
+    spawn(JP + "ArchBridge", br["at"][0] * M, br["at"][1] * M, br["z"] * M, br["yaw"], folder=fo, label="KoiBridge")
+    koi = _real_actors.spawn_actor_from_class(unreal.load_class(None, "/Script/KillGodot.KGFishSchool"),
+                                              unreal.Vector(cx, cy, pd["water_z"] * M))
     koi.set_editor_property("fish_mesh", mesh(JP + "Koi"))
-    for k, v in (("count", 7), ("radius", 160.0), ("min_depth", 12.0), ("max_depth", 25.0), ("speed", 40.0),
+    for k, v in (("count", 7), ("radius", 150.0), ("min_depth", 8.0), ("max_depth", 18.0), ("speed", 40.0),
                  ("fish_scale", 0.9), ("species", "Koi")):
         koi.set_editor_property(k, v)
     koi.set_folder_path(fo)
-    gt = lm("garden_torii")
-    spawn(JP + "Torii", gt["at"][0] * M, gt["at"][1] * M, gt["z"] * M, gt["face_deg"] - 90.0, scale=0.55, folder=fo)   # passage along x = 45
+    t = G["torii"]
+    spawn(JP + "Torii", t["at"][0] * M, t["at"][1] * M, t["z"] * M + 41.0 * t["scale"] - 4.0, t["yaw"], scale=t["scale"], folder=fo,
+          label="GardenTorii")
     pv = lm("pavilion")
     spawn(DW + "TeaHouse", pv["at"][0] * M, pv["at"][1] * M, pv["z"] * M + 4.0, pv["yaw"] - 90.0, scale=0.9, folder=fo, label="Pavilion")
     warm_light(pv["at"][0] * M, pv["at"][1] * M, pv["z"] * M + 250.0, 5.0, 600.0)
     gs = lm("giant_sakura")
     spawn(JP + "Sakura_A", gs["at"][0] * M, gs["at"][1] * M, gs["z"] * M - 10.0, 30.0, scale=1.6, folder=fo)
-    for name, x, y, sc in [("Sakura_B", 54.0, 8.0, 1.0), ("Sakura_A", 66.0, 18.0, 0.9), ("Maple", 52.0, 30.0, 0.9),
-                           ("BonsaiPine", 60.0, 12.0, 1.0), ("Bamboo", 49.5, 2.0, 1.0), ("Bamboo", 52.0, 0.5, 1.1),
-                           ("GardenRock", 49.0, 13.0, 1.0), ("GardenRock", 41.8, 18.5, 0.8)]:
-        spawn(JP + name, x * M, y * M, ground(x * M, y * M) - 5.0, rng.uniform(0, 360), scale=sc, folder=fo)
-    for x, y in [(42.5, 13.0), (47.5, 13.0), (42.5, 22.0), (47.5, 22.0)]:
-        spawn(JP + "GardenLamp", x * M, y * M, gz, 0.0, folder=fo)
-        warm_light(x * M, y * M, gz + 70.0, 3.0, 350.0)
-    for x, y in [(56.0, 22.0), (63.0, 10.0)]:
-        spawn(JP + "ToroLantern", x * M, y * M, ground(x * M, y * M), 0.0, folder=fo)
-        warm_light(x * M, y * M, ground(x * M, y * M) + 150.0, 6.0, 500.0)
+    for name, x, y, z, sc in G["trees"]:
+        spawn(JP + name, x * M, y * M, z * M, rng.uniform(0, 360), scale=sc, folder=fo)
+    for x, y, z, sc in G["rocks"]:
+        spawn(JP + "GardenRock", x * M, y * M, z * M, rng.uniform(0, 360), scale=sc, folder=fo)
+    for x, y, z in G["lamps"]:
+        spawn(JP + "GardenLamp", x * M, y * M, z * M + 14.0, 0.0, folder=fo)
+        warm_light(x * M, y * M, z * M + 84.0, 3.0, 350.0)
+    for k, (x, y, z) in enumerate(G["lanterns"]):
+        spawn(DL + "LanternPlinth", x * M, y * M, z * M, 15.0 * k, folder=fo) if have(DL + "LanternPlinth") else None
+        top = z * M + (36.0 if have(DL + "LanternPlinth") else 0.0)
+        spawn(JP + "ToroLantern", x * M, y * M, top + 6.0, 15.0 * k, folder=fo)
+        if k < 2:
+            warm_light(x * M, y * M, top + 150.0, 6.0, 500.0)
+
+
+def unary_first(path, fallback):
+    """Load a material asset, or the fallback path (None = no fallback)."""
+    for p_ in (path, fallback):
+        if p_ and unreal.EditorAssetLibrary.does_asset_exist(p_):
+            return unreal.load_asset(p_)
+    return None
 
 
 def shrine_island():
@@ -863,6 +1395,15 @@ def slipway():
             px, py = x + u[0] * sc - u[1] * off, y + u[1] * sc + u[0] * off
             spawn(V + "Floor_WoodDark", px, py, z, sw["face_deg"], pitch=pitch, scale=(1.07, 1.0, 1.0), folder="V2/Harbour")
     spawn(WP + "Rowboat", x - u[0] * 150.0, y - u[1] * 150.0, 120.0, sw["face_deg"], pitch=pitch, folder="V2/Harbour")
+    # SPRINT-022: the slip stands on timber piles down to the basin floor (it used to end in mid-water)
+    for k in range(1, 4):
+        sc = -300.0 + k * 200.0
+        zt = 50.0 - sc * (3.0 / 8.0) - 12.0
+        for off in (-180.0, 180.0):
+            px, py = x + u[0] * sc - u[1] * off, y + u[1] * sc + u[0] * off
+            zb = ground(px, py) - 20.0
+            if zt - zb > 40.0:
+                spawn(V + "Corner_Exterior_Wood", px, py, zb, sw["face_deg"], scale=(1.4, 1.4, (zt - zb) / 300.0), folder="V2/Harbour")
 
 
 # =================================================================================================== placements file
@@ -878,11 +1419,17 @@ def placements():
             a.static_mesh_component.set_editor_property("can_ever_affect_navigation", False)
         n += 1
     water_mat = unreal.load_asset("/Game/KillGodot/Materials/M_KG_PondWater")
+    # SPRINT-022 water family (kg_make_water_v2.py): brook ribbons flow along their local X, the mill pond is still;
+    # the vertical koi-spill curtain keeps the old material.
+    fam = {"V2/Water/Brook": unary_first("/Game/KillGodot/Materials/S22/MI_KG_Water_Brook", None),
+           "V2/Water/Pond": unary_first("/Game/KillGodot/Materials/S22/MI_KG_Water_Pond", None),
+           "V2/KoiSpill": unary_first("/Game/KillGodot/Materials/S22/MI_KG_Water_Koi", None)}
     for w in PL["water"]:
         a = spawn("/Engine/BasicShapes/Plane", w["p"][0], w["p"][1], w["p"][2], w["y"], w.get("pi", 0.0), w.get("ro", 0.0),
                   tuple(w["s"]), w["f"], collide=False)
         if a:
-            a.static_mesh_component.set_material(0, water_mat)
+            mat = None if w.get("vertical") else fam.get(w["f"])
+            a.static_mesh_component.set_material(0, mat or water_mat)
     for x, y, z, yaw, kind in PL["lamps"]:
         if kind == "jetty":
             spawn(PIR + "Torch_0", x, y, z - 25.0, 0.0, folder="V2/Jetty")
@@ -938,6 +1485,10 @@ def terrain_and_sea():
     sea = spawn("/Game/KillGodot/Env/Sea/KG_Sea/StaticMeshes/KG_Sea", 0.0, 0.0, 0.0, folder="V2/Terrain", label="Sea", collide=False)
     if sea:
         sea.static_mesh_component.set_editor_property("bounds_scale", 3.0)
+        sm = unary_first("/Game/KillGodot/Materials/S22/MI_KG_Water_Sea", None)     # SPRINT-022 water family
+        if sm:
+            sea.static_mesh_component.set_material(0, sm)
+            stats["sea_material"] = "MI_KG_Water_Sea"
 
 
 def sea_life():
@@ -987,8 +1538,13 @@ def breakables():
     for name, ox, oy in [("Crate_Wooden", 900, -620), ("Crate_Wooden", 960, -700), ("Barrel", -700, 900), ("Barrel", -760, 980)]:
         V1["breakable"](name, fs[0] * M + ox, fs[1] * M + oy, yaw=rng.uniform(0, 360), folder="V2/Breakables")
     jh = next(l for l in LAYOUT["lanes"] if l["name"] == "jetty_head")["points"]
+    # SPRINT-022: along the head's centre line (on its walkable deck box), they used to hang off the side and drop
+    ux, uy = jh[1][0] - jh[0][0], jh[1][1] - jh[0][1]
+    n_ = math.hypot(ux, uy)
+    ux, uy = ux / n_, uy / n_
     for k in range(3):
-        V1["breakable"]("Crate_Wooden", (jh[0][0] + 2.0) * M + k * 75.0, jh[0][1] * M - 50.0, 122.0, rng.uniform(-10, 10),
+        s_ = 1.6 + k * 0.8
+        V1["breakable"]("Crate_Wooden", (jh[0][0] + ux * s_) * M, (jh[0][1] + uy * s_) * M, 150.0, rng.uniform(-10, 10),
                         folder="V2/Breakables")
 
 
@@ -1035,6 +1591,24 @@ HINTS = {"FileReports": ("BookStand", 0), "LightCandles": ("CandleStick_Triple",
          "ForgeNails": None}
 
 
+def _hint_clear(px, py):
+    """True when (px, py) cm is outside every home / civic door apron (1.6 m) and every stair corridor."""
+    for b in LAYOUT["houses"] + [v for v in LAYOUT["landmarks"].values() if v.get("interior")]:
+        w, d = b["size"]
+        cw = w // 2
+        lx = -cw + 1 + 2 * (cw // 2) if w >= 4 else 0.0
+        yaw = math.radians(b.get("yaw", b["face_deg"] + 90.0))
+        c, s_ = math.cos(yaw), math.sin(yaw)
+        ly = -d / 2.0 - 0.8
+        dx, dy = b["at"][0] + lx * c - ly * s_, b["at"][1] + lx * s_ + ly * c
+        if math.hypot(px / M - dx, py / M - dy) < 1.6:
+            return False
+    for st in LAYOUT["stairs"]:
+        if V1["seg_dist"](px / M, py / M, st["from"][0], st["from"][1], st["to"][0], st["to"][1]) < st["width"] / 2.0 + 0.5:
+            return False
+    return True
+
+
 def task_stations():
     cls = unreal.load_class(None, "/Script/KillGodot.KGTaskStation")
     decks = [l for l in LAYOUT["lanes"] if l["kind"] in ("pier", "mole")]
@@ -1068,7 +1642,13 @@ def task_stations():
         st.set_folder_path("Gameplay/Tasks")
         hint = HINTS.get(t["id"])
         if hint:
+            # SPRINT-022: the hint prop goes beside the station but never into a door apron or a stair corridor
             hx, hy = (x + 110.0, y + 60.0)
+            for ox, oy in ((110.0, 60.0), (-110.0, 60.0), (110.0, -60.0), (-110.0, -60.0), (0.0, 130.0), (130.0, 0.0),
+                           (-130.0, 0.0), (0.0, -130.0)):
+                if t["id"] in TOWER_TOP_TASKS or _hint_clear(x + ox, y + oy):
+                    hx, hy = x + ox, y + oy
+                    break
             hz = z if (t["id"] in TOWER_TOP_TASKS or ground(hx, hy) < z - 150.0) else ground(hx, hy)
             if t["id"] in TOWER_TOP_TASKS:
                 hx, hy = x + 40.0, y + 30.0
@@ -1099,6 +1679,11 @@ def capture_camera():
 
 def minimap():
     """Coordinator hook: redraw T_KG_Map_Morrowmere_v2 with the real trees + place AKGMapInfo (saved with the level)."""
+    if TEST_BUILD:
+        cls = unreal.load_class(None, "/Script/KillGodot.KGMapInfo")
+        info = _real_actors.spawn_actor_from_class(cls, unreal.Vector(0.0, 0.0, 0.0)) if cls else None
+        calm_water(info)
+        return
     import kg_make_minimap
     importlib.reload(kg_make_minimap)
     info = kg_make_minimap.build_minimap("D:/Kill Godot/Tools/Level/morrowmere_layout_v2.json")
@@ -1201,6 +1786,7 @@ def build():
     step("harbour_light", harbour_light)
     step("windmill", windmill, lm("windmill"))
     step("waterwheel", waterwheel, lm("waterwheel"))   # axle along face_deg (wheel plane follows the brook)
+    step("landmarks_s22", landmarks_s22)                # SPRINT-022: Belvedere telescope, Well Court wall fountain
     step("farm", farm_bits)
     step("slipway", slipway)
     step("nature", nature)
@@ -1213,9 +1799,12 @@ def build():
     step("minimap", minimap)
     step("nav", navigation)
     report()
-    step("underground", lambda: importlib.import_module("kg_build_underground").build_into_current_level())  # KG_DIG hook (after the report: the village counts stay the village's)
+    if not TEST_BUILD:
+        step("underground", lambda: importlib.import_module("kg_build_underground").build_into_current_level())  # KG_DIG hook (after the report: the village counts stay the village's)
     saved = level_sub.save_current_level()
     log(f"saved {LEVEL}: {saved} in {time.time() - T0:.0f}s")
 
 
-build()
+# KG_V2_NOBUILD=1: import the helpers only (SPRINT-022 lab levels, tests); the normal run builds the map.
+if __import__("os").environ.get("KG_V2_NOBUILD") != "1":
+    build()

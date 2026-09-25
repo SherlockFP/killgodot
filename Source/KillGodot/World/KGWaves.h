@@ -6,6 +6,8 @@
  * The sea surface, shared by the M_KG_Ocean material (world position offset) and gameplay (swimming, buoyancy,
  * bobbers). Three travelling sine waves with deep-water speed c = sqrt(g / k).
  * KEEP IN SYNC with OCEAN_HLSL in Tools/Unreal/kg_make_ocean.py (same directions, amplitudes, wavelengths, calm mask).
+ * The SPRINT-022 water family (Tools/Unreal/kg_make_water_v2.py, M_KG_WaterV2_Sea) reads the same HLSL strings from
+ * kg_make_ocean.py, so the rendered surface of both sea materials and this struct stay one set of maths.
  * Time is world time in seconds (the material's Time node uses the same clock).
  *
  * Calm zone (sheltered harbour basin): inside a circle the swell is scaled down to CalmScale and replaced by small

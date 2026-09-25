@@ -244,7 +244,9 @@ namespace KGWorldChoreDebug
 				}
 				if (A.ClimbCm > 1.0f)
 				{
-					ClimbS += 2.0f * A.ClimbCm / Cat.ClimbSpeed;   // up the ladder and back down
+					// Up the ladder, and back down only when another step follows (the chore ends at the top otherwise).
+					const bool bLastLeg = s == Def.NumSteps() - 1 && Todo.Num() == 1;
+					ClimbS += (bLastLeg ? 1.0f : 2.0f) * A.ClimbCm / Cat.ClimbSpeed;
 					L->SetNumberField(TEXT("climb_m"), A.ClimbCm / 100.0f);
 				}
 				Legs.Add(MakeShared<FJsonValueObject>(L));
@@ -263,12 +265,16 @@ namespace KGWorldChoreDebug
 		O->SetNumberField(TEXT("from_square_m"), FMath::RoundToFloat(FromHub / 10.0f) / 10.0f);
 		O->SetBoolField(TEXT("reachable"), bOk);
 		O->SetBoolField(TEXT("in_30_75"), Total >= 30.0f && Total <= 75.0f);
+		// User target (2026-09-25, "keep it simple but fun"): 25-50 s; with_travel adds the walk from the square.
+		const float WithTravel = Total + FMath::Max(0.0f, FromHub) / Cat.WalkSpeed;
+		O->SetNumberField(TEXT("with_travel_s"), FMath::RoundToFloat(WithTravel * 10.0f) / 10.0f);
+		O->SetBoolField(TEXT("in_25_50"), WithTravel >= 25.0f && WithTravel <= 50.0f);
 		O->SetArrayField(TEXT("legs"), Legs);
 		bOutOk = bOk;
 		OutTotal = Total;
-		UE_LOG(LogKillGodot, Log, TEXT("KG_WORLDCHORE_ROUTE %s/%s reachable=%d length=%.1fm walk=%.1fs work=%.1fs climb=%.1fs total=%.1fs in_range=%d from_square=%.1fm"),
+		UE_LOG(LogKillGodot, Log, TEXT("KG_WORLDCHORE_ROUTE %s/%s reachable=%d length=%.1fm walk=%.1fs work=%.1fs climb=%.1fs total=%.1fs in_25_50=%d from_square=%.1fm with_travel=%.1fs"),
 		       *Def.Id.ToString(), *O->GetStringField(TEXT("variant")), bOk ? 1 : 0, LenCm / 100.0f, WalkS, WorkS, ClimbS, Total,
-		       Total >= 30.0f && Total <= 75.0f ? 1 : 0, FromHub / 100.0f);
+		       O->GetBoolField(TEXT("in_25_50")) ? 1 : 0, FromHub / 100.0f, WithTravel);
 		return O;
 	}
 
@@ -286,7 +292,7 @@ namespace KGWorldChoreDebug
 			Sub->SetupWorld(true);
 			const FKGWorldChoreCatalog& Cat = FKGWorldChoreCatalog::Get();
 			TSharedRef<FJsonObject> Root = MakeShared<FJsonObject>();
-			int32 Pass = 0, Fail = 0;
+			int32 Pass = 0, Fail = 0, InTarget = 0;
 			for (const FKGWorldChoreDef& Def : Cat.Chores)
 			{
 				TArray<TSharedPtr<FJsonValue>> Vars;
@@ -295,17 +301,22 @@ namespace KGWorldChoreDebug
 					bool bOk = false;
 					float Total = 0.0f;
 					Vars.Add(MakeShared<FJsonValueObject>(RouteOne(World, Def, v, bOk, Total)));
-					(bOk && Total >= 30.0f && Total <= 75.0f ? Pass : Fail) += 1;
+					// Pass = every step reachable (acceptance 2). Target (user, 2026-09-25): 25-50 s with the walk from the square.
+					(bOk ? Pass : Fail) += 1;
+					const TSharedPtr<FJsonObject> Last = Vars.Last()->AsObject();
+					InTarget += Last->GetBoolField(TEXT("in_25_50")) ? 1 : 0;
 				}
 				Root->SetArrayField(Def.Id.ToString(), Vars);
 			}
 			Root->SetNumberField(TEXT("pass"), Pass);
 			Root->SetNumberField(TEXT("fail"), Fail);
+			Root->SetNumberField(TEXT("in_25_50"), InTarget);
 			FString Out;
 			const TSharedRef<TJsonWriter<>> Writer = TJsonWriterFactory<>::Create(&Out);
 			FJsonSerializer::Serialize(Root, Writer);
 			FFileHelper::SaveStringToFile(Out, *(FPaths::ProjectSavedDir() / TEXT("KG_WorldChoreRoutes.json")));
-			UE_LOG(LogKillGodot, Log, TEXT("KG_WORLDCHORE_ROUTES done: %d pass, %d fail -> Saved/KG_WorldChoreRoutes.json"), Pass, Fail);
+			UE_LOG(LogKillGodot, Log, TEXT("KG_WORLDCHORE_ROUTES done: %d pass, %d fail (reachable); %d of %d within 25-50 s incl. the walk from the square -> Saved/KG_WorldChoreRoutes.json"),
+			       Pass, Fail, InTarget, Pass + Fail);
 		}));
 
 	// ---- poses + shots -------------------------------------------------------------------------------------------------
@@ -476,8 +487,7 @@ namespace KGWorldChoreDebug
 			if (FKGSpotState* S = Spot(World, TEXT("mill_hopper"))) { S->Count = 1; }
 			const FVector T = SpotAt(World, TEXT("mill_hopper"));
 			const FVector Out = FRotator(0.0f, Yaw(TEXT("mill_hopper")), 0.0f).Vector();
-			PoseVillager(World, T + Out * 200.0f, T, TEXT("Sack"));
-			PoseItem(World, TEXT("Flour"), T + Out * 70.0f + FRotator(0.0f, Yaw(TEXT("mill_hopper")) + 90.0f, 0.0f).Vector() * 80.0f);
+			PoseVillager(World, T + Out * 150.0f, T, TEXT("Sack"));
 			Cam = Around(T, Yaw(TEXT("mill_hopper")) + 40.0f, 520.0f, 220.0f, 120.0f);
 		}
 		else if (Name == TEXT("LighthouseOil"))
@@ -493,8 +503,8 @@ namespace KGWorldChoreDebug
 		}
 		else if (Name == TEXT("Twist_Poison"))
 		{
-			if (FKGSpotState* S = Spot(World, TEXT("farm_trough"))) { S->Level = 0.8f; S->bSpoiled = true; }
-			const FVector T = SpotAt(World, TEXT("farm_trough"));
+			if (FKGSpotState* S = Spot(World, TEXT("inn_trough"))) { S->Level = 0.8f; S->bSpoiled = true; }
+			const FVector T = SpotAt(World, TEXT("inn_trough"));
 			PoseVillager(World, T + FVector(-110.0f, 90.0f, 0.0f), T);
 			Cam = Around(T, 200.0f, 300.0f, 170.0f, 30.0f);
 		}

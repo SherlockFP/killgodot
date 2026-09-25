@@ -45,7 +45,7 @@ def fountain_seats():
         for k in range(n):
             a = 2 * math.pi * k / n
             x, y = FS[0] + rr * math.cos(a), FS[1] + rr * math.sin(a)
-            K.clutter(N + "RockPath_Square_Small_%d" % (1 + k % 3), x, y, Z - 17.0, math.degrees(a) + R.uniform(-6, 6), sc,
+            K.clutter(N + "RockPath_Square_Small_%d" % (1 + k % 3), x, y, Z - 3.0, math.degrees(a) + R.uniform(-6, 6), sc,
                       cull=9000.0)
 
 

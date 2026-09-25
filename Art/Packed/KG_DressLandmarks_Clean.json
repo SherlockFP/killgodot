@@ -1,0 +1,84 @@
+{
+ "props": {
+  "ClockStage": {
+   "material": "VC",
+   "collision": "box"
+  },
+  "Belfry": {
+   "material": "VC",
+   "collision": "complex"
+  },
+  "Spire": {
+   "material": "VC",
+   "collision": "complex"
+  },
+  "ClockDial": {
+   "material": "VC",
+   "collision": "none"
+  },
+  "ClockHand_Hour": {
+   "material": "VC",
+   "collision": "none"
+  },
+  "ClockHand_Minute": {
+   "material": "VC",
+   "collision": "none"
+  },
+  "Bell": {
+   "material": "VC",
+   "collision": "none"
+  },
+  "BellBeam": {
+   "material": "VC",
+   "collision": "none"
+  },
+  "LighthouseGallery": {
+   "material": "VC",
+   "collision": "complex"
+  },
+  "LampRoom": {
+   "material": "Glow",
+   "collision": "complex"
+  },
+  "Waterwheel": {
+   "material": "VC",
+   "collision": "none"
+  },
+  "ArchPortal": {
+   "material": "VC",
+   "collision": "complex"
+  },
+  "Buttress": {
+   "material": "VC",
+   "collision": "box"
+  },
+  "WallFountain": {
+   "material": "VC",
+   "collision": "complex"
+  },
+  "Telescope": {
+   "material": "VC",
+   "collision": "box"
+  },
+  "LanternPlinth": {
+   "material": "VC",
+   "collision": "box"
+  },
+  "Cliff_A": {
+   "material": "VC",
+   "collision": "complex"
+  },
+  "Cliff_B": {
+   "material": "VC",
+   "collision": "complex"
+  },
+  "Cliff_C": {
+   "material": "VC",
+   "collision": "complex"
+  },
+  "CliffTalus": {
+   "material": "VC",
+   "collision": "complex"
+  }
+ }
+}

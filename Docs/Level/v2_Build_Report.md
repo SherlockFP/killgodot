@@ -381,3 +381,116 @@ The first soak run, before the door and unstick fixes, logged 107 stuck events a
 - **Not verified:**
   - a full cook of the map;
   - an in-editor look at the navmesh over the new quay steps and bridge.
+
+## 8. SPRINT-022 visual pass (2026-09-25)
+
+> **Özet (TR):** Kullanıcının editör yorumu üzerine ("bütün evler aynı", "Japon bahçesinde yanlış geometri", "su kötü",
+> "saat kulesini güzelleştir", "Deniz Feneri Burnu'ndaki dev düz duvar"):
+> - **Evler:** 8 ev tipi (arketip): sıva konak, çıkmalı yarı ahşap, kırma çatılı tüccar evi, çapraz alınlıklı ev,
+>   yüksek taş ev, balkonlu ev, taş kulübe, dış merdivenli ev. Komşu iki ev asla aynı tip değil. Boyalı panjurlar ve
+>   kapılar, camlı pencereler, balkonlar, saçaklar, tabelalar. Kit duvarlarının süslü yüzü artık sokağa bakıyor
+>   (önceden içe bakıyordu). Ev sayısı 20 → 18, dolgu kabuk 36 → 33.
+> - **Geometri:** yeni doğrulayıcı haritadaki her dekor parçasının altını ışın izleriyle ölçüyor: havada, gömülü,
+>   merdiven basamağında ya da merdiven/rampa/köprü/kapı önünde duran hiçbir şey yok (211 hata → 0).
+>   Japon bahçesi düz çimenliğe yeniden yerleştirildi: torii yolun üstünde, fenerler kaide üstünde, kayalar yerde,
+>   köprü gerçek suyun üstünde.
+> - **Su:** yeni su ailesi (deniz, liman havuzu, koi havuzu, dere): derinliğe göre renk, iki ölçekte dalgacık, gökyüzü
+>   yansıması, kırılma, temas köpüğü, güneş parıltısı; dalga matematiği aynı (FKGWaves).
+> - **Kuleler:** saat kulesine kadran katı + çan odası + sivri kule + dönen akrep/yelkovan; çan kulesine gerçek çan;
+>   deniz fenerine galeri ve fener odası; su çarkı, geçit kemerleri, payandalar, dürbün.
+> - **Uçurumlar:** havuzun doğusundaki ve Burnun dev düz toprak duvarları katmanlı kaya ile kaplandı.
+
+### 8.1 House archetypes
+- **Table:** `Tools/Level/kg_archetypes_v2.py` (pure Python, one source for the layout, the builder, the dressing and the
+  check). Eight archetypes: `townhouse` (plaster, gable to the street, shutters), `timber` (jettied upper floors on a
+  beam and brackets, WoodGrid), `merchant` (hip roof, shop windows, centre balcony, two chimneys), `crossgable` (street
+  gable over the door bay, porch canopy), `stone` (all stone, thin windows, a top balcony, a tall chimney), `balcony`
+  (full-width balcony, ridge along the street), `cottage` (1-2 storeys, hip roof, porch), `stairhouse` (outside stair
+  to a first-floor door where a side is free). Per house (from the id): shutter paint, door paint and leaf, flower
+  boxes on or off, sometimes a trade sign (`dress_town.house_signs`).
+- **Assignment:** `author_layout_v2.py` gives every home and shell an `archetype` + `details` by greedy colouring over
+  the neighbour graph (party-wall neighbours and anything within half-sizes + 3.5 m), balanced across the village.
+- **The kit's dressed face:** the kit wall pieces carry their exterior (stone plinth, beams, framed glazed windows, the
+  shutter / balcony mounts) on mesh +Y; the v2 builder placed them with that face inside. `wall_run` now turns them
+  180 degrees and moves them out by 21 cm (the slab occupies the same space), for houses, shells, civic buildings and
+  towers. Window frames with glass (`Window_*1`) go into every archetype window.
+- **Materials:** `Tools/Unreal/kg_make_paint_v2.py` -> `/Game/KillGodot/Materials/S22/M_KG_PaintedWood` + 9
+  `MI_KG_Paint_<colour>` (the kit wood texture desaturated under the paint, worn edges show wood).
+- **Fewer houses:** the two Brookside homes are gone (the Brook Path home and the Tannery merged into one Tannery
+  workshop, the Mill Lane home removed): homes 20 -> 18. H01-H16 are unchanged, so the world chores and the game
+  mode's 16 home slots keep their doors. The three weakest shells (the single-unit blocks BC2, BE2, UE3) are removed:
+  shells 36 -> 33. Town-core coverage 22.6 % -> 21.2 %.
+- **Check** (`verify_v2_build.house_variety`): >= 6 archetypes among the homes (8), 0 same-looking neighbour pairs of
+  29, every building built as its layout archetype (`stats.facades` in the build report), 16-18 homes, coverage >= 20 %.
+
+### 8.2 Geometric placement validator
+- **Samples:** `Tools/Unreal/kg_placement_check_v2.ps1` runs `kg_placement_check_v2.py` in a `-game -nullrhi` session
+  (a commandlet world has no static-mesh collision). For every exterior prop (actors, movers, breakables, seats, chests
+  and every HISM instance of the dressing and nature fields; about 8,000) it traces 5 points of the bottom face down to
+  the surfaces under it (skipping the prop itself) plus the terrain tiles -> `Saved/KG_V2_PlacementSamples.json`.
+  Build step 9.
+- **Rules** (`verify_v2_build.placement`): floating (> 8 cm gap under the whole footprint; props resting on clutter
+  count as supported), sunk past a class tolerance (props 25 % of the height, rocks 55 %, plants 60 %, paving 30 cm;
+  leaning props exempt), standing on a stair tread or hidden ramp (planters and balustrades allowed), intersecting a
+  stair, ramp, bridge (incl. the koi bridge) or a home / civic door apron. Attached things (wall lanterns, signs,
+  flower boxes, shutters, glow cards, bunting, laundry, ropes...), water floaters and hidden colliders are classified
+  out. Report: `Saved/KG_V2_PlacementReport.json`.
+- **Result:** before 211 violations (89 floating, 78 sunk, 8 on stairs, 36 intersecting: pines and rocks hanging off
+  the rim and coast drops, a mill-pond landing built at 1.48 km altitude, garden lamps on the Garden Stair treads, the
+  torii over the stair, paving over stair flights, a pot 2 m above a balustrade, jetty crates falling into the basin,
+  the slipway ending mid-water); after **0**.
+- **Sakura Garden** (`prep_v2_placements.garden` -> `PL["garden"]`): an oval koi pond on the flat lawn with oval water
+  over a dark bed, the arch bridge across its short axis (ends on the lawn, water under the arch), the torii across
+  the Sakura Walk on level ground past the stair head, four stone lanterns on `LanternPlinth`s beside the paths,
+  grounded rocks, a stepping-stone route stair head -> bridge -> pavilion. FeedKoi stays at the pond's south-west tip.
+
+### 8.3 Water family
+- `Tools/Unreal/kg_make_water_v2.py` -> `/Game/KillGodot/Materials/S22/`: `M_KG_WaterV2_Sea` (the KG_Sea actor; the calm
+  basin through `MPC_KG_Water` as before) and `M_KG_WaterV2_Still` (koi pond, brook ribbons flowing along their local
+  X, mill pond), instances `MI_KG_Water_Sea/Koi/Brook/Pond`, `M_KG_PondBed`, `T_KG_WaterRipple_N`
+  (`Tools/Level/make_water_normals.py`).
+- **Shading:** depth colour with per-channel absorption, a soft shoreline fade, two-scale ripple normals (faded with
+  distance so the tiling never shows), fresnel sky reflection (`SkyLightEnvMapSample`, so it dims at night), refraction
+  (pixel-normal offset, scaled by depth), soft foam at every contact line (a depth band broken by the ripples), a sharp
+  sun glint (`SkyAtmosphereLightDirection` / `Illuminance`), forward-shaded translucency.
+- **WPO sync:** the sea's height / calm HLSL is read from `kg_make_ocean.py` (the same strings as M_KG_Ocean), so
+  `FKGWaves` is unchanged and still exact (KGWaves.h: comment only).
+- **Weather hooks** (for the later WEATHER sprint, not implemented): `/Game/KillGodot/Materials/S22/MPC_KG_Weather` with
+  `WindStrength` (default 0.35: ripple strength and drift speed, 0 = glassy, 1 = gusty), `RainRipple` (0: expanding
+  rain rings on every water surface when > 0), `Wetness` (0: reserved for wet stone / roofs; not read by the water).
+  A weather system only has to set these three scalars on the world's MPC instance.
+- **Perf:** `Tools/Unreal/kg_s22_perf.ps1` (old vs new materials in one -game session at 1920x1080, 5 views x 2 reps)
+  -> `Saved/KG_V2_WaterPerf.json`.
+
+### 8.4 Towers and landmarks (pack `KG_DressLandmarks`)
+- `Tools/Blender/kg_make_dress_landmarks.py` (reuses the KG_DressTerrace machinery) -> `Art/Packed/KG_DressLandmarks_Clean`
+  (20 props), imported in build step 2. Previews `Art/Concept/DressLandmarks_preview*.png`.
+- **Clock tower** (`tower(..., crown="clock")`): on the 4-level shaft (ladder and WindClock unchanged) a stone clock
+  stage with four `ClockDial`s and turning hands (`ClockHand_Hour/Minute` on `KGSpinner`s: one turn per 120 s / 24 min),
+  an open belfry with a small bell, an octagonal verdigris spire with a gilded ball and a weathervane. Top 24.5 m ->
+  about 36 m; the sightlines were re-checked in 3D with the new height: clear.
+- **Bell tower** (`crown="bell"`): an oak beam across the open lookout and a bronze `Bell` hanging from it over the
+  RingBell station; AKGChoreFx's BellRing strikes sound at the station + 2.5 m, i.e. at the bell.
+- **Lighthouse** (`crown="lighthouse"`): a corbelled `LighthouseGallery` with an iron railing and a glazed `LampRoom`
+  (glowing glass, copper dome); the 400 cd light and the dressing's beam moved into the lamp room.
+- **Small landmarks:** the `Waterwheel` (rims, spokes, 16 paddles) turning on a KGSpinner; an `ArchPortal` on both faces
+  of the four sottoportego arches over the opes; `Buttress`es on the Upper / Crown retaining walls where the low side
+  is open; the Belvedere `Telescope`; `LanternPlinth`s in the garden. (`WallFountain` is in the pack; the builder found
+  no Upper Wall spot clear of lanes and doors, so it is not placed.)
+
+### 8.5 Cliffs (acceptance 6, user-approved addition)
+- `prep_v2_placements.cliffs()`: the basin east cliff and the Point's sea cliff (and any other tall face near public
+  ground, found from the terrain) are clad in `Cliff_A/B/C` layered rock, 2-3 tiers from the sea bed to the cliff top,
+  staggered in plan, height and yaw, with `CliffTalus` boulder aprons at the waterline (about 117 pieces, complex
+  collision, sea side only; never on a stair / ramp / walkway).
+- **Check** (`verify_v2_build.cliff_faces`, data `PL["faces"]` from `prep_v2_placements.terrain_faces`): every steep
+  terrain face > 6 m tall and > 15 m long within 60 m of a walkway must be clad or broken (cliff rock, kit walls,
+  quay stones or buildings) with no bare stretch longer than 8 m.
+- Not done: lowering the headland itself (terrain generator, outside this sprint's files; see the proposals).
+
+### 8.6 Tooling added
+- `kg_build_village_v2.py`: `KG_V2_LEVEL` + `KG_V2_TEST=1` build a copy under `/Game/KillGodot/Maps/Test/` without
+  touching shared assets (used while the editor had the map open); `KG_V2_NOBUILD=1` imports the helpers only.
+- `Tools/Unreal/kg_s22_lab.py` + `kg_s22_lab_capture.ps1`: a lab level for kit pieces, archetypes and water.
+- `Tools/Unreal/kg_s22_testdress.py`: dress a Test/ copy with the real zone modules.
+- `kg_capture_v2.ps1 -Map`, `kg_placement_check_v2.ps1 -Map`, new shots (garden x3, water, towers, cliffs, a `dusk` look).

@@ -22,6 +22,82 @@ def log(m):
     unreal.log(f"KG_WC_CAPTURE {m}")
 
 
+# Look round 2 (SPRINT-016): some staged cameras landed inside a market stall, behind a villager's back or next to the
+# lighthouse lamp (blown out). For these poses the capture re-aims KG_CaptureCam itself: it tries eyes on a ring around
+# the focus (spots from the resolved chore data, ground-snapped) and takes the first one, nearest the preferred yaw, with
+# a clear sphere sweep to the focus. dist/height in cm; lift = focus height above the ground.
+REFRAME = {
+    "FishToMarket": {"focus": ["brine_table"], "lift": 90, "dist": 560, "height": 300, "prefer": 209.5 + 180},
+    "Lamplighter": {"focus": ["lamp_3", "lamp_4"], "lift": 170, "dist": 820, "height": 330, "prefer": 200},
+    "Nets": {"focus": ["quay_posts"], "lift": 130, "dist": 460, "height": 170, "prefer": 118 - 90},
+    "LighthouseOil": {"focus": ["lighthouse_lamp"], "lift": 60, "dist": 2400, "height": -500, "prefer": 225, "fov": 55},
+    "Twist_Poison": {"focus": ["inn_trough"], "lift": 40, "dist": 340, "height": 200, "prefer": 166.5 + 180},
+}
+_ANCHORS = None
+
+
+def anchor_xy(aid):
+    global _ANCHORS
+    if _ANCHORS is None:
+        import json
+        # "py <file>" in -game runs without __file__: the .ps1 passes the data path.
+        for p in (os.environ.get("KG_WC_RESOLVED", ""),):
+            if p and os.path.exists(p):
+                _ANCHORS = {a["id"]: a for a in json.load(open(p))["anchors"]}
+                break
+        else:
+            _ANCHORS = {}
+    a = _ANCHORS.get(aid)
+    return (a["at"][0] * 100.0, a["at"][1] * 100.0, a.get("z", 0.0) * 100.0) if a else None
+
+
+def ground(world, x, y, zhint):
+    hit = unreal.SystemLibrary.line_trace_single(world, unreal.Vector(x, y, zhint + 200), unreal.Vector(x, y, zhint - 600),
+                                                 unreal.TraceTypeQuery.TRACE_TYPE_QUERY1, False, [], unreal.DrawDebugTrace.NONE, True)
+    return hit.to_tuple()[5].z if hit else zhint
+
+
+def reframe(world, name):
+    import math
+    spec = REFRAME.get(name)
+    cams = unreal.GameplayStatics.get_all_actors_with_tag(world, "KG_CaptureCam")
+    if not spec or not cams:
+        return
+    pts = [anchor_xy(a) for a in spec["focus"]]
+    pts = [p for p in pts if p]
+    if not pts:
+        return
+    fx = sum(p[0] for p in pts) / len(pts)
+    fy = sum(p[1] for p in pts) / len(pts)
+    fz = ground(world, fx, fy, max(p[2] for p in pts)) + spec["lift"]
+    focus = unreal.Vector(fx, fy, fz)
+    best = None
+    for k in range(24):
+        yaw = spec["prefer"] + (k + 1) // 2 * 15.0 * (1 if k % 2 else -1)
+        r = math.radians(yaw)
+        eye = unreal.Vector(fx + math.cos(r) * spec["dist"], fy + math.sin(r) * spec["dist"], fz + spec["height"])
+        clear = True
+        for a, b in ((eye, focus), (focus, eye)):
+            hit = unreal.SystemLibrary.sphere_trace_single(world, a, b, 25.0, unreal.TraceTypeQuery.TRACE_TYPE_QUERY1, False, [],
+                                                           unreal.DrawDebugTrace.NONE, True)
+            if hit and hit.to_tuple()[3] < 0.9 * spec["dist"]:
+                clear = False
+                break
+        if clear:
+            best = (yaw, eye)
+            break
+    if not best:
+        log(f"reframe {name}: no clear eye, keeping the staged camera")
+        return
+    yaw, eye = best
+    cam = cams[0]
+    rot = unreal.MathLibrary.find_look_at_rotation(eye, focus)
+    cam.set_actor_location_and_rotation(eye, rot, False, True)
+    if spec.get("fov"):
+        cam.camera_component.set_field_of_view(spec["fov"])
+    log(f"reframe {name}: yaw {yaw:.0f} eye {eye.x:.0f},{eye.y:.0f},{eye.z:.0f} -> focus {fx:.0f},{fy:.0f},{fz:.0f}")
+
+
 def game_world():
     for w in unreal.ObjectIterator(unreal.World):
         try:
@@ -68,8 +144,15 @@ class Tour:
                     return
                 self.cur = self.todo.pop(0)
                 self.cmd(f"kg.WorldChore.Pose {self.cur}")
+                self.state = "aim"
+                self.next_t = now + 0.5
+            elif self.state == "aim":
+                try:
+                    reframe(self.world, self.cur)
+                except Exception as e:
+                    log(f"reframe {self.cur} error {e}")
                 self.state = "shoot"
-                self.next_t = now + 3.0
+                self.next_t = now + 2.5
             elif self.state == "shoot":
                 self.cmd(f"HighResShot {W}x{H} filename=WC_{self.cur}")
                 log(f"shot {self.cur}")

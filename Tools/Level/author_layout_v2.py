@@ -615,9 +615,9 @@ bldg("special", A(-26.0, 141.0), 4, 4, ang((-DIN[0], -DIN[1])), "Mausoleum (futu
 pack("CR", "crown_hill", "crown", Z_CROWN, RF_CR, "in", 3.6, TH_CROWN[1] - 3.2, ["h6x6:Sexton's House", "i6x6:Parsonage"])
 
 # ---- Brookside (along its lanes) ----
-along(BROOK_PATH, 5.5, +1, 6, 6, 3.0, "home", None, "brookside", "brookside")
-along(BROOK_PATH, 12.4, +1, 4, 6, 3.0, "infill", "Tannery", "brookside", "brookside")
-along(MILL_LANE, 36.0, +1, 6, 6, 3.0, "home", None, "brookside", "brookside")
+# SPRINT-022: the two Brookside homes are gone (homes 20 -> 18): the Brook Path home and the 4 m Tannery shell are
+# merged into one 6 m Tannery workshop on the home's plot; the lone Mill Lane home is removed.
+along(BROOK_PATH, 5.5, +1, 6, 6, 3.0, "infill", "Tannery", "brookside", "brookside")
 along(MILL_LANE, 49.0, +1, 4, 6, 3.0, "infill", "Dyer's shed", "brookside", "brookside", storeys=1)
 bldg("civic", (-97.8, 14.2), 4, 6, 0.0, "Smithy (open forge)", "brookside", "brookside", None, 1, legacy="smithy", open=True)
 along(WOODS, 12.0, -1, 4, 4, 2.6, "infill", "Woodcutter's hut", "brookside", "brookside", storeys=1)
@@ -636,6 +636,11 @@ bldg("special", (45.0, 21.2), 4, 4, 90.0, "Garden pavilion (on the island axis)"
 bldg("tower", (68.0, 95.0), 4, 4, -60.0, "Lighthouse", "lighthouse_point", "headland", 14.0, 5, legacy="lighthouse",
      ladder=True, top_z=14.0 + 5 * 3 + 7.5)
 along(HEAD_RD, 50.0, +1, 4, 6, 3.0, "infill", "Keeper's hut", "lighthouse_point", "headland", storeys=1)
+
+# SPRINT-022 ("you can reduce the number of houses very slightly"): the three weakest infill shells go, the lone
+# single-unit blocks at the ends of the Back Row and the Upper Town (their neighbours keep the street wall).
+S22_DROP_BLOCKS = {"BC2", "BE2", "UE3"}
+BUILD[:] = [b for b in BUILD if b.get("block") not in S22_DROP_BLOCKS]
 
 # ================================================================================================ STREET JOINS
 # Close the street wall between consecutive blocks of one ring: a 2.4 m garden wall with a gate where nothing
@@ -732,6 +737,14 @@ for k, b in enumerate(civic):
     else:
         b["style"] = 30 + k
         b["interior"] = False
+
+# SPRINT-022: house archetypes (Tools/Level/kg_archetypes_v2.py): no two neighbouring homes / shells look alike.
+import sys as _sys  # noqa: E402
+_sys.path.insert(0, HERE)
+import kg_archetypes_v2 as ARCH  # noqa: E402
+_pairs = ARCH.assign(homes + infill)
+print(f"  archetypes: {len(homes) + len(infill)} buildings, {len(_pairs)} neighbour pairs, "
+      f"{len({b['archetype'] for b in homes + infill})} archetypes in use")
 
 houses_out = [{k: v for k, v in b.items() if k != "kind"} for b in homes]
 infill_out = [{k: v for k, v in b.items() if k != "kind"} for b in infill]

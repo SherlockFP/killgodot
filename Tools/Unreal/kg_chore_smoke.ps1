@@ -8,8 +8,9 @@
   Every stage is validated by the server (no TooFast rejects expected: auto-win waits for the timing floor).
   Part 2 (SPRINT-016, world chores): a second server + client pair on Morrowmere v2 plays the WATER RUN end to end the way
   a person does (-KGWorldChoreSmoke=WaterRun on the client, UKGWorldChoreSubsystem::TickSmoke): the host puts the chore on
-  the client's list, the client walks (movement input along a navmesh path), presses E at the fountain trough, picks the
-  bucket up with hold-E, carries it to the well (cranked full by standing there), carries it back and pours it. Checked on
+  the client's list, the client walks (movement input along a navmesh path) to the well, presses E and cranks a full bucket up,
+  picks it up with hold-E, carries it to the fountain trough without running and pours it (2 steps, simplified after the
+  user's 'keep it simple but fun' feedback). Checked on
   both machines: every step validated by the server, the bucket and its fill replicated, the trough level replicated,
   the chore ticked off the client's list.
   Usage: powershell -ExecutionPolicy Bypass -File Tools/Unreal/kg_chore_smoke.ps1 [-Map /Game/KillGodot/Maps/L_Dev_Greybox] [-SkipWorld]
@@ -21,7 +22,8 @@ param(
     [string]$WorldMap = "/Game/KillGodot/Maps/L_Morrowmere_v2",
     [int]$Port = 0,
     [int]$TimeoutSeconds = 240,
-    [switch]$SkipWorld
+    [switch]$SkipWorld,
+    [switch]$OnlyWorld
 )
 $ErrorActionPreference = "Stop"
 $Root = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
@@ -57,6 +59,9 @@ $Steps = @(
     "kg.After 80 kg.Debug.Dump"
 ) -join ","
 
+$fail = @()
+function Has($Path, $Pattern) { [bool](Select-String -Path $Path -Pattern $Pattern -Quiet) }
+if (-not $OnlyWorld) {
 $srv = Start-Process $Exe -ArgumentList "`"$Proj`" `"$Map`?listen`" $Common -port=$Port -log=ChoreSmokeServer-$Tag.log" -PassThru -WindowStyle Hidden
 $cli = $null
 try {
@@ -76,8 +81,6 @@ foreach ($l in @($SrvLog, $CliLog)) {
 }
 
 # ---- checks ----
-$fail = @()
-function Has($Path, $Pattern) { [bool](Select-String -Path $Path -Pattern $Pattern -Quiet) }
 if (-not (Has $SrvLog "KG_CHORE_OPEN RingBell")) { $fail += "server never opened RingBell for the client" }
 if (-not (Has $CliLog "KG_CHORE_PANEL open RingBell")) { $fail += "client never showed the RingBell panel" }
 if (-not (Has $SrvLog "KG_CHORE_DONE RingBell .*visual=1")) { $fail += "RingBell was not completed as a visual chore" }
@@ -88,6 +91,7 @@ if (-not (Has $SrvLog "KG_CHORE_CLOSE BakeBread .*reason=Phase")) { $fail += "th
 if (-not (Has $CliLog "KG_CHORE_PANEL closed BakeBread reason=Phase")) { $fail += "the client panel did not close for the meeting" }
 if (-not (Has $SrvLog "KG_CHORE_OPEN BakeBread .*stage=[12]/3")) { $fail += "BakeBread did not resume at its saved stage" }
 if (Has $SrvLog "KG_CHORE_REJECT .*verdict=TooFast") { $fail += "auto-win tripped the timing floor (TooFast)" }
+}
 
 # ---- part 2: world chore (water run) across two processes ----
 if (-not $SkipWorld) {
@@ -111,18 +115,18 @@ if (-not $SkipWorld) {
     }
     foreach ($l in @($WSrvLog, $WCliLog)) {
         Write-Host "==== $l"
-        Select-String -Path $l -Pattern "KG_WORLDCHORE_(GIVE|STEP|DONE|CARRY|DROP|REVERT|NOTICE|ITEM_SEEN|CLIENT_STEP|SPOT fountain)|KG_WC_SMOKE" |
+        Select-String -Path $l -Pattern "KG_WORLDCHORE_(GIVE|STEP|DONE|CARRY|CARRYPOS|DROP|SPILL|REVERT|NOTICE|ITEM_SEEN|CLIENT_STEP|SPOT fountain)|KG_WC_SMOKE" |
             ForEach-Object { $_.Line -replace '^\[[^\]]*\]\[[^\]]*\]LogKillGodot: (Warning: )?', '' }
     }
     if (-not (Has $WSrvLog "KG_WORLDCHORE_GIVE WaterRun")) { $fail += "world: the host never gave the water run" }
-    foreach ($st in 1, 2, 3) {
-        if (-not (Has $WSrvLog "KG_WORLDCHORE_STEP WaterRun .*step=$st/3")) { $fail += "world: water run step $st/3 never validated by the server" }
+    foreach ($st in 1, 2) {
+        if (-not (Has $WSrvLog "KG_WORLDCHORE_STEP WaterRun .*step=$st/2")) { $fail += "world: water run step $st/2 never validated by the server" }
     }
     if (-not (Has $WSrvLog "KG_WORLDCHORE_DONE WaterRun .*fake=0 counted=1")) { $fail += "world: the water run was not completed / counted" }
     if (-not (Has $WSrvLog "KG_WORLDCHORE_CARRY Bucket by")) { $fail += "world: nobody carried the bucket (hold-E)" }
     if (-not (Has $WCliLog "KG_WORLDCHORE_ITEM_SEEN Bucket .*authority=0")) { $fail += "world: the bucket did not replicate to the client" }
-    if (-not (Has $WCliLog "KG_WC_SMOKE step 3, item fill=(0\.[4-9]|1\.00)")) { $fail += "world: the client never saw a full bucket (fill replication)" }
-    if (-not (Has $WCliLog "KG_WORLDCHORE_CLIENT_STEP WaterRun step=3/3 done=1 authority=0")) { $fail += "world: the client got no 'chore done' tick" }
+    if (-not (Has $WCliLog "KG_WC_SMOKE step 2, item fill=(0\.[4-9]|1\.00)")) { $fail += "world: the client never saw a full bucket (fill replication)" }
+    if (-not (Has $WCliLog "KG_WORLDCHORE_CLIENT_STEP WaterRun step=2/2 done=1 authority=0")) { $fail += "world: the client got no 'chore done' tick" }
     if (-not (Has $WCliLog "KG_WC_SMOKE_DONE WaterRun .*level=(0\.[3-9]|1\.00)")) { $fail += "world: the trough level did not replicate / chore not ticked on the client list" }
     if (Has $WCliLog "KG_WC_SMOKE_FAIL") { $fail += "world: client script failed: " + ((Select-String -Path $WCliLog -Pattern "KG_WC_SMOKE_FAIL (.*)" | Select-Object -First 1).Matches[0].Groups[1].Value) }
     foreach ($l in @($WSrvLog, $WCliLog)) {

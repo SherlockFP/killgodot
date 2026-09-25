@@ -150,7 +150,8 @@ bool FKGWorldChoreCatalogTest::RunTest(const FString& Parameters)
 		const FKGWorldChoreDef* D = Cat.FindChore(FName(Id));
 		if (TestNotNull(FString::Printf(TEXT("%s exists"), Id), D))
 		{
-			TestTrue(FString::Printf(TEXT("%s is multi-step"), Id), D->NumSteps() >= 2);
+			// Physical (a fetch and a use) but simple (user, 2026-09-25: "keep it simple but fun"): 2-3 steps.
+			TestTrue(FString::Printf(TEXT("%s has 2-3 simple steps"), Id), D->NumSteps() >= 2 && D->NumSteps() <= 3);
 			TestFalse(FString::Printf(TEXT("%s has a title"), Id), D->Title.IsEmpty());
 			for (int32 v = 0; v < D->NumVariants(); ++v)
 			{
@@ -164,7 +165,7 @@ bool FKGWorldChoreCatalogTest::RunTest(const FString& Parameters)
 	TestTrue(TEXT("Clock tower chore needs a climb"), Cat.FindChore(TEXT("BellAndClock"))->NeedsClimb());
 	TestTrue(TEXT("Lighthouse chore needs a climb"), Cat.FindChore(TEXT("LighthouseOil"))->NeedsClimb());
 	TestFalse(TEXT("Water run needs none"), Cat.FindChore(TEXT("WaterRun"))->NeedsClimb());
-	TestEqual(TEXT("Water run: three destinations (fountain / bakery / farm)"), Cat.FindChore(TEXT("WaterRun"))->NumVariants(), 3);
+	TestEqual(TEXT("Water run: three destinations (fountain / bakery / inn)"), Cat.FindChore(TEXT("WaterRun"))->NumVariants(), 3);
 	const FKGWorldItemDef* Crate = Cat.FindItem(TEXT("Crate"));
 	const FKGWorldItemDef* Bucket = Cat.FindItem(TEXT("Bucket"));
 	if (TestNotNull(TEXT("Crate item"), Crate) && TestNotNull(TEXT("Bucket item"), Bucket))
@@ -174,7 +175,7 @@ bool FKGWorldChoreCatalogTest::RunTest(const FString& Parameters)
 	}
 	const FKGWorldAnchor* Box = Cat.FindAnchor(TEXT("box_H14"));
 	TestTrue(TEXT("Letterboxes carry lore names"), Box && Box->Name == TEXT("MR THIMBLE"));
-	TestTrue(TEXT("Troughs can be poisoned"), Cat.FindAnchor(TEXT("farm_trough"))->Sabotage == TEXT("poison"));
+	TestTrue(TEXT("Troughs can be poisoned"), Cat.FindAnchor(TEXT("inn_trough"))->Sabotage == TEXT("poison"));
 	TestTrue(TEXT("Lamps can be snuffed"), Cat.FindAnchor(TEXT("lamp_3"))->Sabotage == TEXT("snuff"));
 	return true;
 }
@@ -292,42 +293,36 @@ bool FKGWorldChoreFlowTest::RunTest(const FString& Parameters)
 	TestTrue(TEXT("Progress starts at step 1"), P && P->Step == 0);
 
 	// Validation: E from across the square does nothing; E at a spot of no current step does nothing.
-	Server.StandAt(Body, TEXT("well"), 2000.0f);
-	TestFalse(TEXT("Too far away: refused"), WC->AuthInteract(Server.Anchor(TEXT("fountain_trough"))));
-	Server.StandAt(Body, TEXT("well"));
-	TestFalse(TEXT("The well is not the first step"), WC->AuthInteract(Server.Anchor(TEXT("well"))));
-
-	// 1. Take the empty bucket at the fountain trough (a bot: the bucket goes straight into its arms).
+	Server.StandAt(Body, TEXT("fountain_trough"), 2000.0f);
+	TestFalse(TEXT("Too far away: refused"), WC->AuthInteract(Server.Anchor(TEXT("well"))));
 	Server.StandAt(Body, TEXT("fountain_trough"));
-	TestTrue(TEXT("E at the trough starts the take"), WC->AuthInteract(Server.Anchor(TEXT("fountain_trough"))));
-	WC->DebugTick(0.3f);
-	TestEqual(TEXT("Not instant: still step 1"), static_cast<int32>(WC->FindProgress(WaterRun)->Step), 0);
-	WC->DebugTick(0.8f);
+	TestFalse(TEXT("The trough is not the first step"), WC->AuthInteract(Server.Anchor(TEXT("fountain_trough"))));
+
+	// 1. Crank a full bucket up the well (a bot: the bucket goes straight into its arms).
+	Server.StandAt(Body, TEXT("well"));
+	TestTrue(TEXT("E at the well starts the crank"), WC->AuthInteract(Server.Anchor(TEXT("well"))));
+	TestEqual(TEXT("The work ring shows it"), WC->GetDwell().Kind, EKGDwell::Work);
+	WC->DebugTick(1.5f);
+	TestEqual(TEXT("Cranking takes time: still step 1"), static_cast<int32>(WC->FindProgress(WaterRun)->Step), 0);
+	WC->DebugTick(1.8f);
 	P = WC->FindProgress(WaterRun);
-	TestEqual(TEXT("Took the bucket: step 2"), static_cast<int32>(P->Step), 1);
+	TestEqual(TEXT("Cranked: step 2"), static_cast<int32>(P->Step), 1);
 	AKGChoreItem* Bucket = P->Item;
 	if (!TestNotNull(TEXT("A real bucket item"), Bucket))
 	{
 		return false;
 	}
 	TestTrue(TEXT("...carried by the bot"), Bucket->IsCarriedBy(Body));
-	TestEqual(TEXT("...empty"), Bucket->GetFill(), 0.0f);
+	TestEqual(TEXT("...full to the brim"), Bucket->GetFill(), 1.0f);
 
-	// 2. Carrying it to the fountain does not count: it has to be cranked full at the well first.
-	WC->DebugTick(3.0f);
-	TestEqual(TEXT("Still at the crank step"), static_cast<int32>(WC->FindProgress(WaterRun)->Step), 1);
-	Server.StandAt(Body, TEXT("well"));
+	// 2. Standing at the well with it does nothing: it goes into the fountain trough.
 	WC->DebugTick(2.0f);
-	TestEqual(TEXT("Cranking takes time"), static_cast<int32>(WC->FindProgress(WaterRun)->Step), 1);
-	TestEqual(TEXT("The work ring shows it"), WC->GetDwell().Kind, EKGDwell::Bring);
-	WC->DebugTick(3.0f);
-	TestEqual(TEXT("Cranked: step 3"), static_cast<int32>(WC->FindProgress(WaterRun)->Step), 2);
-	TestEqual(TEXT("The bucket is full"), Bucket->GetFill(), 1.0f);
-
-	// 3. Pour at the fountain trough.
+	TestEqual(TEXT("Still at the pour step"), static_cast<int32>(WC->FindProgress(WaterRun)->Step), 1);
 	const float PrepBefore = Server.GS()->Preparation;
 	Server.StandAt(Body, TEXT("fountain_trough"));
-	WC->DebugTick(2.5f);
+	WC->DebugTick(0.7f);
+	TestEqual(TEXT("Pouring takes a moment"), WC->GetDwell().Kind, EKGDwell::Bring);
+	WC->DebugTick(1.3f);
 	TestTrue(TEXT("Water run done: ticked off the list"), Done(PS, WaterRun));
 	TestNull(TEXT("Progress cleared"), WC->FindProgress(WaterRun));
 	TestTrue(TEXT("Preparation grew"), Server.GS()->Preparation > PrepBefore);
@@ -335,21 +330,23 @@ bool FKGWorldChoreFlowTest::RunTest(const FString& Parameters)
 	TestTrue(TEXT("The trough visibly holds water"), Trough && Trough->Level > 0.9f);
 	TestEqual(TEXT("The bucket was emptied into it"), Bucket->GetFill(), 0.0f);
 
-	// Spill: a new run, the bucket is lost (thrown in the sea) after cranking -> back to the take step.
+	// Spill: a new run; most of the water sloshes out on the way -> back to the well for a refill.
 	TestTrue(TEXT("Again"), WC->AuthGive(WaterRun, 0));
-	Server.StandAt(Body, TEXT("fountain_trough"));
-	WC->AuthInteract(Server.Anchor(TEXT("fountain_trough")));
-	WC->DebugTick(1.0f);
 	Server.StandAt(Body, TEXT("well"));
-	WC->DebugTick(5.0f);
-	TestEqual(TEXT("Cranked again"), static_cast<int32>(WC->FindProgress(WaterRun)->Step), 2);
+	WC->AuthInteract(Server.Anchor(TEXT("well")));
+	WC->DebugTick(3.3f);
+	TestEqual(TEXT("Cranked again"), static_cast<int32>(WC->FindProgress(WaterRun)->Step), 1);
 	AKGChoreItem* Second = WC->FindProgress(WaterRun)->Item;
 	Second->AuthSetFill(0.1f);   // spilled most of it (ran / tipped)
 	WC->DebugTick(0.1f);
-	TestEqual(TEXT("An empty bucket goes back to the well"), static_cast<int32>(WC->FindProgress(WaterRun)->Step), 1);
-	Second->AuthConsume();
+	TestEqual(TEXT("An empty bucket goes back to the well"), static_cast<int32>(WC->FindProgress(WaterRun)->Step), 0);
+	TestTrue(TEXT("Refill at the well"), WC->AuthInteract(Server.Anchor(TEXT("well"))));
+	WC->DebugTick(3.3f);
+	AKGChoreItem* Third = WC->FindProgress(WaterRun)->Item;
+	TestTrue(TEXT("...a fresh, full bucket"), IsValid(Third) && Third->GetFill() > 0.99f);
+	Third->AuthConsume();   // lost (thrown in the sea)
 	WC->DebugTick(0.1f);
-	TestEqual(TEXT("A lost bucket goes back to the take"), static_cast<int32>(WC->FindProgress(WaterRun)->Step), 0);
+	TestEqual(TEXT("A lost bucket goes back to the well too"), static_cast<int32>(WC->FindProgress(WaterRun)->Step), 0);
 	return true;
 }
 
@@ -383,18 +380,17 @@ bool FKGWorldChoreSocialTest::RunTest(const FString& Parameters)
 		return false;
 	}
 	const FName WaterRun(TEXT("WaterRun"));
-	const int32 Farm = Server.Anchor(TEXT("farm_trough"));
+	const int32 Farm = Server.Anchor(TEXT("inn_trough"));
 	AKGWorldChoreDirector* Dir = AKGWorldChoreDirector::Get(Server.World);
 
-	// Fake: the Impatient does the farm water run for real-looking results; nothing is counted.
+	// Fake: the Impatient does the inn water run for real-looking results; nothing is counted.
 	Fake->AuthGive(WaterRun, 2);
 	Server.StandAt(KillerBody, TEXT("well"));
-	TestTrue(TEXT("Fake takes a bucket at the well"), Fake->AuthInteract(Server.Anchor(TEXT("well"))));
-	Fake->DebugTick(1.0f);
-	Fake->DebugTick(5.0f);
-	TestEqual(TEXT("Fake cranked it full like anyone"), static_cast<int32>(Fake->FindProgress(WaterRun)->Step), 2);
+	TestTrue(TEXT("Fake cranks a bucket at the well"), Fake->AuthInteract(Server.Anchor(TEXT("well"))));
+	Fake->DebugTick(3.3f);
+	TestEqual(TEXT("Fake cranked it full like anyone"), static_cast<int32>(Fake->FindProgress(WaterRun)->Step), 1);
 	const float Prep0 = Server.GS()->Preparation;
-	Server.StandAt(KillerBody, TEXT("farm_trough"));
+	Server.StandAt(KillerBody, TEXT("inn_trough"));
 	Fake->DebugTick(2.5f);
 	TestTrue(TEXT("Fake ticks their own list"), Done(Server.Player(0), WaterRun));
 	TestEqual(TEXT("...but fills no preparation"), Server.GS()->Preparation, Prep0);
@@ -411,9 +407,8 @@ bool FKGWorldChoreSocialTest::RunTest(const FString& Parameters)
 	Real->AuthGive(WaterRun, 2);
 	Server.StandAt(VillagerBody, TEXT("well"));
 	Real->AuthInteract(Server.Anchor(TEXT("well")));
-	Real->DebugTick(1.0f);
-	Real->DebugTick(5.0f);
-	Server.StandAt(VillagerBody, TEXT("farm_trough"));
+	Real->DebugTick(3.3f);
+	Server.StandAt(VillagerBody, TEXT("inn_trough"));
 	Real->DebugTick(3.0f);
 	TestFalse(TEXT("No pouring into poison"), Done(Server.Player(1), WaterRun));
 	TestTrue(TEXT("E dumps the poisoned water"), Real->AuthInteract(Farm));
@@ -444,6 +439,57 @@ bool FKGWorldChoreSocialTest::RunTest(const FString& Parameters)
 		TestTrue(TEXT("Grabbing someone's bucket snatches it"), Pail->AuthAddCarrier(KillerBody) == VillagerBody);
 		TestTrue(TEXT("...the thief holds it now"), Pail->IsCarriedBy(KillerBody) && !Pail->IsCarriedBy(VillagerBody));
 	}
+	return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FKGWorldChoreThrowTest, "KillGodot.WorldChores.ChopAndThrowIn",
+                                 EAutomationTestFlags_ApplicationContextMask | EAutomationTestFlags::ProductFilter)
+
+bool FKGWorldChoreThrowTest::RunTest(const FString& Parameters)
+{
+	using namespace KGWorldChoreTests;
+	FServerWorld Server;
+	if (!TestTrue(TEXT("Headless server world with world chore spots"), Server.Create()))
+	{
+		return false;
+	}
+	Server.Run(TEXT("Bot.Fill 4"));
+	Server.Run(TEXT("Match.Phase Day"));
+	const FKGRoleInfo* Town = FirstRole(EKGAlignment::Town);
+	Server.Run(FString::Printf(TEXT("Me.Role %s #0"), *Town->RoleId.ToString()));
+	AKGCharacter* Body = Server.Body(0);
+	UKGWorldChoreComponent* WC = UKGWorldChoreComponent::FindFor(Body);
+	if (!TestNotNull(TEXT("World chore component"), WC))
+	{
+		return false;
+	}
+	const FName Firewood(TEXT("Firewood"));
+	WC->AuthGive(Firewood);
+	const int32 Block = Server.Anchor(TEXT("chop_block"));
+	Server.StandAt(Body, TEXT("chop_block"));
+	// Three swings, one E each; the split logs pile up on the block.
+	for (int32 Swing = 1; Swing <= 3; ++Swing)
+	{
+		TestTrue(FString::Printf(TEXT("Swing %d starts"), Swing), WC->AuthInteract(Block));
+		WC->DebugTick(2.4f);
+	}
+	TestEqual(TEXT("Three logs on the block"), static_cast<int32>(AKGWorldChoreDirector::Get(Server.World)->GetSpot(Block)->Count), 3);
+	const FKGWorldProgress* P = WC->FindProgress(Firewood);
+	AKGChoreItem* Bundle = P ? P->Item.Get() : nullptr;
+	if (!TestNotNull(TEXT("The bundle popped out after the third log"), Bundle))
+	{
+		return false;
+	}
+	TestEqual(TEXT("Now: carry it to the inn"), static_cast<int32>(P->Step), 1);
+	// Thrown from four metres: it lands in the woodbox, the chore counts, and the thrower hears about it.
+	Bundle->AuthDetach(FVector::ZeroVector);
+	const FVector Box = Server.Sub()->SpotLocation(Server.Anchor(TEXT("forge_woodbox")));
+	Server.StandAt(Body, TEXT("forge_woodbox"), 400.0f);
+	Bundle->SetActorLocation(Box + FVector(0.0f, 0.0f, 30.0f), false, nullptr, ETeleportType::TeleportPhysics);
+	WC->DebugTick(2.0f);
+	TestTrue(TEXT("Firewood done: thrown into the forge woodbox"), Done(Server.Player(0), Firewood));
+	TestTrue(TEXT("\"Nice throw!\""), WC->GetNotice().Contains(TEXT("Nice throw")));
+	TestEqual(TEXT("The woodbox shows the bundle"), static_cast<int32>(AKGWorldChoreDirector::Get(Server.World)->GetSpot(Server.Anchor(TEXT("forge_woodbox")))->Count), 1);
 	return true;
 }
 

@@ -137,6 +137,8 @@ public:
 	enum class EBot : uint8 { Idle, Busy, Failed };
 	/** Walks and works Chore for a bot. Busy while it has something to do; Failed = give up on this chore. */
 	EBot BotDrive(AAIController* AI, FName Chore, float DeltaSeconds);
+	/** Bots: put down whatever chore item is hugged (night, meeting, hunting, giving a chore up). */
+	void BotDropCarried(const TCHAR* Why);
 
 	// ---- dev (kg.WorldChore.*; clients need kg.Dev.AllowClients 1 on the host) ----
 	UFUNCTION(Server, Reliable)
@@ -185,6 +187,8 @@ private:
 	void Say(const FString& Text);
 	int32 TargetSlot(const FKGWorldChoreDef& Def, const FKGWorldProgress& P, int32 AnchorIndex) const;
 	void TickAutopilot(float DeltaTime);
+	/** Bots: where to walk for a spot (its stand point, or the navmesh next to it on our side). */
+	FVector BotWalkGoal(int32 AnchorIndex) const;
 
 	uint16 NextTouch = 1;
 	float NoticeCooldown = 0.0f;
@@ -201,9 +205,19 @@ private:
 	float BotProgressClock = 0.0f;
 	FVector BotProgressFrom = FVector::ZeroVector;
 	int32 BotFails = 0;
+	int32 BotSnags = 0;
+	int32 BotGoalAnchor = INDEX_NONE;
+	FVector BotGoalCached = FVector::ZeroVector;
 	float BotElapsed = 0.0f;
 	FVector BotGoal = FVector::ZeroVector;
 
-	// Client autopilot (dev)
+	// Client autopilot (dev): follows the server's navmesh path; steps sideways around things the navmesh can't see
+	// (a wall lantern at head height is above the nav agent but inside the 180 cm capsule).
 	TArray<FVector> AutoPath;
+	FVector AutoFace = FVector::ZeroVector;
+	float AutoBestDist = TNumericLimits<float>::Max();
+	float AutoStuckClock = 0.0f;
+	float AutoSideClock = 0.0f;
+	float AutoSideSign = 1.0f;
+	int32 AutoUnstucks = 0;
 };

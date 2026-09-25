@@ -18,6 +18,7 @@ Get-ChildItem $Raw -Filter "WC_*.png" -ErrorAction SilentlyContinue | Remove-Ite
 $Log = Join-Path $Root "Saved\Logs\kg_worldchore_capture.log"
 $env:KG_WC_SHOTS = $Shots
 $env:KG_WC_NOSHOTS = if ($NoShots) { "1" } else { "0" }
+$env:KG_WC_RESOLVED = Join-Path $Root "Tools\Level\morrowmere_world_chores.resolved.json"
 # The "py" console command needs a path without spaces.
 $Script = Join-Path $env:TEMP "kg_worldchore_capture.py"
 Copy-Item (Join-Path $Root "Tools\Unreal\kg_worldchore_capture.py") $Script -Force

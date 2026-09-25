@@ -39,11 +39,29 @@ def glow_windows():
     C.stats["glow_windows"] = n
 
 
+def house_signs():
+    """SPRINT-022 per-house detail: the homes / shells whose details carry a trade sign (Tools/Level/kg_archetypes_v2
+    .details) hang it beside the door when the front faces a street."""
+    n = 0
+    for f in C.buildings():
+        sp = K.spec_of(f)
+        sign = ((sp or {}).get("details") or {}).get("sign")
+        if not sign or f.kind not in ("home", "infill") or "front" not in K.street_sides(f):
+            continue
+        t = (f.door_t if f.door else 0.0) + (150.0 if f.cells("front") >= 3 else 110.0)
+        if abs(t) > f.half("front") - 40.0:
+            t = -t
+        K.hang_sign(sign, f, "front", t, z_above=265.0)
+        n += 1
+    C.stats["house_signs"] = n
+
+
 def dress():
     K.reset()
-    try:
-        glow_windows()
-    except Exception:
-        import traceback
-        C.stats.setdefault("errors", []).append(f"windows: {traceback.format_exc()[-900:]}")
+    for name, fn in (("windows", glow_windows), ("signs", house_signs)):
+        try:
+            fn()
+        except Exception:
+            import traceback
+            C.stats.setdefault("errors", []).append(f"{name}: {traceback.format_exc()[-900:]}")
     K.flush()

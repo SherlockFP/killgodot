@@ -18,6 +18,7 @@ windowed build with the user present, clears it.
 | 10 | HUD overhaul | Hit direction, low-HP pulse, stamina TIRED state | 2026-09-24 |
 | 11 | Interiors (stairs, rooms, 71 seats, 16 chests) | Tight upstairs walkway in 4 m houses, sitting poses | 2026-09-24 |
 | 12 | Digging + underground | Shovel in first/third person (own FP rig), dig feel + dust, grave noise cue, well ladder down/up, mausoleum door, the underground map layer + toasts, underground light/fog in PIE | 2026-09-25 |
+| 13 | World chores (SPRINT-016, 10 physical chores) | Hold-E carry feel of bucket/crate/sacks (slow walk, spill when sprinting), two players on the fish crate, shove knocks items out, compass/minimap waypoints + work ring, spot payoffs (trough level, lamps, bell, lighthouse glow, chimney smoke), "Nice throw!", poison/snuff sabotage, ladder climbs for the clock/bell/lighthouse chores | 2026-09-25 |
 
 Headless coverage that exists: `Tools/Gauntlet/run_invariants.ps1` (build, tests, v2 verify, chat/emote/fish/chore
 smokes, whole-match bot smoke).

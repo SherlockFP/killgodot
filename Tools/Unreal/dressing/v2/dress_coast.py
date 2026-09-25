@@ -40,7 +40,7 @@ def spot(x, y, r, reach=300.0, flat=50.0, **kw):
 def beam():
     lh = C.building("lighthouse")
     x, y = lh.x, lh.y
-    z = lh.z + 4 * C.FLOOR_H + 175.0
+    z = lh.z + 5 * C.FLOOR_H + 220.0          # SPRINT-022: inside the new lamp room (LampRoom on the gallery at 15.5 m)
     hub = C.mover(C.E + "Sphere", x, y, z, yaw=0.0, scale=0.45, spin=(0.0, 22.0, 0.0), sub="Lighthouse",
                   material="/Game/KillGodot/Materials/M_KG_JapanGlow")
     L, rad = 3400.0, 260.0

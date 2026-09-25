@@ -15,6 +15,16 @@
 > - Menüde "Morrowmere: Amphitheatre Cove" olarak seçilebilir; v1 varsayılan ve yedek olarak kaldı.
 >
 > Editör açılınca kontrol edilecekler aşağıda (§4).
+>
+> **Cila turu (2026-09-25, §7):**
+> - v2 artık varsayılan harita ("Morrowmere"); v1 "Morrowmere (Classic)" olarak seçilebilir.
+> - Liman havuzu sakin: dalga ×0,25, küçük dalgacıklar ve yeşil ton. Yüzme ve şamandıra fiziği de aynı maskeyi kullanıyor.
+> - Yeni Blender paketi `KG_DressTerrace`: taş korkuluk, granit rıhtım duvarı ve suya inen merdiven, taş kemer köprü, mendirek feneri, 4 saat kadranı.
+> - Ayrıca 84 çatı penceresi ve meydanda bir Maypole.
+> - Botlar haritayı okuyor: 20 bot tüm bölgeleri geziyor ve toplantı için en geç 33 sn'de meydanda.
+> - Instanced prop malzeme uyarıları sıfırlandı.
+
+![polish](v2_Polish_Renders.png)
 
 ![renders](v2_Build_Renders.png)
 
@@ -139,7 +149,8 @@ python Tools/Level/verify_v2_build.py                      # numeric checks -> S
 - 141 lights.
 - 26 KGDoors, 90 seats, 20 chests, 3 ladders.
 
-**Menu:** `KGMenu::GetMaps()` gets a second entry, "Morrowmere: Amphitheatre Cove", pointing at `/Game/KillGodot/Maps/L_Morrowmere_v2`.
+**Menu (superseded 2026-09-25, see §7.4):** v2 is now entry 0, "Morrowmere" (the default); v1 is "Morrowmere (Classic)".
+Originally `KGMenu::GetMaps()` got a second entry, "Morrowmere: Amphitheatre Cove", pointing at `/Game/KillGodot/Maps/L_Morrowmere_v2`.
 - L_Morrowmere stays first, as the default and the fallback.
 - This is code, not data, because the list is hard-coded in `KGMenuActions.cpp`; there is no map config.
 - Making v2 the default means swapping the two entries.
@@ -186,7 +197,7 @@ Two problems were found in the images and fixed during the build: the outer terr
    - the market stalls, pavilion TeaHouse, graveyard GateArch and WoodBridges (arch height versus the bank);
    - the waterwheel paddles, which spin in PIE only.
    - Each is one yaw or z constant in `kg_build_village_v2.py`.
-4. **Basin calm mask:** the ocean waves run full height inside the basin. The plan scales them ×0.25; that needs the M_KG_Ocean material and FKGWaves (C++).
+4. **Basin calm mask: done (§7.1).** Before the fix, the ocean waves run full height inside the basin. The plan scales them ×0.25; that needs the M_KG_Ocean material and FKGWaves (C++).
 5. **Brook water:** `M_KG_PondWater` reads pale, almost like a path, from a distance. It needs a darker, flowing MI.
 6. **Roof tints:** the kit's orange tile texture limits what a multiply can do, so "slate-blue" Crown roofs come out dark brown. Real slate needs a desaturating MI or a texture swap.
 7. **Not yet built:**
@@ -197,10 +208,12 @@ Two problems were found in the images and fixed during the build: the outer terr
    - the Belvedere telescope and benches;
    - cypress rows and lavender;
    - the Balustrade, RetainingWall, QuayWall, StoneArchBridge and HarbourLight props from §11.4. The kit fallbacks are used instead.
-8. **Bots:**
+8. **Bots: done (§7.3).** Before the fix:
    - `KGBotController` wanders around the v1 plaza constant (0, −8 m, r 17 m). In v2 that falls on the Town Hall / square area, so it roughly works, but it should read the level, for example the `KG_Gallows` marker or AKGMapInfo.
    - A 20-bot meeting test on v2 is still to be done.
-9. **Dressing:** done (§5). Still open: dormers, clock faces, the §11.4 props and the basin calm mask.
+9. **Dressing:** done (§5).
+   - Dormers, clock faces, the calm mask and most §11.4 props were added on 2026-09-25 (§7).
+   - Still open: see §7.7.
 10. **Lighting:** the level uses the v1 golden-hour setup. The capture tour runs under GameModeBase; the game's day/night phases drive the sun in real matches.
 
 ## 5. Dressing (plan §11.3): done 2026-09-24
@@ -257,3 +270,114 @@ Keep `dress_*.py` and `kg_dress_common.py` working on v1 until every zone has be
 
 **Edited**
 - `Source/KillGodot/UI/Menu/KGMenuActions.cpp`: the second map entry, the only C++ change.
+
+## 7. Polish pass: done 2026-09-25
+
+All work was headless: Blender CLI, commandlets, the offscreen `-game` capture and `-nullrhi` sessions.
+- **Rebuild:** `kg_build_v2_all.ps1` now has 8 steps (7 = material check, 8 = capture) and takes about 8 min.
+- **Checks:**
+  - `verify_v2_build.py`: **PASS**.
+  - Navmesh: **79/79** targets reached.
+  - `run_gates.ps1`: **PASS** (build + 38 tests).
+  - Chat / emote / fish / chore smokes: **PASS**.
+  - v1 `L_Morrowmere` still loads in `-game`, and its bots use its navmesh (30 anchors).
+
+### 7.1 Calm harbour basin
+- **One source of truth.** `AKGMapInfo` has new Water properties: `bCalmWater`, `CalmCentre`, `CalmRadius`, `CalmFade`, `CalmWaveScale`, `CalmRipple`, `CalmTint`, `CalmTintAmount`.
+  - At register and at BeginPlay it pushes them into `FKGWaves::Calm()`, which drives swimming, buoyancy and the underwater check.
+  - It pushes the same values into the new `MPC_KG_Water` (vectors `CalmZone`, `CalmParams`, `CalmTint`), which `M_KG_Ocean` reads.
+- **Same maths in C++ and in the material.** `KGWaves.h` and `kg_make_ocean.py` use identical formulas:
+  - calm weight w: a smoothstep over `Fade` inside `Radius`;
+  - height: swell × lerp(1, 0.25, w), plus w × 2.5 cm of two-train ripples.
+- **Material only:**
+  - ripple normals broken up by a slow gust mask;
+  - a 45 % teal tint;
+  - less crest foam and crest colour.
+- **Values:**
+  - v2: centre = `basin.center`, radius 34 m (the inner toe of the mole), fade 10 m.
+  - v1 leaves `bCalmWater` off, and the MPC defaults to radius 0, so the open sea is unchanged.
+- **Rebuild:** `kg_make_ocean.py rebuild` rebuilds the graph as a commandlet. Never run it in a live editor.
+
+### 7.2 Plan §11.4 props: the `KG_DressTerrace` pack
+- **Pack:** `Tools/Blender/kg_make_dress_terrace.py` writes `Art/Packed/KG_DressTerrace_Clean.glb` + `.json`.
+  - Previews: `Art/Concept/DressTerrace_preview*.png`.
+  - Style: vertex colours, Quaternius look, stone matched to the fountain.
+- **Import:** build step 2 runs `kg_import_dress_pack.py KG_DressTerrace_Clean`. The pack name can now also be passed as the commandlet argument.
+- **Swapped in at the source** in `prep_v2_placements.py` (`DT:` prefix). The kit fallback returns if the manifest is missing or `KG_NO_TERRACE=1`.
+  - 73 `Balustrade_2m` + 32 `Balustrade_Post` on the harbour walls (the sea window over the Grand Stair) and the crown walls (the Belvedere).
+  - 14 `QuayWall_4m(_Ring)` sections on 4 m chords of the quay edge. The sea face sits 0.4 m out, so the terrain step stays hidden.
+  - 2 `QuaySteps` flights down to the water.
+  - `StoneArchBridge_7m` for the Old Stone Bridge. Its hidden flat deck box is kept for nav.
+- **Builder** (`kg_build_village_v2.py`):
+  - `HarbourLight` at the mole tip, with a green 14 cd light;
+  - 4 `ClockFace` dials on the clock tower's third storey;
+  - 84 kit `Roof_Dormer_RoundTile` dormers on exposed 6 m-span roofs (upper town, heart, crown), fitted from the kit geometry;
+  - the `KG_BotHub` TargetPoint at the fountain;
+  - the calm-water setup.
+- **Dressing:**
+  - The ribboned Maypole (DressVillage pack) stands in the square's south-west pocket by the sea window.
+  - Towers no longer get flower boxes above the first floor, so the dials stay clear.
+  - Knee-high shrubs are walk-through. As colliders they made navmesh pockets between garden fences.
+
+### 7.3 Bots read the level (`AKGBotController`)
+- **Anchors:**
+  - Sources: `KG_BotHub`, the task stations, PlayerStarts, optional `KG_BotSpot` tags, and the street / place / district regions of `AKGMapInfo`.
+  - Each is projected to the navmesh and kept only if a full path to the hub exists. v2 keeps 81 of 98.
+- **Roaming:** navmesh moves; 65 % of trips go to an anchor within 45 m, the rest anywhere. Stairs are climbed via their hidden ramps.
+- **Chores:** the nearest open chore, with per-bot jitter. Chores a bot cannot reach are skipped for a while.
+- **Meeting run-up:**
+  - In the last 30 s of a day that ends in a meeting, or with `kg.BotGather 1`, every bot walks to a loose 4-9 m ring round the fountain.
+  - The gallows meeting ring now opens toward `KG_BotHub`. v1 still uses +Y.
+- **Stuck handling:**
+  - A bot is stuck after less than 0.8 m of progress in 4 s. It opens a door ahead if there is one; otherwise it side-steps with a hop and repaths.
+  - After 4 stuck events in the same place, the dev bot is put back on the nearest anchor. This is counted as a rescue.
+  - Path failures are throttled. A swimming bot heads for the nearest low navmesh.
+- **Counters:** `kg.BotStats [reset]`.
+- **Levels without a navmesh** keep the old plaza wander.
+
+**Soak test:** `powershell -File Tools/Unreal/kg_bot_test_v2.ps1` runs 20 bots in a `-nullrhi` game and writes `Saved/KG_V2_BotTest.json`.
+
+| Phase | Result |
+|---|---|
+| Roam, 150 s before the match | All 8 districts plus the outskirts visited. Per bot (min / median / max): 3 / 5 / 9 districts, 193 / 373 / 428 m walked. 143 anchor arrivals. 7 stuck events, all self-recovered. 0 path failures. No bot stood still for 15 s or more. Every terrace level from 2 to 15 m was reached. |
+| Meeting run-up to the fountain (`kg.BotGather 1`) | **20/20 arrived** within 10 m of the hub. Start distance: median 49 m, max 104 m. Arrival: median **21.3 s**, p90 32.9 s, max **33.4 s**. 1 rescue. |
+| Meeting ring (`kg.Match.Phase Meeting`) | 20/20 bodies on the square, within 12 m of the gallows, at terrace height. |
+| Day chores, 240 s, timer frozen | 44 chores done at 21 distinct stations. Average 26.9 s from pick to done, walking included. 13 stuck events, 3 path failures. The Impatient killed 10 villagers during this phase. |
+| Navmesh paths | Hub + 20 starts to all 22 chores: **462/462 full paths**. Tower chores are checked to the tower door, because the ladder is not navmesh. Longest: FuelLighthouse, 139 m from the hub (about 23 s). |
+
+The first soak run, before the door and unstick fixes, logged 107 stuck events and 7,197 path failures, mostly bots against closed house doors. The final run logged 24 stuck events and no pathfinder spam.
+
+### 7.4 v2 is the default map
+- **Menu:** `KGMenu::GetMaps()` index 0 is now v2, "Morrowmere". Quick-play, `kg.Session host` and the lobby fall back to it. v1 stays selectable as "Morrowmere (Classic)".
+- **Config:** `EditorStartupMap` is v2. `GameDefaultMap` stays `L_MainMenu`, the front end.
+- **Dev tools:**
+  - The fake session rows in `KGMenuDebug` point at v2.
+  - `autoshot.ps1 -Map` defaults to v2.
+  - The HUD map card strips `_vN`, so v2 shows as "MORROWMERE".
+
+### 7.5 Instanced props in packaged builds
+- **The problem:** the kit materials are children of Unreal's glTF material (`/InterchangeAssets/gltf/M_Default` via `MI_Default_*`), which lacks the instanced-mesh usage flag. HISM props therefore drew the default checker in `-game` and in cooked builds.
+- **The fix:** `Tools/Unreal/kg_fix_gltf_materials.py`, a commandlet run as build step 7:
+  - it copies the engine base material and the intermediate MIs to `/Game/KillGodot/Materials/glTF/`;
+  - it sets bUsedWithInstancedStaticMeshes and bUsedWithNanite on the copy;
+  - it reparents the 62 project MIs onto the copy;
+  - it flags the project base materials the map needs.
+- **Checked:** every material on the map's 383 (H)ISM components (35 materials, 29,455 instances) and on its Nanite meshes (61) has a ready base. `Saved/KG_V2_MaterialCheck.json`: **PASS**.
+- **In the render tour:** "missing usage flag" warnings went from 17 materials to **0**.
+- **Not done:** a full cook was not run.
+
+### 7.6 Renders
+- **Contact sheet:** `Docs/Level/v2_Polish_Renders.png`, with before/after pairs: basin ×3, quay steps, Grand Stair balustrade, bridge, harbour light, clock, dormers, Maypole, aerials.
+- **Files:** the new shots are in `Saved/Screenshots/V2/pol_*.png`; the before set is in `Saved/Screenshots/V2_before/`.
+
+### 7.7 Still open
+- **§11.4 props not built:** RetainingWall_2m (the kit walls remain), Waterwheel, GateArch_Ope.
+- **Missing details:** the bell, the Belvedere telescope, the lighthouse gallery. The clock hands are static.
+- **Grand Stair flights:** they keep their kit cheek walls. A balustrade on a slope would need a raked mesh.
+- **Dormers:** the kit mesh is fitted to the 6 m roof profile only, so 4 m roofs have none.
+- **Bots:**
+  - A wedged bot still needs about 1 rescue per run.
+  - The Impatient kill freely by day in soaks, so the chore counts vary from run to run.
+- **Not verified:**
+  - a full cook of the map;
+  - an in-editor look at the navmesh over the new quay steps and bridge.

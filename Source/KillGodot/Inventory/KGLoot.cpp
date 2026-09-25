@@ -49,6 +49,32 @@ namespace KGLootPrivate
 		Tables.Add(TEXT("Fishing"), T(1, 1, 0, {E(Ids::OldBoot, 1, 1, 40), E(Ids::MessageBottle, 1, 1, 20),
 		                                       E(Ids::Key, 1, 1, 14), E(Ids::CoinPouch, 1, 1, 12), E(Ids::Bone, 1, 1, 6),
 		                                       E(Ids::Pearl, 1, 1, 6), E(Ids::TreasureMap, 1, 1, 2)}));
+		// KG_DIG: dig spots, graves, buried chests, the catacombs and the well cellar (Source/KillGodot/Dig).
+		// Intermediate dig stages roll *Shallow, the last stage the spot's own table (FKGDigRules::LootTable).
+		Tables.Add(TEXT("DigShallow"), T(1, 1, 65, {E(Ids::Coin, 1, 2, 40), E(Ids::Bone, 1, 1, 20), E(Ids::OldBoot, 1, 1, 12),
+		                                           E(Ids::MapScrap, 1, 1, 6), E(Ids::Skull, 1, 1, 4)}));
+		Tables.Add(TEXT("DigMound"), T(1, 2, 10, {E(Ids::Coin, 2, 8, 40), E(Ids::Bone, 1, 2, 18), E(Ids::OldRing, 1, 1, 8),
+		                                         E(Ids::Key, 1, 1, 6), E(Ids::MapScrap, 1, 1, 10), E(Ids::CoinPouch, 1, 1, 6),
+		                                         E(Ids::OldBoot, 1, 1, 10), E(Ids::MournerToken, 1, 1, 1)}));
+		Tables.Add(TEXT("DigX"), T(2, 3, 0, {E(Ids::Coin, 5, 15, 35), E(Ids::CoinPouch, 1, 1, 15), E(Ids::OldRing, 1, 1, 12),
+		                                    E(Ids::Pearl, 1, 2, 10), E(Ids::MapScrap, 1, 1, 12), E(Ids::CryptKey, 1, 1, 6),
+		                                    E(Ids::MournerToken, 1, 1, 3), E(Ids::TreasureMap, 1, 1, 2)}));
+		Tables.Add(TEXT("DigGlint"), T(1, 1, 0, {E(Ids::Coin, 3, 10, 50), E(Ids::OldRing, 1, 1, 20), E(Ids::Pearl, 1, 1, 15),
+		                                        E(Ids::CoinPouch, 1, 1, 10), E(Ids::MournerToken, 1, 1, 2)}));
+		Tables.Add(TEXT("DigGraveShallow"), T(1, 1, 40, {E(Ids::Bone, 1, 2, 50), E(Ids::Skull, 1, 1, 15), E(Ids::Coin, 1, 3, 20),
+		                                                E(Ids::Candle, 1, 1, 8)}));
+		Tables.Add(TEXT("DigGrave"), T(2, 3, 5, {E(Ids::Bone, 1, 3, 30), E(Ids::Skull, 1, 1, 15), E(Ids::OldRing, 1, 1, 15),
+		                                        E(Ids::Coin, 2, 10, 15), E(Ids::CryptKey, 1, 1, 8), E(Ids::MapScrap, 1, 1, 7),
+		                                        E(Ids::MournerToken, 1, 1, 3), E(Ids::TreasureMap, 1, 1, 2)}));
+		Tables.Add(TEXT("BuriedChest"), T(3, 5, 0, {E(Ids::Coin, 15, 40, 40), E(Ids::CoinPouch, 1, 2, 15), E(Ids::Pearl, 1, 3, 15),
+		                                           E(Ids::OldRing, 1, 2, 12), E(Ids::MournerToken, 1, 1, 8), E(Ids::CryptKey, 1, 1, 4)}));
+		Tables.Add(TEXT("CryptUrn"), T(1, 1, 35, {E(Ids::Bone, 1, 2, 30), E(Ids::Skull, 1, 1, 15), E(Ids::Coin, 1, 4, 25),
+		                                         E(Ids::OldRing, 1, 1, 8), E(Ids::Candle, 1, 1, 10), E(Ids::MapScrap, 1, 1, 6)}));
+		Tables.Add(TEXT("CryptVault"), T(4, 6, 0, {E(Ids::Coin, 20, 50, 35), E(Ids::Pearl, 1, 3, 15), E(Ids::OldRing, 1, 2, 12),
+		                                          E(Ids::MournerToken, 1, 1, 10), E(Ids::CoinPouch, 1, 2, 15), E(Ids::TreasureMap, 1, 1, 8)}));
+		Tables.Add(TEXT("Cellar"), T(2, 4, 0, {E(Ids::Apple, 1, 3, 20), E(Ids::Bread, 1, 1, 12), E(Ids::Rope, 1, 1, 10),
+		                                      E(Ids::Candle, 1, 2, 12), E(Ids::Coin, 3, 10, 25), E(Ids::Key, 1, 1, 6),
+		                                      E(Ids::MapScrap, 1, 1, 8), E(Ids::Shovel, 1, 1, 4)}));
 		return Tables;
 	}
 }

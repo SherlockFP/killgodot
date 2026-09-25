@@ -98,6 +98,12 @@ struct KILLGODOT_API FKGItemIds
 	static const FName OldBoot;
 	static const FName MessageBottle;
 	static const FName CoinPouch;
+	// KG_DIG: digging + the underground (Source/KillGodot/Dig, Docs/01_GDD_Core.md section 16).
+	static const FName Shovel;
+	static const FName CryptKey;
+	static const FName MapScrap;
+	static const FName Skull;
+	static const FName MournerToken;
 };
 
 /**

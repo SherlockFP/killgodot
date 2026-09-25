@@ -20,6 +20,12 @@ const FName FKGItemIds::FishingRod(TEXT("FishingRod"));
 const FName FKGItemIds::OldBoot(TEXT("OldBoot"));
 const FName FKGItemIds::MessageBottle(TEXT("MessageBottle"));
 const FName FKGItemIds::CoinPouch(TEXT("CoinPouch"));
+// KG_DIG
+const FName FKGItemIds::Shovel(TEXT("Shovel"));
+const FName FKGItemIds::CryptKey(TEXT("CryptKey"));
+const FName FKGItemIds::MapScrap(TEXT("MapScrap"));
+const FName FKGItemIds::Skull(TEXT("Skull"));
+const FName FKGItemIds::MournerToken(TEXT("MournerToken"));
 
 namespace KGItemCatalogPrivate
 {
@@ -142,6 +148,27 @@ namespace KGItemCatalogPrivate
 		               LOCTEXT("CoinPouchDesc", "Soggy leather, heavy with somebody's savings."),
 		               Hex(186, 132, 72), TEXT("$"), 5, 15, EKGRarity::Rare, {TEXT("Valuable"), TEXT("Sea")},
 		               Mesh(PropsDir, TEXT("Pouch_Large")), 18.0f));
+		// KG_DIG: digging + the underground (Source/KillGodot/Dig, Docs/01_GDD_Core.md section 16).
+		Items.Add(Make(FKGItemIds::Shovel, LOCTEXT("Shovel", "Shovel"),
+		               LOCTEXT("ShovelDesc", "Q to take it out, hold the mouse to dig. Graves are loud."),
+		               Hex(168, 132, 92), TEXT("Sh"), 1, 6, EKGRarity::Common, {TEXT("Tool"), TEXT("Dig")},
+		               Mesh(FishDir, TEXT("SM_KG_Shovel")), 110.0f));
+		Items.Add(Make(FKGItemIds::CryptKey, LOCTEXT("CryptKey", "Crypt Key"),
+		               LOCTEXT("CryptKeyDesc", "Black iron, cold as a tomb. The gate in the catacombs still remembers it."),
+		               Hex(96, 104, 128), TEXT("CK"), 3, 20, EKGRarity::Rare, {TEXT("Tool"), TEXT("Key")},
+		               Mesh(PropsDir, TEXT("Key_Metal")), 20.0f));
+		Items.Add(Make(FKGItemIds::MapScrap, LOCTEXT("MapScrap", "Map Scrap"),
+		               LOCTEXT("MapScrapDesc", "A torn corner of a treasure map. Three of them make a whole one."),
+		               Hex(214, 190, 140), TEXT("Sc"), 9, 15, EKGRarity::Rare, {TEXT("Quest")},
+		               Mesh(PropsDir, TEXT("Scroll_1")), 18.0f));
+		Items.Add(Make(FKGItemIds::Skull, LOCTEXT("Skull", "Skull"),
+		               LOCTEXT("SkullDesc", "Alas. Somebody knew him well."),
+		               Hex(233, 223, 198), TEXT("Sk"), 5, 2, EKGRarity::Common, {TEXT("Junk")},
+		               None, 18.0f));
+		Items.Add(Make(FKGItemIds::MournerToken, LOCTEXT("MournerToken", "Mourner's Token"),
+		               LOCTEXT("MournerTokenDesc", "A stamped brass token from the old crypt. The tailor pays well for these."),
+		               Hex(196, 120, 232), TEXT("Tk"), 5, 80, EKGRarity::Epic, {TEXT("Valuable"), TEXT("Cosmetic")},
+		               None, 10.0f, TEXT("Cylinder"), FVector(1.0f, 1.0f, 0.2f)));
 		return Items;
 	}
 }

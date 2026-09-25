@@ -1,6 +1,28 @@
-# Ganimet, Zanaat ve Çakmaklı Tabanca (Loot + Crafting + The Gun) — Tasarım v1
+# Ganimet, Zanaat ve Çakmaklı Tabanca (Loot + Crafting + The Gun) — Tasarım v1.1
 
-> **Durum:** Öneri, kullanıcı onayı gerekiyor (2026-09-25). Hiçbir kod, seviye ya da mevcut belge değişmedi.
+> **Durum:** Öneri, kullanıcı onayı gerekiyor (v1.1, 2026-09-25). Hiçbir kod, seviye ya da mevcut belge değişmedi.
+> Sprint sözleşmesi: `Docs/Iterations/SPRINT-035-Loot-Bandage-Flintlock.md` (035a–035f, §11).
+>
+> **v1.1 revizyonu (3 inceleme turundan sonra; özellik eklenmedi, sadece kesildi ve keskinleştirildi):**
+> 1. **Parça arzı tavana bağlandı.** Eski model parça bolluğunu ~3 kat düşük tahmin ediyordu (N = 12'de 1. gün sonunda
+>    ~2 tam set). Yeni: günlük stok P = 3·G + 1 (G = ertesi günün tavanı); tavan kontrolü tabancaları **ve ceplerdeki tam
+>    setleri** sayar; parça yığını her türden 1; en nadir tür kuralı sadece kaplardaki stoğu sayar.
+> 2. **Tavan güne göre açılır ve düştü:** N ≤ 7: 0; 8–11: 1 (ocak 3. gün); 12–15: 2. günden 1, 4. günden 2; 16–20:
+>    2. gün 1, 3. günden 2. Kasaba kazanma farkı modelde +1.3…+2.1 puan (medyan), kötü durumda N = 12'de +4.2.
+> 3. **Yaralayıp bitirme boşluğu kapandı:** 12 m'nin ötesi sabit 40 hasar; tabancayla yaralanan kurban 30 sn içinde
+>    herhangi bir sebepten ölürse ceza atıcıya işler.
+> 4. **Tek atım, tek silah:** öldüren atıştan sonra tabanca her zaman çatlar ve düşer; düşmesi kimseye bir şey söylemez.
+>    Masum cezası **özel**: bulanıklık sadece atıcının ekranında, animasyon ve hız cezası yok, maç boyu yasak gizli.
+>    Böylece "cezasız atış = atıcı Kasaba" sızıntısı kapandı.
+> 5. **Kurban Hakkı bağı:** tehdit tarafı oyuncunun her tabanca öldürmesi takımın o geceki Kurban Hakkı'nı harcar; hak
+>    yoksa ertesi gecenin hakkı düşer (Roadmap 027b ile).
+> 6. **İstifleme kapandı:** tabanca sandığa konamaz; şafakta bir canlının kemerinde olmayan tabanca yok olur ve tavan
+>    boşalır. Orman kaplarına parça konmaz. Tabanca kurda ve Sis'e etkisiz. Tek "Islak" durumu (Sis Duvarı da ıslatır).
+> 7. **Para birimi tek:** maç içi para `Coin` eşyası, Türkçe arayüzde **Bakır** (`01b` §5). Tek harcama yeri Bay
+>    Thimble'ın sargı satışıdır (bu sprintlerin kapsamı dışında; fiyat önerisi §3.5).
+> 8. **Sprintler bölündü:** 035a Kutular → 035b Eşya kullanma + Sargı + ortak durum bileşeni → 035c Yönetmen, parçalar,
+>    Demirhane, kemer (ateş etmeyen tabanca) → 035d Tabanca kuralları + ceza + FP klipleri → 035e bot tabanca yolları →
+>    035f ıslaklık/batırma/silahsızlandırma + pano satırı.
 > **Kaynak:** kullanıcının isteği: kırılabilir kutulardan şansa bağlı bandaj ve silah parçaları; parçalar birleşince GMod
 > Murder'daki gibi bir silah olur. Kullanıcı "ben yüzeysel söyledim, dengeyi ve içeriği sen düşün" dedi.
 > **Charter:** `Docs/Design/KillGo_Pillars.md` v1.1. Her sayı bir hedef koduna bağlıdır (S…, G…). 12 maddelik kontrol
@@ -22,23 +44,29 @@
    bütündürler**: köy aynı sabaha uyanır, ama içleri her sabah başkadır.
 2. Kaplardan çoğunlukla sıradan eşya çıkar (para, yiyecek, hurda). **Sargı bezi** (%11) ve **tabanca parçaları** daha
    nadirdir.
-3. Parçalar serbest bir zar değildir. **Ganimet Yönetmeni** (sunucu, tohumlu `FKGRng`) her şafakta dünyadaki bulunmamış
-   parça stoğunu N'ye göre sabit bir bütçeye tamamlar. Silah sayısı böylece varyanslı değil, öngörülebilir olur (G4).
+3. Parçalar serbest bir zar değildir. **Ganimet Yönetmeni** (sunucu, tohumlu `FKGRng`) her şafakta kaplardaki
+   bulunmamış parça stoğunu **ertesi günün tabanca tavanına** göre küçük bir bütçeye (3·G + 1) tamamlar. Tavan doluysa
+   (tabancalar + ceplerdeki tam setler) hiç parça koymaz. Silah sayısı böylece öngörülebilir olur (G4).
 4. Tabanca **3 farklı parçadan** yapılır: **Namlu, Çakmak, Kabza**. Aynı parçanın ikincisi tek başına işe yaramaz, bu
    yüzden **takas** gerekir: "Kimde çakmak var?" (güven kararı).
 5. Zanaat sadece **Demirhane tezgâhında** yapılır (Dere Boyu): 8 sn, 35 m'den duyulan örs sesi, ocak parlaması, Kasaba
-   Panosu'nda isimsiz satır ("Demirhane: 2 numaralı tabanca dövüldü, Gündüz 2 14:20"). **Ocak 1. gün soğuktur.**
-6. **Çakmaklı tabanca:** tek atım, horoz çekilmeden ateş etmez, 12 m içinde öldürür, uzakta yaralar. Ateş 60 m'den
-   duyulur ve duman bırakır. Yedek mermi (Kâğıt Fişek) nadir, tavan 1.
-7. **Tekleme yazı-tura değildir:** sadece barut ıslakken olur (suya düşen, denize itilen), bu da görünür ve kurutulabilir.
-8. **Masum cezası (GDD §4, aynen):** tabancayla **masum birini öldüren** silahı düşürür, 30 sn bulanık görür ve maç boyu
-   silah tutamaz. Kural atanın tarafına bakmaz; bu yüzden "yanlışlıkla vurdum" diyen kasabalı ile kasten vuran Sabırsız
-   dışarıdan aynı görünür. Çıkarımın asıl malzemesi budur.
-9. **Anti-snowball:** N'ye göre silah tavanı (N ≤ 7: 0, 8–11: 1, 12–15: 2, 16–20: 3), tavandayken parça yok, oyuncu
-   başına 1 tabanca, taşınan tabanca **belde görünür**, Sabırsız için tabanca pratikte tek kullanımlık.
-10. **Beklenen sayılar** (10.000 tohumlu model, Ek A): 3. günün sonunda N = 8'de ~0.7, N = 12'de ~1.2, N = 20'de ~1.9
-    tabanca dövülmüş olur. Tabanca ölümleri tüm ölümlerin ~%4–8'i. Kasaba kazanma oranına kaba etkisi +1.5–2.5 puan:
-    bu, Kasaba kazanma oranı için tek, monoton bir **ayar düğmesi**dir.
+   Panosu'nda isimsiz satır ("Demirhane: 2 numaralı tabanca dövüldü, Gündüz 2 14:20"). **Ocak N'ye göre 2. ya da 3.
+   gün yanar.**
+6. **Çakmaklı tabanca:** tek atım, horoz çekilmeden ateş etmez, 12 m içinde öldürür (100), ötesinde 40 m'ye kadar sabit
+   40 hasar. Ateş 60 m'den duyulur ve duman bırakır. Yedek mermi (Kâğıt Fişek) nadir, tavan 1. **Öldüren atıştan sonra
+   tabanca çatlar** (tek atım, tek silah).
+7. **Tekleme yazı-tura değildir:** sadece barut ıslakken olur (suya düşen, denize itilen, Sis Duvarı'ndan dönen), bu da
+   görünür ve kurutulabilir.
+8. **Masum cezası (GDD §4'ün gizli hâli):** tabancayla **masum birinin ölümüne** yol açan (vurduğu kişi 30 sn içinde
+   ölürse) 30 sn bulanık görür (**sadece kendi ekranında**) ve maç boyu silah tutamaz (gizli). Kural atanın tarafına
+   bakmaz ve dışarıdan hiçbir şey görünmez: "yanlışlıkla vurdum" diyen kasabalı ile kasten vuran Sabırsız aynı görünür.
+   Çıkarımın asıl malzemesi budur.
+9. **Anti-snowball:** güne göre açılan tavan (N ≤ 7: 0; 8–11: 1, 3. günden; 12–15: 2. günden 1, 4. günden 2; 16–20:
+   2. gün 1, 3. günden 2), tavandayken parça yok, oyuncu başına 1 tabanca, taşınan tabanca **belde görünür**, sandığa
+   konamaz, tek atım tek silah.
+10. **Beklenen sayılar** (§4.2, stres varsayımı: set hep hazır): maç başına tabanca-gün N = 8: ~1.9, N = 12: ~3.0,
+    N = 20: ~2.8; tabanca ölümü ~0.36 / 0.57 / 0.53. Kasaba kazanma oranına kaba etkisi +1.3…+2.1 puan (medyan); en kötü
+    durum (5 günlük N = 12 maçı) +4.2. Kasaba oranı için tek, monoton bir **ayar düğmesi**: ilk düğme "2. tabancanın günü".
 
 ---
 
@@ -46,7 +74,7 @@
 
 ### 1.1 Bir kasabalının 2. günü (N = 12)
 Şafakta iskeleye iniyorsun. Dün kırılan balık kasaları yine yerinde, üstlerinde çiğ var. Görevin Değirmen Yolu'nda. Yolda
-iki sandığı yumrukluyorsun: birinden 3 altın, öbüründen tahta talaşı arasında pirinç bir **çakmak mekanizması**
+iki sandığı yumrukluyorsun: birinden 3 bakır, öbüründen tahta talaşı arasında pirinç bir **çakmak mekanizması**
 çıkıyor. Cebinde dünden kalma bir **namlu** var. Eksik tek parça **kabza**.
 
 Akşam toplantısında bunu söylersen herkes duyar. Katil de duyar. Söylemezsen kimse sana kabza vermez. Fısıltı kanalından
@@ -59,14 +87,16 @@ görebileceği yerde. Artık bir **hedef** ve bir **şüphelisin**: "Neden silah
 
 ### 1.2 Bir Sabırsızın aynı günü
 Senin için tabanca bir silahtan çok bir **araç**tır. Bulduğun parçaları kimseye vermezsin (inkâr). Takımın parça
-topluyorsa tabancayı sen dövebilirsin, ama kasabalıyı onunla öldürürsen ceza sana da işler: silah düşer, 30 sn göremezsin,
-o gecenin Kurban Hakkı yanar. Buna değer mi? Bazen evet: kalabalığın önünde bıçak çeken birini "vurup" kahraman gibi
-görünmek, ya da elinde silahı olan kasabalıyı denize itip barutunu ıslatmak. Bir de en sevdiğin hamle: 2 numaralı
-tabancayı Ahmet'in bahçesine bırakmak. Ama Demirhane'de 2 numarayı kimin dövdüğünü **gören** biri varsa çerçeve çöker.
+topluyorsa tabancayı sen dövebilirsin, ama onunla kimi öldürürsen öldür takımının o geceki Kurban Hakkı yanar (hak
+yoksa ertesi gecenin); kasabalıyı öldürürsen ayrıca 30 sn göremezsin ve bir daha silah tutamazsın. Buna değer mi? Bazen
+evet: kalabalığın önünde bıçak çeken birini "vurup" kahraman gibi görünmek, ya da elinde silahı olan kasabalıyı denize
+itip barutunu ıslatmak. Bir de en sevdiğin hamle: 2 numaralı tabancayı gün içinde Ahmet'in bahçesine bırakmak (şafağa
+kadar orada kalır). Ama Demirhane'de 2 numarayı kimin dövdüğünü **gören** biri varsa çerçeve çöker.
 
 ### 1.3 Hissiyat hedefleri
-- **Kutu kırmak** her zaman yapılabilen, kısa, tatmin edici bir ara iştir (talaş patlaması, ses, sürpriz). Ölü zamanı
-  keser (S1.1), ama görevin yerine geçmez: kutudan bar dolmaz.
+- **Kutu kırmak** her zaman yapılabilen, kısa, tatmin edici bir ara iştir (talaş patlaması, ses, sürpriz). Görevin
+  yerine geçmez: kutudan bar dolmaz. Ölü zaman ölçümünde (S1.1) **sayılmaz**: kendi kırdığın kutu kendi ürettiğin olaydır
+  (v1.1 sayım kuralı). Ölü zamanı azaltan asıl şey takas ve zanaat kararlarıdır.
 - **Parça bulmak** küçük bir heyecan, **tabanca yapmak** büyük ve **gürültülü** bir karardır.
 - **Tabancayı taşımak** güç ve yük birlikte: herkes görür, herkes sorar, katil seni ilk hedefler.
 - **Ateş etmek** maçın en pahalı tek hamlesidir: tek atım, 60 m'lik ses, masumu vurmanın ağır bedeli.
@@ -133,7 +163,7 @@ biraz kısılır. Silah parçaları ve Fişek bu tablolarda **yoktur**: onları 
 
 | Eşya | Adet | Ağırlık | Çekiliş başına | Kapta ≥ 1 |
 |---|---|---|---|---|
-| Altın | 1–5 | 35 (40'tı) | %28.7 | %40.8 |
+| Bakır (`Coin`) | 1–5 | 35 (40'tı) | %28.7 | %40.8 |
 | **Sargı Bezi** | 1 | **14** | %11.5 | **%16.6** |
 | Elma | 1–2 | 12 (15) | %9.8 | %14.4 |
 | Ekmek | 1 | 8 (10) | %6.6 | %9.8 |
@@ -144,9 +174,9 @@ biraz kısılır. Silah parçaları ve Fişek bu tablolarda **yoktur**: onları 
 | Hazine Haritası | 1 | 1 | %0.8 | %1.2 |
 | (boş) | | 20 | %16.4 | Tamamen boş kap: %9.5 |
 
-**Fıçı** (1 çekiliş, boş 30, toplam 132): Elma 30, Uskumru 20, Altın 20, Morina 10, **Sargı 8 (%6.1)**, **Hurda 6**, İp 5,
+**Fıçı** (1 çekiliş, boş 30, toplam 132): Elma 30, Uskumru 20, Bakır 20, Morina 10, **Sargı 8 (%6.1)**, **Hurda 6**, İp 5,
 Olta 3. Tamamen boş: %22.7.
-**Küp** (1 çekiliş, boş 35, toplam 106): Altın 45, Mum 10, **Sargı 6 (%5.7)**, İnci 5, Eski Yüzük 5. Tamamen boş: %33.
+**Küp** (1 çekiliş, boş 35, toplam 106): Bakır 45, Mum 10, **Sargı 6 (%5.7)**, İnci 5, Eski Yüzük 5. Tamamen boş: %33.
 **CryptUrn / Cellar / Chest:** değişmez (yeraltı ve kilitli sandıklar zaten ödüllü; Chest bir kez yuvarlanır).
 
 **Karışık ortalama:** kap başına sargı olasılığı **%11.2**. Yaşayan oyuncu günde ~2.5–3 kap açarsa **günde ~0.3 sargı**,
@@ -157,56 +187,75 @@ kez toparlanma" demektir.
 Tek sorumluluk: silah ekonomisini **sayılabilir** tutmak. Saf mantık (`FKGLootDirector`, UObject'siz, SaveGame durumu,
 `FKGRng` tohumlu), `FKGRoleListGenerator` kalıbında.
 
-Her **Şafak**'ta:
-1. **Tavan kontrolü.** Dünyadaki tabanca sayısı (belde, yerde, sandıkta; batanlar hariç) `G_max(N)`'e eşitse o gün
-   **parça konmaz** (yerine Katman A çalışır).
-2. **Stok tamamlama.** Bulunmamış parça stoğu (dünden kırılmamış kaplarda kalanlar dahil) `P(N)`'e tamamlanır.
-3. **En nadir tür önce.** Yeni parça, dünyada (kap + cepler) en az bulunan türden seçilir; eşitlikte tohum karar verir.
-   Setler böylece tamamlanabilir kalır ve "hep namlu çıkıyor" varyansı olmaz (G4).
-4. **Yer seçimi:** ağırlıklı rastgele kap, kap başına en fazla 1 parça. Ağırlıklar: sandık 3, fıçı 2, küp 1. Oyuncunun
-   evinin 8 m içindeki kaplar hariçtir (ev kampı yok).
-5. **Fişek:** stok = dünyadaki dolu olmayan tabanca sayısı, en fazla silah sayısı kadar. Ağırlıklar: fıçı 3, sandık 1,
-   küp 1.
-6. **Oyun sonu koruması:** yaşayan ≤ 4 ise yeni parça ve Fişek konmaz (S10.5).
-7. **1. gün:** parçalar konur ama **ocak soğuktur**: zanaat 2. günün şafağından itibaren açılır (S10 tempo: erken oyun
-   keşiftir; S10.2).
-8. **Log:** `KG_LOOTDIR day=… seeded=… stock=… guns=… cap=…` (host migration testinde aynı tohum aynı çıktıyı verir).
+Tanımlar: `G(N, d)` = d. gündeki tabanca tavanı (aşağıdaki tablo). `G⁺ = G(N, d + 1)` = ertesi günün tavanı (parçalar
+bir gün önceden konur ki set, ocağın yandığı gün tamamlanabilsin). `Tam set` = bir oyuncunun cebindeki üç farklı
+parça (parça yığını her türden 1 olduğu için oyuncu başına en fazla 1 set).
 
-| N | ≤ 7 | 8–11 | 12–15 | 16–19 | 20 |
-|---|---|---|---|---|---|
-| `G_max(N)` (aynı anda var olan tabanca) | **0** (lobi seçeneğiyle 1) | 1 | 2 | 3 | 3 |
-| `P(N)` = 2 + yuvarla(0.7·N): günlük parça stoğu | 0 (seçenekle 6) | 8–10 | 10–12 | 13–15 | 16 |
+Her **Şafak**'ta:
+1. **Süre dolumu.** Bir canlının kemerinde olmayan her tabanca (yerde, cesedin yanında, bir yere bırakılmış) yok olur
+   ("pas tutmuş, çatlamış bulunur") ve tavanda yer açar. Olay `GunExpired {serial}`. Tabanca sandığa zaten konamaz (§3.9).
+2. **Tavan kontrolü.** `tabancalar (kemerde) + ceplerdeki tam setler ≥ G⁺` ise o gün **parça konmaz** (yerine Katman A
+   çalışır). Böylece cepte biriken setler tavanı aşan bir "yedek tabanca deposu" olamaz.
+3. **Stok tamamlama.** Kaplardaki bulunmamış parça stoğu (dünden kırılmamış kaplarda kalanlar dahil)
+   `P = 3·G⁺ + 1`'e tamamlanır. G⁺ = 0 ise P = 0.
+4. **En nadir tür önce.** Yeni parça, **kaplardaki** stokta en az bulunan türden seçilir (cepler sayılmaz: bir türü
+   cebinde biriktiren Sabırsız, yönetmeni o türü koymaktan alıkoyamaz); eşitlikte tohum karar verir.
+5. **Yer seçimi:** ağırlıklı rastgele kap, kap başına en fazla 1 parça. Ağırlıklar: sandık 3, fıçı 2, küp 1. Hariç:
+   oyuncu evlerinin 8 m içindeki kaplar (ev kampı yok) ve **orman bandındaki kaplar** (orman belgesi §7.5: orman riski
+   sargı ve reçineyle ödüllenir, parçayla değil; grupta tehditlere bağışık olan birbirine güvenen katil takımıdır).
+6. **Fişek:** stok = kemerdeki boş tabanca sayısı, en fazla tabanca sayısı kadar. Ağırlıklar: fıçı 3, sandık 1, küp 1.
+7. **Oyun sonu koruması:** yaşayan ≤ 4 ise yeni parça ve Fişek konmaz (S10.5).
+8. **Log:** `KG_LOOTDIR day=… seeded=… stock=… guns=… sets=… cap=…` (host migration testinde aynı tohum aynı çıktıyı
+   verir).
+
+| N | ≤ 7 | 8–11 | 12–15 | 16–20 |
+|---|---|---|---|---|
+| `G(N, d)`: 1. gün | 0 | 0 | 0 | 0 |
+| 2. gün | 0 | 0 | 1 | 1 |
+| 3. gün | 0 (lobi seçeneğiyle 1) | 1 | 1 | 2 |
+| 4. gün ve sonrası | 0 (seçenekle 1) | 1 | 2 | 2 |
+| Ocağın ilk yandığı gün | — (seçenekle 3) | 3 | 2 | 2 |
+| Günlük stok `P = 3·G⁺ + 1` | 0 (seçenekle 4, 2. günden) | 4 (2. günden) | 4 (1.–2. gün), 7 (3. günden) | 4 (1. gün), 7 (2. günden) |
 
 **Neden N ≤ 7'de kapalı?** N = 6'da tek Sabırsız vardır (GDD §3). Doğru tek bir atış maçı toplantısız bitirir: S10.5
 ("son eleme asma ya da rol yeteneği", ≥ %40) ve Sabırsızın frustrasyonu (G5) açısından kabul edilemez. N ≤ 7'de kaplar,
 sargılar ve ipuçları kalır. Lobi seçeneği "Tabanca: açık" ile 1 tabanca olur, ocak **3. günden** itibaren yanar.
 
-**Kap türüne göre etkili parça olasılığı** (şafakta, belli bir kabın parça içerme olasılığı; stok / ağırlık payı):
+**Neden bu kadar az?** v1'in stoğu (P = 2 + 0.7·N) bulunan parça hızına göre çok büyüktü: insanlar her kabı ~1 sn'de
+kırdığı için stoğun %62–90'ı her gün bulunur. N = 12'de günde 6–9 parça, 1. gün sonunda ~2 tam set demekti; tavan
+2. günde doluyor, cepteki fazlalık da batırılan ya da kaybedilen tabancayı ertesi gün yerine koyuyordu. Yeni stok
+tavanın bir set fazlasıdır: bir gün içinde yaklaşık bir set bulunur ve takas yine gerekir.
 
-| N | Sandık | Fıçı | Küp |
+**Kap türüne göre parça olasılığı** (şafakta, belli bir kabın parça içerme olasılığı ≈ P · ağırlık / (C · 2.3);
+tavandayken 0):
+
+| N, stok | Sandık | Fıçı | Küp |
 |---|---|---|---|
-| 8 (P = 8, 38 kap) | %28 | %18 | %9 |
-| 12 (P = 10, 48 kap) | %27 | %18 | %9 |
-| 20 (P = 16, 60 kap) | %35 | %23 | %12 |
+| 8, P = 4 (38 kap) | %14 | %9 | %5 |
+| 12, P = 4 (48 kap) | %11 | %7 | %4 |
+| 12, P = 7 | %19 | %13 | %6 |
+| 20, P = 7 (60 kap) | %15 | %10 | %5 |
 
-(Tavandayken bu sütunlar 0'a iner; oyuncu bunu doğrudan görmez, ama Kasaba Panosu'ndaki dövülme satırlarından
-çıkarabilir.)
+(Oyuncu bunu doğrudan görmez, ama Kasaba Panosu'ndaki dövülme satırlarından çıkarabilir.)
 
 ### 3.4 Yeni eşyalar (`UKGItemCatalog`, `Inventory/KGItemCatalog.cpp`)
 
 | Id | TR / EN | Yığın | Değer | Nadirlik | Etiketler | Nerede görünür |
 |---|---|---|---|---|---|---|
 | `Bandage` | Sargı Bezi / Bandage | 2 | 3 | Sıradan | Medical, Tool | Cep (gizli) |
-| `GunBarrel` | Namlu / Barrel | 3 | 12 | Kasaba | GunPart, Contraband | Cep (gizli); yerde parıltı |
-| `GunLock` | Çakmak Mekanizması / Flintlock | 3 | 12 | Kasaba | GunPart, Contraband | Cep |
-| `GunStock` | Kabza / Grip | 3 | 12 | Kasaba | GunPart, Contraband | Cep |
+| `GunBarrel` | Namlu / Barrel | 1 | 12 | Kasaba | GunPart, Contraband | Cep (gizli); yerde parıltı |
+| `GunLock` | Çakmak Mekanizması / Flintlock | 1 | 12 | Kasaba | GunPart, Contraband | Cep |
+| `GunStock` | Kabza / Grip | 1 | 12 | Kasaba | GunPart, Contraband | Cep |
 | `Cartridge` | Kâğıt Fişek / Paper Cartridge | 1 | 8 | Kasaba | Ammo, Contraband | Cep |
 | `Flintlock` | Çakmaklı Tabanca / Flintlock Pistol | — (kemer) | 60 | Nadir | Weapon, Contraband | **Kemerde, herkese görünür** |
 | `Scrap` | Paslı Çivi / Rusty Nails | 10 | 1 | Sıradan | Junk | Cep |
 | `WitnessNote` (sonra) | Tanık Pusulası / Witness Note | 3 | 2 | Kasaba | Quest, Clue | Cep |
 
-- Parça yığını 3'tür: takas malzemesi olarak birikebilir, ama cep 12 slottur (`KGInventoryComponent.h`, Capacity 12).
-- **Kemer slotu** (yeni, 1 slot): tabanca cebe girmez. Taşıyorsan görünür. Görünmemesi için sandığa koymalısın.
+- Parça **her türden cepte en fazla 1** taşınır (ikinci aynı parça alınamaz; yerde kalır). Oyuncu başına en fazla 1 tam
+  set: bir kişi bir türü istifleyip kimsenin set tamamlamasını engelleyemez, fazlası yerde görünür kalır.
+- **Kemer slotu** (yeni, 1 slot): tabanca cebe girmez ve **hiçbir sandığa konamaz** (ev sandığı da, açık sandık da).
+  Taşıyorsan görünür. Görünmemesi için bir yere bırakabilirsin, ama bir canlının kemerinde olmayan tabanca şafakta yok
+  olur (§3.3 madde 1).
 - Tabancanın **seri numarası** vardır (Demirhane damgası "No. 1, 2, 3…"). İncelenince görünür (§3.9).
 
 ### 3.5 Sargı Bezi: sayılar ve mevcut hasarla karşılaştırma
@@ -228,6 +277,13 @@ sargılar ve ipuçları kalır. Lobi seçeneği "Tabanca: açık" ile 1 tabanca 
 - **Kesilme:** hasar almak, itilmek, toplantı çanı, saldırmak, koşmak. Açma bittiyse sargı harcanmıştır ve o ana kadarki
   can kalır. Kalan iyileşme kaybolur. Bu, "1 sn'de iptal" istismarını kapatır.
 - **Kavgada işe yaramaz** (5 sn'de 30 can, rakip 2.4 sn'de 100 hasar verir). Kavga **sonrası** içindir. Hedef bu.
+- **Sis dili seni hedeflerken** sargı başlatılamaz, başlamış sargı kesilir (orman belgesi §5.3: %50 hızla sisten
+  kaçılmaz).
+- **Arz ve para:** kaplardan günde ~0.3 sargı/oyuncu (yukarıda); orman bandındaki kaplarda sargı ağırlığı ×2 (orman
+  riskinin ödülü). Maç içi para tek: `Coin` eşyası, Türkçe adı **Bakır** (`01b_Village_Life_Fun.md` §5). Bakırın tek
+  harcama yeri Bay Thimble'ın dükkânında sargıdır; dükkân **bu belgenin sprintlerinde yapılmaz**. Yapıldığında fiyat
+  önerisi: 15 Bakır, oyuncu başına günde en fazla 1 (arz bütçesi ~0.3 → ~0.5 sargı/gün'ü geçmesin). Kaplar oyuncu başına
+  günde ~4 Bakır verir; masada kaybedilen 10 Bakırlık bahis ~2/3 sargı demektir.
 - **İz:** kullanılan sargı yerde **Kanlı Sargı** bırakır (90 sn, §5.2). "Burada biri yaralandı" = bilgi.
 - **Delil etkileşimi (sonra, 026a ile):** tabancanın ağır yarası ve bıçak yarası boya/talaş damlası bırakır (charter §3).
   Sargı damlayı durdurur. Yaralı katil için sargı iz silme aracıdır, yani sargıların da çıkarım değeri vardır.
@@ -237,8 +293,8 @@ sargılar ve ipuçları kalır. Lobi seçeneği "Tabanca: açık" ile 1 tabanca 
   `Morrowmere_v2_Plan.md` görev tablosu). Mevcut örsün yanındaki **tezgâh** (`KG_Props/Workbench`, 202 × 102 cm)
   çalışma zamanında layout JSON noktasından spawn edilen etkileşimli bir aktördür (`AKGForgeBench`). ForgeNails görevinin
   örsüyle çakışmaz.
-- **Şart:** cepte her türden 1 parça (Namlu + Çakmak + Kabza), kemer boş, 2. gün ya da sonrası, `G_max` dolmamış, faz
-  Gündüz ya da Gece.
+- **Şart:** cepte her türden 1 parça (Namlu + Çakmak + Kabza), kemer boş, ocak yanıyor (`G(N, d)` ≥ 1), kemerdeki
+  tabanca sayısı `G(N, d)`'nin altında, atıcı silah yasaklı değil, faz Gündüz ya da Gece.
 - **Eylem:** `E` basılı, **8 sn**, tezgâhın 1.5 m içinde, hareketsiz. Her saniye bir örs darbesi (`KG_HEAR_FORGE`, öneri
   35 m). Ocak parlar (gece 80 m'den görünür turuncu ışık). Kesilirse (hasar, itilme, hareket, çan) ilerleme sıfırlanır,
   parçalar kalır.
@@ -250,7 +306,7 @@ sargılar ve ipuçları kalır. Lobi seçeneği "Tabanca: açık" ile 1 tabanca 
   (risk), herkes "14:20'de Dere Boyu'nda kim vardı?" diye sorar (S2.3). Riski, 8 sn'lik kısa süre ve 35 m'lik duyulma
   dengeler.
 - **Bölge Kapıları uyarısı (031a):** Dere Boyu, tabancanın açık olduğu her N'de (≥ 8) açık kalmalıdır. Kalamıyorsa o N'de
-  `G_max = 0` olur.
+  `G = 0` olur.
 
 ### 3.7 Çakmaklı tabanca
 
@@ -260,17 +316,19 @@ sargılar ve ipuçları kalır. Lobi seçeneği "Tabanca: açık" ile 1 tabanca 
 | Horoz (RMB basılı) | 0.4 sn; tık sesi `KG_HEAR_COCK` 8 m. RMB bırakılınca horoz iner (güvenli). | Ateşten önce okunabilir bir niyet |
 | Ateş (LMB, horoz çekiliyken) | Çakmak gecikmesi 0.12 sn (tavada parlama), sonra atış | Tarihî his; tepki payı |
 | İsabet | **Hitscan, rastgele sapma yok.** Mermi namlunun gösterdiği yere gider. Yürürken viewmodel salınımı **deterministik** artar (yürüme döngüsünün sinüsü). Sunucu lag telafisi (`ValidatedViewStart`). | G4.1: sonucu belirleyen zar 0 |
-| Hasar | ≤ 12 m: **100** (öldürür). 12–25 m: 100 → 50 doğrusal. 25–40 m: 50 → 25. > 40 m: mermi düşer. | Yakın mesafe cesaret ister |
-| Ağır yara (≥ 50, ölmedi) | 30 sn %80 hız + damla izi (026a gelince), sargı durdurur | Kaçan kurban delil taşır |
-| Mermi | Dövülünce 1 dolu. Yedek: 1 Kâğıt Fişek (cepte en fazla 1). | "Sınırlı" = maçta tabanca başına tipik 1–2 atış |
+| Hasar | ≤ 12 m: **100** (öldürür). 12–40 m: **sabit 40** (ağır yara). > 40 m: mermi düşer. | Yakın mesafe cesaret ister. Basamak, "12.5 m'den 98 vur, yumrukla bitir" boşluğunu kapatır |
+| Ağır yara (40, ölmedi) | 30 sn %80 hız + damla izi (026a gelince), sargı durdurur. **Atıf:** yaralanan 30 sn içinde herhangi bir sebepten (yumruk, bıçak, kurt, Sis) ölürse ölüm atıcıya yazılır ve §3.8 cezası işler | Kaçan kurban delil taşır; yaralayıp ortağa bitirtmek cezadan kaçmaz |
+| Mermi | Dövülünce 1 dolu. Yedek: 1 Kâğıt Fişek (cepte en fazla 1). Iska ya da yaralama sonrası dolum yapılabilir | "Sınırlı" = maçta tabanca başına tipik 1–2 atış |
+| **Tek atım, tek silah** | Bir ölüme yol açan atıştan (doğrudan ya da 30 sn atıf) sonra tabanca **çatlar**: kemerden düşer, kullanılamaz bir prop olur (seri numarası okunur, 90 sn), tavan ertesi şafak boşalır | Düşmesi bir ceza işareti değildir; hep olur. Tabanca maç başına en fazla bir kişi öldürür |
 | Dolum | 5 sn, hareketsiz (dönebilir), harbi sesi 10 m | Atıştan sonra savunmasızlık |
 | Ses ve görüntü | Atış `KG_HEAR_SHOT` (öneri 60 m), 6 sn duman bulutu (atanın yerini işaretler), gece namlu alevi 40 m'den | Silah gizli bir cinayet aracı değildir |
 | Faz kilidi | Toplantı, Mahkeme ve Epilog'da çekilemez (S9.1). 1. gündüzün ilk 90 sn'si zaten ocak soğuk. | S9.1, S10.2 |
 | Oyuncu başına | 1 tabanca (kemer). Kemer doluyken zanaat ve yerden alma yok. | Anti-snowball |
 
 **Tekleme (misfire): yazı-tura değil, durum.**
-- Taşıyan beline kadar suya girerse (yüzme, denize itilme, iskeleden düşme) tabanca **Islak** olur. Islakken tetik
-  sadece tavada parlama yapar: atış yok, 1.5 sn yeniden horoz.
+- Taşıyan beline kadar suya girerse (yüzme, denize itilme, iskeleden düşme) ya da Sis Duvarı'ndan geri çıkarsa (orman
+  belgesi §2.4; oyunda **tek** bir Islak durumu var) tabanca **Islak** olur. Islakken tetik sadece tavada parlama yapar:
+  atış yok, 1.5 sn yeniden horoz.
 - Islaklık 60 sn kuruda, ya da bir ateşin (ocak, fırın, ocaklık, kamp ateşi) 3 m içinde 10 sn kalınca biter.
 - **İşaret:** sahibin HUD'unda damla ikonu. Başkaları 60 sn boyunca kemerdeki tabancadan su damladığını görür (Ç11).
 - **Karşı hamle:** tabancalı birini **denize itmek**, mevcut itme mekaniğiyle (650 itki) bir katilin gerçek cevabıdır.
@@ -280,33 +338,44 @@ sargılar ve ipuçları kalır. Lobi seçeneği "Tabanca: açık" ile 1 tabanca 
 ve Hortlak (GDD §11.1: "suçluluk cezası olmadan herkes öldürebilir"). Kasaba ve öldürmeyen nötrler masumdur. Taraflar
 Roadmap 022'nin çözücüsünden okunur.
 
+"Ölüm" burada: atışın doğrudan öldürmesi **ya da** tabancayla yaralananın 30 sn içinde herhangi bir sebepten ölmesi
+(§3.7 atıf kuralı).
+
 | Atan | Sonuç | Ceza |
 |---|---|---|
-| Kim olursa | Tehdit öldü | Yok |
-| Kim olursa | **Masum öldü** | Tabanca olduğu yere düşer. 30 sn bulanık ve renksiz görüş, %80 hız, "gözlerini kapatma" animasyonu (görenler görür). **Maç boyu** tabanca tutamaz, dövemez, yerden alamaz. |
-| Sabırsız | Masum öldü | Yukarıdaki ceza, **ve** o gecenin Kurban Hakkı düşer (`02_Roles.md`: "Gündüz öldürmek o gecenin hakkından düşer") |
-| Kim olursa | Masum ölümcül vuruş yedi ama korundu (Doktor → baygın, Hayatta Kalan yeleği, zırh) | **Yok** (ölüm yok) |
-| Kim olursa | Masum ağır yaralandı, ölmedi | **Yok**; olay deftere düşer |
+| Kim olursa | Tehdit öldü | Yok (tabanca yine çatlar: tek atım, tek silah) |
+| Kim olursa | **Masum öldü** | Tabanca çatlar (her ölümde olduğu gibi). **Sadece atıcının ekranında** 30 sn bulanık ve renksiz görüş; başkalarının gördüğü bir animasyon ya da hız cezası **yok**. **Maç boyu** tabanca tutamaz, dövemez, yerden alamaz (gizli; denerse sadece kendisi "Elin titriyor" yazısını görür). Atıcı, vurduğunun masum olduğunu böylece özel olarak öğrenir; bunu iddia edebilir (yumuşak bilgi). |
+| Tehdit tarafı (Sabırsız, katil nötrler) | **Kim ölürse ölsün** | Takımın o geceki Kurban Hakkı harcanır; o gece hak kalmadıysa **ertesi gecenin hakkı düşer** (borç). Sunucuda tutulur, görünmez. Masumsa yukarıdaki ceza da işler. (Roadmap 027b ile; o zamana kadar kodda öldürme bütçesi yok, satır uygulanmaz.) |
+| Kim olursa | Masum ölümcül vuruş yedi ama korundu (Doktor → baygın, Hayatta Kalan yeleği, zırh) | **Yok** (ölüm yok); tabanca çatlamaz |
+| Kim olursa | Masum ağır yaralandı ve 30 sn içinde ölmedi | **Yok**; olay deftere düşer |
 | İnfazcı'nın **rol** tabancası | Masum öldü | Rol kuralı: ertesi gece vicdan azabından ölür (`02_Roles.md`). Ganimet cezası işlemez. |
 
 **Neden sadece ölümde?** Yaralamada ceza olsaydı, bir kasabalı birini uzaktan hafifçe vurup "ceza geldi mi?" diye
 bakarak **yaşayan** birinin masumiyetini kesinleştirebilirdi. Bu, charter S2.4'ün yasakladığı cinayet dışı bir sert kanıt
-kaynağı olurdu. Ölümde ceza, ölenin tarafını erkenden sızdırır ama o bilgi zaten şafakta ya da kararda açılır. **Atanın**
-tarafı ise belirsiz kalır (yanlışlıkla vuran kasabalı mı, kasten vuran Sabırsız mı?). Bu belirsizlik tasarımın kalbidir.
+kaynağı olurdu. 30 sn atıf kuralı bu korumayı bozmaz (atıcı sadece kurban ölünce öğrenir), ama "yarala, ortağın
+bitirsin" kaçışını kapatır.
+
+**Neden gizli ceza?** v1'de ceza herkesin görebileceği bir işaretti (silah düşer, gözlerini kapatır, yavaşlar). Bu,
+tanıklı her tabanca ölümünü anında bir hükme çeviriyordu: ceza yoksa ölen bir tehditti **ve** atıcı neredeyse kesin
+Kasaba'ydı (Sabırsız'ın takım arkadaşını vurması nadirdir). Bu, S2.4'ün cinayet başına ≤ 0.20 sert kanıt bütçesini tek
+başına yiyordu. Şimdi her ölümcül atışta tabanca aynı şekilde çatlar ve dışarıdan hiçbir fark görünmez: **atıcının
+tarafı da, ölenin tarafı da atıştan okunamaz.** Bu belirsizlik tasarımın kalbidir.
 
 ### 3.9 Taşıma, saklama, çalma, batırma, yerleştirme
 - **Taşımak:** kemerde, 3. şahısta kalçada pirinç parıltılı küçük bir tabanca. ~15 m'den okunur. Toplantıda da görünür:
   *"Neden silahın var?"*
-- **Saklamak:** evdeki kilitli sandık (`AKGStorageChest`, sahip kilidi), herkese açık sandık (risk), ya da bir yere
-  bırakmak. Saklanan tabanca görünmez, ama gerektiğinde elinde de değildir. Kazıyla gömmek sonraki iştir (§11).
+- **Saklamak:** tabanca **hiçbir sandığa konamaz** (ev sandığı da, açık sandık da). Tek yol bir yere bırakmaktır; bırakılan
+  tabanca görünür bir pickup'tır ve bir canlının kemerinde değilse şafakta yok olur (§3.3/1). Böylece katil takımı bir
+  tabancayı "kilitleyip" Kasaba'yı bütün maç silahsız bırakamaz: inkâr en fazla bir gün sürer. Kazıyla gömmek kesildi
+  (aynı istifleme yolu olurdu).
 - **Silahsızlandırma:** kuşanılmış (çekili) tabancası olan birini **önden itmek** tabancayı her zaman düşürür
   (deterministik). Kemerdeki tabanca itmeyle düşmez. Bu, "çekmek" ile "kemerde tutmak" arasında gerçek bir karardır.
 - **Cesetten almak:** ölünce kemerdeki tabanca, parçalar ve Fişek cesedin yanına düşer (pickup). Yerden almak görünür
   ve olay defterine düşer (`GunPickup`). Baygın düşen (Doktor koruması) de tabancasını düşürür.
 - **Batırmak:** denize ya da derin suya düşen/atılan tabanca batar ve yok olur. Sıçrama 15 m'den duyulur, olay
   `GunSunk`. Tavan ertesi şafak boşalır. Sabırsızın inkâr hamlesidir.
-- **Yerleştirmek (çerçeveleme):** tabancayı ya da parçaları birinin bahçesine, kapısının önüne, açık sandığına
-  bırakmak. Tabancanın **seri numarası** Demirhane olayına bağlıdır. 2 numarayı Mehmet'in dövdüğünü gören biri varsa,
+- **Yerleştirmek (çerçeveleme):** tabancayı birinin bahçesine ya da kapısının önüne (şafağa kadar kalır), parçaları
+  bunlara ek olarak açık sandığına bırakmak. Tabancanın **seri numarası** Demirhane olayına bağlıdır. 2 numarayı Mehmet'in dövdüğünü gören biri varsa,
   Ahmet'in bahçesinde bulunan 2 numara bir **çelişki**dir (charter §0.4, S9.5). Kilitli ev sandığına yerleştirmek sadece
   İftiracı'nın fiziksel sahte delili ya da Çilingir'in kilidiyle olur (rol sprintleri).
 - **Kaçakçı'nın tabancası** (`02_Roles.md`, maçta 1 kez) **damgasızdır** ("No. —"). Tavan dışıdır. Damgasız bir tabanca
@@ -317,7 +386,7 @@ tarafı ise belirsiz kalır (yanlışlıkla vuran kasabalı mı, kasten vuran Sa
 | Faz | Kap kırma | Sargı | Zanaat | Tabanca çekme/ateş |
 |---|---|---|---|---|
 | Şafak | Evet (kaplar yenileniyor) | Evet | Hayır | Hayır |
-| Gündüz | Evet | Evet | 2. günden itibaren | Evet (1. gün zaten yok) |
+| Gündüz | Evet | Evet | Ocak günü itibaren (N'ye göre 2. ya da 3. gün) | Evet (1. gün zaten yok) |
 | Toplantı / Mahkeme / Epilog | Hayır | Evet | Hayır | **Hayır** (S9.1) |
 | Gece | Evet (yasak saatinde dışarıda olmak riskli) | Evet | Evet (ocak 80 m'den görünür) | Evet |
 
@@ -325,24 +394,28 @@ tarafı ise belirsiz kalır (yanlışlıkla vuran kasabalı mı, kasten vuran Sa
 
 ## 4. Sayılarla denge
 
-### 4.1 Oyuncu başına günlük parça
-Model (Ek A, 10.000 tohum): yaşayan oyuncu başına günde **0.55–0.65 parça**. Yani tek başına bir set (3 farklı parça)
-~5 günde tamamlanır. **Takas olmadan tabanca yok gibidir.** Bu kasıtlı: tabanca sosyal bir üründür.
+### 4.1 Günlük parça
+Stok küçük ve tavana bağlı: `P = 3·G⁺ + 1` (§3.3). Stoğun her gün %62–90'ı bulunur (insanlar kabı ~1 sn'de kırar). Yani
+tavan açıkken günde **~2.5–3.6 parça** (P = 4) ya da **~4.3–6.3** (P = 7) bulunur: bütün köy için günde yaklaşık bir
+set. Parçalar farklı kişilere dağıldığı için **takas olmadan tabanca yok gibidir**. Bu kasıtlı: tabanca sosyal bir
+üründür. Tavan dolunca (tabancalar + ceplerdeki tam setler) parça gelmez.
 
-### 4.2 Tabanca sayısı: 2. ve 3. gün (ortalamalar, 10.000 tohum)
+### 4.2 Tabanca sayısı (stres varsayımı)
+Model: tasarım aracı olarak koşulan basit bir Monte Carlo (20.000 tohum, oyun kodu değil; sprintte `KillGodot.Loot.Director` mantık testine
+dönüşür, Ek A). **Stres varsayımı:** ocak yandığı gün bir set her zaman hazırdır (Sabırsız takımı parçaları %100
+paylaşır, Kasaba %80 takas eder; stok yukarıdaki kadar bulunur). Yeni tabanca dövüldüğü gün yarım gün sayılır; öldüren
+atış tabancayı çatlatır, tavan ertesi şafak boşalır. Atış eğilimi tabanca-gün başına 0.25, isabet 0.75.
 
-| N | Tavan | P(N) | Dövülen: 2. gün sonu | Dövülen: 3. gün sonu | Var olan: 3. gün sonu | ≥ 1 tabanca: 2. gün / 3. gün |
-|---|---|---|---|---|---|---|
-| 6 (varsayılan) | 0 | 0 | 0 | 0 | 0 | %0 / %0 |
-| 6 (lobi seçeneği, ocak 3. gün) | 1 | 6 | 0 | 0.46 | 0.44 | %0 / %46 |
-| 8 | 1 | 8 | 0.31 | 0.69 | 0.60 | %31 / %67 |
-| **12** | 2 | 10 | **0.52** | **1.23** | 1.10 | %49 / %84 |
-| 16 | 3 | 13 | 0.62 | 1.51 | 1.37 | %57 / %89 |
-| **20** | 3 | 16 | **0.82** | **1.91** | 1.77 | %71 / %95 |
+| N | Maç süresi (gün, S10.1) | Tavan (gün 1/2/3/4+) | İlk tabanca | Tabanca-gün / maç | Tabanca ölümü / maç |
+|---|---|---|---|---|---|
+| 6–7 (varsayılan) | 3–4 | 0/0/0/0 | yok | 0 | 0 |
+| 8 | 4–5 | 0/0/1/1 | 3. gün | ~1.9 | ~0.36 |
+| **12** | 3–5 | 0/1/1/2 | 2. gün | ~3.0 | ~0.57 |
+| 16 | 3–4 | 0/1/2/2 | 2. gün | ~2.9 | ~0.53 |
+| **20** | 3–4 | 0/1/2/2 | 2. gün | ~2.8 | ~0.53 |
 
-"Var olan" < "dövülen": batırılan, yanlış atıştan sonra kaybolan ve ölenden kalıp kimsenin almadığı tabancalar.
-S10.1'e göre maç N = 12'de 3–5, N = 20'de 3–4 gün sürer. Yani tipik bir N = 12 maçında 1–2, N = 20 maçında 2–3 tabanca
-görülür.
+Tipik bir N = 12 maçında 1–2 tabanca görülür; N = 20'de 1–3. Bir inceleyicinin daha kötümser sayımı (tabanca-gün
+N = 8/12/20'de 2.8/3.8/3.8) da aşağıda üst sınır olarak verilir.
 
 ### 4.3 Kasaba kazanma oranı: kaba etki ve ayar düğmesi
 Hedef: GDD §3'ün uzun vadeli ayarı Kasaba **%48–52**. Charter'ın kapısı S7.2: [O] %38–62, merkez ~%50, n_min 67 maç.
@@ -350,39 +423,41 @@ Tabanca bir Kasaba aracıdır, bu yüzden **artı** yönde iter. Tasarım hedefi
 ≤ +3 puan.**
 
 Kaba model: `Δ ≈ D · (p · V_k − (1 − p) · V_t)`
-- D = maç başına tabanca ölümü. Tabanca-gün × 0.25 atış eğilimi × 0.75 isabet. Model: N = 8: ~0.3, N = 12: ~0.55,
-  N = 20: ~0.95.
+- D = maç başına tabanca ölümü (§4.2).
 - p = kasaba atışlarının doğru (tehdit) olma oranı. Hedef bandın ortası 0.55 (§4.5, L2).
 - V_k, V_t = bir tehdidin ya da bir kasabalının ölümünün Kasaba kazanma olasılığına etkisi. Parite oranından kaba:
-  N = 12'de V_k ≈ 10, V_t ≈ 4 puan; N = 20'de 7 ve 3; N = 8'de 14 ve 6.
+  N = 8'de 14 ve 6; N = 12'de 10 ve 4; N = 16'da 8.5 ve 3.5; N = 20'de 7 ve 3 puan.
 
-| N | D | Δ (puan) |
-|---|---|---|
-| 8 | 0.31 | ≈ +1.6 |
-| 12 | 0.57 | ≈ +2.1 |
-| 20 | 0.94 | ≈ +2.4 |
+| N | D (medyan model) | Δ medyan | Δ inceleyici üst sınırı | Δ en kötü (en uzun maç, tabanca hep tam gün) |
+|---|---|---|---|---|
+| 8 | 0.36 | **+1.8** | +2.6 | +2.8 |
+| 12 | 0.57 | **+2.1** | +2.6 | **+4.2** |
+| 16 | 0.53 | **+1.7** | — | +2.9 |
+| 20 | 0.53 | **+1.3** | +1.8 | +2.3 |
 
-Bu bir **tahmin**, ölçüm değil. Gerçek kapı [O] ve gece soak'udur (§4.5). Sabırsızın "kasten yanlış atış" hamlesi kill
-sayısını değiştirmez (Kurban Hakkı düşer), zamanlamasını ve kimliğini değiştirir. Bu yüzden modele girmedi.
+Bu bir **tahmin**, ölçüm değil. Gerçek kapı [O] ve gece soak'udur (§4.5). N = 12'deki en kötü durum (5 günlük maç)
+sınırı aşar: L4 bunu izler ve ilk düğme onu hedefler.
 
 **Ayar düğmeleri (sırayla, her biri tek sayı):**
-1. `P(N)` ±%25 (en yumuşak: silah daha erken ya da geç gelir)
-2. `G_max(N)` ±1
-3. Ocak günü (2 → 3)
-4. Ölüm eşiği mesafesi (12 m → 8 m)
+1. **2. tabancanın günü** (N 12–15'te 4 → 5; N 16–20'de 3 → 4). En uzun maçlardaki fazlalığı keser, kısa maçlara dokunmaz.
+2. **Ocak günü** (N 8–11'de 3 → 4; N ≥ 12'de 2 → 3).
+3. `P` (3·G + 1 → 3·G): set daha geç tamamlanır.
+4. Ölüm eşiği mesafesi (12 m → 8 m).
 
 Bugün smoke'larda Sabırsız yıpratmayla kazanıyor (anekdot, `Pillar_Audit.md`). Kasaba hedefin altında kalırsa aynı
 düğmeler ters yönde kullanılır. Rol üreticisinin güç bütçesine dokunmadan Kasaba oranını kaydırmanın yolu budur.
 
 ### 4.4 Anti-snowball kuralları (G5)
-1. **Tavan** `G_max(N)`; tavandayken parça konmaz.
-2. **En nadir tür önce** + günlük tamamlama: şans serisi yok, kıtlık serisi yok.
-3. **Takas zorunluluğu:** 3 farklı parça ve kişi başına ~0.6 parça/gün.
-4. **Oyuncu başına 1 tabanca**, kemerde ve görünür. Tabancalı hedef olur.
-5. **Tek atım**, yedek en fazla 1, dolum 5 sn.
-6. **Masum cezası:** kaybedilen silah + 30 sn + maç boyu yasak. Sabırsız için ek olarak Kurban Hakkı.
+1. **Güne göre açılan tavan** `G(N, d)`; tavan tabancaları ve ceplerdeki tam setleri sayar; tavandayken parça konmaz.
+2. **En nadir tür önce** (sadece kap stoğu) + günlük tamamlama: şans serisi yok, kıtlık serisi yok, cepte istifleme
+   yönetmeni kilitleyemez.
+3. **Takas zorunluluğu:** 3 farklı parça, her türden cepte en fazla 1, köy için günde ~1 set.
+4. **Oyuncu başına 1 tabanca**, kemerde ve görünür; sandığa konamaz; kemerde olmayan tabanca şafakta yok olur.
+5. **Tek atım, tek silah:** yedek en fazla 1, dolum 5 sn, ölüme yol açan atıştan sonra tabanca çatlar.
+6. **Masum cezası:** 30 sn özel bulanıklık + maç boyu gizli yasak; 30 sn atıf kuralı. Tehdit tarafı için her tabanca
+   ölümü Kurban Hakkı harcar (borç kuralıyla).
 7. **Ölen taşıyanın her şeyi yere düşer**, suya düşerse batar.
-8. **Ocak 1. gün soğuk;** zanaat 8 sn ve 35 m'den duyulur.
+8. **Ocak N'ye göre 2. ya da 3. gün yanar;** zanaat 8 sn ve 35 m'den duyulur.
 9. **Oyun sonu:** yaşayan ≤ 4 iken yeni parça ya da Fişek yok.
 10. **Tarafsız yönetmen:** bütçe sadece N'ye ve açık kap sayısına bakar, kimin kazandığına **bakmaz**. Gizli bilgiyle
     lastik bant yok (G5.1'in geri dönüşü rol ve toplantıdan gelmeli).
@@ -391,12 +466,14 @@ düğmeler ters yönde kullanılır. Rol üreticisinin güç bütçesine dokunma
 
 | Kod (öneri) | Hedef | Değer | Ölçüm | n_min |
 |---|---|---|---|---|
-| L1 | Dövülen tabanca (2. ve 3. gün), tavan ihlali | §4.2 tablosu ± %20; tavan ihlali 0 | [L] mantık simülasyonu (10.000 tohum), [T] | — |
+| L1 | Tabanca-gün ve tabanca ölümü (stres vakası: Sabırsız %100 paylaşım, Kasaba %80 takas); tavan ihlali (tabanca + cepteki tam set > G) | §4.2 tablosu ± %20; ihlal 0 | [L] mantık simülasyonu (10.000 tohum), [T] | — |
 | L2 | Kasabalı (tehdit olmayan) atıcıların tabanca ölümlerinde doğru hedef oranı | %45–70 (alt: çıkarım çalışıyor; üst: silah bir sert kanıt makinesi değil) | [O]; [B] sadece rapor | 60 tabanca ölümü |
-| L3 | Tabanca ölümlerinin tüm ölümlere oranı | ≤ %15 | [B] [O] | 40 |
+| L3 | Tabanca ölümlerinin tüm ölümlere oranı | ≤ %10 (model %5–8) | [B] [O] | 40 |
 | L4 | Kasaba kazanma oranı farkı, tabanca açık − kapalı | ≤ +3 puan | Mantık-seviyesi simülasyon + [O] toplam. Kapı değil, rapor (tam maçla anlamlı fark ~2.000 maç/kol ister). | — |
 | L5 | Bot yolları: kır, sar, takas, dök, ateş et, batır | Her yol çalışır ve loglar; `reason=random` 0 | [U] | — |
 | L6 | Toplantı, Mahkeme ve Epilog'da tabanca çekme | Reddedilir | [T] | — |
+| L7 | Tabancadan çıkan sert kanıt (atıştan ya da cezadan başkalarının öğrendiği taraf bilgisi) | 0 (ceza gizli, çatlama her ölümde) | [T] replikasyon testi: ceza durumu `COND_OwnerOnly` | — |
+| L8 | Tabanca-gün başına "tavan dolu ama Kasaba'da hiç tabanca yok" günleri (inkâr) | Rapor; ≤ 1 gün üst üste (şafak süre dolumu) | [B] | 40 maç |
 
 ---
 
@@ -408,7 +485,7 @@ bir şey ekler:
 | Halka | Ne ekler |
 |---|---|
 | Karar | Kutu mu görev mi; parçayı kime veririm; ne zaman döverim; tabancayı taşır mıyım saklar mıyım; çeker miyim; ateş eder miyim |
-| İz | Kırma sesi, örs sesi, ocak parlaması, atış sesi ve dumanı, seri numarası, kanlı sargı, ıslak tabanca, sersem atıcı |
+| İz | Kırma sesi, örs sesi, ocak parlaması, atış sesi ve dumanı, seri numarası, çatlamış tabanca, kanlı sargı, ıslak tabanca |
 | Bilgi | Kasaba Panosu'ndaki dövülme satırı; "kimin belinde silah var?"; yaranın sınıfı "kurşun" |
 | Şüphe | Parça isteyen herkes şüphelidir; parça vermeyen herkes de. "Tabancan var ama neden hiç kullanmadın?" |
 | Toplantı | Vaka Dosyası'nda yara sınıfı "Kurşun" → silahı olanlar ilk soruya çekilir; seri numarası ile tanık çelişkisi |
@@ -424,7 +501,9 @@ bir şey ekler:
 | `Craft {who, serial}` | `AKGForgeBench` | Görüş + `KG_HEAR_FORGE` | **Evet, isimsiz** (Kasaba Panosu) |
 | `GunDraw {who, serial}` | kemer bileşeni | Görüş | Hayır |
 | `Shot {who, serial, hitWho, dmg}` | tabanca bileşeni | Görüş + `KG_HEAR_SHOT` | Duyan herkesin HUD'unda "Silah sesi! (Dere Boyu)", isimsiz (kazıdaki "Birisi mezar kazıyor…" kalıbı, GDD §16) |
-| `GunPenalty {who}` | ceza | Görüş | Hayır |
+| `GunPenalty {who}` | ceza | **Tanık yok** (sadece sunucu ve atıcının kendi defteri) | Hayır |
+| `GunBroke {who, serial}` | ölüme yol açan atış | Görüş | Hayır |
+| `GunExpired {serial}` | şafak süre dolumu | Yok (dünyadan kaybolur) | Hayır |
 | `GunPickup / GunSunk {who, serial}` | pickup / su | Görüş + sıçrama 15 m | Hayır |
 | `Bandage {who, target}` | sargı | Görüş | Hayır |
 
@@ -442,7 +521,7 @@ Defter (J, Roadmap 024) satır örnekleri (G3.5, tek satır):
 | Seri numaralı tabanca | Zanaat | Batana kadar | Batır | Başkasının evine bırak |
 | Kanlı Sargı | Sargı kullanımı | 90 sn | Kendi evinde sarın | İftiracı'nın "kanlı bez"i (`02_Roles.md`) |
 | Islak tabanca (damlama) | Suya girmek | 60 sn | Ateş başında kurut | — |
-| Sersem atıcı | Masum cezası | 30 sn | Görülmeden vur | — |
+| Çatlamış tabanca (seri no okunur) | Ölüme yol açan her atış | 90 sn | Alıp denize at (batırma) | Başka bir tabancayı çatlatıp bırakmak mümkün değil (sadece ölümcül atış çatlatır) |
 | Kırık kap kırıntısı | Kırma | 9–12 sn (talaş) + kap şafağa kadar yok | — | — |
 
 Yeni iz türleri S3.1 ve S3.2'ye sayılır: her birinin bir ömrü ve bir karşı hamlesi var, ikisinin sahte yolu var.
@@ -470,8 +549,9 @@ Yeni iz türleri S3.1 ve S3.2'ye sayılır: her birinin bir ömrü ve bir karş�
 3. Deniz, Defter'inden paylaşır: *"Gündüz 2, 14:20, Demirhane'de Emre'yi tezgâhta gördüm"* (tanımlı tanık).
 4. Emre: *"Evet dövdüm, ama tabancam dün gece çalındı."* Kemerinde tabanca yok.
 5. Barut Ustası: *"Sabah Çeşme'de birinin cebinde parça sezdim."* (kim olduğunu bilmiyor).
-6. Selin: *"Atıştan hemen sonra Liman'da dumanın içinden biri koşarak kaçtı. Sersem değildi."* Şafakta ölenin kasabalı
-   olduğu açılırsa atıcı **mutlaka** cezalı ve sersemdi. Koşarak kaçan kişi ya atıcı değildi, ya da Selin yalan söylüyor.
+6. Selin: *"Atıştan hemen sonra Liman'da dumanın içinden biri koşarak kaçtı, yerde çatlak bir tabanca kaldı."* Çatlak
+   tabancanın seri numarası No. 1'dir: Emre'nin dövdüğü tabanca. Ya Emre'nin "çalındı" hikâyesi doğrudur ve tabancayı
+   alan kişi dün gece Emre'nin evinin yakınındaydı, ya da Emre yalan söylüyor.
 Bu tartışmayı tek bir bilgi parçası değil, **dört** bilgi parçası (S2.3 medyan ≥ 3) ve bir çelişki (S9.5) besler.
 
 ---
@@ -480,12 +560,16 @@ Bu tartışmayı tek bir bilgi parçası değil, **dört** bilgi parçası (S2.3
 
 | # | İstismar | Kural / karşı hamle |
 |---|---|---|
-| 1 | Sabırsızın parça biriktirerek inkârı | En nadir tür önce + günlük tamamlama; Barut Ustası sezgisi; ölünce her şey düşer |
+| 1 | Sabırsızın parça biriktirerek inkârı | Her türden cepte en fazla 1; en nadir tür kuralı sadece kap stoğunu sayar (cepteki istif yönetmeni kilitlemez); tam setler tavana sayılır ama stok her gün bir set fazlasına tamamlanır; Barut Ustası sezgisi; ölünce her şey düşer |
 | 2 | Demirhane'de pusu | 8 sn kısa; örs 35 m'den duyulur; eşlikle gel. Kabul edilen bir risk. |
-| 3 | Dövüp batırarak tavanı tüketmek | Batırma tavanı ertesi şafak boşaltır (1 günlük inkâr); sıçrama olayı defterde |
+| 3 | Dövüp batırarak ya da bir yere bırakarak tavanı tüketmek | Batırılan ya da kemerde olmayan tabanca şafakta tavanı boşaltır (en fazla 1 günlük inkâr); sıçrama olayı defterde |
+| 3b | Tabancayı sandığa kilitleyip Kasaba'yı bütün maç silahsız bırakmak (tavan 1 iken) | Tabanca hiçbir sandığa konamaz; kemerde olmayan tabanca şafakta yok olur |
+| 3c | Katil takımının parçaları kusursuz paylaşması | Modelin stres vakası zaten bunu varsayar (Ek A); stok küçük ve tavana bağlı olduğu için paylaşım tavanı aşamaz |
 | 4 | RDM ve trol atışları | Masum cezası + maç boyu yasak; mevcut raporlama; 1 atım + 5 sn dolum |
-| 5 | Masumiyet testi (yaralayıp cezaya bakmak) | Ceza sadece ölümde (§3.8) |
-| 6 | Takım arkadaşını vurup güven kazanmak (bus) | İzinli; Town of Salem'in klasik hamlesi. Takıma pahalıya patlar. |
+| 5 | Masumiyet testi (yaralayıp cezaya bakmak) | Ceza sadece ölümde (§3.8) ve gizli |
+| 5b | Yaralayıp ortağa (ya da kurda) bitirtmek, cezadan kaçmak | 12 m ötesi sabit 40 hasar; 30 sn atıf kuralı: yaralanan ölürse ceza atıcıya işler |
+| 6 | Takım arkadaşını vurup güven kazanmak (bus) | İzinli; Town of Salem'in klasik hamlesi. Takıma pahalıya patlar ve Kurban Hakkı harcar. Ceza gizli olduğu için "cezasız atış = Kasaba" okuması zaten yok |
+| 6b | Tabancayı Kurban Hakkı dışında ek öldürme olarak kullanmak (öldürmeyen bir Sabırsız rolüyle) | Tehdit tarafının her tabanca ölümü takımın Kurban Hakkı'nı harcar; hak yoksa ertesi gecenin hakkı düşer (027b) |
 | 7 | Kap ezberleme | Kap tohumu = maç tohumu × gün × kalıcı kimlik (bugünkü `LootSeed = 0` riski düzelir) |
 | 8 | Gece kap tarlası | Kaplar sadece şafakta yenilenir |
 | 9 | Sargıyı 1 sn'de iptal | Açma bitince harcanır |
@@ -496,7 +580,8 @@ Bu tartışmayı tek bir bilgi parçası değil, **dört** bilgi parçası (S2.3
 | 14 | Takas dolandırıcılığı (parçayı alıp dövmemek) | Tasarımın parçası: çıkarım malzemesi; `ItemGiven` defterde |
 | 15 | Host migration'da eşya kopyalama | Kemer, cepler ve yönetmen SaveGame; kayıt anahtarı `PlayerKey()` (`UI/Reveal/KGStreamerMode.h`) |
 | 16 | Parçaya bakarak rol okuma | Parçalar herkese düşer; Sabırsız da döver; Kaçakçı tabancası tavan dışı |
-| 17 | Sersem atıcıyı öldürmek | İzinli (30 sn açık hedef): masum öldürmenin gerçek bedeli |
+| 17 | Cezalı atıcıyı teşhis etmek | Mümkün değil: ceza gizli (L7). Atıcının kendisi masumu vurduğunu bilir ve bunu söyleyebilir |
+| 18 | Masada oturan (sabit, dar algılı) oyuncuyu vurmak | Masa belgesi: tahta odağı 8 m'ye kadar tanımlar, horoz tıkı (8 m) odağı 3 sn kırar; T-M3 tabancalı maçlarda ayrı izlenir |
 
 ---
 
@@ -535,16 +620,16 @@ olmayan bir oyuncuyla çağrılması eklenir. Barut Ustası botu sezgisini rol y
 - İkon: bugünkü sistem gibi renkli karo + glif (asset gerekmez). Namlu "Nm", Çakmak "Çk", Kabza "Kb", Fişek "F",
   Sargı "+", Hurda "Çv".
 - **Tooltip (G3.4, gizli kural yok; G3.1, ≤ 25 kelime):**
-  - Tabanca: *"Tek atım. Masumu öldürürsen tabanca düşer, 30 sn göremezsin ve maç boyu silah tutamazsın."* (14 kelime)
-  - Parça: *"Namlu + Çakmak + Kabza = tabanca. Demirhane tezgâhında dövülür (2. günden itibaren)."*
+  - Tabanca: *"Tek atım, tek ölüm: öldürünce çatlar. Masumu öldürürsen bir daha silah tutamazsın."* (13 kelime)
+  - Parça: *"Namlu + Çakmak + Kabza = tabanca. Demirhane tezgâhında dövülür (ocak yanınca). Her türden bir tane taşınır."*
   - Sargı: *"Kendine 30 can (6 sn), başkasına 40 can. Hasar alırsan yarıda kalır."*
 - Metinler String Tables'tan gelir (EN/TR/RU). Yayıncı modu (SPRINT-015) defter ve pano satırlarındaki isimleri maskeler.
 
 ### 8.2 HUD
 - **Zanaat:** tezgâhta `E basılı: Tabanca döv (8 sn)`, halka ilerleme çubuğu ve her darbede ekran sarsıntısı.
 - **Duyulan olaylar:** kazıdaki kalıp. *"Silah sesi! — Dere Boyu"* (60 m), *"Demirhane'de örs sesi"* (35 m). İsim yok.
-- **Ceza ekranı:** 30 sn radyal bulanıklık, renksizleşme, vinyet (balık çekmedeki vinyet tekniği) ve yazı *"Masum
-  birini vurdun. Tabanca elinden düştü."*
+- **Ceza ekranı (sadece atıcı görür):** 30 sn radyal bulanıklık, renksizleşme, vinyet (balık çekmedeki vinyet tekniği)
+  ve yazı *"Masum birini öldürdün. Elin titriyor: bu maç silah tutamazsın."* Başkalarına hiçbir şey gösterilmez.
 - **Sargı:** can çubuğunun üstünde yeşil dolan bir "iyileşme gölgesi". Kesilince kırmızı çizgi.
 - **Horoz:** nişangâhın yanında küçük horoz ikonu (iniş / kalkış).
 
@@ -566,7 +651,6 @@ FPArms2 doğrulamasından **sonra** gelmeli.
 | `pistol_inspect` | 2 sn | Seri no'yu kameraya çevirir (knife_inspect kalıbı) |
 | `bandage_self` / `bandage_other` | döngü | İki el sarar / öne uzanır |
 | `forge_hammer` | döngü | Tezgâhta çekiç (ya da 3P + kamera sarsıntısı) |
-| `cover_eyes` | 30 sn döngü | Ceza |
 
 `FGripDef` satırı: `SM_KG_Flintlock` (uç +X, sırt +Z, tutuş kabzanın ortası).
 
@@ -609,13 +693,13 @@ FPArms2 doğrulamasından **sonra** gelmeli.
 | `Inventory/KGLoot.*` | `FKGLoot::Roll`, tablolar Crate/Barrel/Pot/Chest/Grave/Fishing/Dig*/Crypt*/Cellar, `MakeRng` | Tablo ağırlıkları (§3.2); yönetmen kap içeriğini önceden belirleyebilsin |
 | `Inventory/KGItemCatalog.*` | Tek kaynak katalog, `EKGRarity`, etiketler | 7 yeni eşya (§3.4) |
 | `Inventory/KGInventoryComponent.*`, `KGInventoryRPCComponent.*` | Capacity 12, `COND_OwnerOnly`, `ServerDrop`, `ServerTransfer` | Kemer slotu (ayrı bileşen daha iyi: cep kodu değişmez) |
-| `World/KGPickup.*`, `World/KGStorageChest.*` | Yer eşyası; kilitli ev sandığı | Tabanca pickup'ı; sandıkta tabanca |
+| `World/KGPickup.*`, `World/KGStorageChest.*` | Yer eşyası; kilitli ev sandığı | Tabanca pickup'ı; sandık tabancayı **reddeder** |
 | `Character/KGCharacter.*` | `ServerAttack` (faz kontrolü yok: 020a), `ServerShove`, taşıma, `HandleDeath`, `ValidatedViewStart`, `KGFP2` | Girdi kancaları (ateş, horoz, sargı), itme → silahsızlandırma, ölümde düşürme. **Seri dosya.** |
 | `Combat/KGHealthComponent.*` | 100 can, `Heal()` | Zamana yayılı iyileşme (`FKGMatchClock`) |
 | `Character/KGStamina.h` | 100, koşu 18/sn, yenilenme 16/sn | Sargıda koşu yok |
 | `Core/KGGameMode.cpp` | `EnterPhase(Dawn)`, `OnCharacterDied`, faz süreleri (`:62-86`) | Şafak kancası → yönetmen |
 | `Core/KGMatchClock.h`, `Core/KGRng.h` | Süreler, tohum | — |
-| `Dig/` | 40 m duyulma ve "Birisi…" HUD kalıbı | Sonra: tabancayı gömmek |
+| `Dig/` | 40 m duyulma ve "Birisi…" HUD kalıbı | Duyulan olay HUD kalıbı (tabancayı gömmek kesildi) |
 | `Fishing/` | Suya düşme ve yüzme durumu | Islaklık tetikleyicisi |
 | `Chores/` + SPRINT-016 `Chores/WorldChores/` | Taşıma, yol noktası çizimi | Demirhane işareti aynı çizimle |
 | `AI/KGBotController.cpp` | Gezinme | §7 yolları. **Seri dosya.** |
@@ -654,62 +738,40 @@ FPArms2 doğrulamasından **sonra** gelmeli.
 - **Not:** Iteration klasöründeki SPRINT-022/023 numaraları, Roadmap'teki 022/023 önerileriyle çakışıyor. Bu belge
   Roadmap önerileri için "Roadmap 022" yazar.
 
-### 10.4 Kardeş tasarımlarla arayüz (başka ajanlar yazıyor)
-- **Orman tehlikesi (kurtlar, sis):** kurtlar tabancayla vurulabilir mi? Öneri: evet, ama atış yine 60 m'den duyulur ve
-  mermi harcanır; kurt ölümü masum cezası vermez. Sis yaratığına ateş etmek sesi çeker. Orman kapları (terk edilmiş
-  kamp sandığı) aynı yönetmenden beslenir: tehlikeli bölgede kap ağırlığı ×1.5 (risk/ödül, S4.1).
-- **Orman görevleri (ateş yakma, kamp):** kamp ateşi ıslak tabancayı kurutur (§3.7).
-- **Masa oyunları (satranç, dama):** bağlantı yok. Sadece eşyalar masada bahis konusu olmaz (tabanca ve parça bahsi
-  yok).
-
----
+### 10.4 Kardeş tasarımlarla arayüz (ortak kurallar, iki belgede aynı)
+- **Orman tehlikesi (kurtlar, sis):** tabanca kurtlara ve Sis'e **etki etmez** (atış yine 60 m'den duyulur, mermi
+  harcanır). "Kurda ateş ettim" böylece duyulan bir atışın doğrulanamaz bahanesi olamaz. **Orman kaplarına parça
+  konmaz** (yönetmen hariç tutar); orman kaplarında sargı ağırlığı ×2. Tabanca ölümü de orman ölümü de Kurban Hakkı'na
+  bağlıdır (027b).
+- **Tek Islak durumu:** bele kadar su **ve** Sis Duvarı dönüşü aynı durumu verir; kamp ateşi dahil her ateşin 3 m içinde
+  10 sn'de kurur (§3.7).
+- **Orman görevleri:** cepte şifa otu yok; şifa arzı sadece sargıdır (§3.5 bütçesi).
+- **Masa oyunları:** tabanca ve parça bahsi yok. Masa odağı `KG_TABLE_FOCUS_RANGE` = 8 m (tabancanın öldürme mesafesi
+  içindeki atıcı tanımlanır); horoz tıkını (`KG_HEAR_COCK`, 8 m) duyan oturan oyuncunun odağı 3 sn kırılır. T-M3
+  tabancalı maçlarda ayrı raporlanır.
+- **Para:** maç içi para `Coin` = Bakır; tek harcama yeri Bay Thimble'ın sargısı (§3.5).
 
 ## 11. MVP ve sonrası
 
-### 11.1 Önerilen bölme (her biri ayrı Backlog "Proposed" maddesi)
+### 11.1 Bölme (sözleşme: `Docs/Iterations/SPRINT-035-Loot-Bandage-Flintlock.md`)
+Her dilim ayrı bir Backlog "Proposed" maddesidir; kabul ve yazılabilir kapsam sözleşmededir.
 
-**Parça A — "Kutular + Sargı" (S, 020a'dan sonra koşabilir, görünür ilerleme):**
-- Şafakta kap yenilenmesi, tohum düzeltmesi, snapshot; Katman A tabloları (Sargı, Hurda); küp canı 20.
-- Sargı Bezi (kendine ve başkasına, kesilme), Doktor değerleri daha sonra 027a'da.
-- Kanlı Sargı prop'u (90 sn).
-- Botlar: kır + sar yolu ([U]).
-- Olay kancaları boş fonksiyon olarak (`EmitLootEvent`); 020b gelince bağlanır.
+| Dilim | İçerik | Boy | Önkoşul |
+|---|---|---|---|
+| **035a Kutular** | Tohum düzeltmesi `hash(MaçTohumu, Gün, PersistentId)`, `UKGSnapshotComponent`, şafak yenilenmesi (`SetLifeSpan(15)` yerine gizle/göster), Katman A tabloları, `Bandage` ve `Scrap` düz katalog eşyası, küp canı 20, bot kırma yolu, boş `EmitLootEvent` kancası | S | Doğrulama oturumu, 020a |
+| **035b Eşya kullanma + Sargı** | Yeni `UKGItemUseComponent` (`KGPlayerExtrasSubsystem` sıfır entegrasyon kalıbı), kanal ve kesilme (hasar, itme, saldırı, koşu, Toplantı fazı başlangıcı; çan 021'de), kendine/başkasına sargı, Kanlı Sargı prop'u, bot sargı yolu, **ortak durum bileşeni** `UKGStatusComponent` (Islak, aksama, yavaşlık; orman da bunu kullanır) | M | 035a |
+| **035c Yönetmen + parçalar + Demirhane + kemer** | `FKGLootDirector` (saf), parçalar, Fişek, `AKGForgeBench`, kemer slotu, seri no; tabanca **görünür ve taşınır ama ateş etmez**; L1 Monte Carlo testi | M | 035b, Roadmap 020b |
+| **035d Tabanca kuralları + ceza + FP** | `FKGGunRules`, çek/horoz/ateş/dolum, basamaklı hasar, 30 sn atıf, tek atım tek silah, gizli ceza, FP klipleri ve mesh | L | 035c, Roadmap 021, 022, FPArms2 doğrulaması (borç #1) |
+| **035e Bot tabanca yolları** | Kır/sar/takas/döv/ateş/batır, `reason=<eventId>` | S | 035d, Roadmap 023 |
+| **035f Islaklık, batırma, silahsızlandırma, pano** | Islak tekleme, batırma, önden itmeyle düşürme, şafak süre dolumu, Kasaba Panosu dövülme satırı | S | 035d, Roadmap 024 |
 
-Kabul (öneri, sabit):
-1. **Test:** kap şafakta yeniden belirir; aynı maç tohumu + gün aynı ganimeti verir; farklı tohum farklı verir; kap
-   başına ganimet dağılımı 100.000 çekilişte §3.2 tablosuna ±%1 uyar.
-2. **Test:** sargı kendine +30/6 sn, başkasına +40; açma bitmeden iptal eşyayı korur; hasar kalan iyileşmeyi keser;
-   can 100'ü geçmez; süreler `FKGMatchClock`'tan.
-3. **[U]** 8 botlu x1 soak'ta her botun `KG_LOOT` ve (canı ≤ 60 olanların) `KG_BANDAGE` satırı var.
-4. UIShot: sargı gölgeli can çubuğu; kutu kırılma anı (`KG_Cap_crate_burst.png`). `run_invariants.ps1` geçer.
-
-**Parça B — "Çakmaklı v1" (L, 020b + 021 + 022 + 023'ten ve FPArms2 doğrulamasından sonra):**
-- Parçalar, Fişek, Yönetmen (bütçe, tavan, en nadir tür, oyun sonu), Demirhane tezgâhı.
-- Tabanca: kemer, çek/horoz/ateş/dolum, hasar tablosu, ıslaklık, masum cezası, silahsızlandırma, ölümde düşürme, batma.
-- Olaylar ve Kasaba Panosu satırı. Botların tabanca yolları. FP klipleri ve mesh'ler.
-
-Kabul (öneri, sabit):
-1. **Test** `KillGodot.Gun.Rules` (saf `FKGGunRules`): ≥ 16 tablo vakası: hasar düşüşü sınırları, §3.8'deki ceza
-   tablosunun her satırı, ıslak tekleme (deterministik), faz reddi (S9.1), tavan ve kemer kuralları.
-2. **Test** `KillGodot.Loot.Director` (saf): 10.000 tohumda `G_max` ihlali 0; en nadir tür kuralı; oyun sonu kesintisi;
-   §4.2 tablosu mantık simülasyonuyla ± %20 (L1).
-3. **Test:** zanaat 8 sn sunucu süresi, 2. günden önce ve tavanda red; `Craft` olayı tanık listesiyle defterde; pano
-   satırı isimsiz.
-4. **[U]** Kasabalı bot atışlarının %100'ü `KG_SHOT … reason=<eventId>`; `random` 0; Sabırsız `KG_SINK` yolu çalışır.
-5. UIShot'lar: kemer + set izleyicili envanter, tezgâhta ilerleme, ceza ekranı, FP nişan (`KG_Cap_flintlock_fp.png`),
-   2 bakış turu. `run_invariants.ps1` geçer.
-
-Yazılabilir kapsam (B): yeni `Source/KillGodot/Weapons/` (`FKGGunRules`, `UKGBeltComponent`, `UKGGunComponent`), yeni
-`Loot/KGLootDirector.*`, yeni `World/KGForgeBench.*`, `Inventory/KGItemCatalog.cpp`, `Inventory/KGLoot.cpp`,
-`Character/KGCharacter.cpp` (sadece kancalar), `Combat/KGHealthComponent.*`, `AI/KGBotController.cpp` (tabanca yolları),
-`UI/` (kemer, HUD), `Tools/Blender/kg_make_fp_arms2.py` (yeni klipler) + yeni mesh yolları, layout JSON (`forge_bench`,
-`loot_spots`: sadece veri), testler, `01_GDD_Core.md` §4 (güncelleme). Başlık değişiklikleri tek editör-kapanış döngüsünde.
+Kurban Hakkı satırı (§3.8) Roadmap 027b'ye kadar uygulanmaz; 027b sprintinin kabulüne girer.
 
 ### 11.2 Sonra (her biri ayrı öneri)
 - **Tanık Pusulası** (ipucu eşyası): gerçek bir defter olayının bölge + saatini **isimsiz** söyleyen not
   (`N/6` adet/gün, küplerde). Sahtekar sahte pusula bırakabilir. 020b + 024 ister.
 - Barut isi ve yıkama, ağır yara damlası (026a).
-- Tabancayı gömmek (Dig), Hodge'a hurda/parça satmak, "Uzat" ile doğrudan eşya verme.
+- Hodge'a hurda/parça satmak, "Uzat" ile doğrudan eşya verme. (Tabancayı gömmek kesildi: istifleme yolu olurdu.)
 - Rol bağları: Barut Ustası sezgisi, Kaçakçı tabancası, İftiracı yerleştirmesi, Adli Tabip yara okuması, İnfazcı rol
   tabancası.
 - Dünya Olayı "Gemi Enkazı" (R8): kıyıya tam set içeren bir G. kolisi (tavan içinde).
@@ -725,62 +787,70 @@ Kural: Ç1–Ç4 zorunlu; kalan 8'den ≥ 6 Evet. Bu **yeni** bir mekanik: zorun
 | # | Soru | Cevap | Gerekçe |
 |---|---|---|---|
 | Ç1 | Karar | **Evet** | Kutu mu görev mi; parçayı kime vereyim (güven); döveyim mi (35 m gürültü); tabancayı taşıyayım mı saklayayım mı; çekeyim mi; ateş edeyim mi; sargıyı şimdi mi sonra mı. Her birinin farklı bir risk ya da bilgi sonucu var. |
-| Ç2 | İz | **Evet** (020b koşuluyla) | Zanaat, atış, alma, batırma, sargı ve kırma defter olaylarıdır; örs 35 m'den, atış 60 m'den duyulur, pano satırı herkese açık. **Koşul:** Parça B, 020b'den önce gelirse Ç2 Hayır olur. Bu yüzden sıralama kabulün parçasıdır. |
-| Ç3 | Karşı hamle | **Evet** | Denize itip barutu ıslatmak, önden itip silahı düşürmek, cesetten almak, batırmak, Doktor koruması, zırhlar, Demirhane pususu, parça inkârı, çerçeveyi seri numarasıyla bozmak. |
+| Ç2 | İz | **Evet** (020b koşuluyla) | Zanaat, atış, alma, batırma, sargı ve kırma defter olaylarıdır; örs 35 m'den, atış 60 m'den duyulur, pano satırı herkese açık. **Koşul:** 035c, 020b'den önce gelirse Ç2 Hayır olur. Bu yüzden sıralama kabulün parçasıdır. |
+| Ç3 | Karşı hamle | **Evet** | Denize itip ya da Sis Duvarı'ndan geçirip barutu ıslatmak, önden itip silahı düşürmek, cesetten almak, batırmak, Doktor koruması, zırhlar, Demirhane pususu, çerçeveyi seri numarasıyla (çatlak tabanca dahil) bozmak. |
 | Ç4 | Ölçüm | **Evet** | S1.4 (karar türü: Risk = silah çek, Güven = parça ver; bugün medyan 3 → hedef ≥ 4), S6.1 (Sabırsızın öldürme dışı fiilleri: batır, yerleştir, kasten yanlış atış), S2.3 (atış başına duyan tanık → vaka başına +1–3 bilgi parçası), S3.1/S3.2 (+5 iz türü, hepsinin ömrü ve karşısı var), S4.1 (açık her bölgede ≥ 3 kap = "risk/ödül" sebebi), S10.3 (tabancalar 2. günden itibaren → tırmanma). Kendi bantları: L1–L6 (§4.5). Not: "silah çek / parça ver" charter §0.4 karar fiili listesinde yok; ekleme önerisi §13'te. |
 | Ç5 | Bağlantı | **Evet** | Defter, Kasaba Panosu, Vaka Dosyası (yara sınıfı), roller (İnfazcı, Doktor, Barut Ustası, Kaçakçı, İftiracı, Adli Tabip, Bekçi, zırhlılar), botlar, harita (Demirhane, kaplar), epilog zaman çizelgesi ("No. 2'yi kim dövdü"). |
-| Ç6 | Ölçek | **Hayır** | N = 6–7'de tabanca **varsayılan olarak kapalı**: tek Sabırsız varken doğru tek bir atış maçı bitirir. Orada sadece kaplar ve sargı çalışır. N ≥ 8'de tavan ve bütçe N ile ölçeklenir. |
+| Ç6 | Ölçek | **Hayır** | N = 6–7'de tabanca **varsayılan olarak kapalı**: tek Sabırsız varken doğru tek bir atış maçı bitirir. Orada sadece kaplar ve sargı çalışır. N ≥ 8'de tavan ve ocak günü N ile ölçeklenir. |
 | Ç7 | Varyans | **Evet** | Parça yerleşimi tohumlu kurulum rastgeleliğidir ve tavanla sınırlıdır. Atışta rastgele sapma yok; tekleme sadece ıslaklıkla, görünür ve deterministik. Kap tablosu zarları sonucu belirlemez: günlük bütçe toplamı sabitler. |
 | Ç8 | Bot | **Evet** (020b + 023 koşuluyla) | Her yol sadece kendi algısıyla çalışır ve gerekçe loglar. Başkasının cebini okumak G6.1 grep'iyle yasak. |
 | Ç9 | Sessiz yol | **Evet** | Takas yazıyla ya da yere bırak/al ile yapılır; duyulan olaylar HUD yazısı; iddialar defterden. Ses gerekmez. |
 | Ç10 | Okunabilirlik | **Evet** | "Kutulardan 3 farklı parça topla, Demirhane'de tabanca dök; masumu öldürürsen tabancayı kaybedersin." |
-| Ç11 | Frustrasyon | **Evet** | Belde görünen tabanca, 0.8 sn çekme, 8 m'den duyulan horoz tıkı, nişan pozu. Cevap: siper, itmek, kalabalık, Doktor. Ceza kartta önceden yazılı. Islaklık damlayarak görünür. Vurulup ölmek ölümdür (G5.6 ölümü hariç tutar). |
-| Ç12 | Tempo | **Evet** | Erken: kutular ve keşif (ocak soğuk). Orta: takas ve ilk tabancalar (2. gün). Geç: pahalı, belirleyici tek atışlar; ama yaşayan ≤ 4 iken yeni parça yok (S10.5). Kutu kırmak her zaman yapılabilen bir fiil olduğu için ölü zamanı azaltır (S1.1). |
+| Ç11 | Frustrasyon | **Evet** | Belde görünen tabanca, 0.8 sn çekme, 8 m'den duyulan horoz tıkı, nişan pozu; 12 m ötesi öldürmez. Cevap: siper, itmek, kalabalık, Doktor. Ceza tooltip'te önceden yazılı. Islaklık damlayarak görünür. Vurulup ölmek ölümdür (G5.6 ölümü hariç tutar). |
+| Ç12 | Tempo | **Evet** | Erken: keşif ve ilk parçalar (ocak soğuk). Orta: **takas** (karar fiili "parça ver", L-7) ve **zanaat** (Demirhane'ye yürümek, 8 sn örs, eşlik isteme) ilk tabancaları 2.–3. günde getirir. Geç: pahalı tek atışlar; yaşayan ≤ 4 iken yeni parça yok (S10.5). Kutu kırmak S1.1'de sayılmaz (kendi ürettiğin olay); Ç12'nin gerekçesi takas ve zanaattir. |
 
 **Sonuç:** Ç1–Ç4 Evet (Ç2, 020b sıralamasına bağlı). Diğer 8'den **7 Evet** (Ç6 Hayır, gerekçeli). **Geçer.** Koşul:
-Parça B 020b, 022 ve 023'ten önce başlamaz; aksi hâlde Ç2 ve Ç8 Hayır'a döner ve mekanik reddedilir.
+035c 020b'den, 035d 021 ve 022'den, 035e 023'ten önce başlamaz; aksi hâlde Ç2 ve Ç8 Hayır'a döner ve mekanik reddedilir.
 
 ---
 
 ## 13. Riskler, açık sorular ve onay listesi
 
 **Riskler**
-1. **Kasaba'ya fazla güç** (§4.3 kaba modeli +1.5–2.5 puan). İzleme L4; düğme `P(N)`.
+1. **Kasaba'ya fazla güç** (§4.3: medyan +1.3…+2.1, en kötü N = 12 uzun maçta +4.2). İzleme L4; ilk düğme 2. tabancanın
+   günü.
 2. **S2.1 üst sınırı (%80):** atışlar 60 m'den duyulur, tabanca cinayetlerinin neredeyse hepsi tanıklıdır. Tabanca
-   ölümleri ~%4–8 olduğu için S2.1'i ~+2–3 puan kaydırır.
+   ölümleri ~%5–8 olduğu için S2.1'i ~+2–3 puan kaydırır.
+2b. **Kurban Hakkı sistemi kodda yok** (Roadmap 027b). O gelene kadar Sabırsız'ın tabanca öldürmesi bütçesizdir; bugün
+   bıçak öldürmesi de bütçesiz olduğu için yeni bir boşluk değildir.
 3. **S10.5:** son eleme tabancayla olursa "asma ya da rol yeteneği" payı düşer. Oyun sonu kesintisi (yaşayan ≤ 4)
    bunu sınırlar; İnfazcı'nın rol tabancası "rol yeteneği" sayılır.
-4. **Bugünkü `LootSeed = 0`:** kap ganimeti maçtan maça aynı. Parça A'da düzelir (§3.1).
+4. **Bugünkü `LootSeed = 0`:** kap ganimeti maçtan maça aynı. 035a'da düzelir (§3.1).
 5. **Doğrulama borcu:** FPArms2 ve yeni klipler gerçek oturumda görülmeli; borç > 10 ise sprint beklemeli (LoopContract).
-6. **Seri dosyalar** (`KGCharacter.cpp`, `KGBotController.cpp`): Parça B paralel koşamaz.
+6. **Seri dosyalar** (`KGCharacter.cpp`, `KGBotController.cpp`, `KGGameMode.cpp`, `KGDevCommands.cpp`, `KGHUD.cpp`):
+   035 dilimleri birbiriyle ve bu dosyalara yazan başka sprintlerle paralel koşamaz.
+8. **Eşya kullanma yolu yok:** `KGInventoryRPCComponent` sadece Transfer/Close/SetLocked/StandUp/Drop taşır;
+   `Heal()`'i sadece dev paneli çağırır. Sargı yeni bir kullanma bileşeni ister (035b).
 7. **Sanat:** tabanca mesh'i yoksa Blender başsız hattında yapılır; indirme gerekirse önce kullanıcıya sorulur.
 
 **Onay listesi (kullanıcı için)**
 - [ ] L-1: Parçadan zanaat, GDD §4'teki "doğrudan nadir loot tabanca"nın yerine geçsin mi?
 - [ ] L-2: Ganimet Yönetmeni (günlük bütçe + tavan) kabul mü, yoksa saf kap olasılıkları mı? (Öneri: yönetmen; G4.)
-- [ ] L-3: N ≤ 7'de tabanca varsayılan kapalı (lobi seçeneğiyle açık) mı?
-- [ ] L-4: Masum cezası sadece **ölümde** (yaralamada değil) mi?
+- [ ] L-3: N ≤ 7'de tabanca varsayılan kapalı (lobi seçeneğiyle açık) mı? Güne göre açılan tavan (§3.3) kabul mü?
+- [ ] L-4: Masum cezası sadece **ölümde** (30 sn atıflı), **gizli** (sadece atıcı görür) mi? Tek atım, tek silah mı?
 - [ ] L-5: Av tüfeği ve harpon (GDD §4) kaldırılsın mı?
 - [ ] L-6: Charter §0.3'e sabit önerileri: `KG_HEAR_SHOT` 60 m, `KG_HEAR_FORGE` 35 m, `KG_HEAR_BREAK` 20 m,
   `KG_HEAR_COCK` 8 m, `KG_HEAR_RELOAD` 10 m.
 - [ ] L-7: Charter §0.4 karar fiillerine "silah çek" (Risk), "ateş et" (Risk), "parça ver" (Güven) eklensin mi?
-- [ ] L-8: Parça A (S) 020a'dan hemen sonra; Parça B (L) 020b/021/022/023 ve FPArms2 doğrulamasından sonra.
+- [ ] L-8: Dilim sırası 035a → 035b → (020b) 035c → (021, 022, FPArms2) 035d → (023) 035e → (024) 035f.
+- [ ] L-9: Tabanca sandığa konamaz; şafakta kemerde olmayan tabanca yok olur.
+- [ ] L-10: Maç içi para tek isim: `Coin` = Bakır; sargı fiyatı önerisi 15 Bakır (dükkân yapılınca).
 
 ---
 
 ## Ek A: Model varsayımları (tabanca sayıları, §4.2)
-10.000 tohumlu Monte Carlo (tasarım aracı, oyun kodu değil; sprintte `KillGodot.Loot.Director` mantık testine dönüşür):
-- C(N) aktif kap; karışım %50 sandık, %30 fıçı, %20 küp; kırılan kaplar şafakta bütün.
-- Yönetmen: tavan altındayken bulunmamış stoğu P(N)'e tamamlar, en nadir tür önce, kap ağırlıkları 3/2/1.
-- Yaşayan oyuncu günde U{2..4} kap açar (N ≥ 16'da U{2..3}, rekabet); en fazla 0.9·C.
-- Ölümler: her gece 1 kasabalı; 2. günden itibaren toplantı %60 olasılıkla asar (asılanın tehdit olma olasılığı %45).
-  Ölenin parçaları düşer; ertesi gün %60 olasılıkla biri alır.
-- Takas (akşam): en çok farklı türü olan oyuncu toplayıcıdır. Kasabalılar eksik türü %50 olasılıkla verir (toplayıcının
-  Sabırsız olabileceğini bilmeden). Sabırsızlar kimseye vermez.
-- Zanaat: 2. günden itibaren (N = 6 seçeneğinde 3. gün). Seti tamamlanan kasabalı ertesi gün %85, aynı gün %50;
-  Sabırsız %50 olasılıkla döver (inkâr/çerçeve), Sabırsız tabancası günde %30 olasılıkla batırılır.
-- Sınırlar: atış, isabet ve korumalar modellenmedi (§4.3'teki D ayrı tahmindir). Oyuncuların gerçek takas isteği
-  modelden yüksekse sayılar artar: L1 bu yüzden [L] + gece soak'u raporuyla izlenir.
+Tasarım aracı olan basit Monte Carlo (20.000 tohum, oyun kodu değil; sprintte `KillGodot.Loot.Director` mantık testine
+dönüşür):
+- **Stres vakası (L1 bunu raporlar):** ocak yandığı gün bir set hazırdır. Gerekçe: bulunan parça oranı stoğun
+  %62–90'ı; Sabırsız takımı parçaları %100 paylaşır (takım kanalı), Kasaba %80 takas eder; sahte görev yapan Sabırsız
+  1.5× kap açar. v1'in "%50 takas, Sabırsız kimseye vermez" varsayımı bu vakada yoktur.
+- Tavan `G(N, d)` §3.3 tablosu; tabanca dövüldüğü gün 0.5 tabanca-gün sayılır; tabanca-gün başına atış eğilimi 0.25,
+  isabet 0.75 (öldürme olasılığı 0.1875).
+- Öldüren atış tabancayı çatlatır; tavan ertesi şafak boşalır, set yine hazırsa yeni tabanca o gün dövülür.
+- Maç süresi: N = 8: 4–5 gün, 12: 3–5, 16: 3–4, 20: 3–4 (düzgün).
+- Üst sınır varyantı: her maç en uzun, yeni tabanca tam gün sayılır (§4.3 son sütun).
+- Sınırlar: batırma, süre dolumu ve Doktor koruması modellenmedi (hepsi sayıları **düşürür**; model muhafazakârdır).
+  Oyuncuların gerçek davranışı farklıysa L1 [L] + gece soak'u raporu ile izlenir.
 
 ## Ek B: Lore satırları (ST_Lore önerisi, EN / TR)
 | Key | EN | TR |
@@ -788,5 +858,5 @@ Parça B 020b, 022 ve 023'ten önce başlamaz; aksi hâlde Ç2 ve Ç8 Hayır'a d
 | Lore.Loot.Dawn | At dawn the broken crates are whole again. The village wakes to the same morning; what is inside never is. | Şafakta kırık sandıklar yine bütündür. Köy aynı sabaha uyanır; içlerindeki hiç aynı değildir. |
 | Lore.Hodge.Cold | Forge's cold. Come back tomorrow. Everyone does. | Ocak soğuk. Yarın gel. Herkes gelir. |
 | Lore.Hodge.Cap | The village smells of enough powder already. | Köyde yeterince barut kokusu var. |
-| Lore.Gun.Tooltip | One shot. Kill an innocent and it falls from your hand. | Tek atım. Masumu öldürürsen elinden düşer. |
+| Lore.Gun.Tooltip | One shot, one death. Kill an innocent and your hands will never be steady again. | Tek atım, tek ölüm. Masumu öldürürsen elin bir daha titremeden tutamaz. |
 | Lore.Load.Gun | Tip: a wet flintlock only sparks. The sea is closer than you think. | İpucu: ıslak çakmaklı sadece kıvılcım çıkarır. Deniz sandığından yakın. |

@@ -1,6 +1,23 @@
-# Masa Oyunları — Satranç ve Dama (sonra: Yalancı Zarı, Tavla, kart) — Tasarım v0.1
+# Masa Oyunları — Satranç ve Dama (sonra: Yalancı Zarı, Tavla, kart) — Tasarım v0.2
 
-> Durum: **Öneri (kullanıcı onayı gerekiyor)**, 2026-09-25. Hiçbir sprint kuyruğunu değiştirmez.
+> Durum: **Öneri (kullanıcı onayı gerekiyor)**, v0.2, 2026-09-25. Hiçbir sprint kuyruğunu değiştirmez. Sprint
+> sözleşmesi: `Docs/Iterations/SPRINT-036-Tabletop.md` (036h, 036a–036e; §10).
+>
+> **v0.2 revizyonu (3 inceleme turundan sonra; özellik eklenmedi, sadece kesildi ve keskinleştirildi):**
+> 1. **Oturma tavanları ölü zaman hedefleriyle uyumlu:** düşünme payı 0.2 → **0.12 × Gündüz**, günlük oturum tavanı
+>    0.5 → **0.3 × Gündüz**, kesintisiz odak en fazla **45 sn** (sonra otomatik erteleme istemi).
+> 2. **Küçük lobide maç içi masa yok:** aynı anda oynanan koltuk ≤ floor((N − tehdit) / 3); N ≤ 7'de bu 0 masa demek
+>    (T1 sadece ısınma ve epilogda), N = 8–12'de 1, N = 16–20'de 2 masa.
+> 3. **Tebeşir tahtası isim yazmaz** ("Beyaz – Siyah · 1:30–3:00 · Siyah kalktı 2:30"). İmza ve T-M4 kesildi. İsim
+>    toplantıya sadece tanıkların defteri ve rakibin doğrulayıp yalanlayabileceği ORADAYDIM iddiasıyla gelir.
+> 4. **Odak bedeli gerçekten bağlar:** dar tanıklık filtresi oturulan **bütün süre** boyunca geçerlidir; "Etrafa bak"
+>    sadece kameradır. Odak menzili 4 → 8 m (tabancanın öldürme mesafesindeki atıcı tanımlanır); horoz tıkı odağı 3 sn
+>    kırar.
+> 5. **Para birimi:** Coin yerine Türkçe arayüz adı **Bakır** (kodda `Coin` eşyası); kaybedilen bahis, Bay Thimble'ın
+>    sargısından eksilen bakırdır (tek harcama yeri, ganimet belgesi §3.5).
+> 6. **Masa olayları ölü zamanı şişirmez:** kendi ürettiğin masa olayları S1.1'de algı sayılmaz; Ç12 yine dürüstçe Hayır.
+> 7. **Sprintler bölündü:** 036h (StartMeeting oturanı kaldırır, bugünkü hata) → 036a saf kurallar + 2D panel → 036b ağ
+>    masası → 036c 3D tahta görünümü → 036d masa botu → 036e deftere bağlama.
 > Charter `KillGo_Pillars.md` §0.1'e göre bu **yeni bir sistemdir**: onaylanırsa `Docs/Backlog.md` "Proposed (needs
 > approval)" bölümüne girer. Yol haritasındaki yeri M12 "Canlı köy"dür ("mini oyunlar (satranç, tavla, dart…)",
 > `09_Roadmap_Gauntlet.md`). `01b_Village_Life_Fun.md` §2'deki satranç/dama/tavla/Yalancı Zarı satırlarının ayrıntılı
@@ -29,14 +46,15 @@ yazılır.
 
 **1. Gündüz (toplantısız tanışma günü).** Tom, Geç Kalan'ın pencere kenarındaki satranç masasına oturur, karşısı boş.
 Yakındaki bir bota bakıp `E` ile onu çağırır. Bot "Geliyorum" der, oturur, oynarlar. Tom'un bugünkü düşünme payı
-44 saniyedir (N = 12). Pay bitince oyun **ertelenir**: taşlar yerinde kalır, tahta yarın kaldığı yerden sürer.
-Kalkarken tebeşir tahtasında bir satır belirir: *"Tom – Bartholomew · Gündüz 1 · 0:30–2:00 · ertelendi"*.
+27 saniyedir (N = 12). Pay bitince oyun **ertelenir**: taşlar yerinde kalır, tahta yarın kaldığı yerden sürer.
+Kalkarken tebeşir tahtasında bir satır belirir: *"Beyaz – Siyah · Gündüz 1 · 0:30–1:30 · ertelendi"*. Kimin oynadığını
+tahta söylemez; o saatte meydandan geçenler söyler.
 
 **3. Gündüz.** Meydanda bir ceset bulunur, çan çalar (SPRINT-021). Masadaki iki oyuncunun tahtası donar. Toplantıda
-Tom "Ben 1:30–3:00 arası meydanda Ada ile satranç oynuyordum, tahtaya bakın" der. Tahtada satır gerçekten vardır. Ama
-Ada imza atmamıştır: satırda *"Tom – Bir yabancı"* ve sonunda *"Bir yabancı kalktı 2:30"* yazar. Ceset 2:40
-civarında düşmüştür. "Yabancı"nın Ada olduğunu sadece Tom söylüyor; Ada'nın alibisi, varsa, 2:30'da biter. Tom'unki
-çana kadar sürer. Tartışma buradan başlar.
+Tom "Ben 1:30–3:00 arası meydanda Ada ile satranç oynuyordum, tahtaya bakın" der. Tahtada satır gerçekten vardır:
+*"Beyaz – Siyah · Gündüz 3 · 1:30–3:00 · Siyah kalktı 2:30"*. Tahta kimin oturduğunu söylemez. Ada "Evet, siyah bendim,
+2:30'da kalktım" der; tezgâhların önünden geçen Mira ikisini masada gördüğünü defterinden paylaşır. Ceset 2:40
+civarında düşmüştür. Ada'nın alibisi 2:30'da biter, Tom'unki çana kadar sürer. Tartışma buradan başlar.
 
 **Epilog.** Roller açıktır, herkes meydanda. Yarım kalan oyunlar 30 saniye ek süreyle sürer. Bitmeyenler "Yarın
 bitiririz" diye beraberlik sayılır.
@@ -60,7 +78,17 @@ bir tebeşir tahtası ve bahis paralarının yığıldığı bir kâse. Masalar 
 | T4 | Geç Kalan zemin kat, ocak başı | Dama | orta | SPRINT-016'nın "Odun" görevi odunu bu ocağa teslim eder: taşıyıcılar masanın yanından geçer. |
 
 - Meydan ve Geç Kalan "Kalp" bölgesindedir, Bölge Kapıları (031a) her N'de açıktır.
-- **N < 8'de sadece T1 ve T3 açıktır** (2 tahta, en fazla 4 oturan). N ≥ 8'de 4 tahta. Gerekçe: 6 kişilik maçta 4 kişinin masada olması köyü boşaltır.
+- **Maç içinde aynı anda oynanabilen masa sayısı** = floor(floor((N − tehdit) / 3) / 2) ([L] + sunucu kuralı; bir masa
+  2 koltuktur). Dolu olunca oturma istemi "Masalar dolu" der. Sonuç:
+
+  | N (tehdit) | 6–7 (1) | 8 (2) | 12 (3) | 16 (4) | 20 (5) |
+  |---|---|---|---|---|---|
+  | Maç içi masa | **0** | 1 | 1 | 2 | 2 |
+  | Isınma ve epilog | T1 | 4 | 4 | 4 | 4 |
+
+  Gerekçe: N = 6'da iki masadaki 4 kişinin karşılıklı alibisi, 1 Sabırsız ve 1 nötr varken bir gündüz cinayetinde
+  şüpheliyi 2'ye indirir; çıkarım yapmadan tarlayı temizler. Bu yüzden N ≤ 7'de masa sadece ısınmada ve epilogda açıktır
+  (sosyal eğlence kalır, alibi makinesi olmaz). Hangi masaların açık olduğu: T1, sonra T3, sonra T2, T4.
 - Lore dokunuşu: T1 tahtasının başlığı sabittir: *"Karşılama Komitesi Satranç Kulübü — Finalist: G. (gelmedi)"*.
 
 ---
@@ -70,7 +98,7 @@ bir tebeşir tahtası ve bahis paralarının yığıldığı bir kâse. Masalar 
 ### 3.1 Akış
 1. **Otur** (`E`, mevcut `AKGSeat`). Karşı sandalye boşsa ipucu: "Rakip bekleniyor · Bir köylüye bak, `E`: oyuna çağır".
 2. İki sandalye doluysa **tahta paneli** açılır: oyun (masanın oyunu), saat modu (faza göre otomatik), bahis (fare
-   tekerleği, 0–10 Coin, sadece ilk oturan belirler), **imza** (açık/kapalı, her oyuncu kendisi için).
+   tekerleği, 0–10 Bakır, sadece ilk oturan belirler).
 3. İkisi de `F: Hazır` der → oyun başlar. Beyaz/siyah: ilk oturan beyaz. Ertelenmiş bir oyun varsa (aynı iki
    oyuncu, aynı masa) o oyun kaldığı yerden sürer; renkler değişmez.
 4. Oyun biter (mat, pat, terk, beraberlik) ya da **ertelenir** (pay bitti, biri kalktı, faz kesintisi, ölüm).
@@ -85,23 +113,25 @@ bedeli bilgidir, puan değil.
 | Nerede | Mod | Kural |
 |---|---|---|
 | Lobi (3D meyhane lobisi gelince), Isınma | **Mermi 1+1** (varsayılan), Blitz 3+2, Hızlı 5+3; Süresiz sadece lobide | Klasik Fischer saati. Süresi biten kaybeder; rakibin mat edecek malzemesi yoksa (Ş, Ş+F, Ş+A) beraberlik. Isınma bitince oyun sonuçsuz silinir. |
-| Maç içi **Gündüz** | **Günlük pay** | Her oyuncunun her Gündüz için **düşünme payı** `KG_TABLE_ALLOWANCE` = 0.2 × Gündüz süresi, hamle başına +1 sn. Pay oyuncuya aittir, masaya değil: aynı gün başka masaya geçen yeni pay almaz. Payı biten oyuncunun sırası gelince oyun **ertelenir** (kaybetmez). Ayrıca oyuncu başına günlük oturum tavanı `KG_TABLE_SITTING_CAP` = 0.5 × Gündüz (duvar saati, aktif oyunda geçen). |
+| Maç içi **Gündüz** | **Günlük pay** | Her oyuncunun her Gündüz için **düşünme payı** `KG_TABLE_ALLOWANCE` = 0.12 × Gündüz süresi, hamle başına +1 sn. Pay oyuncuya aittir, masaya değil: aynı gün başka masaya geçen yeni pay almaz. Payı biten oyuncunun sırası gelince oyun **ertelenir** (kaybetmez). Ayrıca oyuncu başına günlük oturum tavanı `KG_TABLE_SITTING_CAP` = 0.3 × Gündüz (duvar saati, aktif oyunda geçen) ve **kesintisiz odak tavanı** `KG_TABLE_FOCUS_MAX` = 45 sn: 45 sn boyunca tahta görünümünden çıkılmazsa oyun otomatik ertelenir ve istem "Başını kaldır: yarın devam" der (S1.1 gündüz p90 45 sn ile aynı sayı). |
 | **Epilog** | Uzatma | Ertelenmiş oyunlar iki saate +30 sn ve hamle başına +1 sn ile sürer. Epilog biterken bitmemiş oyun **beraberlik** ("Godot gelmedi, oyun yarına kaldı"). |
 
 Sayılar (Gündüz = 150 + 6N sn, `KGGameMode.cpp:63-86`):
 
-| N | Gündüz | Düşünme payı (0.2×) | Oturum tavanı (0.5×) |
-|---|---|---|---|
-| 6 | 186 sn | 37 sn | 93 sn |
-| 8 | 198 sn | 40 sn | 99 sn |
-| 12 | 222 sn | 44 sn | 111 sn |
-| 16 | 246 sn | 49 sn | 123 sn |
-| 20 | 270 sn | 54 sn | 135 sn |
+| N | Gündüz | Düşünme payı (0.12×) | Oturum tavanı (0.3×) | Kesintisiz odak |
+|---|---|---|---|---|
+| 6–7 | 186 sn | maç içi masa yok | — | — |
+| 8 | 198 sn | 24 sn | 59 sn | 45 sn |
+| 12 | 222 sn | 27 sn | 67 sn | 45 sn |
+| 16 | 246 sn | 30 sn | 74 sn | 45 sn |
+| 20 | 270 sn | 32 sn | 81 sn | 45 sn |
 
-**Neden bu kadar kısa:** maç 20–35 dk (S10.1). Masa bir ölü zaman mıknatısı olmamalı (S1.2: Gündüz ölü zaman payı
-≤ %20). En kötü durumda bir oyuncu Gündüz'ün yarısını masada geçirir; beklenen kullanım çok daha azdır (bkz. T-M1).
-**Sonuç:** maç içi satranç "yazışmalı satranç" gibi günlere yayılır. Tipik bir gündelik oyun (30–40 hamle, ~4 sn/hamle)
-3–4 gün sürer; dama (20–25 hamle) 2 gün. Maçların bir kısmında satranç bitmez: bu bilinçli bir seçimdir, "Yarın" motifi
+**Neden bu kadar kısa:** maç 20–35 dk (S10.1). Masa bir ölü zaman mıknatısı olmamalı. Charter'ın tanımıyla (§0.3: son
+15 sn'de algılanan olay ve karar fiili yoksa ölü saniye) tahta hamleleri karar fiili değildir (§4.1) ve odak algıyı
+daraltır; yani masada geçen süre ölü zaman sayılır. v0.1'in 0.5 × tavanı tek oturuşta S1.1'in 45 sn gündüz p90'ını ve
+kendi T-M1 koruyucusunu (p90 ≤ %30) aşmaya izin veriyordu. Şimdi en kötü durumda bir oyuncu Gündüz'ün %30'unu masada
+geçirir ve hiçbir oturuş 45 sn'yi aşmaz. **Sonuç:** maç içi satranç "yazışmalı satranç" gibi günlere yayılır. Tipik
+bir gündelik oyun (30–40 hamle, ~4 sn/hamle) 3–5 gün sürer; dama (20–25 hamle) 2–3 gün. Maçların bir kısmında satranç bitmez: bu bilinçli bir seçimdir, "Yarın" motifi
 de budur. Satranç tutkunları için tam saatli oyun lobide, ısınmada ve epilogdadır.
 
 Süreler `FKGMatchClock` kalıbıyla (kalan saniye, SaveGame) tutulur. `TimerManager` yok.
@@ -140,48 +170,58 @@ Süreler `FKGMatchClock` kalıbıyla (kalan saniye, SaveGame) tutulur. `TimerMan
   alma zorunluluğu). Çekirdek varyant parametresiyle yazılır (`EKGDraughtsVariant`); öneri: MVP İngiliz (EN/TR/RU
   için ortak, kuralı kısa), ilk ek varyant Türk daması (aynı tahta, aynı taşlar, yalnız kurallar).
 
-### 3.6 Bahis (Coin)
-- 0–10 **Coin** (maç içi para, `UKGItemCatalog` `Coin`, `Inventory/KGItemCatalog.h`). Sadece Gündüz. İkisi de aynı
-  miktarı koyar. Sunucu başlangıçta iki envanterden düşer ve kâseye koyar: kâsede **gerçek para yığını** görünür (en
-  fazla 20 mesh, herkes görür).
-- Ölçek: sandık 1–5, fıçı 1–3, sandık (Chest) 5–20 Coin düşürür (`Inventory/KGLoot.cpp`). 10 Coin kayda değer ama
-  yıkıcı değil.
+### 3.6 Bahis (Bakır)
+- 0–10 **Bakır** (maç içi para: kodda `UKGItemCatalog` `Coin` eşyası, `Inventory/KGItemCatalog.h`; Türkçe arayüz adı
+  `01b_Village_Life_Fun.md` §5'e göre Bakır, meta para Altın ile karışmasın). Sadece Gündüz. İkisi de aynı miktarı koyar.
+  Sunucu başlangıçta iki envanterden düşer ve kâseye koyar: kâsede **gerçek para yığını** görünür (en fazla 20 mesh,
+  herkes görür).
+- Ölçek: sandık 1–5, fıçı 1–3, sandık (Chest) 5–20 Bakır düşürür (`Inventory/KGLoot.cpp`); oyuncu kaplardan günde ~4
+  Bakır toplar. **Bakırın tek harcama yeri** Bay Thimble'ın sargısıdır (ganimet belgesi §3.5, öneri 15 Bakır; dükkân
+  ayrı bir iş). Yani 10 Bakırlık kayıp ~2/3 sargıdır: kayda değer ama yıkıcı değil. Yeni harcama yeri eklenmez.
 - **Sonuçlar:** kazanan 2× bahsi alır. Beraberlik ve maç sonuna kadar bitmeyen oyun: iade. **Ölüm:** hayatta kalanın
   payı ona döner; **ölenin payı masada fiziksel bir para yığını (`AKGPickup`) olarak kalır.** Onu alan herkes bir
   Pickup olayı bırakır (tanıklarıyla). "Ölünün bahsini kim aldı?" küçük ama gerçek bir iz.
-- **Botlar bahse girmez** (bahis 0): insanların Coin'i bottan "çiftçilik"le toplaması, Coin kardeş tasarımdaki
-  silah parçalarına/eşyalara dönüşecekse bir sömürü olur.
-- Ev payı (meyhane kesintisi) MVP'de yok. Coin bir para yuvası (sink) gerekirse sonra T3/T4'e %10 eklenebilir.
+- **Botlar bahse girmez** (bahis 0): insanların bakırı bottan "çiftçilik"le toplaması bir sömürü olurdu.
+- Ev payı (meyhane kesintisi) yok.
 - Uyum: Roadmap Onay R5'in "Korsan: mahkeme kararına bahis" fikri onaylanırsa aynı emanet (escrow) modülünü kullanır.
 
 ### 3.7 Tebeşir tahtası (masa kaydı) — dünyadaki iz
-Her masanın yanında küçük bir kara tahta vardır. Son **3 oyunu** gösterir:
+Her masanın yanında küçük bir kara tahta vardır. Son **3 oyunu** gösterir. **İsim yazmaz**, sadece renkleri:
 
 ```
-Tom – Bir yabancı · Gündüz 3 · 1:30–3:00 · ertelendi · Bir yabancı kalktı 2:30
+Beyaz – Siyah · Gündüz 3 · 1:30–3:00 · ertelendi · Siyah kalktı 2:30
 ```
 - Saatler faz saatinde, **30 sn kovasına yuvarlanır** (`KG_TABLE_SLATE_BUCKET`). Defter kesin saati tutar; tahta
   kaba saati. Böylece Vaka Dosyası'nın ölüm zamanı aralığıyla kenarlarda belirsizlik kalır (S9.4 üst sınırı).
-- **İmza** bir karardır: imzalı satır doğrulanabilir alibi, imzasız satır "Bir yabancı" yazar (ama rakip kim olduğunu
-  bilir ve söyleyebilir). Yayıncı modunda isimler `KGStreamer::DisplayName` ile gelir (G7.5).
+- **Neden isimsiz:** v0.1'de imzalı satır sunucunun yazdığı, sahtelenemez bir zaman alibisiydi. N ≤ 7'de tek Sabırsız
+  varken bir cinayeti örten imzalı satır, Kasaba ortağını pratikte kesin aklıyordu (sert kanıt, S2.4); iki Sabırsız
+  karşılıklı sertifikalı alibi toplayabiliyordu. Şimdi tahta sadece "o saatte bu masada bir oyun vardı ve siyah 2:30'da
+  kalktı" der. **Kimin** oturduğu toplantıya sadece iki yoldan gelir: o saatte masayı gören tanıkların defteri (020b,
+  024) ve oturanın ORADAYDIM iddiası; rakip bunu doğrulayabilir ya da yalanlayabilir. İmza kararı ve T-M4 kesildi.
 - Tahta **otomatik duyurulmaz** (S2.5): okumak için masaya gitmek gerekir.
 - **Silmek:** herkes tahtayı silebilir (`E` basılı 2 sn). Silinen tahtada **"silinmiş" lekesi** kalır, bir sonraki oyun
-  yazılana kadar. Silme bir defter olayıdır (görenler tanık). Sahte yolu: Sabırsız bir Kasabalının alibisini ortadan
-  kaldırabilir ya da kendi "kalktı" satırını yok edebilir, ama leke silindiğini ilan eder.
+  yazılana kadar. Silme bir defter olayıdır (görenler tanık). Sahte yolu: Sabırsız bir kalkış saatini ortadan
+  kaldırabilir, ama leke silindiğini ilan eder.
 
 ### 3.8 Odak ve savunmasızlık
-- Oyun başlayınca kamera **tahta görünümüne** geçer (§7). Tahta görünümündeyken oyuncunun **görme tanıklığı** daralır:
-  koni `KG_TABLE_FOCUS_CONE` = ±30° (tahta yönünde), menzil `KG_TABLE_FOCUS_RANGE` = 4 m (normalde `KG_SIGHT_CONE`
-  ±60°, `KG_SIGHT_DAY` 30 m). **Duyma değişmez.** Karşıdaki rakip bu koninin içindedir: rakip her zaman görülür ve
-  4 m < `KG_IDENT_RANGE` olduğu için **tanımlanır** (maskesizse).
-- **Etrafa bak** (sağ tık basılı): kamera 0.15 sn'de serbest oturma bakışına döner (`AKGSeat` serbest yaw), algı normale
-  döner, satranç saati akmaya devam eder. Bırakınca tahtaya döner.
+- Oyun başlayınca kamera **tahta görünümüne** geçer (§7). **Oturulan bütün süre boyunca** (kameranın nereye baktığından
+  bağımsız) oyuncunun **görme tanıklığı** daralır: koni `KG_TABLE_FOCUS_CONE` = ±30° (tahta yönünde), menzil
+  `KG_TABLE_FOCUS_RANGE` = 8 m (= `KG_IDENT_RANGE`; normalde `KG_SIGHT_CONE` ±60°, `KG_SIGHT_DAY` 30 m). **Duyma
+  değişmez.** Karşıdaki rakip bu koninin içindedir ve **tanımlanır** (maskesizse). 8 m, tabancanın öldürme mesafesinin
+  (12 m) içindeki ön tarafı kapsar: önden yaklaşan atıcı tanımlanır.
+- **Etrafa bak** (sağ tık basılı): **sadece kamera**. Kamera 0.15 sn'de serbest oturma bakışına döner (`AKGSeat` serbest
+  yaw), ama tanıklık filtresi dar kalır (defter bu sürede de sadece koniyi yazar). Satranç saati akmaya devam eder.
+  v0.1'de "Etrafa bak" tam algıyı geri veriyordu ve rakip sırasındayken bedelsizdi; odak bedeli bir UI vergisine
+  dönüşüyordu.
+- **Horoz tıkı:** oturan oyuncu `KG_HEAR_COCK` (8 m) içinde bir tabanca horozu duyarsa odak 3 sn kırılır: kamera sese
+  döner **ve** bu 3 sn boyunca tam algı geçerlidir (sistem olayı; oyuncu tetikleyemez).
 - Oturan hareket edemez (`AKGSeat` MOVE_None). Kalkmak anlıktır ama yeri bellidir. Backstab geometrisi
   (`BackstabRange` 150 cm, arkadan) oturana da uygulanır.
 - Sonuç: masa **ne sığınak ne tuzaktır**. Rakip bir tanıktır (bu korur). Ama odaktaki oyuncu çevresindeki cinayeti
   görmez (bu masadakileri kötü tanık yapar), sabit bir hedeftir ve Sabırsız bir rakip, maskeli bir takım arkadaşının
   işini "görmedim" diyerek örtebilir.
-- Ekran kenarında %15 karartma (vinyet) odağı ve bedelini oyuncuya gösterir (Ç11).
+- Ekran kenarında %15 karartma (vinyet) odağı ve bedelini oyuncuya gösterir (Ç11). Kesintisiz odak 45 sn'de biter
+  (§3.2).
 
 ### 3.9 Seyirciler
 - Masaya 3 m'den bakan herkes HUD'da küçük saat şeridini görür. Özel kamera yok: taşlar 2–3 m'den okunacak boyuttadır.
@@ -193,19 +233,21 @@ Tom – Bir yabancı · Gündüz 3 · 1:30–3:00 · ertelendi · Bir yabancı k
 
 | Sabit | Değer | Anlamı |
 |---|---|---|
-| `KG_TABLE_ALLOWANCE` | 0.2 × Gündüz süresi / oyuncu / gün, +1 sn/hamle | Maç içi düşünme payı |
-| `KG_TABLE_SITTING_CAP` | 0.5 × Gündüz süresi / oyuncu / gün | Aktif oyunda geçen en uzun duvar saati |
-| `KG_TABLE_FOCUS_CONE` | ±30° | Tahta görünümünde görme konisi |
-| `KG_TABLE_FOCUS_RANGE` | 4 m | Tahta görünümünde görme menzili |
+| `KG_TABLE_ALLOWANCE` | 0.12 × Gündüz süresi / oyuncu / gün, +1 sn/hamle | Maç içi düşünme payı |
+| `KG_TABLE_SITTING_CAP` | 0.3 × Gündüz süresi / oyuncu / gün | Aktif oyunda geçen en uzun duvar saati |
+| `KG_TABLE_FOCUS_MAX` | 45 sn | Kesintisiz odak; sonra otomatik erteleme |
+| `KG_TABLE_FOCUS_CONE` | ±30° | Oturulan bütün süre boyunca görme konisi |
+| `KG_TABLE_FOCUS_RANGE` | 8 m (= `KG_IDENT_RANGE`) | Oturulan bütün süre boyunca görme menzili |
+| `KG_TABLE_MAX_TABLES` | floor(floor((N − tehdit) / 3) / 2) | Maç içinde aynı anda aktif masa |
 | `KG_TABLE_SLATE_BUCKET` | 30 sn | Tebeşir tahtasındaki saat yuvarlaması |
 | `KG_HEAR_TABLE` | 8 m | Taş vuruşu / saat düğmesi sesi (duvar arkası × `KG_WALL_FACTOR`) |
-| `KG_TABLE_STAKE_MAX` | 10 Coin | Oyuncu başına bahis tavanı |
+| `KG_TABLE_STAKE_MAX` | 10 Bakır | Oyuncu başına bahis tavanı |
 
 ---
 
 ## 4. Çıkarım döngüsüne katkı
 
-Charter döngüsüne göre: **KARAR** (otur / kalk / imzala / sil / çağrıldığında gel) → **İZ** (defter olayı + tebeşir
+Charter döngüsüne göre: **KARAR** (otur / kalk / sil / çağrıldığında gel / ORADAYDIM de) → **İZ** (defter olayı + tebeşir
 tahtası + para yığını) → **BİLGİ** (zaman aralıklı alibi, kalkış saati, kimin kiminle oturduğu) → **ŞÜPHE** ("çandan 40
 sn önce kalktı") → **TOPLANTI** (ORADAYDIM iddiası, tahtayla çelişki) → **SONUÇ** → yeni karar ("bugün onunla
 oturmayacağım").
@@ -214,22 +256,25 @@ oturmayacağım").
 
 | Olay | Aktör | Tanık (020b filtresi) | Kim okur |
 |---|---|---|---|
-| `TableGameStart {masa, beyaz, siyah, oyun, bahis, imzalar}` | iki oyuncu | görenler/duyanlar (`KG_HEAR_TABLE`) | defter (J, 024), bot zihni (023), epilog |
+| `TableGameStart {masa, beyaz, siyah, oyun, bahis}` | iki oyuncu | görenler/duyanlar (`KG_HEAR_TABLE`) | defter (J, 024), bot zihni (023), epilog |
 | `TableStand {oyuncu, sebep: kendisi/pay/çan/faz/ölüm}` | kalkan | görenler + rakip | defter, Vaka Dosyası ilgili parça (S2.3) |
 | `TableGameEnd {sonuç, sebep}` | iki oyuncu | görenler | epilog, bahis |
 | `TableSpectate {seyirci, başlangıç, bitiş}` | seyirci | oyuncular + görenler | defter |
-| `SlateWiped {silen}` | silen | görenler | defter, Kasaba Panosu (024, isimsiz "meydan tahtası silindi") |
+| `SlateWiped {silen}` | silen | görenler | defter (panoya düşmez, S2.5) |
 | `StakeTaken {alan, miktar}` | ölünün yığınını alan | görenler | defter |
 
 Her olay tek satırdır, bölge adı + faz saati ile (G3.5). Oyun içindeki **tek tek hamleler olay değildir** ve **karar
-fiili sayılmaz** (S1.3'ü şişirmemek için). Karar fiilleri: otur, kalk, imzala/imzalama, sil, çağrıya gel.
+fiili sayılmaz** (S1.3'ü şişirmemek için). Karar fiilleri: otur, kalk, sil, çağrıya gel. **S1.1 sayımı:** oyuncunun
+kendi ürettiği masa olayları (kendi `TableGameStart/Stand`, kendi hamle sesi) onun için algılanan olay sayılmaz; masada
+geçen süre dürüstçe ölü zaman olarak ölçülür ve tavanlar onu sınırlar.
 
 ### 4.2 Beş kanca (kullanıcının önerileri + tasarımcının eklediği)
-1. **Karşılıklı alibi, ama dar.** Masa kaydı iki oyuncuyu **bir zaman aralığı** için aklar, taraflarını değil. Bir
+1. **Karşılıklı alibi, ama dar ve sertifikasız.** Tahta sadece bir oyunun olduğunu ve saatlerini söyler; kimin
+   oturduğunu tanıklar ve iddialar söyler. Doğrulanan bir iddia iki oyuncuyu **bir zaman aralığı** için aklar, taraflarını değil. Bir
    cinayeti dışlar, takımı dışlamaz. Sabırsızlar da kullanır: biri oturup alibi toplar, takım arkadaşı öldürür.
    "Hep birlikte oturuyorlar" başlı başına bir desendir.
-2. **Odaktayken savunmasız ve kör** (§3.8). Masadakiler güçlü bir alibi ama zayıf bir tanıklık alır. Bu, bilgi
-   bütçesini dengeler: alibi arttıkça tanık azalır.
+2. **Oturduğun sürece dar tanık** (§3.8). Masadakiler bir alibi ama zayıf bir tanıklık alır; "Etrafa bak" bunu
+   değiştirmez. Bu, bilgi bütçesini dengeler: alibi arttıkça tanık azalır.
 3. **Çan anı.** Çan çaldığında (021) tahtalar donar ve sunucu o anda oturan/izleyen herkesi tek bir
    `TableStand {sebep: çan}` kümesiyle yazar: Toplanma penceresindeki "son dakika cinayeti" için hazır bir alibi
    anlık görüntüsü. İpucu, **çandan önce kalkanlardan** gelir: tebeşir tahtası kalkış saatini yazar.
@@ -246,7 +291,7 @@ fiili sayılmaz** (S1.3'ü şişirmemek için). Karar fiilleri: otur, kalk, imza
 | S9.5 | ORADAYDIM iddiası masa olayına bağlanır; tahtayla çelişen iddia `KG_CONTRA` üretir | [B] |
 | S1.4 | "Güven" türü: masa alibisi bir **kefil olma** biçimidir (iddia paylaşınca) | [B] [O] |
 | S4.4 | Masadaki çift sürekli bir karşılaşmadır (≤ 15 m, LOS, ≥ 3 sn) | [B] |
-| S1.1, S1.2 | **Risk (koruyucu):** odaktaki oyuncu daha az olay algılar. Pay ve tavan bunu sınırlar. | [O], aşağıdaki T-M1 |
+| S1.1, S1.2 | **Risk (koruyucu):** masadaki süre ölü zaman sayılır (kendi olayların hariç). Pay (0.12×), tavan (0.3×) ve 45 sn kesintisiz odak tavanı bunu S1.1'in 45 sn gündüz p90'ının içinde tutar. | [O], aşağıdaki T-M1 |
 
 **Özelliğin kendi koruyucu metrikleri** (charter bandı değil, sadece rapor; onaylanırsa §0.2 kurallarıyla):
 
@@ -254,8 +299,8 @@ fiili sayılmaz** (S1.3'ü şişirmemek için). Karar fiilleri: otur, kalk, imza
 |---|---|---|---|---|
 | T-M1 | Gündüz canlı oyuncu-saniyelerinin aktif masa oyununda geçen payı | Oyuncu p90 ≤ %30; lobi ortalaması ≤ %10 | [O] ([B] sadece bilgi) | 40 oyuncu-gündüz |
 | T-M2 | O gün ≥ 1 masa oyunu oynanmış vakalı toplantılarda masa olayına bağlı ≥ 1 iddia | ≥ %20 | [B] (024 sonrası) | 30 toplantı |
-| T-M3 | Oturan oyuncunun saniye başına öldürülme oranı ÷ ayakta Gündüz oranı | 0.5–1.5× (ne sığınak ne tuzak) | [B] gece koşusu | 40 cinayet (masada) |
-| T-M4 | İmza oranı | %50–90 (%100 = karar değil) | [O] | 60 oyun |
+| T-M3 | Oturan oyuncunun saniye başına öldürülme oranı ÷ ayakta Gündüz oranı; tabancalı ve tabancasız maçlar **ayrı** | 0.5–1.5× (ne sığınak ne tuzak) | [B] gece koşusu | 40 cinayet (masada), her kol |
+| T-M5 | Masada geçen kesintisiz odak | Maks 45 sn (yapı gereği, [T]); oyuncu-gündüz p90 masa payı ≤ %30 (T-M1) | [T] [O] | — |
 
 ---
 
@@ -263,12 +308,14 @@ fiili sayılmaz** (S1.3'ü şişirmemek için). Karar fiilleri: otur, kalk, imza
 
 | Durum | Kim, neden | Karşı hamle / kural |
 |---|---|---|
-| Alibi çiftçiliği (iki Sabırsız birbirine alibi) | Sabırsız | Kayıt doğrudur ama dardır; üçüncü takım arkadaşının cinayetini örtmez. "Hep aynı ikili" deseni tartışılır. |
+| Alibi çiftçiliği (iki Sabırsız birbirine alibi) | Sabırsız | Tahta isim yazmaz: alibi sadece tanıkların gördüğü kadardır. Kayıt dardır; üçüncü takım arkadaşının cinayetini örtmez. "Hep aynı ikili" deseni tartışılır. Maç içi masa sayısı tavanlı (§2). |
+| "Etrafa bak" ile tam tanık olup alibi de toplamak | Herkes | Etrafa bak sadece kameradır; dar tanıklık oturulan bütün süre geçerli (§3.8). |
+| Masadaki sabit hedefe tabancayla ateş | Sabırsız | Odak 8 m'de tanımlar; horoz tıkı odağı 3 sn kırar; T-M3 tabancalı maçlarda ayrı izlenir. |
 | Sabırsız rakip, maskeli takım arkadaşının cinayetini "görmedim" diye örter | Sabırsız | Rakip **her zaman** tanık olarak defterde yazar: yalanı 024 ile çelişki üretir. Seyirciler ikinci tanıktır. |
-| Masada saklanmak (toplantıya gelmemek, iş yapmamak) | Herkes | Günlük pay + oturum tavanı; çanda donma; `KG_GATHER_WINDOW` sonunda Geç Kalan; AFK (G5.5) masa hamlelerini etkinlik sayar ama tavan yine keser. |
+| Masada saklanmak (toplantıya gelmemek, iş yapmamak) | Herkes | Günlük pay + oturum tavanı + 45 sn kesintisiz odak; çanda donma; `KG_GATHER_WINDOW` sonunda Geç Kalan; AFK (G5.5) masa hamlelerini etkinlik sayar ama tavan yine keser. |
 | Tahtayı silerek alibi yok etmek | Sabırsız | Silmek 2 sn, görünür, "silinmiş" lekesi kalır, defter olayıdır. Defterdeki kayıt silinmez. |
-| Coin aklama / takım arkadaşına para aktarma | Sabırsız | Zaten para düşürerek (`AKGPickup`) mümkün. Bahis tavanı 10, her aktarım görünür (kâse) ve defterde. Yeni sömürü yok. |
-| Bottan Coin çiftçiliği | Güçlü oyuncu | Botlar bahse girmez. |
+| Bakır aklama / takım arkadaşına para aktarma | Sabırsız | Zaten para düşürerek (`AKGPickup`) mümkün. Bahis tavanı 10, her aktarım görünür (kâse) ve defterde. Yeni sömürü yok. |
+| Bottan bakır çiftçiliği | Güçlü oyuncu | Botlar bahse girmez. |
 | Rakibin payını yakmak için yavaş oynamak | Trol | Saat hamle yapanın payından yer: yavaş oyuncu **kendi** payını yakar. |
 | Koltuk işgali (oturup başlamamak) | Trol | Hazır olmadan 20 sn geçerse ikinci sandalyedeki ipucu "Kalk ya da hazır ol"; 40 sn'de sunucu kaldırır (sadece aktif oyun yokken). |
 | Davet spam'i (bot/oyuncu) | Trol | 10 sn'de 1 çağrı; aynı hedefe 60 sn'de 1. |
@@ -278,7 +325,7 @@ fiili sayılmaz** (S1.3'ü şişirmemek için). Karar fiilleri: otur, kalk, imza
 | Ölü oyuncunun hamle söylemesi | Hayalet | Ölüler canlının oyununa ses/yazı ile ulaşamaz (S8.3 kanalları). Epilogda herkes serbest. |
 
 **Frustrasyon kuralı (G5.6):** masadaki tek olumsuz etki (daralan algı) önceden gösterilir (vinyet + ipucu metni) ve
-bir karşı fiili vardır (Etrafa bak, kalk).
+bir karşı fiili vardır (kalk; 45 sn'de otomatik erteleme).
 
 ---
 
@@ -317,7 +364,7 @@ konuşan ağız (SPRINT-023) ve ifade oyunun parçasıdır. Kafa sallanması kap
 | Girdi | Eylem | Not |
 |---|---|---|
 | Sol tık / sürükle-bırak | Taş seç → hedef kare | Seçilince yasal kareler nokta (ayar: "Yardımcı işaretler", varsayılan açık) |
-| Sağ tık basılı | Etrafa bak | Odak kapanır (§3.8) |
+| Sağ tık basılı | Etrafa bak | Sadece kamera; tanıklık dar kalır (§3.8) |
 | `F` | Hazır | Tahta bağlamında karakterin `Inspect`'inin önüne geçer |
 | Fare tekerleği | Bahis 0–10 (başlamadan önce, ilk oturan) | |
 | `B` | Beraberlik teklif et / kabul | 10 sn |
@@ -355,10 +402,10 @@ dokusu, taş başına 150–400 üçgen; (b) KayKit Board Game Bits (CC0, `Docs/
 | Sunucu CPU | Kural doğrulama hamle başına ≤ 0.05 ms. Bot araması zaman dilimli, kare başına ≤ 0.5 ms toplam; 4 tahta + 2 arayan botla ortalama ≤ 0.3 ms/kare, p99 ≤ 1.0 ms (N = 20). Arama düğüm bütçesi: satranç 20k, dama 50k. |
 | Replikasyon | `FKGBoardState` sıkıştırılmış: 64 kare × 4 bit = 32 B + sıra, rok/geçerken bayrakları, iki saat (int16 desisaniye), son hamle (2 B), durum ≈ **44 B**. Push-model, sadece hamlede; hamleler arası `DORM_DormantAll`, hamlede `FlushNetDormancy`. Hamle RPC'si ~8 B, güvenilir. Iris-uyumlu (kayıtlı alt nesne yok, düz struct). |
 | Relevancy | Tahta aktörünün `NetCullDistance` ≈ 40 m (tahtayı görebilen herkes). Tebeşir tahtası metni aynı aktörde. |
-| Sunucu-özel durum | Zobrist tekrar geçmişi (≤ 150 × 8 B), emanet, imzalar: `UPROPERTY(SaveGame)`, replike olmaz. |
+| Sunucu-özel durum | Zobrist tekrar geçmişi (≤ 150 × 8 B), emanet, oyun başına günlük pay ve odak sayaçları: `UPROPERTY(SaveGame)`, replike olmaz. |
 | Çizim | Tahta başına tek tahta mesh'i + taş türü başına bir ISM (satranç 6, dama 2), renk instance başına özel veri ile palet materyalinde. 4 tahtada ≤ 32 çizim çağrısı. Taşlar 25 m'de gizlenir, 8 m'de LOD1 (%25). Satranç tahtası yakında ≤ 16k üçgen. |
 | Ses | Taş vuruşu ve saat düğmesi: 2 ses, `KG_HEAR_TABLE` 8 m zayıflama, eşzamanlı sınır tahta başına 2. |
-| Host migration | `UKGSnapshotComponent` tahta aktöründe; FEN + saatler (kalan saniye) + paylar + emanet + imzalar + tebeşir satırları SaveGame. Aktör uzamsal yüklenmez (World Partition akıtmaz). |
+| Host migration | `UKGSnapshotComponent` tahta aktöründe; FEN + saatler (kalan saniye) + paylar + emanet + tebeşir satırları SaveGame. Aktör uzamsal yüklenmez (World Partition akıtmaz). |
 
 ---
 
@@ -369,7 +416,7 @@ dokusu, taş başına 150–400 üçgen; (b) KayKit Board Game Bits (CC0, `Docs/
 |---|---|
 | `World/KGSeat.*` | Oturma, replike `Occupant`, oturma kamerası, `E/Boşluk` ile kalkma, ölü oturanı kaldırma (`Tick`). Tahta aktörü iki koltuğu **sahiplenir** ve `GetOccupant()`'ı okur: `KGSeat` dosyasında değişiklik yok. |
 | `Inventory/KGPlayerExtrasSubsystem.*` | "Sıfır entegrasyon" kalıbı: yeni `UKGTabletopSubsystem` her `AKGPlayerState`'e `UKGTabletopRPCComponent` ekler (aynı kalıp, ayrı dosya). |
-| `Inventory/KGItemCatalog.*`, `KGInventoryComponent.*`, `World/KGPickup.*` | Coin, emanet, ölünün yığını |
+| `Inventory/KGItemCatalog.*`, `KGInventoryComponent.*`, `World/KGPickup.*` | Bakır (`Coin`), emanet, ölünün yığını |
 | `Core/KGMatchClock.h`, `Core/KGRng.h` | Saatler ve bot tohumu |
 | `Core/KGTypes.h` (`EKGPhase`), `Core/KGGameState` | Faz kesintileri |
 | `Chores/UI/KGMinigame.h` (`FKGMgPainter`) | 2D panel ve UIShot'lar |
@@ -400,63 +447,22 @@ dokusu, taş başına 150–400 üçgen; (b) KayKit Board Game Bits (CC0, `Docs/
 | SPRINT-023-VoiceSocial (çalışıyor) | Yakınlık sesi, konuşan ağız, ses komutları, taş-kâğıt-makas ortak emote'u (sunucu çözümlü sonuç kalıbı). Masa bunlara dokunmaz, sadece kullanır. |
 | SPRINT-015 | Yayıncı modu ve takma adlar (tebeşir tahtası). |
 | SPRINT-022-V2VisualPass (çalışıyor) | Meydan/meyhane süslemesi; masa noktaları JSON'da veri olarak, inşa hattına dokunmadan. |
-| Kardeş tasarımlar (paralel) | Kırılabilir kutu → silah parçaları: menzilli silah oturan hedefi daha savunmasız yapar (T-M3 izlenmeli). Orman kampı "bir gece hayatta kal": Yalancı Zarı'nın kamp ateşi versiyonu için doğal yer (§10 Sonra). |
+| Kardeş tasarımlar | Ganimet: tabanca ve parça bahsi yok; odak menzili 8 m ve horoz tıkı kuralı ortak (§3.8); Bakır tek para, tek harcama yeri sargı. Orman kampı: Yalancı Zarı'nın kamp ateşi versiyonu için doğal yer (§10 Sonra). |
 
 ---
 
 ## 10. MVP ve sonrası
 
-### TT-1 — Masa oyunları çekirdeği (M) · 020b'den bağımsız yapılabilir
-**Hedef (kullanıcının göreceği):** meydanda ve Geç Kalan'da 4 masa. İki oyuncu (ya da oyuncu + bot) satranç veya dama
-oynar, maç içinde günlere yayılır, çanda/gecede donar, tebeşir tahtasına yazılır, isteyen Coin koyar.
+### Sprint dilimleri (sözleşme: `Docs/Iterations/SPRINT-036-Tabletop.md`)
 
-**Kabul (sabit, 6):**
-1. **Test** `KillGodot.Tabletop.Perft`: satranç perft değerleri: başlangıç d1–4 = 20 / 400 / 8 902 / 197 281;
-   "Kiwipete" (`r3k2r/p1ppqpb1/bn2pnp1/3PN3/1p2P3/2N2Q1p/PPPBBPPP/R3K2R w KQkq -`) d1–3 = 48 / 2 039 / 97 862;
-   pozisyon 3 (`8/2p5/3p4/KP5r/1R3p1k/8/4P1P1/8 w - -`) d1–4 = 14 / 191 / 2 812 / 43 238; pozisyon 5
-   (`rnbq1k1r/pp1Pbppp/2p5/8/2B5/8/PPP1NnPP/RNBQK2R w KQ - 1 8`) d1–3 = 44 / 1 486 / 62 379. İngiliz daması başlangıç
-   d1–5 = 7 / 49 / 302 / 1 469 / 7 361 (sprint başında bağımsız bir kaynağa karşı teyit edilir). Ayrıca ≥ 20 kural
-   vakası: şahtan geçen rok reddi, geçerken almanın sadece hemen ardından, Ata terfi, pat, üçlü tekrar, 50 hamle,
-   yetersiz malzeme, damada zorunlu alma, çoklu atlama, dama olunca hamlenin bitmesi.
-2. **Test:** yarım oyunun (FEN, saatler, paylar, tekrar geçmişi, emanet, tebeşir satırları) SaveGame arşiv turu birebir
-   aynı; Toplantı/Mahkeme/Gece fazlarında saatler 0 sn ilerler; payı biten oyuncunun sırasında oyun ertelenir, kaybetmez.
-3. **İki süreçli smoke** `Tools/Unreal/kg_table_smoke.ps1` (penceresiz, kg_chat_smoke kalıbı): istemci sunucuya karşı
-   "Çoban matı"nı RPC ile oynar; iki makinede son FEN ve "mat" aynı; istemcinin geçersiz, sırasız ve oturmadan
-   gönderdiği hamleler reddedilir (G7.2); 5 Coin bahis kazanana **bir kez** geçer.
-4. **[U]** Çağrılan bot 15 sn içinde oturur ve bir damayı bitirir (bot–bot, `kg.Table.Start Checkers Bot Bot`);
-   `KG_TABLE` satırları yazılır. Başsız `stat`: 4 tahta + 2 arayan bot, N = 20'de tabletop sunucu maliyeti ortalama
-   ≤ 0.3 ms/kare, p99 ≤ 1.0 ms.
-5. **Görseller** (2 bakış turu): `KG_Cap_table_square.png` (T1, 5 m, gündüz), tahta görünümü UIShot'u (orta oyun,
-   yasal hamle noktaları, saat şeridi), 3 satırlı tebeşir tahtası.
-6. `run_invariants.ps1` geçer; tabletop smoke I3'e eklenir.
-
-**Yazılabilir kapsam:** yeni `Source/KillGodot/Tabletop/` (`FKGChessRules`, `FKGDraughtsRules`, `FKGTableBot`,
-`AKGBoardTable`, `UKGTabletopRPCComponent`, `UKGTabletopSubsystem`, `FKGBoardState`), yeni `UI/Tabletop/`,
-`AI/KGBotController.cpp` (sadece çağrı kancası), `Dev/KGDevCommands.cpp` (sadece `kg.Table.*` fiilleri),
-`Core/KGGameMode.cpp` (sadece §9.2'deki tek satır), layout JSON `tables[]` (sadece veri),
-`Tools/Blender/kg_make_tabletop.py` + yeni `Art/`/`Content` yolları (T2 = a ise), `Tools/Unreal/kg_table_smoke.ps1`,
-`Private/Tests/KGTabletopTests.cpp`, `Docs/05_Tech_Architecture.md` (yeni bölüm), `Docs/01b_Village_Life_Fun.md` §2
-(satırlar). Klasör adı: `05_Tech_Architecture.md` `Minigames/` diyor; `Chores/UI/KGMinigame*` bu adı zaten görev
-panelleri için kullandığı için `Tabletop/` önerilir.
-
-**Dev fiilleri:** `kg.Table.List`, `kg.Table.Start Chess|Checkers [Bot] [Bot]`, `kg.Table.Move e2e4`,
-`kg.Table.Fen [FEN]`, `kg.Table.Allowance 999`, `kg.Table.Shot`.
-
-**Sınırlar:** 3 düzeltme denemesi / kontrol, UI için 2 bakış turu, plato durdurması. Başlık değişiklikleri tek toplu
-editör-kapanış döngüsünde. Paralel sprintlerle ortak dosya: `KGBotController.cpp`, `KGGameMode.cpp`,
-`KGDevCommands.cpp` → seri sırada.
-
-### TT-2 — Masayı çıkarım döngüsüne bağla (S) · 020b + 021 + 024 sonrası
-**Kabul (sabit, 5):**
-1. **Test:** tahta görünümündeki oyuncu, arkasında 5 m'de ve 60° açıdaki backstab'ı **görmez** (duyar); masanın
-   karşısındakini görür ve tanımlar; "Etrafa bak" basılıyken normal algı.
-2. **Test:** §4.1'deki 6 olay tanık listeleriyle deftere düşer; tebeşir tahtası silinince "silinmiş" lekesi ve
-   `SlateWiped` olayı; çan anında oturan herkes tek `TableStand {çan}` kümesinde.
-3. **Test:** masa olayından ORADAYDIM iddiası `ClaimRef` ile paylaşılır; tahtayla çelişen iddia `KG_CONTRA` üretir.
-4. **[U]** botlar vakayla örtüşen masa olayını iddia olarak kullanır ve loglar. T-M1, T-M2, T-M3 raporda (kapı değil).
-5. `run_invariants.ps1` geçer.
-
-**Yazılabilir kapsam:** `Tabletop/`, `Evidence/` (olay türleri, algı daralması kancası), `AI/` (iddia), testler.
+| Dilim | İçerik | Boy | Önkoşul |
+|---|---|---|---|
+| **036h** | Hata düzeltmesi: `StartMeeting` ışınlamadan önce oturanı kaldırır (§9.2, bugünkü 71 koltuk) | XS | Roadmap 020a ile aynı seri pencere (`KGGameMode.cpp`) |
+| **036a** | Saf kurallar: `FKGChessRules`, `FKGDraughtsRules`, `FKGTableBot` araması, perft testleri, `FKGMgPainter` 2D panel; kendi dosyasında konsol komutu | M | Yok; sadece yeni dosyalar, 020b ile paralel koşabilir |
+| **036b** | Ağ masası: `AKGBoardTable`, RPC bileşeni, alt sistem, pay/tavan/45 sn odak, faz donması, isimsiz tebeşir tahtası, Bakır bahsi, snapshot, masa sayısı tavanı, iki süreçli smoke | M | 036a, 036h |
+| **036c** | 3D tahta görünümü + taşlar (Blender başsız) + odak vinyeti | M | 036b; T2 kararı |
+| **036d** | Masa botu dünyada: çağrıya cevap, yürüme, oynama, çanda kalkma | S | 036b, Roadmap 021, 023 |
+| **036e** | Deftere bağlama: olaylar, dar tanıklık filtresi, çan anı kümesi, ORADAYDIM ve `KG_CONTRA` | S | 036b, Roadmap 020b, 021, 024 |
 
 ### Sonra (öncelik sırasıyla, her biri ayrı öneri)
 1. **Yalancı Zarı** (Geç Kalan barı, 2–6 kişi): oyunun içinde blöf oyunu, sosyal çıkarıma en yakın masa oyunu.
@@ -486,21 +492,21 @@ Kural: Ç1–Ç4 zorunlu, kalan 8'den ≥ 6 Evet. Bu **yeni** bir mekaniktir: zo
 
 | # | Soru | Cevap | Gerekçe |
 |---|---|---|---|
-| Ç1 | Karar | **Evet** | Otur (güçlü, dar alibi + daralan algı + sabit hedef) ya da dolaş; imzala ya da imzasız kal; çandan önce kalk ya da kal; tahtayı sil ya da silme; ölünün bahsini al ya da alma. Her seçeneğin risk/bilgi sonucu farklı. |
+| Ç1 | Karar | **Evet** | Otur (dar alibi + daralan algı + sabit hedef) ya da dolaş; kiminle oturacağın (güven); çandan önce kalk ya da kal; tahtayı sil ya da silme; ORADAYDIM de ya da deme; ölünün bahsini al ya da alma. Her seçeneğin risk/bilgi sonucu farklı. |
 | Ç2 | İz | **Evet** | Tebeşir tahtası, kâsedeki para yığını ve kalkış saati dünyada, herkesin görebileceği izlerdir (bugün bile). Defter olayları 020b ile (§4.1). |
-| Ç3 | Karşı hamle | **Evet** | Alibi dar ve kaba (30 sn kova); tahta silinebilir ama leke kalır; odaktaki oyuncu "Etrafa bak" ile algısını geri alır; Sabırsız rakip "görmedim" diyebilir ama defter onu tanık yazar. |
-| Ç4 | Ölçüm | **Evet** | S2.3 (+1 ilgili parça), S9.5 (iddia/çelişki), S1.4 (güven), S4.4 (karşılaşma); koruyucu T-M1 (masa payı p90 ≤ %30) ve T-M3 (0.5–1.5×) ile S1.2'yi kötüleştirmediği gösterilir. |
-| Ç5 | Bağlantı | **Evet** | Defter, toplantı (iddia), bot zihni, epilog (zaman çizelgesi, unvan), ekonomi (Coin), harita (risk katmanı, bölge kapısı). |
-| Ç6 | Ölçek | **Evet** | N = 6'da 2 tahta (az kişiyi köyden çekmemek için), N ≥ 8'de 4 tahta; paylar Gündüz süresiyle ölçeklenir. N = 6'da alibi görece güçlüdür (4 şüpheliden 2'sini dışlar), 30 sn kova bunu yumuşatır. |
+| Ç3 | Karşı hamle | **Evet** | Tahta isimsiz ve kaba (30 sn kova): alibi tanık ister; tahta silinebilir ama leke kalır; rakip ORADAYDIM iddiasını yalanlayabilir; Sabırsız rakip "görmedim" diyebilir ama defter onu tanık yazar; oturan 45 sn'de kalkar. |
+| Ç4 | Ölçüm | **Evet** | S2.3 (+1 ilgili parça), S9.5 (iddia/çelişki), S1.4 (güven), S4.4 (karşılaşma); koruyucu T-M1 (masa payı p90 ≤ %30), T-M3 (0.5–1.5×, tabancalı kol ayrı) ve T-M5 (45 sn kesintisiz odak) ile S1.1/S1.2'yi kötüleştirmediği gösterilir. |
+| Ç5 | Bağlantı | **Evet** | Defter, toplantı (iddia), bot zihni, epilog (zaman çizelgesi, unvan), ekonomi (Bakır → sargı), harita (risk katmanı, bölge kapısı), ganimet (horoz tıkı odağı kırar). |
+| Ç6 | Ölçek | **Evet** | Maç içi masa sayısı floor(floor((N − tehdit)/3)/2): N ≤ 7'de 0 (masa ısınma ve epilogda), N = 8–12'de 1, N = 16–20'de 2; paylar Gündüz süresiyle ölçeklenir. Küçük lobide alibinin tarlayı temizlemesi riski böylece kapandı. |
 | Ç7 | Varyans | **Evet** | Satranç ve dama deterministik; bot seçimleri tohumlu `FKGRng`; masanın sonucu maçı belirlemez. Zar (Sonra) sadece masa oyununun içinde. |
 | Ç8 | Bot | **Evet** | Botlar çağrılınca oynar, çanda kalkar, sadece açık tahta durumunu okur; 024 sonrası masa olaylarını iddia olarak kullanır. MVP'de kendiliğinden oturmazlar (bilinçli). |
 | Ç9 | Sessiz yol | **Evet** | Tamamı fare + HUD; iddia yapılandırılmış satır; çağrı cevabı NEAR sohbet satırı. |
 | Ç10 | Okunabilirlik | **Evet** | "Masada oturan görülür ve kayda geçer, ama etrafını az görür." |
-| Ç11 | Frustrasyon | **Evet** | Daralan algı vinyetle önceden görünür; "Etrafa bak" ve kalkmak cevaptır; kalkmak oyunu kaybettirmez. |
-| Ç12 | Tempo | **Hayır** | Erken evreye (1. gün, ısınma, epilog) hizmet eder ama charter'ın ölü zaman tanımıyla odaktaki oyuncu **daha az** olay algılar; ölü zamanı azaltmaz, sadece pay ve tavanla sınırlar. |
+| Ç11 | Frustrasyon | **Evet** | Daralan algı vinyetle önceden görünür; kalkmak cevaptır ve oyunu kaybettirmez; 45 sn'de otomatik erteleme; horoz tıkı odağı kırar. |
+| Ç12 | Tempo | **Hayır** | Isınma ve epilogda sosyal eğlencedir, ama charter'ın ölü zaman tanımıyla masadaki süre ölü zamandır (kendi olayların sayılmaz); ölü zamanı azaltmaz, sadece pay, 0.3× tavan ve 45 sn odak tavanıyla sınırlar. |
 
 **Sonuç: Ç1–Ç4 Evet, diğerlerinden 7/8 Evet → geçer** (öneri olarak). Koşul: Ç2 ve Ç4'ün defter/ölçüm kısmı 020b ve
-024'e bağlıdır; TT-2 onlardan önce bitirilemez. 020b veya 024 iptal edilirse masa, tebeşir tahtası iziyle kalan ama
+024'e bağlıdır; 036e onlardan önce bitirilemez. 020b veya 024 iptal edilirse masa, tebeşir tahtası iziyle kalan ama
 ölçülemeyen bir yan etkinlik olur.
 
 ---
@@ -509,8 +515,10 @@ Kural: Ç1–Ç4 zorunlu, kalan 8'den ≥ 6 Evet. Bu **yeni** bir mekaniktir: zo
 - [ ] **T0** Masa oyunlarını Backlog "Proposed" listesine al (M12 içeriği; doğrulama borcundan sonra).
 - [ ] **T1** Dama varyantı: MVP İngiliz (çapraz) mı, Türk daması (düz) mı? Öneri: İngiliz, hemen ardından Türk.
 - [ ] **T2** Taşlar: Blender'da başsız üretim (izin gerekmez, öneri) mi, KayKit Board Game Bits (CC0, indirme izni) mi?
-- [ ] **T3** Maç içi pay: 0.2 × Gündüz (satranç çoğu maçta bitmez) uygun mu? Daha cömert seçenek 0.3 × (T-M1 riski).
-- [ ] **T4** Bahis 0–10 Coin ve ölünün payının masada kalması.
+- [ ] **T3** Maç içi pay 0.12 × Gündüz, oturum tavanı 0.3 ×, kesintisiz odak 45 sn (satranç çoğu maçta bitmez; tam saat lobide, ısınmada, epilogda). Alternatif: rakibin hamlesini S1.1'de algılanan olay saymak (metrik tanımı değişir, kullanıcı onayı ister).
+- [ ] **T4** Bahis 0–10 Bakır ve ölünün payının masada kalması.
+- [ ] **T7** Tebeşir tahtası isim yazmaz, imza yok.
+- [ ] **T8** N ≤ 7'de maç içi masa yok (sadece ısınma ve epilog); maç içi masa sayısı formülü (§2).
 - [ ] **T5** §3.10 sabitleri charter §0.3'e eklensin mi?
 - [ ] **T6** §9.2'deki `StartMeeting` oturan-kaldırma düzeltmesi (bugünkü 71 koltuğu da etkiler) ayrı küçük iş olarak öne alınsın mı?
 
@@ -518,13 +526,14 @@ Kural: Ç1–Ç4 zorunlu, kalan 8'den ≥ 6 Evet. Bu **yeni** bir mekaniktir: zo
 - **R-1 (bugün var):** `StartMeeting` oturan karakteri kaldırmadan ışınlıyor; `AKGSeat::Tick` hareketi her karede
   kapattığı için oturan oyuncu toplantı halkasında donabilir ve kalkınca koltuğa geri ışınlanır. Masalardan bağımsız,
   mevcut 71 koltukta yaşanabilir.
-- **R-2:** Masa ölü zaman mıknatısı olabilir (S1.2). Tedbir: pay, tavan, faz kesintileri, T-M1 raporu. Plato olursa
-  pay 0.15×'e iner.
-- **R-3:** Alibi çok güçlü çıkarsa asma doğruluğu S9.4'ün %75 tavanını aşar. Tedbir: 30 sn kova, alibinin taraf değil
-  zaman temizlemesi, imzasız seçenek.
+- **R-2:** Masa ölü zaman mıknatısı olabilir (S1.2). Tedbir: pay 0.12×, tavan 0.3×, 45 sn odak, faz kesintileri, T-M1
+  raporu. Plato olursa pay 0.10×'e iner.
+- **R-3:** Alibi çok güçlü çıkarsa asma doğruluğu S9.4'ün %75 tavanını aşar. Tedbir: isimsiz tahta, 30 sn kova, alibinin
+  taraf değil zaman temizlemesi, masa sayısı tavanı, N ≤ 7'de maç içi masa yok. Nöbet defteri (orman) gece alibisi
+  kaynağıdır; ikisi birlikte S9.4 raporunda izlenir.
 - **R-4:** Masa çok tehlikeli çıkarsa (T-M3 > 1.5×, özellikle kardeş tasarımın menzilli silahıyla) kimse oturmaz.
   Tedbir: odak konisi genişletilir ya da odak sadece kendi sıranda uygulanır.
-- **R-5:** `KGBotController.cpp`, `KGGameMode.cpp` ve `KGDevCommands.cpp` birçok sprintin ortak dosyası; TT-1 seri
+- **R-5:** `KGBotController.cpp`, `KGGameMode.cpp` ve `KGDevCommands.cpp` birçok sprintin ortak dosyası; 036b ve 036d seri
   sırada koşmalı.
-- **R-6:** Satranç taşı asset'i yok; T2 kararı gecikirse TT-1'in görsel kabulü (madde 5) bekler.
+- **R-6:** Satranç taşı asset'i yok; T2 kararı gecikirse 036c bekler (036a ve 036b 2D panel ve yer tutucu taşlarla ilerler).
 - **R-7:** Taş vuruşu sesi yeni bir `KG_HEAR_*` sabiti ister; charter'ın tek sabit tablosu kuralı gereği onaysız eklenmez.

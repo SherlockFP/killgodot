@@ -538,7 +538,7 @@ void SKGLogo::Construct(const FArguments& InArgs)
 			+ SHorizontalBox::Slot()
 			.AutoWidth()
 			[
-				Word(TEXT("KILL G"))
+				Word(TEXT("KILLG"))
 			]
 			+ SHorizontalBox::Slot()
 			.AutoWidth()
@@ -547,11 +547,6 @@ void SKGLogo::Construct(const FArguments& InArgs)
 				.Font(Font)
 				.ShadowOffset(Shadow)
 				.ShadowColor(ShadowColor)
-			]
-			+ SHorizontalBox::Slot()
-			.AutoWidth()
-			[
-				Word(TEXT("DOT"))
 			]
 		]
 		+ SVerticalBox::Slot()

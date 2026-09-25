@@ -1,4 +1,4 @@
-# KILL GODOT
+# KILLGO
 
 > *Herkes bekliyor. Biri sabırsız.*
 

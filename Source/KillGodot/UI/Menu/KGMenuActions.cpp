@@ -312,7 +312,7 @@ namespace
 
 	FAutoConsoleCommandWithWorldAndArgs GKGMainMenuCommand(
 		TEXT("kg.MainMenu"),
-		TEXT("Toggle the Kill Godot main menu over the current map. 'kg.MainMenu travel' loads the front-end map instead; ")
+		TEXT("Toggle the KillGo main menu over the current map. 'kg.MainMenu travel' loads the front-end map instead; ")
 		TEXT("'kg.MainMenu home|play|host|join|cosmetics|settings' opens the overlay on that page."),
 		FConsoleCommandWithWorldAndArgsDelegate::CreateStatic(&HandleMainMenuCommand));
 

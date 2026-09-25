@@ -1,4 +1,7 @@
-# Kill Godot — agent guide
+# KillGo (project "Kill Godot") — agent guide
+
+The game is called **KillGo** (renamed 2026-09-25). Internal names stay `KillGodot` (module, .uproject, `KG` prefix,
+paths) — never rename those; only player-facing text says KillGo.
 
 First-person, voice-driven social-deduction game (Town of Salem × GMod Murder × Lockdown Protocol × R.E.P.O.,
 CS2-quality viewmodel) set in the coastal fishing village of Morrowmere. Unreal Engine **5.8.3**
@@ -12,7 +15,7 @@ research reports are English**. In-game text goes through String Tables (EN/TR/R
 | Path | What |
 |---|---|
 | `Docs/00_Vision.md` … `Docs/09_Roadmap_Gauntlet.md` | The design. Read the relevant doc before building a system. |
-| `Docs/Backlog.md` | Work queue for the Gauntlet loop (milestones M0–M18). |
+| `Docs/Backlog.md` | Work queue (milestones M0–M18). |
 | `Docs/Research/TechResearch.md` | Engine-verified UE 5.8 facts: host migration, EOS, voice, FP rendering, perf, legal. |
 | `Docs/Research/AssetResearch.md` | Free asset candidates + licenses (download only with user permission). |
 | `Docs/Prompts/` | Reusable prompts: the loop prompt, milestone prompts, art-generation prompts. |
@@ -21,10 +24,16 @@ research reports are English**. In-game text goes through String Tables (EN/TR/R
 | `Tools/Gauntlet/run_gates.ps1` | Quality gates G1–G4. |
 | `Art/` | Generated textures, concept renders, exported meshes. |
 
-## The Gauntlet loop (how to make progress)
-SELECT next `[ ]` in `Docs/Backlog.md` → PLAN (`Docs/Iterations/ITER-NNN.md`) → BUILD → run gates
-(`powershell -File Tools/Gauntlet/run_gates.ps1`) → update docs/backlog → report. A task is done only when its
-gates pass. Max 3 fix attempts per failing gate, then ask the user. Commit only when the user asks.
+## The bounded loop (how to make progress)
+Follow `Docs/Process/LoopContract.md`. In short:
+- Every sprint is one Backlog item, with acceptance criteria and a writable file scope written BEFORE work.
+- Max 3 fix attempts per failing check and 2 look-and-iterate rounds for visuals. Stop on acceptance, or on a plateau
+  (two rounds with no measurable gain).
+- `powershell -File Tools/Gauntlet/run_invariants.ps1` runs build + tests, the v2 verify, the chat/emote/fish/chore
+  smokes and a whole-match bot smoke. Run it before and after each sprint; a sprint that breaks it is reverted.
+- Critics and agents never change the objective. Their findings go to Backlog "Proposed (needs approval)".
+- Git: the repo is initialised, with a baseline commit on 2026-09-25 (binaries via LFS). Commit only when the user asks;
+  never push. Snapshots of the code folders go to `D:\KillGodot_Snapshots\`.
 
 ## Non-negotiable code rules (host migration depends on them)
 - Gameplay durations come from `FKGMatchClock` (remaining seconds). No `TimerManager` for gameplay-critical time.

@@ -284,7 +284,7 @@ void SKGPauseMenu::ConfirmQuit()
 	const APlayerController* PC = OwningPlayer.Get();
 	const bool bHosting = PC && PC->GetWorld() && PC->GetWorld()->GetNetMode() == NM_ListenServer;
 	ShowModal(SNew(SKGModal)
-		.Title(LOCTEXT("QuitTitle", "Quit Kill Godot?"))
+		.Title(LOCTEXT("QuitTitle", "Quit KillGo?"))
 		.Body(bHosting ? LOCTEXT("QuitBodyHost", "You are the host: quitting ends the match for everyone.")
 		               : LOCTEXT("QuitBody", "The village will have to wait for you."))
 		.ConfirmText(LOCTEXT("QuitConfirm", "Quit"))

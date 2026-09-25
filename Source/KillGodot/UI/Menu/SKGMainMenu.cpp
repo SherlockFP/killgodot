@@ -1968,7 +1968,7 @@ void SKGMainMenu::GoBack()
 void SKGMainMenu::RequestQuit()
 {
 	ShowModal(SNew(SKGModal)
-		.Title(LOCTEXT("QuitTitle", "Quit Kill Godot?"))
+		.Title(LOCTEXT("QuitTitle", "Quit KillGo?"))
 		.Body(LOCTEXT("QuitBody", "The village will have to wait for you."))
 		.ConfirmText(LOCTEXT("QuitConfirm", "Quit"))
 		.ConfirmKind(EKGButtonKind::Danger)

@@ -39,7 +39,7 @@ enum class EKGBrowserColumn : uint8
 };
 
 /**
- * Title screen: painted dusk-harbour backdrop, the KILL GODOT wordmark and a column of big buttons on the home page
+ * Title screen: painted dusk-harbour backdrop, the KILLGO wordmark and a column of big buttons on the home page
  * (Play / Cosmetics / Settings / Quit). Play opens a full-screen server browser (sortable table, search, filters,
  * join by code or address, Quick Match), Host and Cosmetics open centered panels. Every page sizes itself from the
  * DPI-scaled viewport, so it fits 720p to 1440p and ultrawide. Keyboard + mouse: arrows / Tab move, Enter selects,

@@ -62,7 +62,7 @@ private:
 	double StartTime = 0.0;
 };
 
-/** "KILL GODOT" wordmark with the clock "O", a warm poster shadow and the tagline. */
+/** "KILLGO" wordmark with the clock "O", a warm poster shadow and the tagline. */
 class KILLGODOT_API SKGLogo : public SCompoundWidget
 {
 public:

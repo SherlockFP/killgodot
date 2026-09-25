@@ -125,6 +125,11 @@
 ## Sonraki milestone'lar
 M4–M18 maddeleri, milestone başladığında `09_Roadmap_Gauntlet.md`'den buraya ayrıntılı olarak açılır.
 
+## NEXT (user, 2026-09-25 evening): v2 harbour cliff lower + lighthouse to the corner
+- [ ] The stepped rock wall around the harbour/Lighthouse Point (the user's screenshot: blocky stacked rock terraces above the basin water) must be MUCH lower: a gentle 2-4 m rocky shore, not a wall. Also cl_point.
+- [ ] Move the lighthouse tower further out to the corner/tip of the headland, off the main view axis. Keep the FuelLighthouse chore reachable and nav 100%.
+- Files: author_layout_v2.py/.json (cliff shoulders, lighthouse position), kg_build_terrain_v2.py; full rebuild + verify + invariants; before/after shots from the basin and the jetty.
+
 ## Sprint queue (bounded loop, 2026-09-25): start in this order as agent slots free (max 3 running)
 - [~] SPRINT v2 polish (running): calm basin, §11.4 props, bots on v2, v2 as the default map, material fix
 - [~] SPRINT underground: shovel/digging/loot (5 spot kinds, grave noise + open graves, treasure maps + scraps, 10 loot

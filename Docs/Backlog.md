@@ -125,6 +125,8 @@
 ## Sonraki milestone'lar
 M4–M18 maddeleri, milestone başladığında `09_Roadmap_Gauntlet.md`'den buraya ayrıntılı olarak açılır.
 
+## NEXT after 040 (user, 2026-09-26): SPRINT-041 Trapper killer role (mimic chests, snare, tripwire) + the first role-ability framework: Docs/Iterations/SPRINT-041-TrapperRole-Mimics.md
+
 ## NEXT (user, 2026-09-26): SPRINT-040 Storm Manor expansion (much bigger, secrets, hidden compartments, secret + manor-only chores, traps): Docs/Iterations/SPRINT-040-StormManor-Expansion.md, starts when the v2 cliff/stairs agent frees a main slot
 
 ## NEXT (user, 2026-09-25 evening): v2 harbour cliff lower + lighthouse to the corner

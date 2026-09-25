@@ -49,7 +49,7 @@ sparse rooms (blue room, nursery, study) and white pack meshes.
 ## Writable scope
 - Tools/Level/author_stormmanor.py, validate_stormmanor.py, render_stormmanor.py, stormmanor_layout.json
 - Tools/Unreal/kg_build_stormmanor*.py/.ps1, kg_sm_dress.py, kg_capture_stormmanor.py, Tools/Level/verify_stormmanor_build.py
-- new C++ under Source/KillGodot/Manor/ (secrets, compartments, traps), with minimal registration hooks
+- new C++ under Source/KillGodot/Manor/ (secrets, compartments) and a GENERIC trap framework in Source/KillGodot/Traps/ (arm / telegraph / trigger / cooldown / event hook) that SPRINT-041's Trapper role reuses, with minimal registration hooks
 - manor chore data plus minimal hooks into Chores/WorldChores
 - tests, docs
 

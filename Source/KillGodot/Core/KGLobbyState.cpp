@@ -4,6 +4,9 @@
 #include "Engine/World.h"
 #include "EngineUtils.h"
 #include "GameFramework/GameModeBase.h"
+#include "Misc/CommandLine.h"
+#include "Misc/DateTime.h"
+#include "Misc/Parse.h"
 #include "GameFramework/GameSession.h"
 #include "GameFramework/GameStateBase.h"
 #include "GameFramework/PlayerController.h"
@@ -16,6 +19,15 @@
 #include "UI/Menu/KGMenuActions.h"
 
 #define LOCTEXT_NAMESPACE "KGLobby"
+
+namespace
+{
+	/** Wall clock in ms since 1970 (logs only: lets a local multi-process smoke line up events across processes). */
+	long long LobbyUnixMs()
+	{
+		return static_cast<long long>((FDateTime::UtcNow() - FDateTime(1970, 1, 1)).GetTotalMilliseconds());
+	}
+}
 
 AKGLobbyState::AKGLobbyState()
 {
@@ -90,7 +102,52 @@ void AKGLobbyState::BeginPlay()
 		Settings.LobbyName = LOCTEXT("DefaultName", "Morrowmere lobby").ToString();
 	}
 	AuthSyncSeats();
+	PostLoginHandle = FGameModeEvents::GameModePostLoginEvent.AddUObject(this, &AKGLobbyState::HandlePostLogin);
 	UE_LOG(LogKillGodot, Log, TEXT("KG_LOBBY open '%s' code %s, max %d"), *Settings.LobbyName, *Settings.Code, Settings.MaxPlayers);
+}
+
+void AKGLobbyState::EndPlay(const EEndPlayReason::Type EndPlayReason)
+{
+	FGameModeEvents::GameModePostLoginEvent.Remove(PostLoginHandle);
+	Super::EndPlay(EndPlayReason);
+}
+
+void AKGLobbyState::HandlePostLogin(AGameModeBase* GameMode, APlayerController* NewPlayer)
+{
+	if (!GameMode || GameMode->GetWorld() != GetWorld() || !NewPlayer)
+	{
+		return;
+	}
+	// Wall clock (ms since 1970, same machine clock for every process of a local smoke) for the "names within 1 s"
+	// acceptance check (Tools/Unreal/kg_lobby_smoke.ps1).
+	UE_LOG(LogKillGodot, Log, TEXT("KG_LOBBY join t=%lld"), LobbyUnixMs());
+	bSyncNextTick = true;   // AKGGameMode::PostLogin names the player right after this event
+}
+
+FString AKGLobbyState::GetSeatName(const FKGLobbyEntry& Entry)
+{
+	return !Entry.Name.IsEmpty() ? Entry.Name : (Entry.Player ? Entry.Player->GetPlayerName() : FString());
+}
+
+void AKGLobbyState::LogVisibleNames()
+{
+	TArray<FString> Names;
+	for (const FKGLobbyEntry& Entry : Entries.Items)
+	{
+		const FString Name = GetSeatName(Entry);
+		if (!Name.IsEmpty())
+		{
+			Names.Add(Name);
+		}
+	}
+	const FString Joined = FString::Join(Names, TEXT(", "));
+	if (Joined == LastLoggedNames)
+	{
+		return;
+	}
+	LastLoggedNames = Joined;
+	UE_LOG(LogKillGodot, Log, TEXT("KG_LOBBY_NAMES t=%lld %s n=%d [%s]"), LobbyUnixMs(), HasAuthority() ? TEXT("host") : TEXT("client"),
+	       Names.Num(), *Joined);
 }
 
 const FKGLobbyEntry* AKGLobbyState::FindEntry(const APlayerState* Player) const
@@ -173,12 +230,25 @@ void AKGLobbyState::AuthSyncSeats()
 		}
 		FKGLobbyEntry& Entry = Entries.Items.AddDefaulted_GetRef();
 		Entry.Player = PlayerState;
+		Entry.Name = PlayerState->GetPlayerName();
 		Entry.ColorIndex = NextColor++;
 		const APlayerController* OwnerPC = Cast<APlayerController>(PlayerState->GetOwner());
 		Entry.bHost = OwnerPC && OwnerPC->IsLocalController();
 		Entries.MarkItemDirty(Entry);
 		bChanged = true;
 		UE_LOG(LogKillGodot, Log, TEXT("KG_LOBBY seat %s%s"), *PlayerState->GetPlayerName(), Entry.bHost ? TEXT(" (host)") : TEXT(""));
+	}
+	// Renames (the game mode names humans right after login) reach every seat list with the lobby, not later with the
+	// player state (which replicates at a low rate).
+	for (FKGLobbyEntry& Entry : Entries.Items)
+	{
+		if (Entry.Player && Entry.Name != Entry.Player->GetPlayerName())
+		{
+			Entry.Name = Entry.Player->GetPlayerName();
+			Entries.MarkItemDirty(Entry);
+			++Revision;
+			ForceNetUpdate();
+		}
 	}
 	if (bChanged)
 	{
@@ -287,15 +357,32 @@ void AKGLobbyState::AuthBeginMatch()
 void AKGLobbyState::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
+	if (!bStarted)
+	{
+		LogVisibleNames();
+	}
 	if (!HasAuthority() || bStarted)
 	{
 		return;
 	}
 	SyncAccumulator += DeltaSeconds;
-	if (SyncAccumulator >= 0.25f)
+	if (SyncAccumulator >= 0.25f || bSyncNextTick)
 	{
 		SyncAccumulator = 0.0f;
+		bSyncNextTick = false;
 		AuthSyncSeats();
+		LogVisibleNames();
+	}
+	static const bool bSmoke = FParse::Param(FCommandLine::Get(), TEXT("KGLobbySmoke"));
+	if (bSmoke && !bCountingDown)
+	{
+		// Headless two-process smoke: once two named humans sit here for a few seconds, the host starts the match.
+		SmokeSeatedSeconds = CountHumans() >= 2 ? SmokeSeatedSeconds + DeltaSeconds : 0.0f;
+		if (SmokeSeatedSeconds > 4.0f)
+		{
+			SmokeSeatedSeconds = -1000.0f;
+			AuthSetCountdown(true);
+		}
 	}
 	if (bCountingDown)
 	{

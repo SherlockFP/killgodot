@@ -56,6 +56,8 @@
 #include "World/KGGrassField.h"
 #include "World/KGMapInfo.h"
 #include "World/KGTaskStation.h"
+#include "Dig/KGDigDev.h"            // KG_DIG hook: Dig.* verbs
+#include "Dig/KGUndergroundInfo.h"   // KG_DIG hook: GroundAt stays on the surface
 
 namespace KGDevPrivate
 {
@@ -1206,6 +1208,9 @@ namespace KGDevPrivate
 		    });
 
 		// ---- Debug (this machine) ----
+		// ---- KG_DIG: digging + the underground (Source/KillGodot/Dig, Docs/01_GDD_Core.md section 16) ----
+		KGDigDev::AddVerbs(Add);
+
 		Add(TEXT("Debug.HUDDemo"), TEXT("<0-5>"), TEXT("HUD preview states (kg.HUDDemo)."), Local,
 		    [](const FKGDevContext& C, const TArray<FString>& A)
 		    {
@@ -1543,6 +1548,8 @@ FVector FKGDev::GroundAt(UWorld* World, const FVector2D& XY, float HintZ)
 	FCollisionQueryParams Params(SCENE_QUERY_STAT(KGDevGround), true);
 	World->LineTraceMultiByObjectType(Hits, FVector(XY.X, XY.Y, 60000.0), FVector(XY.X, XY.Y, -20000.0), Objects, Params);
 	Hits.Sort([](const FHitResult& A, const FHitResult& B) { return A.ImpactPoint.Z > B.ImpactPoint.Z; });
+	// KG_DIG hook: the underground (well cellar, catacombs) lies below the village; places above it are on the surface.
+	Hits.RemoveAll([World](const FHitResult& H) { return AKGUndergroundInfo::IsBelowGround(World, H.ImpactPoint); });
 	for (int32 i = Hits.Num() - 1; i >= 0; --i)
 	{
 		const double Above = i > 0 ? Hits[i - 1].ImpactPoint.Z : TNumericLimits<double>::Max();

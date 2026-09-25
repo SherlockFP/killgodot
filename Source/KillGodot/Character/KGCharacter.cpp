@@ -35,6 +35,7 @@
 #include "Character/KGCharacterMovement.h"
 #include "Components/PostProcessComponent.h"
 #include "World/KGLadder.h"
+#include "World/KGChoreItem.h"
 #include "World/KGWaves.h"
 #include "GameFramework/PhysicsVolume.h"
 #include "Materials/MaterialInterface.h"
@@ -746,6 +747,12 @@ void AKGCharacter::Tick(float DeltaSeconds)
 	const bool bMoving = GetVelocity().SizeSquared2D() > 100.0f;
 	const bool bSprinting = Stamina.Tick(DeltaSeconds, bWantsSprint && !bIsCrouched, bMoving);
 	GetCharacterMovement()->MaxWalkSpeed = bSprinting ? SprintSpeed : WalkSpeed;
+	// SPRINT-016 hook (Chores/WorldChores): a heavy chore item (fish crate, sacks, firewood) slows its carrier and
+	// forbids sprinting; a second carrier on the crate restores full walking speed.
+	if (const float Carry = AKGChoreItem::SpeedFactorFor(this); Carry < 0.999f)
+	{
+		GetCharacterMovement()->MaxWalkSpeed = WalkSpeed * Carry;
+	}
 
 	if (HeldComponent)
 	{
@@ -984,6 +991,15 @@ bool AKGCharacter::TryGrab(UPrimitiveComponent* Component, const FVector& GrabPo
 	PhysicsHandle->bSoftAngularConstraint = true;
 	PhysicsHandle->bSoftLinearConstraint = true;
 	HeldYaw = Component->GetComponentRotation().Yaw - GetControlRotation().Yaw;
+	// SPRINT-016 hook: chore items know who carries them (speed, spills, credit). A light one is snatched out of the
+	// previous carrier's hands; the heavy crate takes a second pair of hands.
+	if (AKGChoreItem* ChoreItem = Cast<AKGChoreItem>(Component->GetOwner()))
+	{
+		if (AKGCharacter* Robbed = Cast<AKGCharacter>(ChoreItem->AuthAddCarrier(this)); Robbed && Robbed != this)
+		{
+			Robbed->Release(false);
+		}
+	}
 	PhysicsHandle->GrabComponentAtLocationWithRotation(Component, NAME_None, Component->Bounds.Origin,
 	                                                   Component->GetComponentRotation());
 	HeldComponent = Component;
@@ -997,6 +1013,10 @@ void AKGCharacter::Release(bool bThrow)
 	PhysicsHandle->ReleaseComponent();
 	HeldComponent = nullptr;
 	bHoldingObject = false;
+	if (AKGChoreItem* ChoreItem = IsValid(Held) ? Cast<AKGChoreItem>(Held->GetOwner()) : nullptr)
+	{
+		ChoreItem->AuthRemoveCarrier(this);   // SPRINT-016 hook
+	}
 	if (bThrow && IsValid(Held))
 	{
 		Held->AddImpulse(GetControlRotation().Vector() * ThrowSpeed, NAME_None, true);
@@ -1193,6 +1213,23 @@ void AKGCharacter::ServerShove_Implementation(FVector_NetQuantizeNormal ViewDir)
 		Pushed.Add(HitActor);
 		if (ACharacter* Other = Cast<ACharacter>(HitActor))
 		{
+			// SPRINT-016 hook: a shove knocks whatever they carry out of their hands (players and bots).
+			if (AKGCharacter* Carrier = Cast<AKGCharacter>(Other); Carrier && Carrier->HeldComponent)
+			{
+				UPrimitiveComponent* Knocked = Carrier->HeldComponent;
+				Carrier->Release(false);
+				if (IsValid(Knocked) && Knocked->IsSimulatingPhysics())
+				{
+					Knocked->AddImpulse(Forward * 350.0f + FVector(0.0f, 0.0f, 150.0f), NAME_None, true);
+				}
+				UE_LOG(LogKillGodot, Log, TEXT("KG_WORLDCHORE_KNOCK %s knocked %s out of %s's hands"), *GetName(), *GetNameSafe(Knocked ? Knocked->GetOwner() : nullptr),
+				       *Carrier->GetName());
+			}
+			if (AKGChoreItem* Attached = AKGChoreItem::CarriedBy(Other); Attached && Attached->IsAttached())
+			{
+				Attached->AuthDetach(Forward * 350.0f + FVector(0.0f, 0.0f, 150.0f));
+				UE_LOG(LogKillGodot, Log, TEXT("KG_WORLDCHORE_KNOCK %s knocked %s out of %s's hands"), *GetName(), *Attached->GetName(), *Other->GetName());
+			}
 			Other->LaunchCharacter(FVector(Forward.X, Forward.Y, 0.0).GetSafeNormal() * ShoveImpulse +
 			                       FVector(0.0, 0.0, 180.0), true, true);
 		}

@@ -23,6 +23,8 @@ struct FKGSettingsSnapshot
 	bool bInvertY = false;
 	float FieldOfView = 90.0f;
 	int32 ViewmodelPreset = 1;
+	bool bStreamerMode = false;
+	FName StreamerPeekKey;
 	float Volumes[4] = {};
 
 	static FKGSettingsSnapshot Capture(const UKGGameUserSettings& Settings);

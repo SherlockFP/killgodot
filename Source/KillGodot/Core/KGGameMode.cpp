@@ -21,7 +21,9 @@
 #include "AI/KGBotController.h"
 #include "GameFramework/DamageType.h"
 #include "World/KGTaskStation.h"
+#include "Chores/WorldChores/KGWorldChoreTypes.h"
 #include "HAL/IConsoleManager.h"
+#include "UI/Reveal/KGRevealTypes.h"
 
 namespace
 {
@@ -67,6 +69,7 @@ float AKGGameMode::GetPhaseDuration(EKGPhase Phase, int32 NumPlayers)
 	case EKGPhase::Warmup:
 		return CVarWarmup.GetValueOnGameThread();
 	case EKGPhase::RoleReveal:
+		return KGReveal::PhaseSeconds;   // the reveal ceremony (UI/Reveal), 8-12 s by contract (SPRINT-015)
 	case EKGPhase::Dawn:
 		return 12.0f;
 	case EKGPhase::Day:
@@ -255,7 +258,11 @@ void AKGGameMode::StartFromLobby(int32 BotFillTarget)
 	{
 		FillWithBots(BotFillTarget);
 	}
-	StartMatchFlow(FDateTime::UtcNow().GetTicks());
+	// The lobby was the warm-up: straight to the role reveal ceremony, the village only shows after the cards.
+	const int64 Seed = FDateTime::UtcNow().GetTicks();
+	Rng.Reseed(static_cast<uint64>(Seed));
+	MatchSeed = Seed;
+	EnterPhase(EKGPhase::RoleReveal);
 }
 
 void AKGGameMode::StartMatchFlow(int64 Seed)
@@ -757,9 +764,9 @@ void AKGGameMode::AssignTasks(const TArray<AKGPlayerState*>& Players)
 	constexpr int32 TasksPerPlayer = 4;
 	for (AKGPlayerState* PS : Players)
 	{
-		TArray<FName> Mine = Pool;
-		Rng.Shuffle(Mine);
-		Mine.SetNum(FMath::Min(TasksPerPlayer, Mine.Num()));
+		// SPRINT-016 hook: about 70 % world chores / 30 % panel chores where the level has world chores
+		// (Chores/WorldChores); levels without them get exactly the old shuffle.
+		TArray<FName> Mine = FKGWorldChoreRules::Deal(Pool, FKGWorldChoreCatalog::Get(), PS->IsABot(), TasksPerPlayer, Rng);
 		PS->TaskIds = Mine;
 		PS->TaskDone.Init(false, Mine.Num());
 		const FKGRoleInfo* RoleInfo = FKGRoleListGenerator::FindRole(FKGRoleListGenerator::GetDefaultCatalog(),

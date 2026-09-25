@@ -114,6 +114,8 @@ void UKGGameUserSettings::SetKGDefaults()
 	bInvertY = false;
 	FieldOfView = DefaultFieldOfView;
 	ViewmodelPreset = 1;
+	bStreamerMode = false;
+	StreamerPeekKey = GetStreamerPeekKeys()[0];
 	MasterVolume = 1.0f;
 	MusicVolume = 0.7f;
 	EffectsVolume = 1.0f;
@@ -157,6 +159,18 @@ void UKGGameUserSettings::SetFieldOfView(float Value)
 void UKGGameUserSettings::SetViewmodelPreset(int32 Preset)
 {
 	ViewmodelPreset = FMath::Clamp(Preset, 1, 3);
+}
+
+const TArray<FName>& UKGGameUserSettings::GetStreamerPeekKeys()
+{
+	// EKeys names. Tab is free in gameplay (chat uses it only while typing); the others are common alternatives.
+	static const TArray<FName> Keys = {TEXT("Tab"), TEXT("LeftAlt"), TEXT("CapsLock"), TEXT("Q")};
+	return Keys;
+}
+
+void UKGGameUserSettings::SetStreamerPeekKey(FName Key)
+{
+	StreamerPeekKey = GetStreamerPeekKeys().Contains(Key) ? Key : GetStreamerPeekKeys()[0];
 }
 
 float UKGGameUserSettings::GetVolume(EKGVolumeChannel Channel) const

@@ -627,6 +627,12 @@ struct FKGChorePin
 	bool bActive = false;
 };
 
+// SPRINT-016 hooks: world chore waypoints, compass strip and work ring (Chores/WorldChores/KGWorldChoreHud.inl,
+// included at the end).
+bool IsWorldChoreId(FName Id);
+void GatherWorldChorePins(const FKGHudFrame& F, TArray<FKGChorePin>& Out);
+void DrawWorldChoreHud(const FKGHudFrame& F);
+
 void GatherChores(const FKGHudFrame& F, FKGMapFx& M, TArray<FKGChorePin>& Out)
 {
 	if (F.Fx->Now - M.StationsAt > 3.0)
@@ -644,11 +650,16 @@ void GatherChores(const FKGHudFrame& F, FKGMapFx& M, TArray<FKGChorePin>& Out)
 		for (int32 i = 0; i < F.Me->TaskIds.Num(); ++i)
 		{
 			const bool bDone = F.Me->TaskDone.IsValidIndex(i) && F.Me->TaskDone[i];
+			if (IsWorldChoreId(F.Me->TaskIds[i]))
+			{
+				continue;   // SPRINT-016: world chores pin their current step (below), not where they start
+			}
 			if (const FVector2D* Pos = bDone ? nullptr : M.Stations.Find(F.Me->TaskIds[i]))
 			{
 				Out.Add({*Pos, Active && Active->TaskId == F.Me->TaskIds[i]});
 			}
 		}
+		GatherWorldChorePins(F, Out);   // SPRINT-016 hook
 	}
 	if (Out.Num() == 0 && F.Demo != 0)
 	{
@@ -662,6 +673,12 @@ void GatherChores(const FKGHudFrame& F, FKGMapFx& M, TArray<FKGChorePin>& Out)
 		}
 	}
 }
+
+// KG_DIG hooks: digging HUD, treasure-map marks and the underground plan (Dig/KGDigHud.inl, included at the end).
+void DrawDigLayer(const FKGHudFrame& F);
+const AKGMapInfo* DigResolvePlan(const FKGHudFrame& F, FKGMapFx& M, const AKGMapInfo* Surface);
+void DigMapMarks(const FKGHudFrame& F, TFunctionRef<FVector2D(const FVector2D&)> ToScreen, float Size, float Opacity,
+                 const FVector2D* ClipCentre, float ClipRadius);
 
 // -------------------------------------------------------------------------------------------------------------------
 // Corner minimap (top right): rotates with the view, you in the centre, nearby names, your chores
@@ -801,6 +818,7 @@ void DrawMinimap(const FKGHudFrame& F, FKGMapFx& M, const AKGMapInfo& Info, cons
 			P.Poly(MakeArrayView(Tri), WithAlpha(Gold, Opacity), WithAlpha(Srgb(236, 150, 40), Opacity));
 		}
 	}
+	DigMapMarks(F, [&X](const FVector2D& W) { return X.ToScreen(W); }, 20.0f * S, Opacity, &Ctr, R);   // KG_DIG hook
 
 	// You: view cone + arrow (always up: the map turns, you don't).
 	FPts Cone;
@@ -969,6 +987,7 @@ void DrawFullMap(const FKGHudFrame& F, FKGMapFx& M, const AKGMapInfo& Info, cons
 	{
 		ChorePin(P, ToScreen(Pin.Pos), 26.0f * S, A, Pin.bActive ? 0.0f : Pulse);
 	}
+	DigMapMarks(F, [&ToScreen](const FVector2D& W) { return ToScreen(W); }, 26.0f * S, A, nullptr, 0.0f);   // KG_DIG hook
 	if (Me)
 	{
 		const FVector2D You = ToScreen(*Me);
@@ -1051,6 +1070,12 @@ void DrawMapLayer(const FKGHudFrame& F, bool bLoadingCard)
 {
 	FKGMapFx& M = MapFx(F.Hud);
 	const AKGMapInfo* Info = MapInfoFor(F, M);
+	if (!bLoadingCard)
+	{
+		DrawWorldChoreHud(F);               // SPRINT-016 hook: compass waypoints, current step, work ring, toasts
+	}
+	DrawDigLayer(F);                        // KG_DIG hook: shovel prompt, stage ring, dug-up card, grave noise
+	Info = DigResolvePlan(F, M, Info);      // KG_DIG hook: below ground the map is the underground plan
 	if (!Info)
 	{
 		M.bFullOpen = false;
@@ -1097,3 +1122,9 @@ void DrawMapLayer(const FKGHudFrame& F, bool bLoadingCard)
 	}
 	DrawFullMap(F, M, *Info, Pawn ? &Me : nullptr, Yaw, Chores);
 }
+
+// KG_DIG hook: digging HUD + underground plan (leaves and re-opens the anonymous namespace for its includes).
+#include "Dig/KGDigHud.inl"
+
+// SPRINT-016 hook: world chore HUD (same namespace trick).
+#include "Chores/WorldChores/KGWorldChoreHud.inl"

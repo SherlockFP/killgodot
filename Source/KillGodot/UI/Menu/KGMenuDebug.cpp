@@ -3,6 +3,8 @@
 //
 //   kg.UIShot <page|all> [WxH ...]
 //     page: home | play | playempty | host | cosmetics | settings | pause | lobby
+//           reveal:<RoleId>:<table|shuffle|deal|flip|role>[:ready]  (role reveal ceremony, sample data; SPRINT-015)
+//           revealall:<RoleId>  (every stage of that role, plus role:ready)
 //     default sizes: 1280x720 1920x1080 2560x1440 3440x1440 1024x768
 //   Output: Saved/UIShots/<page>_<W>x<H>.png
 //
@@ -30,6 +32,8 @@
 #include "UI/Menu/SKGMainMenu.h"
 #include "UI/Menu/SKGPauseMenu.h"
 #include "UI/Menu/SKGSettingsMenu.h"
+#include "UI/Reveal/KGRevealSubsystem.h"
+#include "UI/Reveal/KGStreamerMode.h"
 
 namespace
 {
@@ -87,6 +91,10 @@ namespace
 
 	TSharedPtr<SWidget> UIShotBuild(const FString& Page, APlayerController* PC)
 	{
+		if (Page.StartsWith(TEXT("reveal:")))
+		{
+			return UKGRevealSubsystem::MakeShotWidget(Page.RightChop(7), KGStreamer::IsEnabled());
+		}
 		if (Page == TEXT("pause"))
 		{
 			return SNew(SKGPauseMenu).OwningPlayer(PC);
@@ -133,10 +141,12 @@ namespace
 		}
 		const float Scale = GetDefault<UUserInterfaceSettings>()->GetDPIScaleBasedOnSize(Size);
 		const FVector2D DrawSize(Size.X, Size.Y);
-		UTextureRenderTarget2D* Target = FWidgetRenderer::CreateTargetFor(DrawSize, TF_Bilinear, true);
+		// Reveal pages keep raw sRGB colours (what the game shows); the gamma-corrected target washes dark UI out.
+		const bool bGamma = !Page.StartsWith(TEXT("reveal:"));
+		UTextureRenderTarget2D* Target = FWidgetRenderer::CreateTargetFor(DrawSize, TF_Bilinear, bGamma);
 		Target->AddToRoot();
 		{
-			FWidgetRenderer Renderer(true, true);
+			FWidgetRenderer Renderer(bGamma, true);
 			// Tick through the intro / page animations (about 1.5 s) before the kept frame.
 			for (int32 Frame = 0; Frame < 30; ++Frame)
 			{
@@ -145,7 +155,7 @@ namespace
 		}
 		const FString Dir = FPaths::ProjectSavedDir() / TEXT("UIShots");
 		IFileManager::Get().MakeDirectory(*Dir, true);
-		const FString File = Dir / FString::Printf(TEXT("%s_%dx%d.png"), *Page, Size.X, Size.Y);
+		const FString File = Dir / FString::Printf(TEXT("%s_%dx%d.png"), *Page.Replace(TEXT(":"), TEXT("-")), Size.X, Size.Y);
 		bool bSaved = false;
 		if (TUniquePtr<FArchive> Ar = TUniquePtr<FArchive>(IFileManager::Get().CreateFileWriter(*File)))
 		{
@@ -189,6 +199,14 @@ namespace
 				if (AKGLobbyState::Get(World))
 				{
 					Pages.Add(TEXT("lobby"));
+				}
+			}
+			else if (What.StartsWith(TEXT("revealall:")))
+			{
+				const FString Role = What.RightChop(10);
+				for (const TCHAR* Stage : {TEXT("table"), TEXT("shuffle"), TEXT("deal"), TEXT("flip"), TEXT("role"), TEXT("role:ready")})
+				{
+					Pages.Add(FString::Printf(TEXT("reveal:%s:%s"), *Role, Stage));
 				}
 			}
 			else

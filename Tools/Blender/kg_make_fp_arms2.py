@@ -1599,6 +1599,7 @@ def build_clips():
     C["hands_idle"] = Clip("hands_idle", 90, True, Track([(0, oh, "lin")]), Track([(0, oh, "lin")]),
                            extra=breathe(1.0, 90), preview=(0,))
     build_rod_clips(C, L_hidden, V)
+    build_shovel_clips(C, V)   # KG_DIG
     # --- hidden (1-frame pose, exported as 2 identical frames) ----------------------------------------------------------
     C["empty_hidden"] = Clip("empty_hidden", 1, False, Track([(0, HIDDEN, "lin")]), L_hidden, preview=(0,))
     build_emote_clips(C, L_hidden, V)
@@ -1668,6 +1669,294 @@ def build_rod_clips(C, L_hidden, V):
         (0, idle, "lin"), (3, jerk, "out"), (8, jerk.but(dW=(0.0, 0.0, -0.01)), "io"), (14, reel, "io")]),
         Track([(0, HIDDEN, "lin"), (8, HIDDEN, "lin"), (14, crank, "io")]),
         sigma=0.5, preview=(3, 8, 14))
+
+
+# KG_DIG =========================================================================================================
+# Shovel (SM_KG_Shovel in Art/Packed/KG_WaterProps.glb, 1.466 m along +X): D-grip X 0..0.19 m (crossbar along Y at
+# X ~0.015, 13 cm wide), round shaft (r ~2 cm) X 0.19..1.12, blade X 1.15..1.466 (25.6 cm wide along Y; its scoop face
+# is +Z and the tip bends toward -Z). Held on weapon_r exactly like the rod: shovel +X (blade) -> bone X (tip),
+# shovel +Z (scoop face) -> bone Y = spine (UE socket Z), shovel +Y -> bone -Z.
+# KEEP IN SYNC with the SM_KG_Shovel grip in Source/KillGodot/Dig/KGDigComponent.cpp:
+#   tip +X, spine +Z, grip (SHOVEL_GRIP * 100, 0, 0) cm = (85, 0, 0) cm, scale SHOVEL_SCALE = 0.70.
+SHOVEL_SCALE = 0.70
+SHOVEL_GRIP = 0.85            # m along the shovel where the right hand closes (58 % of the way to the blade tip)
+SHOVEL_DGRIP = 0.015          # m along the shovel: centre of the D-grip crossbar (the left hand)
+SHOVEL_BLADE = 1.31           # m: blade centre
+SHOVEL_LEN = 1.466
+SHOVEL_SHOULDER_R = (0.07, 0.03, 0.0)     # torso turned into the tool: right shoulder forward, left one back
+SHOVEL_SHOULDER_L = (-0.03, 0.0, 0.0)
+SHOVEL_BAR_SIGN = 1.0         # which way the left fist runs along the D-grip crossbar (+1: index toward shovel +Y)
+
+
+def shovel_weapon(k):
+    """weapon_r matrix (camera space, or mirrored space for a left key) of an arm key; no fingers (cheap)."""
+    _, _, _, Rl, _ = ik(k)
+    H = m4(hand_rot(Rl[:, 1], k.roll, k.flex, k.dev), k.W)
+    return H @ weapon_rel() @ m4(RZ(k.wspin) @ RX(k.wroll), k.woff)
+
+
+def shovel_pt(Wm, x, y=0.0, z=0.0):
+    """Camera-space point of shovel-local (x, y, z) m on a weapon_r matrix: shovel (x, y, z) -> bone (x, z, -y)."""
+    return (Wm @ np.array([(x - SHOVEL_GRIP) * SHOVEL_SCALE, z * SHOVEL_SCALE, -y * SHOVEL_SCALE, 1.0]))[:3]
+
+
+def shovel_dgrip(kr):
+    """D-grip target for the left fist, camera space: crossbar centre, bar axis (shovel +Y) and the back-of-hand
+    direction (-shovel X: the fingers go through the D and wrap the bar, the palm faces the shaft)."""
+    Wm = shovel_weapon(kr)
+    return shovel_pt(Wm, SHOVEL_DGRIP), -Wm[:3, 2] * SHOVEL_BAR_SIGN, -Wm[:3, 0]
+
+
+def shovel_mirror_targets(kr):
+    """shovel_dgrip() in the left arm's mirrored solve space, as a grip frame (X = bar, Z = back of the hand).
+    world weapon_l = MIRROR @ M @ FLIPX, so X_m = -MIRROR X_world, Z_m = MIRROR Z_world."""
+    P, bar, dorsal = shovel_dgrip(kr)
+    mir = np.array([1.0, -1.0, 1.0])
+    xm = -(bar * mir)
+    zm = dorsal * mir
+    return P * mir, xm, zm
+
+
+def place_vec(local, P, xdir, ydir, **kw):
+    """place() from a camera-space point + axis vectors (X of `local` along xdir, its Y as close to ydir)."""
+    P = np.asarray(P, float).copy()
+    if abs(P[0]) < 1e-4:
+        P[0] = 1e-4
+    sx, sy = -P[1] / (P[0] * TAN_H), P[2] / (P[0] * TAN_V)
+    x = nrm(xdir)
+    yaw, pitch = math.degrees(math.atan2(x[1], x[0])), math.degrees(math.asin(np.clip(x[2], -1, 1)))
+    up = np.array([0, 0, 1.0]) - x[2] * x
+    up = nrm(up) if np.linalg.norm(up) > 1e-3 else np.array([-1.0, 0, 0])
+    y = np.asarray(ydir, float)
+    y = nrm(y - np.dot(y, x) * x)
+    roll = math.degrees(math.atan2(np.dot(np.cross(up, y), x), np.dot(up, y)))
+    return place(local, sx, sy, float(P[0]), yaw, pitch, roll, **kw)
+
+
+def shovel_arm_cost(k, tgt=None):
+    """Unnaturalness of an arm key (wrist flex / deviation, forearm twist, over-reach) + aim error (deg) of weapon_r
+    X against tgt."""
+    _, _, _, Rl, pulled = ik(k)
+    H = hand_rot(Rl[:, 1], k.roll, k.flex, k.dev)
+    tw = twist_angle((Rl.T @ H) @ (R_ARM.T @ R_HAND_REST).T)
+    c = 0.02 * max(0, abs(k.flex) - 30) ** 2 + 0.03 * max(0, k.dev - 25) ** 2 + 0.03 * max(0, -k.dev - 12) ** 2
+    c += 0.02 * max(0, tw - 85) ** 2 + 0.02 * max(0, -105 - tw) ** 2 + 400 * pulled
+    if tgt is not None:
+        c += math.degrees(math.acos(np.clip(np.dot(shovel_weapon(k)[:3, 0], tgt), -1, 1)))
+    return c
+
+
+def spine_angle(Wm):
+    """Roll (deg, left-positive, about weapon X) of weapon Y (the shovel's scoop face) from world up."""
+    x, y = Wm[:3, 0], Wm[:3, 1]
+    up = np.array([0, 0, 1.0]) - x[2] * x
+    up = nrm(up) if np.linalg.norm(up) > 1e-3 else np.array([-1.0, 0, 0])
+    return math.degrees(math.atan2(np.dot(np.cross(up, y), x), np.dot(up, y)))
+
+
+def shovel_fit(k0, P, xdir, zdir=None, w_x=40.0, w_z=10.0, ret_cost=False):
+    """Local fit from key k0 (stays in its arm-solution family): pattern search on roll / flex / dev, the wrist
+    solved so the weapon_r origin sits on P, weapon X aimed along xdir (and Z along zdir), natural arm preferred."""
+    x0 = np.array([k0.roll, k0.flex, k0.dev], float)
+    xdir = nrm(xdir)
+
+    def build(x):
+        k = k0.but()
+        k.roll, k.flex, k.dev = float(x[0]), float(x[1]), float(x[2])
+        for i in range(40):                 # damped fixed point (a folded arm makes the wrist -> grip map stiff)
+            err = P - shovel_weapon(k)[:3, 3]
+            if np.linalg.norm(err) < 5e-5:
+                break
+            k.W = k.W + err * (0.8 if i < 10 else 0.3)
+        return k, shovel_weapon(k)
+
+    def cost(x):
+        k, Wm = build(x)
+        c = (1 - np.dot(Wm[:3, 0], xdir)) * w_x + 2e-5 * np.sum((x - x0) ** 2) + 2000 * np.linalg.norm(P - Wm[:3, 3])
+        if zdir is not None:
+            c += (1 - np.dot(Wm[:3, 2], zdir)) * w_z
+        return c + 0.2 * shovel_arm_cost(k)
+    x, c = x0.copy(), cost(x0)
+    step = 8.0
+    while step > 0.2:
+        imp = False
+        for i in range(3):
+            for s in (step, -step):
+                y = x.copy()
+                y[i] += s
+                cy = cost(y)
+                if cy < c:
+                    x, c, imp = y, cy, True
+        if not imp:
+            step *= 0.5
+    return (build(x)[0], c) if ret_cost else build(x)[0]
+
+
+def shovel_at(sx, sy, depth, yaw, pitch, spine=0.0, seed=None, **kw):
+    """Right hand on the shaft: grip point at screen (sx, sy) / depth, blade along (yaw, pitch), scoop face rolled
+    `spine` deg (left-positive) from up. Without a seed: most natural arm (place()); with a seed key: local fit from
+    it (same arm family, so keys interpolate cleanly). The shaft turns in the fist (weapon_r wroll) so the scoop face
+    ends where asked."""
+    verbose = kw.pop("verbose", False)
+    shoulder = kw.pop("shoulder", SHOVEL_SHOULDER_R)
+    tgt = dir_of(yaw, pitch)
+    if seed is None:
+        best = None
+        for s in (-90, -45, 0, 45, 90, 135, 180):
+            k = knife_at(sx, sy, depth, yaw, pitch, s, w_roll=1.0, dev_pref=10.0, shoulder=shoulder, **kw)
+            c = shovel_arm_cost(k, tgt)
+            if best is None or c < best[0]:
+                best = (c, k)
+        k = best[1]
+    else:
+        k = shovel_fit(seed.but(shoulder=shoulder, wroll=0.0, **kw), screen_pt(sx, sy, depth), tgt)
+    k.wroll = float((spine - spine_angle(shovel_weapon(k)) + 180.0) % 360.0 - 180.0)
+    if seed is not None:
+        k.wroll += 360.0 * round((seed.wroll - k.wroll) / 360.0)
+    if verbose:
+        ax = shovel_weapon(k)[:3, 0]
+        log(f"shovel_at({sx},{sy},{depth},{yaw},{pitch},{spine}) -> aim yaw "
+            f"{math.degrees(math.atan2(ax[1], ax[0])):+.0f} pitch {math.degrees(math.asin(ax[2])):+.0f} "
+            f"roll {k.roll:.0f} flex {k.flex:.0f} dev {k.dev:.0f} wroll {k.wroll:.0f} cost {shovel_arm_cost(k):.2f}")
+    return k
+
+
+def shovel_left_key(kr, seed=None, **kw):
+    """Left fist on the D-grip crossbar for right key kr: most natural arm (place(), solved mirrored), or a local fit
+    from a seed left key."""
+    Pm, xm, zm = shovel_mirror_targets(kr)
+    if seed is not None:
+        return shovel_fit(seed.but(**kw), Pm, xm, zm)
+    kw.setdefault("dev_pref", 10.0)
+    kw.setdefault("shoulder", SHOVEL_SHOULDER_L)
+    return place_vec(weapon_rel(), Pm, xm, np.cross(zm, xm), **kw)
+
+
+def shovel_snap_left(kl, kr, prev=None):
+    """Per-frame fix-up: keep the left fist exactly on the D-grip of the right key's shovel. Starts from the
+    interpolated left key (and from the previous frame's snapped key, if given) and only nudges roll / flex / dev
+    (wrist position solved), so the motion stays smooth."""
+    Pm, xm, zm = shovel_mirror_targets(kr)
+    best = shovel_fit(kl, Pm, xm, zm, ret_cost=True)
+    if prev is not None:
+        k2 = shovel_fit(prev.but(pole=kl.pole, shoulder=kl.shoulder), Pm, xm, zm, ret_cost=True)
+        if k2[1] < best[1]:
+            best = k2
+    return best[0]
+
+
+def shovel_extra(right_extra=None):
+    """Clip.extra: optional right-arm motion (breathing), then the left fist is snapped onto the D-grip."""
+    rkeys, last = {}, {}
+
+    def fn(side, fr, k):
+        if side == "r":
+            if right_extra:
+                right_extra(side, fr, k)
+            rkeys[fr] = k
+        else:
+            s = shovel_snap_left(k, rkeys[fr], last.get("l"))
+            k.W, k.roll, k.flex, k.dev = s.W, s.roll, s.flex, s.dev
+            last["l"] = s
+    return fn
+
+
+def shovel_tracks(keys, left0):
+    """keys: [(frame, right key, ease)] -> (right Track, left Track): a D-grip left key per right key, each fitted
+    from the previous one (starting at left0) so the left arm stays in one solution family."""
+    left, prev = [], left0
+    for fr, kr, e in keys:
+        kl = shovel_left_key(kr, seed=prev)
+        left.append((fr, kl, e))
+        prev = kl
+    return Track(keys), Track(left)
+
+
+def build_shovel_clips(C, V):
+    """Two-handed shovel on weapon_r (Source/KillGodot/Dig): idle carry, one dig stroke per loop, draw.
+    Right hand on the shaft (SHOVEL_GRIP), left fist on the D-grip crossbar. The shaft runs from off the lower left
+    (the D-grip, near the chest) forward-right; the blade sits at the lower centre-right and the screen centre stays
+    clear in the idle. (The saber-style weapon_r grip can aim the shaft right-forward only with the shaft pitched up
+    a little, so the 'down' of the stroke comes from the hands dropping, not from pitching the shaft down.)"""
+    idle = shovel_at(0.20, -0.75, 0.44, -35, 5, 40, verbose=V)     # scoop face rolled toward the eye
+    idle_l = shovel_left_key(idle, verbose=V)
+    S = dict(seed=idle, verbose=V)
+    # --- idle (loop, 3 s breathing) --------------------------------------------------------------------------------
+    r, l = shovel_tracks([(0, idle, "lin")], idle_l)
+    C["shovel_idle"] = Clip("shovel_idle", 90, True, r, l, extra=shovel_extra(breathe(0.8, 90)), preview=(0, 45))
+    # --- dig (loop 1.1 s = 33 frames, one stroke): lift 0-7, plunge 7-13 (the hands drive the blade forward-down out
+    # of the bottom of the frame; contact ~12-13), lever 13-20 (handle back/down, the blade tilts up with the load),
+    # toss right 20-27 (sweep right, the scoop rolls over to the right), return 27-33 --------------------------------
+    lift = shovel_at(0.26, -0.45, 0.40, -30, 18, 25, **S)
+    plunge = shovel_at(0.10, -1.90, 0.50, -28, 2, 0, shoulder=(0.12, 0.04, -0.02), **S)
+    lever = shovel_at(0.24, -1.15, 0.42, -30, 24, 15, **S)
+    toss_a = shovel_at(0.40, -0.75, 0.46, -46, 18, -30, **S)
+    toss = shovel_at(0.50, -0.64, 0.46, -54, 12, -120, **S)
+    r, l = shovel_tracks([(0, idle, "lin"), (7, lift, "io"), (13, plunge, "in2"), (20, lever, "io"),
+                          (24, toss_a, "in2"), (27, toss, "out"), (33, idle, "io")], idle_l)
+    C["shovel_dig"] = Clip("shovel_dig", 33, True, r, l, sigma=0.6, extra=shovel_extra(),
+                           preview=(0, 4, 7, 10, 12, 13, 17, 20, 23, 25, 27, 30))
+    # --- draw (0.4 s): up from below the frame into the idle, small overshoot -----------------------------------------
+    d0 = shovel_at(0.30, -3.0, 0.34, -30, 10, 20, shape=("loose", "loose", 0), **S)
+    d1 = shovel_at(0.21, -0.70, 0.44, -34, 7, 44, **S)
+    r, l = shovel_tracks([(0, d0, "lin"), (8, d1, "out2"), (12, idle, "io")], idle_l)
+    C["shovel_draw"] = Clip("shovel_draw", 12, False, r, l, sigma=0.5, extra=shovel_extra(), preview=(0, 4, 8, 12))
+    add_shovel_preview()
+
+
+def add_shovel_preview():
+    """Preview helper (like add_rod): SM_KG_Shovel parented to weapon_r with the SHOVEL_* grip; a frame-change handler
+    shows it only while a shovel_* action is active. Never exported (the glb export only selects rig + mesh) and
+    removed before a .blend save."""
+    if not os.path.exists(WATER_PROPS_GLB) or STAGE not in ("poses", "all"):
+        return
+    rig = next((o for o in bpy.data.objects if o.type == "ARMATURE"), None)
+    if rig is None or "weapon_r" not in rig.data.bones:
+        return
+    before = set(bpy.data.objects)
+    bpy.ops.import_scene.gltf(filepath=WATER_PROPS_GLB)
+    new = [o for o in bpy.data.objects if o not in before]
+    sh = next((o for o in new if o.type == "MESH" and "Shovel" in o.name), None)
+    if sh is not None:
+        bpy.context.view_layer.update()
+        mw = sh.matrix_world.copy()
+        sh.data = sh.data.copy()
+        sh.data.transform(mw)
+    for o in new:
+        if o is not sh:
+            bpy.data.objects.remove(o)
+    if sh is None:
+        return
+    sh.name = "KG_DIG_Shovel"
+    Rr = np.column_stack([(1, 0, 0), (0, 0, -1), (0, 1, 0)])       # shovel X -> bone X, shovel Z (scoop) -> bone Y
+    grip = np.array([SHOVEL_GRIP, 0.0, 0.0]) * SHOVEL_SCALE
+    Mk = m4(Rr * SHOVEL_SCALE, -(Rr @ grip))
+    sh["kg_local"] = Mk.ravel().tolist()
+    # bone parenting hangs the child on the bone TAIL: pre-offset by the bone length so world = rig @ pose @ Mk
+    blen = rig.data.bones["weapon_r"].length
+    sh.parent = rig
+    sh.parent_type = "BONE"
+    sh.parent_bone = "weapon_r"
+    sh.matrix_parent_inverse = Matrix.Identity(4)
+    sh.matrix_basis = Matrix(m4(np.eye(3), (0.0, -blen, 0.0)).tolist()) @ Matrix(Mk.tolist())
+    sh.hide_render = True
+    log(f"shovel preview on weapon_r: scale {SHOVEL_SCALE} grip {SHOVEL_GRIP} m, dims "
+        f"{tuple(round(v, 3) for v in sh.dimensions)}")
+
+    def on_frame(scene, depsgraph=None):
+        ob = bpy.data.objects.get("KG_DIG_Shovel")
+        if ob is None:
+            return
+        act = rig.animation_data.action if rig.animation_data else None
+        ob.hide_render = not (act is not None and act.name.startswith("shovel"))
+
+    def on_save(*_a):
+        ob = bpy.data.objects.get("KG_DIG_Shovel")
+        if ob is not None:
+            bpy.data.objects.remove(ob)
+    bpy.app.handlers.frame_change_post.append(on_frame)
+    bpy.app.handlers.save_pre.append(on_save)
+# KG_DIG end =====================================================================================================
 
 
 def build_emote_clips(C, L_hidden, V):

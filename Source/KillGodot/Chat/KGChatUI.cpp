@@ -37,6 +37,7 @@
 #include "Widgets/SOverlay.h"
 #include "Widgets/Text/SMultiLineEditableText.h"
 #include "Widgets/Text/STextBlock.h"
+#include "UI/Reveal/KGStreamerMode.h"
 
 #define LOCTEXT_NAMESPACE "KGChat"
 
@@ -164,7 +165,14 @@ public:
 	void Construct(const FArguments& InArgs)
 	{
 		Opacity = InArgs._Opacity;
-		const FKGChatMessage& M = InArgs._Message;
+		// Streamer mode (SPRINT-015): other players' names become this match's pseudonyms, in the name and in the text.
+		FKGChatMessage Masked = InArgs._Message;
+		if (KGStreamer::IsEnabled())
+		{
+			Masked.SenderName = KGStreamer::DisplayNameOf(nullptr, Masked.SenderName);
+			Masked.Text = KGStreamer::MaskText(nullptr, Masked.Text);
+		}
+		const FKGChatMessage& M = Masked;
 		const bool bSystem = M.Channel == EKGChatChannel::System;
 		const bool bHint = M.HasFlag(EKGChatFlags::Hint);
 		const bool bAction = M.HasFlag(EKGChatFlags::Action);

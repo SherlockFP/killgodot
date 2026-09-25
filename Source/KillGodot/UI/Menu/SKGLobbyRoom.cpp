@@ -10,6 +10,7 @@
 #include "UI/Menu/KGMenuActions.h"
 #include "UI/Menu/KGMenuStyle.h"
 #include "UI/Menu/SKGMenuWidgets.h"
+#include "UI/Reveal/KGStreamerMode.h"
 #include "Widgets/Images/SImage.h"
 #include "Widgets/Layout/SBackgroundBlur.h"
 #include "Widgets/Layout/SBorder.h"
@@ -409,7 +410,7 @@ TSharedRef<SWidget> SKGLobbyRoom::BuildHeader()
 					.Text_Lambda([this]()
 					{
 						const AKGLobbyState* Lobby = GetLobby();
-						return Lobby ? FText::AsCultureInvariant(Lobby->GetSettings().Code) : FText::GetEmpty();
+						return Lobby ? FText::AsCultureInvariant(KGStreamer::MaskCode(Lobby->GetSettings().Code)) : FText::GetEmpty();
 					})
 				]
 			]
@@ -673,12 +674,18 @@ void SKGLobbyRoom::RebuildPlayers()
 	const TArray<FKGLobbyEntry>& Entries = Lobby->GetEntries();
 	for (const FKGLobbyEntry& Entry : Entries)
 	{
+		// The seat carries its own name copy: a joiner shows up by name as soon as the lobby replicates, even before
+		// their player state has (SPRINT-015: names within 1 s on every machine).
 		APlayerState* Player = Entry.Player;
-		if (!Player)
+		const FString SeatName = AKGLobbyState::GetSeatName(Entry);
+		if (!Player && SeatName.IsEmpty())
 		{
 			continue;
 		}
-		const bool bYou = Player == LocalState;
+		const bool bYou = Player && Player == LocalState;
+		// Streamer mode: everyone else gets this match's pseudonym.
+		const FString ShownName = bYou ? SeatName
+			: (Player ? KGStreamer::DisplayName(Player) : KGStreamer::DisplayNameOf(Lobby->GetWorld(), SeatName));
 		const bool bReady = Entry.bReady;
 		const bool bCanKick = bHost && !Entry.bHost && !bYou;
 		TWeakObjectPtr<APlayerState> WeakPlayer = Player;
@@ -712,7 +719,7 @@ void SKGLobbyRoom::RebuildPlayers()
 				.VAlign(VAlign_Center)
 				[
 					SNew(STextBlock)
-					.Text(FText::FromString(Player->GetPlayerName()))
+					.Text(FText::FromString(ShownName))
 					.Font(S.BodyBoldFont)
 					.ColorAndOpacity(S.Cream)
 					.OverflowPolicy(ETextOverflowPolicy::Ellipsis)
@@ -968,7 +975,7 @@ void SKGLobbyRoom::RequestKick(TWeakObjectPtr<APlayerState> Target)
 	}
 	ShowModal(SNew(SKGModal)
 		.Title(LOCTEXT("KickTitle", "Remove player?"))
-		.Body(FText::Format(LOCTEXT("KickBody", "{0} is sent back to the title screen."), FText::FromString(Target->GetPlayerName())))
+		.Body(FText::Format(LOCTEXT("KickBody", "{0} is sent back to the title screen."), FText::FromString(KGStreamer::DisplayName(Target.Get()))))
 		.ConfirmText(LOCTEXT("KickConfirm", "Kick"))
 		.ConfirmKind(EKGButtonKind::Danger)
 		.CancelText(LOCTEXT("KickCancel", "Cancel"))

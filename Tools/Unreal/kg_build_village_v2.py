@@ -1213,6 +1213,7 @@ def build():
     step("minimap", minimap)
     step("nav", navigation)
     report()
+    step("underground", lambda: importlib.import_module("kg_build_underground").build_into_current_level())  # KG_DIG hook (after the report: the village counts stay the village's)
     saved = level_sub.save_current_level()
     log(f"saved {LEVEL}: {saved} in {time.time() - T0:.0f}s")
 

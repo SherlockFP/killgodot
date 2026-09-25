@@ -287,7 +287,7 @@ void AKGDigManager::Regenerate(uint64 Seed)
 		const UStaticMesh* Mesh = Comp ? Comp->GetStaticMesh() : nullptr;
 		if (Mesh && Mesh->GetName().Contains(TEXT("Gravestone")))
 		{
-			Stones.Add({It->GetActorLocation(), It->GetActorRotation().Yaw});
+			Stones.Add({It->GetActorLocation(), static_cast<float>(It->GetActorRotation().Yaw)});
 		}
 	}
 	Stones.Sort([](const FStone& A, const FStone& B)
@@ -302,9 +302,9 @@ void AKGDigManager::Regenerate(uint64 Seed)
 		FHitResult Hit;
 		FCollisionQueryParams Params(SCENE_QUERY_STAT(KGDigGrave), true);
 		FVector Ground = Want;
-		if (World->LineTraceSingleByChannel(Hit, Want + FVector(0.0, 0.0, 300.0), Want - FVector(0.0, 0.0, 400.0), ECC_Visibility, Params))
+		if (!ProbeGround(World, FVector2D(Want), Ground) || FMath::Abs(Ground.Z - Stone.Location.Z) > 120.0f)
 		{
-			Ground = Hit.ImpactPoint;
+			continue;   // not open ground in front of the stone (a path, the mausoleum steps, a wall): no dig here
 		}
 		Spots.Items.Add(FKGDigRules::MakeSpot(NextId++, EKGDigKind::Grave, EKGDigZone::Graveyard, Ground, Yaw));
 		GravePoints.Add(Ground);
@@ -567,8 +567,15 @@ void AKGDigManager::ApplyVisual(const FKGDigSpot& Spot, FSpotVisual& V)
 			const bool bOpen = S >= Spot.MaxStage - 1;
 			Show(V.Main, TEXT("DigGrave"), PackMesh(bOpen ? TEXT("GraveOpen_2") : TEXT("GraveOpen_1"), TEXT("DugHole")), Up,
 			     bOpen ? FVector(1.0) : FVector(1.0, 1.0, 0.6f + 0.4f * S));
-			Show(V.Pile, TEXT("DigGravePile"), PackMesh(TEXT("DirtPile"), TEXT("DigMound")), FVector(0.0, 95.0, 0.0),
-			     FVector(0.9f + 0.5f * Depth, 1.2f + 0.8f * Depth, 0.5f + 0.7f * Depth));
+			if (bOpen)
+			{
+				Hide(V.Pile);   // GraveOpen_2 carries its own spoil heap
+			}
+			else
+			{
+				Show(V.Pile, TEXT("DigGravePile"), PackMesh(TEXT("DirtPile"), TEXT("DigMound")), FVector(0.0, 110.0, 0.0),
+				     FVector(0.9f + 0.5f * Depth, 1.2f + 0.8f * Depth, 0.5f + 0.7f * Depth));
+			}
 		}
 		Hide(V.Extra);
 		break;
@@ -581,7 +588,7 @@ void AKGDigManager::ApplyVisual(const FKGDigSpot& Spot, FSpotVisual& V)
 		else if (Spot.IsDugOut())
 		{
 			Show(V.Main, TEXT("DigTreasure"), PackMesh(TEXT("BuriedChest"), TEXT("DugHole")), Up, FVector(1.0));
-			Show(V.Pile, TEXT("DigTreasurePile"), PackMesh(TEXT("DirtPile"), TEXT("DigMound")), FVector(115.0, 0.0, 0.0), FVector(1.5f));
+			Show(V.Pile, TEXT("DigTreasurePile"), PackMesh(TEXT("DirtPile"), TEXT("DigMound")), FVector(160.0, 0.0, 0.0), FVector(1.4f));
 		}
 		else
 		{
@@ -605,7 +612,7 @@ void AKGDigManager::ApplyVisual(const FKGDigSpot& Spot, FSpotVisual& V)
 			const int32 Level = Spot.MaxStage <= 1 ? 1 : FMath::Clamp<int32>(S, 1, 3);
 			const TCHAR* Hole = Level == 1 ? TEXT("DigHole_1") : Level == 2 ? TEXT("DigHole_2") : TEXT("DigHole_3");
 			Show(V.Main, TEXT("DigSpot"), PackMesh(Hole, TEXT("DugHole")), Up, FVector(Spot.MaxStage <= 1 ? 0.8f : 1.0f));
-			Show(V.Pile, TEXT("DigPile"), PackMesh(TEXT("DirtPile"), TEXT("DigMound")), FVector(100.0, 20.0, 0.0),
+			Show(V.Pile, TEXT("DigPile"), PackMesh(TEXT("DirtPile"), TEXT("DigMound")), FVector(95.0 + 28.0 * Level, 20.0, 0.0),
 			     FVector(0.45f + 0.35f * Level));
 		}
 		Hide(V.Extra);
@@ -690,4 +697,80 @@ void AKGDigManager::TickFx(float DeltaSeconds)
 	{
 		Clods->AddInstances(Xf, false, true);
 	}
+}
+
+// =================================================================================================================
+// Dev: captures
+// =================================================================================================================
+namespace KGDigManagerPrivate
+{
+	TArray<uint16>& ShotIds()
+	{
+		static TArray<uint16> Ids;
+		return Ids;
+	}
+}
+
+void AKGDigManager::DevPrepareShots(AKGDigManager* Manager)
+{
+	using namespace KGDigManagerPrivate;
+	TArray<uint16>& Ids = ShotIds();
+	Ids.Reset();
+	if (!Manager || !Manager->HasAuthority())
+	{
+		return;
+	}
+	auto Nth = [Manager](EKGDigKind Kind, int32 N) -> int32
+	{
+		int32 Seen = 0;
+		for (int32 i = 0; i < Manager->Spots.Items.Num(); ++i)
+		{
+			if (Manager->Spots.Items[i].Kind == Kind && Seen++ == N)
+			{
+				return i;
+			}
+		}
+		return INDEX_NONE;
+	};
+	auto Use = [Manager, &Ids](int32 Index, int32 Stage)
+	{
+		if (Manager->Spots.Items.IsValidIndex(Index))
+		{
+			Manager->DebugSetStage(Index, static_cast<uint8>(FMath::Max(0, Stage)));
+			Ids.Add(Manager->Spots.Items[Index].Id);
+		}
+		else
+		{
+			Ids.Add(0);
+		}
+	};
+	// Order: open grave, half-dug grave, mound, hole 1, hole 2, dug-out hole, X mark, glint, dug-up chest.
+	Use(Nth(EKGDigKind::Grave, 3), 4);
+	Use(Nth(EKGDigKind::Grave, 9), 2);
+	Use(Nth(EKGDigKind::Mound, 0), 0);
+	Use(Nth(EKGDigKind::Mound, 1), 1);
+	Use(Nth(EKGDigKind::Mound, 2), 2);
+	Use(Nth(EKGDigKind::Mound, 3), 3);
+	Use(Nth(EKGDigKind::XMark, 0), 0);
+	Use(Nth(EKGDigKind::Glint, 0), 0);
+	int32 Chest = INDEX_NONE;
+	if (Manager->Buried.Num() > 0)
+	{
+		Chest = Manager->RevealBuriedNear(FVector(Manager->Buried[0].Location), 10.0f);
+	}
+	Use(Chest, 4);
+	UE_LOG(LogKillGodot, Log, TEXT("KG_DIG_SHOTS prepared %d spots"), Ids.Num());
+}
+
+TArray<FVector> AKGDigManager::DevShotPoints(UObject* WorldContext)
+{
+	TArray<FVector> Out;
+	const UWorld* World = WorldContext ? WorldContext->GetWorld() : nullptr;
+	const AKGDigManager* Manager = Get(World);
+	for (const uint16 Id : KGDigManagerPrivate::ShotIds())
+	{
+		const FKGDigSpot* S = Manager && Id ? Manager->FindSpot(Id) : nullptr;
+		Out.Add(S ? FVector(S->Location) : FVector::ZeroVector);
+	}
+	return Out;
 }

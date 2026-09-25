@@ -1,0 +1,100 @@
+{
+ "props": {
+  "DigMound": {
+   "material": "VC",
+   "collision": "none"
+  },
+  "DigX": {
+   "material": "VC",
+   "collision": "none"
+  },
+  "DigGlint": {
+   "material": "Glow",
+   "collision": "none"
+  },
+  "DigHole_1": {
+   "material": "VC",
+   "collision": "none"
+  },
+  "DigHole_2": {
+   "material": "VC",
+   "collision": "none"
+  },
+  "DigHole_3": {
+   "material": "VC",
+   "collision": "none"
+  },
+  "DirtPile": {
+   "material": "VC",
+   "collision": "none"
+  },
+  "GraveOpen_1": {
+   "material": "VC",
+   "collision": "none"
+  },
+  "GraveOpen_2": {
+   "material": "VC",
+   "collision": "none"
+  },
+  "BuriedChest": {
+   "material": "VC",
+   "collision": "none"
+  },
+  "NicheWall_2m": {
+   "material": "VC",
+   "collision": "box"
+  },
+  "CryptVault_2m": {
+   "material": "VC",
+   "collision": "box"
+  },
+  "SkullPile": {
+   "material": "VC",
+   "collision": "box"
+  },
+  "BoneScatter": {
+   "material": "VC",
+   "collision": "none"
+  },
+  "Sarcophagus": {
+   "material": "VC",
+   "collision": "box"
+  },
+  "CryptGate": {
+   "material": "VC",
+   "collision": "box"
+  },
+  "CandleCluster": {
+   "material": "Glow",
+   "collision": "none"
+  },
+  "MineFloor_2m": {
+   "material": "VC",
+   "collision": "box"
+  },
+  "MineWall_2m": {
+   "material": "VC",
+   "collision": "box"
+  },
+  "MineCeiling_2m": {
+   "material": "VC",
+   "collision": "box"
+  },
+  "WellShaft": {
+   "material": "Glow",
+   "collision": "complex"
+  },
+  "Ladder_4m": {
+   "material": "VC",
+   "collision": "none"
+  },
+  "CryptStair": {
+   "material": "Glow",
+   "collision": "complex"
+  },
+  "WellMouth": {
+   "material": "VC",
+   "collision": "none"
+  }
+ }
+}

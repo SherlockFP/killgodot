@@ -135,13 +135,24 @@ M4–M18 maddeleri, milestone başladığında `09_Roadmap_Gauntlet.md`'den bura
 - [ ] SPRINT-016 physical, original chores (USER PRIORITY): Docs/Iterations/SPRINT-016-PhysicalChores.md
 - [ ] SPRINT-022 v2 visual pass (USER REVIEW 2026-09-25): varied houses, geometry validator + Japan garden fix, realistic water, towers/landmarks: Docs/Iterations/SPRINT-022-V2VisualPass.md
 - [ ] SPRINT-023 voice + talking mouths + TF2 voice commands + partner emotes: Docs/Iterations/SPRINT-023-VoiceSocial.md
-- [ ] SPRINT-015 match flow: server list first, role-reveal ceremony, streamer mode: Docs/Iterations/SPRINT-015-MatchFlow.md
+- [~] SPRINT-015 match flow: server list first, role-reveal ceremony, streamer mode: Docs/Iterations/SPRINT-015-MatchFlow.md
+  — `UI/Reveal/` (ceremony, owner-only reveal component, streamer mode + pseudonyms), tests `KillGodot.Reveal.*` (4),
+  `Tools/Unreal/kg_lobby_smoke.ps1` (2 processes), `Tools/Unreal/kg_reveal_shots.ps1`; **PIE/real-session check pending**
 - [ ] SPRINT-017 map 2 "Storm Manor", design only, needs user approval: Docs/Iterations/SPRINT-017-StormManor-Design.md
 - [ ] SPRINT-018 map 2 build (after 017 is approved)
 - [ ] SPRINT-019 spectator mode + replays ("record")
 - [ ] VERIFICATION session with the user (Docs/Process/VerificationDebt.md): blocks new feature sprints once the debt is >10 items
 
 ## Proposed (needs approval)
+- [proposal] Streamer mode: hide the chore panel's "FAKING - WON'T COUNT" tag (Chores/ is outside SPRINT-015's scope): one line in `KGChoreComponent.cpp` where the panel is built, `.bFake(bFake && !KGStreamer::IsRoleHidden(PC))` (UI/Reveal/KGStreamerMode.h)
+- [proposal] Streamer mode: nameplates and a kill feed do not exist yet; when they land they should use `KGStreamer::DisplayName` / `MaskText`. Chat name completion (Tab) and `/w <name>` still take real names while typing
+- [proposal] Streamer mode: the Impatient backstab-ready crosshair tint and the drawn blade still tell the role on stream (they are world/viewmodel cues, not HUD text)
+- [proposal] Reveal: the Impatient team chat is open during RoleReveal but hidden under the ceremony; show a small team-chat strip on the reveal screen for Clockbreakers
+- [proposal] Reveal: illustrated role art on the card face (`UKGRoleDefinition::CardArt`) in place of the faded emblem; card flip / shuffle sounds
+- [proposal] Reveal: a network smoke that forces a Clockbreaker pair (e.g. a `-KGRevealForceRoles` dev flag) so the owner-only teammates path is checked over the wire, not only in UIShots
+- [proposal] UI shots: kg.UIShot renders menu pages into a gamma-corrected target, which washes the dark UI out (lobby/home shots look lavender); reveal pages now use raw sRGB like `kg.ChoreShot`. Switch every page after a look round
+- [proposal] Pseudonyms: derive the per-match salt from a replicated, non-secret match id so every streamer in the same match shows the same pseudonyms (today each client picks its own)
+- [proposal] Localisation: move role card copy (EN/TR table in `UI/Reveal/KGRoleCardText.cpp`) into ST_Lore / String Tables with RU
 - [proposal] Dig: bots use the passages (nav links + a "go underground" roam target) and dig mounds now and then
 - [proposal] Dig: third-person dig/hold body clips (kg_make_emotes.py Dig_Hold/Dig_Stroke) instead of the torch/sword stand-ins
 - [proposal] Dig: dev panel buttons (Dig.Give / Dig.Spots near / Dig.Finish / Dig.Gate) in the WORLD tab; teleports already list the underground markers

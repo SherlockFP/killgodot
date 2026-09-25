@@ -70,6 +70,13 @@ public:
 	/** Standard stone -> grave spot: the grave lies in front of the stone (its local -Y). */
 	static FVector GraveFromStone(const FVector& StoneLocation, float StoneYaw, float& OutYaw);
 
+	/** Dev (-KGDigShots): one spot of every look at a telling stage (open grave, holes, X, glint, dug-up chest). */
+	static void DevPrepareShots(AKGDigManager* Manager);
+
+	/** Dev / captures: ground points of the DevPrepareShots spots, in a fixed order (see the .cpp). */
+	UFUNCTION(BlueprintCallable, Category = "KillGodot|Dig|Dev", meta = (WorldContext = "WorldContext"))
+	static TArray<FVector> DevShotPoints(UObject* WorldContext);
+
 	/** Sound + dust for a finished stage (every machine, from the replicated stage change). */
 	void PlayStageFx(const FKGDigSpot& Spot, uint8 NewStage);
 	/** Local: a small puff at a spot (strokes in progress, seen by everyone). */

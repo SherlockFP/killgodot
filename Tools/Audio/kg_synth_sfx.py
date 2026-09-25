@@ -648,3 +648,35 @@ save("S_Fish_Snap", fish_snap(), 0.85)
 save("S_Fish_Fanfare", fish_fanfare(), 0.7)
 save("S_Fish_Escape", fish_escape(), 0.7)
 save("S_Fish_Coins", fish_coins(), 0.6)
+
+
+# ---- World chores (SPRINT-016, S_WC_*): door knock, water slosh -------------------------------------------------------
+# Appended last so every sound above keeps its exact random stream.
+def knock():
+    """Three knuckle raps on a wooden door: a short hollow body resonance plus a click."""
+    x = np.zeros(int(0.62 * SR))
+    for k, at in enumerate((0.0, 0.2, 0.37)):
+        t = t_axis(0.12)
+        body = np.sin(2 * np.pi * (190 - 60 * t) * t) * np.exp(-t / 0.028) + 0.5 * np.sin(2 * np.pi * 410 * t) * np.exp(-t / 0.015)
+        click = noise_burst(0.12, 1500, 5000, 0.0003, 0.006) * 0.5
+        rap = mix(body, click) * (1.0 if k < 2 else 1.15)
+        i0 = int(at * SR)
+        x[i0:i0 + len(rap)] += rap[: len(x) - i0]
+    return x
+
+
+def slosh():
+    """Water lurching in a bucket: a low swell of filtered noise with a couple of drips."""
+    t = t_axis(0.55)
+    swell = bp(rng.standard_normal(len(t)), 250, 1400) * np.sin(np.pi * t / 0.55) ** 2
+    drip = np.zeros(len(t))
+    for at in (0.28, 0.41):
+        tt = t_axis(0.06)
+        d = np.sin(2 * np.pi * (900 + 1400 * tt) * tt) * np.exp(-tt / 0.012)
+        i0 = int(at * SR)
+        drip[i0:i0 + len(d)] += d * 0.5
+    return swell * 0.9 + drip
+
+
+save("S_WC_Knock", knock(), 0.8)
+save("S_WC_Slosh", slosh(), 0.55)

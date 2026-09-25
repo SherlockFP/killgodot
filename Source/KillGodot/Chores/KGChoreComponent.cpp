@@ -18,6 +18,7 @@
 #include "Net/UnrealNetwork.h"
 #include "Roles/KGRoleListGenerator.h"
 #include "World/KGTaskStation.h"
+#include "Chores/WorldChores/KGWorldChoreComponent.h"
 
 namespace KGChoreComp
 {
@@ -150,6 +151,7 @@ bool UKGChoreComponent::AuthOpen(FName ChoreId, AKGTaskStation* Station, bool bD
 	}
 
 	Session = ChoreId;
+	SessionWorldChore = NAME_None;
 	SessionStage = FMath::Clamp(GetSavedStage(ChoreId), 0, Def->NumStages() - 1);
 	SessionToken = Rng.RandRange(1, 0x3FFFFFFF);
 	bSessionFake = IsImpatient();
@@ -178,6 +180,46 @@ bool UKGChoreComponent::AuthOpen(FName ChoreId, AKGTaskStation* Station, bool bD
 	UE_LOG(LogKillGodot, Log, TEXT("KG_CHORE_OPEN %s by %s stage=%d/%d token=%d fake=%d practice=%d visual=%d"), *ChoreId.ToString(),
 	       *PS->GetPlayerName(), SessionStage, Def->NumStages(), SessionToken, bSessionFake ? 1 : 0, bSessionPractice ? 1 : 0,
 	       Def->IsVisual() ? 1 : 0);
+	ClientOpen(Session, SessionStage, SessionToken, bSessionFake, bSessionPractice);
+	return true;
+}
+
+bool UKGChoreComponent::AuthOpenWorldStep(FName InPanelChore, int32 StartStage, FName WorldChore, const FVector& At)
+{
+	AKGCharacter* Char = GetCharacter();
+	const AKGPlayerState* PS = GetPlayerState();
+	const FKGChoreDef* Def = FKGChoreCatalog::Find(InPanelChore);
+	if (!Char || !Char->HasAuthority() || !PS || Char->IsDead() || !Def || !FKGMinigameFactory::Has(InPanelChore))
+	{
+		return false;
+	}
+	if (HasSession())
+	{
+		if (Session == InPanelChore && SessionWorldChore == WorldChore)
+		{
+			ClientOpen(Session, SessionStage, SessionToken, bSessionFake, bSessionPractice);
+			return true;
+		}
+		AuthClose(EKGChoreClose::Replaced, true);
+	}
+	Session = InPanelChore;
+	SessionWorldChore = WorldChore;
+	SessionStage = FMath::Clamp(FMath::Max(StartStage, GetSavedStage(InPanelChore)), 0, Def->NumStages() - 1);
+	SessionToken = Rng.RandRange(1, 0x3FFFFFFF);
+	bSessionFake = IsImpatient();
+	bSessionPractice = false;
+	StageSeconds = 0.0f;
+	bHitThisTick = false;
+	Anchor = Char->GetActorLocation();
+	SessionStation.Reset();
+	FxLocation = At;
+	bWorking = true;
+	if (UKGEmoteComponent* Emote = Char->GetEmote())
+	{
+		Emote->ServerStop(EKGEmoteStop::Requested);
+	}
+	UE_LOG(LogKillGodot, Log, TEXT("KG_CHORE_OPEN %s by %s stage=%d/%d token=%d fake=%d practice=0 visual=0 world=%s"), *InPanelChore.ToString(),
+	       *PS->GetPlayerName(), SessionStage, Def->NumStages(), SessionToken, bSessionFake ? 1 : 0, *WorldChore.ToString());
 	ClientOpen(Session, SessionStage, SessionToken, bSessionFake, bSessionPractice);
 	return true;
 }
@@ -225,6 +267,23 @@ void UKGChoreComponent::CompleteSession()
 	const FKGChoreDef* Def = FKGChoreCatalog::Find(Id);
 	AKGPlayerState* PS = GetPlayerState();
 	SetSaved(Id, 0);
+	if (!SessionWorldChore.IsNone())
+	{
+		// SPRINT-016: a step of a world chore - the world chore advances, nothing is credited here.
+		const FName World = SessionWorldChore;
+		++CompletedCount;
+		UE_LOG(LogKillGodot, Log, TEXT("KG_CHORE_DONE %s by %s fake=%d practice=0 counted=0 visual=0 world=%s"), *Id.ToString(),
+		       PS ? *PS->GetPlayerName() : TEXT("?"), bSessionFake ? 1 : 0, *World.ToString());
+		Session = NAME_None;
+		SessionWorldChore = NAME_None;
+		SessionStation.Reset();
+		bWorking = false;
+		if (UKGWorldChoreComponent* WorldChores = UKGWorldChoreComponent::FindFor(GetOwner()))
+		{
+			WorldChores->AuthPanelStepDone(World);
+		}
+		return;
+	}
 	bool bCounted = false;
 	if (!bSessionPractice && PS && PS->CompleteTask(Id))
 	{
@@ -265,6 +324,7 @@ void UKGChoreComponent::AuthClose(EKGChoreClose Reason, bool bTellOwner)
 		ClientClose(Session, static_cast<uint8>(Reason));
 	}
 	Session = NAME_None;
+	SessionWorldChore = NAME_None;
 	SessionStation.Reset();
 	bWorking = false;
 }

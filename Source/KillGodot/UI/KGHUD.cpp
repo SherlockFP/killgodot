@@ -27,6 +27,8 @@
 #include "Roles/KGRoleListGenerator.h"
 #include "TextureResource.h"
 #include "UObject/ObjectKey.h"
+#include "UI/Reveal/KGRevealSubsystem.h"
+#include "UI/Reveal/KGStreamerMode.h"
 #include "World/KGInteractable.h"
 #include "World/KGMapInfo.h"
 #include "World/KGTaskStation.h"
@@ -1639,7 +1641,8 @@ namespace
 		const float Age = static_cast<float>(Fx.Now - Fx.AnnouncedAt);
 		const float In = EaseOutBack(Age / 0.4f);
 		const float A = Saturate(Age / 0.2f) * Saturate(static_cast<float>(GS->AnnouncementUntil - ServerNow) / 0.4f);
-		const float TextW = static_cast<float>(P.Measure(GS->Announcement, 21.0f, true).X);
+		const FString Line = KGStreamer::MaskText(F.Hud->GetWorld(), GS->Announcement);   // streamer mode: pseudonyms
+		const float TextW = static_cast<float>(P.Measure(Line, 21.0f, true).X);
 		const float W = FMath::Min(TextW + 110.0f * S, F.W - 40.0f * S);
 		const float H = 52.0f * S;
 		const float X = F.CX - W * 0.5f;
@@ -1648,7 +1651,7 @@ namespace
 		P.RoundRect(F.CX - 34.0f * S, Y - 2.0f * S, 68.0f * S, 5.0f * S, 2.5f * S, WithAlpha(Gold, A));
 		P.Diamond(FVector2D(X + 26.0f * S, Y + H * 0.5f), 6.0f * S, WithAlpha(Gold, A));
 		P.Diamond(FVector2D(X + W - 26.0f * S, Y + H * 0.5f), 6.0f * S, WithAlpha(Gold, A));
-		P.TextMid(GS->Announcement, F.CX, Y + H * 0.5f, 21.0f, WithAlpha(Cream, A), 0.5f, true);
+		P.TextMid(Line, F.CX, Y + H * 0.5f, 21.0f, WithAlpha(Cream, A), 0.5f, true);
 	}
 
 	/** Top left: own chores with checkboxes. Returns the bottom edge (or the top margin when nothing is shown). */
@@ -1797,6 +1800,24 @@ namespace
 		}
 	}
 
+	/** Streamer mode (SPRINT-015): the role chip without the role - hold the peek key to see it. */
+	void DrawHiddenRoleChip(const FKGHudFrame& F)
+	{
+		const FKGPainter& P = F.P;
+		const float S = F.S;
+		const FString Key = KGStreamer::GetPeekKeyLabel().ToString();
+		const FString Label = TEXT("Hold to peek");
+		const FString Caption = TEXT("ROLE HIDDEN");
+		const float TextW = FMath::Max(P.KeyHintWidth(Key, Label, 16.0f), static_cast<float>(P.Measure(Caption, 12.0f, true, 2.0f).X));
+		const float H = 64.0f * S;
+		const float W = TextW + 48.0f * S;
+		const float X = F.W - 28.0f * S - W;
+		const float Y = F.H - 28.0f * S - H;
+		P.Card(X, Y, W, H);
+		P.TextMid(Caption, X + 24.0f * S, Y + 20.0f * S, 12.0f, WithAlpha(Cream, 0.55f), 0.0f, true, 2.0f);
+		P.KeyHint(Key, Label, X + 24.0f * S, Y + 43.0f * S, 16.0f, Cream);
+	}
+
 	/** Centre: the role card while roles are dealt (slides up, glows in the alignment colour). */
 	void DrawRoleCard(const FKGHudFrame& F, const FKGRoleInfo& Role)
 	{
@@ -1905,7 +1926,7 @@ namespace
 				P.RoundRect(RX, RowY + 3.0f * S, ColW, RowH - 6.0f * S, 10.0f * S, FLinearColor(1.0f, 1.0f, 1.0f, 0.04f * Al));
 			}
 			P.Circle(FVector2D(RX + 24.0f * S, MidY), 7.0f * S, WithAlpha(RC, Dim * Al));
-			const FString Name = PS == Me ? PS->GetPlayerName() + TEXT("  (you)") : PS->GetPlayerName();
+			const FString Name = PS == Me ? PS->GetPlayerName() + TEXT("  (you)") : KGStreamer::DisplayName(PS);
 			P.TextMid(Name, RX + 44.0f * S, MidY, 20.0f, WithAlpha(PS == Me ? Gold : Cream, Dim * Al), 0.0f, true);
 			const FVector2D RoleSize = P.TextMid(Role ? PrettyRole(Role->RoleId) : TEXT("?"), RX + ColW - 20.0f * S, MidY, 20.0f,
 			                                     WithAlpha(RC, Dim * Al), 1.0f, true);
@@ -1975,7 +1996,7 @@ namespace
 			{
 				P.RoundRect(X + 10.0f * S, RowY + 3.0f * S, W - 20.0f * S, RowH - 6.0f * S, 10.0f * S, WithAlpha(Gold, 0.14f));
 			}
-			P.TextMid(Row.Key->GetPlayerName(), X + 20.0f * S, MidY, 18.0f, bMine ? Gold : Cream, 0.0f, true);
+			P.TextMid(KGStreamer::DisplayName(Row.Key), X + 20.0f * S, MidY, 18.0f, bMine ? Gold : Cream, 0.0f, true);
 			P.PillBar(X + 200.0f * S, MidY - 5.0f * S, W - 290.0f * S, 10.0f * S, static_cast<float>(Row.Value) / Needed,
 			          FMath::Lerp(Col, FLinearColor::White, 0.3f), Col);
 			P.TextMid(FString::Printf(TEXT("%d/%d"), Row.Value, Needed), X + W - 20.0f * S, MidY, 17.0f, Col, 1.0f, true);
@@ -2026,7 +2047,7 @@ namespace
 		P.Card(X, Y, W, H, 1.0f, R, true);
 		P.TopBand(X, Y, W, R, 7.0f * S, Crimson);
 		P.TextMid(TEXT("ON TRIAL"), F.CX, Y + 32.0f * S, 15.0f, ImpatientColor, 0.5f, true, 3.0f);
-		P.TextMid(GS->OnTrial->GetPlayerName(), F.CX, Y + 70.0f * S, 40.0f, Cream, 0.5f, true, 1.0f);
+		P.TextMid(KGStreamer::DisplayName(GS->OnTrial), F.CX, Y + 70.0f * S, 40.0f, Cream, 0.5f, true, 1.0f);
 		if (F.Me == GS->OnTrial)
 		{
 			P.TextMid(TEXT("Defend yourself - they are listening."), F.CX, Y + 130.0f * S, 20.0f, WithAlpha(Cream, 0.85f), 0.5f,
@@ -2172,7 +2193,13 @@ void AKGHUD::DrawMatchInfo(float S)
 	}
 	const float ChoresBottom = DrawChores(F);
 	const FKGRoleInfo* MyRole = F.Me ? RoleOf(F.Me->GetPrivateRoleId()) : nullptr;   // secret: only the owner has it
-	if (MyRole)
+	// Streamer mode: after the reveal the role stays off screen unless the peek key is held.
+	const bool bRoleHidden = MyRole && KGStreamer::IsRoleHidden(F.PC);
+	if (MyRole && bRoleHidden)
+	{
+		DrawHiddenRoleChip(F);
+	}
+	else if (MyRole)
 	{
 		DrawRoleChip(F, *MyRole);
 	}
@@ -2184,7 +2211,8 @@ void AKGHUD::DrawMatchInfo(float S)
 	{
 		DrawTrial(F);
 	}
-	if (Phase == EKGPhase::RoleReveal && MyRole)
+	// The full-screen ceremony (UI/Reveal) replaces this card whenever it runs; this stays as the fallback.
+	if (Phase == EKGPhase::RoleReveal && MyRole && !bRoleHidden && !UKGRevealSubsystem::IsOverlayShown(GetWorld()))
 	{
 		DrawRoleCard(F, *MyRole);
 	}

@@ -65,6 +65,11 @@ public:
 	 * Returns false when it cannot open (dead, phase, no minigame, not your chore...).
 	 */
 	bool AuthOpen(FName ChoreId, AKGTaskStation* Station, bool bDev = false);
+	/**
+	 * Authority (SPRINT-016 hook): opens PanelChore's minigame as one step of the world chore WorldChore (from
+	 * StartStage). Completing it tells UKGWorldChoreComponent::AuthPanelStepDone instead of crediting a chore.
+	 */
+	bool AuthOpenWorldStep(FName InPanelChore, int32 StartStage, FName WorldChore, const FVector& At);
 	/** Authority: a stage report (the RPC body; tests call it directly). */
 	EKGChoreVerdict AuthStageDone(FName ChoreId, int32 Stage, int32 Token);
 	/** Authority: end the session (progress kept). */
@@ -139,6 +144,8 @@ private:
 	int32 SessionToken = 0;
 	bool bSessionFake = false;
 	bool bSessionPractice = false;
+	/** SPRINT-016: the world chore this panel session is a step of (None = a normal chore). */
+	FName SessionWorldChore;
 	float StageSeconds = 0.0f;
 	FVector Anchor = FVector::ZeroVector;
 	TWeakObjectPtr<AKGTaskStation> SessionStation;

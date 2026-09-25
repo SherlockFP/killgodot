@@ -1,4 +1,5 @@
 #include "UI/Menu/SKGMainMenu.h"
+#include "UI/Reveal/KGStreamerMode.h"
 
 #include "Core/KGGameUserSettings.h"
 #include "Framework/Application/SlateApplication.h"
@@ -911,6 +912,7 @@ TSharedRef<SWidget> SKGMainMenu::BuildBrowserFooter()
 				SAssignNew(AddressBox, SEditableTextBox)
 				.Style(&MainMenuCompactTextBox())
 				.Text(FText::FromString(LastAddress))
+				.IsPassword_Lambda([]() { return KGStreamer::IsEnabled(); })   // streamer mode: codes / IPs never on screen
 				.HintText(LOCTEXT("AddressHint", "ABC123 or 192.168.1.20:7777"))
 				.SelectAllTextWhenFocused(true)
 				.ClearKeyboardFocusOnCommit(false)
@@ -1160,7 +1162,9 @@ void SKGMainMenu::RebuildRows()
 				SNew(SKGGlyph).Glyph(EKGGlyph::Lock).Size(18.0f).Thickness(2.2f).Color(S.Gold)
 			];
 		Cells.Name = BrowserCellText(FText::FromString(Row.Name), S.BodyBoldFont, S.Cream);
-		Cells.Host = BrowserCellText(FText::FromString(Row.HostName), S.SmallFont, S.CreamDim);
+		// Streamer mode: host names are other players' names too (a pseudonym per menu visit).
+		const UWorld* MenuWorld = OwningPlayer.IsValid() ? OwningPlayer->GetWorld() : nullptr;
+		Cells.Host = BrowserCellText(FText::FromString(KGStreamer::DisplayHostName(MenuWorld, Row.HostName)), S.SmallFont, S.CreamDim);
 		Cells.Map = BrowserCellText(FText::FromString(Row.MapTitle), S.SmallFont, S.CreamDim);
 		Cells.Players = BrowserCellText(FText::Format(LOCTEXT("PlayersOf", "{0} / {1}"), FText::AsNumber(Row.Players),
 		                                              FText::AsNumber(Row.MaxPlayers)),
@@ -1313,7 +1317,7 @@ void SKGMainMenu::JoinByCodeOrAddress()
 		PendingJoinCode = Code;
 		FKGSessions::Get().CancelFind(PC);
 		bSearching = false;
-		ShowConnecting(FText::Format(LOCTEXT("FindingCode", "Looking for game {0}"), FText::AsCultureInvariant(Code)), [this]()
+		ShowConnecting(FText::Format(LOCTEXT("FindingCode", "Looking for game {0}"), FText::AsCultureInvariant(KGStreamer::MaskCode(Code))), [this]()
 		{
 			PendingJoinCode.Reset();
 			FKGSessions::Get().CancelFind(OwningPlayer.Get());
@@ -1332,7 +1336,7 @@ void SKGMainMenu::JoinByCodeOrAddress()
 		KGMenu::FocusWidget(AddressBox);
 		return;
 	}
-	ShowConnecting(FText::Format(LOCTEXT("JoiningAddress", "Connecting to {0}"), FText::FromString(KGMenu::NormalizeAddress(Input))),
+	ShowConnecting(FText::Format(LOCTEXT("JoiningAddress", "Connecting to {0}"), FText::FromString(KGStreamer::MaskAddress(KGMenu::NormalizeAddress(Input)))),
 	               [this]() { KGMenu::CancelJoin(OwningPlayer.Get()); });
 }
 
@@ -1354,7 +1358,7 @@ void SKGMainMenu::HandleCodeSearch(bool bSuccess, const TArray<FKGSessionRow>& R
 		return;
 	}
 	ShowToast(FText::Format(LOCTEXT("CodeNotFound", "No open game with code {0}. Private games join by address."),
-	                        FText::AsCultureInvariant(Code)), true);
+	                        FText::AsCultureInvariant(KGStreamer::MaskCode(Code))), true);
 }
 
 void SKGMainMenu::StartQuickMatch()
@@ -1521,10 +1525,16 @@ TSharedRef<SWidget> SKGMainMenu::BuildHostPanel()
 		];
 	}
 
-	const FText AddressLine = LocalAddress.IsEmpty()
-		? LOCTEXT("AddressUnknown", "Your address could not be detected")
-		: FText::Format(LOCTEXT("AddressLine", "{0}  :  {1}"), FText::FromString(LocalAddress),
-		                FText::AsNumber(KGMenu::DefaultPort, &FNumberFormattingOptions::DefaultNoGrouping()));
+	const FText AddressUnknown = LOCTEXT("AddressUnknown", "Your address could not be detected");
+	const TAttribute<FText> AddressLine = TAttribute<FText>::CreateLambda([this, AddressUnknown]()
+	{
+		if (LocalAddress.IsEmpty())
+		{
+			return AddressUnknown;
+		}
+		// Streamer mode masks the address (digits become dots, the shape stays readable).
+		return FText::FromString(KGStreamer::MaskAddress(FString::Printf(TEXT("%s  :  %d"), *LocalAddress, KGMenu::DefaultPort)));
+	});
 	TArray<FText> RegionNames;
 	for (const FString& Region : FKGSessions::GetRegions())
 	{

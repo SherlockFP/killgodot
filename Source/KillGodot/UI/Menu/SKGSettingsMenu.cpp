@@ -2,6 +2,7 @@
 
 #include "Core/KGGameUserSettings.h"
 #include "Framework/Application/SlateApplication.h"
+#include "InputCoreTypes.h"
 #include "Kismet/KismetSystemLibrary.h"
 #include "UI/Menu/KGMenuActions.h"
 #include "UI/Menu/KGMenuStyle.h"
@@ -98,6 +99,8 @@ FKGSettingsSnapshot FKGSettingsSnapshot::Capture(const UKGGameUserSettings& Sett
 	Out.bInvertY = Settings.GetInvertY();
 	Out.FieldOfView = Settings.GetFieldOfView();
 	Out.ViewmodelPreset = Settings.GetViewmodelPreset();
+	Out.bStreamerMode = Settings.GetStreamerMode();
+	Out.StreamerPeekKey = Settings.GetStreamerPeekKey();
 	for (int32 Channel = 0; Channel < 4; ++Channel)
 	{
 		Out.Volumes[Channel] = Settings.GetVolume(SettingsChannel(Channel));
@@ -127,6 +130,8 @@ void FKGSettingsSnapshot::Restore(UKGGameUserSettings& Settings) const
 	Settings.SetInvertY(bInvertY);
 	Settings.SetFieldOfView(FieldOfView);
 	Settings.SetViewmodelPreset(ViewmodelPreset);
+	Settings.SetStreamerMode(bStreamerMode);
+	Settings.SetStreamerPeekKey(StreamerPeekKey);
 	for (int32 Channel = 0; Channel < 4; ++Channel)
 	{
 		Settings.SetVolume(SettingsChannel(Channel), Volumes[Channel]);
@@ -139,7 +144,8 @@ bool FKGSettingsSnapshot::Matches(const FKGSettingsSnapshot& Other) const
 		!FMath::IsNearlyEqual(FrameRateLimit, Other.FrameRateLimit) ||
 		!FMath::IsNearlyEqual(ResolutionScale, Other.ResolutionScale, 0.5f) ||
 		!FMath::IsNearlyEqual(Sensitivity, Other.Sensitivity, 0.001f) || bInvertY != Other.bInvertY ||
-		!FMath::IsNearlyEqual(FieldOfView, Other.FieldOfView, 0.01f) || ViewmodelPreset != Other.ViewmodelPreset)
+		!FMath::IsNearlyEqual(FieldOfView, Other.FieldOfView, 0.01f) || ViewmodelPreset != Other.ViewmodelPreset ||
+		bStreamerMode != Other.bStreamerMode || StreamerPeekKey != Other.StreamerPeekKey)
 	{
 		return false;
 	}
@@ -746,6 +752,69 @@ TSharedRef<SWidget> SKGSettingsMenu::BuildGameplayTab()
 			})
 		]);
 
+	// Streamer mode (SPRINT-015): purely local, nothing changes for the other players.
+	SettingsAddSection(Box, LOCTEXT("SectionStreamer", "Streamer mode"));
+	SettingsAddRow(Box,
+		SNew(SKGSettingRow)
+		.Label(LOCTEXT("StreamerMode", "Streamer mode"))
+		.Description(LOCTEXT("StreamerModeDesc",
+			"Hides your role after the reveal, shows other players under pseudonyms for the match and masks join codes and addresses."))
+		[
+			SNew(SBox)
+			.HAlign(HAlign_Right)
+			[
+				SNew(SKGToggle)
+				.IsChecked_Lambda([]()
+				{
+					const UKGGameUserSettings* Settings = UKGGameUserSettings::Get();
+					return Settings && Settings->GetStreamerMode();
+				})
+				.OnToggled_Lambda([this](bool bValue)
+				{
+					if (UKGGameUserSettings* Settings = UKGGameUserSettings::Get())
+					{
+						Settings->SetStreamerMode(bValue);
+						OnLiveValueChanged();
+					}
+				})
+			]
+		]);
+	{
+		TArray<FText> PeekNames;
+		for (const FName& KeyName : UKGGameUserSettings::GetStreamerPeekKeys())
+		{
+			PeekNames.Add(FKey(KeyName).GetDisplayName(false));
+		}
+		SettingsAddRow(Box,
+			SNew(SKGSettingRow)
+			.Label(LOCTEXT("StreamerPeek", "Peek at your role (hold)"))
+			.Description(LOCTEXT("StreamerPeekDesc", "While streamer mode hides it, hold this key to see your role."))
+			[
+				SNew(SKGOptionSelector)
+				.bWrap(true)
+				.Options(PeekNames)
+				.IsEnabled_Lambda([]()
+				{
+					const UKGGameUserSettings* Settings = UKGGameUserSettings::Get();
+					return Settings && Settings->GetStreamerMode();
+				})
+				.SelectedIndex_Lambda([]()
+				{
+					const UKGGameUserSettings* Settings = UKGGameUserSettings::Get();
+					return Settings ? FMath::Max(0, UKGGameUserSettings::GetStreamerPeekKeys().IndexOfByKey(Settings->GetStreamerPeekKey())) : 0;
+				})
+				.OnSelectionChanged_Lambda([this](int32 Index)
+				{
+					UKGGameUserSettings* Settings = UKGGameUserSettings::Get();
+					if (Settings && UKGGameUserSettings::GetStreamerPeekKeys().IsValidIndex(Index))
+					{
+						Settings->SetStreamerPeekKey(UKGGameUserSettings::GetStreamerPeekKeys()[Index]);
+						OnLiveValueChanged();
+					}
+				})
+			]);
+	}
+
 	return MakePage(Box);
 }
 
@@ -1142,6 +1211,8 @@ void SKGSettingsMenu::ResetTab()
 		Settings->SetInvertY(false);
 		Settings->SetFieldOfView(UKGGameUserSettings::DefaultFieldOfView);
 		Settings->SetViewmodelPreset(1);
+		Settings->SetStreamerMode(false);
+		Settings->SetStreamerPeekKey(UKGGameUserSettings::GetStreamerPeekKeys()[0]);
 	}
 	else if (ActiveTab == Tab_Audio)
 	{

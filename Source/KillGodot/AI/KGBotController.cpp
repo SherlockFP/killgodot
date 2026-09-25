@@ -16,6 +16,7 @@
 #include "World/KGInteractable.h"
 #include "World/KGMapInfo.h"
 #include "World/KGTaskStation.h"
+#include "Chores/WorldChores/KGWorldChoreComponent.h"
 
 namespace
 {
@@ -1012,6 +1013,18 @@ bool AKGBotController::UpdateChores(float DeltaSeconds, const AKGGameState* GS)
 		ChoreElapsed = 0.0f;
 		ProgressTimer = 0.0f;
 		ProgressFrom = Me->GetActorLocation();
+	}
+	// SPRINT-016 hook: world chores (Chores/WorldChores) walk their real steps - fetch, carry, work, deliver.
+	if (UKGWorldChoreComponent* WorldChores = UKGWorldChoreComponent::FindFor(Me);
+	    WorldChores && FKGWorldChoreCatalog::Get().IsWorldChore(ChoreTarget->TaskId))
+	{
+		if (WorldChores->BotDrive(this, ChoreTarget->TaskId, DeltaSeconds) == UKGWorldChoreComponent::EBot::Failed)
+		{
+			FailedChores.AddUnique(ChoreTarget);
+			ChoreTarget = nullptr;
+			StopMovement();
+		}
+		return true;
 	}
 	const FVector Goal = ChoreTarget->GetActorLocation();
 	if (FVector::DistSquared2D(Me->GetActorLocation(), Goal) < FMath::Square(150.0))

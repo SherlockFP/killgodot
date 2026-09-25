@@ -18,6 +18,10 @@ struct FKGLobbyEntry : public FFastArraySerializerItem
 	UPROPERTY()
 	TObjectPtr<APlayerState> Player;
 
+	/** Display name, copied by the server: the seat shows a name before (and without) the player state replicating. */
+	UPROPERTY()
+	FString Name;
+
 	UPROPERTY()
 	bool bReady = false;
 
@@ -109,6 +113,7 @@ public:
 
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 	virtual void BeginPlay() override;
+	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 	virtual void Tick(float DeltaSeconds) override;
 
 	// --- Queries (any machine) ---------------------------------------------------------------------------------
@@ -124,6 +129,8 @@ public:
 	bool CanStart(FText& OutReason) const;
 	/** Bumped on every replicated change; UI rebuilds lists when it moves. */
 	uint32 GetRevision() const { return Revision; }
+	/** Name shown for a seat (the replicated copy, else the player state's). */
+	static FString GetSeatName(const FKGLobbyEntry& Entry);
 
 	// --- Authority -------------------------------------------------------------------------------------------
 	void AuthSetReady(APlayerState* Player, bool bReady);
@@ -138,6 +145,10 @@ protected:
 	void AuthSyncSeats();
 	void AuthBeginMatch();
 	void Touch();
+	/** Server: a player finished logging in (seat them on the next tick, once the game mode has named them). */
+	void HandlePostLogin(class AGameModeBase* GameMode, APlayerController* NewPlayer);
+	/** Every machine: logs KG_LOBBY_NAMES (with a wall clock) whenever the set of named seats changes. */
+	void LogVisibleNames();
 
 	UPROPERTY(ReplicatedUsing = OnRep_Lobby)
 	FKGLobbyEntryArray Entries;
@@ -159,4 +170,9 @@ private:
 	uint8 NextColor = 0;
 	float SyncAccumulator = 0.0f;
 	int32 LastCountdownSecond = -1;
+	bool bSyncNextTick = false;
+	FDelegateHandle PostLoginHandle;
+	FString LastLoggedNames;
+	/** Dev (-KGLobbySmoke): seconds with two or more named humans seated, then the host starts by itself. */
+	float SmokeSeatedSeconds = 0.0f;
 };

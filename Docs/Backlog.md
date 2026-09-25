@@ -133,6 +133,11 @@ M4–M18 maddeleri, milestone başladığında `09_Roadmap_Gauntlet.md`'den bura
   + `Tools/Unreal/kg_dig_smoke.ps1` pass; **PIE verification pending** (VerificationDebt #12)
 - [~] SPRINT lore + brand (running): lore bible (TR), text bank, KillGo logo, key art, loading art
 - [ ] SPRINT-016 physical, original chores (USER PRIORITY): Docs/Iterations/SPRINT-016-PhysicalChores.md
+- [~] SPRINT-016 finisher, underground finisher, SPRINT-022 visual pass (running 2026-09-25 afternoon)
+- [ ] SPRINT-025 chore clarity + hold-M big map + UI overhaul (USER): Docs/Iterations/SPRINT-025-ChoreClarity-UI.md
+- [ ] SPRINT-026 movement: strafe bunny hop + stamina (USER): Docs/Iterations/SPRINT-026-Movement.md
+- [ ] SPRINT-027 villager variety (per player, never per role) + viewmodel animation polish (USER): Docs/Iterations/SPRINT-027-CharactersAndViewmodel.md
+- [ ] FOREST sprint (from the forest/loot/tabletop design): the user also wants the forest BIGGER, with survival chores
 - [ ] SPRINT-022 v2 visual pass (USER REVIEW 2026-09-25): varied houses, geometry validator + Japan garden fix, realistic water, towers/landmarks: Docs/Iterations/SPRINT-022-V2VisualPass.md
 - [ ] SPRINT-023 voice + talking mouths + TF2 voice commands + partner emotes: Docs/Iterations/SPRINT-023-VoiceSocial.md
 - [~] SPRINT-015 match flow: server list first, role-reveal ceremony, streamer mode: Docs/Iterations/SPRINT-015-MatchFlow.md

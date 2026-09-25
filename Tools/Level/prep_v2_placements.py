@@ -1131,6 +1131,59 @@ def cliffs():
         covered = covered.union(LineString([(x - ax_[0] * 3.5, y - ax_[1] * 3.5), (x + ax_[0] * 3.5, y + ax_[1] * 3.5)]).buffer(2.4))
         k += 1
     stats["cliff_pieces"] = n_p
+    shoulder_dressing()
+
+
+def shoulder_dressing():
+    """SPRINT-022 acceptance 6: a lowered cliff (layout "shoulder", terrain in kg_build_terrain_v2.py) gets a broken
+    top: boulders along the rock lip and the bench step, then scrub, ferns and grass on the bench and a few wind-bent
+    trees on the slope above, so the silhouette from the basin reads as layered rock and vegetation, not a ruled line.
+    Own RNG (the global stream feeds the other passes)."""
+    r = np.random.default_rng(22006)
+    keep_out = unary_union([CORRIDORS.buffer(1.5), LANES.buffer(1.5), B_RECTS.buffer(2.0),
+                            Point(L["landmarks"]["lighthouse"]["at"]).buffer(8.0)])
+    rocks = [f"N:Rock_Medium_{i}" for i in range(1, 4)]
+    scrub = ["N:Bush_Common", "N:Fern_1", "N:Grass_Common_Tall", "N:Bush_Common_Flowers", "N:Plant_1_Big"]
+    trees = [f"N:TwistedTree_{i}" for i in range(1, 6)]
+    n = {"rocks": 0, "scrub": 0, "trees": 0}
+    for c in L["cliffs"]:
+        sh = c.get("shoulder")
+        if not sh:
+            continue
+        line = LineString(c["points"])
+        S = line.length
+        s = sh.get("fade_m", 6.0) * 0.5
+        while s < S - 1.0:
+            p = line.interpolate(s)
+            a, b = line.interpolate(max(0.0, s - 1.0)), line.interpolate(min(S, s + 1.0))
+            u = norm(b.x - a.x, b.y - a.y)
+            land = (-u[1], u[0])
+            if g1(p.x + land[0] * 4.0, p.y + land[1] * 4.0) < g1(p.x - land[0] * 4.0, p.y - land[1] * 4.0):
+                land = (-land[0], -land[1])                    # inland = uphill
+            for dd, kind in ((1.4, "rock"), (r.uniform(3.0, 4.2), "rock"), (r.uniform(4.6, 6.4), "scrub"),
+                             (r.uniform(4.6, 6.4), "scrub"), (r.uniform(7.0, 10.5), "scrub"), (r.uniform(8.0, 11.5), "tree")):
+                if kind == "rock" and r.random() < 0.25 or kind == "tree" and r.random() < 0.55:
+                    continue
+                x = p.x + land[0] * dd + u[0] * r.uniform(-1.2, 1.2)
+                y = p.y + land[1] * dd + u[1] * r.uniform(-1.2, 1.2)
+                if keep_out.contains(Point(x, y)):
+                    continue
+                # plants and trees only where the ground is gentle enough to stand them (the validator's sink/float
+                # tolerances); the steep bits between the lip and the bench are the rocks' job
+                if kind == "scrub" and relief(x, y, 0.5) > 0.3 or kind == "tree" and relief(x, y, 0.8) > 0.45:
+                    continue
+                yaw = float(r.uniform(0, 360))
+                if kind == "rock":
+                    sc = float(r.uniform(0.9, 1.6))
+                    inst("forest", rocks[int(r.integers(0, 3))], x, y, gmin(x, y, 0.6 * sc) - 0.15 * sc, yaw, sc)
+                elif kind == "scrub":
+                    inst("crops", scrub[int(r.integers(0, len(scrub)))], x, y, gmin(x, y, 0.4) - 0.05, yaw,
+                         float(r.uniform(0.9, 1.5)))
+                else:
+                    inst("forest", trees[int(r.integers(0, 5))], x, y, gmin(x, y, 0.7) - 0.2, yaw, float(r.uniform(0.8, 1.2)))
+                n[kind + ("s" if kind != "scrub" else "")] += 1
+            s += r.uniform(2.6, 3.6)
+    stats["shoulder_dressing"] = n
 
 
 # ------------------------------------------------------------------------------------------------ small landmarks

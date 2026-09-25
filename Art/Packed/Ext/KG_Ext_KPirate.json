@@ -1,0 +1,799 @@
+{
+ "tag": "KPirate",
+ "source": "D:/Kill Godot/Art/Source/Kenney_PirateKit/Models/GLB format",
+ "props": {
+  "KPirate_barrel": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    94,
+    94,
+    86
+   ],
+   "tris": 148,
+   "file": "barrel.glb"
+  },
+  "KPirate_boat_row_large": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    192,
+    200,
+    59
+   ],
+   "tris": 174,
+   "file": "boat-row-large.glb"
+  },
+  "KPirate_boat_row_small": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    192,
+    166,
+    59
+   ],
+   "tris": 168,
+   "file": "boat-row-small.glb"
+  },
+  "KPirate_bottle_large": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    33,
+    33,
+    62
+   ],
+   "tris": 108,
+   "file": "bottle-large.glb"
+  },
+  "KPirate_bottle": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    26,
+    26,
+    62
+   ],
+   "tris": 124,
+   "file": "bottle.glb"
+  },
+  "KPirate_cannon_ball": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    45,
+    39,
+    47
+   ],
+   "tris": 48,
+   "file": "cannon-ball.glb"
+  },
+  "KPirate_cannon_mobile": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    118,
+    135,
+    97
+   ],
+   "tris": 472,
+   "file": "cannon-mobile.glb"
+  },
+  "KPirate_cannon": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    98,
+    135,
+    74
+   ],
+   "tris": 232,
+   "file": "cannon.glb"
+  },
+  "KPirate_castle_door": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    140,
+    224,
+    308
+   ],
+   "tris": 392,
+   "file": "castle-door.glb"
+  },
+  "KPirate_castle_gate": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    280,
+    252,
+    308
+   ],
+   "tris": 712,
+   "file": "castle-gate.glb"
+  },
+  "KPirate_castle_wall": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    140,
+    196,
+    308
+   ],
+   "tris": 306,
+   "file": "castle-wall.glb"
+  },
+  "KPirate_castle_window": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    140,
+    196,
+    308
+   ],
+   "tris": 292,
+   "file": "castle-window.glb"
+  },
+  "KPirate_chest": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    89,
+    92,
+    94
+   ],
+   "tris": 232,
+   "file": "chest.glb"
+  },
+  "KPirate_crate_bottles": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    75,
+    92,
+    74
+   ],
+   "tris": 572,
+   "file": "crate-bottles.glb"
+  },
+  "KPirate_crate": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    75,
+    92,
+    54
+   ],
+   "tris": 76,
+   "file": "crate.glb"
+  },
+  "KPirate_flag_high_pennant": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    123,
+    28,
+    252
+   ],
+   "tris": 101,
+   "file": "flag-high-pennant.glb"
+  },
+  "KPirate_flag_high": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    94,
+    28,
+    252
+   ],
+   "tris": 128,
+   "file": "flag-high.glb"
+  },
+  "KPirate_flag_pennant": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    123,
+    28,
+    147
+   ],
+   "tris": 101,
+   "file": "flag-pennant.glb"
+  },
+  "KPirate_flag_pirate_high_pennant": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    123,
+    28,
+    252
+   ],
+   "tris": 101,
+   "file": "flag-pirate-high-pennant.glb"
+  },
+  "KPirate_flag_pirate_high": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    94,
+    28,
+    252
+   ],
+   "tris": 128,
+   "file": "flag-pirate-high.glb"
+  },
+  "KPirate_flag_pirate_pennant": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    123,
+    28,
+    147
+   ],
+   "tris": 101,
+   "file": "flag-pirate-pennant.glb"
+  },
+  "KPirate_flag_pirate": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    94,
+    28,
+    147
+   ],
+   "tris": 128,
+   "file": "flag-pirate.glb"
+  },
+  "KPirate_flag": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    94,
+    28,
+    147
+   ],
+   "tris": 128,
+   "file": "flag.glb"
+  },
+  "KPirate_grass_patch": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    92,
+    89,
+    33
+   ],
+   "tris": 360,
+   "file": "grass-patch.glb"
+  },
+  "KPirate_grass_plant": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    78,
+    87,
+    36
+   ],
+   "tris": 144,
+   "file": "grass-plant.glb"
+  },
+  "KPirate_grass": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    36,
+    38,
+    22
+   ],
+   "tris": 72,
+   "file": "grass.glb"
+  },
+  "KPirate_hole": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    200,
+    189,
+    25
+   ],
+   "tris": 286,
+   "file": "hole.glb"
+  },
+  "KPirate_mast_ropes": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    307,
+    164,
+    552
+   ],
+   "tris": 335,
+   "file": "mast-ropes.glb"
+  },
+  "KPirate_mast": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    307,
+    122,
+    550
+   ],
+   "tris": 287,
+   "file": "mast.glb"
+  },
+  "KPirate_palm_bend": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    202,
+    225,
+    298
+   ],
+   "tris": 338,
+   "file": "palm-bend.glb"
+  },
+  "KPirate_palm_detailed_bend": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    202,
+    225,
+    298
+   ],
+   "tris": 482,
+   "file": "palm-detailed-bend.glb"
+  },
+  "KPirate_palm_detailed_straight": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    225,
+    225,
+    295
+   ],
+   "tris": 482,
+   "file": "palm-detailed-straight.glb"
+  },
+  "KPirate_palm_straight": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    174,
+    174,
+    295
+   ],
+   "tris": 338,
+   "file": "palm-straight.glb"
+  },
+  "KPirate_patch_grass_foliage": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    369,
+    288,
+    39
+   ],
+   "tris": 300,
+   "file": "patch-grass-foliage.glb"
+  },
+  "KPirate_patch_grass": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    369,
+    288,
+    17
+   ],
+   "tris": 84,
+   "file": "patch-grass.glb"
+  },
+  "KPirate_patch_sand_foliage": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    542,
+    423,
+    39
+   ],
+   "tris": 636,
+   "file": "patch-sand-foliage.glb"
+  },
+  "KPirate_patch_sand": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    542,
+    423,
+    17
+   ],
+   "tris": 108,
+   "file": "patch-sand.glb"
+  },
+  "KPirate_platform_planks": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    133,
+    189,
+    30
+   ],
+   "tris": 48,
+   "file": "platform-planks.glb"
+  },
+  "KPirate_platform": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    175,
+    176,
+    16
+   ],
+   "tris": 60,
+   "file": "platform.glb"
+  },
+  "KPirate_rocks_a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    358,
+    307,
+    203
+   ],
+   "tris": 264,
+   "file": "rocks-a.glb"
+  },
+  "KPirate_rocks_b": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    311,
+    329,
+    256
+   ],
+   "tris": 300,
+   "file": "rocks-b.glb"
+  },
+  "KPirate_rocks_c": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    255,
+    257,
+    161
+   ],
+   "tris": 232,
+   "file": "rocks-c.glb"
+  },
+  "KPirate_rocks_sand_a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    358,
+    307,
+    225
+   ],
+   "tris": 552,
+   "file": "rocks-sand-a.glb"
+  },
+  "KPirate_rocks_sand_b": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    307,
+    330,
+    260
+   ],
+   "tris": 516,
+   "file": "rocks-sand-b.glb"
+  },
+  "KPirate_rocks_sand_c": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    260,
+    261,
+    183
+   ],
+   "tris": 448,
+   "file": "rocks-sand-c.glb"
+  },
+  "KPirate_ship_ghost": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    336,
+    742,
+    697
+   ],
+   "tris": 1658,
+   "file": "ship-ghost.glb"
+  },
+  "KPirate_ship_large": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    336,
+    917,
+    697
+   ],
+   "tris": 1801,
+   "file": "ship-large.glb"
+  },
+  "KPirate_ship_medium": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    336,
+    742,
+    697
+   ],
+   "tris": 1675,
+   "file": "ship-medium.glb"
+  },
+  "KPirate_ship_pirate_large": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    336,
+    917,
+    697
+   ],
+   "tris": 1893,
+   "file": "ship-pirate-large.glb"
+  },
+  "KPirate_ship_pirate_medium": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    336,
+    742,
+    697
+   ],
+   "tris": 1767,
+   "file": "ship-pirate-medium.glb"
+  },
+  "KPirate_ship_pirate_small": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    336,
+    616,
+    697
+   ],
+   "tris": 1431,
+   "file": "ship-pirate-small.glb"
+  },
+  "KPirate_ship_small": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    336,
+    616,
+    697
+   ],
+   "tris": 1338,
+   "file": "ship-small.glb"
+  },
+  "KPirate_ship_wreck": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    336,
+    742,
+    697
+   ],
+   "tris": 2282,
+   "file": "ship-wreck.glb"
+  },
+  "KPirate_structure_fence_sides": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    175,
+    175,
+    154
+   ],
+   "tris": 436,
+   "file": "structure-fence-sides.glb"
+  },
+  "KPirate_structure_fence": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    175,
+    175,
+    154
+   ],
+   "tris": 356,
+   "file": "structure-fence.glb"
+  },
+  "KPirate_structure_platform_dock_small": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    133,
+    176,
+    92
+   ],
+   "tris": 312,
+   "file": "structure-platform-dock-small.glb"
+  },
+  "KPirate_structure_platform_dock": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    175,
+    176,
+    92
+   ],
+   "tris": 324,
+   "file": "structure-platform-dock.glb"
+  },
+  "KPirate_structure_platform_small": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    133,
+    176,
+    63
+   ],
+   "tris": 208,
+   "file": "structure-platform-small.glb"
+  },
+  "KPirate_structure_platform": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    175,
+    176,
+    65
+   ],
+   "tris": 220,
+   "file": "structure-platform.glb"
+  },
+  "KPirate_structure_roof": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    216,
+    226,
+    238
+   ],
+   "tris": 348,
+   "file": "structure-roof.glb"
+  },
+  "KPirate_structure": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    175,
+    175,
+    154
+   ],
+   "tris": 276,
+   "file": "structure.glb"
+  },
+  "KPirate_tool_paddle": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    46,
+    15,
+    164
+   ],
+   "tris": 60,
+   "file": "tool-paddle.glb"
+  },
+  "KPirate_tool_shovel": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    46,
+    20,
+    164
+   ],
+   "tris": 168,
+   "file": "tool-shovel.glb"
+  },
+  "KPirate_tower_base_door": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    221,
+    249,
+    140
+   ],
+   "tris": 130,
+   "file": "tower-base-door.glb"
+  },
+  "KPirate_tower_base": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    221,
+    221,
+    140
+   ],
+   "tris": 44,
+   "file": "tower-base.glb"
+  },
+  "KPirate_tower_complete_large": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    254,
+    254,
+    716
+   ],
+   "tris": 604,
+   "file": "tower-complete-large.glb"
+  },
+  "KPirate_tower_complete_small": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    235,
+    256,
+    475
+   ],
+   "tris": 650,
+   "file": "tower-complete-small.glb"
+  },
+  "KPirate_tower_middle_windows": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    198,
+    215,
+    140
+   ],
+   "tris": 242,
+   "file": "tower-middle-windows.glb"
+  },
+  "KPirate_tower_middle": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    214,
+    214,
+    140
+   ],
+   "tris": 210,
+   "file": "tower-middle.glb"
+  },
+  "KPirate_tower_roof": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    254,
+    254,
+    241
+   ],
+   "tris": 110,
+   "file": "tower-roof.glb"
+  },
+  "KPirate_tower_top": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    235,
+    235,
+    195
+   ],
+   "tris": 334,
+   "file": "tower-top.glb"
+  },
+  "KPirate_tower_watch": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    213,
+    213,
+    195
+   ],
+   "tris": 248,
+   "file": "tower-watch.glb"
+  }
+ },
+ "skipped": []
+}

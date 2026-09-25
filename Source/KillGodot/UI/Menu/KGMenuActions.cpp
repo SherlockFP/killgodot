@@ -339,6 +339,15 @@ namespace KGMenu
 			Morrowmere.bAvailable = true;
 			Maps.Add(Morrowmere);
 
+			// Map 2 "Storm Manor" (SPRINT-018: Docs/Level/StormManor_Plan.md, Tools/Unreal/kg_build_stormmanor_all.ps1).
+			FKGMapEntry Manor;
+			Manor.DisplayName = LOCTEXT("MapStormManor", "Storm Manor");
+			Manor.Mode = LOCTEXT("ModeClassic", "Classic");
+			Manor.Description = LOCTEXT("MapStormManorDesc", "A storm-locked manor on a rock off the coast \u00B7 6-20 players");
+			Manor.MapPath = TEXT("/Game/KillGodot/Maps/L_StormManor");
+			Manor.bAvailable = true;
+			Maps.Add(Manor);
+
 			// The first village (Tools/Unreal/kg_build_village.py), kept selectable.
 			FKGMapEntry Classic;
 			Classic.DisplayName = LOCTEXT("MapMorrowmereClassic", "Morrowmere (Classic)");

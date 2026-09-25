@@ -841,7 +841,7 @@ def _outside_stair(f, side, ex, ey):
     f.put(V + "Stairs_Exterior_Platform", xo, y_top, 0.0, 0.0, "V2/Facade", scale=(1.0, 1.0, 3.0), tinted=False)
 
 DL = "/Game/KillGodot/Env/Dress/KG_DressLandmarks_Clean/StaticMeshes/SM_KG_"   # SPRINT-022 landmark pack
-CLOCK_MINUTE_S = 120.0      # seconds per turn of the minute hand (KGSpinner; see the S22 proposal for match-clock drive)
+CLOCK_MINUTE_S = 120.0      # idle turn rate (lobby); in a match AKGSpinner drives ClockHand_* meshes from the match clock
 
 
 def spinner(path, x, y, z, yaw, rate, folder, label=None):

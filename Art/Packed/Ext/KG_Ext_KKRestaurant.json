@@ -1,0 +1,1591 @@
+{
+ "tag": "KKRestaurant",
+ "source": "D:/Kill Godot/Art/Source/KayKit_RestaurantBits/KayKit_Restaurant_Bits_1.0_FREE",
+ "props": {
+  "KKRestaurant_bowl": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    71,
+    71,
+    23
+   ],
+   "tris": 256,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/bowl.gltf"
+  },
+  "KKRestaurant_bowl_dirty": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    71,
+    71,
+    23
+   ],
+   "tris": 319,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/bowl_dirty.gltf"
+  },
+  "KKRestaurant_bowl_small": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    56,
+    56,
+    23
+   ],
+   "tris": 256,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/bowl_small.gltf"
+  },
+  "KKRestaurant_chair_A": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    56,
+    60,
+    91
+   ],
+   "tris": 428,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/chair_A.gltf"
+  },
+  "KKRestaurant_chair_B": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    56,
+    60,
+    91
+   ],
+   "tris": 428,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/chair_B.gltf"
+  },
+  "KKRestaurant_chair_stool": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    56,
+    56,
+    38
+   ],
+   "tris": 272,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/chair_stool.gltf"
+  },
+  "KKRestaurant_crate": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    150,
+    150,
+    60
+   ],
+   "tris": 132,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/crate.gltf"
+  },
+  "KKRestaurant_crate_buns": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    150,
+    150,
+    60
+   ],
+   "tris": 2772,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/crate_buns.gltf"
+  },
+  "KKRestaurant_crate_carrots": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    150,
+    150,
+    71
+   ],
+   "tris": 1752,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/crate_carrots.gltf"
+  },
+  "KKRestaurant_crate_cheese": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    150,
+    150,
+    71
+   ],
+   "tris": 1164,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/crate_cheese.gltf"
+  },
+  "KKRestaurant_crate_ham": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    150,
+    150,
+    67
+   ],
+   "tris": 676,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/crate_ham.gltf"
+  },
+  "KKRestaurant_crate_lettuce": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    150,
+    150,
+    75
+   ],
+   "tris": 1980,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/crate_lettuce.gltf"
+  },
+  "KKRestaurant_crate_lid": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    150,
+    150,
+    15
+   ],
+   "tris": 164,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/crate_lid.gltf"
+  },
+  "KKRestaurant_crate_onions": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    150,
+    150,
+    69
+   ],
+   "tris": 1652,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/crate_onions.gltf"
+  },
+  "KKRestaurant_crate_potatoes": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    150,
+    150,
+    72
+   ],
+   "tris": 1068,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/crate_potatoes.gltf"
+  },
+  "KKRestaurant_crate_steak": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    150,
+    150,
+    66
+   ],
+   "tris": 1188,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/crate_steak.gltf"
+  },
+  "KKRestaurant_crate_tomatoes": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    150,
+    150,
+    69
+   ],
+   "tris": 2072,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/crate_tomatoes.gltf"
+  },
+  "KKRestaurant_cuttingboard": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    112,
+    75,
+    11
+   ],
+   "tris": 38,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/cuttingboard.gltf"
+  },
+  "KKRestaurant_dishrack": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    90,
+    90,
+    45
+   ],
+   "tris": 240,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/dishrack.gltf"
+  },
+  "KKRestaurant_dishrack_plates": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    90,
+    90,
+    82
+   ],
+   "tris": 880,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/dishrack_plates.gltf"
+  },
+  "KKRestaurant_door_A": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    120,
+    58,
+    210
+   ],
+   "tris": 188,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/door_A.gltf"
+  },
+  "KKRestaurant_door_B": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    120,
+    58,
+    210
+   ],
+   "tris": 188,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/door_B.gltf"
+  },
+  "KKRestaurant_extractorhood": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    150,
+    121,
+    150
+   ],
+   "tris": 204,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/extractorhood.gltf"
+  },
+  "KKRestaurant_floor_kitchen": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    300,
+    300,
+    38
+   ],
+   "tris": 48,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/floor_kitchen.gltf"
+  },
+  "KKRestaurant_floor_kitchen_small": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    150,
+    150,
+    38
+   ],
+   "tris": 48,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/floor_kitchen_small.gltf"
+  },
+  "KKRestaurant_food_burger": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    71,
+    71,
+    64
+   ],
+   "tris": 1622,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/food_burger.gltf"
+  },
+  "KKRestaurant_food_dinner": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    78,
+    71,
+    68
+   ],
+   "tris": 1196,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/food_dinner.gltf"
+  },
+  "KKRestaurant_food_ingredient_bun": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    52,
+    52,
+    38
+   ],
+   "tris": 440,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/food_ingredient_bun.gltf"
+  },
+  "KKRestaurant_food_ingredient_bun_bottom": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    52,
+    52,
+    15
+   ],
+   "tris": 152,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/food_ingredient_bun_bottom.gltf"
+  },
+  "KKRestaurant_food_ingredient_bun_top": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    52,
+    52,
+    23
+   ],
+   "tris": 320,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/food_ingredient_bun_top.gltf"
+  },
+  "KKRestaurant_food_ingredient_burger_cooked": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    52,
+    52,
+    15
+   ],
+   "tris": 208,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/food_ingredient_burger_cooked.gltf"
+  },
+  "KKRestaurant_food_ingredient_burger_trash": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    52,
+    52,
+    15
+   ],
+   "tris": 208,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/food_ingredient_burger_trash.gltf"
+  },
+  "KKRestaurant_food_ingredient_burger_uncooked": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    52,
+    52,
+    15
+   ],
+   "tris": 208,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/food_ingredient_burger_uncooked.gltf"
+  },
+  "KKRestaurant_food_ingredient_carrot": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    42,
+    41,
+    95
+   ],
+   "tris": 324,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/food_ingredient_carrot.gltf"
+  },
+  "KKRestaurant_food_ingredient_carrot_chopped": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    42,
+    42
+   ],
+   "tris": 534,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/food_ingredient_carrot_chopped.gltf"
+  },
+  "KKRestaurant_food_ingredient_carrot_pieces": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    41,
+    54,
+    24
+   ],
+   "tris": 576,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/food_ingredient_carrot_pieces.gltf"
+  },
+  "KKRestaurant_food_ingredient_cheese": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    73,
+    54,
+    38
+   ],
+   "tris": 258,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/food_ingredient_cheese.gltf"
+  },
+  "KKRestaurant_food_ingredient_cheese_chopped": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    77,
+    54,
+    38
+   ],
+   "tris": 254,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/food_ingredient_cheese_chopped.gltf"
+  },
+  "KKRestaurant_food_ingredient_cheese_slice": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    62,
+    62,
+    8
+   ],
+   "tris": 54,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/food_ingredient_cheese_slice.gltf"
+  },
+  "KKRestaurant_food_ingredient_ham": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    104,
+    62,
+    62
+   ],
+   "tris": 272,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/food_ingredient_ham.gltf"
+  },
+  "KKRestaurant_food_ingredient_ham_cooked": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    104,
+    62,
+    62
+   ],
+   "tris": 272,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/food_ingredient_ham_cooked.gltf"
+  },
+  "KKRestaurant_food_ingredient_ham_trash": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    104,
+    62,
+    62
+   ],
+   "tris": 272,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/food_ingredient_ham_trash.gltf"
+  },
+  "KKRestaurant_food_ingredient_lettuce": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    83,
+    85,
+    62
+   ],
+   "tris": 462,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/food_ingredient_lettuce.gltf"
+  },
+  "KKRestaurant_food_ingredient_lettuce_chopped": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    135,
+    91,
+    61
+   ],
+   "tris": 462,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/food_ingredient_lettuce_chopped.gltf"
+  },
+  "KKRestaurant_food_ingredient_lettuce_slice": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    61,
+    61,
+    7
+   ],
+   "tris": 124,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/food_ingredient_lettuce_slice.gltf"
+  },
+  "KKRestaurant_food_ingredient_onion": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    56,
+    56,
+    65
+   ],
+   "tris": 304,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/food_ingredient_onion.gltf"
+  },
+  "KKRestaurant_food_ingredient_onion_chopped": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    92,
+    56,
+    56
+   ],
+   "tris": 704,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/food_ingredient_onion_chopped.gltf"
+  },
+  "KKRestaurant_food_ingredient_onion_rings": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    58,
+    55,
+    8
+   ],
+   "tris": 384,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/food_ingredient_onion_rings.gltf"
+  },
+  "KKRestaurant_food_ingredient_potato": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    45,
+    51,
+    59
+   ],
+   "tris": 156,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/food_ingredient_potato.gltf"
+  },
+  "KKRestaurant_food_ingredient_potato_chopped": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    78,
+    53,
+    45
+   ],
+   "tris": 308,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/food_ingredient_potato_chopped.gltf"
+  },
+  "KKRestaurant_food_ingredient_potato_mashed": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    45,
+    48,
+    16
+   ],
+   "tris": 32,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/food_ingredient_potato_mashed.gltf"
+  },
+  "KKRestaurant_food_ingredient_steak": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    79,
+    68,
+    21
+   ],
+   "tris": 352,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/food_ingredient_steak.gltf"
+  },
+  "KKRestaurant_food_ingredient_steak_pieces": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    49,
+    47,
+    33
+   ],
+   "tris": 264,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/food_ingredient_steak_pieces.gltf"
+  },
+  "KKRestaurant_food_ingredient_tomato": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    56,
+    56,
+    53
+   ],
+   "tris": 388,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/food_ingredient_tomato.gltf"
+  },
+  "KKRestaurant_food_ingredient_tomato_slice": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    49,
+    49,
+    7
+   ],
+   "tris": 220,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/food_ingredient_tomato_slice.gltf"
+  },
+  "KKRestaurant_food_ingredient_tomato_slices": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    57,
+    49,
+    22
+   ],
+   "tris": 476,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/food_ingredient_tomato_slices.gltf"
+  },
+  "KKRestaurant_food_ingredient_vegetableburger_cooked": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    55,
+    54,
+    16
+   ],
+   "tris": 338,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/food_ingredient_vegetableburger_cooked.gltf"
+  },
+  "KKRestaurant_food_ingredient_vegetableburger_uncooked": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    55,
+    54,
+    16
+   ],
+   "tris": 338,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/food_ingredient_vegetableburger_uncooked.gltf"
+  },
+  "KKRestaurant_food_stew": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    71,
+    71,
+    28
+   ],
+   "tris": 560,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/food_stew.gltf"
+  },
+  "KKRestaurant_food_vegetableburger": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    71,
+    71,
+    64
+   ],
+   "tris": 1698,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/food_vegetableburger.gltf"
+  },
+  "KKRestaurant_fridge_A": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    150,
+    168,
+    188
+   ],
+   "tris": 612,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/fridge_A.gltf"
+  },
+  "KKRestaurant_fridge_A_decorated": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    150,
+    168,
+    188
+   ],
+   "tris": 2396,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/fridge_A_decorated.gltf"
+  },
+  "KKRestaurant_fridge_B": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    150,
+    168,
+    188
+   ],
+   "tris": 426,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/fridge_B.gltf"
+  },
+  "KKRestaurant_jar_A_large": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    38,
+    38,
+    56
+   ],
+   "tris": 168,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/jar_A_large.gltf"
+  },
+  "KKRestaurant_jar_A_medium": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    38,
+    38,
+    49
+   ],
+   "tris": 188,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/jar_A_medium.gltf"
+  },
+  "KKRestaurant_jar_A_small": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    42,
+    42,
+    41
+   ],
+   "tris": 192,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/jar_A_small.gltf"
+  },
+  "KKRestaurant_jar_B_large": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    38,
+    38,
+    56
+   ],
+   "tris": 168,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/jar_B_large.gltf"
+  },
+  "KKRestaurant_jar_B_medium": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    38,
+    38,
+    49
+   ],
+   "tris": 188,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/jar_B_medium.gltf"
+  },
+  "KKRestaurant_jar_B_small": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    42,
+    42,
+    41
+   ],
+   "tris": 192,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/jar_B_small.gltf"
+  },
+  "KKRestaurant_jar_C_large": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    38,
+    38,
+    56
+   ],
+   "tris": 168,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/jar_C_large.gltf"
+  },
+  "KKRestaurant_jar_C_medium": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    38,
+    38,
+    49
+   ],
+   "tris": 188,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/jar_C_medium.gltf"
+  },
+  "KKRestaurant_jar_C_small": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    42,
+    42,
+    41
+   ],
+   "tris": 192,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/jar_C_small.gltf"
+  },
+  "KKRestaurant_jar_D_large": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    38,
+    38,
+    56
+   ],
+   "tris": 168,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/jar_D_large.gltf"
+  },
+  "KKRestaurant_jar_D_medium": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    38,
+    38,
+    49
+   ],
+   "tris": 188,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/jar_D_medium.gltf"
+  },
+  "KKRestaurant_jar_D_small": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    42,
+    42,
+    41
+   ],
+   "tris": 192,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/jar_D_small.gltf"
+  },
+  "KKRestaurant_ketchup": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    23,
+    23,
+    58
+   ],
+   "tris": 168,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/ketchup.gltf"
+  },
+  "KKRestaurant_kitchencabinet": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    150,
+    78,
+    150
+   ],
+   "tris": 156,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/kitchencabinet.gltf"
+  },
+  "KKRestaurant_kitchencabinet_corner": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    150,
+    150,
+    150
+   ],
+   "tris": 172,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/kitchencabinet_corner.gltf"
+  },
+  "KKRestaurant_kitchencabinet_corner_half": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    150,
+    150,
+    75
+   ],
+   "tris": 172,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/kitchencabinet_corner_half.gltf"
+  },
+  "KKRestaurant_kitchencabinet_half": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    150,
+    78,
+    75
+   ],
+   "tris": 156,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/kitchencabinet_half.gltf"
+  },
+  "KKRestaurant_kitchencounter_innercorner": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    150,
+    150,
+    75
+   ],
+   "tris": 38,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/kitchencounter_innercorner.gltf"
+  },
+  "KKRestaurant_kitchencounter_innercorner_backsplash": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    150,
+    150,
+    90
+   ],
+   "tris": 56,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/kitchencounter_innercorner_backsplash.gltf"
+  },
+  "KKRestaurant_kitchencounter_outercorner": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    150,
+    150,
+    75
+   ],
+   "tris": 38,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/kitchencounter_outercorner.gltf"
+  },
+  "KKRestaurant_kitchencounter_outercorner_backsplash": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    150,
+    150,
+    90
+   ],
+   "tris": 56,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/kitchencounter_outercorner_backsplash.gltf"
+  },
+  "KKRestaurant_kitchencounter_sink": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    150,
+    153,
+    135
+   ],
+   "tris": 674,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/kitchencounter_sink.gltf"
+  },
+  "KKRestaurant_kitchencounter_sink_backsplash": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    150,
+    153,
+    135
+   ],
+   "tris": 686,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/kitchencounter_sink_backsplash.gltf"
+  },
+  "KKRestaurant_kitchencounter_straight_A": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    150,
+    153,
+    75
+   ],
+   "tris": 168,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/kitchencounter_straight_A.gltf"
+  },
+  "KKRestaurant_kitchencounter_straight_A_backsplash": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    150,
+    153,
+    90
+   ],
+   "tris": 180,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/kitchencounter_straight_A_backsplash.gltf"
+  },
+  "KKRestaurant_kitchencounter_straight_A_decorated": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    150,
+    170,
+    157
+   ],
+   "tris": 1456,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/kitchencounter_straight_A_decorated.gltf"
+  },
+  "KKRestaurant_kitchencounter_straight_B": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    150,
+    153,
+    75
+   ],
+   "tris": 168,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/kitchencounter_straight_B.gltf"
+  },
+  "KKRestaurant_kitchencounter_straight_B_backsplash": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    150,
+    153,
+    90
+   ],
+   "tris": 180,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/kitchencounter_straight_B_backsplash.gltf"
+  },
+  "KKRestaurant_kitchencounter_straight_decorated": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    150,
+    153,
+    144
+   ],
+   "tris": 894,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/kitchencounter_straight_decorated.gltf"
+  },
+  "KKRestaurant_kitchentable_A": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    150,
+    150,
+    75
+   ],
+   "tris": 236,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/kitchentable_A.gltf"
+  },
+  "KKRestaurant_kitchentable_A_large": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    225,
+    150,
+    75
+   ],
+   "tris": 236,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/kitchentable_A_large.gltf"
+  },
+  "KKRestaurant_kitchentable_A_large_decorated": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    225,
+    150,
+    145
+   ],
+   "tris": 1996,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/kitchentable_A_large_decorated.gltf"
+  },
+  "KKRestaurant_kitchentable_B": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    150,
+    150,
+    75
+   ],
+   "tris": 236,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/kitchentable_B.gltf"
+  },
+  "KKRestaurant_kitchentable_B_large": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    225,
+    150,
+    75
+   ],
+   "tris": 236,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/kitchentable_B_large.gltf"
+  },
+  "KKRestaurant_kitchentable_sink": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    150,
+    150,
+    135
+   ],
+   "tris": 742,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/kitchentable_sink.gltf"
+  },
+  "KKRestaurant_kitchentable_sink_large": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    225,
+    150,
+    135
+   ],
+   "tris": 846,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/kitchentable_sink_large.gltf"
+  },
+  "KKRestaurant_kitchentable_sink_large_decorated": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    225,
+    150,
+    146
+   ],
+   "tris": 2589,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/kitchentable_sink_large_decorated.gltf"
+  },
+  "KKRestaurant_knife": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    19,
+    8,
+    86
+   ],
+   "tris": 104,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/knife.gltf"
+  },
+  "KKRestaurant_lid_A": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    75,
+    75,
+    15
+   ],
+   "tris": 200,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/lid_A.gltf"
+  },
+  "KKRestaurant_lid_B": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    75,
+    75,
+    15
+   ],
+   "tris": 200,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/lid_B.gltf"
+  },
+  "KKRestaurant_lid_large": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    112,
+    90,
+    22
+   ],
+   "tris": 200,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/lid_large.gltf"
+  },
+  "KKRestaurant_menu": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    38,
+    23,
+    60
+   ],
+   "tris": 108,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/menu.gltf"
+  },
+  "KKRestaurant_mustard": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    23,
+    23,
+    58
+   ],
+   "tris": 168,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/mustard.gltf"
+  },
+  "KKRestaurant_oven": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    150,
+    176,
+    151
+   ],
+   "tris": 542,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/oven.gltf"
+  },
+  "KKRestaurant_pan_006": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    56,
+    96,
+    26
+   ],
+   "tris": 278,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/pan_006.gltf"
+  },
+  "KKRestaurant_pan_A": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    75,
+    112,
+    19
+   ],
+   "tris": 310,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/pan_A.gltf"
+  },
+  "KKRestaurant_pan_B": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    75,
+    112,
+    19
+   ],
+   "tris": 310,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/pan_B.gltf"
+  },
+  "KKRestaurant_papertowel": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    38,
+    38,
+    69
+   ],
+   "tris": 228,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/papertowel.gltf"
+  },
+  "KKRestaurant_pillar_A": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    45,
+    45,
+    307
+   ],
+   "tris": 44,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/pillar_A.gltf"
+  },
+  "KKRestaurant_pillar_B": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    75,
+    75,
+    307
+   ],
+   "tris": 44,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/pillar_B.gltf"
+  },
+  "KKRestaurant_plate": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    71,
+    71,
+    7
+   ],
+   "tris": 160,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/plate.gltf"
+  },
+  "KKRestaurant_plate_dirty": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    71,
+    71,
+    7
+   ],
+   "tris": 262,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/plate_dirty.gltf"
+  },
+  "KKRestaurant_plate_small": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    56,
+    56,
+    7
+   ],
+   "tris": 120,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/plate_small.gltf"
+  },
+  "KKRestaurant_pot_A": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    105,
+    75,
+    38
+   ],
+   "tris": 324,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/pot_A.gltf"
+  },
+  "KKRestaurant_pot_A_stew": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    105,
+    75,
+    39
+   ],
+   "tris": 612,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/pot_A_stew.gltf"
+  },
+  "KKRestaurant_pot_B": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    105,
+    75,
+    38
+   ],
+   "tris": 324,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/pot_B.gltf"
+  },
+  "KKRestaurant_pot_B_stew": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    105,
+    75,
+    39
+   ],
+   "tris": 612,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/pot_B_stew.gltf"
+  },
+  "KKRestaurant_pot_large": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    150,
+    90,
+    56
+   ],
+   "tris": 388,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/pot_large.gltf"
+  },
+  "KKRestaurant_shelf_papertowel": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    150,
+    45,
+    79
+   ],
+   "tris": 284,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/shelf_papertowel.gltf"
+  },
+  "KKRestaurant_shelf_papertowel_decorated": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    150,
+    47,
+    128
+   ],
+   "tris": 832,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/shelf_papertowel_decorated.gltf"
+  },
+  "KKRestaurant_stew_bowl": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    59,
+    59,
+    19
+   ],
+   "tris": 304,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/stew_bowl.gltf"
+  },
+  "KKRestaurant_stew_pot": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    55,
+    55,
+    19
+   ],
+   "tris": 304,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/stew_pot.gltf"
+  },
+  "KKRestaurant_stove_multi": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    150,
+    172,
+    90
+   ],
+   "tris": 1084,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/stove_multi.gltf"
+  },
+  "KKRestaurant_stove_multi_countertop": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    131,
+    131,
+    20
+   ],
+   "tris": 708,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/stove_multi_countertop.gltf"
+  },
+  "KKRestaurant_stove_multi_decorated": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    165,
+    172,
+    129
+   ],
+   "tris": 2270,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/stove_multi_decorated.gltf"
+  },
+  "KKRestaurant_stove_single": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    150,
+    172,
+    91
+   ],
+   "tris": 680,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/stove_single.gltf"
+  },
+  "KKRestaurant_stove_single_countertop": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    131,
+    131,
+    21
+   ],
+   "tris": 304,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/stove_single_countertop.gltf"
+  },
+  "KKRestaurant_table_round_A": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    225,
+    225,
+    75
+   ],
+   "tris": 312,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/table_round_A.gltf"
+  },
+  "KKRestaurant_table_round_A_decorated": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    225,
+    225,
+    139
+   ],
+   "tris": 4422,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/table_round_A_decorated.gltf"
+  },
+  "KKRestaurant_table_round_A_small": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    112,
+    112,
+    75
+   ],
+   "tris": 312,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/table_round_A_small.gltf"
+  },
+  "KKRestaurant_table_round_A_small_decorated": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    112,
+    112,
+    135
+   ],
+   "tris": 756,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/table_round_A_small_decorated.gltf"
+  },
+  "KKRestaurant_table_round_B": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    225,
+    225,
+    75
+   ],
+   "tris": 300,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/table_round_B.gltf"
+  },
+  "KKRestaurant_towelrail": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    120,
+    35,
+    44
+   ],
+   "tris": 180,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/towelrail.gltf"
+  },
+  "KKRestaurant_wall": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    300,
+    38,
+    300
+   ],
+   "tris": 76,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/wall.gltf"
+  },
+  "KKRestaurant_wall_decorated": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    300,
+    218,
+    300
+   ],
+   "tris": 3880,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/wall_decorated.gltf"
+  },
+  "KKRestaurant_wall_doorway": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    300,
+    38,
+    300
+   ],
+   "tris": 162,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/wall_doorway.gltf"
+  },
+  "KKRestaurant_wall_half": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    150,
+    38,
+    300
+   ],
+   "tris": 76,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/wall_half.gltf"
+  },
+  "KKRestaurant_wall_orderwindow": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    300,
+    68,
+    300
+   ],
+   "tris": 206,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/wall_orderwindow.gltf"
+  },
+  "KKRestaurant_wall_orderwindow_decorated": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    300,
+    68,
+    300
+   ],
+   "tris": 650,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/wall_orderwindow_decorated.gltf"
+  },
+  "KKRestaurant_wall_window_closed": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    300,
+    38,
+    300
+   ],
+   "tris": 196,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/wall_window_closed.gltf"
+  },
+  "KKRestaurant_wall_window_open": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    300,
+    38,
+    300
+   ],
+   "tris": 192,
+   "file": "KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/wall_window_open.gltf"
+  }
+ },
+ "skipped": []
+}

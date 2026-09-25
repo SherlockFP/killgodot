@@ -1,0 +1,249 @@
+{
+ "tag": "PPManor",
+ "source": "D:/Kill Godot/Art/Source/PolyPizza_Manor",
+ "props": {
+  "PPManor_AngelStatue_6v4CL0nKfT": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    248,
+    351,
+    381
+   ],
+   "tris": 1673,
+   "file": "AngelStatue_6v4CL0nKfT.glb"
+  },
+  "PPManor_Armchair_myd1WSucAz": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    59,
+    54,
+    72
+   ],
+   "tris": 162,
+   "file": "Armchair_myd1WSucAz.glb"
+  },
+  "PPManor_Armor_Golden_65ltdmlBcy": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    154,
+    76,
+    120
+   ],
+   "tris": 1040,
+   "file": "Armor_Golden_65ltdmlBcy.glb"
+  },
+  "PPManor_Bathtub_2MbbdwbTjt": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    142,
+    63,
+    79
+   ],
+   "tris": 474,
+   "file": "Bathtub_2MbbdwbTjt.glb"
+  },
+  "PPManor_Bathtub_kVFRyNEn4F": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    119,
+    56,
+    42
+   ],
+   "tris": 602,
+   "file": "Bathtub_kVFRyNEn4F.glb"
+  },
+  "PPManor_Bookcase_with_Books_tACDGJ4CGW": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    184,
+    66,
+    337
+   ],
+   "tris": 10948,
+   "file": "Bookcase_with_Books_tACDGJ4CGW.glb"
+  },
+  "PPManor_Cauldron_QaWJOPa6Gt": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    36,
+    30,
+    25
+   ],
+   "tris": 1238,
+   "file": "Cauldron_QaWJOPa6Gt.glb"
+  },
+  "PPManor_Ceiling_Lamp_OTJPOdps4p": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    160,
+    156,
+    141
+   ],
+   "tris": 1192,
+   "file": "Ceiling_Lamp_OTJPOdps4p.glb"
+  },
+  "PPManor_Chandelier_RPLTkXHOOM": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    76,
+    76,
+    67
+   ],
+   "tris": 1204,
+   "file": "Chandelier_RPLTkXHOOM.glb"
+  },
+  "PPManor_Coffin_ySERERWPgE": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    200,
+    300,
+    90
+   ],
+   "tris": 2064,
+   "file": "Coffin_ySERERWPgE.glb"
+  },
+  "PPManor_Couch_Small_ZOPP3KzNIk": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    289,
+    220,
+    191
+   ],
+   "tris": 852,
+   "file": "Couch_Small_ZOPP3KzNIk.glb"
+  },
+  "PPManor_Fireplace_nzxZYIOCIr": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    325,
+    116,
+    256
+   ],
+   "tris": 360,
+   "file": "Fireplace_nzxZYIOCIr.glb"
+  },
+  "PPManor_Globe_Y4Dof9b2p5": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    20,
+    17,
+    28
+   ],
+   "tris": 478,
+   "file": "Globe_Y4Dof9b2p5.glb"
+  },
+  "PPManor_Grandfathers_Clock_09YKIkFZnA": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    30,
+    22,
+    136
+   ],
+   "tris": 547,
+   "file": "Grandfathers_Clock_09YKIkFZnA.glb"
+  },
+  "PPManor_Horse_Statue_AK9CmjFnL6": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    174,
+    338,
+    585
+   ],
+   "tris": 1849,
+   "file": "Horse_Statue_AK9CmjFnL6.glb"
+  },
+  "PPManor_Light_Chandelier_q3k8I8YYX9": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    81,
+    81,
+    52
+   ],
+   "tris": 972,
+   "file": "Light_Chandelier_q3k8I8YYX9.glb"
+  },
+  "PPManor_Lute_q3IXa6QH1C": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    50,
+    31,
+    133
+   ],
+   "tris": 710,
+   "file": "Lute_q3IXa6QH1C.glb"
+  },
+  "PPManor_Mannequin_tYwjQJvcFX": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    251,
+    181,
+    901
+   ],
+   "tris": 462,
+   "file": "Mannequin_tYwjQJvcFX.glb"
+  },
+  "PPManor_Painting_rsZqX75a8x": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    12,
+    75,
+    90
+   ],
+   "tris": 388,
+   "file": "Painting_rsZqX75a8x.glb"
+  },
+  "PPManor_Rug_7H5qKjuxVY": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    213,
+    309,
+    4
+   ],
+   "tris": 108,
+   "file": "Rug_7H5qKjuxVY.glb"
+  },
+  "PPManor_Statue_gieXYyUTYr": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    85,
+    137,
+    159
+   ],
+   "tris": 758,
+   "file": "Statue_gieXYyUTYr.glb"
+  },
+  "PPManor_Telescope_RjyTCQvA8b": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    51,
+    59,
+    95
+   ],
+   "tris": 734,
+   "file": "Telescope_RjyTCQvA8b.glb"
+  }
+ },
+ "skipped": []
+}

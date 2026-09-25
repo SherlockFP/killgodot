@@ -6,6 +6,32 @@
 - **Renk:** krem parşömen zemin, koyu mürekkep metin, vurgu için Fener Işığı turuncusu. Sabırsız UI'ı kırmızı, hayalet UI'ı camgöbeği.
 - **Hareket:** her şey yaylanarak açılır (spring easing), 150–250 ms. Butonlar hover'da hafifçe büyür ve "tahta tık" sesi çıkarır. Sayfalar kitap sayfası çevirir gibi geçer.
 
+## 1.1 Stil sayfası (SPRINT-025, `Source/KillGodot/UI/KGUITokens.h`)
+Tek görsel dil: maç içi HUD (`UI/KGHUD.cpp`, canvas), görev paneli (`Chores/UI`, Slate) ve ön yüz (`UI/Menu`, Slate)
+renk rollerini, yazı ölçeğini, boşluk ızgarasını, köşe yarıçaplarını ve hareketi **aynı başlıktan** okur; bir değişiklik
+her yere birden iner.
+
+| Rol | Değer | Nerede |
+|---|---|---|
+| `Ink` / `Night` / `Panel` / `PanelHi` | `#120D17` / `#1D1524` / `#2A1F31` / `#3A2B42` | kart zemini (üst→alt gradyan), satırlar |
+| `Cream` / `CreamDim` / `Muted` | `#F6E7C8` / `#CDBB98` / `#8E7D6E` | metin, ikincil metin, başlık altı |
+| `Gold` / `GoldLight` | `#F2C230` / `#FFE096` | pirinç: odak, saat, tuş kapağı halkası, çubuk üstü |
+| `Lantern` | `#F28C28` | **görev işaretçileri**, izleyicideki aktif satır, kart üst şeridi |
+| `Good` / `GoodLight` | `#8BD160` / `#AAECA0` | bitti, hazırlık çubuğu |
+| `Crimson` / `CrimsonText` | `#C8102E` / `#FF485E` | Sabırsız, hasar, uyarı |
+| `Ghost`, `Neutral`, `Night2`, `Dawn`, `Water` | `#4FD1C5`, `#B696F2`, `#8CACFF`, `#FF925C`, `#3FA7D6` | hayalet, tarafsız, gece, şafak, sıvı / eşya işaretçisi |
+
+- **Yazı ölçeği (1080p px, Roboto):** Display 38 (saat) · Title 24 (faz adı, kart başlığı) · Heading 19 (satırlar,
+  E ipucu) · Body 16 (adım satırı) · Caption 13 büyük harf, 2.5 aralık (`CHORES`, `VILLAGE PREPARATION`) · Micro 11 (etiket).
+- **Boşluk ızgarası:** 8 px. Ekran kenarından karta 24, kartlar arası 16, kart içi 20, liste satırı 36.
+- **Şekil:** kart köşesi 18, iç kutu 12, tuş kapağı 6; kartlar %72 saydam alacakaranlık, hap ipuçları %62.
+- **Hareket:** giriş 0.25 sn ease-out-back (küçük yaylanma), çıkış 0.18 sn ease-out-cubic, toast 2.5 sn.
+- **Yerleşim tablosu:** `UI/KGHudLayout.h::Compute(W, H, satır, hazırlık)` sabit kartların dikdörtgenlerini verir
+  (izleyici, faz kartı, pusula, mini harita, can, kese, rol çipi, ipucu). HUD bu dikdörtgenlerden çizer;
+  `KillGodot.HUD.Layout` testi 1280×720'den 3440×1440'a kadar hiçbirinin taşmadığını / çakışmadığını kanıtlar.
+- **Ekran görüntüsü:** `Tools/Unreal/kg_hud_shots.ps1 -Sizes "1280x720 1920x1080" -Tag after` → `Saved/Screenshots/HUD/`
+  (yakın / orta / uzak / arkada işaretçi, M basılı büyük harita, M dokunma tam harita, demo durumları).
+
 ## 2. Popup ve bildirimler ("güzel gözükmeli")
 | Tip | Görünüm |
 |---|---|
@@ -239,6 +265,30 @@ Tasarım ve liste: `01_GDD_Core.md §8.1`. Ekran (`SKGChorePanel`):
 - **İstasyon ipucu:** mini oyunlu istasyonda saniye yazmaz; yarım kalan çok aşamalıda "(continue 2/3)".
 - **Ekran görüntüsü:** `kg.ChoreShot all` (ekran dışı, `-game -RenderOffScreen`) → `Saved/UIShots/chore_<Id>_s<Aşama>_<W>x<H>.png`;
   `Tools/Unreal/kg_chore_shots.ps1 -What all`.
+
+### 6.3.1 Görev görünürlüğü, tek E ipucu ve M basılı büyük harita (SPRINT-025)
+Kullanıcı: "görevler basit ve görünür olsun; M basılı tutunca harita büyüsün; UI çok kötü."
+- **Dünya işaretçisi** (`UI/KGHUDChoreMarkers.inl`): her açık görevin **şimdiki adımı** için istasyonun / eşyanın
+  üstünde fener turuncusu bir raptiye + altında metre (`12 m`). Uzaklıkla küçülür (6 m'de tam, 60 m'de %55), zemine
+  yumuşak bir parıltı düşer (post-process yok, kod çizimi). Ekran dışında ya da arkandayken merkezden çıkan ışın
+  boyunca kenara kenetlenir ve ok olur (üst kartlar ve can kartı için 150 px'lik bant boş bırakılır). En yakın
+  / çalışılan görev "yanar": adım adı raptiyenin üstünde. Görev paneli açıkken, toplantı ve yargılamada çizilmez.
+  Sabırsız'ın sahte görevleri aynı listelerden geçer: işaretçi ve satır bire bir aynıdır, kimse başkasınınkini görmez.
+- **Görev izleyici** (sol üst): `CHORES 1 / 4` + yeşil ilerleme; her görev **tek kısa satır**:
+  `[durum] Ad · sonraki adım ……… 12 m`. Panel görevlerinde adım = aşama adı (`Crank 1/2`), dünya görevlerinde adım
+  etiketi (`Carry the bucket to the trough 1/2`, `Pick up your bucket`). Aktif satır fener bandı + raptiye, bitmişler
+  yeşil tik + üstü çizili. Adım satırı yer kalmayınca "..." ile kısalır.
+- **Tek ipucu** (`DrawActionPrompt`): nişangâhın altında hap: **E tuş kapağı + etrafında ilerleme halkası + fiil**
+  (`E  Draw water`, çalışırken `E  Mend the nets  62%`). Tut-E istasyonu, panel istasyonu, dünya adımı (krank, kes,
+  dök, sabotaj) hepsi bu hap; aynı anda asla iki ipucu çizilmez.
+- **Kolay ayar** (`Chores/UI`): mini oyunlar cömert pencere / az tekrar; `KillGodot.Chores.Timing` testi her mini
+  oyunu betikli oyuncuyla (AutoPlay, 60 Hz, 3 tohum) oynatır: medyan ≤ 28 sn (+~12 sn yürüme = 40 sn hedefi) ve
+  sunucu tabanı (`StageMinSeconds × 0.9`) kusursuz oyuncudan hızlı olmalı. `KillGodot.Chores.FailKeepsStage`:
+  10 sn çöp girdi + sunucu reddi aşamayı asla geri almaz.
+- **M:** dokunma tam haritayı açıp kapar (eskisi gibi); **basılı tutma** (≥ 0.3 sn) büyük haritayı tuş basılıyken
+  gösterir, bırakınca mini haritaya döner (`UI/KGMapInput.h`, `KillGodot.HUD.MapInput`). Tam haritada her açık adım
+  raptiye + görev adı (aktif olan turuncu), sen, yerler, lejant; başlıkta `M  Close · hold to peek` /
+  `Release to close`. `kg.Map.Debug 1|2` ekran görüntüsü için basılı / açık zorlar.
 
 ### 6.4 Balık tutma HUD'u (`Source/KillGodot/UI/KGHUDFishing.inl`)
 Tasarım: `01_GDD_Core.md §15`. Hepsi canvas çizimi, `FKGPainter` paleti.

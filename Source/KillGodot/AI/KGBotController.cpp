@@ -992,7 +992,8 @@ bool AKGBotController::UpdateChores(float DeltaSeconds, const AKGGameState* GS)
 		double Best = TNumericLimits<double>::Max();
 		for (AKGTaskStation* Station : Open)
 		{
-			if (FailedChores.Contains(Station))
+			if (FailedChores.Contains(Station) ||
+			    (bFakedWorldChore && FKGWorldChoreCatalog::Get().IsWorldChore(Station->TaskId)))
 			{
 				continue;
 			}
@@ -1020,6 +1021,8 @@ bool AKGBotController::UpdateChores(float DeltaSeconds, const AKGGameState* GS)
 	{
 		if (WorldChores->BotDrive(this, ChoreTarget->TaskId, DeltaSeconds) == UKGWorldChoreComponent::EBot::Failed)
 		{
+			// A world chore is a long walk with an item in your arms: the Impatient fake one, then get back to hunting.
+			bFakedWorldChore = bFakedWorldChore || IsImpatient();
 			FailedChores.AddUnique(ChoreTarget);
 			ChoreTarget = nullptr;
 			StopMovement();

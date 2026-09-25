@@ -1,0 +1,700 @@
+{
+ "tag": "KKHalloween",
+ "source": "D:/Kill Godot/Art/Source/KayKit_HalloweenBits/KayKit_HalloweenBits_1.0_FREE/KayKit_HalloweenBits_1.0_FREE/Assets/gltf",
+ "props": {
+  "KKHalloween_arch": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    253,
+    46,
+    265
+   ],
+   "tris": 436,
+   "file": "arch.gltf"
+  },
+  "KKHalloween_arch_gate": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    253,
+    46,
+    265
+   ],
+   "tris": 856,
+   "file": "arch_gate.gltf"
+  },
+  "KKHalloween_bench": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    120,
+    45,
+    30
+   ],
+   "tris": 172,
+   "file": "bench.gltf"
+  },
+  "KKHalloween_bench_decorated": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    120,
+    61,
+    101
+   ],
+   "tris": 978,
+   "file": "bench_decorated.gltf"
+  },
+  "KKHalloween_bone_A": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    42,
+    12,
+    17
+   ],
+   "tris": 204,
+   "file": "bone_A.gltf"
+  },
+  "KKHalloween_bone_B": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    36,
+    17,
+    10
+   ],
+   "tris": 220,
+   "file": "bone_B.gltf"
+  },
+  "KKHalloween_bone_C": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    66,
+    12,
+    17
+   ],
+   "tris": 204,
+   "file": "bone_C.gltf"
+  },
+  "KKHalloween_candle": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    18,
+    18,
+    47
+   ],
+   "tris": 66,
+   "file": "candle.gltf"
+  },
+  "KKHalloween_candle_melted": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    18,
+    18,
+    38
+   ],
+   "tris": 66,
+   "file": "candle_melted.gltf"
+  },
+  "KKHalloween_candle_thin": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    10,
+    10,
+    47
+   ],
+   "tris": 66,
+   "file": "candle_thin.gltf"
+  },
+  "KKHalloween_candle_triple": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    27,
+    21,
+    47
+   ],
+   "tris": 198,
+   "file": "candle_triple.gltf"
+  },
+  "KKHalloween_coffin": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    120,
+    180,
+    79
+   ],
+   "tris": 316,
+   "file": "coffin.gltf"
+  },
+  "KKHalloween_coffin_decorated": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    120,
+    180,
+    54
+   ],
+   "tris": 2064,
+   "file": "coffin_decorated.gltf"
+  },
+  "KKHalloween_crypt": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    360,
+    480,
+    480
+   ],
+   "tris": 952,
+   "file": "crypt.gltf"
+  },
+  "KKHalloween_fence": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    240,
+    30,
+    132
+   ],
+   "tris": 380,
+   "file": "fence.gltf"
+  },
+  "KKHalloween_fence_broken": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    240,
+    30,
+    132
+   ],
+   "tris": 446,
+   "file": "fence_broken.gltf"
+  },
+  "KKHalloween_fence_gate": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    240,
+    30,
+    180
+   ],
+   "tris": 608,
+   "file": "fence_gate.gltf"
+  },
+  "KKHalloween_fence_pillar": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    30,
+    30,
+    132
+   ],
+   "tris": 94,
+   "file": "fence_pillar.gltf"
+  },
+  "KKHalloween_fence_pillar_broken": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    30,
+    30,
+    90
+   ],
+   "tris": 102,
+   "file": "fence_pillar_broken.gltf"
+  },
+  "KKHalloween_fence_seperate": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    240,
+    10,
+    120
+   ],
+   "tris": 312,
+   "file": "fence_seperate.gltf"
+  },
+  "KKHalloween_fence_seperate_broken": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    240,
+    10,
+    120
+   ],
+   "tris": 354,
+   "file": "fence_seperate_broken.gltf"
+  },
+  "KKHalloween_floor_dirt": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    240,
+    240,
+    32
+   ],
+   "tris": 120,
+   "file": "floor_dirt.gltf"
+  },
+  "KKHalloween_floor_dirt_grave": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    240,
+    240,
+    92
+   ],
+   "tris": 132,
+   "file": "floor_dirt_grave.gltf"
+  },
+  "KKHalloween_floor_dirt_small": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    120,
+    120,
+    32
+   ],
+   "tris": 80,
+   "file": "floor_dirt_small.gltf"
+  },
+  "KKHalloween_grave_A": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    120,
+    60,
+    128
+   ],
+   "tris": 323,
+   "file": "grave_A.gltf"
+  },
+  "KKHalloween_grave_A_destroyed": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    125,
+    68,
+    126
+   ],
+   "tris": 416,
+   "file": "grave_A_destroyed.gltf"
+  },
+  "KKHalloween_grave_B": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    120,
+    60,
+    132
+   ],
+   "tris": 190,
+   "file": "grave_B.gltf"
+  },
+  "KKHalloween_gravemarker_A": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    48,
+    17,
+    72
+   ],
+   "tris": 56,
+   "file": "gravemarker_A.gltf"
+  },
+  "KKHalloween_gravemarker_B": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    48,
+    25,
+    71
+   ],
+   "tris": 136,
+   "file": "gravemarker_B.gltf"
+  },
+  "KKHalloween_gravestone": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    84,
+    24,
+    96
+   ],
+   "tris": 271,
+   "file": "gravestone.gltf"
+  },
+  "KKHalloween_lantern_hanging": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    38,
+    38,
+    85
+   ],
+   "tris": 472,
+   "file": "lantern_hanging.gltf"
+  },
+  "KKHalloween_lantern_standing": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    38,
+    38,
+    56
+   ],
+   "tris": 264,
+   "file": "lantern_standing.gltf"
+  },
+  "KKHalloween_path_A": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    114,
+    113,
+    6
+   ],
+   "tris": 361,
+   "file": "path_A.gltf"
+  },
+  "KKHalloween_path_B": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    113,
+    111,
+    6
+   ],
+   "tris": 370,
+   "file": "path_B.gltf"
+  },
+  "KKHalloween_path_C": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    111,
+    111,
+    6
+   ],
+   "tris": 393,
+   "file": "path_C.gltf"
+  },
+  "KKHalloween_path_D": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    99,
+    102,
+    6
+   ],
+   "tris": 275,
+   "file": "path_D.gltf"
+  },
+  "KKHalloween_pillar": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    60,
+    60,
+    264
+   ],
+   "tris": 94,
+   "file": "pillar.gltf"
+  },
+  "KKHalloween_plaque": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    120,
+    120,
+    24
+   ],
+   "tris": 88,
+   "file": "plaque.gltf"
+  },
+  "KKHalloween_plaque_candles": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    120,
+    120,
+    68
+   ],
+   "tris": 418,
+   "file": "plaque_candles.gltf"
+  },
+  "KKHalloween_post": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    25,
+    94,
+    198
+   ],
+   "tris": 96,
+   "file": "post.gltf"
+  },
+  "KKHalloween_post_lantern": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    38,
+    94,
+    198
+   ],
+   "tris": 568,
+   "file": "post_lantern.gltf"
+  },
+  "KKHalloween_post_skull": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    49,
+    94,
+    198
+   ],
+   "tris": 776,
+   "file": "post_skull.gltf"
+  },
+  "KKHalloween_pumpkin_orange": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    60,
+    60,
+    42
+   ],
+   "tris": 306,
+   "file": "pumpkin_orange.gltf"
+  },
+  "KKHalloween_pumpkin_orange_jackolantern": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    90,
+    84,
+    78
+   ],
+   "tris": 374,
+   "file": "pumpkin_orange_jackolantern.gltf"
+  },
+  "KKHalloween_pumpkin_orange_small": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    36,
+    36,
+    33
+   ],
+   "tris": 322,
+   "file": "pumpkin_orange_small.gltf"
+  },
+  "KKHalloween_pumpkin_yellow": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    60,
+    60,
+    42
+   ],
+   "tris": 306,
+   "file": "pumpkin_yellow.gltf"
+  },
+  "KKHalloween_pumpkin_yellow_jackolantern": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    90,
+    84,
+    78
+   ],
+   "tris": 374,
+   "file": "pumpkin_yellow_jackolantern.gltf"
+  },
+  "KKHalloween_pumpkin_yellow_small": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    36,
+    36,
+    33
+   ],
+   "tris": 322,
+   "file": "pumpkin_yellow_small.gltf"
+  },
+  "KKHalloween_ribcage": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    51,
+    45,
+    51
+   ],
+   "tris": 1240,
+   "file": "ribcage.gltf"
+  },
+  "KKHalloween_shrine": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    66,
+    66,
+    144
+   ],
+   "tris": 94,
+   "file": "shrine.gltf"
+  },
+  "KKHalloween_shrine_candles": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    66,
+    66,
+    107
+   ],
+   "tris": 360,
+   "file": "shrine_candles.gltf"
+  },
+  "KKHalloween_skull": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    55,
+    54,
+    54
+   ],
+   "tris": 344,
+   "file": "skull.gltf"
+  },
+  "KKHalloween_skull_candle": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    55,
+    56,
+    71
+   ],
+   "tris": 542,
+   "file": "skull_candle.gltf"
+  },
+  "KKHalloween_tree_dead_large": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    138,
+    83,
+    304
+   ],
+   "tris": 256,
+   "file": "tree_dead_large.gltf"
+  },
+  "KKHalloween_tree_dead_large_decorated": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    138,
+    97,
+    325
+   ],
+   "tris": 1496,
+   "file": "tree_dead_large_decorated.gltf"
+  },
+  "KKHalloween_tree_dead_medium": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    109,
+    28,
+    251
+   ],
+   "tris": 216,
+   "file": "tree_dead_medium.gltf"
+  },
+  "KKHalloween_tree_dead_small": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    85,
+    61,
+    179
+   ],
+   "tris": 184,
+   "file": "tree_dead_small.gltf"
+  },
+  "KKHalloween_tree_pine_orange_large": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    286,
+    249,
+    449
+   ],
+   "tris": 318,
+   "file": "tree_pine_orange_large.gltf"
+  },
+  "KKHalloween_tree_pine_orange_medium": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    200,
+    187,
+    352
+   ],
+   "tris": 318,
+   "file": "tree_pine_orange_medium.gltf"
+  },
+  "KKHalloween_tree_pine_orange_small": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    144,
+    132,
+    243
+   ],
+   "tris": 260,
+   "file": "tree_pine_orange_small.gltf"
+  },
+  "KKHalloween_tree_pine_yellow_large": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    286,
+    249,
+    449
+   ],
+   "tris": 318,
+   "file": "tree_pine_yellow_large.gltf"
+  },
+  "KKHalloween_tree_pine_yellow_medium": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    200,
+    187,
+    352
+   ],
+   "tris": 318,
+   "file": "tree_pine_yellow_medium.gltf"
+  },
+  "KKHalloween_tree_pine_yellow_small": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    144,
+    132,
+    243
+   ],
+   "tris": 260,
+   "file": "tree_pine_yellow_small.gltf"
+  }
+ },
+ "skipped": []
+}

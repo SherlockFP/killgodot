@@ -95,6 +95,9 @@ Bots:
 - They put their chore items down at night and in meetings.
 - The Impatient only fake a world chore for 25 s, then drop the item and get back to hunting (fix for the I4 no-winner
   regression).
+- Closure fix: that alone was not enough. The night drop reset the show, so the Impatient picked the same basket up
+  again every day. Now an Impatient bot fakes one world chore per match (`AKGBotController::bFakedWorldChore`), then
+  only fakes panel chores. The I4 match smoke passes again (12 bots, seed 7).
 
 Network:
 - The water-run smoke failed because a wall lantern at head height, which the 144 cm navmesh agent can't see, stopped
@@ -103,3 +106,7 @@ Network:
 - Replication waits were added for the fill and the trough level.
 - Panel stations that stood on a world chore spot (DrawWater on the well kerb, MendNets at the rack, ChopWood at the
   block) now slide their E box aside, so they no longer swallow the E.
+- Closure fix: with the well-first water run, the cranked bucket lands inside the well spot's own E box, so E hit the
+  box and never the bucket. Now a chore item behind a chore spot's or panel station's E box wins the interact trace
+  (`KGInteractTrace::PreferChoreItem` in KGCharacter.cpp; walls and doors are never looked through). The water-run
+  smoke passes (well -> fountain trough, 52 s).

@@ -12,9 +12,11 @@ struct FKGMapFx
 	TWeakObjectPtr<AKGMapInfo> Info;
 	double NextSearch = 0.0;
 
-	// Full map
+	// Full map (SPRINT-025: tap toggles, hold shows it while M is down; UI/KGMapInput.h)
 	bool bFullOpen = false;
+	bool bHolding = false;
 	float FullAlpha = 0.0f;
+	FKGMapInput Input;
 
 	// Location tracking (indices into AKGMapInfo::Regions)
 	int32 Here = INDEX_NONE;          // stable most-specific region
@@ -31,9 +33,21 @@ struct FKGMapFx
 	double ToastAt = -100.0;
 
 	// Chore station positions (refreshed every few seconds)
-	TMap<FName, FVector2D> Stations;
+	TMap<FName, FVector> Stations;
 	double StationsAt = -100.0;
+
+	// SPRINT-025: this frame's chore pins (tracker, markers, minimap and full map share one gather)
+	TArray<struct FKGChorePin> Pins;
+	uint64 PinsFrame = 0;
 };
+
+#if !UE_BUILD_SHIPPING
+TAutoConsoleVariable<int32> CVarMapDebug(TEXT("kg.Map.Debug"), 0,
+                                         TEXT("Dev: force the village map state for screenshots: 1 = as if M were held, 2 = as if tapped open."));
+int32 MapDebug() { return CVarMapDebug.GetValueOnGameThread(); }
+#else
+int32 MapDebug() { return 0; }
+#endif
 
 FKGMapFx& MapFx(const AKGHUD* Hud)
 {
@@ -623,8 +637,17 @@ void DrawLocationToast(const FKGHudFrame& F, const FKGMapFx& M)
 // -------------------------------------------------------------------------------------------------------------------
 struct FKGChorePin
 {
-	FVector2D Pos;
+	FVector2D Pos;          // world XY (map)
 	bool bActive = false;
+	// SPRINT-025 (item 1): the in-world marker and the tracker line.
+	FVector Loc = FVector::ZeroVector;   // world position of the current step
+	FName Chore;
+	FString Name;           // "Draw water"
+	FString Step;           // "Crank", "Carry the bucket to the trough 1/2"
+	bool bItem = false;     // your dropped item (pick it up again)
+	bool bDone = false;     // finished (tracker only, no marker)
+	bool bRowOnly = false;  // tracker row without a marker (a world chore's row; its steps are separate pins)
+	float Metres = 0.0f;
 };
 
 // SPRINT-016 hooks: world chore waypoints, compass strip and work ring (Chores/WorldChores/KGWorldChoreHud.inl,
@@ -632,6 +655,10 @@ struct FKGChorePin
 bool IsWorldChoreId(FName Id);
 void GatherWorldChorePins(const FKGHudFrame& F, TArray<FKGChorePin>& Out);
 void DrawWorldChoreHud(const FKGHudFrame& F);
+// SPRINT-025 hooks (UI/KGHUDChoreMarkers.inl, included at the end): in-world markers + the top-left tracker.
+FString WorldChoreStepLine(const FKGHudFrame& F, FName Chore, FVector* OutLoc);
+FString WorldChoreTitle(FName Chore);
+void DrawChoreMarkers(const FKGHudFrame& F, const TArray<FKGChorePin>& Pins, float Opacity);
 
 void GatherChores(const FKGHudFrame& F, FKGMapFx& M, TArray<FKGChorePin>& Out)
 {
@@ -640,38 +667,84 @@ void GatherChores(const FKGHudFrame& F, FKGMapFx& M, TArray<FKGChorePin>& Out)
 		M.Stations.Reset();
 		for (TActorIterator<AKGTaskStation> It(F.Hud->GetWorld()); It; ++It)
 		{
-			M.Stations.Add(It->TaskId, FVector2D(It->GetActorLocation()));
+			M.Stations.Add(It->TaskId, It->GetActorLocation());
 		}
 		M.StationsAt = F.Fx->Now;
 	}
+	if (M.PinsFrame == GFrameCounter && GFrameCounter != 0)
+	{
+		Out = M.Pins;   // already gathered this frame (tracker, markers and maps share it)
+		return;
+	}
 	const AKGTaskStation* Active = F.Pawn ? F.Pawn->GetActiveTask() : nullptr;
+	const UKGChoreComponent* Chores = F.Pawn ? UKGChoreComponent::FindFor(F.Pawn) : nullptr;
+	const FVector MeLoc = F.Pawn ? F.Pawn->GetActorLocation() : FVector::ZeroVector;
 	if (F.Me && F.GS && F.GS->GetPhase() != EKGPhase::Epilogue)
 	{
 		for (int32 i = 0; i < F.Me->TaskIds.Num(); ++i)
 		{
+			const FName Id = F.Me->TaskIds[i];
 			const bool bDone = F.Me->TaskDone.IsValidIndex(i) && F.Me->TaskDone[i];
-			if (IsWorldChoreId(F.Me->TaskIds[i]))
+			FKGChorePin Pin;
+			Pin.Chore = Id;
+			Pin.bDone = bDone;
+			if (IsWorldChoreId(Id))
 			{
-				continue;   // SPRINT-016: world chores pin their current step (below), not where they start
+				// SPRINT-016: world chores pin their current step, not where they start (GatherWorldChorePins).
+				Pin.Name = WorldChoreTitle(Id);
+				Pin.Step = bDone ? FString() : WorldChoreStepLine(F, Id, &Pin.Loc);
+				Pin.Pos = FVector2D(Pin.Loc);
+				Pin.Metres = static_cast<float>(FVector::Dist2D(MeLoc, Pin.Loc)) / 100.0f;
+				Pin.bRowOnly = true;
+				Out.Add(Pin);
+				continue;
 			}
-			if (const FVector2D* Pos = bDone ? nullptr : M.Stations.Find(F.Me->TaskIds[i]))
+			Pin.Name = ChoreName(F, Id);
+			const FKGChoreDef* Def = FKGChoreCatalog::Find(Id);
+			const int32 Stage = Chores ? Chores->GetSavedStage(Id) : 0;
+			Pin.Step = Def && Def->Stages.IsValidIndex(Stage) ? Def->Stages[Stage] : FString(TEXT("Work"));
+			if (Def && Def->NumStages() > 1)
 			{
-				Out.Add({*Pos, Active && Active->TaskId == F.Me->TaskIds[i]});
+				Pin.Step += FString::Printf(TEXT("  %d/%d"), Stage + 1, Def->NumStages());
 			}
+			if (const FVector* Pos = M.Stations.Find(Id))
+			{
+				Pin.Loc = *Pos;
+				Pin.Pos = FVector2D(*Pos);
+				Pin.Metres = static_cast<float>(FVector::Dist2D(MeLoc, *Pos)) / 100.0f;
+			}
+			else
+			{
+				Pin.bRowOnly = true;
+			}
+			Pin.bActive = Active && Active->TaskId == Id;
+			Out.Add(Pin);
 		}
-		GatherWorldChorePins(F, Out);   // SPRINT-016 hook
+		GatherWorldChorePins(F, Out);   // SPRINT-016 hook (markers + map pins of the world chore steps)
 	}
 	if (Out.Num() == 0 && F.Demo != 0)
 	{
 		int32 k = 0;
-		for (const TPair<FName, FVector2D>& Pair : M.Stations)
+		const TCHAR* DemoSteps[] = {TEXT("Crank  1/2"), TEXT("Carry the bucket to the trough"), TEXT("Ring"), TEXT("Weed  1/2")};
+		for (const TPair<FName, FVector>& Pair : M.Stations)
 		{
-			if (k++ % 4 == 1)
+			if (k++ % 4 == 1 && Out.Num() < 4)
 			{
-				Out.Add({Pair.Value, false});
+				FKGChorePin Pin;
+				Pin.Pos = FVector2D(Pair.Value);
+				Pin.Loc = Pair.Value;
+				Pin.Chore = Pair.Key;
+				Pin.Name = ChoreName(F, Pair.Key);
+				Pin.Step = DemoSteps[Out.Num()];
+				Pin.Metres = static_cast<float>(FVector::Dist2D(MeLoc, Pair.Value)) / 100.0f;
+				Pin.bActive = Out.Num() == 0;
+				Pin.bDone = Out.Num() == 2;
+				Out.Add(Pin);
 			}
 		}
 	}
+	M.Pins = Out;
+	M.PinsFrame = GFrameCounter;
 }
 
 // KG_DIG hooks: digging HUD, treasure-map marks and the underground plan (Dig/KGDigHud.inl, included at the end).
@@ -710,7 +783,9 @@ void DrawMinimap(const FKGHudFrame& F, FKGMapFx& M, const AKGMapInfo& Info, cons
 	const FKGPainter& P = F.P;
 	const float S = F.S;
 	const float R = 124.0f * S;
-	const FVector2D Ctr(F.W - 32.0f * S - R, 30.0f * S + R);
+	const float Rim0 = 7.0f * S;
+	const FBox2D Slot = FKGHudLayout::Compute(F.W, F.H, 0, false).Minimap;   // SPRINT-025: shared layout table
+	const FVector2D Ctr(static_cast<float>(Slot.Max.X) - Rim0 - R, static_cast<float>(Slot.Min.Y) + Rim0 + R);
 	const double ViewRadius = 3800.0;   // cm of world from the centre to the rim
 	const float Rad = FMath::DegreesToRadians(Yaw);
 	FKGMiniXf X;
@@ -799,6 +874,10 @@ void DrawMinimap(const FKGHudFrame& F, FKGMapFx& M, const AKGMapInfo& Info, cons
 	const float Pulse = static_cast<float>(FMath::Frac(F.Fx->Now * 0.8));
 	for (const FKGChorePin& Pin : Chores)
 	{
+		if (Pin.bDone || Pin.bRowOnly)
+		{
+			continue;
+		}
 		const FVector2D Sc = X.ToScreen(Pin.Pos);
 		const FVector2D D = Sc - Ctr;
 		const float Dist = static_cast<float>(D.Size());
@@ -902,7 +981,7 @@ void DrawFullMap(const FKGHudFrame& F, FKGMapFx& M, const AKGMapInfo& Info, cons
 	const float TitleW = static_cast<float>(P.Measure(MapTitleOf(Info).ToUpper(), 30.0f, true, 5.0f).X);
 	P.TextMid(TEXT("VILLAGE MAP"), CX0 + Pad + TitleW + 22.0f * S, CY0 + 38.0f * S, 14.0f, WithAlpha(Gold, 0.9f * A), 0.0f,
 	          true, 3.0f);
-	const FString CloseLabel = TEXT("Close");
+	const FString CloseLabel = M.bHolding ? TEXT("Release to close") : TEXT("Close  ·  hold to peek");
 	P.KeyHint(TEXT("M"), CloseLabel, CX0 + CardW - Pad, CY0 + 36.0f * S, 16.0f, WithAlpha(Cream, 0.85f), 1.0f, A);
 
 	// Map.
@@ -981,11 +1060,22 @@ void DrawFullMap(const FKGHudFrame& F, FKGMapFx& M, const AKGMapInfo& Info, cons
 		}
 	}
 
-	// Chores, then you (on top of everything).
+	// Chores (SPRINT-025: every open step as a pin with its chore name; the active one in lantern orange), then you.
 	const float Pulse = static_cast<float>(FMath::Frac(F.Fx->Now * 0.8));
 	for (const FKGChorePin& Pin : Chores)
 	{
-		ChorePin(P, ToScreen(Pin.Pos), 26.0f * S, A, Pin.bActive ? 0.0f : Pulse);
+		if (Pin.bDone || Pin.bRowOnly)
+		{
+			continue;
+		}
+		const FVector2D Sc = ToScreen(Pin.Pos);
+		ChorePin(P, Sc, (Pin.bActive ? 30.0f : 26.0f) * S, A, Pin.bActive ? 0.0f : Pulse);
+		const FString Tag = Pin.bItem ? FString::Printf(TEXT("Your %s"), *Pin.Name) : Pin.Name;
+		const FBox2D Box = HaloLabel(P, Tag, Sc.X, Sc.Y + 12.0f * S, 13.0f, Cream, true, 0.0f, false);
+		if (InMap(Box))
+		{
+			HaloLabel(P, Tag, Sc.X, Sc.Y + 12.0f * S, 13.0f, WithAlpha(Pin.bActive ? Lantern : Cream, A), true);
+		}
 	}
 	DigMapMarks(F, [&ToScreen](const FVector2D& W) { return ToScreen(W); }, 26.0f * S, A, nullptr, 0.0f);   // KG_DIG hook
 	if (Me)
@@ -1091,27 +1181,39 @@ void DrawMapLayer(const FKGHudFrame& F, bool bLoadingCard)
 		Yaw = F.PC && F.PC->PlayerCameraManager ? F.PC->PlayerCameraManager->GetCameraRotation().Yaw : Pawn->GetControlRotation().Yaw;
 		UpdateLocation(F, M, *Info, Me, bLoadingCard);
 	}
-	// M toggles, Esc closes (AKGPlayerController also closes it before opening the pause menu).
+	// SPRINT-025: M tap toggles, M held shows the big map while down (UI/KGMapInput.h); Esc closes
+	// (AKGPlayerController also closes it before opening the pause menu). kg.Map.Debug forces a state for shots.
 	if (F.PC && F.PC->IsLocalController())
 	{
-		if (F.PC->WasInputKeyJustPressed(EKeys::M) && (Pawn || M.bFullOpen))
+		const int32 Forced = MapDebug();
+		const bool bKeyDown = Forced == 1 || (Forced == 0 && F.PC->IsInputKeyDown(EKeys::M) && (Pawn || M.Input.bOpen));
+		if (KGMapInput::Update(M.Input, bKeyDown, F.Fx->Now))
 		{
-			M.bFullOpen = !M.bFullOpen;
 			KGAudio::UI(F.Hud, TEXT("S_ReelClick"), 0.35f);
 		}
-		if (M.bFullOpen && F.PC->WasInputKeyJustPressed(EKeys::Escape))
+		if (Forced == 2)
 		{
-			M.bFullOpen = false;
+			M.Input.bOpen = true;
+		}
+		if (M.Input.bOpen && F.PC->WasInputKeyJustPressed(EKeys::Escape))
+		{
+			KGMapInput::Close(M.Input);
 		}
 	}
 	if (!Pawn)
 	{
-		M.bFullOpen = false;
+		KGMapInput::Close(M.Input);
 	}
+	M.bFullOpen = M.Input.bOpen;
+	M.bHolding = KGMapInput::IsHolding(M.Input, F.Fx->Now);
 	M.FullAlpha = FMath::FInterpConstantTo(M.FullAlpha, M.bFullOpen ? 1.0f : 0.0f, F.Fx->Dt, 7.0f);
 
 	TArray<FKGChorePin> Chores;
 	GatherChores(F, M, Chores);
+	if (Pawn && !bLoadingCard && M.FullAlpha < 0.999f)
+	{
+		DrawChoreMarkers(F, Chores, 1.0f - EaseOutCubic(M.FullAlpha));   // SPRINT-025 item 1: in-world markers
+	}
 	if (Pawn && M.FullAlpha < 0.999f)
 	{
 		DrawMinimap(F, M, *Info, Me, Yaw, Chores, 1.0f - EaseOutCubic(M.FullAlpha));
@@ -1128,3 +1230,6 @@ void DrawMapLayer(const FKGHudFrame& F, bool bLoadingCard)
 
 // SPRINT-016 hook: world chore HUD (same namespace trick).
 #include "Chores/WorldChores/KGWorldChoreHud.inl"
+
+// SPRINT-025 hook: in-world chore markers + the top-left tracker (needs the world chore include above).
+#include "UI/KGHUDChoreMarkers.inl"

@@ -81,6 +81,13 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "KillGodot|Profile")
 	static int32 BankMatchCoins(APlayerController* PC);
 
+	/** SPRINT-027a: locked villager archetype (NAME_None = a random one each match). Saves and broadcasts. */
+	UFUNCTION(BlueprintCallable, Category = "KillGodot|Profile")
+	void SetPreferredLook(FName Archetype);
+
+	UFUNCTION(BlueprintPure, Category = "KillGodot|Profile")
+	FName GetPreferredLook() const { return PreferredLook; }
+
 	/** Fires after any change (shop refresh, loadout push). */
 	static FSimpleMulticastDelegate& OnProfileChanged();
 
@@ -103,6 +110,9 @@ protected:
 
 	UPROPERTY(SaveGame)
 	bool bStarterGranted = false;
+
+	UPROPERTY(SaveGame)
+	FName PreferredLook;
 
 	/** Grants starter gold/items, drops unknown ids, sizes the slot array. */
 	void Sanitize();

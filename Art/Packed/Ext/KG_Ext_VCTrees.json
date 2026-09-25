@@ -1,0 +1,73 @@
+{
+ "tag": "VCTrees",
+ "source": "D:/Kill Godot/Art/Source/Vertexcat_Trees",
+ "props": {
+  "VCTrees_TreeBell": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    248,
+    271,
+    405
+   ],
+   "tris": 284,
+   "file": "MainTreesSetFBX_v1.1/TreeBell.fbx"
+  },
+  "VCTrees_TreeDiamond": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    155,
+    155,
+    352
+   ],
+   "tris": 116,
+   "file": "MainTreesSetFBX_v1.1/TreeDiamond.fbx"
+  },
+  "VCTrees_TreePine": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    300,
+    301,
+    445
+   ],
+   "tris": 474,
+   "file": "MainTreesSetFBX_v1.1/TreePine.fbx"
+  },
+  "VCTrees_TreePink": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    281,
+    267,
+    355
+   ],
+   "tris": 672,
+   "file": "MainTreesSetFBX_v1.1/TreePink.fbx"
+  },
+  "VCTrees_TreeRound": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    190,
+    171,
+    355
+   ],
+   "tris": 416,
+   "file": "MainTreesSetFBX_v1.1/TreeRound.fbx"
+  },
+  "VCTrees_TreeStack": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    307,
+    288,
+    350
+   ],
+   "tris": 600,
+   "file": "MainTreesSetFBX_v1.1/TreeStack.fbx"
+  }
+ },
+ "skipped": []
+}

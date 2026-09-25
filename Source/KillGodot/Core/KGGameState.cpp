@@ -70,7 +70,8 @@ void AKGGameState::UpdatePhaseLighting(float DeltaSeconds, bool bSnap)
 	for (TActorIterator<ADirectionalLight> It(GetWorld()); It; ++It)
 	{
 		UDirectionalLightComponent* Sun = Cast<UDirectionalLightComponent>(It->GetLightComponent());
-		if (!Sun || Sun->Mobility != EComponentMobility::Movable)
+		// KG_FixedLook: the map keeps its own light in every phase (SPRINT-018 Storm Manor: a storm night).
+		if (!Sun || Sun->Mobility != EComponentMobility::Movable || It->ActorHasTag(TEXT("KG_FixedLook")))
 		{
 			continue;
 		}
@@ -82,6 +83,10 @@ void AKGGameState::UpdatePhaseLighting(float DeltaSeconds, bool bSnap)
 	}
 	for (TActorIterator<ASkyLight> It(GetWorld()); It; ++It)
 	{
+		if (It->ActorHasTag(TEXT("KG_FixedLook")))
+		{
+			continue;
+		}
 		if (USkyLightComponent* Sky = It->GetLightComponent())
 		{
 			Sky->SetIntensity(FMath::Lerp(Sky->Intensity, Look.SkyIntensity, Alpha));

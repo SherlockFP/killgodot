@@ -78,6 +78,36 @@ Kapalı bölgeler lore'a uygun şekilde kapanır: "Karantina – Veba" tabelası
 - **Yaralanma:** kan yerine **boya/talaş damlaları** (bkz. sanat yönü). 60 sn boyunca iz bırakır, bu da delildir. Aksak yürüme animasyonu da görülür.
 - **Silahlar (ana mod):** nadir loot. Tek mermili çakmaklı tabanca, av tüfeği, harpon. Gmod Murder kuralı geçerli: **masum kasabalıyı vuran** silahı düşürür, 30 sn bulanık görür ve o maç boyunca silah alamaz. Sırtta taşınan silah görünür, bu da sosyal bilgidir.
 
+### 4.1 Zıplama ve air strafe (skill bhop, SPRINT-026)
+Amaç: hareket daha "canlı" hissettirsin ama **otomatik bhop olmasın** — hız kazancı gerçek strafe becerisi (fare dönüşü +
+zıt A/D) gerektirsin, ve katiller (Sabırsız) bu sayede herkesi sonsuza dek geçemesin (sosyal çıkarım dengesi).
+- **Otomatik değil:** boşluğu basılı tutmak tekrar zıplatmaz — motor `bPressedJump`'ı her hareket adımında sıfırlar
+  (`JumpMaxHoldTime = 0`), o yüzden her sıçrama **taze bir basışa** ihtiyaç duyar. İniş anına yakın (±**80 ms**, bir
+  "jump buffer") basılan bir tuş yine de saplanır ("landing-buffer chain hop"); daha erken basış sayılmaz.
+  (`UKGCharacterMovement::JumpBufferSeconds`, varsayılan 0.08 s.)
+- **Havada strafe:** Quake/Source tarzı ivme — `wishdir`e yansıyan hızın altında kalan fark kadar hızlanma
+  (`UKGCharacterMovement::ComputeAirStrafeVelocity2D`, testli: `KillGodot.Character.AirStrafe`).
+  `AirAccelerate = 8`, `AirWishSpeed = 320 uu/s (3.2 m/s)`. Düz gitmek (kötü strafe) yalnızca wish hızına
+  yaklaştırır; fareyle dönüp zıt tuşa basmak (iyi strafe) hız eklemeye devam eder.
+- **Yumuşak tavan (soft cap):** koşu hızının **~1.35 katı** = `580 × 1.35 = 783 uu/s (≈7.83 m/s)`. Tavanın üstünde
+  kazanç sıfırlanmaz, azalır (`BunnyHopSoftCapMultiplier`) — yalnızca sürekli iyi strafe oraya ulaşır.
+- **Bağlama göre ceza/kapama (`AKGCharacter::Tick`, `HopGainScale` / `bAirStrafeDisabled`):**
+  | Bağlam | Etki | Efektif tavan |
+  |---|---|---|
+  | Boş elle | tam bonus | 783 uu/s (7.83 m/s) |
+  | Sabırsız bıçağı elde (`bHoldingAssassinBlade`) | bonus yok, ama strafe hâlâ hissedilir | 580 uu/s (5.8 m/s, düz koşu) |
+  | Stamina tükenmiş (`bExhausted`) | zincir kilitli + bonus yok | 580 uu/s, yeni zincir başlamaz |
+  | Eşya taşıma / olta elde / görev yapıyor | strafe kazancı tamamen kapalı | motorun temel hava kontrolü, bonus yok |
+- **Stamina maliyeti** (`FKGStamina`, maks 100, yenilenme 16/sn, 0.8 sn gecikmeyle):
+  - Düz zıplama: **6** (her zaman harcanır ama asla zıplamayı engellemez — parkur/temel hareket kilitlenmesin diye).
+  - Zincir sıçraması (landing-buffer): **8 + 3 × min(zincir, 5)** — yani 1. zincir 11, 5.+ zincir 23 stamina.
+  - **Tükenme zinciri durdurur:** `bExhausted` iken yeni zincir sıçraması hiç tetiklenmez (`bHopChainBlocked`); düz
+    zıplama yine de çalışır (stamina yetersizse ücretsiz kalır, asla bloklanmaz).
+- **His:** iniş/kalkışta viewmodel'de küçük bir geri tepme (`UKGViewmodelComponent::AddRecoil`), inişte ayak
+  sesi (zemine göre), adım sesi hıza göre 3 kademeli (165/210/260 cm), Ayarlar'da açılabilir **FOV kick**
+  (koşu→bhop aralığında görüş açısı +0–6°, `UKGGameUserSettings::GetFOVKickOnSpeed`). Geliştirici panelinde küçük bir
+  hız okuması var (`kg.Debug.Speed`), botlarda hiçbir etkisi yok (botlar zıplama tuşuna hiç basmıyor).
+
 ## 5. Sabırsız Maskesi (kimlik gizleme)
 - Her Sabırsız, 1 sn'lik animasyonla **Maske + Pelerin** takabilir. Takınca isim etiketi gizlenir, silüet tek tipe döner, ses hafifçe bozulur, ayak izleri anonimleşir.
 - Maskeyi takarken ya da çıkarırken görülen kişi yakalanır. Bu anı kovalamak ana gerilim kaynağıdır.

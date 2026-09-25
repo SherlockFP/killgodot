@@ -114,6 +114,7 @@ void UKGGameUserSettings::SetKGDefaults()
 	bInvertY = false;
 	FieldOfView = DefaultFieldOfView;
 	ViewmodelPreset = 1;
+	bFOVKickOnSpeed = true;
 	bStreamerMode = false;
 	StreamerPeekKey = GetStreamerPeekKeys()[0];
 	MasterVolume = 1.0f;

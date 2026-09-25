@@ -1,0 +1,2345 @@
+{
+ "tag": "EmaceHouses",
+ "source": "D:/Kill Godot/Art/Source/EmaceArt_MedievalHouses/FBX",
+ "props": {
+  "EmaceHouses_EA03": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    22482,
+    22476,
+    3017
+   ],
+   "tris": 2885,
+   "file": "FBX/EA03.fbx"
+  },
+  "EmaceHouses_EA03_EnvRock_01a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    656,
+    368,
+    62
+   ],
+   "tris": 1029,
+   "file": "FBX/EA03_EnvRock_01a.fbx"
+  },
+  "EmaceHouses_EA03_Env_Mud_Flat_01b": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    550,
+    568,
+    37
+   ],
+   "tris": 897,
+   "file": "FBX/EA03_Env_Mud_Flat_01b.fbx"
+  },
+  "EmaceHouses_EA03_Env_Mud_Flat_01c": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    826,
+    565,
+    37
+   ],
+   "tris": 884,
+   "file": "FBX/EA03_Env_Mud_Flat_01c.fbx"
+  },
+  "EmaceHouses_EA03_Env_Mud_Flat_01c_Half": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    809,
+    311,
+    36
+   ],
+   "tris": 499,
+   "file": "FBX/EA03_Env_Mud_Flat_01c_Half.fbx"
+  },
+  "EmaceHouses_EA03_Env_RoadIslandMud_01a": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    388,
+    182,
+    38
+   ],
+   "tris": 107,
+   "file": "FBX/EA03_Env_RoadIslandMud_01a.fbx"
+  },
+  "EmaceHouses_EA03_Env_RoadIslandMud_01b": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    390,
+    201,
+    35
+   ],
+   "tris": 102,
+   "file": "FBX/EA03_Env_RoadIslandMud_01b.fbx"
+  },
+  "EmaceHouses_EA03_Env_Road_Wooden_01d": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    315,
+    130,
+    10
+   ],
+   "tris": 345,
+   "file": "FBX/EA03_Env_Road_Wooden_01d.fbx"
+  },
+  "EmaceHouses_EA03_Env_Rock_Slice_01a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    367,
+    373,
+    606
+   ],
+   "tris": 718,
+   "file": "FBX/EA03_Env_Rock_Slice_01a.fbx"
+  },
+  "EmaceHouses_EA03_Env_Sand_Flat_01a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    463,
+    484,
+    45
+   ],
+   "tris": 890,
+   "file": "FBX/EA03_Env_Sand_Flat_01a.fbx"
+  },
+  "EmaceHouses_EA03_Env_Sand_Flat_01b": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    1281,
+    1089,
+    173
+   ],
+   "tris": 833,
+   "file": "FBX/EA03_Env_Sand_Flat_01b.fbx"
+  },
+  "EmaceHouses_EA03_Environment_Moss_01": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    288,
+    326,
+    32
+   ],
+   "tris": 217,
+   "file": "FBX/EA03_Environment_Moss_01.fbx"
+  },
+  "EmaceHouses_EA03_Environment_Mud_04b": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    549,
+    442,
+    45
+   ],
+   "tris": 296,
+   "file": "FBX/EA03_Environment_Mud_04b.fbx"
+  },
+  "EmaceHouses_EA03_Environment_RiverStraight_01f_R": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    2015,
+    2052,
+    848
+   ],
+   "tris": 3986,
+   "file": "FBX/EA03_Environment_RiverStraight_01f_R.fbx"
+  },
+  "EmaceHouses_EA03_Environment_RiverStraight_01g": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    3506,
+    1615,
+    967
+   ],
+   "tris": 5127,
+   "file": "FBX/EA03_Environment_RiverStraight_01g.fbx"
+  },
+  "EmaceHouses_EA03_Environment_RiverStraight_02a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    4960,
+    1054,
+    1013
+   ],
+   "tris": 3202,
+   "file": "FBX/EA03_Environment_RiverStraight_02a.fbx"
+  },
+  "EmaceHouses_EA03_Environment_RiverStraight_02b": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    5868,
+    2540,
+    888
+   ],
+   "tris": 817,
+   "file": "FBX/EA03_Environment_RiverStraight_02b.fbx"
+  },
+  "EmaceHouses_EA03_Environment_RoadIsland_08": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    857,
+    328,
+    58
+   ],
+   "tris": 743,
+   "file": "FBX/EA03_Environment_RoadIsland_08.fbx"
+  },
+  "EmaceHouses_EA03_Environment_RoadIsland_08a": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    394,
+    185,
+    43
+   ],
+   "tris": 227,
+   "file": "FBX/EA03_Environment_RoadIsland_08a.fbx"
+  },
+  "EmaceHouses_EA03_Environment_RoadIsland_09": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    1874,
+    395,
+    65
+   ],
+   "tris": 1603,
+   "file": "FBX/EA03_Environment_RoadIsland_09.fbx"
+  },
+  "EmaceHouses_EA03_Environment_RoadIsland_09a": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    1804,
+    397,
+    63
+   ],
+   "tris": 3504,
+   "file": "FBX/EA03_Environment_RoadIsland_09a.fbx"
+  },
+  "EmaceHouses_EA03_Environment_RoadSide": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    422,
+    132,
+    48
+   ],
+   "tris": 1393,
+   "file": "FBX/EA03_Environment_RoadSide.fbx"
+  },
+  "EmaceHouses_EA03_Environment_Road_Cobble_01a": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    524,
+    176,
+    55
+   ],
+   "tris": 383,
+   "file": "FBX/EA03_Environment_Road_Cobble_01a.fbx"
+  },
+  "EmaceHouses_EA03_Environment_Road_Cobble_01b": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    186,
+    167,
+    54
+   ],
+   "tris": 110,
+   "file": "FBX/EA03_Environment_Road_Cobble_01b.fbx"
+  },
+  "EmaceHouses_EA03_Environment_Road_Cobble_Corner_01a": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    371,
+    353,
+    59
+   ],
+   "tris": 284,
+   "file": "FBX/EA03_Environment_Road_Cobble_Corner_01a.fbx"
+  },
+  "EmaceHouses_EA03_Environment_Road_Cobble_Staris_01b": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    508,
+    187,
+    312
+   ],
+   "tris": 654,
+   "file": "FBX/EA03_Environment_Road_Cobble_Staris_01b.fbx"
+  },
+  "EmaceHouses_EA03_Environment_Rock_CatHead_01a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    455,
+    474,
+    72
+   ],
+   "tris": 347,
+   "file": "FBX/EA03_Environment_Rock_CatHead_01a.fbx"
+  },
+  "EmaceHouses_EA03_Environment_Rock_CatHead_01b": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    609,
+    709,
+    166
+   ],
+   "tris": 255,
+   "file": "FBX/EA03_Environment_Rock_CatHead_01b.fbx"
+  },
+  "EmaceHouses_EA03_Environment_Rock_Flat_04c": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    1963,
+    1151,
+    631
+   ],
+   "tris": 1211,
+   "file": "FBX/EA03_Environment_Rock_Flat_04c.fbx"
+  },
+  "EmaceHouses_EA03_Environment_Rock_Head_01a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    61,
+    54,
+    50
+   ],
+   "tris": 55,
+   "file": "FBX/EA03_Environment_Rock_Head_01a.fbx"
+  },
+  "EmaceHouses_EA03_Environment_Rock_Head_01b": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    96,
+    77,
+    55
+   ],
+   "tris": 214,
+   "file": "FBX/EA03_Environment_Rock_Head_01b.fbx"
+  },
+  "EmaceHouses_EA03_Environment_Rock_Head_01c": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    149,
+    77,
+    54
+   ],
+   "tris": 444,
+   "file": "FBX/EA03_Environment_Rock_Head_01c.fbx"
+  },
+  "EmaceHouses_EA03_Environment_Sand_01b": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    886,
+    713,
+    80
+   ],
+   "tris": 285,
+   "file": "FBX/EA03_Environment_Sand_01b.fbx"
+  },
+  "EmaceHouses_EA03_Fence_Cobble_01a": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    380,
+    78,
+    164
+   ],
+   "tris": 920,
+   "file": "FBX/EA03_Fence_Cobble_01a.fbx"
+  },
+  "EmaceHouses_EA03_Fence_Cobble_01b": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    626,
+    79,
+    164
+   ],
+   "tris": 1506,
+   "file": "FBX/EA03_Fence_Cobble_01b.fbx"
+  },
+  "EmaceHouses_EA03_Fence_Cobble_End_01a": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    142,
+    156,
+    230
+   ],
+   "tris": 518,
+   "file": "FBX/EA03_Fence_Cobble_End_01a.fbx"
+  },
+  "EmaceHouses_EA03_Fence_Plank_02a": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    400,
+    28,
+    304
+   ],
+   "tris": 309,
+   "file": "FBX/EA03_Fence_Plank_02a.fbx"
+  },
+  "EmaceHouses_EA03_Fence_Plank_02b": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    400,
+    36,
+    305
+   ],
+   "tris": 267,
+   "file": "FBX/EA03_Fence_Plank_02b.fbx"
+  },
+  "EmaceHouses_EA03_Fence_Plank_02c": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    400,
+    47,
+    305
+   ],
+   "tris": 206,
+   "file": "FBX/EA03_Fence_Plank_02c.fbx"
+  },
+  "EmaceHouses_EA03_Fence_Plank_02d": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    192,
+    28,
+    304
+   ],
+   "tris": 158,
+   "file": "FBX/EA03_Fence_Plank_02d.fbx"
+  },
+  "EmaceHouses_EA03_Fence_RockGate_01a": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    434,
+    154,
+    365
+   ],
+   "tris": 3836,
+   "file": "FBX/EA03_Fence_RockGate_01a.fbx"
+  },
+  "EmaceHouses_EA03_Fence_SolidBeam_End_01a": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    622,
+    337,
+    301
+   ],
+   "tris": 619,
+   "file": "FBX/EA03_Fence_SolidBeam_End_01a.fbx"
+  },
+  "EmaceHouses_EA03_Fence_VegetablePatch_02a": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    262,
+    36,
+    98
+   ],
+   "tris": 1071,
+   "file": "FBX/EA03_Fence_VegetablePatch_02a.fbx"
+  },
+  "EmaceHouses_EA03_Fence_WallGate_01a": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    497,
+    176,
+    489
+   ],
+   "tris": 1131,
+   "file": "FBX/EA03_Fence_WallGate_01a.fbx"
+  },
+  "EmaceHouses_EA03_Fence_Wall_01b": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    501,
+    176,
+    356
+   ],
+   "tris": 2247,
+   "file": "FBX/EA03_Fence_Wall_01b.fbx"
+  },
+  "EmaceHouses_EA03_Fence_Wall_01d": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    150,
+    163,
+    354
+   ],
+   "tris": 1135,
+   "file": "FBX/EA03_Fence_Wall_01d.fbx"
+  },
+  "EmaceHouses_EA03_Fence_Withy_Seam_02a": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    234,
+    60,
+    168
+   ],
+   "tris": 999,
+   "file": "FBX/EA03_Fence_Withy_Seam_02a.fbx"
+  },
+  "EmaceHouses_EA03_Fence_rockDesk_01g": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    410,
+    69,
+    181
+   ],
+   "tris": 453,
+   "file": "FBX/EA03_Fence_rockDesk_01g.fbx"
+  },
+  "EmaceHouses_EA03_Fence_rockDesk_End_01a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    73,
+    50,
+    123
+   ],
+   "tris": 207,
+   "file": "FBX/EA03_Fence_rockDesk_End_01a.fbx"
+  },
+  "EmaceHouses_EA03_Items_House_Apple_01a": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    20,
+    19,
+    19
+   ],
+   "tris": 117,
+   "file": "FBX/EA03_Items_House_Apple_01a.fbx"
+  },
+  "EmaceHouses_EA03_Items_House_Apple_01b": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    17,
+    17,
+    18
+   ],
+   "tris": 112,
+   "file": "FBX/EA03_Items_House_Apple_01b.fbx"
+  },
+  "EmaceHouses_EA03_Items_House_Apple_01c": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    15,
+    18,
+    17
+   ],
+   "tris": 117,
+   "file": "FBX/EA03_Items_House_Apple_01c.fbx"
+  },
+  "EmaceHouses_EA03_Items_House_Besom_01a": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    26,
+    26,
+    157
+   ],
+   "tris": 85,
+   "file": "FBX/EA03_Items_House_Besom_01a.fbx"
+  },
+  "EmaceHouses_EA03_Items_House_Bottle_01a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    29,
+    29,
+    48
+   ],
+   "tris": 345,
+   "file": "FBX/EA03_Items_House_Bottle_01a.fbx"
+  },
+  "EmaceHouses_EA03_Items_House_BredBoard_01a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    32,
+    56,
+    3
+   ],
+   "tris": 68,
+   "file": "FBX/EA03_Items_House_BredBoard_01a.fbx"
+  },
+  "EmaceHouses_EA03_Items_House_Carrot_01a": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    32,
+    20,
+    8
+   ],
+   "tris": 161,
+   "file": "FBX/EA03_Items_House_Carrot_01a.fbx"
+  },
+  "EmaceHouses_EA03_Items_House_Corn_01a": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    11,
+    32,
+    11
+   ],
+   "tris": 290,
+   "file": "FBX/EA03_Items_House_Corn_01a.fbx"
+  },
+  "EmaceHouses_EA03_Items_House_Cup_01a": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    13,
+    14,
+    23
+   ],
+   "tris": 82,
+   "file": "FBX/EA03_Items_House_Cup_01a.fbx"
+  },
+  "EmaceHouses_EA03_Items_House_Firewood_01a": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    350,
+    125,
+    236
+   ],
+   "tris": 2464,
+   "file": "FBX/EA03_Items_House_Firewood_01a.fbx"
+  },
+  "EmaceHouses_EA03_Items_House_Spoon_01a": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    7,
+    39,
+    2
+   ],
+   "tris": 196,
+   "file": "FBX/EA03_Items_House_Spoon_01a.fbx"
+  },
+  "EmaceHouses_EA03_Nature_Bush_01a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    232,
+    145,
+    357
+   ],
+   "tris": 926,
+   "file": "FBX/EA03_Nature_Bush_01a.fbx"
+  },
+  "EmaceHouses_EA03_Nature_Bush_01b": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    200,
+    277,
+    396
+   ],
+   "tris": 1385,
+   "file": "FBX/EA03_Nature_Bush_01b.fbx"
+  },
+  "EmaceHouses_EA03_Nature_Bush_01c": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    262,
+    245,
+    398
+   ],
+   "tris": 2363,
+   "file": "FBX/EA03_Nature_Bush_01c.fbx"
+  },
+  "EmaceHouses_EA03_Nature_Bush_01d": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    232,
+    145,
+    361
+   ],
+   "tris": 1061,
+   "file": "FBX/EA03_Nature_Bush_01d.fbx"
+  },
+  "EmaceHouses_EA03_Nature_Bush_02a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    226,
+    260,
+    366
+   ],
+   "tris": 896,
+   "file": "FBX/EA03_Nature_Bush_02a.fbx"
+  },
+  "EmaceHouses_EA03_Nature_Bush_02b": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    214,
+    229,
+    367
+   ],
+   "tris": 899,
+   "file": "FBX/EA03_Nature_Bush_02b.fbx"
+  },
+  "EmaceHouses_EA03_Nature_Bush_03a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    272,
+    275,
+    175
+   ],
+   "tris": 1289,
+   "file": "FBX/EA03_Nature_Bush_03a.fbx"
+  },
+  "EmaceHouses_EA03_Nature_Bush_03b": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    256,
+    342,
+    159
+   ],
+   "tris": 2266,
+   "file": "FBX/EA03_Nature_Bush_03b.fbx"
+  },
+  "EmaceHouses_EA03_Nature_Bush_03c": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    191,
+    183,
+    143
+   ],
+   "tris": 692,
+   "file": "FBX/EA03_Nature_Bush_03c.fbx"
+  },
+  "EmaceHouses_EA03_Nature_Bush_03d": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    447,
+    338,
+    56
+   ],
+   "tris": 1174,
+   "file": "FBX/EA03_Nature_Bush_03d.fbx"
+  },
+  "EmaceHouses_EA03_Nature_Bush_04a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    248,
+    218,
+    155
+   ],
+   "tris": 832,
+   "file": "FBX/EA03_Nature_Bush_04a.fbx"
+  },
+  "EmaceHouses_EA03_Nature_Bush_05a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    116,
+    113,
+    593
+   ],
+   "tris": 217,
+   "file": "FBX/EA03_Nature_Bush_05a.fbx"
+  },
+  "EmaceHouses_EA03_Nature_Bush_05b": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    213,
+    208,
+    593
+   ],
+   "tris": 351,
+   "file": "FBX/EA03_Nature_Bush_05b.fbx"
+  },
+  "EmaceHouses_EA03_Nature_Bush_Flat_03d": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    511,
+    471,
+    40
+   ],
+   "tris": 892,
+   "file": "FBX/EA03_Nature_Bush_Flat_03d.fbx"
+  },
+  "EmaceHouses_EA03_Nature_Bush_Flat_03e": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    1958,
+    1367,
+    115
+   ],
+   "tris": 1042,
+   "file": "FBX/EA03_Nature_Bush_Flat_03e.fbx"
+  },
+  "EmaceHouses_EA03_Nature_Solid_Flat_01a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    1958,
+    1367,
+    115
+   ],
+   "tris": 1042,
+   "file": "FBX/EA03_Nature_Solid_Flat_01a.fbx"
+  },
+  "EmaceHouses_EA03_Nature_Solid_Flat_01b": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    1640,
+    1121,
+    105
+   ],
+   "tris": 891,
+   "file": "FBX/EA03_Nature_Solid_Flat_01b.fbx"
+  },
+  "EmaceHouses_EA03_Nature_Solid_Flat_01c": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    1645,
+    738,
+    231
+   ],
+   "tris": 395,
+   "file": "FBX/EA03_Nature_Solid_Flat_01c.fbx"
+  },
+  "EmaceHouses_EA03_Nature_SweetFlag_01a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    17,
+    17,
+    297
+   ],
+   "tris": 68,
+   "file": "FBX/EA03_Nature_SweetFlag_01a.fbx"
+  },
+  "EmaceHouses_EA03_Nature_SweetFlag_01b": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    76,
+    94,
+    337
+   ],
+   "tris": 406,
+   "file": "FBX/EA03_Nature_SweetFlag_01b.fbx"
+  },
+  "EmaceHouses_EA03_Nature_SweetFlag_01c": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    86,
+    60,
+    295
+   ],
+   "tris": 381,
+   "file": "FBX/EA03_Nature_SweetFlag_01c.fbx"
+  },
+  "EmaceHouses_EA03_Nature_SweetFlag_01d": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    133,
+    21,
+    297
+   ],
+   "tris": 181,
+   "file": "FBX/EA03_Nature_SweetFlag_01d.fbx"
+  },
+  "EmaceHouses_EA03_Nature_SweetFlag_01e": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    78,
+    64,
+    282
+   ],
+   "tris": 500,
+   "file": "FBX/EA03_Nature_SweetFlag_01e.fbx"
+  },
+  "EmaceHouses_EA03_Nature_SweetFlag_02a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    17,
+    17,
+    297
+   ],
+   "tris": 68,
+   "file": "FBX/EA03_Nature_SweetFlag_02a.fbx"
+  },
+  "EmaceHouses_EA03_Nature_SweetFlag_02c": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    47,
+    32,
+    295
+   ],
+   "tris": 219,
+   "file": "FBX/EA03_Nature_SweetFlag_02c.fbx"
+  },
+  "EmaceHouses_EA03_Nature_SweetFlag_02d": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    215,
+    21,
+    232
+   ],
+   "tris": 226,
+   "file": "FBX/EA03_Nature_SweetFlag_02d.fbx"
+  },
+  "EmaceHouses_EA03_Nature_Tree_01b": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    327,
+    325,
+    1029
+   ],
+   "tris": 1106,
+   "file": "FBX/EA03_Nature_Tree_01b.fbx"
+  },
+  "EmaceHouses_EA03_Nature_Tree_02b": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    466,
+    293,
+    1154
+   ],
+   "tris": 1502,
+   "file": "FBX/EA03_Nature_Tree_02b.fbx"
+  },
+  "EmaceHouses_EA03_Nature_Tree_02c": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    342,
+    241,
+    937
+   ],
+   "tris": 791,
+   "file": "FBX/EA03_Nature_Tree_02c.fbx"
+  },
+  "EmaceHouses_EA03_Nature_Tree_03b": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    487,
+    480,
+    929
+   ],
+   "tris": 10980,
+   "file": "FBX/EA03_Nature_Tree_03b.fbx"
+  },
+  "EmaceHouses_EA03_Nature_Tree_03c": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    749,
+    503,
+    1180
+   ],
+   "tris": 18686,
+   "file": "FBX/EA03_Nature_Tree_03c.fbx"
+  },
+  "EmaceHouses_EA03_Nature_Tree_05a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    670,
+    446,
+    1177
+   ],
+   "tris": 3765,
+   "file": "FBX/EA03_Nature_Tree_05a.fbx"
+  },
+  "EmaceHouses_EA03_Nature_Tree_06b": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    638,
+    576,
+    1683
+   ],
+   "tris": 799,
+   "file": "FBX/EA03_Nature_Tree_06b.fbx"
+  },
+  "EmaceHouses_EA03_Nature_TrunkPlant_01a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    442,
+    367,
+    90
+   ],
+   "tris": 4365,
+   "file": "FBX/EA03_Nature_TrunkPlant_01a.fbx"
+  },
+  "EmaceHouses_EA03_Plant_Grass_01c": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    87,
+    63,
+    74
+   ],
+   "tris": 2227,
+   "file": "FBX/EA03_Plant_Grass_01c.fbx"
+  },
+  "EmaceHouses_EA03_Plant_Grass_01d": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    60,
+    43,
+    84
+   ],
+   "tris": 2054,
+   "file": "FBX/EA03_Plant_Grass_01d.fbx"
+  },
+  "EmaceHouses_EA03_Plant_Grass_01e": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    170,
+    125,
+    68
+   ],
+   "tris": 2241,
+   "file": "FBX/EA03_Plant_Grass_01e.fbx"
+  },
+  "EmaceHouses_EA03_Plant_Grass_02a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    38,
+    34,
+    52
+   ],
+   "tris": 16,
+   "file": "FBX/EA03_Plant_Grass_02a.fbx"
+  },
+  "EmaceHouses_EA03_Plant_Grass_02b": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    38,
+    34,
+    52
+   ],
+   "tris": 16,
+   "file": "FBX/EA03_Plant_Grass_02b.fbx"
+  },
+  "EmaceHouses_EA03_Prop_Brushwood_03a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    172,
+    60,
+    58
+   ],
+   "tris": 5726,
+   "file": "FBX/EA03_Prop_Brushwood_03a.fbx"
+  },
+  "EmaceHouses_EA03_Prop_Container_Bag_02a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    82,
+    62,
+    72
+   ],
+   "tris": 515,
+   "file": "FBX/EA03_Prop_Container_Bag_02a.fbx"
+  },
+  "EmaceHouses_EA03_Prop_Container_Bale_01a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    36,
+    60,
+    37
+   ],
+   "tris": 1609,
+   "file": "FBX/EA03_Prop_Container_Bale_01a.fbx"
+  },
+  "EmaceHouses_EA03_Prop_Container_Barrel_01d": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    66,
+    59,
+    82
+   ],
+   "tris": 908,
+   "file": "FBX/EA03_Prop_Container_Barrel_01d.fbx"
+  },
+  "EmaceHouses_EA03_Prop_Container_Basket_01a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    47,
+    47,
+    46
+   ],
+   "tris": 524,
+   "file": "FBX/EA03_Prop_Container_Basket_01a.fbx"
+  },
+  "EmaceHouses_EA03_Prop_Container_Basket_02": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    60,
+    61,
+    52
+   ],
+   "tris": 719,
+   "file": "FBX/EA03_Prop_Container_Basket_02.fbx"
+  },
+  "EmaceHouses_EA03_Prop_Container_Basket_03a": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    32,
+    34,
+    26
+   ],
+   "tris": 1924,
+   "file": "FBX/EA03_Prop_Container_Basket_03a.fbx"
+  },
+  "EmaceHouses_EA03_Prop_Container_Basket_04a": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    32,
+    32,
+    43
+   ],
+   "tris": 2791,
+   "file": "FBX/EA03_Prop_Container_Basket_04a.fbx"
+  },
+  "EmaceHouses_EA03_Prop_Container_Bowl_01": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    53,
+    68,
+    34
+   ],
+   "tris": 434,
+   "file": "FBX/EA03_Prop_Container_Bowl_01.fbx"
+  },
+  "EmaceHouses_EA03_Prop_Container_Chest_02a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    169,
+    95,
+    71
+   ],
+   "tris": 741,
+   "file": "FBX/EA03_Prop_Container_Chest_02a.fbx"
+  },
+  "EmaceHouses_EA03_Prop_Container_Crate_01a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    88,
+    81,
+    64
+   ],
+   "tris": 778,
+   "file": "FBX/EA03_Prop_Container_Crate_01a.fbx"
+  },
+  "EmaceHouses_EA03_Prop_Container_Crate_02a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    104,
+    98,
+    85
+   ],
+   "tris": 919,
+   "file": "FBX/EA03_Prop_Container_Crate_02a.fbx"
+  },
+  "EmaceHouses_EA03_Prop_Container_Crate_03a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    87,
+    82,
+    75
+   ],
+   "tris": 918,
+   "file": "FBX/EA03_Prop_Container_Crate_03a.fbx"
+  },
+  "EmaceHouses_EA03_Prop_Crate_Under_Ceiling_01b": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    107,
+    293,
+    122
+   ],
+   "tris": 19810,
+   "file": "FBX/EA03_Prop_Crate_Under_Ceiling_01b.fbx"
+  },
+  "EmaceHouses_EA03_Prop_Forester_CutOutTrees_03": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    607,
+    1727,
+    468
+   ],
+   "tris": 2747,
+   "file": "FBX/EA03_Prop_Forester_CutOutTrees_03.fbx"
+  },
+  "EmaceHouses_EA03_Prop_Forester_wooden_01d": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    217,
+    158,
+    65
+   ],
+   "tris": 906,
+   "file": "FBX/EA03_Prop_Forester_wooden_01d.fbx"
+  },
+  "EmaceHouses_EA03_Prop_House_Bolt_01a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    21,
+    73,
+    33
+   ],
+   "tris": 263,
+   "file": "FBX/EA03_Prop_House_Bolt_01a.fbx"
+  },
+  "EmaceHouses_EA03_Prop_House_Door_01b": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    18,
+    139,
+    253
+   ],
+   "tris": 951,
+   "file": "FBX/EA03_Prop_House_Door_01b.fbx"
+  },
+  "EmaceHouses_EA03_Prop_House_Hanger_01b": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    118,
+    25,
+    123
+   ],
+   "tris": 342,
+   "file": "FBX/EA03_Prop_House_Hanger_01b.fbx"
+  },
+  "EmaceHouses_EA03_Prop_House_Shelf_01a": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    230,
+    74,
+    239
+   ],
+   "tris": 336,
+   "file": "FBX/EA03_Prop_House_Shelf_01a.fbx"
+  },
+  "EmaceHouses_EA03_Prop_House_Shelf_01c": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    140,
+    74,
+    239
+   ],
+   "tris": 330,
+   "file": "FBX/EA03_Prop_House_Shelf_01c.fbx"
+  },
+  "EmaceHouses_EA03_Prop_House_Shelf_01g": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    157,
+    23,
+    111
+   ],
+   "tris": 1010,
+   "file": "FBX/EA03_Prop_House_Shelf_01g.fbx"
+  },
+  "EmaceHouses_EA03_Prop_House_Shelf_02c": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    147,
+    50,
+    373
+   ],
+   "tris": 225,
+   "file": "FBX/EA03_Prop_House_Shelf_02c.fbx"
+  },
+  "EmaceHouses_EA03_Prop_House_Shutter_01a": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    94,
+    296,
+    161
+   ],
+   "tris": 319,
+   "file": "FBX/EA03_Prop_House_Shutter_01a.fbx"
+  },
+  "EmaceHouses_EA03_Prop_House_Shutter_01c": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    50,
+    272,
+    161
+   ],
+   "tris": 207,
+   "file": "FBX/EA03_Prop_House_Shutter_01c.fbx"
+  },
+  "EmaceHouses_EA03_Prop_House_Shutter_01d": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    11,
+    217,
+    132
+   ],
+   "tris": 316,
+   "file": "FBX/EA03_Prop_House_Shutter_01d.fbx"
+  },
+  "EmaceHouses_EA03_Prop_House_Shutter_01e": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    38,
+    186,
+    123
+   ],
+   "tris": 379,
+   "file": "FBX/EA03_Prop_House_Shutter_01e.fbx"
+  },
+  "EmaceHouses_EA03_Prop_House_Stove_01b": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    276,
+    274,
+    333
+   ],
+   "tris": 3281,
+   "file": "FBX/EA03_Prop_House_Stove_01b.fbx"
+  },
+  "EmaceHouses_EA03_Prop_Pier_03d": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    660,
+    256,
+    257
+   ],
+   "tris": 415,
+   "file": "FBX/EA03_Prop_Pier_03d.fbx"
+  },
+  "EmaceHouses_EA03_Prop_Pier_04c": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    463,
+    353,
+    246
+   ],
+   "tris": 667,
+   "file": "FBX/EA03_Prop_Pier_04c.fbx"
+  },
+  "EmaceHouses_EA03_Prop_Pillow_01d": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    61,
+    84,
+    13
+   ],
+   "tris": 191,
+   "file": "FBX/EA03_Prop_Pillow_01d.fbx"
+  },
+  "EmaceHouses_EA03_Prop_Shelf_01b": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    252,
+    215,
+    23
+   ],
+   "tris": 112,
+   "file": "FBX/EA03_Prop_Shelf_01b.fbx"
+  },
+  "EmaceHouses_EA03_Prop_Shelf_01c": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    118,
+    108,
+    23
+   ],
+   "tris": 119,
+   "file": "FBX/EA03_Prop_Shelf_01c.fbx"
+  },
+  "EmaceHouses_EA03_Prop_Sign_Chapel_01": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    195,
+    178,
+    401
+   ],
+   "tris": 1260,
+   "file": "FBX/EA03_Prop_Sign_Chapel_01.fbx"
+  },
+  "EmaceHouses_EA03_Prop_Stool_01a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    53,
+    50,
+    51
+   ],
+   "tris": 135,
+   "file": "FBX/EA03_Prop_Stool_01a.fbx"
+  },
+  "EmaceHouses_EA03_Prop_Stool_02a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    60,
+    69,
+    108
+   ],
+   "tris": 361,
+   "file": "FBX/EA03_Prop_Stool_02a.fbx"
+  },
+  "EmaceHouses_EA03_Prop_Tabble_01a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    98,
+    268,
+    83
+   ],
+   "tris": 516,
+   "file": "FBX/EA03_Prop_Tabble_01a.fbx"
+  },
+  "EmaceHouses_EA03_Prop_Tabble_02a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    78,
+    92,
+    65
+   ],
+   "tris": 212,
+   "file": "FBX/EA03_Prop_Tabble_02a.fbx"
+  },
+  "EmaceHouses_EA03_Prop_Tool_Basket_01": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    62,
+    67,
+    67
+   ],
+   "tris": 937,
+   "file": "FBX/EA03_Prop_Tool_Basket_01.fbx"
+  },
+  "EmaceHouses_EA03_Prop_Tool_Pick_01a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    55,
+    92,
+    7
+   ],
+   "tris": 281,
+   "file": "FBX/EA03_Prop_Tool_Pick_01a.fbx"
+  },
+  "EmaceHouses_EA03_Prop_Tool_Stump_02a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    91,
+    61,
+    123
+   ],
+   "tris": 294,
+   "file": "FBX/EA03_Prop_Tool_Stump_02a.fbx"
+  },
+  "EmaceHouses_EA03_Prop_Town_AnimalSkin_01b": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    151,
+    104,
+    9
+   ],
+   "tris": 532,
+   "file": "FBX/EA03_Prop_Town_AnimalSkin_01b.fbx"
+  },
+  "EmaceHouses_EA03_Prop_Town_AnimalSkin_01c": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    151,
+    104,
+    8
+   ],
+   "tris": 530,
+   "file": "FBX/EA03_Prop_Town_AnimalSkin_01c.fbx"
+  },
+  "EmaceHouses_EA03_Prop_Town_Bed_01a_004": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    278,
+    118,
+    106
+   ],
+   "tris": 1179,
+   "file": "FBX/EA03_Prop_Town_Bed_01a.004.fbx"
+  },
+  "EmaceHouses_EA03_Prop_Town_Bench_01a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    50,
+    136,
+    42
+   ],
+   "tris": 363,
+   "file": "FBX/EA03_Prop_Town_Bench_01a.fbx"
+  },
+  "EmaceHouses_EA03_Prop_Town_Bench_01b": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    50,
+    136,
+    42
+   ],
+   "tris": 754,
+   "file": "FBX/EA03_Prop_Town_Bench_01b.fbx"
+  },
+  "EmaceHouses_EA03_Prop_Vegetable_Basket_02": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    104,
+    59,
+    43
+   ],
+   "tris": 295,
+   "file": "FBX/EA03_Prop_Vegetable_Basket_02.fbx"
+  },
+  "EmaceHouses_EA03_Prop_Village_Ladder_02a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    86,
+    18,
+    204
+   ],
+   "tris": 206,
+   "file": "FBX/EA03_Prop_Village_Ladder_02a.fbx"
+  },
+  "EmaceHouses_EA03_Prop_Village_Plank_01c": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    27,
+    7,
+    129
+   ],
+   "tris": 24,
+   "file": "FBX/EA03_Prop_Village_Plank_01c.fbx"
+  },
+  "EmaceHouses_EA03_Prop_Village_Whell_01d": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    558,
+    470,
+    494
+   ],
+   "tris": 1773,
+   "file": "FBX/EA03_Prop_Village_Whell_01d.fbx"
+  },
+  "EmaceHouses_EA03_Step_01b": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    246,
+    93,
+    72
+   ],
+   "tris": 124,
+   "file": "FBX/EA03_Step_01b.fbx"
+  },
+  "EmaceHouses_EA03_Terrain_Field_2x2_Seam_01a": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    2001,
+    2000,
+    60
+   ],
+   "tris": 1235,
+   "file": "FBX/EA03_Terrain_Field_2x2_Seam_01a.fbx"
+  },
+  "EmaceHouses_EA03_Town_Ill_Roof_01a": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    930,
+    988,
+    479
+   ],
+   "tris": 5496,
+   "file": "FBX/EA03_Town_Ill_Roof_01a.fbx"
+  },
+  "EmaceHouses_EA03_Town_Ill_Roof_01b": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    1244,
+    990,
+    488
+   ],
+   "tris": 5864,
+   "file": "FBX/EA03_Town_Ill_Roof_01b.fbx"
+  },
+  "EmaceHouses_EA03_Village_AnimalBreeding_Hovel_01a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    222,
+    235,
+    221
+   ],
+   "tris": 1417,
+   "file": "FBX/EA03_Village_AnimalBreeding_Hovel_01a.fbx"
+  },
+  "EmaceHouses_EA03_Village_Balcony_R_01a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    468,
+    272,
+    337
+   ],
+   "tris": 1708,
+   "file": "FBX/EA03_Village_Balcony_R_01a.fbx"
+  },
+  "EmaceHouses_EA03_Village_Fence_01a": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    27,
+    519,
+    176
+   ],
+   "tris": 182,
+   "file": "FBX/EA03_Village_Fence_01a.fbx"
+  },
+  "EmaceHouses_EA03_Village_HouseModule_Porch_01d": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    664,
+    289,
+    146
+   ],
+   "tris": 1277,
+   "file": "FBX/EA03_Village_HouseModule_Porch_01d.fbx"
+  },
+  "EmaceHouses_EA03_Village_HouseModule_Porch_R_03b": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    637,
+    180,
+    102
+   ],
+   "tris": 3876,
+   "file": "FBX/EA03_Village_HouseModule_Porch_R_03b.fbx"
+  },
+  "EmaceHouses_EA03_Village_Hut_Ceiling_01e": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    1928,
+    765,
+    20
+   ],
+   "tris": 314,
+   "file": "FBX/EA03_Village_Hut_Ceiling_01e.fbx"
+  },
+  "EmaceHouses_EA03_Village_Hut_Foundation_02b": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    2011,
+    938,
+    175
+   ],
+   "tris": 3336,
+   "file": "FBX/EA03_Village_Hut_Foundation_02b.fbx"
+  },
+  "EmaceHouses_EA03_Village_Hut_Roof_01c": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    2002,
+    1130,
+    505
+   ],
+   "tris": 1583,
+   "file": "FBX/EA03_Village_Hut_Roof_01c.fbx"
+  },
+  "EmaceHouses_EA03_Village_Hut_Roof_Cut_01C": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    1054,
+    1137,
+    522
+   ],
+   "tris": 1452,
+   "file": "FBX/EA03_Village_Hut_Roof_Cut_01C.fbx"
+  },
+  "EmaceHouses_EA03_Village_Hut_Roof_Cut_01a": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    1655,
+    1130,
+    505
+   ],
+   "tris": 1402,
+   "file": "FBX/EA03_Village_Hut_Roof_Cut_01a.fbx"
+  },
+  "EmaceHouses_EA03_Village_Hut_Roof_Cut_01b": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    1056,
+    1137,
+    522
+   ],
+   "tris": 1425,
+   "file": "FBX/EA03_Village_Hut_Roof_Cut_01b.fbx"
+  },
+  "EmaceHouses_EA03_Village_Hut_Roof_Cut_01d": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    695,
+    913,
+    522
+   ],
+   "tris": 1270,
+   "file": "FBX/EA03_Village_Hut_Roof_Cut_01d.fbx"
+  },
+  "EmaceHouses_EA03_Village_Hut_Roof_Cut_02a": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    850,
+    629,
+    547
+   ],
+   "tris": 1285,
+   "file": "FBX/EA03_Village_Hut_Roof_Cut_02a.fbx"
+  },
+  "EmaceHouses_EA03_Village_Hut_Roof_Half_01a": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    917,
+    1015,
+    553
+   ],
+   "tris": 2123,
+   "file": "FBX/EA03_Village_Hut_Roof_Half_01a.fbx"
+  },
+  "EmaceHouses_EA03_Village_Hut_Wall_Desk_02a": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    50,
+    852,
+    44
+   ],
+   "tris": 79,
+   "file": "FBX/EA03_Village_Hut_Wall_Desk_02a.fbx"
+  },
+  "EmaceHouses_EA03_Village_Hut_Wall_Front_01i": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    31,
+    542,
+    290
+   ],
+   "tris": 547,
+   "file": "FBX/EA03_Village_Hut_Wall_Front_01i.fbx"
+  },
+  "EmaceHouses_EA03_Village_Hut_Wall_Front_02d": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    76,
+    866,
+    313
+   ],
+   "tris": 1087,
+   "file": "FBX/EA03_Village_Hut_Wall_Front_02d.fbx"
+  },
+  "EmaceHouses_EA03_Village_Hut_Wall_Front_02i": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    55,
+    535,
+    310
+   ],
+   "tris": 465,
+   "file": "FBX/EA03_Village_Hut_Wall_Front_02i.fbx"
+  },
+  "EmaceHouses_EA03_Village_Hut_Wall_Front_03f": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    77,
+    886,
+    313
+   ],
+   "tris": 725,
+   "file": "FBX/EA03_Village_Hut_Wall_Front_03f.fbx"
+  },
+  "EmaceHouses_EA03_Village_Hut_Wall_Front_04b": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    36,
+    795,
+    298
+   ],
+   "tris": 325,
+   "file": "FBX/EA03_Village_Hut_Wall_Front_04b.fbx"
+  },
+  "EmaceHouses_EA03_Village_Hut_Wall_Front_04e": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    40,
+    793,
+    298
+   ],
+   "tris": 384,
+   "file": "FBX/EA03_Village_Hut_Wall_Front_04e.fbx"
+  },
+  "EmaceHouses_EA03_Village_Hut_Wall_Front_04f": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    40,
+    793,
+    298
+   ],
+   "tris": 275,
+   "file": "FBX/EA03_Village_Hut_Wall_Front_04f.fbx"
+  },
+  "EmaceHouses_EA03_Village_Hut_Wall_Front_04h": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    33,
+    793,
+    298
+   ],
+   "tris": 205,
+   "file": "FBX/EA03_Village_Hut_Wall_Front_04h.fbx"
+  },
+  "EmaceHouses_EA03_Village_Hut_Wall_Painted_Desk_02a": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    50,
+    852,
+    44
+   ],
+   "tris": 79,
+   "file": "FBX/EA03_Village_Hut_Wall_Painted_Desk_02a.fbx"
+  },
+  "EmaceHouses_EA03_Village_Hut_Wall_Painted_Front_02a": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    59,
+    856,
+    310
+   ],
+   "tris": 675,
+   "file": "FBX/EA03_Village_Hut_Wall_Painted_Front_02a.fbx"
+  },
+  "EmaceHouses_EA03_Village_Hut_Wall_Painted_Side_02c": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    2004,
+    55,
+    310
+   ],
+   "tris": 540,
+   "file": "FBX/EA03_Village_Hut_Wall_Painted_Side_02c.fbx"
+  },
+  "EmaceHouses_EA03_Village_Hut_Wall_Painted_Side_02e": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    1999,
+    88,
+    313
+   ],
+   "tris": 1316,
+   "file": "FBX/EA03_Village_Hut_Wall_Painted_Side_02e.fbx"
+  },
+  "EmaceHouses_EA03_Village_OutBuilding_Convenience_01a": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    265,
+    292,
+    476
+   ],
+   "tris": 943,
+   "file": "FBX/EA03_Village_OutBuilding_Convenience_01a.fbx"
+  },
+  "EmaceHouses_EA03_Village_OutBuilding_Cubby_01d": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    898,
+    735,
+    810
+   ],
+   "tris": 3338,
+   "file": "FBX/EA03_Village_OutBuilding_Cubby_01d.fbx"
+  },
+  "EmaceHouses_EA03_Village_OutBuilding_PentHouse_01a": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    927,
+    1052,
+    882
+   ],
+   "tris": 988,
+   "file": "FBX/EA03_Village_OutBuilding_PentHouse_01a.fbx"
+  },
+  "EmaceHouses_EA03_Village_OutBuilding_Shed_01a": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    1114,
+    806,
+    738
+   ],
+   "tris": 2519,
+   "file": "FBX/EA03_Village_OutBuilding_Shed_01a.fbx"
+  },
+  "EmaceHouses_EA03_Village_OutBuilding_Shed_03b": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    1545,
+    2447,
+    959
+   ],
+   "tris": 5260,
+   "file": "FBX/EA03_Village_OutBuilding_Shed_03b.fbx"
+  },
+  "EmaceHouses_EA03_Village_OutBuilding_WoodRoof_01b": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    518,
+    321,
+    416
+   ],
+   "tris": 1387,
+   "file": "FBX/EA03_Village_OutBuilding_WoodRoof_01b.fbx"
+  },
+  "EmaceHouses_EA03_Village_Tover_01a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    812,
+    880,
+    1086
+   ],
+   "tris": 9210,
+   "file": "FBX/EA03_Village_Tover_01a.fbx"
+  },
+  "EmaceHouses_EA03_Village_platform_01a": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    291,
+    543,
+    36
+   ],
+   "tris": 388,
+   "file": "FBX/EA03_Village_platform_01a.fbx"
+  },
+  "EmaceHouses_EA03_Village_step_platform_Stair_R_03a": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    461,
+    214,
+    516
+   ],
+   "tris": 620,
+   "file": "FBX/EA03_Village_step_platform_Stair_R_03a.fbx"
+  },
+  "EmaceHouses_EA03_Wooden_Pin_01a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    31,
+    27,
+    81
+   ],
+   "tris": 277,
+   "file": "FBX/EA03_Wooden_Pin_01a.fbx"
+  },
+  "EmaceHouses_EA03_Wooden_Pin_01b": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    23,
+    28,
+    149
+   ],
+   "tris": 79,
+   "file": "FBX/EA03_Wooden_Pin_01b.fbx"
+  },
+  "EmaceHouses_EA03_Wooden_Pin_01c": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    34,
+    40,
+    176
+   ],
+   "tris": 154,
+   "file": "FBX/EA03_Wooden_Pin_01c.fbx"
+  },
+  "EmaceHouses_EA_Items_House_bowl_metal_01c": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    33,
+    34,
+    5
+   ],
+   "tris": 208,
+   "file": "FBX/EA_Items_House_bowl_metal_01c.fbx"
+  },
+  "EmaceHouses_EA_Items_House_bowl_wod": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    39,
+    40,
+    8
+   ],
+   "tris": 246,
+   "file": "FBX/EA_Items_House_bowl_wod.fbx"
+  },
+  "EmaceHouses_EA_Items_House_bowl_wod_2": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    23,
+    24,
+    10
+   ],
+   "tris": 322,
+   "file": "FBX/EA_Items_House_bowl_wod_2.fbx"
+  },
+  "EmaceHouses_EA_Items_House_bowl_wod_powder_01a": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    23,
+    24,
+    10
+   ],
+   "tris": 289,
+   "file": "FBX/EA_Items_House_bowl_wod_powder_01a.fbx"
+  },
+  "EmaceHouses_EA_Items_House_cauldron_01a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    39,
+    28,
+    48
+   ],
+   "tris": 430,
+   "file": "FBX/EA_Items_House_cauldron_01a.fbx"
+  },
+  "EmaceHouses_EA_Items_House_cauldron_01d": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    32,
+    35,
+    45
+   ],
+   "tris": 824,
+   "file": "FBX/EA_Items_House_cauldron_01d.fbx"
+  },
+  "EmaceHouses_EA_Items_House_cauldron_soup_01a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    53,
+    47,
+    43
+   ],
+   "tris": 1324,
+   "file": "FBX/EA_Items_House_cauldron_soup_01a.fbx"
+  },
+  "EmaceHouses_EA_Items_House_kettle_01a": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    29,
+    33,
+    30
+   ],
+   "tris": 550,
+   "file": "FBX/EA_Items_House_kettle_01a.fbx"
+  },
+  "EmaceHouses_EA_Items_House_kettle_empty_01a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    25,
+    35,
+    45
+   ],
+   "tris": 682,
+   "file": "FBX/EA_Items_House_kettle_empty_01a.fbx"
+  },
+  "EmaceHouses_EA_Items_House_mug_01a": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    14,
+    20,
+    22
+   ],
+   "tris": 380,
+   "file": "FBX/EA_Items_House_mug_01a.fbx"
+  },
+  "EmaceHouses_EA_Items_House_mug_01b": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    17,
+    25,
+    31
+   ],
+   "tris": 435,
+   "file": "FBX/EA_Items_House_mug_01b.fbx"
+  },
+  "EmaceHouses_EA_Items_House_mug_02a": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    16,
+    16,
+    30
+   ],
+   "tris": 758,
+   "file": "FBX/EA_Items_House_mug_02a.fbx"
+  },
+  "EmaceHouses_EA_Items_House_pan_empty_01a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    24,
+    47,
+    6
+   ],
+   "tris": 546,
+   "file": "FBX/EA_Items_House_pan_empty_01a.fbx"
+  },
+  "EmaceHouses_EA_Items_House_soon_wooden": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    7,
+    31,
+    3
+   ],
+   "tris": 302,
+   "file": "FBX/EA_Items_House_soon_wooden.fbx"
+  },
+  "EmaceHouses_EA_Items_House_spoon_wooden_02": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    12,
+    40,
+    6
+   ],
+   "tris": 360,
+   "file": "FBX/EA_Items_House_spoon_wooden_02.fbx"
+  },
+  "EmaceHouses_EA_Items_House_spoon_wooden_03": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    7,
+    33,
+    3
+   ],
+   "tris": 299,
+   "file": "FBX/EA_Items_House_spoon_wooden_03.fbx"
+  },
+  "EmaceHouses_EA_Items_House_spoon_wooden_04": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    10,
+    43,
+    3
+   ],
+   "tris": 295,
+   "file": "FBX/EA_Items_House_spoon_wooden_04.fbx"
+  },
+  "EmaceHouses_EA_Items_House_spoon_wooden_05": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    10,
+    29,
+    3
+   ],
+   "tris": 195,
+   "file": "FBX/EA_Items_House_spoon_wooden_05.fbx"
+  },
+  "EmaceHouses_EA_Prop_Hunter_Animal_Trophy_01a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    126,
+    87,
+    123
+   ],
+   "tris": 1411,
+   "file": "FBX/EA_Prop_Hunter_Animal_Trophy_01a.fbx"
+  },
+  "EmaceHouses_EA_Prop_Stand_Sheet_01a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    365,
+    196,
+    333
+   ],
+   "tris": 2321,
+   "file": "FBX/EA_Prop_Stand_Sheet_01a.fbx"
+  }
+ },
+ "skipped": [
+  {
+   "file": "FBX/EA03_Town_Building_Administrative _01a.fbx",
+   "piece": "EA03_Town_Building_Administrative_01a",
+   "reason": "25685 tris > 20000"
+  }
+ ]
+}

@@ -3,10 +3,12 @@
 #include "Character/KGCharacter.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "Components/StaticMeshComponent.h"
+#include "Core/KGGameMode.h"
 #include "Cosmetics/KGCosmeticCatalog.h"
 #include "Cosmetics/KGProfileSave.h"
 #include "Engine/SkeletalMesh.h"
 #include "Engine/StaticMesh.h"
+#include "GameFramework/GameStateBase.h"
 #include "GameFramework/PlayerController.h"
 #include "GameFramework/PlayerState.h"
 #include "KillGodot.h"
@@ -38,6 +40,62 @@ void UKGCosmeticsComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>
 	FDoRepLifetimeParams Params;
 	Params.bIsPushBased = true;   // public: everyone sees your hat
 	DOREPLIFETIME_WITH_PARAMS_FAST(UKGCosmeticsComponent, Equipped, Params);
+	DOREPLIFETIME_WITH_PARAMS_FAST(UKGCosmeticsComponent, Look, Params);   // public too: everyone renders your body
+}
+
+uint64 UKGCosmeticsComponent::LookSeed(const UWorld* World)
+{
+	const AKGGameMode* GM = World ? World->GetAuthGameMode<AKGGameMode>() : nullptr;
+	if (GM && GM->GetMatchSeed() != 0)
+	{
+		return static_cast<uint64>(GM->GetMatchSeed());
+	}
+	// Pre-match lobby: one seed per server process, so a lobby's looks differ from the last lobby's.
+	static const uint64 LobbySeed = (static_cast<uint64>(FMath::Rand()) << 32) ^ FPlatformTime::Cycles64();
+	return LobbySeed;
+}
+
+void UKGCosmeticsComponent::AssignLook(FName PreferredArchetype)
+{
+	const APlayerState* PS = Cast<APlayerState>(GetOwner());
+	if (!PS || !GetOwner()->HasAuthority())
+	{
+		return;
+	}
+	TArray<FKGVillagerLook> Taken;
+	if (const AGameStateBase* GS = GetWorld() ? GetWorld()->GetGameState() : nullptr)
+	{
+		for (const APlayerState* Other : GS->PlayerArray)
+		{
+			const UKGCosmeticsComponent* Theirs = Other && Other != PS ? FindForPlayer(Other) : nullptr;
+			if (Theirs && Theirs->Look.IsAssigned())
+			{
+				Taken.Add(Theirs->Look);
+			}
+		}
+	}
+	const FKGVillagerLook New = FKGVillagerLookGen::Generate(LookSeed(GetWorld()), PS->GetPlayerId(), Taken, PreferredArchetype);
+	PreferredLook = PreferredArchetype;
+	if (New == Look)
+	{
+		return;
+	}
+	Look = New;
+	MARK_PROPERTY_DIRTY_FROM_NAME(UKGCosmeticsComponent, Look, this);
+	GetOwner()->ForceNetUpdate();
+	UE_LOG(LogKillGodot, Log, TEXT("Look for %s: %s"), *PS->GetPlayerName(), *Look.ToString());
+}
+
+void UKGCosmeticsComponent::ServerSetPreferredLook_Implementation(FName Archetype)
+{
+	if (!FKGVillagerLookGen::FindArchetype(Archetype))
+	{
+		Archetype = NAME_None;
+	}
+	if (Archetype != PreferredLook || !Look.IsAssigned())
+	{
+		AssignLook(Archetype);
+	}
 }
 
 UKGCosmeticsComponent* UKGCosmeticsComponent::FindForPlayer(const APlayerState* PlayerState)
@@ -98,6 +156,10 @@ void UKGCosmeticsComponent::TickComponent(float DeltaTime, ELevelTick TickType,
 	{
 		AssignBotLoadout();
 	}
+	if (GetOwner()->HasAuthority() && !Look.IsAssigned())
+	{
+		AssignLook(PreferredLook);   // SPRINT-027a: every player (bots too) gets a unique seeded villager look
+	}
 	if (!bPushedLocalLoadout && KGCosmeticsPrivate::IsLocalOwner(this))
 	{
 		PushLocalLoadout();
@@ -116,13 +178,16 @@ void UKGCosmeticsComponent::PushLocalLoadout()
 {
 	bPushedLocalLoadout = true;
 	const TArray<FName> Ids = UKGProfileSave::GetProfile()->GetEquippedIds();
+	const FName Preferred = UKGProfileSave::GetProfile()->GetPreferredLook();
 	if (GetOwner()->HasAuthority())
 	{
 		SetLoadout(Ids);
+		ServerSetPreferredLook_Implementation(Preferred);
 	}
 	else
 	{
 		ServerSetLoadout(Ids);
+		ServerSetPreferredLook(Preferred);
 	}
 }
 

@@ -380,7 +380,7 @@ bool FKGWorldChoreSocialTest::RunTest(const FString& Parameters)
 		return false;
 	}
 	const FName WaterRun(TEXT("WaterRun"));
-	const int32 Farm = Server.Anchor(TEXT("inn_trough"));
+	const int32 Trough = Server.Anchor(TEXT("inn_trough"));
 	AKGWorldChoreDirector* Dir = AKGWorldChoreDirector::Get(Server.World);
 
 	// Fake: the Impatient does the inn water run for real-looking results; nothing is counted.
@@ -394,14 +394,14 @@ bool FKGWorldChoreSocialTest::RunTest(const FString& Parameters)
 	Fake->DebugTick(2.5f);
 	TestTrue(TEXT("Fake ticks their own list"), Done(Server.Player(0), WaterRun));
 	TestEqual(TEXT("...but fills no preparation"), Server.GS()->Preparation, Prep0);
-	TestTrue(TEXT("...and the trough looks filled to everyone"), Dir->GetSpot(Farm)->Level > 0.9f);
+	TestTrue(TEXT("...and the trough looks filled to everyone"), Dir->GetSpot(Trough)->Level > 0.9f);
 
 	// Sabotage: the Impatient poisons the filled trough (3 s at it).
-	TestTrue(TEXT("The Impatient may poison a filled trough"), Fake->AuthInteract(Farm));
+	TestTrue(TEXT("The Impatient may poison a filled trough"), Fake->AuthInteract(Trough));
 	TestEqual(TEXT("...standing there"), Fake->GetDwell().Kind, EKGDwell::Sabotage);
 	Fake->DebugTick(3.2f);
-	TestTrue(TEXT("Poisoned"), Dir->GetSpot(Farm)->bSpoiled);
-	TestFalse(TEXT("A villager cannot poison anything"), Real->AuthInteract(Farm));
+	TestTrue(TEXT("Poisoned"), Dir->GetSpot(Trough)->bSpoiled);
+	TestFalse(TEXT("A villager cannot poison anything"), Real->AuthInteract(Trough));
 
 	// The next villager with water for that trough finds it poisoned: dump it first, then pour.
 	Real->AuthGive(WaterRun, 2);
@@ -411,10 +411,10 @@ bool FKGWorldChoreSocialTest::RunTest(const FString& Parameters)
 	Server.StandAt(VillagerBody, TEXT("inn_trough"));
 	Real->DebugTick(3.0f);
 	TestFalse(TEXT("No pouring into poison"), Done(Server.Player(1), WaterRun));
-	TestTrue(TEXT("E dumps the poisoned water"), Real->AuthInteract(Farm));
+	TestTrue(TEXT("E dumps the poisoned water"), Real->AuthInteract(Trough));
 	TestEqual(TEXT("...a dump"), Real->GetDwell().Kind, EKGDwell::Dump);
 	Real->DebugTick(3.2f);
-	TestFalse(TEXT("Clean again"), Dir->GetSpot(Farm)->bSpoiled);
+	TestFalse(TEXT("Clean again"), Dir->GetSpot(Trough)->bSpoiled);
 	Real->DebugTick(2.5f);
 	TestTrue(TEXT("Then the pour counts"), Done(Server.Player(1), WaterRun));
 
@@ -490,6 +490,37 @@ bool FKGWorldChoreThrowTest::RunTest(const FString& Parameters)
 	TestTrue(TEXT("Firewood done: thrown into the forge woodbox"), Done(Server.Player(0), Firewood));
 	TestTrue(TEXT("\"Nice throw!\""), WC->GetNotice().Contains(TEXT("Nice throw")));
 	TestEqual(TEXT("The woodbox shows the bundle"), static_cast<int32>(AKGWorldChoreDirector::Get(Server.World)->GetSpot(Server.Anchor(TEXT("forge_woodbox")))->Count), 1);
+	return true;
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FKGWorldChoreStormManorTest, "KillGodot.WorldChores.StormManor",
+                                 EAutomationTestFlags_ApplicationContextMask | EAutomationTestFlags::ProductFilter)
+
+bool FKGWorldChoreStormManorTest::RunTest(const FString& Parameters)
+{
+	// SPRINT-018: map 2 has its own catalog (all 19 manor chores); Morrowmere stays the default one.
+	const FKGWorldChoreCatalog* Manor = FKGWorldChoreCatalog::FindByMap(TEXT("L_StormManor"));
+	if (!TestNotNull(TEXT("Storm Manor catalog"), Manor))
+	{
+		return false;
+	}
+	FString Error;
+	TestTrue(TEXT("Storm Manor catalog validates: ") + Error, Manor->Validate(Error));
+	TestEqual(TEXT("All 19 manor chores"), Manor->Chores.Num(), 19);
+	for (const FKGWorldChoreDef& D : Manor->Chores)
+	{
+		TestTrue(FString::Printf(TEXT("%s has 1-3 simple steps"), *D.Id.ToString()), D.NumSteps() >= 1 && D.NumSteps() <= 3);
+		for (int32 v = 0; v < D.NumVariants(); ++v)
+		{
+			for (int32 st = 0; st < D.NumSteps(); ++st)
+			{
+				TestFalse(FString::Printf(TEXT("%s step %d label resolved"), *D.Id.ToString(), st), D.StepLabel(st, v).Contains(TEXT("$")));
+			}
+		}
+	}
+	TestEqual(TEXT("Morrowmere v2 is still the default catalog"), FKGWorldChoreCatalog::Get().MapName, FString(TEXT("L_Morrowmere_v2")));
 	return true;
 }
 

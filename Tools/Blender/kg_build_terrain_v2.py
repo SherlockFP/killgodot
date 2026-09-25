@@ -322,6 +322,30 @@ class Field:
         quiet = smooth(1.0, 6.0, lane_d) * (1.0 - pad_w) * (1.0 - near_flat_w)
         z = np.where((kind == 2) | (kind == 0), z + slope_noise * quiet, z)
 
+        # --- cliff shoulders (SPRINT-022 acceptance 6): a cliff with a "shoulder" is lowered on its land side, so the
+        # sheer face stops at a ragged rock lip (edge_z); above it the land steps up to a grassy bench (ledge_z) and only
+        # then climbs back to the terrace. An fbm wobble along the line keeps the skyline seen from the basin broken.
+        # Never on flat terraces, lanes or building pads; faded in and out along the cliff (fade_m).
+        for c in L["cliffs"]:
+            sh = c.get("shoulder")
+            if not sh:
+                continue
+            W = sh["width_m"]
+            bb = bbox_mask(px, py, c["points"], W + 1.0) & land & ((kind == 0) | (kind == 2))
+            if not bb.any():
+                continue
+            d, s_at, _, _, total = polyline_info(px[bb], py[bb], c["points"])
+            wob = sh.get("wobble_m", 0.0) * fbm(px[bb] * 0.5 + 11.0, py[bb] * 0.5 - 7.0, 4.5, 3, seed=17)
+            edge = sh["edge_z"] + wob
+            ledge = sh["ledge_z"] + 0.6 * wob
+            d2 = d + 1.2 * wob                                             # the lip and bench wander in plan too
+            tgt = edge + (ledge - edge) * smooth(1.2, sh["ledge_at_m"], d2)
+            zb = z[bb]
+            tgt = tgt + np.maximum(0.0, zb - ledge) * smooth(sh["bench_to_m"], W, d2)
+            fade = smooth(0.0, sh["fade_m"], s_at) * smooth(0.0, sh.get("fade_end_m", sh["fade_m"]), total - s_at) * (d <= W)
+            fade = fade * smooth(0.5, 3.0, lane_d[bb]) * (1.0 - pad_w[bb])
+            z[bb] = zb + (np.minimum(zb, tgt) - zb) * fade
+
         # --- brook: bed + banks, mill pond
         st = L["stream"]
         spts = [p[:2] for p in st["points"]]

@@ -1,0 +1,1162 @@
+{
+ "tag": "KKForest",
+ "source": "D:/Kill Godot/Art/Source/KayKit_Forest/KayKit_Forest_Nature_Pack_1.0_FREE/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf",
+ "props": {
+  "KKForest_Bush_1_A_Color1": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    27,
+    23,
+    23
+   ],
+   "tris": 72,
+   "file": "Bush_1_A_Color1.gltf"
+  },
+  "KKForest_Bush_1_B_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    72,
+    72,
+    48
+   ],
+   "tris": 168,
+   "file": "Bush_1_B_Color1.gltf"
+  },
+  "KKForest_Bush_1_C_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    120,
+    120,
+    81
+   ],
+   "tris": 168,
+   "file": "Bush_1_C_Color1.gltf"
+  },
+  "KKForest_Bush_1_D_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    157,
+    157,
+    99
+   ],
+   "tris": 168,
+   "file": "Bush_1_D_Color1.gltf"
+  },
+  "KKForest_Bush_1_E_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    158,
+    132,
+    81
+   ],
+   "tris": 552,
+   "file": "Bush_1_E_Color1.gltf"
+  },
+  "KKForest_Bush_1_F_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    228,
+    188,
+    99
+   ],
+   "tris": 576,
+   "file": "Bush_1_F_Color1.gltf"
+  },
+  "KKForest_Bush_1_G_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    310,
+    175,
+    99
+   ],
+   "tris": 984,
+   "file": "Bush_1_G_Color1.gltf"
+  },
+  "KKForest_Bush_2_A_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    53,
+    53,
+    53
+   ],
+   "tris": 44,
+   "file": "Bush_2_A_Color1.gltf"
+  },
+  "KKForest_Bush_2_B_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    86,
+    86,
+    86
+   ],
+   "tris": 108,
+   "file": "Bush_2_B_Color1.gltf"
+  },
+  "KKForest_Bush_2_C_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    132,
+    132,
+    132
+   ],
+   "tris": 108,
+   "file": "Bush_2_C_Color1.gltf"
+  },
+  "KKForest_Bush_2_D_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    157,
+    102,
+    86
+   ],
+   "tris": 196,
+   "file": "Bush_2_D_Color1.gltf"
+  },
+  "KKForest_Bush_2_E_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    235,
+    201,
+    133
+   ],
+   "tris": 476,
+   "file": "Bush_2_E_Color1.gltf"
+  },
+  "KKForest_Bush_2_F_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    201,
+    159,
+    179
+   ],
+   "tris": 368,
+   "file": "Bush_2_F_Color1.gltf"
+  },
+  "KKForest_Bush_3_A_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    103,
+    103,
+    49
+   ],
+   "tris": 208,
+   "file": "Bush_3_A_Color1.gltf"
+  },
+  "KKForest_Bush_3_B_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    168,
+    168,
+    80
+   ],
+   "tris": 240,
+   "file": "Bush_3_B_Color1.gltf"
+  },
+  "KKForest_Bush_3_C_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    249,
+    249,
+    115
+   ],
+   "tris": 272,
+   "file": "Bush_3_C_Color1.gltf"
+  },
+  "KKForest_Bush_4_A_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    58,
+    58,
+    43
+   ],
+   "tris": 44,
+   "file": "Bush_4_A_Color1.gltf"
+  },
+  "KKForest_Bush_4_B_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    99,
+    99,
+    74
+   ],
+   "tris": 44,
+   "file": "Bush_4_B_Color1.gltf"
+  },
+  "KKForest_Bush_4_C_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    158,
+    158,
+    130
+   ],
+   "tris": 108,
+   "file": "Bush_4_C_Color1.gltf"
+  },
+  "KKForest_Bush_4_D_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    174,
+    129,
+    74
+   ],
+   "tris": 132,
+   "file": "Bush_4_D_Color1.gltf"
+  },
+  "KKForest_Bush_4_E_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    270,
+    228,
+    130
+   ],
+   "tris": 284,
+   "file": "Bush_4_E_Color1.gltf"
+  },
+  "KKForest_Bush_4_F_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    339,
+    214,
+    130
+   ],
+   "tris": 284,
+   "file": "Bush_4_F_Color1.gltf"
+  },
+  "KKForest_Grass_1_A_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    34,
+    15,
+    56
+   ],
+   "tris": 44,
+   "file": "Grass_1_A_Color1.gltf"
+  },
+  "KKForest_Grass_1_A_Singlesided_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    29,
+    13,
+    56
+   ],
+   "tris": 14,
+   "file": "Grass_1_A_Singlesided_Color1.gltf"
+  },
+  "KKForest_Grass_1_B_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    51,
+    56,
+    54
+   ],
+   "tris": 132,
+   "file": "Grass_1_B_Color1.gltf"
+  },
+  "KKForest_Grass_1_B_Singlesided_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    51,
+    53,
+    52
+   ],
+   "tris": 42,
+   "file": "Grass_1_B_Singlesided_Color1.gltf"
+  },
+  "KKForest_Grass_1_C_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    75,
+    72,
+    58
+   ],
+   "tris": 396,
+   "file": "Grass_1_C_Color1.gltf"
+  },
+  "KKForest_Grass_1_C_Singlesided_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    73,
+    73,
+    58
+   ],
+   "tris": 126,
+   "file": "Grass_1_C_Singlesided_Color1.gltf"
+  },
+  "KKForest_Grass_1_D_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    108,
+    118,
+    59
+   ],
+   "tris": 528,
+   "file": "Grass_1_D_Color1.gltf"
+  },
+  "KKForest_Grass_1_D_Singlesided_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    104,
+    119,
+    58
+   ],
+   "tris": 168,
+   "file": "Grass_1_D_Singlesided_Color1.gltf"
+  },
+  "KKForest_Grass_1_Mesh": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    34,
+    15,
+    56
+   ],
+   "tris": 44,
+   "file": "Grass_1_Mesh.gltf"
+  },
+  "KKForest_Grass_1_SingleSided_Mesh": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    29,
+    13,
+    56
+   ],
+   "tris": 14,
+   "file": "Grass_1_SingleSided_Mesh.gltf"
+  },
+  "KKForest_Grass_2_A_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    16,
+    25,
+    92
+   ],
+   "tris": 44,
+   "file": "Grass_2_A_Color1.gltf"
+  },
+  "KKForest_Grass_2_A_Singlesided_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    16,
+    23,
+    92
+   ],
+   "tris": 14,
+   "file": "Grass_2_A_Singlesided_Color1.gltf"
+  },
+  "KKForest_Grass_2_B_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    40,
+    40,
+    92
+   ],
+   "tris": 132,
+   "file": "Grass_2_B_Color1.gltf"
+  },
+  "KKForest_Grass_2_B_Singlesided_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    38,
+    38,
+    92
+   ],
+   "tris": 42,
+   "file": "Grass_2_B_Singlesided_Color1.gltf"
+  },
+  "KKForest_Grass_2_C_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    90,
+    76,
+    94
+   ],
+   "tris": 528,
+   "file": "Grass_2_C_Color1.gltf"
+  },
+  "KKForest_Grass_2_C_Singlesided_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    87,
+    74,
+    93
+   ],
+   "tris": 168,
+   "file": "Grass_2_C_Singlesided_Color1.gltf"
+  },
+  "KKForest_Grass_2_D_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    110,
+    137,
+    94
+   ],
+   "tris": 528,
+   "file": "Grass_2_D_Color1.gltf"
+  },
+  "KKForest_Grass_2_D_Singlesided_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    108,
+    134,
+    93
+   ],
+   "tris": 168,
+   "file": "Grass_2_D_Singlesided_Color1.gltf"
+  },
+  "KKForest_Grass_2_Mesh": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    16,
+    25,
+    92
+   ],
+   "tris": 44,
+   "file": "Grass_2_Mesh.gltf"
+  },
+  "KKForest_Grass_2_SingleSided_Mesh": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    16,
+    23,
+    92
+   ],
+   "tris": 14,
+   "file": "Grass_2_SingleSided_Mesh.gltf"
+  },
+  "KKForest_Rock_1_A_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    58,
+    61,
+    54
+   ],
+   "tris": 48,
+   "file": "Rock_1_A_Color1.gltf"
+  },
+  "KKForest_Rock_1_B_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    55,
+    58,
+    54
+   ],
+   "tris": 48,
+   "file": "Rock_1_B_Color1.gltf"
+  },
+  "KKForest_Rock_1_C_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    52,
+    61,
+    54
+   ],
+   "tris": 48,
+   "file": "Rock_1_C_Color1.gltf"
+  },
+  "KKForest_Rock_1_D_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    93,
+    116,
+    113
+   ],
+   "tris": 84,
+   "file": "Rock_1_D_Color1.gltf"
+  },
+  "KKForest_Rock_1_E_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    109,
+    113
+   ],
+   "tris": 84,
+   "file": "Rock_1_E_Color1.gltf"
+  },
+  "KKForest_Rock_1_F_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    87,
+    113
+   ],
+   "tris": 84,
+   "file": "Rock_1_F_Color1.gltf"
+  },
+  "KKForest_Rock_1_G_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    175,
+    165,
+    187
+   ],
+   "tris": 104,
+   "file": "Rock_1_G_Color1.gltf"
+  },
+  "KKForest_Rock_1_H_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    153,
+    153,
+    187
+   ],
+   "tris": 104,
+   "file": "Rock_1_H_Color1.gltf"
+  },
+  "KKForest_Rock_1_I_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    161,
+    200,
+    187
+   ],
+   "tris": 104,
+   "file": "Rock_1_I_Color1.gltf"
+  },
+  "KKForest_Rock_1_J_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    339,
+    376,
+    336
+   ],
+   "tris": 521,
+   "file": "Rock_1_J_Color1.gltf"
+  },
+  "KKForest_Rock_1_K_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    369,
+    313,
+    365
+   ],
+   "tris": 529,
+   "file": "Rock_1_K_Color1.gltf"
+  },
+  "KKForest_Rock_1_L_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    329,
+    262,
+    340
+   ],
+   "tris": 494,
+   "file": "Rock_1_L_Color1.gltf"
+  },
+  "KKForest_Rock_1_M_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    391,
+    271,
+    352
+   ],
+   "tris": 528,
+   "file": "Rock_1_M_Color1.gltf"
+  },
+  "KKForest_Rock_1_N_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    230,
+    224,
+    450
+   ],
+   "tris": 355,
+   "file": "Rock_1_N_Color1.gltf"
+  },
+  "KKForest_Rock_1_O_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    211,
+    211,
+    458
+   ],
+   "tris": 223,
+   "file": "Rock_1_O_Color1.gltf"
+  },
+  "KKForest_Rock_1_P_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    221,
+    184,
+    401
+   ],
+   "tris": 405,
+   "file": "Rock_1_P_Color1.gltf"
+  },
+  "KKForest_Rock_1_Q_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    222,
+    280,
+    428
+   ],
+   "tris": 497,
+   "file": "Rock_1_Q_Color1.gltf"
+  },
+  "KKForest_Rock_2_A_Color1": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    22,
+    22,
+    22
+   ],
+   "tris": 12,
+   "file": "Rock_2_A_Color1.gltf"
+  },
+  "KKForest_Rock_2_B_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    63,
+    63,
+    65
+   ],
+   "tris": 44,
+   "file": "Rock_2_B_Color1.gltf"
+  },
+  "KKForest_Rock_2_C_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    130,
+    130,
+    133
+   ],
+   "tris": 108,
+   "file": "Rock_2_C_Color1.gltf"
+  },
+  "KKForest_Rock_2_D_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    171,
+    171,
+    174
+   ],
+   "tris": 108,
+   "file": "Rock_2_D_Color1.gltf"
+  },
+  "KKForest_Rock_2_E_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    317,
+    331,
+    286
+   ],
+   "tris": 438,
+   "file": "Rock_2_E_Color1.gltf"
+  },
+  "KKForest_Rock_2_F_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    414,
+    287,
+    286
+   ],
+   "tris": 428,
+   "file": "Rock_2_F_Color1.gltf"
+  },
+  "KKForest_Rock_2_G_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    309,
+    373,
+    320
+   ],
+   "tris": 488,
+   "file": "Rock_2_G_Color1.gltf"
+  },
+  "KKForest_Rock_2_H_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    370,
+    331,
+    276
+   ],
+   "tris": 312,
+   "file": "Rock_2_H_Color1.gltf"
+  },
+  "KKForest_Rock_3_A_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    96,
+    81,
+    86
+   ],
+   "tris": 84,
+   "file": "Rock_3_A_Color1.gltf"
+  },
+  "KKForest_Rock_3_B_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    82,
+    85,
+    103
+   ],
+   "tris": 84,
+   "file": "Rock_3_B_Color1.gltf"
+  },
+  "KKForest_Rock_3_C_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    81,
+    86,
+    97
+   ],
+   "tris": 84,
+   "file": "Rock_3_C_Color1.gltf"
+  },
+  "KKForest_Rock_3_D_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    93,
+    79,
+    97
+   ],
+   "tris": 84,
+   "file": "Rock_3_D_Color1.gltf"
+  },
+  "KKForest_Rock_3_E_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    115,
+    118,
+    129
+   ],
+   "tris": 84,
+   "file": "Rock_3_E_Color1.gltf"
+  },
+  "KKForest_Rock_3_F_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    109,
+    119,
+    118
+   ],
+   "tris": 84,
+   "file": "Rock_3_F_Color1.gltf"
+  },
+  "KKForest_Rock_3_G_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    186,
+    173,
+    200
+   ],
+   "tris": 168,
+   "file": "Rock_3_G_Color1.gltf"
+  },
+  "KKForest_Rock_3_H_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    195,
+    176,
+    206
+   ],
+   "tris": 168,
+   "file": "Rock_3_H_Color1.gltf"
+  },
+  "KKForest_Rock_3_I_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    192,
+    164,
+    211
+   ],
+   "tris": 168,
+   "file": "Rock_3_I_Color1.gltf"
+  },
+  "KKForest_Rock_3_J_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    197,
+    174,
+    190
+   ],
+   "tris": 168,
+   "file": "Rock_3_J_Color1.gltf"
+  },
+  "KKForest_Rock_3_K_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    261,
+    259,
+    222
+   ],
+   "tris": 168,
+   "file": "Rock_3_K_Color1.gltf"
+  },
+  "KKForest_Rock_3_L_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    262,
+    256,
+    227
+   ],
+   "tris": 168,
+   "file": "Rock_3_L_Color1.gltf"
+  },
+  "KKForest_Rock_3_M_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    343,
+    281,
+    360
+   ],
+   "tris": 320,
+   "file": "Rock_3_M_Color1.gltf"
+  },
+  "KKForest_Rock_3_N_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    342,
+    298,
+    353
+   ],
+   "tris": 320,
+   "file": "Rock_3_N_Color1.gltf"
+  },
+  "KKForest_Rock_3_O_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    348,
+    293,
+    347
+   ],
+   "tris": 320,
+   "file": "Rock_3_O_Color1.gltf"
+  },
+  "KKForest_Rock_3_P_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    329,
+    287,
+    368
+   ],
+   "tris": 320,
+   "file": "Rock_3_P_Color1.gltf"
+  },
+  "KKForest_Rock_3_Q_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    465,
+    448,
+    372
+   ],
+   "tris": 320,
+   "file": "Rock_3_Q_Color1.gltf"
+  },
+  "KKForest_Rock_3_R_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    516,
+    421,
+    385
+   ],
+   "tris": 320,
+   "file": "Rock_3_R_Color1.gltf"
+  },
+  "KKForest_Tree_1_A_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    318,
+    325,
+    416
+   ],
+   "tris": 530,
+   "file": "Tree_1_A_Color1.gltf"
+  },
+  "KKForest_Tree_1_B_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    401,
+    345,
+    493
+   ],
+   "tris": 636,
+   "file": "Tree_1_B_Color1.gltf"
+  },
+  "KKForest_Tree_1_C_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    669,
+    575,
+    781
+   ],
+   "tris": 1364,
+   "file": "Tree_1_C_Color1.gltf"
+  },
+  "KKForest_Tree_2_A_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    260,
+    200,
+    467
+   ],
+   "tris": 336,
+   "file": "Tree_2_A_Color1.gltf"
+  },
+  "KKForest_Tree_2_B_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    370,
+    210,
+    604
+   ],
+   "tris": 492,
+   "file": "Tree_2_B_Color1.gltf"
+  },
+  "KKForest_Tree_2_C_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    460,
+    340,
+    692
+   ],
+   "tris": 648,
+   "file": "Tree_2_C_Color1.gltf"
+  },
+  "KKForest_Tree_2_D_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    474,
+    403,
+    809
+   ],
+   "tris": 1428,
+   "file": "Tree_2_D_Color1.gltf"
+  },
+  "KKForest_Tree_2_E_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    605,
+    568,
+    879
+   ],
+   "tris": 1560,
+   "file": "Tree_2_E_Color1.gltf"
+  },
+  "KKForest_Tree_3_A_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    309,
+    309,
+    351
+   ],
+   "tris": 978,
+   "file": "Tree_3_A_Color1.gltf"
+  },
+  "KKForest_Tree_3_B_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    413,
+    413,
+    435
+   ],
+   "tris": 988,
+   "file": "Tree_3_B_Color1.gltf"
+  },
+  "KKForest_Tree_3_C_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    563,
+    462,
+    579
+   ],
+   "tris": 2228,
+   "file": "Tree_3_C_Color1.gltf"
+  },
+  "KKForest_Tree_4_A_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    201,
+    200,
+    527
+   ],
+   "tris": 404,
+   "file": "Tree_4_A_Color1.gltf"
+  },
+  "KKForest_Tree_4_B_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    257,
+    227,
+    694
+   ],
+   "tris": 522,
+   "file": "Tree_4_B_Color1.gltf"
+  },
+  "KKForest_Tree_4_C_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    374,
+    287,
+    1077
+   ],
+   "tris": 982,
+   "file": "Tree_4_C_Color1.gltf"
+  },
+  "KKForest_Tree_Bare_1_A_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    113,
+    103,
+    286
+   ],
+   "tris": 324,
+   "file": "Tree_Bare_1_A_Color1.gltf"
+  },
+  "KKForest_Tree_Bare_1_B_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    196,
+    145,
+    325
+   ],
+   "tris": 332,
+   "file": "Tree_Bare_1_B_Color1.gltf"
+  },
+  "KKForest_Tree_Bare_1_C_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    374,
+    207,
+    526
+   ],
+   "tris": 936,
+   "file": "Tree_Bare_1_C_Color1.gltf"
+  },
+  "KKForest_Tree_Bare_2_A_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    120,
+    60,
+    384
+   ],
+   "tris": 404,
+   "file": "Tree_Bare_2_A_Color1.gltf"
+  },
+  "KKForest_Tree_Bare_2_B_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    179,
+    66,
+    554
+   ],
+   "tris": 448,
+   "file": "Tree_Bare_2_B_Color1.gltf"
+  },
+  "KKForest_Tree_Bare_2_C_Color1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    158,
+    110,
+    761
+   ],
+   "tris": 634,
+   "file": "Tree_Bare_2_C_Color1.gltf"
+  }
+ },
+ "skipped": []
+}

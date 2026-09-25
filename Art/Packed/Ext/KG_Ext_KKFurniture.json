@@ -1,0 +1,590 @@
+{
+ "tag": "KKFurniture",
+ "source": "D:/Kill Godot/Art/Source/KayKit_FurnitureBits/KayKit_Furniture_Bits_1.0_FREE/KayKit_Furniture_Bits_1.0_FREE/Assets/gltf",
+ "props": {
+  "KKFurniture_armchair": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    126,
+    112,
+    86
+   ],
+   "tris": 528,
+   "file": "armchair.gltf"
+  },
+  "KKFurniture_armchair_pillows": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    126,
+    112,
+    86
+   ],
+   "tris": 614,
+   "file": "armchair_pillows.gltf"
+  },
+  "KKFurniture_bed_double_A": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    217,
+    210,
+    70
+   ],
+   "tris": 540,
+   "file": "bed_double_A.gltf"
+  },
+  "KKFurniture_bed_double_B": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    217,
+    210,
+    70
+   ],
+   "tris": 600,
+   "file": "bed_double_B.gltf"
+  },
+  "KKFurniture_bed_single_A": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    112,
+    210,
+    70
+   ],
+   "tris": 474,
+   "file": "bed_single_A.gltf"
+  },
+  "KKFurniture_bed_single_B": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    112,
+    210,
+    70
+   ],
+   "tris": 534,
+   "file": "bed_single_B.gltf"
+  },
+  "KKFurniture_book_set": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    55,
+    26,
+    35
+   ],
+   "tris": 196,
+   "file": "book_set.gltf"
+  },
+  "KKFurniture_book_single": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    18,
+    26,
+    35
+   ],
+   "tris": 68,
+   "file": "book_single.gltf"
+  },
+  "KKFurniture_cabinet_medium": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    140,
+    70,
+    70
+   ],
+   "tris": 428,
+   "file": "cabinet_medium.gltf"
+  },
+  "KKFurniture_cabinet_medium_decorated": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    143,
+    70,
+    128
+   ],
+   "tris": 1018,
+   "file": "cabinet_medium_decorated.gltf"
+  },
+  "KKFurniture_cabinet_small": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    70,
+    70,
+    70
+   ],
+   "tris": 322,
+   "file": "cabinet_small.gltf"
+  },
+  "KKFurniture_cabinet_small_decorated": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    73,
+    77,
+    113
+   ],
+   "tris": 464,
+   "file": "cabinet_small_decorated.gltf"
+  },
+  "KKFurniture_cactus_medium_A": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    62,
+    59,
+    58
+   ],
+   "tris": 448,
+   "file": "cactus_medium_A.gltf"
+  },
+  "KKFurniture_cactus_medium_B": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    62,
+    59,
+    58
+   ],
+   "tris": 448,
+   "file": "cactus_medium_B.gltf"
+  },
+  "KKFurniture_cactus_small_A": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    35,
+    35,
+    39
+   ],
+   "tris": 252,
+   "file": "cactus_small_A.gltf"
+  },
+  "KKFurniture_cactus_small_B": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    35,
+    35,
+    39
+   ],
+   "tris": 252,
+   "file": "cactus_small_B.gltf"
+  },
+  "KKFurniture_chair_A": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    52,
+    59,
+    88
+   ],
+   "tris": 308,
+   "file": "chair_A.gltf"
+  },
+  "KKFurniture_chair_A_wood": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    52,
+    59,
+    88
+   ],
+   "tris": 308,
+   "file": "chair_A_wood.gltf"
+  },
+  "KKFurniture_chair_B": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    53,
+    59,
+    88
+   ],
+   "tris": 384,
+   "file": "chair_B.gltf"
+  },
+  "KKFurniture_chair_B_wood": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    53,
+    59,
+    88
+   ],
+   "tris": 384,
+   "file": "chair_B_wood.gltf"
+  },
+  "KKFurniture_chair_C": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    53,
+    65,
+    84
+   ],
+   "tris": 288,
+   "file": "chair_C.gltf"
+  },
+  "KKFurniture_chair_stool": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    53,
+    53,
+    35
+   ],
+   "tris": 216,
+   "file": "chair_stool.gltf"
+  },
+  "KKFurniture_chair_stool_wood": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    53,
+    53,
+    35
+   ],
+   "tris": 216,
+   "file": "chair_stool_wood.gltf"
+  },
+  "KKFurniture_couch": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    210,
+    112,
+    86
+   ],
+   "tris": 636,
+   "file": "couch.gltf"
+  },
+  "KKFurniture_couch_pillows": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    210,
+    112,
+    86
+   ],
+   "tris": 808,
+   "file": "couch_pillows.gltf"
+  },
+  "KKFurniture_lamp_standing": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    70,
+    70,
+    176
+   ],
+   "tris": 320,
+   "file": "lamp_standing.gltf"
+  },
+  "KKFurniture_lamp_table": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    70,
+    70,
+    72
+   ],
+   "tris": 392,
+   "file": "lamp_table.gltf"
+  },
+  "KKFurniture_pictureframe_large_A": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    71,
+    14,
+    84
+   ],
+   "tris": 60,
+   "file": "pictureframe_large_A.gltf"
+  },
+  "KKFurniture_pictureframe_large_B": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    140,
+    14,
+    84
+   ],
+   "tris": 60,
+   "file": "pictureframe_large_B.gltf"
+  },
+  "KKFurniture_pictureframe_medium": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    49,
+    14,
+    63
+   ],
+   "tris": 60,
+   "file": "pictureframe_medium.gltf"
+  },
+  "KKFurniture_pictureframe_small_A": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    35,
+    14,
+    42
+   ],
+   "tris": 60,
+   "file": "pictureframe_small_A.gltf"
+  },
+  "KKFurniture_pictureframe_small_B": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    49,
+    14,
+    31
+   ],
+   "tris": 60,
+   "file": "pictureframe_small_B.gltf"
+  },
+  "KKFurniture_pictureframe_small_C": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    35,
+    14,
+    35
+   ],
+   "tris": 60,
+   "file": "pictureframe_small_C.gltf"
+  },
+  "KKFurniture_pictureframe_standing_A": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    35,
+    27,
+    43
+   ],
+   "tris": 74,
+   "file": "pictureframe_standing_A.gltf"
+  },
+  "KKFurniture_pictureframe_standing_B": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    49,
+    25,
+    33
+   ],
+   "tris": 74,
+   "file": "pictureframe_standing_B.gltf"
+  },
+  "KKFurniture_pillow_A": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    45,
+    35,
+    14
+   ],
+   "tris": 86,
+   "file": "pillow_A.gltf"
+  },
+  "KKFurniture_pillow_B": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    45,
+    35,
+    14
+   ],
+   "tris": 86,
+   "file": "pillow_B.gltf"
+  },
+  "KKFurniture_rug_oval_A": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    210,
+    140,
+    7
+   ],
+   "tris": 176,
+   "file": "rug_oval_A.gltf"
+  },
+  "KKFurniture_rug_oval_B": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    210,
+    140,
+    7
+   ],
+   "tris": 176,
+   "file": "rug_oval_B.gltf"
+  },
+  "KKFurniture_rug_rectangle_A": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    210,
+    140,
+    7
+   ],
+   "tris": 44,
+   "file": "rug_rectangle_A.gltf"
+  },
+  "KKFurniture_rug_rectangle_B": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    210,
+    140,
+    7
+   ],
+   "tris": 44,
+   "file": "rug_rectangle_B.gltf"
+  },
+  "KKFurniture_rug_rectangle_stripes_A": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    210,
+    140,
+    7
+   ],
+   "tris": 68,
+   "file": "rug_rectangle_stripes_A.gltf"
+  },
+  "KKFurniture_rug_rectangle_stripes_B": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    210,
+    140,
+    7
+   ],
+   "tris": 68,
+   "file": "rug_rectangle_stripes_B.gltf"
+  },
+  "KKFurniture_shelf_A_big": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    140,
+    35,
+    28
+   ],
+   "tris": 212,
+   "file": "shelf_A_big.gltf"
+  },
+  "KKFurniture_shelf_A_small": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    70,
+    35,
+    28
+   ],
+   "tris": 212,
+   "file": "shelf_A_small.gltf"
+  },
+  "KKFurniture_shelf_B_large": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    140,
+    35,
+    28
+   ],
+   "tris": 212,
+   "file": "shelf_B_large.gltf"
+  },
+  "KKFurniture_shelf_B_large_decorated": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    140,
+    35,
+    57
+   ],
+   "tris": 482,
+   "file": "shelf_B_large_decorated.gltf"
+  },
+  "KKFurniture_shelf_B_small": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    70,
+    35,
+    28
+   ],
+   "tris": 212,
+   "file": "shelf_B_small.gltf"
+  },
+  "KKFurniture_shelf_B_small_decorated": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    70,
+    40,
+    71
+   ],
+   "tris": 532,
+   "file": "shelf_B_small_decorated.gltf"
+  },
+  "KKFurniture_table_low": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    168,
+    105,
+    35
+   ],
+   "tris": 276,
+   "file": "table_low.gltf"
+  },
+  "KKFurniture_table_medium": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    140,
+    140,
+    70
+   ],
+   "tris": 168,
+   "file": "table_medium.gltf"
+  },
+  "KKFurniture_table_medium_long": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    210,
+    140,
+    70
+   ],
+   "tris": 168,
+   "file": "table_medium_long.gltf"
+  },
+  "KKFurniture_table_small": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    70,
+    70,
+    70
+   ],
+   "tris": 168,
+   "file": "table_small.gltf"
+  }
+ },
+ "skipped": []
+}

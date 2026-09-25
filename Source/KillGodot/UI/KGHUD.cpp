@@ -1,5 +1,8 @@
 #include "UI/KGHUD.h"
 #include "Audio/KGAudio.h"
+#include "Chores/KGChoreComponent.h"
+#include "Chores/KGChoreTypes.h"
+#include "Chores/WorldChores/KGWorldChoreComponent.h"
 #include "Camera/CameraComponent.h"
 #include "Camera/PlayerCameraManager.h"
 #include "CanvasItem.h"
@@ -27,6 +30,9 @@
 #include "Roles/KGRoleListGenerator.h"
 #include "TextureResource.h"
 #include "UObject/ObjectKey.h"
+#include "UI/KGHudLayout.h"
+#include "UI/KGMapInput.h"
+#include "UI/KGUITokens.h"
 #include "UI/Reveal/KGRevealSubsystem.h"
 #include "UI/Reveal/KGStreamerMode.h"
 #include "World/KGInteractable.h"
@@ -60,20 +66,24 @@ namespace
 	FLinearColor Srgb(uint8 R, uint8 G, uint8 B) { return FLinearColor::FromSRGBColor(FColor(R, G, B)); }
 	FLinearColor WithAlpha(const FLinearColor& C, float A) { return FLinearColor(C.R, C.G, C.B, C.A * A); }
 
-	const FLinearColor Cream = Srgb(255, 244, 222);          // #FFF4DE body text
-	const FLinearColor Gold = Srgb(255, 184, 77);            // #FFB84D accent
-	const FLinearColor GoldLight = Srgb(255, 224, 150);
-	const FLinearColor TownColor = Srgb(110, 205, 120);      // village green
-	const FLinearColor TownLight = Srgb(170, 236, 160);
-	const FLinearColor Crimson = Srgb(200, 16, 46);          // #C8102E impatient crimson (fills, vignettes)
-	const FLinearColor ImpatientColor = Srgb(255, 72, 94);   // crimson lifted so it reads as text on dark ink
-	const FLinearColor NeutralColor = Srgb(182, 150, 242);   // neutral violet
-	const FLinearColor NightColor = Srgb(140, 172, 255);
-	const FLinearColor DawnColor = Srgb(255, 146, 92);
-	const FLinearColor GhostColor = Srgb(110, 225, 235);
-	const FLinearColor InkTop = Srgb(40, 31, 58);            // panels: warm-dark ink gradient
-	const FLinearColor InkBottom = Srgb(19, 14, 29);
-	const FLinearColor InkText = Srgb(40, 28, 44);           // text printed on cream keycaps / bright chips
+	// SPRINT-025: colour roles come from UI/KGUITokens.h (shared with the chore panel and the front end).
+	const FLinearColor Cream = KGUI::Color(KGUI::Cream);            // body text
+	const FLinearColor CreamDim = KGUI::Color(KGUI::CreamDim);      // secondary text
+	const FLinearColor Gold = KGUI::Color(KGUI::Gold);              // brass accent: the active thing
+	const FLinearColor GoldLight = KGUI::Color(KGUI::GoldLight);
+	const FLinearColor Lantern = KGUI::Color(KGUI::Lantern);        // lighthouse orange: chore markers
+	const FLinearColor TownColor = KGUI::Color(KGUI::Good);         // done / village green
+	const FLinearColor TownLight = KGUI::Color(KGUI::GoodLight);
+	const FLinearColor Crimson = KGUI::Color(KGUI::Crimson);        // impatient crimson (fills, vignettes)
+	const FLinearColor ImpatientColor = KGUI::Color(KGUI::CrimsonText);   // crimson lifted so it reads as text on dark ink
+	const FLinearColor NeutralColor = KGUI::Color(KGUI::Neutral);   // neutral violet
+	const FLinearColor NightColor = KGUI::Color(KGUI::Night2);
+	const FLinearColor DawnColor = KGUI::Color(KGUI::Dawn);
+	const FLinearColor GhostColor = KGUI::Color(KGUI::Ghost);
+	const FLinearColor WaterColor = KGUI::Color(KGUI::Water);
+	const FLinearColor InkTop = KGUI::Color(KGUI::Panel);           // panels: warm-dark ink gradient
+	const FLinearColor InkBottom = KGUI::Color(KGUI::Ink);
+	const FLinearColor InkText = Srgb(40, 28, 44);                   // text printed on cream keycaps / bright chips
 
 	float Saturate(float X) { return FMath::Clamp(X, 0.0f, 1.0f); }
 
@@ -1250,7 +1260,57 @@ namespace
 	void DrawLabelChip(const FKGHudFrame& F, float MidY, float Width, float Height, float Opacity)
 	{
 		F.P.RoundRect(F.CX - Width * 0.5f, MidY - Height * 0.5f, Width, Height, Height * 0.5f,
-		              WithAlpha(InkBottom, 0.62f * Opacity), WithAlpha(InkBottom, 0.72f * Opacity));
+		              WithAlpha(InkBottom, KGUI::ChipAlpha * Opacity), WithAlpha(InkBottom, (KGUI::ChipAlpha + 0.1f) * Opacity));
+	}
+
+	/**
+	 * SPRINT-025: the one action prompt every chore step uses (item 3): a pill under the crosshair with the key
+	 * glyph, a progress ring around the glyph (Progress 0..1, hidden when 0) and the action verb. Hold-E stations,
+	 * panel stations, world chore steps and the world work ring all draw through here so they read the same.
+	 */
+	void DrawActionPrompt(const FKGHudFrame& F, const FString& Key, const FString& Verb, float Progress, float Alpha,
+	                      const FLinearColor& Accent = Gold, const FString& Detail = FString())
+	{
+		if (Alpha <= 0.01f)
+		{
+			return;
+		}
+		const FKGPainter& P = F.P;
+		const float S = F.S;
+		const float Px = KGUI::TypeHeading;
+		const float KeyPx = Px * 0.85f;
+		const float KH = P.KeycapHeight(KeyPx);
+		const float KW = P.KeycapWidth(Key, KeyPx);
+		const float RingR = FMath::Max(KH, KW) * 0.5f + 7.0f * S;
+		const float VerbW = static_cast<float>(P.Measure(Verb, Px).X);
+		const float DetailW = Detail.IsEmpty() ? 0.0f : static_cast<float>(P.Measure(Detail, KGUI::TypeCaption, true, 1.5f).X) + 12.0f * S;
+		const float GroupW = RingR * 2.0f + 12.0f * S + VerbW + DetailW;
+		const float ChipH = FMath::Max(44.0f * S, RingR * 2.0f + 10.0f * S);
+		const float MidY = F.CY + (66.0f + 8.0f * (1.0f - Alpha)) * S;
+		const float X0 = F.CX - GroupW * 0.5f;
+		DrawLabelChip(F, MidY, GroupW + 30.0f * S, ChipH, Alpha);
+		const FVector2D KeyC(X0 + RingR, MidY);
+		if (Progress > 0.003f)
+		{
+			const float Th = FMath::Max(2.5f, 4.0f * S);
+			P.Arc(KeyC, RingR, Th, 0.0f, UE_TWO_PI, FLinearColor(1.0f, 1.0f, 1.0f, 0.14f * Alpha));
+			const float A0 = -UE_HALF_PI;
+			const float A1 = A0 + UE_TWO_PI * Saturate(Progress);
+			P.Arc(KeyC, RingR, Th + 6.0f * S, A0, A1, WithAlpha(Accent, 0.22f * Alpha), 5.0f * S);
+			P.Arc(KeyC, RingR, Th, A0, A1, WithAlpha(Accent, Alpha));
+			P.Circle(KeyC + FVector2D(FMath::Cos(A1), FMath::Sin(A1)) * RingR, Th * 0.55f, WithAlpha(GoldLight, Alpha));
+		}
+		else
+		{
+			P.Arc(KeyC, RingR, FMath::Max(1.5f, 2.0f * S), 0.0f, UE_TWO_PI, WithAlpha(Accent, 0.55f * Alpha));
+		}
+		P.Keycap(Key, KeyC.X - KW * 0.5f, KeyC.Y - KH * 0.5f - 1.0f * S, KeyPx, Alpha);
+		const float TextX = X0 + RingR * 2.0f + 12.0f * S;
+		P.TextMid(Verb, TextX, MidY, Px, WithAlpha(Cream, Alpha), 0.0f, true);
+		if (!Detail.IsEmpty())
+		{
+			P.TextMid(Detail, TextX + VerbW + 12.0f * S, MidY + 1.0f * S, KGUI::TypeCaption, WithAlpha(Accent, Alpha), 0.0f, true, 1.5f);
+		}
 	}
 
 	void DrawCrosshair(const FKGHudFrame& F)
@@ -1293,32 +1353,6 @@ namespace
 		}
 		const bool bWorking = !TaskName.IsEmpty();
 		Fx.ShownTask = bWorking ? FMath::FInterpTo(Fx.ShownTask, TaskProgress, Fx.Dt, 14.0f) : 0.0f;
-		if (bWorking)
-		{
-			const float R = 28.0f * S;
-			const float Th = FMath::Max(3.0f, 6.0f * S);
-			P.Arc(Ctr, R, Th + 8.0f * S, 0.0f, UE_TWO_PI, FLinearColor(0.0f, 0.0f, 0.0f, 0.35f), 2.0f * S);
-			P.Arc(Ctr, R, Th, 0.0f, UE_TWO_PI, FLinearColor(1.0f, 1.0f, 1.0f, 0.14f));
-			if (Fx.ShownTask > 0.003f)
-			{
-				const float A0 = -UE_HALF_PI;
-				const float A1 = A0 + UE_TWO_PI * Saturate(Fx.ShownTask);
-				P.Arc(Ctr, R, Th + 10.0f * S, A0, A1, WithAlpha(Gold, 0.18f), 6.0f * S);
-				P.Arc(Ctr, R, Th, A0, A1, Gold);
-				P.Circle(Ctr + FVector2D(FMath::Cos(A0), FMath::Sin(A0)) * R, Th * 0.5f, Gold);
-				P.Circle(Ctr + FVector2D(FMath::Cos(A1), FMath::Sin(A1)) * R, Th * 0.5f, GoldLight);
-			}
-			const FString Label = TaskName.ToUpper();
-			const FString Pct = FString::Printf(TEXT("%d%%"), FMath::FloorToInt(Saturate(Fx.ShownTask) * 100.0f));
-			const float LW = static_cast<float>(P.Measure(Label, 16.0f, true, 1.5f).X);
-			const float PW = static_cast<float>(P.Measure(Pct, 16.0f, true).X);
-			const float Gap = 12.0f * S;
-			const float MidY = F.CY + 62.0f * S;
-			DrawLabelChip(F, MidY, LW + Gap + PW + 32.0f * S, 34.0f * S, 1.0f);
-			const float X0 = F.CX - (LW + Gap + PW) * 0.5f;
-			P.TextMid(Label, X0, MidY, 16.0f, Gold, 0.0f, true, 1.5f);
-			P.TextMid(Pct, X0 + LW + Gap, MidY, 16.0f, Cream, 0.0f, true);
-		}
 
 		// Interaction prompt: look-at trace (same reach as the old HUD prompt).
 		FString PromptNow;
@@ -1343,14 +1377,20 @@ namespace
 			Fx.Prompt = PromptNow;
 		}
 		Fx.PromptAlpha = FMath::FInterpConstantTo(Fx.PromptAlpha, PromptNow.IsEmpty() ? 0.0f : 1.0f, Fx.Dt, 8.0f);
-		if (Fx.PromptAlpha > 0.01f && !Fx.Prompt.IsEmpty())
+		// SPRINT-025 item 3: one prompt for every step. Working a hold-E station = the same pill with the ring filling.
+		if (bWorking)
 		{
-			const float A = EaseOutCubic(Fx.PromptAlpha);
-			const float MidY = F.CY + (62.0f + 8.0f * (1.0f - A)) * S;
-			const float Px = 19.0f;
-			const float GroupW = P.KeyHintWidth(TEXT("E"), Fx.Prompt, Px);
-			DrawLabelChip(F, MidY, GroupW + 28.0f * S, 40.0f * S, A);
-			P.KeyHint(TEXT("E"), Fx.Prompt, F.CX, MidY, Px, Cream, 0.5f, A);
+			const FString Pct = FString::Printf(TEXT("%d%%"), FMath::FloorToInt(Saturate(Fx.ShownTask) * 100.0f));
+			DrawActionPrompt(F, TEXT("E"), TaskName, FMath::Max(0.01f, Fx.ShownTask), 1.0f, Gold, Pct);
+		}
+		else if (Fx.PromptAlpha > 0.01f && !Fx.Prompt.IsEmpty())
+		{
+			// A world chore dwell (KGWorldChoreHud.inl) draws the same prompt with its ring: never two at once.
+			const UKGWorldChoreComponent* WC = UKGWorldChoreComponent::FindFor(F.Pawn);
+			if (!WC || WC->GetDwell().Kind == EKGDwell::None)
+			{
+				DrawActionPrompt(F, TEXT("E"), Fx.Prompt, 0.0f, EaseOutCubic(Fx.PromptAlpha));
+			}
 		}
 
 		// Ring: a subtle circle that kicks outward on every swing.
@@ -1401,10 +1441,11 @@ namespace
 		const FKGPainter& P = F.P;
 		const float S = F.S;
 		const float Shake = Fx.HitShake * Fx.HitShake * static_cast<float>(FMath::Sin(Fx.Now * 80.0)) * 7.0f * S;
-		const float PW = 440.0f * S;
-		const float PH = 100.0f * S;
-		const float PX = 28.0f * S + Shake;
-		const float PY = F.H - 28.0f * S - PH;
+		const FBox2D Box = FKGHudLayout::Compute(F.W, F.H, 0, false).Vitals;   // SPRINT-025: shared layout table
+		const float PW = static_cast<float>(Box.GetSize().X);
+		const float PH = static_cast<float>(Box.GetSize().Y);
+		const float PX = static_cast<float>(Box.Min.X) + Shake;
+		const float PY = static_cast<float>(Box.Min.Y);
 		P.Card(PX, PY, PW, PH);
 		if (Fx.HitFlash > 0.01f)
 		{
@@ -1521,10 +1562,11 @@ namespace
 		const bool bHint = !(F.PC && FKGInventoryUI::IsOpen(F.PC));
 		const float AmountW = static_cast<float>(P.Measure(Amount, 20.0f, true).X);
 		const float HintW = bHint ? P.KeyHintWidth(TEXT("I"), Label, 16.0f) + 22.0f * S : 0.0f;
-		const float H = 38.0f * S;
+		const FBox2D Box = FKGHudLayout::Compute(F.W, F.H, 0, false).Purse;   // SPRINT-025: shared layout table
+		const float H = static_cast<float>(Box.GetSize().Y);
 		const float W = 50.0f * S + AmountW + 16.0f * S + HintW;
-		const float X = 28.0f * S;
-		const float MidY = F.H - 128.0f * S - 12.0f * S - H * 0.5f;
+		const float X = static_cast<float>(Box.Min.X);
+		const float MidY = static_cast<float>(Box.Max.Y) - H * 0.5f;
 		P.RoundRect(X, MidY - H * 0.5f, W, H, H * 0.5f, WithAlpha(InkBottom, 0.62f), WithAlpha(InkBottom, 0.74f));
 
 		const FVector2D Coin(X + 24.0f * S, MidY);
@@ -1654,122 +1696,7 @@ namespace
 		P.TextMid(Line, F.CX, Y + H * 0.5f, 21.0f, WithAlpha(Cream, A), 0.5f, true);
 	}
 
-	/** Top left: own chores with checkboxes. Returns the bottom edge (or the top margin when nothing is shown). */
-	float DrawChores(const FKGHudFrame& F)
-	{
-		FKGHudFx& Fx = *F.Fx;
-		const FKGPainter& P = F.P;
-		const float S = F.S;
-		struct FRow
-		{
-			FString Name;
-			bool bDone = false;
-			bool bActive = false;
-		};
-		TArray<FRow> Rows;
-		const AKGTaskStation* Active = F.Pawn ? F.Pawn->GetActiveTask() : nullptr;
-		if (F.Me && F.GS->GetPhase() != EKGPhase::Epilogue)
-		{
-			for (int32 i = 0; i < F.Me->TaskIds.Num(); ++i)
-			{
-				FRow& Row = Rows.AddDefaulted_GetRef();
-				Row.Name = ChoreName(F, F.Me->TaskIds[i]);
-				Row.bDone = F.Me->TaskDone.IsValidIndex(i) && F.Me->TaskDone[i];
-				Row.bActive = Active && Active->TaskId == F.Me->TaskIds[i];
-			}
-		}
-		if (Rows.Num() == 0 && F.Demo != 0)
-		{
-			const TCHAR* Names[] = {TEXT("Mend the nets"), TEXT("Feed the gulls"), TEXT("Ring the harbour bell"), TEXT("Stack firewood")};
-			for (int32 i = 0; i < 4; ++i)
-			{
-				FRow& Row = Rows.AddDefaulted_GetRef();
-				Row.Name = Names[i];
-				Row.bDone = i == 1 || (F.Demo == 1 && i == 3 && FMath::Fmod(Fx.Now, 8.0) > 6.0);
-				Row.bActive = i == 0 && F.Demo != 3;
-			}
-		}
-		if (Rows.Num() == 0)
-		{
-			Fx.LastDone = -1;
-			Fx.ChoreDoneAt.Reset();
-			return 0.0f;
-		}
-
-		int32 Done = 0;
-		for (const FRow& Row : Rows)
-		{
-			Done += Row.bDone ? 1 : 0;
-		}
-		if (Fx.LastDone >= 0 && Done > Fx.LastDone)
-		{
-			KGAudio::UI(F.Hud, TEXT("S_TaskDone"), 0.7f);   // chime when a chore completes
-		}
-		Fx.LastDone = Done;
-		if (Fx.ChoreDoneAt.Num() != Rows.Num())
-		{
-			Fx.ChoreDoneAt.Init(0.0, Rows.Num());
-			for (int32 i = 0; i < Rows.Num(); ++i)
-			{
-				Fx.ChoreDoneAt[i] = Rows[i].bDone ? -100.0 : 0.0;   // already done when first seen: no pop
-			}
-		}
-
-		const float X = 28.0f * S;
-		const float Y = 24.0f * S;
-		const float W = 350.0f * S;
-		const float RowH = 36.0f * S;
-		const float HeadH = 62.0f * S;
-		const float H = HeadH + RowH * Rows.Num() + 10.0f * S;
-		P.Card(X, Y, W, H);
-		P.TextMid(TEXT("CHORES"), X + 20.0f * S, Y + 22.0f * S, 15.0f, Gold, 0.0f, true, 2.5f);
-		P.TextMid(FString::Printf(TEXT("%d / %d"), Done, Rows.Num()), X + W - 20.0f * S, Y + 22.0f * S, 15.0f, Cream, 1.0f,
-		          true, 1.0f);
-		P.PillBar(X + 20.0f * S, Y + 40.0f * S, W - 40.0f * S, 7.0f * S, static_cast<float>(Done) / Rows.Num(), TownLight,
-		          TownColor);
-
-		for (int32 i = 0; i < Rows.Num(); ++i)
-		{
-			const FRow& Row = Rows[i];
-			if (Row.bDone && Fx.ChoreDoneAt[i] == 0.0)
-			{
-				Fx.ChoreDoneAt[i] = Fx.Now;
-			}
-			else if (!Row.bDone)
-			{
-				Fx.ChoreDoneAt[i] = 0.0;
-			}
-			const float MidY = Y + HeadH + RowH * (i + 0.5f);
-			const float Box = 20.0f * S;
-			const FVector2D BoxC(X + 20.0f * S + Box * 0.5f, MidY);
-			if (Row.bDone)
-			{
-				const float Pop = Fx.ChoreDoneAt[i] < 0.0 ? 1.0f : EaseOutBack(static_cast<float>(Fx.Now - Fx.ChoreDoneAt[i]) / 0.35f);
-				const float B = Box * FMath::Max(0.05f, Pop);
-				P.RoundRect(BoxC.X - B * 0.5f, BoxC.Y - B * 0.5f, B, B, 6.0f * S * Pop, TownLight, TownColor);
-				P.Check(BoxC, B, FMath::Max(1.5f, 3.0f * S * Pop), InkText);
-			}
-			else if (Row.bActive)
-			{
-				const float Glow = 0.5f + 0.5f * static_cast<float>(FMath::Sin(Fx.Now * 6.0));
-				P.RoundRect(BoxC.X - Box * 0.5f, BoxC.Y - Box * 0.5f, Box, Box, 6.0f * S, WithAlpha(Gold, 0.2f + 0.25f * Glow));
-				P.Outline(BoxC.X - Box * 0.5f, BoxC.Y - Box * 0.5f, Box, Box, 6.0f * S, FMath::Max(1.5f, 2.0f * S), Gold);
-			}
-			else
-			{
-				P.Outline(BoxC.X - Box * 0.5f, BoxC.Y - Box * 0.5f, Box, Box, 6.0f * S, FMath::Max(1.5f, 2.0f * S),
-				          WithAlpha(Cream, 0.55f));
-			}
-			const FLinearColor TextCol = Row.bDone ? WithAlpha(Cream, 0.42f) : Row.bActive ? Gold : Cream;
-			const FVector2D Size = P.TextMid(Row.Name, X + 54.0f * S, MidY, 19.0f, TextCol, 0.0f, !Row.bDone);
-			if (Row.bDone)
-			{
-				P.Rect(X + 52.0f * S, FMath::RoundToFloat(MidY), static_cast<float>(Size.X) + 4.0f * S, FMath::Max(1.0f, 2.0f * S),
-				       WithAlpha(Cream, 0.45f));
-			}
-		}
-		return Y + H;
-	}
+	// SPRINT-025: the chore tracker (top left) lives in UI/KGHUDChoreMarkers.inl (DrawChoreTracker).
 
 	/** Bottom right: own (secret) role, plus the blade key for the Impatient. */
 	void DrawRoleChip(const FKGHudFrame& F, const FKGRoleInfo& Role)
@@ -1782,10 +1709,11 @@ namespace
 		const FString Side = AlignmentName(A).ToUpper();
 		const float TextW = FMath::Max(static_cast<float>(P.Measure(Name, 22.0f, true).X),
 		                               static_cast<float>(P.Measure(Side, 13.0f, true, 2.0f).X));
+		const FBox2D Box = FKGHudLayout::Compute(F.W, F.H, 0, false).RoleChip;   // SPRINT-025: shared layout table
 		const float H = 64.0f * S;
-		const float W = TextW + 90.0f * S;
-		const float X = F.W - 28.0f * S - W;
-		const float Y = F.H - 28.0f * S - H;
+		const float W = FMath::Min(TextW + 90.0f * S, static_cast<float>(Box.GetSize().X));
+		const float X = static_cast<float>(Box.Max.X) - W;
+		const float Y = static_cast<float>(Box.Max.Y) - H;
 		P.Card(X, Y, W, H);
 		AlignmentEmblem(P, A, FVector2D(X + 36.0f * S, Y + H * 0.5f), 36.0f * S);
 		P.TextMid(Name, X + 68.0f * S, Y + 25.0f * S, 22.0f, AC, 0.0f, true);
@@ -1795,8 +1723,8 @@ namespace
 			const float MidY = Y - 30.0f * S;
 			const FString Label = TEXT("Draw / hide blade");
 			const float HW = P.KeyHintWidth(TEXT("B"), Label, 17.0f) + 26.0f * S;
-			P.RoundRect(F.W - 28.0f * S - HW, MidY - 19.0f * S, HW, 38.0f * S, 19.0f * S, WithAlpha(InkBottom, 0.6f));
-			P.KeyHint(TEXT("B"), Label, F.W - 28.0f * S - 13.0f * S, MidY, 17.0f, Cream, 1.0f);
+			P.RoundRect(Box.Max.X - HW, MidY - 19.0f * S, HW, 38.0f * S, 19.0f * S, WithAlpha(InkBottom, KGUI::ChipAlpha));
+			P.KeyHint(TEXT("B"), Label, Box.Max.X - 13.0f * S, MidY, 17.0f, Cream, 1.0f);
 		}
 	}
 
@@ -1809,10 +1737,11 @@ namespace
 		const FString Label = TEXT("Hold to peek");
 		const FString Caption = TEXT("ROLE HIDDEN");
 		const float TextW = FMath::Max(P.KeyHintWidth(Key, Label, 16.0f), static_cast<float>(P.Measure(Caption, 12.0f, true, 2.0f).X));
+		const FBox2D Box = FKGHudLayout::Compute(F.W, F.H, 0, false).RoleChip;   // SPRINT-025: shared layout table
 		const float H = 64.0f * S;
 		const float W = TextW + 48.0f * S;
-		const float X = F.W - 28.0f * S - W;
-		const float Y = F.H - 28.0f * S - H;
+		const float X = static_cast<float>(Box.Max.X) - W;
+		const float Y = static_cast<float>(Box.Max.Y) - H;
 		P.Card(X, Y, W, H);
 		P.TextMid(Caption, X + 24.0f * S, Y + 20.0f * S, 12.0f, WithAlpha(Cream, 0.55f), 0.0f, true, 2.0f);
 		P.KeyHint(Key, Label, X + 24.0f * S, Y + 43.0f * S, 16.0f, Cream);
@@ -2191,7 +2120,7 @@ void AKGHUD::DrawMatchInfo(float S)
 	{
 		DrawAnnouncement(F, PhaseBottom + 16.0f * S);
 	}
-	const float ChoresBottom = DrawChores(F);
+	const float ChoresBottom = DrawChoreTracker(F);
 	const FKGRoleInfo* MyRole = F.Me ? RoleOf(F.Me->GetPrivateRoleId()) : nullptr;   // secret: only the owner has it
 	// Streamer mode: after the reveal the role stays off screen unless the peek key is held.
 	const bool bRoleHidden = MyRole && KGStreamer::IsRoleHidden(F.PC);

@@ -1,0 +1,227 @@
+{
+ "tag": "KarLove",
+ "source": "D:/Kill Godot/Art/Source/KarLove_Cemetery",
+ "props": {
+  "KarLove_Bush_2": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    106,
+    126,
+    131
+   ],
+   "tris": 5116,
+   "file": "Free/Free/Bush_2/obj/Bush_2.obj"
+  },
+  "KarLove_Bush_3": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    106,
+    132,
+    131
+   ],
+   "tris": 5784,
+   "file": "Free/Free/Bush_3/obj/Bush_3.obj"
+  },
+  "KarLove_Coffin_1": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    119,
+    203,
+    50
+   ],
+   "tris": 220,
+   "file": "Free/Free/Coffin_1/obj/Coffin_1.obj"
+  },
+  "KarLove_Coffin_3": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    200,
+    104,
+    51
+   ],
+   "tris": 131,
+   "file": "Free/Free/Coffin_3/obj/Coffin_3.obj"
+  },
+  "KarLove_Fence_1": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    68,
+    334,
+    252
+   ],
+   "tris": 3822,
+   "file": "Free/Free/Fence_1/obj/Fence_1.obj"
+  },
+  "KarLove_Gate_1": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    70,
+    417,
+    300
+   ],
+   "tris": 5020,
+   "file": "Free/Free/Gate_1/obj/Gate_1.obj"
+  },
+  "KarLove_Grass_1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    29,
+    41,
+    66
+   ],
+   "tris": 69,
+   "file": "Free/Free/Grass_1/obj/Grass_1.obj"
+  },
+  "KarLove_Grass_2": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    78,
+    102,
+    41
+   ],
+   "tris": 90,
+   "file": "Free/Free/Grass_2/obj/Grass_2.obj"
+  },
+  "KarLove_Grass_3": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    24,
+    30,
+    93
+   ],
+   "tris": 84,
+   "file": "Free/Free/Grass_3/obj/Grass_3.obj"
+  },
+  "KarLove_Gravestone_2": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    10,
+    92,
+    146
+   ],
+   "tris": 24,
+   "file": "Free/Free/Gravestone_2/obj/Gravestone_2.obj"
+  },
+  "KarLove_Gravestone_4": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    74,
+    104,
+    170
+   ],
+   "tris": 326,
+   "file": "Free/Free/Gravestones_4/obj/Gravestone_4.obj"
+  },
+  "KarLove_RoadStone_1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    72,
+    92,
+    24
+   ],
+   "tris": 16,
+   "file": "Free/Free/RoadStone_1/obj/RoadStone_1.obj"
+  },
+  "KarLove_RoadStone_2": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    85,
+    85,
+    24
+   ],
+   "tris": 24,
+   "file": "Free/Free/RoadStone_2/obj/RoadStone_2.obj"
+  },
+  "KarLove_RoadStone_3": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    78,
+    86,
+    29
+   ],
+   "tris": 24,
+   "file": "Free/Free/RoadStone_3/obj/RoadStone_3.obj"
+  },
+  "KarLove_Shovel": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    9,
+    40,
+    173
+   ],
+   "tris": 172,
+   "file": "Free/Free/Shovel/obj/Shovel.obj"
+  },
+  "KarLove_Stone_1": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    32,
+    34,
+    31
+   ],
+   "tris": 20,
+   "file": "Free/Free/Stone_1/obj/Stone_1.obj"
+  },
+  "KarLove_Stone_2": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    36,
+    46,
+    44
+   ],
+   "tris": 20,
+   "file": "Free/Free/Stone_2/obj/Stone_2.obj"
+  },
+  "KarLove_Stone_3": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    36,
+    46,
+    44
+   ],
+   "tris": 20,
+   "file": "Free/Free/Stone_3/obj/Stone_3.obj"
+  },
+  "KarLove_Tree_1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    360,
+    809,
+    731
+   ],
+   "tris": 848,
+   "file": "Free/Free/Tree_1/obj/Tree_1.obj"
+  },
+  "KarLove_Tree_2": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    579,
+    492,
+    641
+   ],
+   "tris": 1506,
+   "file": "Free/Free/Tree_2/obj/Tree_2.obj"
+  }
+ },
+ "skipped": []
+}

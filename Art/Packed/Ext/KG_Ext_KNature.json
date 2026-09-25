@@ -1,0 +1,3626 @@
+{
+ "tag": "KNature",
+ "source": "D:/Kill Godot/Art/Source/Kenney_NatureKit/Models/GLTF format",
+ "props": {
+  "KNature_bed": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    33,
+    75,
+    27
+   ],
+   "tris": 244,
+   "file": "bed.glb"
+  },
+  "KNature_bed_floor": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    32,
+    75,
+    9
+   ],
+   "tris": 100,
+   "file": "bed_floor.glb"
+  },
+  "KNature_bridge_center_stone": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    30
+   ],
+   "tris": 52,
+   "file": "bridge_center_stone.glb"
+  },
+  "KNature_bridge_center_stoneRound": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    20
+   ],
+   "tris": 52,
+   "file": "bridge_center_stoneRound.glb"
+  },
+  "KNature_bridge_center_wood": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    30
+   ],
+   "tris": 52,
+   "file": "bridge_center_wood.glb"
+  },
+  "KNature_bridge_center_woodRound": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    20
+   ],
+   "tris": 60,
+   "file": "bridge_center_woodRound.glb"
+  },
+  "KNature_bridge_side_stone": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    102,
+    104,
+    40
+   ],
+   "tris": 152,
+   "file": "bridge_side_stone.glb"
+  },
+  "KNature_bridge_side_stoneRound": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    102,
+    104,
+    45
+   ],
+   "tris": 198,
+   "file": "bridge_side_stoneRound.glb"
+  },
+  "KNature_bridge_side_wood": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    102,
+    104,
+    40
+   ],
+   "tris": 136,
+   "file": "bridge_side_wood.glb"
+  },
+  "KNature_bridge_side_woodRound": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    102,
+    104,
+    45
+   ],
+   "tris": 190,
+   "file": "bridge_side_woodRound.glb"
+  },
+  "KNature_bridge_stone": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    104,
+    104,
+    40
+   ],
+   "tris": 252,
+   "file": "bridge_stone.glb"
+  },
+  "KNature_bridge_stoneNarrow": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    104,
+    84,
+    35
+   ],
+   "tris": 252,
+   "file": "bridge_stoneNarrow.glb"
+  },
+  "KNature_bridge_stoneRound": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    104,
+    104,
+    45
+   ],
+   "tris": 360,
+   "file": "bridge_stoneRound.glb"
+  },
+  "KNature_bridge_stoneRoundNarrow": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    104,
+    84,
+    40
+   ],
+   "tris": 360,
+   "file": "bridge_stoneRoundNarrow.glb"
+  },
+  "KNature_bridge_wood": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    104,
+    104,
+    40
+   ],
+   "tris": 220,
+   "file": "bridge_wood.glb"
+  },
+  "KNature_bridge_woodNarrow": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    104,
+    84,
+    35
+   ],
+   "tris": 220,
+   "file": "bridge_woodNarrow.glb"
+  },
+  "KNature_bridge_woodRound": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    104,
+    104,
+    45
+   ],
+   "tris": 336,
+   "file": "bridge_woodRound.glb"
+  },
+  "KNature_bridge_woodRoundNarrow": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    104,
+    84,
+    40
+   ],
+   "tris": 336,
+   "file": "bridge_woodRoundNarrow.glb"
+  },
+  "KNature_cactus_short": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    34,
+    30,
+    53
+   ],
+   "tris": 116,
+   "file": "cactus_short.glb"
+  },
+  "KNature_cactus_tall": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    40,
+    34,
+    75
+   ],
+   "tris": 122,
+   "file": "cactus_tall.glb"
+  },
+  "KNature_campfire_bricks": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    47,
+    47,
+    7
+   ],
+   "tris": 120,
+   "file": "campfire_bricks.glb"
+  },
+  "KNature_campfire_logs": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    29,
+    29,
+    6
+   ],
+   "tris": 112,
+   "file": "campfire_logs.glb"
+  },
+  "KNature_campfire_planks": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    35,
+    35,
+    4
+   ],
+   "tris": 108,
+   "file": "campfire_planks.glb"
+  },
+  "KNature_campfire_stones": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    54,
+    52,
+    8
+   ],
+   "tris": 264,
+   "file": "campfire_stones.glb"
+  },
+  "KNature_canoe": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    30,
+    115,
+    18
+   ],
+   "tris": 200,
+   "file": "canoe.glb"
+  },
+  "KNature_canoe_paddle": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    8,
+    59,
+    4
+   ],
+   "tris": 32,
+   "file": "canoe_paddle.glb"
+  },
+  "KNature_cliff_blockCave_rock": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    100
+   ],
+   "tris": 56,
+   "file": "cliff_blockCave_rock.glb"
+  },
+  "KNature_cliff_blockCave_stone": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    100
+   ],
+   "tris": 56,
+   "file": "cliff_blockCave_stone.glb"
+  },
+  "KNature_cliff_blockDiagonal_rock": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    100
+   ],
+   "tris": 8,
+   "file": "cliff_blockDiagonal_rock.glb"
+  },
+  "KNature_cliff_blockDiagonal_stone": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    100
+   ],
+   "tris": 8,
+   "file": "cliff_blockDiagonal_stone.glb"
+  },
+  "KNature_cliff_blockHalf_rock": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    50
+   ],
+   "tris": 12,
+   "file": "cliff_blockHalf_rock.glb"
+  },
+  "KNature_cliff_blockHalf_stone": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    50
+   ],
+   "tris": 12,
+   "file": "cliff_blockHalf_stone.glb"
+  },
+  "KNature_cliff_blockQuarter_rock": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    25
+   ],
+   "tris": 12,
+   "file": "cliff_blockQuarter_rock.glb"
+  },
+  "KNature_cliff_blockQuarter_stone": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    25
+   ],
+   "tris": 12,
+   "file": "cliff_blockQuarter_stone.glb"
+  },
+  "KNature_cliff_blockSlopeHalfWalls_rock": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    50
+   ],
+   "tris": 106,
+   "file": "cliff_blockSlopeHalfWalls_rock.glb"
+  },
+  "KNature_cliff_blockSlopeHalfWalls_stone": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    50
+   ],
+   "tris": 106,
+   "file": "cliff_blockSlopeHalfWalls_stone.glb"
+  },
+  "KNature_cliff_blockSlopeWalls_rock": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    100
+   ],
+   "tris": 106,
+   "file": "cliff_blockSlopeWalls_rock.glb"
+  },
+  "KNature_cliff_blockSlopeWalls_stone": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    100
+   ],
+   "tris": 106,
+   "file": "cliff_blockSlopeWalls_stone.glb"
+  },
+  "KNature_cliff_blockSlope_rock": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    120,
+    100,
+    100
+   ],
+   "tris": 70,
+   "file": "cliff_blockSlope_rock.glb"
+  },
+  "KNature_cliff_blockSlope_stone": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    120,
+    100,
+    100
+   ],
+   "tris": 70,
+   "file": "cliff_blockSlope_stone.glb"
+  },
+  "KNature_cliff_block_rock": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    100
+   ],
+   "tris": 12,
+   "file": "cliff_block_rock.glb"
+  },
+  "KNature_cliff_block_stone": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    100
+   ],
+   "tris": 12,
+   "file": "cliff_block_stone.glb"
+  },
+  "KNature_cliff_cave_rock": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    17,
+    100
+   ],
+   "tris": 64,
+   "file": "cliff_cave_rock.glb"
+  },
+  "KNature_cliff_cave_stone": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    17,
+    100
+   ],
+   "tris": 64,
+   "file": "cliff_cave_stone.glb"
+  },
+  "KNature_cliff_cornerInnerLarge_rock": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    100
+   ],
+   "tris": 44,
+   "file": "cliff_cornerInnerLarge_rock.glb"
+  },
+  "KNature_cliff_cornerInnerLarge_stone": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    100
+   ],
+   "tris": 44,
+   "file": "cliff_cornerInnerLarge_stone.glb"
+  },
+  "KNature_cliff_cornerInnerTop_rock": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    100
+   ],
+   "tris": 89,
+   "file": "cliff_cornerInnerTop_rock.glb"
+  },
+  "KNature_cliff_cornerInnerTop_stone": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    100
+   ],
+   "tris": 89,
+   "file": "cliff_cornerInnerTop_stone.glb"
+  },
+  "KNature_cliff_cornerInner_rock": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    100
+   ],
+   "tris": 56,
+   "file": "cliff_cornerInner_rock.glb"
+  },
+  "KNature_cliff_cornerInner_stone": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    100
+   ],
+   "tris": 56,
+   "file": "cliff_cornerInner_stone.glb"
+  },
+  "KNature_cliff_cornerLarge_rock": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    42,
+    42,
+    100
+   ],
+   "tris": 12,
+   "file": "cliff_cornerLarge_rock.glb"
+  },
+  "KNature_cliff_cornerLarge_stone": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    42,
+    42,
+    100
+   ],
+   "tris": 12,
+   "file": "cliff_cornerLarge_stone.glb"
+  },
+  "KNature_cliff_cornerTop_rock": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    27,
+    27,
+    100
+   ],
+   "tris": 16,
+   "file": "cliff_cornerTop_rock.glb"
+  },
+  "KNature_cliff_cornerTop_stone": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    27,
+    27,
+    100
+   ],
+   "tris": 16,
+   "file": "cliff_cornerTop_stone.glb"
+  },
+  "KNature_cliff_corner_rock": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    17,
+    17,
+    100
+   ],
+   "tris": 12,
+   "file": "cliff_corner_rock.glb"
+  },
+  "KNature_cliff_corner_stone": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    17,
+    17,
+    100
+   ],
+   "tris": 12,
+   "file": "cliff_corner_stone.glb"
+  },
+  "KNature_cliff_diagonal_rock": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    117,
+    117,
+    100
+   ],
+   "tris": 44,
+   "file": "cliff_diagonal_rock.glb"
+  },
+  "KNature_cliff_diagonal_stone": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    117,
+    117,
+    100
+   ],
+   "tris": 44,
+   "file": "cliff_diagonal_stone.glb"
+  },
+  "KNature_cliff_halfCornerInner_rock": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    50
+   ],
+   "tris": 89,
+   "file": "cliff_halfCornerInner_rock.glb"
+  },
+  "KNature_cliff_halfCornerInner_stone": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    50
+   ],
+   "tris": 89,
+   "file": "cliff_halfCornerInner_stone.glb"
+  },
+  "KNature_cliff_halfCorner_rock": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    42,
+    42,
+    50
+   ],
+   "tris": 16,
+   "file": "cliff_halfCorner_rock.glb"
+  },
+  "KNature_cliff_halfCorner_stone": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    42,
+    42,
+    50
+   ],
+   "tris": 16,
+   "file": "cliff_halfCorner_stone.glb"
+  },
+  "KNature_cliff_half_rock": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    42,
+    50
+   ],
+   "tris": 53,
+   "file": "cliff_half_rock.glb"
+  },
+  "KNature_cliff_half_stone": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    42,
+    50
+   ],
+   "tris": 53,
+   "file": "cliff_half_stone.glb"
+  },
+  "KNature_cliff_large_rock": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    42,
+    100
+   ],
+   "tris": 32,
+   "file": "cliff_large_rock.glb"
+  },
+  "KNature_cliff_large_stone": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    42,
+    100
+   ],
+   "tris": 32,
+   "file": "cliff_large_stone.glb"
+  },
+  "KNature_cliff_rock": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    17,
+    100
+   ],
+   "tris": 32,
+   "file": "cliff_rock.glb"
+  },
+  "KNature_cliff_stepsCornerInner_rock": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    100
+   ],
+   "tris": 213,
+   "file": "cliff_stepsCornerInner_rock.glb"
+  },
+  "KNature_cliff_stepsCornerInner_stone": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    100
+   ],
+   "tris": 213,
+   "file": "cliff_stepsCornerInner_stone.glb"
+  },
+  "KNature_cliff_stepsCorner_rock": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    105,
+    105,
+    100
+   ],
+   "tris": 245,
+   "file": "cliff_stepsCorner_rock.glb"
+  },
+  "KNature_cliff_stepsCorner_stone": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    105,
+    105,
+    100
+   ],
+   "tris": 245,
+   "file": "cliff_stepsCorner_stone.glb"
+  },
+  "KNature_cliff_steps_rock": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    105,
+    100
+   ],
+   "tris": 219,
+   "file": "cliff_steps_rock.glb"
+  },
+  "KNature_cliff_steps_stone": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    105,
+    100
+   ],
+   "tris": 219,
+   "file": "cliff_steps_stone.glb"
+  },
+  "KNature_cliff_stone": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    17,
+    100
+   ],
+   "tris": 32,
+   "file": "cliff_stone.glb"
+  },
+  "KNature_cliff_topDiagonal_rock": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    127,
+    127,
+    100
+   ],
+   "tris": 66,
+   "file": "cliff_topDiagonal_rock.glb"
+  },
+  "KNature_cliff_topDiagonal_stone": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    127,
+    127,
+    100
+   ],
+   "tris": 66,
+   "file": "cliff_topDiagonal_stone.glb"
+  },
+  "KNature_cliff_top_rock": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    27,
+    100
+   ],
+   "tris": 53,
+   "file": "cliff_top_rock.glb"
+  },
+  "KNature_cliff_top_stone": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    27,
+    100
+   ],
+   "tris": 53,
+   "file": "cliff_top_stone.glb"
+  },
+  "KNature_cliff_waterfallTop_rock": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    27,
+    100
+   ],
+   "tris": 60,
+   "file": "cliff_waterfallTop_rock.glb"
+  },
+  "KNature_cliff_waterfallTop_stone": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    27,
+    100
+   ],
+   "tris": 60,
+   "file": "cliff_waterfallTop_stone.glb"
+  },
+  "KNature_cliff_waterfall_rock": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    17,
+    100
+   ],
+   "tris": 34,
+   "file": "cliff_waterfall_rock.glb"
+  },
+  "KNature_cliff_waterfall_stone": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    17,
+    100
+   ],
+   "tris": 34,
+   "file": "cliff_waterfall_stone.glb"
+  },
+  "KNature_crop_carrot": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    34,
+    34,
+    62
+   ],
+   "tris": 100,
+   "file": "crop_carrot.glb"
+  },
+  "KNature_crop_melon": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    42,
+    36,
+    35
+   ],
+   "tris": 236,
+   "file": "crop_melon.glb"
+  },
+  "KNature_crop_pumpkin": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    44,
+    45,
+    33
+   ],
+   "tris": 120,
+   "file": "crop_pumpkin.glb"
+  },
+  "KNature_crop_turnip": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    34,
+    34,
+    66
+   ],
+   "tris": 120,
+   "file": "crop_turnip.glb"
+  },
+  "KNature_crops_bambooStageA": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    34,
+    31,
+    55
+   ],
+   "tris": 276,
+   "file": "crops_bambooStageA.glb"
+  },
+  "KNature_crops_bambooStageB": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    34,
+    31,
+    89
+   ],
+   "tris": 564,
+   "file": "crops_bambooStageB.glb"
+  },
+  "KNature_crops_cornStageA": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    30,
+    30,
+    50
+   ],
+   "tris": 64,
+   "file": "crops_cornStageA.glb"
+  },
+  "KNature_crops_cornStageB": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    30,
+    30,
+    100
+   ],
+   "tris": 80,
+   "file": "crops_cornStageB.glb"
+  },
+  "KNature_crops_cornStageC": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    30,
+    30,
+    125
+   ],
+   "tris": 100,
+   "file": "crops_cornStageC.glb"
+  },
+  "KNature_crops_cornStageD": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    44,
+    44,
+    125
+   ],
+   "tris": 216,
+   "file": "crops_cornStageD.glb"
+  },
+  "KNature_crops_dirtDoubleRow": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    94,
+    5
+   ],
+   "tris": 88,
+   "file": "crops_dirtDoubleRow.glb"
+  },
+  "KNature_crops_dirtDoubleRowCorner": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    94,
+    94,
+    5
+   ],
+   "tris": 50,
+   "file": "crops_dirtDoubleRowCorner.glb"
+  },
+  "KNature_crops_dirtDoubleRowEnd": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    60,
+    94,
+    5
+   ],
+   "tris": 64,
+   "file": "crops_dirtDoubleRowEnd.glb"
+  },
+  "KNature_crops_dirtRow": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    62,
+    5
+   ],
+   "tris": 44,
+   "file": "crops_dirtRow.glb"
+  },
+  "KNature_crops_dirtRowCorner": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    78,
+    78,
+    5
+   ],
+   "tris": 19,
+   "file": "crops_dirtRowCorner.glb"
+  },
+  "KNature_crops_dirtRowEnd": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    60,
+    62,
+    5
+   ],
+   "tris": 32,
+   "file": "crops_dirtRowEnd.glb"
+  },
+  "KNature_crops_dirtSingle": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    40,
+    35,
+    10
+   ],
+   "tris": 32,
+   "file": "crops_dirtSingle.glb"
+  },
+  "KNature_crops_leafsStageA": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    39,
+    39,
+    43
+   ],
+   "tris": 44,
+   "file": "crops_leafsStageA.glb"
+  },
+  "KNature_crops_leafsStageB": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    39,
+    39,
+    68
+   ],
+   "tris": 52,
+   "file": "crops_leafsStageB.glb"
+  },
+  "KNature_crops_wheatStageA": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    54,
+    45,
+    33
+   ],
+   "tris": 360,
+   "file": "crops_wheatStageA.glb"
+  },
+  "KNature_crops_wheatStageB": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    54,
+    45,
+    53
+   ],
+   "tris": 360,
+   "file": "crops_wheatStageB.glb"
+  },
+  "KNature_fence_bend": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    35
+   ],
+   "tris": 240,
+   "file": "fence_bend.glb"
+  },
+  "KNature_fence_bendCenter": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    35
+   ],
+   "tris": 298,
+   "file": "fence_bendCenter.glb"
+  },
+  "KNature_fence_corner": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    35
+   ],
+   "tris": 116,
+   "file": "fence_corner.glb"
+  },
+  "KNature_fence_gate": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    7,
+    35
+   ],
+   "tris": 524,
+   "file": "fence_gate.glb"
+  },
+  "KNature_fence_planks": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    10,
+    35
+   ],
+   "tris": 96,
+   "file": "fence_planks.glb"
+  },
+  "KNature_fence_planksDouble": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    6,
+    35
+   ],
+   "tris": 152,
+   "file": "fence_planksDouble.glb"
+  },
+  "KNature_fence_simple": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    7,
+    35
+   ],
+   "tris": 64,
+   "file": "fence_simple.glb"
+  },
+  "KNature_fence_simpleCenter": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    7,
+    35
+   ],
+   "tris": 116,
+   "file": "fence_simpleCenter.glb"
+  },
+  "KNature_fence_simpleDiagonal": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    35
+   ],
+   "tris": 80,
+   "file": "fence_simpleDiagonal.glb"
+  },
+  "KNature_fence_simpleDiagonalCenter": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    35
+   ],
+   "tris": 148,
+   "file": "fence_simpleDiagonalCenter.glb"
+  },
+  "KNature_fence_simpleHigh": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    104,
+    11,
+    35
+   ],
+   "tris": 44,
+   "file": "fence_simpleHigh.glb"
+  },
+  "KNature_fence_simpleLow": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    104,
+    11,
+    20
+   ],
+   "tris": 44,
+   "file": "fence_simpleLow.glb"
+  },
+  "KNature_flower_purpleA": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    16,
+    18,
+    24
+   ],
+   "tris": 56,
+   "file": "flower_purpleA.glb"
+  },
+  "KNature_flower_purpleB": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    21,
+    24,
+    21
+   ],
+   "tris": 77,
+   "file": "flower_purpleB.glb"
+  },
+  "KNature_flower_purpleC": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    18,
+    18,
+    18
+   ],
+   "tris": 66,
+   "file": "flower_purpleC.glb"
+  },
+  "KNature_flower_redA": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    16,
+    18,
+    29
+   ],
+   "tris": 56,
+   "file": "flower_redA.glb"
+  },
+  "KNature_flower_redB": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    21,
+    24,
+    26
+   ],
+   "tris": 77,
+   "file": "flower_redB.glb"
+  },
+  "KNature_flower_redC": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    18,
+    18,
+    23
+   ],
+   "tris": 66,
+   "file": "flower_redC.glb"
+  },
+  "KNature_flower_yellowA": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    16,
+    18,
+    19
+   ],
+   "tris": 56,
+   "file": "flower_yellowA.glb"
+  },
+  "KNature_flower_yellowB": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    21,
+    24,
+    16
+   ],
+   "tris": 77,
+   "file": "flower_yellowB.glb"
+  },
+  "KNature_flower_yellowC": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    18,
+    18,
+    13
+   ],
+   "tris": 66,
+   "file": "flower_yellowC.glb"
+  },
+  "KNature_grass": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    38,
+    39,
+    25
+   ],
+   "tris": 66,
+   "file": "grass.glb"
+  },
+  "KNature_grass_large": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    41,
+    41,
+    25
+   ],
+   "tris": 112,
+   "file": "grass_large.glb"
+  },
+  "KNature_grass_leafs": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    23,
+    26,
+    14
+   ],
+   "tris": 18,
+   "file": "grass_leafs.glb"
+  },
+  "KNature_grass_leafsLarge": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    48,
+    49,
+    14
+   ],
+   "tris": 72,
+   "file": "grass_leafsLarge.glb"
+  },
+  "KNature_ground_grass": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    0
+   ],
+   "tris": 2,
+   "file": "ground_grass.glb"
+  },
+  "KNature_ground_pathBend": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    5
+   ],
+   "tris": 32,
+   "file": "ground_pathBend.glb"
+  },
+  "KNature_ground_pathBendBank": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    5
+   ],
+   "tris": 38,
+   "file": "ground_pathBendBank.glb"
+  },
+  "KNature_ground_pathCorner": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    5
+   ],
+   "tris": 22,
+   "file": "ground_pathCorner.glb"
+  },
+  "KNature_ground_pathCornerSmall": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    5
+   ],
+   "tris": 24,
+   "file": "ground_pathCornerSmall.glb"
+  },
+  "KNature_ground_pathCross": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    5
+   ],
+   "tris": 74,
+   "file": "ground_pathCross.glb"
+  },
+  "KNature_ground_pathEnd": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    5
+   ],
+   "tris": 52,
+   "file": "ground_pathEnd.glb"
+  },
+  "KNature_ground_pathEndClosed": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    5
+   ],
+   "tris": 68,
+   "file": "ground_pathEndClosed.glb"
+  },
+  "KNature_ground_pathOpen": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    0
+   ],
+   "tris": 8,
+   "file": "ground_pathOpen.glb"
+  },
+  "KNature_ground_pathRocks": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    5
+   ],
+   "tris": 102,
+   "file": "ground_pathRocks.glb"
+  },
+  "KNature_ground_pathSide": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    5
+   ],
+   "tris": 34,
+   "file": "ground_pathSide.glb"
+  },
+  "KNature_ground_pathSideOpen": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    5
+   ],
+   "tris": 40,
+   "file": "ground_pathSideOpen.glb"
+  },
+  "KNature_ground_pathSplit": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    5
+   ],
+   "tris": 68,
+   "file": "ground_pathSplit.glb"
+  },
+  "KNature_ground_pathStraight": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    5
+   ],
+   "tris": 62,
+   "file": "ground_pathStraight.glb"
+  },
+  "KNature_ground_pathTile": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    5
+   ],
+   "tris": 86,
+   "file": "ground_pathTile.glb"
+  },
+  "KNature_ground_riverBend": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    5
+   ],
+   "tris": 54,
+   "file": "ground_riverBend.glb"
+  },
+  "KNature_ground_riverBendBank": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    5
+   ],
+   "tris": 54,
+   "file": "ground_riverBendBank.glb"
+  },
+  "KNature_ground_riverCorner": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    5
+   ],
+   "tris": 40,
+   "file": "ground_riverCorner.glb"
+  },
+  "KNature_ground_riverCornerSmall": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    5
+   ],
+   "tris": 26,
+   "file": "ground_riverCornerSmall.glb"
+  },
+  "KNature_ground_riverCross": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    5
+   ],
+   "tris": 82,
+   "file": "ground_riverCross.glb"
+  },
+  "KNature_ground_riverEnd": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    5
+   ],
+   "tris": 52,
+   "file": "ground_riverEnd.glb"
+  },
+  "KNature_ground_riverEndClosed": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    5
+   ],
+   "tris": 84,
+   "file": "ground_riverEndClosed.glb"
+  },
+  "KNature_ground_riverOpen": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    0
+   ],
+   "tris": 8,
+   "file": "ground_riverOpen.glb"
+  },
+  "KNature_ground_riverRocks": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    5
+   ],
+   "tris": 102,
+   "file": "ground_riverRocks.glb"
+  },
+  "KNature_ground_riverSide": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    5
+   ],
+   "tris": 34,
+   "file": "ground_riverSide.glb"
+  },
+  "KNature_ground_riverSideOpen": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    5
+   ],
+   "tris": 44,
+   "file": "ground_riverSideOpen.glb"
+  },
+  "KNature_ground_riverSplit": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    5
+   ],
+   "tris": 72,
+   "file": "ground_riverSplit.glb"
+  },
+  "KNature_ground_riverStraight": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    5
+   ],
+   "tris": 62,
+   "file": "ground_riverStraight.glb"
+  },
+  "KNature_ground_riverTile": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    5
+   ],
+   "tris": 128,
+   "file": "ground_riverTile.glb"
+  },
+  "KNature_hanging_moss": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    16,
+    3,
+    48
+   ],
+   "tris": 52,
+   "file": "hanging_moss.glb"
+  },
+  "KNature_lily_large": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    27,
+    31,
+    10
+   ],
+   "tris": 60,
+   "file": "lily_large.glb"
+  },
+  "KNature_lily_small": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    19,
+    22,
+    4
+   ],
+   "tris": 38,
+   "file": "lily_small.glb"
+  },
+  "KNature_log": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    23,
+    71,
+    17
+   ],
+   "tris": 100,
+   "file": "log.glb"
+  },
+  "KNature_log_large": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    55,
+    42
+   ],
+   "tris": 96,
+   "file": "log_large.glb"
+  },
+  "KNature_log_stack": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    42,
+    71,
+    35
+   ],
+   "tris": 184,
+   "file": "log_stack.glb"
+  },
+  "KNature_log_stackLarge": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    63,
+    71,
+    35
+   ],
+   "tris": 310,
+   "file": "log_stackLarge.glb"
+  },
+  "KNature_mushroom_red": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    17,
+    20,
+    20
+   ],
+   "tris": 48,
+   "file": "mushroom_red.glb"
+  },
+  "KNature_mushroom_redGroup": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    27,
+    25,
+    25
+   ],
+   "tris": 144,
+   "file": "mushroom_redGroup.glb"
+  },
+  "KNature_mushroom_redTall": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    12,
+    14,
+    25
+   ],
+   "tris": 48,
+   "file": "mushroom_redTall.glb"
+  },
+  "KNature_mushroom_tan": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    19,
+    22,
+    15
+   ],
+   "tris": 48,
+   "file": "mushroom_tan.glb"
+  },
+  "KNature_mushroom_tanGroup": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    27,
+    25,
+    25
+   ],
+   "tris": 144,
+   "file": "mushroom_tanGroup.glb"
+  },
+  "KNature_mushroom_tanTall": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    12,
+    14,
+    25
+   ],
+   "tris": 48,
+   "file": "mushroom_tanTall.glb"
+  },
+  "KNature_path_stone": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    58,
+    5
+   ],
+   "tris": 136,
+   "file": "path_stone.glb"
+  },
+  "KNature_path_stoneCircle": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    93,
+    88,
+    5
+   ],
+   "tris": 164,
+   "file": "path_stoneCircle.glb"
+  },
+  "KNature_path_stoneCorner": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    74,
+    78,
+    5
+   ],
+   "tris": 112,
+   "file": "path_stoneCorner.glb"
+  },
+  "KNature_path_stoneEnd": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    62,
+    57,
+    5
+   ],
+   "tris": 92,
+   "file": "path_stoneEnd.glb"
+  },
+  "KNature_path_wood": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    51,
+    5
+   ],
+   "tris": 60,
+   "file": "path_wood.glb"
+  },
+  "KNature_path_woodCorner": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    75,
+    75,
+    5
+   ],
+   "tris": 60,
+   "file": "path_woodCorner.glb"
+  },
+  "KNature_path_woodEnd": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    61,
+    51,
+    5
+   ],
+   "tris": 36,
+   "file": "path_woodEnd.glb"
+  },
+  "KNature_plant_bush": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    40,
+    40,
+    24
+   ],
+   "tris": 16,
+   "file": "plant_bush.glb"
+  },
+  "KNature_plant_bushDetailed": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    60,
+    60,
+    36
+   ],
+   "tris": 52,
+   "file": "plant_bushDetailed.glb"
+  },
+  "KNature_plant_bushLarge": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    37,
+    34,
+    24
+   ],
+   "tris": 30,
+   "file": "plant_bushLarge.glb"
+  },
+  "KNature_plant_bushLargeTriangle": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    41,
+    47,
+    17
+   ],
+   "tris": 21,
+   "file": "plant_bushLargeTriangle.glb"
+  },
+  "KNature_plant_bushSmall": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    38,
+    34,
+    21
+   ],
+   "tris": 8,
+   "file": "plant_bushSmall.glb"
+  },
+  "KNature_plant_bushTriangle": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    36,
+    41,
+    30
+   ],
+   "tris": 15,
+   "file": "plant_bushTriangle.glb"
+  },
+  "KNature_plant_flatShort": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    28,
+    28,
+    24
+   ],
+   "tris": 24,
+   "file": "plant_flatShort.glb"
+  },
+  "KNature_plant_flatTall": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    27,
+    27,
+    28
+   ],
+   "tris": 18,
+   "file": "plant_flatTall.glb"
+  },
+  "KNature_platform_beach": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    89,
+    72,
+    8
+   ],
+   "tris": 192,
+   "file": "platform_beach.glb"
+  },
+  "KNature_platform_grass": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    89,
+    72,
+    8
+   ],
+   "tris": 186,
+   "file": "platform_grass.glb"
+  },
+  "KNature_platform_stone": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    89,
+    72,
+    8
+   ],
+   "tris": 192,
+   "file": "platform_stone.glb"
+  },
+  "KNature_pot_large": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    56,
+    49,
+    20
+   ],
+   "tris": 68,
+   "file": "pot_large.glb"
+  },
+  "KNature_pot_small": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    32,
+    28,
+    27
+   ],
+   "tris": 72,
+   "file": "pot_small.glb"
+  },
+  "KNature_rock_largeA": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    78,
+    102,
+    26
+   ],
+   "tris": 80,
+   "file": "rock_largeA.glb"
+  },
+  "KNature_rock_largeB": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    77,
+    102,
+    43
+   ],
+   "tris": 85,
+   "file": "rock_largeB.glb"
+  },
+  "KNature_rock_largeC": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    106,
+    102,
+    32
+   ],
+   "tris": 72,
+   "file": "rock_largeC.glb"
+  },
+  "KNature_rock_largeD": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    107,
+    103,
+    57
+   ],
+   "tris": 80,
+   "file": "rock_largeD.glb"
+  },
+  "KNature_rock_largeE": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    110,
+    92,
+    29
+   ],
+   "tris": 64,
+   "file": "rock_largeE.glb"
+  },
+  "KNature_rock_largeF": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    110,
+    90,
+    48
+   ],
+   "tris": 73,
+   "file": "rock_largeF.glb"
+  },
+  "KNature_rock_smallA": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    36,
+    36,
+    19
+   ],
+   "tris": 16,
+   "file": "rock_smallA.glb"
+  },
+  "KNature_rock_smallB": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    36,
+    36,
+    18
+   ],
+   "tris": 24,
+   "file": "rock_smallB.glb"
+  },
+  "KNature_rock_smallC": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    36,
+    36,
+    12
+   ],
+   "tris": 16,
+   "file": "rock_smallC.glb"
+  },
+  "KNature_rock_smallD": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    43,
+    37,
+    23
+   ],
+   "tris": 32,
+   "file": "rock_smallD.glb"
+  },
+  "KNature_rock_smallE": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    36,
+    31,
+    26
+   ],
+   "tris": 64,
+   "file": "rock_smallE.glb"
+  },
+  "KNature_rock_smallF": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    35,
+    31,
+    25
+   ],
+   "tris": 60,
+   "file": "rock_smallF.glb"
+  },
+  "KNature_rock_smallFlatA": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    50,
+    43,
+    6
+   ],
+   "tris": 20,
+   "file": "rock_smallFlatA.glb"
+  },
+  "KNature_rock_smallFlatB": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    43,
+    40,
+    6
+   ],
+   "tris": 16,
+   "file": "rock_smallFlatB.glb"
+  },
+  "KNature_rock_smallFlatC": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    47,
+    36,
+    6
+   ],
+   "tris": 40,
+   "file": "rock_smallFlatC.glb"
+  },
+  "KNature_rock_smallG": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    59,
+    69,
+    25
+   ],
+   "tris": 32,
+   "file": "rock_smallG.glb"
+  },
+  "KNature_rock_smallH": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    46,
+    46,
+    41
+   ],
+   "tris": 60,
+   "file": "rock_smallH.glb"
+  },
+  "KNature_rock_smallI": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    36,
+    41,
+    28
+   ],
+   "tris": 44,
+   "file": "rock_smallI.glb"
+  },
+  "KNature_rock_smallTopA": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    49,
+    49,
+    22
+   ],
+   "tris": 52,
+   "file": "rock_smallTopA.glb"
+  },
+  "KNature_rock_smallTopB": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    62,
+    65,
+    28
+   ],
+   "tris": 76,
+   "file": "rock_smallTopB.glb"
+  },
+  "KNature_rock_tallA": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    98,
+    68,
+    100
+   ],
+   "tris": 136,
+   "file": "rock_tallA.glb"
+  },
+  "KNature_rock_tallB": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    76,
+    77,
+    88
+   ],
+   "tris": 172,
+   "file": "rock_tallB.glb"
+  },
+  "KNature_rock_tallC": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    46,
+    44,
+    78
+   ],
+   "tris": 37,
+   "file": "rock_tallC.glb"
+  },
+  "KNature_rock_tallD": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    44,
+    46,
+    77
+   ],
+   "tris": 38,
+   "file": "rock_tallD.glb"
+  },
+  "KNature_rock_tallE": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    46,
+    53,
+    44
+   ],
+   "tris": 38,
+   "file": "rock_tallE.glb"
+  },
+  "KNature_rock_tallF": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    44,
+    51,
+    57
+   ],
+   "tris": 46,
+   "file": "rock_tallF.glb"
+  },
+  "KNature_rock_tallG": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    42,
+    49,
+    78
+   ],
+   "tris": 62,
+   "file": "rock_tallG.glb"
+  },
+  "KNature_rock_tallH": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    57,
+    66,
+    71
+   ],
+   "tris": 78,
+   "file": "rock_tallH.glb"
+  },
+  "KNature_rock_tallI": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    46,
+    46,
+    81
+   ],
+   "tris": 44,
+   "file": "rock_tallI.glb"
+  },
+  "KNature_rock_tallJ": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    49,
+    54,
+    62
+   ],
+   "tris": 42,
+   "file": "rock_tallJ.glb"
+  },
+  "KNature_sign": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    30,
+    7,
+    41
+   ],
+   "tris": 44,
+   "file": "sign.glb"
+  },
+  "KNature_statue_block": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    40,
+    40,
+    40
+   ],
+   "tris": 140,
+   "file": "statue_block.glb"
+  },
+  "KNature_statue_column": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    30,
+    30,
+    100
+   ],
+   "tris": 122,
+   "file": "statue_column.glb"
+  },
+  "KNature_statue_columnDamaged": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    30,
+    30,
+    70
+   ],
+   "tris": 108,
+   "file": "statue_columnDamaged.glb"
+  },
+  "KNature_statue_head": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    73,
+    55,
+    100
+   ],
+   "tris": 196,
+   "file": "statue_head.glb"
+  },
+  "KNature_statue_obelisk": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    31,
+    31,
+    88
+   ],
+   "tris": 38,
+   "file": "statue_obelisk.glb"
+  },
+  "KNature_statue_ring": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    60,
+    40,
+    80
+   ],
+   "tris": 76,
+   "file": "statue_ring.glb"
+  },
+  "KNature_stone_largeA": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    78,
+    102,
+    26
+   ],
+   "tris": 80,
+   "file": "stone_largeA.glb"
+  },
+  "KNature_stone_largeB": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    77,
+    102,
+    43
+   ],
+   "tris": 85,
+   "file": "stone_largeB.glb"
+  },
+  "KNature_stone_largeC": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    106,
+    102,
+    32
+   ],
+   "tris": 72,
+   "file": "stone_largeC.glb"
+  },
+  "KNature_stone_largeD": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    107,
+    103,
+    57
+   ],
+   "tris": 80,
+   "file": "stone_largeD.glb"
+  },
+  "KNature_stone_largeE": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    110,
+    92,
+    29
+   ],
+   "tris": 64,
+   "file": "stone_largeE.glb"
+  },
+  "KNature_stone_largeF": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    110,
+    90,
+    48
+   ],
+   "tris": 73,
+   "file": "stone_largeF.glb"
+  },
+  "KNature_stone_smallA": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    36,
+    36,
+    19
+   ],
+   "tris": 16,
+   "file": "stone_smallA.glb"
+  },
+  "KNature_stone_smallB": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    36,
+    36,
+    18
+   ],
+   "tris": 24,
+   "file": "stone_smallB.glb"
+  },
+  "KNature_stone_smallC": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    36,
+    36,
+    12
+   ],
+   "tris": 16,
+   "file": "stone_smallC.glb"
+  },
+  "KNature_stone_smallD": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    43,
+    37,
+    23
+   ],
+   "tris": 32,
+   "file": "stone_smallD.glb"
+  },
+  "KNature_stone_smallE": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    36,
+    31,
+    26
+   ],
+   "tris": 64,
+   "file": "stone_smallE.glb"
+  },
+  "KNature_stone_smallF": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    35,
+    31,
+    25
+   ],
+   "tris": 60,
+   "file": "stone_smallF.glb"
+  },
+  "KNature_stone_smallFlatA": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    50,
+    43,
+    6
+   ],
+   "tris": 20,
+   "file": "stone_smallFlatA.glb"
+  },
+  "KNature_stone_smallFlatB": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    43,
+    40,
+    6
+   ],
+   "tris": 16,
+   "file": "stone_smallFlatB.glb"
+  },
+  "KNature_stone_smallFlatC": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    47,
+    36,
+    6
+   ],
+   "tris": 40,
+   "file": "stone_smallFlatC.glb"
+  },
+  "KNature_stone_smallG": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    59,
+    69,
+    25
+   ],
+   "tris": 32,
+   "file": "stone_smallG.glb"
+  },
+  "KNature_stone_smallH": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    46,
+    46,
+    41
+   ],
+   "tris": 60,
+   "file": "stone_smallH.glb"
+  },
+  "KNature_stone_smallI": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    36,
+    41,
+    28
+   ],
+   "tris": 44,
+   "file": "stone_smallI.glb"
+  },
+  "KNature_stone_smallTopA": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    49,
+    49,
+    22
+   ],
+   "tris": 52,
+   "file": "stone_smallTopA.glb"
+  },
+  "KNature_stone_smallTopB": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    62,
+    65,
+    28
+   ],
+   "tris": 76,
+   "file": "stone_smallTopB.glb"
+  },
+  "KNature_stone_tallA": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    98,
+    68,
+    100
+   ],
+   "tris": 136,
+   "file": "stone_tallA.glb"
+  },
+  "KNature_stone_tallB": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    76,
+    77,
+    88
+   ],
+   "tris": 172,
+   "file": "stone_tallB.glb"
+  },
+  "KNature_stone_tallC": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    46,
+    44,
+    78
+   ],
+   "tris": 37,
+   "file": "stone_tallC.glb"
+  },
+  "KNature_stone_tallD": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    44,
+    46,
+    77
+   ],
+   "tris": 38,
+   "file": "stone_tallD.glb"
+  },
+  "KNature_stone_tallE": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    46,
+    53,
+    44
+   ],
+   "tris": 38,
+   "file": "stone_tallE.glb"
+  },
+  "KNature_stone_tallF": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    44,
+    51,
+    57
+   ],
+   "tris": 46,
+   "file": "stone_tallF.glb"
+  },
+  "KNature_stone_tallG": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    42,
+    49,
+    78
+   ],
+   "tris": 62,
+   "file": "stone_tallG.glb"
+  },
+  "KNature_stone_tallH": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    57,
+    66,
+    71
+   ],
+   "tris": 78,
+   "file": "stone_tallH.glb"
+  },
+  "KNature_stone_tallI": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    46,
+    46,
+    81
+   ],
+   "tris": 44,
+   "file": "stone_tallI.glb"
+  },
+  "KNature_stone_tallJ": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    49,
+    54,
+    62
+   ],
+   "tris": 42,
+   "file": "stone_tallJ.glb"
+  },
+  "KNature_stump_old": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    36,
+    37,
+    27
+   ],
+   "tris": 120,
+   "file": "stump_old.glb"
+  },
+  "KNature_stump_oldTall": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    36,
+    37,
+    67
+   ],
+   "tris": 120,
+   "file": "stump_oldTall.glb"
+  },
+  "KNature_stump_round": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    32,
+    37,
+    21
+   ],
+   "tris": 56,
+   "file": "stump_round.glb"
+  },
+  "KNature_stump_roundDetailed": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    36,
+    37,
+    21
+   ],
+   "tris": 96,
+   "file": "stump_roundDetailed.glb"
+  },
+  "KNature_stump_square": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    36,
+    30,
+    30
+   ],
+   "tris": 44,
+   "file": "stump_square.glb"
+  },
+  "KNature_stump_squareDetailed": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    44,
+    44,
+    20
+   ],
+   "tris": 84,
+   "file": "stump_squareDetailed.glb"
+  },
+  "KNature_stump_squareDetailedWide": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    64,
+    64,
+    20
+   ],
+   "tris": 84,
+   "file": "stump_squareDetailedWide.glb"
+  },
+  "KNature_tent_detailedClosed": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    87,
+    64,
+    56
+   ],
+   "tris": 170,
+   "file": "tent_detailedClosed.glb"
+  },
+  "KNature_tent_detailedOpen": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    87,
+    67,
+    56
+   ],
+   "tris": 175,
+   "file": "tent_detailedOpen.glb"
+  },
+  "KNature_tent_smallClosed": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    55,
+    64,
+    56
+   ],
+   "tris": 134,
+   "file": "tent_smallClosed.glb"
+  },
+  "KNature_tent_smallOpen": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    55,
+    67,
+    56
+   ],
+   "tris": 139,
+   "file": "tent_smallOpen.glb"
+  },
+  "KNature_tree_blocks": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    60,
+    60,
+    119
+   ],
+   "tris": 132,
+   "file": "tree_blocks.glb"
+  },
+  "KNature_tree_blocks_dark": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    60,
+    60,
+    119
+   ],
+   "tris": 132,
+   "file": "tree_blocks_dark.glb"
+  },
+  "KNature_tree_blocks_fall": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    60,
+    60,
+    119
+   ],
+   "tris": 132,
+   "file": "tree_blocks_fall.glb"
+  },
+  "KNature_tree_cone": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    53,
+    53,
+    143
+   ],
+   "tris": 132,
+   "file": "tree_cone.glb"
+  },
+  "KNature_tree_cone_dark": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    53,
+    53,
+    143
+   ],
+   "tris": 132,
+   "file": "tree_cone_dark.glb"
+  },
+  "KNature_tree_cone_fall": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    53,
+    53,
+    143
+   ],
+   "tris": 132,
+   "file": "tree_cone_fall.glb"
+  },
+  "KNature_tree_default": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    76,
+    65,
+    171
+   ],
+   "tris": 114,
+   "file": "tree_default.glb"
+  },
+  "KNature_tree_default_dark": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    76,
+    65,
+    171
+   ],
+   "tris": 114,
+   "file": "tree_default_dark.glb"
+  },
+  "KNature_tree_default_fall": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    76,
+    65,
+    171
+   ],
+   "tris": 114,
+   "file": "tree_default_fall.glb"
+  },
+  "KNature_tree_detailed": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    85,
+    76,
+    133
+   ],
+   "tris": 402,
+   "file": "tree_detailed.glb"
+  },
+  "KNature_tree_detailed_dark": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    85,
+    76,
+    133
+   ],
+   "tris": 402,
+   "file": "tree_detailed_dark.glb"
+  },
+  "KNature_tree_detailed_fall": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    85,
+    76,
+    133
+   ],
+   "tris": 402,
+   "file": "tree_detailed_fall.glb"
+  },
+  "KNature_tree_fat": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    76,
+    65,
+    115
+   ],
+   "tris": 50,
+   "file": "tree_fat.glb"
+  },
+  "KNature_tree_fat_darkh": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    76,
+    65,
+    115
+   ],
+   "tris": 50,
+   "file": "tree_fat_darkh.glb"
+  },
+  "KNature_tree_fat_fall": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    76,
+    65,
+    115
+   ],
+   "tris": 50,
+   "file": "tree_fat_fall.glb"
+  },
+  "KNature_tree_oak": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    64,
+    74,
+    123
+   ],
+   "tris": 196,
+   "file": "tree_oak.glb"
+  },
+  "KNature_tree_oak_dark": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    64,
+    74,
+    123
+   ],
+   "tris": 196,
+   "file": "tree_oak_dark.glb"
+  },
+  "KNature_tree_oak_fall": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    64,
+    74,
+    123
+   ],
+   "tris": 196,
+   "file": "tree_oak_fall.glb"
+  },
+  "KNature_tree_palm": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    94,
+    101,
+    151
+   ],
+   "tris": 102,
+   "file": "tree_palm.glb"
+  },
+  "KNature_tree_palmBend": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    94,
+    101,
+    138
+   ],
+   "tris": 118,
+   "file": "tree_palmBend.glb"
+  },
+  "KNature_tree_palmDetailedShort": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    103,
+    103,
+    112
+   ],
+   "tris": 336,
+   "file": "tree_palmDetailedShort.glb"
+  },
+  "KNature_tree_palmDetailedTall": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    103,
+    103,
+    142
+   ],
+   "tris": 336,
+   "file": "tree_palmDetailedTall.glb"
+  },
+  "KNature_tree_palmShort": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    103,
+    103,
+    106
+   ],
+   "tris": 190,
+   "file": "tree_palmShort.glb"
+  },
+  "KNature_tree_palmTall": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    103,
+    103,
+    136
+   ],
+   "tris": 190,
+   "file": "tree_palmTall.glb"
+  },
+  "KNature_tree_pineDefaultA": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    53,
+    53,
+    155
+   ],
+   "tris": 230,
+   "file": "tree_pineDefaultA.glb"
+  },
+  "KNature_tree_pineDefaultB": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    53,
+    53,
+    155
+   ],
+   "tris": 246,
+   "file": "tree_pineDefaultB.glb"
+  },
+  "KNature_tree_pineGroundA": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    48,
+    55,
+    91
+   ],
+   "tris": 82,
+   "file": "tree_pineGroundA.glb"
+  },
+  "KNature_tree_pineGroundB": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    48,
+    55,
+    104
+   ],
+   "tris": 82,
+   "file": "tree_pineGroundB.glb"
+  },
+  "KNature_tree_pineRoundA": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    62,
+    71,
+    137
+   ],
+   "tris": 204,
+   "file": "tree_pineRoundA.glb"
+  },
+  "KNature_tree_pineRoundB": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    53,
+    61,
+    120
+   ],
+   "tris": 262,
+   "file": "tree_pineRoundB.glb"
+  },
+  "KNature_tree_pineRoundC": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    48,
+    55,
+    125
+   ],
+   "tris": 206,
+   "file": "tree_pineRoundC.glb"
+  },
+  "KNature_tree_pineRoundD": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    48,
+    55,
+    108
+   ],
+   "tris": 170,
+   "file": "tree_pineRoundD.glb"
+  },
+  "KNature_tree_pineRoundE": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    53,
+    53,
+    125
+   ],
+   "tris": 198,
+   "file": "tree_pineRoundE.glb"
+  },
+  "KNature_tree_pineRoundF": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    53,
+    53,
+    125
+   ],
+   "tris": 214,
+   "file": "tree_pineRoundF.glb"
+  },
+  "KNature_tree_pineSmallA": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    50,
+    50,
+    97
+   ],
+   "tris": 164,
+   "file": "tree_pineSmallA.glb"
+  },
+  "KNature_tree_pineSmallB": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    39,
+    39,
+    101
+   ],
+   "tris": 86,
+   "file": "tree_pineSmallB.glb"
+  },
+  "KNature_tree_pineSmallC": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    39,
+    39,
+    112
+   ],
+   "tris": 54,
+   "file": "tree_pineSmallC.glb"
+  },
+  "KNature_tree_pineSmallD": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    36,
+    36,
+    96
+   ],
+   "tris": 54,
+   "file": "tree_pineSmallD.glb"
+  },
+  "KNature_tree_pineTallA": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    39,
+    39,
+    153
+   ],
+   "tris": 78,
+   "file": "tree_pineTallA.glb"
+  },
+  "KNature_tree_pineTallA_detailed": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    39,
+    39,
+    153
+   ],
+   "tris": 134,
+   "file": "tree_pineTallA_detailed.glb"
+  },
+  "KNature_tree_pineTallB": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    39,
+    39,
+    193
+   ],
+   "tris": 78,
+   "file": "tree_pineTallB.glb"
+  },
+  "KNature_tree_pineTallB_detailed": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    39,
+    39,
+    193
+   ],
+   "tris": 166,
+   "file": "tree_pineTallB_detailed.glb"
+  },
+  "KNature_tree_pineTallC": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    48,
+    55,
+    167
+   ],
+   "tris": 98,
+   "file": "tree_pineTallC.glb"
+  },
+  "KNature_tree_pineTallC_detailed": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    48,
+    55,
+    167
+   ],
+   "tris": 154,
+   "file": "tree_pineTallC_detailed.glb"
+  },
+  "KNature_tree_pineTallD": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    48,
+    55,
+    208
+   ],
+   "tris": 98,
+   "file": "tree_pineTallD.glb"
+  },
+  "KNature_tree_pineTallD_detailed": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    48,
+    55,
+    208
+   ],
+   "tris": 170,
+   "file": "tree_pineTallD_detailed.glb"
+  },
+  "KNature_tree_plateau": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    61,
+    65,
+    125
+   ],
+   "tris": 215,
+   "file": "tree_plateau.glb"
+  },
+  "KNature_tree_plateau_dark": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    61,
+    65,
+    125
+   ],
+   "tris": 215,
+   "file": "tree_plateau_dark.glb"
+  },
+  "KNature_tree_plateau_fall": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    61,
+    65,
+    125
+   ],
+   "tris": 215,
+   "file": "tree_plateau_fall.glb"
+  },
+  "KNature_tree_simple": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    35,
+    41,
+    152
+   ],
+   "tris": 62,
+   "file": "tree_simple.glb"
+  },
+  "KNature_tree_simple_dark": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    35,
+    41,
+    152
+   ],
+   "tris": 62,
+   "file": "tree_simple_dark.glb"
+  },
+  "KNature_tree_simple_fall": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    35,
+    41,
+    152
+   ],
+   "tris": 62,
+   "file": "tree_simple_fall.glb"
+  },
+  "KNature_tree_small": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    35,
+    41,
+    111
+   ],
+   "tris": 62,
+   "file": "tree_small.glb"
+  },
+  "KNature_tree_small_dark": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    35,
+    41,
+    111
+   ],
+   "tris": 62,
+   "file": "tree_small_dark.glb"
+  },
+  "KNature_tree_small_fall": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    35,
+    41,
+    111
+   ],
+   "tris": 62,
+   "file": "tree_small_fall.glb"
+  },
+  "KNature_tree_tall": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    40,
+    46,
+    169
+   ],
+   "tris": 72,
+   "file": "tree_tall.glb"
+  },
+  "KNature_tree_tall_dark": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    40,
+    46,
+    169
+   ],
+   "tris": 72,
+   "file": "tree_tall_dark.glb"
+  },
+  "KNature_tree_tall_fall": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    40,
+    46,
+    169
+   ],
+   "tris": 72,
+   "file": "tree_tall_fall.glb"
+  },
+  "KNature_tree_thin": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    68,
+    62,
+    149
+   ],
+   "tris": 228,
+   "file": "tree_thin.glb"
+  },
+  "KNature_tree_thin_dark": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    68,
+    62,
+    149
+   ],
+   "tris": 228,
+   "file": "tree_thin_dark.glb"
+  },
+  "KNature_tree_thin_fall": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    68,
+    62,
+    149
+   ],
+   "tris": 228,
+   "file": "tree_thin_fall.glb"
+  }
+ },
+ "skipped": []
+}

@@ -1,0 +1,2207 @@
+{
+ "tag": "KFood",
+ "source": "D:/Kill Godot/Art/Source/Kenney_FoodKit/Models/GLB format",
+ "props": {
+  "KFood_advocado_half": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    10,
+    17,
+    21
+   ],
+   "tris": 98,
+   "file": "advocado-half.glb"
+  },
+  "KFood_apple_half": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    10,
+    20,
+    19
+   ],
+   "tris": 124,
+   "file": "apple-half.glb"
+  },
+  "KFood_apple": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    20,
+    20,
+    19
+   ],
+   "tris": 130,
+   "file": "apple.glb"
+  },
+  "KFood_avocado": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    15,
+    17,
+    21
+   ],
+   "tris": 44,
+   "file": "avocado.glb"
+  },
+  "KFood_bacon_raw": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    13,
+    52,
+    3
+   ],
+   "tris": 40,
+   "file": "bacon-raw.glb"
+  },
+  "KFood_bacon": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    13,
+    52,
+    3
+   ],
+   "tris": 40,
+   "file": "bacon.glb"
+  },
+  "KFood_bag_flat": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    65,
+    47,
+    19
+   ],
+   "tris": 110,
+   "file": "bag-flat.glb"
+  },
+  "KFood_bag": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    22,
+    41,
+    60
+   ],
+   "tris": 44,
+   "file": "bag.glb"
+  },
+  "KFood_banana": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    14,
+    63,
+    20
+   ],
+   "tris": 104,
+   "file": "banana.glb"
+  },
+  "KFood_barrel": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    76,
+    68,
+    68
+   ],
+   "tris": 308,
+   "file": "barrel.glb"
+  },
+  "KFood_beet": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    10,
+    10,
+    27
+   ],
+   "tris": 84,
+   "file": "beet.glb"
+  },
+  "KFood_bottle_ketchup": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    14,
+    17,
+    39
+   ],
+   "tris": 96,
+   "file": "bottle-ketchup.glb"
+  },
+  "KFood_bottle_musterd": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    14,
+    17,
+    39
+   ],
+   "tris": 96,
+   "file": "bottle-musterd.glb"
+  },
+  "KFood_bottle_oil": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    14,
+    14,
+    62
+   ],
+   "tris": 96,
+   "file": "bottle-oil.glb"
+  },
+  "KFood_bowl_broth": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    53,
+    58,
+    29
+   ],
+   "tris": 210,
+   "file": "bowl-broth.glb"
+  },
+  "KFood_bowl_cereal": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    50,
+    63,
+    42
+   ],
+   "tris": 115,
+   "file": "bowl-cereal.glb"
+  },
+  "KFood_bowl_soup": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    50,
+    58,
+    21
+   ],
+   "tris": 132,
+   "file": "bowl-soup.glb"
+  },
+  "KFood_bowl": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    50,
+    58,
+    21
+   ],
+   "tris": 84,
+   "file": "bowl.glb"
+  },
+  "KFood_bread": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    44,
+    37,
+    4
+   ],
+   "tris": 116,
+   "file": "bread.glb"
+  },
+  "KFood_broccoli": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    38,
+    38,
+    42
+   ],
+   "tris": 220,
+   "file": "broccoli.glb"
+  },
+  "KFood_burger_cheese_double": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    38,
+    38,
+    32
+   ],
+   "tris": 232,
+   "file": "burger-cheese-double.glb"
+  },
+  "KFood_burger_cheese": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    38,
+    38,
+    22
+   ],
+   "tris": 146,
+   "file": "burger-cheese.glb"
+  },
+  "KFood_burger_double": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    40,
+    40,
+    36
+   ],
+   "tris": 312,
+   "file": "burger-double.glb"
+  },
+  "KFood_burger": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    40,
+    40,
+    29
+   ],
+   "tris": 216,
+   "file": "burger.glb"
+  },
+  "KFood_cabbage": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    38,
+    40,
+    31
+   ],
+   "tris": 86,
+   "file": "cabbage.glb"
+  },
+  "KFood_cake_birthday": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    64,
+    64,
+    36
+   ],
+   "tris": 1056,
+   "file": "cake-birthday.glb"
+  },
+  "KFood_cake_slicer": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    72,
+    19,
+    7
+   ],
+   "tris": 26,
+   "file": "cake-slicer.glb"
+  },
+  "KFood_cake": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    64,
+    64,
+    27
+   ],
+   "tris": 702,
+   "file": "cake.glb"
+  },
+  "KFood_can_open": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    30,
+    30,
+    41
+   ],
+   "tris": 178,
+   "file": "can-open.glb"
+  },
+  "KFood_can_small": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    30,
+    30,
+    16
+   ],
+   "tris": 154,
+   "file": "can-small.glb"
+  },
+  "KFood_can": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    30,
+    30,
+    32
+   ],
+   "tris": 156,
+   "file": "can.glb"
+  },
+  "KFood_candy_bar_wrapper": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    29,
+    12,
+    8
+   ],
+   "tris": 40,
+   "file": "candy-bar-wrapper.glb"
+  },
+  "KFood_candy_bar": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    29,
+    7,
+    7
+   ],
+   "tris": 72,
+   "file": "candy-bar.glb"
+  },
+  "KFood_carrot": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    34,
+    34,
+    72
+   ],
+   "tris": 100,
+   "file": "carrot.glb"
+  },
+  "KFood_carton_small": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    23,
+    23,
+    39
+   ],
+   "tris": 70,
+   "file": "carton-small.glb"
+  },
+  "KFood_carton": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    23,
+    23,
+    59
+   ],
+   "tris": 90,
+   "file": "carton.glb"
+  },
+  "KFood_cauliflower": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    38,
+    40,
+    31
+   ],
+   "tris": 98,
+   "file": "cauliflower.glb"
+  },
+  "KFood_celery_stick": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    5,
+    9,
+    54
+   ],
+   "tris": 52,
+   "file": "celery-stick.glb"
+  },
+  "KFood_cheese_cut": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    38,
+    26,
+    2
+   ],
+   "tris": 160,
+   "file": "cheese-cut.glb"
+  },
+  "KFood_cheese_slicer": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    62,
+    19,
+    3
+   ],
+   "tris": 30,
+   "file": "cheese-slicer.glb"
+  },
+  "KFood_cheese": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    68,
+    68,
+    22
+   ],
+   "tris": 484,
+   "file": "cheese.glb"
+  },
+  "KFood_cherries": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    9,
+    16,
+    17
+   ],
+   "tris": 128,
+   "file": "cherries.glb"
+  },
+  "KFood_chinese": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    45,
+    56,
+    57
+   ],
+   "tris": 98,
+   "file": "chinese.glb"
+  },
+  "KFood_chocolate_wrapper": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    29,
+    20,
+    6
+   ],
+   "tris": 112,
+   "file": "chocolate-wrapper.glb"
+  },
+  "KFood_chocolate": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    29,
+    15,
+    3
+   ],
+   "tris": 140,
+   "file": "chocolate.glb"
+  },
+  "KFood_chopstic_decorative": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    2,
+    45,
+    2
+   ],
+   "tris": 36,
+   "file": "chopstic-decorative.glb"
+  },
+  "KFood_chopstick": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    2,
+    45,
+    2
+   ],
+   "tris": 12,
+   "file": "chopstick.glb"
+  },
+  "KFood_cocktail": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    26,
+    36,
+    51
+   ],
+   "tris": 144,
+   "file": "cocktail.glb"
+  },
+  "KFood_coconut_half": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    25,
+    25,
+    12
+   ],
+   "tris": 92,
+   "file": "coconut-half.glb"
+  },
+  "KFood_coconut": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    25,
+    25,
+    25
+   ],
+   "tris": 76,
+   "file": "coconut.glb"
+  },
+  "KFood_cookie_chocolate": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    12,
+    14,
+    7
+   ],
+   "tris": 136,
+   "file": "cookie-chocolate.glb"
+  },
+  "KFood_cookie": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    22,
+    19,
+    5
+   ],
+   "tris": 68,
+   "file": "cookie.glb"
+  },
+  "KFood_cooking_fork": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    68,
+    7,
+    7
+   ],
+   "tris": 26,
+   "file": "cooking-fork.glb"
+  },
+  "KFood_cooking_knife_chopping": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    60,
+    22,
+    4
+   ],
+   "tris": 80,
+   "file": "cooking-knife-chopping.glb"
+  },
+  "KFood_cooking_knife": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    72,
+    13,
+    4
+   ],
+   "tris": 39,
+   "file": "cooking-knife.glb"
+  },
+  "KFood_cooking_spatula": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    68,
+    19,
+    7
+   ],
+   "tris": 44,
+   "file": "cooking-spatula.glb"
+  },
+  "KFood_cooking_spoon": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    67,
+    17,
+    2
+   ],
+   "tris": 36,
+   "file": "cooking-spoon.glb"
+  },
+  "KFood_corn_dog": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    60,
+    11,
+    9
+   ],
+   "tris": 64,
+   "file": "corn-dog.glb"
+  },
+  "KFood_corn": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    34,
+    30,
+    32
+   ],
+   "tris": 92,
+   "file": "corn.glb"
+  },
+  "KFood_croissant": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    35,
+    48,
+    19
+   ],
+   "tris": 162,
+   "file": "croissant.glb"
+  },
+  "KFood_cup_coffee": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    22,
+    29,
+    14
+   ],
+   "tris": 108,
+   "file": "cup-coffee.glb"
+  },
+  "KFood_cup_saucer": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    36,
+    36,
+    4
+   ],
+   "tris": 116,
+   "file": "cup-saucer.glb"
+  },
+  "KFood_cup_tea": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    24,
+    29,
+    20
+   ],
+   "tris": 144,
+   "file": "cup-tea.glb"
+  },
+  "KFood_cup": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    23,
+    29,
+    20
+   ],
+   "tris": 112,
+   "file": "cup.glb"
+  },
+  "KFood_cupcake": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    36,
+    31,
+    42
+   ],
+   "tris": 204,
+   "file": "cupcake.glb"
+  },
+  "KFood_cutting_board_japanese": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    49,
+    84,
+    8
+   ],
+   "tris": 104,
+   "file": "cutting-board-japanese.glb"
+  },
+  "KFood_cutting_board_round": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    80,
+    80,
+    6
+   ],
+   "tris": 156,
+   "file": "cutting-board-round.glb"
+  },
+  "KFood_cutting_board": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    58,
+    82,
+    6
+   ],
+   "tris": 120,
+   "file": "cutting-board.glb"
+  },
+  "KFood_dim_sum": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    16,
+    19,
+    12
+   ],
+   "tris": 56,
+   "file": "dim-sum.glb"
+  },
+  "KFood_donut_chocolate": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    25,
+    28,
+    9
+   ],
+   "tris": 120,
+   "file": "donut-chocolate.glb"
+  },
+  "KFood_donut_sprinkles": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    25,
+    28,
+    9
+   ],
+   "tris": 180,
+   "file": "donut-sprinkles.glb"
+  },
+  "KFood_donut": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    25,
+    28,
+    9
+   ],
+   "tris": 108,
+   "file": "donut.glb"
+  },
+  "KFood_egg_cooked": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    41,
+    38,
+    3
+   ],
+   "tris": 92,
+   "file": "egg-cooked.glb"
+  },
+  "KFood_egg_cup": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    16,
+    18,
+    15
+   ],
+   "tris": 84,
+   "file": "egg-cup.glb"
+  },
+  "KFood_egg_half": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    12,
+    13,
+    11
+   ],
+   "tris": 68,
+   "file": "egg-half.glb"
+  },
+  "KFood_egg": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    12,
+    13,
+    17
+   ],
+   "tris": 44,
+   "file": "egg.glb"
+  },
+  "KFood_eggplant": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    20,
+    22,
+    41
+   ],
+   "tris": 124,
+   "file": "eggplant.glb"
+  },
+  "KFood_fish_bones": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    31,
+    64,
+    7
+   ],
+   "tris": 384,
+   "file": "fish-bones.glb"
+  },
+  "KFood_fish": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    20,
+    62,
+    32
+   ],
+   "tris": 229,
+   "file": "fish.glb"
+  },
+  "KFood_frappe": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    25,
+    25,
+    50
+   ],
+   "tris": 310,
+   "file": "frappe.glb"
+  },
+  "KFood_fries_empty": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    16,
+    27,
+    24
+   ],
+   "tris": 92,
+   "file": "fries-empty.glb"
+  },
+  "KFood_fries": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    18,
+    27,
+    40
+   ],
+   "tris": 300,
+   "file": "fries.glb"
+  },
+  "KFood_frikandel_speciaal": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    64,
+    17,
+    11
+   ],
+   "tris": 298,
+   "file": "frikandel-speciaal.glb"
+  },
+  "KFood_frying_pan_lid": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    58,
+    61,
+    11
+   ],
+   "tris": 148,
+   "file": "frying-pan-lid.glb"
+  },
+  "KFood_frying_pan": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    66,
+    102,
+    12
+   ],
+   "tris": 200,
+   "file": "frying-pan.glb"
+  },
+  "KFood_ginger_bread_cutter": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    29,
+    27,
+    4
+   ],
+   "tris": 68,
+   "file": "ginger-bread-cutter.glb"
+  },
+  "KFood_ginger_bread": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    26,
+    24,
+    3
+   ],
+   "tris": 80,
+   "file": "ginger-bread.glb"
+  },
+  "KFood_glass_wine": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    23,
+    20,
+    50
+   ],
+   "tris": 120,
+   "file": "glass-wine.glb"
+  },
+  "KFood_glass": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    16,
+    18,
+    29
+   ],
+   "tris": 44,
+   "file": "glass.glb"
+  },
+  "KFood_grapes": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    28,
+    24,
+    42
+   ],
+   "tris": 568,
+   "file": "grapes.glb"
+  },
+  "KFood_honey": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    33,
+    33,
+    32
+   ],
+   "tris": 140,
+   "file": "honey.glb"
+  },
+  "KFood_hot_dog_raw": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    59,
+    11,
+    10
+   ],
+   "tris": 92,
+   "file": "hot-dog-raw.glb"
+  },
+  "KFood_hot_dog": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    59,
+    20,
+    15
+   ],
+   "tris": 272,
+   "file": "hot-dog.glb"
+  },
+  "KFood_ice_cream_cne": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    18,
+    21,
+    30
+   ],
+   "tris": 44,
+   "file": "ice-cream-cne.glb"
+  },
+  "KFood_ice_cream_cup": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    20,
+    23,
+    18
+   ],
+   "tris": 68,
+   "file": "ice-cream-cup.glb"
+  },
+  "KFood_ice_cream_scoop_chocolate": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    24,
+    27,
+    17
+   ],
+   "tris": 80,
+   "file": "ice-cream-scoop-chocolate.glb"
+  },
+  "KFood_ice_cream_scoop_mint": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    24,
+    27,
+    17
+   ],
+   "tris": 56,
+   "file": "ice-cream-scoop-mint.glb"
+  },
+  "KFood_ice_cream": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    24,
+    27,
+    46
+   ],
+   "tris": 80,
+   "file": "ice-cream.glb"
+  },
+  "KFood_knife_block": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    64,
+    22,
+    66
+   ],
+   "tris": 157,
+   "file": "knife-block.glb"
+  },
+  "KFood_leek": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    27,
+    27,
+    85
+   ],
+   "tris": 124,
+   "file": "leek.glb"
+  },
+  "KFood_lemon_half": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    17,
+    20,
+    11
+   ],
+   "tris": 116,
+   "file": "lemon-half.glb"
+  },
+  "KFood_lemon": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    17,
+    20,
+    22
+   ],
+   "tris": 104,
+   "file": "lemon.glb"
+  },
+  "KFood_loaf_baguette": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    83,
+    25,
+    25
+   ],
+   "tris": 122,
+   "file": "loaf-baguette.glb"
+  },
+  "KFood_loaf_round": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    77,
+    51,
+    29
+   ],
+   "tris": 116,
+   "file": "loaf-round.glb"
+  },
+  "KFood_loaf": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    58,
+    37,
+    44
+   ],
+   "tris": 116,
+   "file": "loaf.glb"
+  },
+  "KFood_lollypop": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    4,
+    19,
+    38
+   ],
+   "tris": 108,
+   "file": "lollypop.glb"
+  },
+  "KFood_maki_roe": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    12,
+    10,
+    9
+   ],
+   "tris": 56,
+   "file": "maki-roe.glb"
+  },
+  "KFood_maki_salmon": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    12,
+    10,
+    7
+   ],
+   "tris": 56,
+   "file": "maki-salmon.glb"
+  },
+  "KFood_maki_vegetable": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    12,
+    10,
+    7
+   ],
+   "tris": 56,
+   "file": "maki-vegetable.glb"
+  },
+  "KFood_meat_cooked": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    48,
+    58,
+    6
+   ],
+   "tris": 116,
+   "file": "meat-cooked.glb"
+  },
+  "KFood_meat_patty": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    30,
+    34,
+    6
+   ],
+   "tris": 104,
+   "file": "meat-patty.glb"
+  },
+  "KFood_meat_raw": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    48,
+    58,
+    6
+   ],
+   "tris": 110,
+   "file": "meat-raw.glb"
+  },
+  "KFood_meat_ribs": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    54,
+    38,
+    6
+   ],
+   "tris": 164,
+   "file": "meat-ribs.glb"
+  },
+  "KFood_meat_sausage": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    15,
+    39,
+    7
+   ],
+   "tris": 320,
+   "file": "meat-sausage.glb"
+  },
+  "KFood_meat_tenderizer": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    54,
+    28,
+    12
+   ],
+   "tris": 322,
+   "file": "meat-tenderizer.glb"
+  },
+  "KFood_mincemeat_pie": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    53,
+    61,
+    17
+   ],
+   "tris": 164,
+   "file": "mincemeat-pie.glb"
+  },
+  "KFood_mortar_pestle": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    11,
+    13,
+    34
+   ],
+   "tris": 56,
+   "file": "mortar-pestle.glb"
+  },
+  "KFood_mortar": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    40,
+    46,
+    21
+   ],
+   "tris": 92,
+   "file": "mortar.glb"
+  },
+  "KFood_muffin": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    30,
+    26,
+    25
+   ],
+   "tris": 84,
+   "file": "muffin.glb"
+  },
+  "KFood_mug": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    34,
+    29,
+    27
+   ],
+   "tris": 232,
+   "file": "mug.glb"
+  },
+  "KFood_mushroom_half": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    6,
+    14,
+    14
+   ],
+   "tris": 68,
+   "file": "mushroom-half.glb"
+  },
+  "KFood_mushroom": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    12,
+    14,
+    14
+   ],
+   "tris": 80,
+   "file": "mushroom.glb"
+  },
+  "KFood_mussel_open": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    10,
+    16,
+    8
+   ],
+   "tris": 57,
+   "file": "mussel-open.glb"
+  },
+  "KFood_mussel": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    9,
+    16,
+    4
+   ],
+   "tris": 38,
+   "file": "mussel.glb"
+  },
+  "KFood_onion_half": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    11,
+    25,
+    25
+   ],
+   "tris": 108,
+   "file": "onion-half.glb"
+  },
+  "KFood_onion": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    21,
+    25,
+    25
+   ],
+   "tris": 68,
+   "file": "onion.glb"
+  },
+  "KFood_orange": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    17,
+    17,
+    17
+   ],
+   "tris": 120,
+   "file": "orange.glb"
+  },
+  "KFood_pan_stew": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    66,
+    76,
+    18
+   ],
+   "tris": 344,
+   "file": "pan-stew.glb"
+  },
+  "KFood_pan": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    66,
+    76,
+    18
+   ],
+   "tris": 236,
+   "file": "pan.glb"
+  },
+  "KFood_pancakes": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    44,
+    50,
+    12
+   ],
+   "tris": 512,
+   "file": "pancakes.glb"
+  },
+  "KFood_paprika_slice": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    16,
+    16,
+    3
+   ],
+   "tris": 96,
+   "file": "paprika-slice.glb"
+  },
+  "KFood_paprika": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    17,
+    17,
+    20
+   ],
+   "tris": 132,
+   "file": "paprika.glb"
+  },
+  "KFood_peanut_butter": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    24,
+    24,
+    30
+   ],
+   "tris": 172,
+   "file": "peanut-butter.glb"
+  },
+  "KFood_pear_half": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    10,
+    20,
+    27
+   ],
+   "tris": 126,
+   "file": "pear-half.glb"
+  },
+  "KFood_pear": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    20,
+    20,
+    27
+   ],
+   "tris": 130,
+   "file": "pear.glb"
+  },
+  "KFood_pepper_mill": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    16,
+    16,
+    55
+   ],
+   "tris": 252,
+   "file": "pepper-mill.glb"
+  },
+  "KFood_pepper": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    10,
+    32,
+    8
+   ],
+   "tris": 92,
+   "file": "pepper.glb"
+  },
+  "KFood_pie": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    95,
+    95,
+    15
+   ],
+   "tris": 292,
+   "file": "pie.glb"
+  },
+  "KFood_pineapple": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    24,
+    24,
+    47
+   ],
+   "tris": 136,
+   "file": "pineapple.glb"
+  },
+  "KFood_pizza_box": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    94,
+    95,
+    88
+   ],
+   "tris": 84,
+   "file": "pizza-box.glb"
+  },
+  "KFood_pizza_cutter": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    54,
+    25,
+    6
+   ],
+   "tris": 94,
+   "file": "pizza-cutter.glb"
+  },
+  "KFood_pizza": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    84,
+    84,
+    4
+   ],
+   "tris": 1163,
+   "file": "pizza.glb"
+  },
+  "KFood_plate_broken": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    89,
+    89,
+    9
+   ],
+   "tris": 300,
+   "file": "plate-broken.glb"
+  },
+  "KFood_plate_deep": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    89,
+    89,
+    14
+   ],
+   "tris": 140,
+   "file": "plate-deep.glb"
+  },
+  "KFood_plate_dinner": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    89,
+    89,
+    22
+   ],
+   "tris": 354,
+   "file": "plate-dinner.glb"
+  },
+  "KFood_plate_rectangle": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    86,
+    72,
+    13
+   ],
+   "tris": 68,
+   "file": "plate-rectangle.glb"
+  },
+  "KFood_plate_sauerkraut": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    89,
+    89,
+    18
+   ],
+   "tris": 580,
+   "file": "plate-sauerkraut.glb"
+  },
+  "KFood_plate": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    89,
+    89,
+    9
+   ],
+   "tris": 140,
+   "file": "plate.glb"
+  },
+  "KFood_popsicle_chocolate": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    9,
+    20,
+    49
+   ],
+   "tris": 132,
+   "file": "popsicle-chocolate.glb"
+  },
+  "KFood_popsicle_stick": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    2,
+    4,
+    34
+   ],
+   "tris": 36,
+   "file": "popsicle-stick.glb"
+  },
+  "KFood_popsicle": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    8,
+    18,
+    49
+   ],
+   "tris": 78,
+   "file": "popsicle.glb"
+  },
+  "KFood_pot_lid": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    66,
+    63,
+    12
+   ],
+   "tris": 132,
+   "file": "pot-lid.glb"
+  },
+  "KFood_pot_stew_lid": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    66,
+    63,
+    12
+   ],
+   "tris": 168,
+   "file": "pot-stew-lid.glb"
+  },
+  "KFood_pot_stew": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    66,
+    82,
+    36
+   ],
+   "tris": 370,
+   "file": "pot-stew.glb"
+  },
+  "KFood_pot": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    66,
+    82,
+    36
+   ],
+   "tris": 228,
+   "file": "pot.glb"
+  },
+  "KFood_pudding": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    25,
+    29,
+    20
+   ],
+   "tris": 56,
+   "file": "pudding.glb"
+  },
+  "KFood_pumpkin_basic": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    42,
+    36,
+    30
+   ],
+   "tris": 80,
+   "file": "pumpkin-basic.glb"
+  },
+  "KFood_pumpkin": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    42,
+    42,
+    23
+   ],
+   "tris": 188,
+   "file": "pumpkin.glb"
+  },
+  "KFood_radish": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    34,
+    34,
+    58
+   ],
+   "tris": 118,
+   "file": "radish.glb"
+  },
+  "KFood_rice_ball": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    8,
+    12,
+    13
+   ],
+   "tris": 94,
+   "file": "rice-ball.glb"
+  },
+  "KFood_rollingPin": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    81,
+    16,
+    14
+   ],
+   "tris": 140,
+   "file": "rollingPin.glb"
+  },
+  "KFood_salad": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    50,
+    58,
+    27
+   ],
+   "tris": 158,
+   "file": "salad.glb"
+  },
+  "KFood_sandwich": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    43,
+    43,
+    17
+   ],
+   "tris": 166,
+   "file": "sandwich.glb"
+  },
+  "KFood_sausage_half": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    19,
+    14,
+    12
+   ],
+   "tris": 100,
+   "file": "sausage-half.glb"
+  },
+  "KFood_sausage": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    37,
+    14,
+    12
+   ],
+   "tris": 92,
+   "file": "sausage.glb"
+  },
+  "KFood_shaker_pepper": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    9,
+    9,
+    20
+   ],
+   "tris": 116,
+   "file": "shaker-pepper.glb"
+  },
+  "KFood_shaker_salt": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    9,
+    9,
+    20
+   ],
+   "tris": 116,
+   "file": "shaker-salt.glb"
+  },
+  "KFood_skewer_vegetables": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    60,
+    11,
+    11
+   ],
+   "tris": 156,
+   "file": "skewer-vegetables.glb"
+  },
+  "KFood_skewer": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    60,
+    11,
+    9
+   ],
+   "tris": 116,
+   "file": "skewer.glb"
+  },
+  "KFood_soda_bottle": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    18,
+    16,
+    58
+   ],
+   "tris": 100,
+   "file": "soda-bottle.glb"
+  },
+  "KFood_soda_can_crushed": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    25,
+    25,
+    18
+   ],
+   "tris": 212,
+   "file": "soda-can-crushed.glb"
+  },
+  "KFood_soda_can": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    22,
+    22,
+    35
+   ],
+   "tris": 164,
+   "file": "soda-can.glb"
+  },
+  "KFood_soda_glass": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    26,
+    30,
+    41
+   ],
+   "tris": 124,
+   "file": "soda-glass.glb"
+  },
+  "KFood_soda": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    25,
+    25,
+    43
+   ],
+   "tris": 188,
+   "file": "soda.glb"
+  },
+  "KFood_soy": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    17,
+    19,
+    4
+   ],
+   "tris": 68,
+   "file": "soy.glb"
+  },
+  "KFood_steamer": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    64,
+    64,
+    60
+   ],
+   "tris": 492,
+   "file": "steamer.glb"
+  },
+  "KFood_strawberry": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    12,
+    12,
+    18
+   ],
+   "tris": 144,
+   "file": "strawberry.glb"
+  },
+  "KFood_styrofoam_dinner": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    126,
+    76,
+    82
+   ],
+   "tris": 240,
+   "file": "styrofoam-dinner.glb"
+  },
+  "KFood_styrofoam": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    126,
+    76,
+    82
+   ],
+   "tris": 152,
+   "file": "styrofoam.glb"
+  },
+  "KFood_sub": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    28,
+    68,
+    22
+   ],
+   "tris": 448,
+   "file": "sub.glb"
+  },
+  "KFood_sundae": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    22,
+    26,
+    67
+   ],
+   "tris": 316,
+   "file": "sundae.glb"
+  },
+  "KFood_sushi_egg": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    12,
+    17,
+    8
+   ],
+   "tris": 78,
+   "file": "sushi-egg.glb"
+  },
+  "KFood_sushi_salmon": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    11,
+    20,
+    9
+   ],
+   "tris": 96,
+   "file": "sushi-salmon.glb"
+  },
+  "KFood_taco": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    43,
+    11,
+    26
+   ],
+   "tris": 174,
+   "file": "taco.glb"
+  },
+  "KFood_tajine_lid": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    76,
+    79,
+    44
+   ],
+   "tris": 136,
+   "file": "tajine-lid.glb"
+  },
+  "KFood_tajine": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    82,
+    86,
+    14
+   ],
+   "tris": 164,
+   "file": "tajine.glb"
+  },
+  "KFood_tomato_slice": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    18,
+    18,
+    3
+   ],
+   "tris": 140,
+   "file": "tomato-slice.glb"
+  },
+  "KFood_tomato": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    17,
+    17,
+    14
+   ],
+   "tris": 120,
+   "file": "tomato.glb"
+  },
+  "KFood_turkey": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    93,
+    68,
+    38
+   ],
+   "tris": 368,
+   "file": "turkey.glb"
+  },
+  "KFood_utensil_fork": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    50,
+    8,
+    2
+   ],
+   "tris": 22,
+   "file": "utensil-fork.glb"
+  },
+  "KFood_utensil_knife": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    60,
+    8,
+    2
+   ],
+   "tris": 9,
+   "file": "utensil-knife.glb"
+  },
+  "KFood_utensil_spoon": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    48,
+    12,
+    3
+   ],
+   "tris": 23,
+   "file": "utensil-spoon.glb"
+  },
+  "KFood_waffle": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    32,
+    32,
+    4
+   ],
+   "tris": 588,
+   "file": "waffle.glb"
+  },
+  "KFood_watermelon": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    46,
+    46,
+    48
+   ],
+   "tris": 880,
+   "file": "watermelon.glb"
+  },
+  "KFood_whipped_cream": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    14,
+    16,
+    10
+   ],
+   "tris": 80,
+   "file": "whipped-cream.glb"
+  },
+  "KFood_whisk": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    72,
+    16,
+    16
+   ],
+   "tris": 83,
+   "file": "whisk.glb"
+  },
+  "KFood_whole_ham": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    38,
+    64,
+    44
+   ],
+   "tris": 128,
+   "file": "whole-ham.glb"
+  },
+  "KFood_wholer_ham": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    34,
+    83,
+    39
+   ],
+   "tris": 104,
+   "file": "wholer-ham.glb"
+  },
+  "KFood_wine_red": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    19,
+    17,
+    70
+   ],
+   "tris": 132,
+   "file": "wine-red.glb"
+  },
+  "KFood_wine_white": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    20,
+    18,
+    66
+   ],
+   "tris": 124,
+   "file": "wine-white.glb"
+  }
+ },
+ "skipped": []
+}

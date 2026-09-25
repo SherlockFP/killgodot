@@ -522,7 +522,11 @@ mole = {"points": [rd(p) for p in MOLE_PTS], "width": 7.0, "walk_width": 3.5, "t
 cliffs = [
     {"name": "basin_east_cliff", "points": [rd(p) for p in [P(R_QUAY_EDGE, TH_QUAY[1]), (46.0, 54.0), (48.8, 64.0), (50.6, 76.0),
                                                                 (51.6, 88.0), (53.0, 97.0)]],
-     "top_z": "terrain", "bottom_z": -3.0, "material": "rock"},
+     "top_z": "terrain", "bottom_z": -3.0, "material": "rock",
+     # SPRINT-022 acceptance 6 (user): the face seen from the basin is lowered. The land side drops to a ragged rock lip
+     # at ~5 m, a grassy bench at ~7.5 m, then climbs back to the headland (Tools/Blender/kg_build_terrain_v2.py).
+     "shoulder": {"edge_z": 5.0, "ledge_z": 7.5, "ledge_at_m": 4.0, "bench_to_m": 6.5, "width_m": 13.0, "fade_m": 9.0, "fade_end_m": 4.0,
+                  "wobble_m": 0.9}},
     {"name": "point_sea_cliff", "points": [[53.0, 97.0], [56.5, 104.5], [63.0, 109.0], [73.0, 110.5], [85.0, 106.0],
                                            [97.0, 99.5], [110.0, 93.0]], "top_z": "terrain", "bottom_z": -4.0, "material": "rock"},
     {"name": "fish_market_cliff", "points": [rd(P(R_QUAY_EDGE, TH_QUAY[1])), rd(P(R_HARBOUR_WALL, TH_QUAY[1]))],

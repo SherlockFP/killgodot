@@ -1,0 +1,1712 @@
+{
+ "tag": "FSVillage",
+ "source": "D:/Kill Godot/Art/Source/FertileSoil_ModularVillage",
+ "props": {
+  "FSVillage_Canopy_Beam": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    10,
+    10,
+    200
+   ],
+   "tris": 12,
+   "file": "modular_village_collection/Modular Village/Canopy_Beam.obj"
+  },
+  "FSVillage_Canopy_Beam_Short": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    10,
+    10,
+    150
+   ],
+   "tris": 12,
+   "file": "modular_village_collection/Modular Village/Canopy_Beam_Short.obj"
+  },
+  "FSVillage_Canopy_Corner": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    115,
+    115,
+    121
+   ],
+   "tris": 86,
+   "file": "modular_village_collection/Modular Village/Canopy_Corner.obj"
+  },
+  "FSVillage_Canopy_Full": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    115,
+    130,
+    121
+   ],
+   "tris": 120,
+   "file": "modular_village_collection/Modular Village/Canopy_Full.obj"
+  },
+  "FSVillage_Canopy_Ramp_Corner": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    115,
+    115,
+    121
+   ],
+   "tris": 86,
+   "file": "modular_village_collection/Modular Village/Canopy_Ramp_Corner.obj"
+  },
+  "FSVillage_Canopy_Ramp_Full": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    115,
+    130,
+    121
+   ],
+   "tris": 120,
+   "file": "modular_village_collection/Modular Village/Canopy_Ramp_Full.obj"
+  },
+  "FSVillage_Canopy_Ramp_Mid": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    115,
+    100,
+    121
+   ],
+   "tris": 52,
+   "file": "modular_village_collection/Modular Village/Canopy_Ramp_Mid.obj"
+  },
+  "FSVillage_Canopy_Side": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    115,
+    121
+   ],
+   "tris": 52,
+   "file": "modular_village_collection/Modular Village/Canopy_Side.obj"
+  },
+  "FSVillage_Canopy_Sides_Opposite": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    130,
+    121
+   ],
+   "tris": 92,
+   "file": "modular_village_collection/Modular Village/Canopy_Sides_Opposite.obj"
+  },
+  "FSVillage_Canopy_Top": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    11
+   ],
+   "tris": 12,
+   "file": "modular_village_collection/Modular Village/Canopy_Top.obj"
+  },
+  "FSVillage_Cobblestone_Dirt_Transition_1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    200,
+    200,
+    23
+   ],
+   "tris": 480,
+   "file": "modular_village_collection/Modular Village/Cobblestone_Dirt_Transition_1.obj"
+  },
+  "FSVillage_Cobblestone_Dirt_Transition_2": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    200,
+    200,
+    23
+   ],
+   "tris": 432,
+   "file": "modular_village_collection/Modular Village/Cobblestone_Dirt_Transition_2.obj"
+  },
+  "FSVillage_Cobblestone_Dirt_Transition_3": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    200,
+    200,
+    23
+   ],
+   "tris": 448,
+   "file": "modular_village_collection/Modular Village/Cobblestone_Dirt_Transition_3.obj"
+  },
+  "FSVillage_Cobblestone_Dirt_Transition_4": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    200,
+    200,
+    23
+   ],
+   "tris": 424,
+   "file": "modular_village_collection/Modular Village/Cobblestone_Dirt_Transition_4.obj"
+  },
+  "FSVillage_Cobblestone_Floor_1": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    200,
+    200,
+    23
+   ],
+   "tris": 1318,
+   "file": "modular_village_collection/Modular Village/Cobblestone_Floor_1.obj"
+  },
+  "FSVillage_Dirt_Fading": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    200,
+    100,
+    20
+   ],
+   "tris": 12,
+   "file": "modular_village_collection/Modular Village/Dirt_Fading.obj"
+  },
+  "FSVillage_Dirt_Fading_from_Gathered": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    150,
+    100,
+    20
+   ],
+   "tris": 12,
+   "file": "modular_village_collection/Modular Village/Dirt_Fading_from_Gathered.obj"
+  },
+  "FSVillage_Dirt_Gathered_Corner": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    150,
+    150,
+    25
+   ],
+   "tris": 36,
+   "file": "modular_village_collection/Modular Village/Dirt_Gathered_Corner.obj"
+  },
+  "FSVillage_Dirt_Gathered_Straight": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    25
+   ],
+   "tris": 16,
+   "file": "modular_village_collection/Modular Village/Dirt_Gathered_Straight.obj"
+  },
+  "FSVillage_Kit_Window_Upper_Convex": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    120,
+    262,
+    270
+   ],
+   "tris": 560,
+   "file": "modular_village_collection/Modular Village/Kit_Window_Upper_Convex.obj"
+  },
+  "FSVillage_Kit_Window_Upper_Straight": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    120,
+    262,
+    320
+   ],
+   "tris": 472,
+   "file": "modular_village_collection/Modular Village/Kit_Window_Upper_Straight.obj"
+  },
+  "FSVillage_Prop_Barrel_1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    48,
+    48,
+    50
+   ],
+   "tris": 452,
+   "file": "modular_village_collection/Modular Village/Prop_Barrel_1.obj"
+  },
+  "FSVillage_Prop_Barrel_1_Open": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    48,
+    48,
+    50
+   ],
+   "tris": 642,
+   "file": "modular_village_collection/Modular Village/Prop_Barrel_1_Open.obj"
+  },
+  "FSVillage_Prop_Barrel_2": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    48,
+    51,
+    59
+   ],
+   "tris": 480,
+   "file": "modular_village_collection/Modular Village/Prop_Barrel_2.obj"
+  },
+  "FSVillage_Prop_Boat_1": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    112,
+    231,
+    56
+   ],
+   "tris": 184,
+   "file": "modular_village_collection/Modular Village/Prop_Boat_1.obj"
+  },
+  "FSVillage_Prop_Boat_2": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    107,
+    250,
+    47
+   ],
+   "tris": 200,
+   "file": "modular_village_collection/Modular Village/Prop_Boat_2.obj"
+  },
+  "FSVillage_Prop_Boat_Oars_1": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    63,
+    150,
+    5
+   ],
+   "tris": 124,
+   "file": "modular_village_collection/Modular Village/Prop_Boat_Oars_1.obj"
+  },
+  "FSVillage_Prop_Boat_Oars_2": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    39,
+    161,
+    12
+   ],
+   "tris": 124,
+   "file": "modular_village_collection/Modular Village/Prop_Boat_Oars_2.obj"
+  },
+  "FSVillage_Prop_Broom": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    12,
+    16,
+    79
+   ],
+   "tris": 236,
+   "file": "modular_village_collection/Modular Village/Prop_Broom.obj"
+  },
+  "FSVillage_Prop_Cart_1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    180,
+    336,
+    130
+   ],
+   "tris": 1040,
+   "file": "modular_village_collection/Modular Village/Prop_Cart_1.obj"
+  },
+  "FSVillage_Prop_Cart_1_Barrels": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    180,
+    336,
+    130
+   ],
+   "tris": 2944,
+   "file": "modular_village_collection/Modular Village/Prop_Cart_1_Barrels.obj"
+  },
+  "FSVillage_Prop_Cart_1_Hay": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    180,
+    336,
+    130
+   ],
+   "tris": 2388,
+   "file": "modular_village_collection/Modular Village/Prop_Cart_1_Hay.obj"
+  },
+  "FSVillage_Prop_Crate_1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    100
+   ],
+   "tris": 412,
+   "file": "modular_village_collection/Modular Village/Prop_Crate_1.obj"
+  },
+  "FSVillage_Prop_Crate_1_Open": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    100
+   ],
+   "tris": 508,
+   "file": "modular_village_collection/Modular Village/Prop_Crate_1_Open.obj"
+  },
+  "FSVillage_Prop_Hay_1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    83,
+    58,
+    58
+   ],
+   "tris": 668,
+   "file": "modular_village_collection/Modular Village/Prop_Hay_1.obj"
+  },
+  "FSVillage_Prop_Ladder_1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    111,
+    68,
+    393
+   ],
+   "tris": 420,
+   "file": "modular_village_collection/Modular Village/Prop_Ladder_1.obj"
+  },
+  "FSVillage_Prop_Lamp_Street": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    23,
+    125
+   ],
+   "tris": 462,
+   "file": "modular_village_collection/Modular Village/Prop_Lamp_Street.obj"
+  },
+  "FSVillage_Prop_Well_1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    136,
+    109,
+    151
+   ],
+   "tris": 1208,
+   "file": "modular_village_collection/Modular Village/Prop_Well_1.obj"
+  },
+  "FSVillage_Prop_Well_Cobblestone": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    21
+   ],
+   "tris": 296,
+   "file": "modular_village_collection/Modular Village/Prop_Well_Cobblestone.obj"
+  },
+  "FSVillage_Prop_Well_Dirt": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    20
+   ],
+   "tris": 64,
+   "file": "modular_village_collection/Modular Village/Prop_Well_Dirt.obj"
+  },
+  "FSVillage_Prop_Well_Grass": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    20
+   ],
+   "tris": 64,
+   "file": "modular_village_collection/Modular Village/Prop_Well_Grass.obj"
+  },
+  "FSVillage_Prop_Well_Inside": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    66,
+    66,
+    100
+   ],
+   "tris": 80,
+   "file": "modular_village_collection/Modular Village/Prop_Well_Inside.obj"
+  },
+  "FSVillage_Roof_Accent_Rake_Concave": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    20,
+    70
+   ],
+   "tris": 36,
+   "file": "modular_village_collection/Modular Village/Roof_Accent_Rake_Concave.obj"
+  },
+  "FSVillage_Roof_Accent_Rake_Convex": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    20,
+    70
+   ],
+   "tris": 36,
+   "file": "modular_village_collection/Modular Village/Roof_Accent_Rake_Convex.obj"
+  },
+  "FSVillage_Roof_Accent_Rake_Eave": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    35,
+    20,
+    45
+   ],
+   "tris": 12,
+   "file": "modular_village_collection/Modular Village/Roof_Accent_Rake_Eave.obj"
+  },
+  "FSVillage_Roof_Accent_Rake_Straight": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    20,
+    120
+   ],
+   "tris": 12,
+   "file": "modular_village_collection/Modular Village/Roof_Accent_Rake_Straight.obj"
+  },
+  "FSVillage_Roof_Accent_Ridge": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    20,
+    20
+   ],
+   "tris": 12,
+   "file": "modular_village_collection/Modular Village/Roof_Accent_Ridge.obj"
+  },
+  "FSVillage_Roof_Accent_Ridge_End": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    150,
+    32,
+    32
+   ],
+   "tris": 22,
+   "file": "modular_village_collection/Modular Village/Roof_Accent_Ridge_End.obj"
+  },
+  "FSVillage_Roof_Concave_Corner_Inner": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    70
+   ],
+   "tris": 96,
+   "file": "modular_village_collection/Modular Village/Roof_Concave_Corner_Inner.obj"
+  },
+  "FSVillage_Roof_Concave_Corner_Outer": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    105,
+    105,
+    70
+   ],
+   "tris": 94,
+   "file": "modular_village_collection/Modular Village/Roof_Concave_Corner_Outer.obj"
+  },
+  "FSVillage_Roof_Concave_Corner_Outer_Eave": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    131,
+    131,
+    82
+   ],
+   "tris": 152,
+   "file": "modular_village_collection/Modular Village/Roof_Concave_Corner_Outer_Eave.obj"
+  },
+  "FSVillage_Roof_Concave_Side": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    105,
+    100,
+    70
+   ],
+   "tris": 88,
+   "file": "modular_village_collection/Modular Village/Roof_Concave_Side.obj"
+  },
+  "FSVillage_Roof_Concave_Side_Eave": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    131,
+    100,
+    82
+   ],
+   "tris": 120,
+   "file": "modular_village_collection/Modular Village/Roof_Concave_Side_Eave.obj"
+  },
+  "FSVillage_Roof_Concave_Side_Eave_Edge": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    131,
+    120,
+    95
+   ],
+   "tris": 176,
+   "file": "modular_village_collection/Modular Village/Roof_Concave_Side_Eave_Edge.obj"
+  },
+  "FSVillage_Roof_Concave_Side_Edge": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    105,
+    120,
+    95
+   ],
+   "tris": 146,
+   "file": "modular_village_collection/Modular Village/Roof_Concave_Side_Edge.obj"
+  },
+  "FSVillage_Roof_Convex_Corner_Inner": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    70
+   ],
+   "tris": 94,
+   "file": "modular_village_collection/Modular Village/Roof_Convex_Corner_Inner.obj"
+  },
+  "FSVillage_Roof_Convex_Corner_Outer": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    107,
+    107,
+    70
+   ],
+   "tris": 86,
+   "file": "modular_village_collection/Modular Village/Roof_Convex_Corner_Outer.obj"
+  },
+  "FSVillage_Roof_Convex_Corner_Outer_Eave": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    131,
+    131,
+    82
+   ],
+   "tris": 144,
+   "file": "modular_village_collection/Modular Village/Roof_Convex_Corner_Outer_Eave.obj"
+  },
+  "FSVillage_Roof_Convex_Side": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    107,
+    100,
+    70
+   ],
+   "tris": 88,
+   "file": "modular_village_collection/Modular Village/Roof_Convex_Side.obj"
+  },
+  "FSVillage_Roof_Convex_Side_Eave": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    131,
+    100,
+    82
+   ],
+   "tris": 120,
+   "file": "modular_village_collection/Modular Village/Roof_Convex_Side_Eave.obj"
+  },
+  "FSVillage_Roof_Convex_Side_Eave_Edge": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    131,
+    120,
+    95
+   ],
+   "tris": 176,
+   "file": "modular_village_collection/Modular Village/Roof_Convex_Side_Eave_Edge.obj"
+  },
+  "FSVillage_Roof_Convex_Side_Edge": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    107,
+    120,
+    95
+   ],
+   "tris": 146,
+   "file": "modular_village_collection/Modular Village/Roof_Convex_Side_Edge.obj"
+  },
+  "FSVillage_Roof_Prop_Chimney_Pipe": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    77,
+    37,
+    117
+   ],
+   "tris": 240,
+   "file": "modular_village_collection/Modular Village/Roof_Prop_Chimney_Pipe.obj"
+  },
+  "FSVillage_Roof_Prop_Chimney_Stone": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    50,
+    50,
+    175
+   ],
+   "tris": 120,
+   "file": "modular_village_collection/Modular Village/Roof_Prop_Chimney_Stone.obj"
+  },
+  "FSVillage_Roof_Straight_Corner_Inner": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    120
+   ],
+   "tris": 102,
+   "file": "modular_village_collection/Modular Village/Roof_Straight_Corner_Inner.obj"
+  },
+  "FSVillage_Roof_Straight_Corner_Outer": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    107,
+    107,
+    120
+   ],
+   "tris": 86,
+   "file": "modular_village_collection/Modular Village/Roof_Straight_Corner_Outer.obj"
+  },
+  "FSVillage_Roof_Straight_Corner_Outer_Eave": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    131,
+    131,
+    132
+   ],
+   "tris": 142,
+   "file": "modular_village_collection/Modular Village/Roof_Straight_Corner_Outer_Eave.obj"
+  },
+  "FSVillage_Roof_Straight_Side": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    107,
+    100,
+    120
+   ],
+   "tris": 88,
+   "file": "modular_village_collection/Modular Village/Roof_Straight_Side.obj"
+  },
+  "FSVillage_Roof_Straight_Side_Eave": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    131,
+    100,
+    132
+   ],
+   "tris": 120,
+   "file": "modular_village_collection/Modular Village/Roof_Straight_Side_Eave.obj"
+  },
+  "FSVillage_Roof_Straight_Side_Eave_Edge": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    131,
+    120,
+    145
+   ],
+   "tris": 152,
+   "file": "modular_village_collection/Modular Village/Roof_Straight_Side_Eave_Edge.obj"
+  },
+  "FSVillage_Roof_Straight_Side_Edge": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    107,
+    120,
+    145
+   ],
+   "tris": 122,
+   "file": "modular_village_collection/Modular Village/Roof_Straight_Side_Edge.obj"
+  },
+  "FSVillage_Stone_Arch": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    100,
+    200,
+    141
+   ],
+   "tris": 44,
+   "file": "modular_village_collection/Modular Village/Stone_Arch.obj"
+  },
+  "FSVillage_Stone_Arch_Outer": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    115,
+    230,
+    305
+   ],
+   "tris": 1228,
+   "file": "modular_village_collection/Modular Village/Stone_Arch_Outer.obj"
+  },
+  "FSVillage_Stone_Curb_1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    20,
+    70,
+    30
+   ],
+   "tris": 284,
+   "file": "modular_village_collection/Modular Village/Stone_Curb_1.obj"
+  },
+  "FSVillage_Stone_Curb_2": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    20,
+    70,
+    30
+   ],
+   "tris": 244,
+   "file": "modular_village_collection/Modular Village/Stone_Curb_2.obj"
+  },
+  "FSVillage_Stone_Curb_3": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    20,
+    70,
+    30
+   ],
+   "tris": 284,
+   "file": "modular_village_collection/Modular Village/Stone_Curb_3.obj"
+  },
+  "FSVillage_Stone_Curb_4": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    20,
+    70,
+    30
+   ],
+   "tris": 284,
+   "file": "modular_village_collection/Modular Village/Stone_Curb_4.obj"
+  },
+  "FSVillage_Stone_Doorway_Narrow_Tall_1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    115,
+    110,
+    200
+   ],
+   "tris": 104,
+   "file": "modular_village_collection/Modular Village/Stone_Doorway_Narrow_Tall_1.obj"
+  },
+  "FSVillage_Stone_Doorway_Narrow_Tall_2": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    115,
+    110,
+    200
+   ],
+   "tris": 134,
+   "file": "modular_village_collection/Modular Village/Stone_Doorway_Narrow_Tall_2.obj"
+  },
+  "FSVillage_Stone_Doorway_Wide_Tall_1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    120,
+    230,
+    200
+   ],
+   "tris": 800,
+   "file": "modular_village_collection/Modular Village/Stone_Doorway_Wide_Tall_1.obj"
+  },
+  "FSVillage_Stone_Doorway_Wide_Tall_2": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    120,
+    230,
+    200
+   ],
+   "tris": 830,
+   "file": "modular_village_collection/Modular Village/Stone_Doorway_Wide_Tall_2.obj"
+  },
+  "FSVillage_Stone_Floor_1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    21
+   ],
+   "tris": 430,
+   "file": "modular_village_collection/Modular Village/Stone_Floor_1.obj"
+  },
+  "FSVillage_Stone_Floor_2": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    21
+   ],
+   "tris": 376,
+   "file": "modular_village_collection/Modular Village/Stone_Floor_2.obj"
+  },
+  "FSVillage_Stone_Pillar": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    25,
+    25,
+    60
+   ],
+   "tris": 84,
+   "file": "modular_village_collection/Modular Village/Stone_Pillar.obj"
+  },
+  "FSVillage_Stone_Pillar_Base": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    30,
+    30,
+    40
+   ],
+   "tris": 44,
+   "file": "modular_village_collection/Modular Village/Stone_Pillar_Base.obj"
+  },
+  "FSVillage_Stone_Sewer_Grate_1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    15,
+    100,
+    110
+   ],
+   "tris": 318,
+   "file": "modular_village_collection/Modular Village/Stone_Sewer_Grate_1.obj"
+  },
+  "FSVillage_Stone_Sewer_Grate_2": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    15,
+    100,
+    110
+   ],
+   "tris": 332,
+   "file": "modular_village_collection/Modular Village/Stone_Sewer_Grate_2.obj"
+  },
+  "FSVillage_Stone_Stairs_Railing": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    215,
+    20,
+    100
+   ],
+   "tris": 220,
+   "file": "modular_village_collection/Modular Village/Stone_Stairs_Railing.obj"
+  },
+  "FSVillage_Stone_Steps": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    200,
+    100,
+    110
+   ],
+   "tris": 64,
+   "file": "modular_village_collection/Modular Village/Stone_Steps.obj"
+  },
+  "FSVillage_Stone_Steps_Side_1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    200,
+    101,
+    110
+   ],
+   "tris": 346,
+   "file": "modular_village_collection/Modular Village/Stone_Steps_Side_1.obj"
+  },
+  "FSVillage_Stone_Steps_Side_2": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    200,
+    101,
+    110
+   ],
+   "tris": 376,
+   "file": "modular_village_collection/Modular Village/Stone_Steps_Side_2.obj"
+  },
+  "FSVillage_Stone_Wall_1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    6,
+    100,
+    100
+   ],
+   "tris": 98,
+   "file": "modular_village_collection/Modular Village/Stone_Wall_1.obj"
+  },
+  "FSVillage_Stone_Wall_2": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    6,
+    100,
+    100
+   ],
+   "tris": 122,
+   "file": "modular_village_collection/Modular Village/Stone_Wall_2.obj"
+  },
+  "FSVillage_Stone_Wall_3": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    6,
+    100,
+    100
+   ],
+   "tris": 122,
+   "file": "modular_village_collection/Modular Village/Stone_Wall_3.obj"
+  },
+  "FSVillage_Stone_Wall_4": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    6,
+    100,
+    100
+   ],
+   "tris": 152,
+   "file": "modular_village_collection/Modular Village/Stone_Wall_4.obj"
+  },
+  "FSVillage_Stone_Wall_5": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    6,
+    100,
+    100
+   ],
+   "tris": 110,
+   "file": "modular_village_collection/Modular Village/Stone_Wall_5.obj"
+  },
+  "FSVillage_Stone_to_Stucco_Doorway_Wide_Tall_1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    120,
+    230,
+    200
+   ],
+   "tris": 636,
+   "file": "modular_village_collection/Modular Village/Stone_to_Stucco_Doorway_Wide_Tall_1.obj"
+  },
+  "FSVillage_Stone_to_Stucco_Doorway_Wide_Tall_2": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    120,
+    230,
+    200
+   ],
+   "tris": 676,
+   "file": "modular_village_collection/Modular Village/Stone_to_Stucco_Doorway_Wide_Tall_2.obj"
+  },
+  "FSVillage_Stucco_Arch_Half": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    50
+   ],
+   "tris": 16,
+   "file": "modular_village_collection/Modular Village/Stucco_Arch_Half.obj"
+  },
+  "FSVillage_Stucco_Arch_Half_Outer": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    110,
+    110,
+    70
+   ],
+   "tris": 56,
+   "file": "modular_village_collection/Modular Village/Stucco_Arch_Half_Outer.obj"
+  },
+  "FSVillage_Stucco_Block": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    100
+   ],
+   "tris": 12,
+   "file": "modular_village_collection/Modular Village/Stucco_Block.obj"
+  },
+  "FSVillage_Stucco_Doorway_Narrow_Tall": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    115,
+    110,
+    200
+   ],
+   "tris": 60,
+   "file": "modular_village_collection/Modular Village/Stucco_Doorway_Narrow_Tall.obj"
+  },
+  "FSVillage_Stucco_Doorway_Wide_Tall": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    115,
+    200,
+    200
+   ],
+   "tris": 76,
+   "file": "modular_village_collection/Modular Village/Stucco_Doorway_Wide_Tall.obj"
+  },
+  "FSVillage_Stucco_Prop_Support_Angled_Large": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    10,
+    100,
+    121
+   ],
+   "tris": 16,
+   "file": "modular_village_collection/Modular Village/Stucco_Prop_Support_Angled_Large.obj"
+  },
+  "FSVillage_Stucco_Prop_Support_Angled_Low": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    10,
+    100,
+    58
+   ],
+   "tris": 12,
+   "file": "modular_village_collection/Modular Village/Stucco_Prop_Support_Angled_Low.obj"
+  },
+  "FSVillage_Stucco_Prop_Support_Angled_Small": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    10,
+    57,
+    60
+   ],
+   "tris": 12,
+   "file": "modular_village_collection/Modular Village/Stucco_Prop_Support_Angled_Small.obj"
+  },
+  "FSVillage_Stucco_Prop_Support_Beam_1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    20,
+    100,
+    20
+   ],
+   "tris": 12,
+   "file": "modular_village_collection/Modular Village/Stucco_Prop_Support_Beam_1.obj"
+  },
+  "FSVillage_Stucco_Prop_Support_Beam_2": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    20,
+    100,
+    20
+   ],
+   "tris": 20,
+   "file": "modular_village_collection/Modular Village/Stucco_Prop_Support_Beam_2.obj"
+  },
+  "FSVillage_Stucco_Prop_Support_Beam_3": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    20,
+    100,
+    20
+   ],
+   "tris": 20,
+   "file": "modular_village_collection/Modular Village/Stucco_Prop_Support_Beam_3.obj"
+  },
+  "FSVillage_Stucco_Prop_Support_Pillar_1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    20,
+    20,
+    100
+   ],
+   "tris": 12,
+   "file": "modular_village_collection/Modular Village/Stucco_Prop_Support_Pillar_1.obj"
+  },
+  "FSVillage_Stucco_Prop_Support_Pillar_2": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    20,
+    20,
+    100
+   ],
+   "tris": 20,
+   "file": "modular_village_collection/Modular Village/Stucco_Prop_Support_Pillar_2.obj"
+  },
+  "FSVillage_Stucco_Prop_Support_Pillar_3": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    20,
+    20,
+    100
+   ],
+   "tris": 20,
+   "file": "modular_village_collection/Modular Village/Stucco_Prop_Support_Pillar_3.obj"
+  },
+  "FSVillage_Stucco_Window_Double_Narrow": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    115,
+    110,
+    100
+   ],
+   "tris": 216,
+   "file": "modular_village_collection/Modular Village/Stucco_Window_Double_Narrow.obj"
+  },
+  "FSVillage_Stucco_Window_Double_Narrow_Tall": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    115,
+    110,
+    200
+   ],
+   "tris": 216,
+   "file": "modular_village_collection/Modular Village/Stucco_Window_Double_Narrow_Tall.obj"
+  },
+  "FSVillage_Stucco_Window_Double_Wide": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    115,
+    200,
+    100
+   ],
+   "tris": 224,
+   "file": "modular_village_collection/Modular Village/Stucco_Window_Double_Wide.obj"
+  },
+  "FSVillage_Stucco_Window_Double_Wide_Tall": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    115,
+    200,
+    200
+   ],
+   "tris": 224,
+   "file": "modular_village_collection/Modular Village/Stucco_Window_Double_Wide_Tall.obj"
+  },
+  "FSVillage_Stucco_Window_Rounded_Narrow": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    115,
+    100,
+    100
+   ],
+   "tris": 180,
+   "file": "modular_village_collection/Modular Village/Stucco_Window_Rounded_Narrow.obj"
+  },
+  "FSVillage_Stucco_Window_Rounded_Narrow_Tall": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    115,
+    100,
+    200
+   ],
+   "tris": 180,
+   "file": "modular_village_collection/Modular Village/Stucco_Window_Rounded_Narrow_Tall.obj"
+  },
+  "FSVillage_Stucco_Window_Rounded_Wide": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    115,
+    200,
+    100
+   ],
+   "tris": 182,
+   "file": "modular_village_collection/Modular Village/Stucco_Window_Rounded_Wide.obj"
+  },
+  "FSVillage_Stucco_Window_Rounded_Wide_Tall": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    115,
+    200,
+    200
+   ],
+   "tris": 182,
+   "file": "modular_village_collection/Modular Village/Stucco_Window_Rounded_Wide_Tall.obj"
+  },
+  "FSVillage_Stucco_Window_Single_Narrow": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    115,
+    100,
+    100
+   ],
+   "tris": 148,
+   "file": "modular_village_collection/Modular Village/Stucco_Window_Single_Narrow.obj"
+  },
+  "FSVillage_Stucco_Window_Single_Narrow_Tall": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    115,
+    100,
+    200
+   ],
+   "tris": 148,
+   "file": "modular_village_collection/Modular Village/Stucco_Window_Single_Narrow_Tall.obj"
+  },
+  "FSVillage_Stucco_Window_Single_Wide": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    115,
+    200,
+    100
+   ],
+   "tris": 148,
+   "file": "modular_village_collection/Modular Village/Stucco_Window_Single_Wide.obj"
+  },
+  "FSVillage_Stucco_Window_Single_Wide_Tall": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    115,
+    200,
+    200
+   ],
+   "tris": 148,
+   "file": "modular_village_collection/Modular Village/Stucco_Window_Single_Wide_Tall.obj"
+  },
+  "FSVillage_Wall_Prop_Bell_1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    95,
+    49,
+    117
+   ],
+   "tris": 410,
+   "file": "modular_village_collection/Modular Village/Wall_Prop_Bell_1.obj"
+  },
+  "FSVillage_Wall_Prop_Door_Ornate": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    18,
+    74,
+    135
+   ],
+   "tris": 472,
+   "file": "modular_village_collection/Modular Village/Wall_Prop_Door_Ornate.obj"
+  },
+  "FSVillage_Wall_Prop_Door_Simple": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    18,
+    74,
+    135
+   ],
+   "tris": 268,
+   "file": "modular_village_collection/Modular Village/Wall_Prop_Door_Simple.obj"
+  },
+  "FSVillage_Wall_Prop_Lamp": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    82,
+    23,
+    70
+   ],
+   "tris": 438,
+   "file": "modular_village_collection/Modular Village/Wall_Prop_Lamp.obj"
+  },
+  "FSVillage_Wall_Prop_Sign_1": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    155,
+    20,
+    96
+   ],
+   "tris": 734,
+   "file": "modular_village_collection/Modular Village/Wall_Prop_Sign_1.obj"
+  },
+  "FSVillage_Wall_Prop_Windmill_1": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    102,
+    700,
+    700
+   ],
+   "tris": 640,
+   "file": "modular_village_collection/Modular Village/Wall_Prop_Windmill_1.obj"
+  },
+  "FSVillage_Waterwheel_1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    150,
+    440,
+    440
+   ],
+   "tris": 1464,
+   "file": "modular_village_collection/Modular Village/Waterwheel_1.obj"
+  },
+  "FSVillage_Waterwheel_Flume_Curved": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    75,
+    75,
+    25
+   ],
+   "tris": 72,
+   "file": "modular_village_collection/Modular Village/Waterwheel_Flume_Curved.obj"
+  },
+  "FSVillage_Waterwheel_Flume_End": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    79,
+    50,
+    45
+   ],
+   "tris": 48,
+   "file": "modular_village_collection/Modular Village/Waterwheel_Flume_End.obj"
+  },
+  "FSVillage_Waterwheel_Flume_Ramp": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    50,
+    50
+   ],
+   "tris": 40,
+   "file": "modular_village_collection/Modular Village/Waterwheel_Flume_Ramp.obj"
+  },
+  "FSVillage_Waterwheel_Flume_Ramp_Supported": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    50,
+    50
+   ],
+   "tris": 52,
+   "file": "modular_village_collection/Modular Village/Waterwheel_Flume_Ramp_Supported.obj"
+  },
+  "FSVillage_Waterwheel_Flume_Straight": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    50,
+    25
+   ],
+   "tris": 40,
+   "file": "modular_village_collection/Modular Village/Waterwheel_Flume_Straight.obj"
+  },
+  "FSVillage_Waterwheel_Flume_Support_Brace": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    5,
+    100
+   ],
+   "tris": 12,
+   "file": "modular_village_collection/Modular Village/Waterwheel_Flume_Support_Brace.obj"
+  },
+  "FSVillage_Waterwheel_Flume_Support_Brace_Double": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    10,
+    100
+   ],
+   "tris": 24,
+   "file": "modular_village_collection/Modular Village/Waterwheel_Flume_Support_Brace_Double.obj"
+  },
+  "FSVillage_Waterwheel_Flume_Support_Pillar": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    20,
+    20,
+    100
+   ],
+   "tris": 12,
+   "file": "modular_village_collection/Modular Village/Waterwheel_Flume_Support_Pillar.obj"
+  },
+  "FSVillage_Wood_Baseboard": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    20,
+    25
+   ],
+   "tris": 12,
+   "file": "modular_village_collection/Modular Village/Wood_Baseboard.obj"
+  },
+  "FSVillage_Wood_Floor_Corner": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    10
+   ],
+   "tris": 116,
+   "file": "modular_village_collection/Modular Village/Wood_Floor_Corner.obj"
+  },
+  "FSVillage_Wood_Floor_Straight_1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    10
+   ],
+   "tris": 92,
+   "file": "modular_village_collection/Modular Village/Wood_Floor_Straight_1.obj"
+  },
+  "FSVillage_Wood_Floor_Straight_2": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    10
+   ],
+   "tris": 104,
+   "file": "modular_village_collection/Modular Village/Wood_Floor_Straight_2.obj"
+  },
+  "FSVillage_Wood_Floor_Straight_3": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    10
+   ],
+   "tris": 92,
+   "file": "modular_village_collection/Modular Village/Wood_Floor_Straight_3.obj"
+  },
+  "FSVillage_Wood_Floor_Straight_4": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    10
+   ],
+   "tris": 104,
+   "file": "modular_village_collection/Modular Village/Wood_Floor_Straight_4.obj"
+  },
+  "FSVillage_Wood_Post_Large": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    23,
+    23,
+    100
+   ],
+   "tris": 28,
+   "file": "modular_village_collection/Modular Village/Wood_Post_Large.obj"
+  },
+  "FSVillage_Wood_Post_Small": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    17,
+    17,
+    55
+   ],
+   "tris": 20,
+   "file": "modular_village_collection/Modular Village/Wood_Post_Small.obj"
+  },
+  "FSVillage_Wood_Railing_Corner": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    110,
+    110,
+    68
+   ],
+   "tris": 148,
+   "file": "modular_village_collection/Modular Village/Wood_Railing_Corner.obj"
+  },
+  "FSVillage_Wood_Railing_Stairs": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    200,
+    20,
+    168
+   ],
+   "tris": 128,
+   "file": "modular_village_collection/Modular Village/Wood_Railing_Stairs.obj"
+  },
+  "FSVillage_Wood_Railing_Straight": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    20,
+    68
+   ],
+   "tris": 80,
+   "file": "modular_village_collection/Modular Village/Wood_Railing_Straight.obj"
+  },
+  "FSVillage_Wood_Rope_Corner": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    112,
+    112,
+    100
+   ],
+   "tris": 172,
+   "file": "modular_village_collection/Modular Village/Wood_Rope_Corner.obj"
+  },
+  "FSVillage_Wood_Rope_Stairs": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    202,
+    20,
+    164
+   ],
+   "tris": 152,
+   "file": "modular_village_collection/Modular Village/Wood_Rope_Stairs.obj"
+  },
+  "FSVillage_Wood_Rope_Straight": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    20,
+    65
+   ],
+   "tris": 76,
+   "file": "modular_village_collection/Modular Village/Wood_Rope_Straight.obj"
+  },
+  "FSVillage_Wood_Steps": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    200,
+    100,
+    114
+   ],
+   "tris": 148,
+   "file": "modular_village_collection/Modular Village/Wood_Steps.obj"
+  },
+  "FSVillage_Wood_Steps_Stucco": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    200,
+    100,
+    100
+   ],
+   "tris": 144,
+   "file": "modular_village_collection/Modular Village/Wood_Steps_Stucco.obj"
+  }
+ },
+ "skipped": []
+}

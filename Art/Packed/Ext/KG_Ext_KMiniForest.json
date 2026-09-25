@@ -1,0 +1,249 @@
+{
+ "tag": "KMiniForest",
+ "source": "D:/Kill Godot/Art/Source/Kenney_MiniForest/Models/GLB format",
+ "props": {
+  "KMiniForest_bridge": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    260,
+    200,
+    118
+   ],
+   "tris": 372,
+   "file": "bridge.glb"
+  },
+  "KMiniForest_building_platform": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    325,
+    325,
+    125
+   ],
+   "tris": 508,
+   "file": "building-platform.glb"
+  },
+  "KMiniForest_building_roof": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    335,
+    291,
+    262
+   ],
+   "tris": 324,
+   "file": "building-roof.glb"
+  },
+  "KMiniForest_building_structure": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    250,
+    250,
+    250
+   ],
+   "tris": 144,
+   "file": "building-structure.glb"
+  },
+  "KMiniForest_character_archer": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    195,
+    117,
+    205
+   ],
+   "tris": 518,
+   "file": "character-archer.glb"
+  },
+  "KMiniForest_fence": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    274,
+    61,
+    100
+   ],
+   "tris": 330,
+   "file": "fence.glb"
+  },
+  "KMiniForest_flag": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    108,
+    39,
+    188
+   ],
+   "tris": 162,
+   "file": "flag.glb"
+  },
+  "KMiniForest_ladder": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    126,
+    34,
+    250
+   ],
+   "tris": 216,
+   "file": "ladder.glb"
+  },
+  "KMiniForest_patch_dirt": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    250,
+    250,
+    25
+   ],
+   "tris": 108,
+   "file": "patch-dirt.glb"
+  },
+  "KMiniForest_patch_grass": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    250,
+    250,
+    43
+   ],
+   "tris": 295,
+   "file": "patch-grass.glb"
+  },
+  "KMiniForest_plant": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    99,
+    108,
+    48
+   ],
+   "tris": 156,
+   "file": "plant.glb"
+  },
+  "KMiniForest_platform": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    250,
+    250,
+    117
+   ],
+   "tris": 651,
+   "file": "platform.glb"
+  },
+  "KMiniForest_rocks_high": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    250,
+    250,
+    250
+   ],
+   "tris": 186,
+   "file": "rocks-high.glb"
+  },
+  "KMiniForest_rocks_low": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    250,
+    250,
+    131
+   ],
+   "tris": 186,
+   "file": "rocks-low.glb"
+  },
+  "KMiniForest_rocks_ramp": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    250,
+    250,
+    125
+   ],
+   "tris": 234,
+   "file": "rocks-ramp.glb"
+  },
+  "KMiniForest_stones": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    226,
+    213,
+    113
+   ],
+   "tris": 236,
+   "file": "stones.glb"
+  },
+  "KMiniForest_target": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    138,
+    118,
+    145
+   ],
+   "tris": 188,
+   "file": "target.glb"
+  },
+  "KMiniForest_tent": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    315,
+    269,
+    250
+   ],
+   "tris": 847,
+   "file": "tent.glb"
+  },
+  "KMiniForest_tree_high": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    232,
+    221,
+    571
+   ],
+   "tris": 266,
+   "file": "tree-high.glb"
+  },
+  "KMiniForest_tree": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    232,
+    221,
+    421
+   ],
+   "tris": 182,
+   "file": "tree.glb"
+  },
+  "KMiniForest_weapon_arrow": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    30,
+    114,
+    30
+   ],
+   "tris": 58,
+   "file": "weapon-arrow.glb"
+  },
+  "KMiniForest_weapon_bow": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    30,
+    52,
+    120
+   ],
+   "tris": 80,
+   "file": "weapon-bow.glb"
+  }
+ },
+ "skipped": []
+}

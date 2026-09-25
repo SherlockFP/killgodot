@@ -9,8 +9,8 @@ class UStaticMesh;
 
 /**
  * Cosmetic motion for set dressing: windmill sails, weather vanes, swinging shop signs, hanging lanterns,
- * bobbing buoys. Purely time driven (world time), so every client sees the same pose without replication, and it
- * stops ticking when it has not been rendered recently. Placed by the dressing modules (Tools/Unreal/dressing).
+ * bobbing buoys. Purely time driven (world time, or the replicated match clock for the clock-tower hands), so every
+ * client sees the same pose without replication, and it stops ticking when it has not been rendered recently. Placed by the dressing modules (Tools/Unreal/dressing).
  */
 UCLASS()
 class KILLGODOT_API AKGSpinner : public AActor
@@ -49,4 +49,7 @@ private:
 	FRotator BaseRotation = FRotator::ZeroRotator;
 	FVector BaseLocation = FVector::ZeroVector;
 	float Phase = 0.0f;
+	/** SPRINT-022: a spinner showing a ClockHand_Hour / ClockHand_Minute mesh (the clock tower) follows the match clock
+	 *  (Dawn 05-06, Day 06-18, Meeting/Trial 18-20, Night 20-05) instead of spinning; 0 = not a clock hand. */
+	uint8 ClockHand = 0;
 };

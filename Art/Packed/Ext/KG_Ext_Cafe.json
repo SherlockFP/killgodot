@@ -1,0 +1,744 @@
+{
+ "tag": "Cafe",
+ "source": "D:/Kill Godot/Art/Source/SynOfPlay_MedievalCafe/medv-cafe/fbx",
+ "props": {
+  "Cafe_balance_scale": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    23,
+    9,
+    19
+   ],
+   "tris": 282,
+   "file": "balance-scale.fbx"
+  },
+  "Cafe_basket_of_jars": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    25,
+    49,
+    13
+   ],
+   "tris": 740,
+   "file": "basket-of-jars.fbx"
+  },
+  "Cafe_basket_of_pastries": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    27,
+    27,
+    23
+   ],
+   "tris": 500,
+   "file": "basket-of-pastries.fbx"
+  },
+  "Cafe_bottle01": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    11,
+    10,
+    38
+   ],
+   "tris": 126,
+   "file": "bottle01.fbx"
+  },
+  "Cafe_bottle02": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    12,
+    12,
+    26
+   ],
+   "tris": 178,
+   "file": "bottle02.fbx"
+  },
+  "Cafe_bowl_of_stew": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    14,
+    16,
+    6
+   ],
+   "tris": 104,
+   "file": "bowl-of-stew.fbx"
+  },
+  "Cafe_chair01": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    59,
+    87,
+    126
+   ],
+   "tris": 272,
+   "file": "chair01.fbx"
+  },
+  "Cafe_coffee_beans_prep": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    16,
+    16,
+    1
+   ],
+   "tris": 84,
+   "file": "coffee-beans-prep.fbx"
+  },
+  "Cafe_coffee_grinder": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    24,
+    16,
+    35
+   ],
+   "tris": 268,
+   "file": "coffee-grinder.fbx"
+  },
+  "Cafe_column01": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    25,
+    30,
+    300
+   ],
+   "tris": 12,
+   "file": "column01.fbx"
+  },
+  "Cafe_column02": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    150,
+    25,
+    300
+   ],
+   "tris": 32,
+   "file": "column02.fbx"
+  },
+  "Cafe_column03": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    88,
+    25,
+    300
+   ],
+   "tris": 22,
+   "file": "column03.fbx"
+  },
+  "Cafe_column04": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    88,
+    25,
+    300
+   ],
+   "tris": 22,
+   "file": "column04.fbx"
+  },
+  "Cafe_counter_BL": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    136,
+    136,
+    115
+   ],
+   "tris": 116,
+   "file": "counter_BL.fbx"
+  },
+  "Cafe_counter_BR": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    135,
+    135,
+    115
+   ],
+   "tris": 116,
+   "file": "counter_BR.fbx"
+  },
+  "Cafe_counter_L": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    160,
+    90,
+    115
+   ],
+   "tris": 44,
+   "file": "counter_L.fbx"
+  },
+  "Cafe_counter_M": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    150,
+    90,
+    115
+   ],
+   "tris": 44,
+   "file": "counter_M.fbx"
+  },
+  "Cafe_counter_R": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    160,
+    90,
+    115
+   ],
+   "tris": 44,
+   "file": "counter_R.fbx"
+  },
+  "Cafe_crate01": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    70,
+    70,
+    70
+   ],
+   "tris": 108,
+   "file": "crate01.fbx"
+  },
+  "Cafe_crate02": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    70,
+    70,
+    72
+   ],
+   "tris": 330,
+   "file": "crate02.fbx"
+  },
+  "Cafe_door01": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    135,
+    24,
+    206
+   ],
+   "tris": 408,
+   "file": "door01.fbx"
+  },
+  "Cafe_drip_coffee_maker": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    46,
+    22,
+    53
+   ],
+   "tris": 534,
+   "file": "drip-coffee-maker.fbx"
+  },
+  "Cafe_floor": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    300,
+    300,
+    7
+   ],
+   "tris": 12,
+   "file": "floor.fbx"
+  },
+  "Cafe_food_bread01": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    19,
+    16,
+    8
+   ],
+   "tris": 40,
+   "file": "food-bread01.fbx"
+  },
+  "Cafe_food_bread02": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    29,
+    16,
+    7
+   ],
+   "tris": 100,
+   "file": "food-bread02.fbx"
+  },
+  "Cafe_food_bread03": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    79,
+    14,
+    13
+   ],
+   "tris": 44,
+   "file": "food-bread03.fbx"
+  },
+  "Cafe_food_bread04": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    37,
+    16,
+    9
+   ],
+   "tris": 40,
+   "file": "food-bread04.fbx"
+  },
+  "Cafe_food_display": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    184,
+    82,
+    132
+   ],
+   "tris": 440,
+   "file": "food-display.fbx"
+  },
+  "Cafe_food_sausage": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    38,
+    30,
+    6
+   ],
+   "tris": 128,
+   "file": "food-sausage.fbx"
+  },
+  "Cafe_fruit_apple": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    12,
+    12,
+    13
+   ],
+   "tris": 49,
+   "file": "fruit-apple.fbx"
+  },
+  "Cafe_herb_drying_hanger": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    70,
+    9,
+    56
+   ],
+   "tris": 334,
+   "file": "herb-drying-hanger.fbx"
+  },
+  "Cafe_jug01": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    21,
+    20,
+    17
+   ],
+   "tris": 142,
+   "file": "jug01.fbx"
+  },
+  "Cafe_keg01": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    69,
+    76,
+    75
+   ],
+   "tris": 434,
+   "file": "keg01.fbx"
+  },
+  "Cafe_keg02": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    85,
+    85,
+    87
+   ],
+   "tris": 212,
+   "file": "keg02.fbx"
+  },
+  "Cafe_menu_stand01": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    56,
+    48,
+    164
+   ],
+   "tris": 324,
+   "file": "menu-stand01.fbx"
+  },
+  "Cafe_menu_stand02": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    27,
+    20,
+    26
+   ],
+   "tris": 118,
+   "file": "menu-stand02.fbx"
+  },
+  "Cafe_menu_stand03": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    70,
+    24,
+    169
+   ],
+   "tris": 174,
+   "file": "menu-stand03.fbx"
+  },
+  "Cafe_mug01": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    15,
+    10,
+    12
+   ],
+   "tris": 160,
+   "file": "mug01.fbx"
+  },
+  "Cafe_mug02": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    13,
+    9,
+    12
+   ],
+   "tris": 136,
+   "file": "mug02.fbx"
+  },
+  "Cafe_mug03": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    15,
+    10,
+    12
+   ],
+   "tris": 212,
+   "file": "mug03.fbx"
+  },
+  "Cafe_pitcher": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    21,
+    17,
+    27
+   ],
+   "tris": 248,
+   "file": "pitcher.fbx"
+  },
+  "Cafe_plaque": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    63,
+    6,
+    75
+   ],
+   "tris": 130,
+   "file": "plaque.fbx"
+  },
+  "Cafe_platter_meal01": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    29,
+    29,
+    10
+   ],
+   "tris": 353,
+   "file": "platter-meal01.fbx"
+  },
+  "Cafe_platter_meal02": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    39,
+    28,
+    11
+   ],
+   "tris": 320,
+   "file": "platter-meal02.fbx"
+  },
+  "Cafe_platter_of_pie": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    16,
+    19,
+    4
+   ],
+   "tris": 90,
+   "file": "platter-of-pie.fbx"
+  },
+  "Cafe_pouch_of_coins": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    14,
+    15,
+    12
+   ],
+   "tris": 248,
+   "file": "pouch-of-coins.fbx"
+  },
+  "Cafe_shelf01": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    120,
+    61,
+    212
+   ],
+   "tris": 162,
+   "file": "shelf01.fbx"
+  },
+  "Cafe_shelf02": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    61,
+    153
+   ],
+   "tris": 92,
+   "file": "shelf02.fbx"
+  },
+  "Cafe_shield": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    67,
+    4,
+    67
+   ],
+   "tris": 44,
+   "file": "shield.fbx"
+  },
+  "Cafe_stool": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    39,
+    39,
+    80
+   ],
+   "tris": 124,
+   "file": "stool.fbx"
+  },
+  "Cafe_table_candle": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    14,
+    14,
+    13
+   ],
+   "tris": 204,
+   "file": "table-candle.fbx"
+  },
+  "Cafe_table_cloth01": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    134,
+    134,
+    13
+   ],
+   "tris": 44,
+   "file": "table-cloth01.fbx"
+  },
+  "Cafe_table_cloth02": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    134,
+    134,
+    13
+   ],
+   "tris": 44,
+   "file": "table-cloth02.fbx"
+  },
+  "Cafe_table_cloth03": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    224,
+    60,
+    32
+   ],
+   "tris": 48,
+   "file": "table-cloth03.fbx"
+  },
+  "Cafe_table01": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    110,
+    110,
+    81
+   ],
+   "tris": 204,
+   "file": "table01.fbx"
+  },
+  "Cafe_table02": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    160,
+    160,
+    81
+   ],
+   "tris": 228,
+   "file": "table02.fbx"
+  },
+  "Cafe_table03": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    220,
+    110,
+    81
+   ],
+   "tris": 276,
+   "file": "table03.fbx"
+  },
+  "Cafe_tapestry01": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    71,
+    4,
+    121
+   ],
+   "tris": 40,
+   "file": "tapestry01.fbx"
+  },
+  "Cafe_tapestry02": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    71,
+    4,
+    174
+   ],
+   "tris": 41,
+   "file": "tapestry02.fbx"
+  },
+  "Cafe_veg_tomato": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    12,
+    12,
+    12
+   ],
+   "tris": 54,
+   "file": "veg-tomato.fbx"
+  },
+  "Cafe_wall_candle": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    7,
+    20,
+    24
+   ],
+   "tris": 418,
+   "file": "wall-candle.fbx"
+  },
+  "Cafe_wall01_d01": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    300,
+    19,
+    300
+   ],
+   "tris": 92,
+   "file": "wall01_d01.fbx"
+  },
+  "Cafe_wall01_full": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    300,
+    19,
+    300
+   ],
+   "tris": 44,
+   "file": "wall01_full.fbx"
+  },
+  "Cafe_wall01f_full": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    300,
+    30,
+    300
+   ],
+   "tris": 80,
+   "file": "wall01f_full.fbx"
+  },
+  "Cafe_wall01f_w01": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    300,
+    30,
+    300
+   ],
+   "tris": 100,
+   "file": "wall01f_w01.fbx"
+  },
+  "Cafe_window01": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    140,
+    34,
+    157
+   ],
+   "tris": 182,
+   "file": "window01.fbx"
+  },
+  "Cafe_window02": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    140,
+    34,
+    157
+   ],
+   "tris": 284,
+   "file": "window02.fbx"
+  }
+ },
+ "skipped": []
+}

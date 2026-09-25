@@ -1,0 +1,1844 @@
+{
+ "tag": "KTown",
+ "source": "D:/Kill Godot/Art/Source/Kenney_FantasyTownKit/Models/GLB format",
+ "props": {
+  "KTown_balcony_wall_fence": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    10,
+    100,
+    100
+   ],
+   "tris": 102,
+   "file": "balcony-wall-fence.glb"
+  },
+  "KTown_balcony_wall": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    10,
+    100,
+    100
+   ],
+   "tris": 64,
+   "file": "balcony-wall.glb"
+  },
+  "KTown_banner_green": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    5,
+    50,
+    84
+   ],
+   "tris": 83,
+   "file": "banner-green.glb"
+  },
+  "KTown_banner_red": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    5,
+    50,
+    84
+   ],
+   "tris": 81,
+   "file": "banner-red.glb"
+  },
+  "KTown_blade": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    11,
+    43,
+    200
+   ],
+   "tris": 168,
+   "file": "blade.glb"
+  },
+  "KTown_cart_high": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    89,
+    139,
+    86
+   ],
+   "tris": 1028,
+   "file": "cart-high.glb"
+  },
+  "KTown_cart": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    89,
+    134,
+    54
+   ],
+   "tris": 608,
+   "file": "cart.glb"
+  },
+  "KTown_chimney_base": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    34,
+    52,
+    100
+   ],
+   "tris": 78,
+   "file": "chimney-base.glb"
+  },
+  "KTown_chimney_top": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    25,
+    34,
+    62
+   ],
+   "tris": 78,
+   "file": "chimney-top.glb"
+  },
+  "KTown_chimney": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    21,
+    34,
+    100
+   ],
+   "tris": 32,
+   "file": "chimney.glb"
+  },
+  "KTown_fence_broken": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    25,
+    100,
+    38
+   ],
+   "tris": 124,
+   "file": "fence-broken.glb"
+  },
+  "KTown_fence_curved": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    38
+   ],
+   "tris": 308,
+   "file": "fence-curved.glb"
+  },
+  "KTown_fence_gate": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    8,
+    100,
+    38
+   ],
+   "tris": 560,
+   "file": "fence-gate.glb"
+  },
+  "KTown_fence": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    8,
+    100,
+    38
+   ],
+   "tris": 84,
+   "file": "fence.glb"
+  },
+  "KTown_fountain_center": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    14
+   ],
+   "tris": 4,
+   "file": "fountain-center.glb"
+  },
+  "KTown_fountain_corner_inner_square": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    28
+   ],
+   "tris": 42,
+   "file": "fountain-corner-inner-square.glb"
+  },
+  "KTown_fountain_corner_inner": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    28
+   ],
+   "tris": 146,
+   "file": "fountain-corner-inner.glb"
+  },
+  "KTown_fountain_corner": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    28
+   ],
+   "tris": 58,
+   "file": "fountain-corner.glb"
+  },
+  "KTown_fountain_curved": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    28
+   ],
+   "tris": 254,
+   "file": "fountain-curved.glb"
+  },
+  "KTown_fountain_edge": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    28
+   ],
+   "tris": 36,
+   "file": "fountain-edge.glb"
+  },
+  "KTown_fountain_round_detail": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    200,
+    200,
+    48
+   ],
+   "tris": 1628,
+   "file": "fountain-round-detail.glb"
+  },
+  "KTown_fountain_round": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    200,
+    200,
+    28
+   ],
+   "tris": 956,
+   "file": "fountain-round.glb"
+  },
+  "KTown_fountain_square_detail": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    200,
+    200,
+    48
+   ],
+   "tris": 324,
+   "file": "fountain-square-detail.glb"
+  },
+  "KTown_fountain_square": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    200,
+    200,
+    46
+   ],
+   "tris": 268,
+   "file": "fountain-square.glb"
+  },
+  "KTown_hedge_curved": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    25
+   ],
+   "tris": 280,
+   "file": "hedge-curved.glb"
+  },
+  "KTown_hedge_gate": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    25,
+    100,
+    25
+   ],
+   "tris": 76,
+   "file": "hedge-gate.glb"
+  },
+  "KTown_hedge_large_curved": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    60
+   ],
+   "tris": 252,
+   "file": "hedge-large-curved.glb"
+  },
+  "KTown_hedge_large_gate": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    40,
+    100,
+    60
+   ],
+   "tris": 164,
+   "file": "hedge-large-gate.glb"
+  },
+  "KTown_hedge_large": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    40,
+    100,
+    60
+   ],
+   "tris": 90,
+   "file": "hedge-large.glb"
+  },
+  "KTown_hedge": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    25,
+    100,
+    25
+   ],
+   "tris": 54,
+   "file": "hedge.glb"
+  },
+  "KTown_lantern": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    22,
+    22,
+    156
+   ],
+   "tris": 158,
+   "file": "lantern.glb"
+  },
+  "KTown_overhang": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    28,
+    100,
+    33
+   ],
+   "tris": 68,
+   "file": "overhang.glb"
+  },
+  "KTown_pillar_stone": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    16,
+    16,
+    100
+   ],
+   "tris": 124,
+   "file": "pillar-stone.glb"
+  },
+  "KTown_pillar_wood": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    16,
+    16,
+    100
+   ],
+   "tris": 44,
+   "file": "pillar-wood.glb"
+  },
+  "KTown_planks_half": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    50,
+    100,
+    6
+   ],
+   "tris": 84,
+   "file": "planks-half.glb"
+  },
+  "KTown_planks_opening": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    6
+   ],
+   "tris": 144,
+   "file": "planks-opening.glb"
+  },
+  "KTown_planks": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    6
+   ],
+   "tris": 96,
+   "file": "planks.glb"
+  },
+  "KTown_poles_horizontal": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    10,
+    100,
+    100
+   ],
+   "tris": 40,
+   "file": "poles-horizontal.glb"
+  },
+  "KTown_poles": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    10,
+    100,
+    100
+   ],
+   "tris": 28,
+   "file": "poles.glb"
+  },
+  "KTown_road_bend": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    300,
+    300,
+    5
+   ],
+   "tris": 280,
+   "file": "road-bend.glb"
+  },
+  "KTown_road_corner_inner": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    5
+   ],
+   "tris": 146,
+   "file": "road-corner-inner.glb"
+  },
+  "KTown_road_corner": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    5
+   ],
+   "tris": 150,
+   "file": "road-corner.glb"
+  },
+  "KTown_road_curb_end": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    5
+   ],
+   "tris": 36,
+   "file": "road-curb-end.glb"
+  },
+  "KTown_road_curb": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    5
+   ],
+   "tris": 12,
+   "file": "road-curb.glb"
+  },
+  "KTown_road_edge_slope": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    25
+   ],
+   "tris": 38,
+   "file": "road-edge-slope.glb"
+  },
+  "KTown_road_edge": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    5
+   ],
+   "tris": 36,
+   "file": "road-edge.glb"
+  },
+  "KTown_road_slope": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    22
+   ],
+   "tris": 12,
+   "file": "road-slope.glb"
+  },
+  "KTown_road": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    3
+   ],
+   "tris": 12,
+   "file": "road.glb"
+  },
+  "KTown_rock_large": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    167,
+    155,
+    116
+   ],
+   "tris": 200,
+   "file": "rock-large.glb"
+  },
+  "KTown_rock_small": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    133,
+    102
+   ],
+   "tris": 128,
+   "file": "rock-small.glb"
+  },
+  "KTown_rock_wide": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    109,
+    157,
+    102
+   ],
+   "tris": 156,
+   "file": "rock-wide.glb"
+  },
+  "KTown_roof_corner_inner": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    63
+   ],
+   "tris": 30,
+   "file": "roof-corner-inner.glb"
+  },
+  "KTown_roof_corner_round": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    107,
+    107,
+    65
+   ],
+   "tris": 44,
+   "file": "roof-corner-round.glb"
+  },
+  "KTown_roof_corner": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    107,
+    107,
+    65
+   ],
+   "tris": 36,
+   "file": "roof-corner.glb"
+  },
+  "KTown_roof_flat": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    13
+   ],
+   "tris": 20,
+   "file": "roof-flat.glb"
+  },
+  "KTown_roof_gable_detail": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    110,
+    121,
+    68
+   ],
+   "tris": 128,
+   "file": "roof-gable-detail.glb"
+  },
+  "KTown_roof_gable_end": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    109,
+    107,
+    57
+   ],
+   "tris": 50,
+   "file": "roof-gable-end.glb"
+  },
+  "KTown_roof_gable_top": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    38
+   ],
+   "tris": 56,
+   "file": "roof-gable-top.glb"
+  },
+  "KTown_roof_gable": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    110,
+    107,
+    57
+   ],
+   "tris": 72,
+   "file": "roof-gable.glb"
+  },
+  "KTown_roof_high_corner_round": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    107,
+    107,
+    118
+   ],
+   "tris": 48,
+   "file": "roof-high-corner-round.glb"
+  },
+  "KTown_roof_high_corner": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    107,
+    107,
+    118
+   ],
+   "tris": 36,
+   "file": "roof-high-corner.glb"
+  },
+  "KTown_roof_high_cornerinner": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    114
+   ],
+   "tris": 30,
+   "file": "roof-high-cornerinner.glb"
+  },
+  "KTown_roof_high_flat": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    14
+   ],
+   "tris": 20,
+   "file": "roof-high-flat.glb"
+  },
+  "KTown_roof_high_gable_detail": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    110,
+    127,
+    131
+   ],
+   "tris": 140,
+   "file": "roof-high-gable-detail.glb"
+  },
+  "KTown_roof_high_gable_end": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    112,
+    113,
+    116
+   ],
+   "tris": 52,
+   "file": "roof-high-gable-end.glb"
+  },
+  "KTown_roof_high_gable_top": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    64
+   ],
+   "tris": 56,
+   "file": "roof-high-gable-top.glb"
+  },
+  "KTown_roof_high_gable": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    110,
+    113,
+    116
+   ],
+   "tris": 72,
+   "file": "roof-high-gable.glb"
+  },
+  "KTown_roof_high_left": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    114,
+    100,
+    126
+   ],
+   "tris": 84,
+   "file": "roof-high-left.glb"
+  },
+  "KTown_roof_high_point": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    110,
+    110,
+    100
+   ],
+   "tris": 44,
+   "file": "roof-high-point.glb"
+  },
+  "KTown_roof_high_right": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    114,
+    100,
+    126
+   ],
+   "tris": 84,
+   "file": "roof-high-right.glb"
+  },
+  "KTown_roof_high_window": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    107,
+    100,
+    118
+   ],
+   "tris": 258,
+   "file": "roof-high-window.glb"
+  },
+  "KTown_roof_high": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    107,
+    100,
+    118
+   ],
+   "tris": 64,
+   "file": "roof-high.glb"
+  },
+  "KTown_roof_left": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    113,
+    100,
+    72
+   ],
+   "tris": 84,
+   "file": "roof-left.glb"
+  },
+  "KTown_roof_point": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    110,
+    110,
+    50
+   ],
+   "tris": 44,
+   "file": "roof-point.glb"
+  },
+  "KTown_roof_right": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    113,
+    100,
+    72
+   ],
+   "tris": 84,
+   "file": "roof-right.glb"
+  },
+  "KTown_roof_window": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    107,
+    100,
+    65
+   ],
+   "tris": 176,
+   "file": "roof-window.glb"
+  },
+  "KTown_roof": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    107,
+    100,
+    65
+   ],
+   "tris": 64,
+   "file": "roof.glb"
+  },
+  "KTown_stairs_full_corner_inner": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    50
+   ],
+   "tris": 84,
+   "file": "stairs-full-corner-inner.glb"
+  },
+  "KTown_stairs_full_corner_outer": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    102,
+    102,
+    50
+   ],
+   "tris": 100,
+   "file": "stairs-full-corner-outer.glb"
+  },
+  "KTown_stairs_full": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    102,
+    100,
+    50
+   ],
+   "tris": 68,
+   "file": "stairs-full.glb"
+  },
+  "KTown_stairs_stone_corner": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    102,
+    100,
+    100
+   ],
+   "tris": 144,
+   "file": "stairs-stone-corner.glb"
+  },
+  "KTown_stairs_stone_handrail": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    102,
+    50,
+    145
+   ],
+   "tris": 272,
+   "file": "stairs-stone-handrail.glb"
+  },
+  "KTown_stairs_stone_round": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    86,
+    49,
+    100
+   ],
+   "tris": 134,
+   "file": "stairs-stone-round.glb"
+  },
+  "KTown_stairs_stone": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    102,
+    50,
+    100
+   ],
+   "tris": 136,
+   "file": "stairs-stone.glb"
+  },
+  "KTown_stairs_wide_stone_handrail": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    102,
+    100,
+    145
+   ],
+   "tris": 272,
+   "file": "stairs-wide-stone-handrail.glb"
+  },
+  "KTown_stairs_wide_stone": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    102,
+    100,
+    100
+   ],
+   "tris": 136,
+   "file": "stairs-wide-stone.glb"
+  },
+  "KTown_stairs_wide_wood_handrail": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    102,
+    100,
+    145
+   ],
+   "tris": 560,
+   "file": "stairs-wide-wood-handrail.glb"
+  },
+  "KTown_stairs_wide_wood": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    102,
+    100,
+    100
+   ],
+   "tris": 424,
+   "file": "stairs-wide-wood.glb"
+  },
+  "KTown_stairs_wood_handrail": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    102,
+    50,
+    145
+   ],
+   "tris": 568,
+   "file": "stairs-wood-handrail.glb"
+  },
+  "KTown_stairs_wood": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    102,
+    50,
+    100
+   ],
+   "tris": 432,
+   "file": "stairs-wood.glb"
+  },
+  "KTown_stall_bench": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    26,
+    94,
+    23
+   ],
+   "tris": 180,
+   "file": "stall-bench.glb"
+  },
+  "KTown_stall_green": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    124
+   ],
+   "tris": 232,
+   "file": "stall-green.glb"
+  },
+  "KTown_stall_red": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    124
+   ],
+   "tris": 206,
+   "file": "stall-red.glb"
+  },
+  "KTown_stall_stool": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    26,
+    26,
+    23
+   ],
+   "tris": 180,
+   "file": "stall-stool.glb"
+  },
+  "KTown_stall": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    65,
+    100,
+    37
+   ],
+   "tris": 106,
+   "file": "stall.glb"
+  },
+  "KTown_tree_crooked": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    102,
+    102,
+    241
+   ],
+   "tris": 178,
+   "file": "tree-crooked.glb"
+  },
+  "KTown_tree_high_crooked": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    102,
+    102,
+    297
+   ],
+   "tris": 210,
+   "file": "tree-high-crooked.glb"
+  },
+  "KTown_tree_high_round": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    102,
+    102,
+    275
+   ],
+   "tris": 126,
+   "file": "tree-high-round.glb"
+  },
+  "KTown_tree_high": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    102,
+    102,
+    297
+   ],
+   "tris": 200,
+   "file": "tree-high.glb"
+  },
+  "KTown_tree": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    102,
+    102,
+    241
+   ],
+   "tris": 168,
+   "file": "tree.glb"
+  },
+  "KTown_wall_arch_top_detail": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    16,
+    100,
+    100
+   ],
+   "tris": 168,
+   "file": "wall-arch-top-detail.glb"
+  },
+  "KTown_wall_arch_top": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    10,
+    100,
+    100
+   ],
+   "tris": 146,
+   "file": "wall-arch-top.glb"
+  },
+  "KTown_wall_arch": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    10,
+    30,
+    100
+   ],
+   "tris": 32,
+   "file": "wall-arch.glb"
+  },
+  "KTown_wall_block_half": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    50
+   ],
+   "tris": 76,
+   "file": "wall-block-half.glb"
+  },
+  "KTown_wall_block": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    100
+   ],
+   "tris": 76,
+   "file": "wall-block.glb"
+  },
+  "KTown_wall_broken": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    12,
+    100,
+    100
+   ],
+   "tris": 130,
+   "file": "wall-broken.glb"
+  },
+  "KTown_wall_corner_detail": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    16,
+    16,
+    100
+   ],
+   "tris": 176,
+   "file": "wall-corner-detail.glb"
+  },
+  "KTown_wall_corner_diagonal_half": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    55,
+    97,
+    100
+   ],
+   "tris": 34,
+   "file": "wall-corner-diagonal-half.glb"
+  },
+  "KTown_wall_corner_diagonal": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    100
+   ],
+   "tris": 48,
+   "file": "wall-corner-diagonal.glb"
+  },
+  "KTown_wall_corner_edge": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    100
+   ],
+   "tris": 40,
+   "file": "wall-corner-edge.glb"
+  },
+  "KTown_wall_corner": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    100
+   ],
+   "tris": 52,
+   "file": "wall-corner.glb"
+  },
+  "KTown_wall_curved": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    100
+   ],
+   "tris": 120,
+   "file": "wall-curved.glb"
+  },
+  "KTown_wall_detail_cross": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    10,
+    100,
+    100
+   ],
+   "tris": 80,
+   "file": "wall-detail-cross.glb"
+  },
+  "KTown_wall_detail_diagonal": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    10,
+    100,
+    100
+   ],
+   "tris": 56,
+   "file": "wall-detail-diagonal.glb"
+  },
+  "KTown_wall_detail_horizontal": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    10,
+    100,
+    100
+   ],
+   "tris": 46,
+   "file": "wall-detail-horizontal.glb"
+  },
+  "KTown_wall_diagonal": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    100
+   ],
+   "tris": 38,
+   "file": "wall-diagonal.glb"
+  },
+  "KTown_wall_door": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    10,
+    100,
+    100
+   ],
+   "tris": 376,
+   "file": "wall-door.glb"
+  },
+  "KTown_wall_doorway_base": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    10,
+    100,
+    100
+   ],
+   "tris": 64,
+   "file": "wall-doorway-base.glb"
+  },
+  "KTown_wall_doorway_round": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    10,
+    100,
+    100
+   ],
+   "tris": 172,
+   "file": "wall-doorway-round.glb"
+  },
+  "KTown_wall_doorway_square_wide_curved": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    10,
+    100,
+    100
+   ],
+   "tris": 166,
+   "file": "wall-doorway-square-wide-curved.glb"
+  },
+  "KTown_wall_doorway_square_wide": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    10,
+    100,
+    100
+   ],
+   "tris": 46,
+   "file": "wall-doorway-square-wide.glb"
+  },
+  "KTown_wall_doorway_square": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    10,
+    100,
+    100
+   ],
+   "tris": 70,
+   "file": "wall-doorway-square.glb"
+  },
+  "KTown_wall_half": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    10,
+    100,
+    50
+   ],
+   "tris": 32,
+   "file": "wall-half.glb"
+  },
+  "KTown_wall_rounded": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    100
+   ],
+   "tris": 136,
+   "file": "wall-rounded.glb"
+  },
+  "KTown_wall_side": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    10,
+    26,
+    100
+   ],
+   "tris": 22,
+   "file": "wall-side.glb"
+  },
+  "KTown_wall_slope": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    10,
+    100,
+    100
+   ],
+   "tris": 32,
+   "file": "wall-slope.glb"
+  },
+  "KTown_wall_window_glass": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    10,
+    100,
+    100
+   ],
+   "tris": 178,
+   "file": "wall-window-glass.glb"
+  },
+  "KTown_wall_window_round": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    10,
+    100,
+    100
+   ],
+   "tris": 280,
+   "file": "wall-window-round.glb"
+  },
+  "KTown_wall_window_shutters": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    18,
+    100,
+    100
+   ],
+   "tris": 292,
+   "file": "wall-window-shutters.glb"
+  },
+  "KTown_wall_window_small": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    10,
+    100,
+    100
+   ],
+   "tris": 104,
+   "file": "wall-window-small.glb"
+  },
+  "KTown_wall_window_stone": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    15,
+    100,
+    100
+   ],
+   "tris": 140,
+   "file": "wall-window-stone.glb"
+  },
+  "KTown_wall_wood_arch_top_detail": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    16,
+    100,
+    100
+   ],
+   "tris": 168,
+   "file": "wall-wood-arch-top-detail.glb"
+  },
+  "KTown_wall_wood_arch_top": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    10,
+    100,
+    100
+   ],
+   "tris": 146,
+   "file": "wall-wood-arch-top.glb"
+  },
+  "KTown_wall_wood_arch": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    10,
+    30,
+    100
+   ],
+   "tris": 32,
+   "file": "wall-wood-arch.glb"
+  },
+  "KTown_wall_wood_block_half": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    50
+   ],
+   "tris": 76,
+   "file": "wall-wood-block-half.glb"
+  },
+  "KTown_wall_wood_block": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    100
+   ],
+   "tris": 76,
+   "file": "wall-wood-block.glb"
+  },
+  "KTown_wall_wood_broken": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    11,
+    100,
+    100
+   ],
+   "tris": 142,
+   "file": "wall-wood-broken.glb"
+  },
+  "KTown_wall_wood_corner_diagonal_half": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    55,
+    97,
+    100
+   ],
+   "tris": 34,
+   "file": "wall-wood-corner-diagonal-half.glb"
+  },
+  "KTown_wall_wood_corner_diagonal": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    100
+   ],
+   "tris": 48,
+   "file": "wall-wood-corner-diagonal.glb"
+  },
+  "KTown_wall_wood_corner_edge": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    100
+   ],
+   "tris": 40,
+   "file": "wall-wood-corner-edge.glb"
+  },
+  "KTown_wall_wood_corner": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    100
+   ],
+   "tris": 52,
+   "file": "wall-wood-corner.glb"
+  },
+  "KTown_wall_wood_curved": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    100
+   ],
+   "tris": 120,
+   "file": "wall-wood-curved.glb"
+  },
+  "KTown_wall_wood_detail_cross": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    10,
+    100,
+    100
+   ],
+   "tris": 80,
+   "file": "wall-wood-detail-cross.glb"
+  },
+  "KTown_wall_wood_detail_diagonal": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    10,
+    100,
+    100
+   ],
+   "tris": 56,
+   "file": "wall-wood-detail-diagonal.glb"
+  },
+  "KTown_wall_wood_detail_horizontal": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    10,
+    100,
+    100
+   ],
+   "tris": 46,
+   "file": "wall-wood-detail-horizontal.glb"
+  },
+  "KTown_wall_wood_diagonal": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    100
+   ],
+   "tris": 38,
+   "file": "wall-wood-diagonal.glb"
+  },
+  "KTown_wall_wood_door": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    10,
+    100,
+    100
+   ],
+   "tris": 376,
+   "file": "wall-wood-door.glb"
+  },
+  "KTown_wall_wood_doorway_base": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    10,
+    100,
+    100
+   ],
+   "tris": 64,
+   "file": "wall-wood-doorway-base.glb"
+  },
+  "KTown_wall_wood_doorway_round": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    10,
+    100,
+    100
+   ],
+   "tris": 172,
+   "file": "wall-wood-doorway-round.glb"
+  },
+  "KTown_wall_wood_doorway_square_wide_curved": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    10,
+    100,
+    100
+   ],
+   "tris": 166,
+   "file": "wall-wood-doorway-square-wide-curved.glb"
+  },
+  "KTown_wall_wood_doorway_square_wide": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    10,
+    100,
+    100
+   ],
+   "tris": 46,
+   "file": "wall-wood-doorway-square-wide.glb"
+  },
+  "KTown_wall_wood_doorway_square": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    10,
+    100,
+    100
+   ],
+   "tris": 82,
+   "file": "wall-wood-doorway-square.glb"
+  },
+  "KTown_wall_wood_half": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    10,
+    100,
+    50
+   ],
+   "tris": 32,
+   "file": "wall-wood-half.glb"
+  },
+  "KTown_wall_wood_rounded": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    100
+   ],
+   "tris": 136,
+   "file": "wall-wood-rounded.glb"
+  },
+  "KTown_wall_wood_side": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    10,
+    26,
+    100
+   ],
+   "tris": 22,
+   "file": "wall-wood-side.glb"
+  },
+  "KTown_wall_wood_slope": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    10,
+    100,
+    100
+   ],
+   "tris": 84,
+   "file": "wall-wood-slope.glb"
+  },
+  "KTown_wall_wood_window_glass": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    10,
+    100,
+    100
+   ],
+   "tris": 122,
+   "file": "wall-wood-window-glass.glb"
+  },
+  "KTown_wall_wood_window_round": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    20,
+    100,
+    100
+   ],
+   "tris": 296,
+   "file": "wall-wood-window-round.glb"
+  },
+  "KTown_wall_wood_window_shutters": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    10,
+    100,
+    100
+   ],
+   "tris": 124,
+   "file": "wall-wood-window-shutters.glb"
+  },
+  "KTown_wall_wood_window_small": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    20,
+    100,
+    100
+   ],
+   "tris": 136,
+   "file": "wall-wood-window-small.glb"
+  },
+  "KTown_wall_wood_window_stone": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    15,
+    100,
+    100
+   ],
+   "tris": 202,
+   "file": "wall-wood-window-stone.glb"
+  },
+  "KTown_wall_wood": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    10,
+    100,
+    100
+   ],
+   "tris": 32,
+   "file": "wall-wood.glb"
+  },
+  "KTown_wall": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    10,
+    100,
+    100
+   ],
+   "tris": 32,
+   "file": "wall.glb"
+  },
+  "KTown_watermill_wide": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    105,
+    180,
+    180
+   ],
+   "tris": 600,
+   "file": "watermill-wide.glb"
+  },
+  "KTown_watermill": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    85,
+    180,
+    180
+   ],
+   "tris": 600,
+   "file": "watermill.glb"
+  },
+  "KTown_wheel": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    24,
+    47,
+    48
+   ],
+   "tris": 192,
+   "file": "wheel.glb"
+  },
+  "KTown_windmill": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    47,
+    311,
+    311
+   ],
+   "tris": 684,
+   "file": "windmill.glb"
+  }
+ },
+ "skipped": []
+}

@@ -1,0 +1,524 @@
+{
+ "tag": "KFFood",
+ "source": "D:/Kill Godot/Art/Source/KyleFuji_Food/Low Poly Food Asset Pack (Godot)/Kyle Fuji/Models",
+ "props": {
+  "KFFood_apple": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    9,
+    8,
+    11
+   ],
+   "tris": 92,
+   "file": "apple.glb"
+  },
+  "KFFood_banana": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    8,
+    20,
+    4
+   ],
+   "tris": 128,
+   "file": "banana.glb"
+  },
+  "KFFood_bowl": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    30,
+    30,
+    9
+   ],
+   "tris": 124,
+   "file": "bowl.glb"
+  },
+  "KFFood_bowl_contents": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    27,
+    27,
+    0
+   ],
+   "tris": 14,
+   "file": "bowl_contents.glb"
+  },
+  "KFFood_broccoli": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    4,
+    4,
+    4
+   ],
+   "tris": 96,
+   "file": "broccoli.glb"
+  },
+  "KFFood_burger": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    12,
+    12,
+    8
+   ],
+   "tris": 80,
+   "file": "burger.glb"
+  },
+  "KFFood_carrot": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    3,
+    20,
+    3
+   ],
+   "tris": 64,
+   "file": "carrot.glb"
+  },
+  "KFFood_cheese_pizza": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    13,
+    13,
+    2
+   ],
+   "tris": 18,
+   "file": "cheese_pizza.glb"
+  },
+  "KFFood_coconut": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    11,
+    11,
+    12
+   ],
+   "tris": 80,
+   "file": "coconut.glb"
+  },
+  "KFFood_corn": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    4,
+    18,
+    4
+   ],
+   "tris": 64,
+   "file": "corn.glb"
+  },
+  "KFFood_cucumber": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    5,
+    26,
+    5
+   ],
+   "tris": 96,
+   "file": "cucumber.glb"
+  },
+  "KFFood_dish": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    30,
+    30,
+    4
+   ],
+   "tris": 188,
+   "file": "dish.glb"
+  },
+  "KFFood_drumstick": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    7,
+    16,
+    7
+   ],
+   "tris": 160,
+   "file": "drumstick.glb"
+  },
+  "KFFood_egg": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    5,
+    6,
+    7
+   ],
+   "tris": 80,
+   "file": "egg.glb"
+  },
+  "KFFood_egg_cooked": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    12,
+    11,
+    1
+   ],
+   "tris": 80,
+   "file": "egg_cooked.glb"
+  },
+  "KFFood_eggplant": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    5,
+    26,
+    5
+   ],
+   "tris": 96,
+   "file": "eggplant.glb"
+  },
+  "KFFood_fries": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    8,
+    6,
+    10
+   ],
+   "tris": 12,
+   "file": "fries.glb"
+  },
+  "KFFood_hot_dog": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    5,
+    19,
+    5
+   ],
+   "tris": 148,
+   "file": "hot_dog.glb"
+  },
+  "KFFood_ice_cream_cone": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    7,
+    7,
+    9
+   ],
+   "tris": 32,
+   "file": "ice_cream_cone.glb"
+  },
+  "KFFood_lemon": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    7,
+    10,
+    7
+   ],
+   "tris": 92,
+   "file": "lemon.glb"
+  },
+  "KFFood_lime": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    7,
+    10,
+    7
+   ],
+   "tris": 92,
+   "file": "lime.glb"
+  },
+  "KFFood_meat_haunch": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    11,
+    26,
+    11
+   ],
+   "tris": 256,
+   "file": "meat_haunch.glb"
+  },
+  "KFFood_mushroom": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    4,
+    4,
+    3
+   ],
+   "tris": 80,
+   "file": "mushroom.glb"
+  },
+  "KFFood_onion_red": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    9,
+    9,
+    9
+   ],
+   "tris": 80,
+   "file": "onion_red.glb"
+  },
+  "KFFood_onion_white": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    9,
+    9,
+    9
+   ],
+   "tris": 80,
+   "file": "onion_white.glb"
+  },
+  "KFFood_orange": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    9,
+    9,
+    9
+   ],
+   "tris": 80,
+   "file": "orange.glb"
+  },
+  "KFFood_pepperoni_pizza": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    13,
+    13,
+    2
+   ],
+   "tris": 18,
+   "file": "pepperoni_pizza.glb"
+  },
+  "KFFood_pineapple": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    11,
+    11,
+    36
+   ],
+   "tris": 176,
+   "file": "pineapple.glb"
+  },
+  "KFFood_plate": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    30,
+    30,
+    2
+   ],
+   "tris": 124,
+   "file": "plate.glb"
+  },
+  "KFFood_potato": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    7,
+    13,
+    7
+   ],
+   "tris": 80,
+   "file": "potato.glb"
+  },
+  "KFFood_salmon_maki": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    4,
+    4,
+    3
+   ],
+   "tris": 32,
+   "file": "salmon_maki.glb"
+  },
+  "KFFood_salmon_nigiri": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    4,
+    8,
+    3
+   ],
+   "tris": 96,
+   "file": "salmon_nigiri.glb"
+  },
+  "KFFood_scoop_1": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    10,
+    10,
+    5
+   ],
+   "tris": 64,
+   "file": "scoop_1.glb"
+  },
+  "KFFood_scoop_2": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    8,
+    8,
+    6
+   ],
+   "tris": 64,
+   "file": "scoop_2.glb"
+  },
+  "KFFood_shiromi_maki": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    4,
+    4,
+    3
+   ],
+   "tris": 32,
+   "file": "shiromi_maki.glb"
+  },
+  "KFFood_shiromi_nigiri": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    4,
+    8,
+    3
+   ],
+   "tris": 96,
+   "file": "shiromi_nigiri.glb"
+  },
+  "KFFood_shrimp_nigiri": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    4,
+    9,
+    3
+   ],
+   "tris": 108,
+   "file": "shrimp_nigiri.glb"
+  },
+  "KFFood_soda_can_beer": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    8,
+    8,
+    12
+   ],
+   "tris": 32,
+   "file": "soda_can_beer.glb"
+  },
+  "KFFood_soda_can_cola": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    8,
+    8,
+    12
+   ],
+   "tris": 32,
+   "file": "soda_can_cola.glb"
+  },
+  "KFFood_steak": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    10,
+    16,
+    3
+   ],
+   "tris": 32,
+   "file": "steak.glb"
+  },
+  "KFFood_sushi_block": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    23,
+    23,
+    3
+   ],
+   "tris": 12,
+   "file": "sushi_block.glb"
+  },
+  "KFFood_tomato": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    9,
+    8,
+    8
+   ],
+   "tris": 92,
+   "file": "tomato.glb"
+  },
+  "KFFood_tuna_maki": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    4,
+    4,
+    3
+   ],
+   "tris": 32,
+   "file": "tuna_maki.glb"
+  },
+  "KFFood_tuna_nigiri": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    4,
+    8,
+    3
+   ],
+   "tris": 96,
+   "file": "tuna_nigiri.glb"
+  },
+  "KFFood_watermelon": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    21,
+    21,
+    21
+   ],
+   "tris": 80,
+   "file": "watermelon.glb"
+  },
+  "KFFood_watermelon_slice": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    13,
+    3,
+    11
+   ],
+   "tris": 16,
+   "file": "watermelon_slice.glb"
+  },
+  "KFFood_zucchini": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    5,
+    26,
+    5
+   ],
+   "tris": 96,
+   "file": "zucchini.glb"
+  }
+ },
+ "skipped": []
+}

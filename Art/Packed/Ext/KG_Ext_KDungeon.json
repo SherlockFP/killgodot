@@ -1,0 +1,436 @@
+{
+ "tag": "KDungeon",
+ "source": "D:/Kill Godot/Art/Source/Kenney_ModularDungeonKit/Models/GLB format",
+ "props": {
+  "KDungeon_corridor_corner": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    280,
+    280,
+    296
+   ],
+   "tris": 429,
+   "file": "corridor-corner.glb"
+  },
+  "KDungeon_corridor_end": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    280,
+    280,
+    290
+   ],
+   "tris": 674,
+   "file": "corridor-end.glb"
+  },
+  "KDungeon_corridor_intersection": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    280,
+    280,
+    283
+   ],
+   "tris": 170,
+   "file": "corridor-intersection.glb"
+  },
+  "KDungeon_corridor_junction": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    280,
+    280,
+    290
+   ],
+   "tris": 310,
+   "file": "corridor-junction.glb"
+  },
+  "KDungeon_corridor_transition": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    560,
+    560,
+    290
+   ],
+   "tris": 1250,
+   "file": "corridor-transition.glb"
+  },
+  "KDungeon_corridor_wide_corner": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    560,
+    560,
+    296
+   ],
+   "tris": 865,
+   "file": "corridor-wide-corner.glb"
+  },
+  "KDungeon_corridor_wide_end": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    560,
+    560,
+    296
+   ],
+   "tris": 1721,
+   "file": "corridor-wide-end.glb"
+  },
+  "KDungeon_corridor_wide_intersection": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    560,
+    560,
+    283
+   ],
+   "tris": 176,
+   "file": "corridor-wide-intersection.glb"
+  },
+  "KDungeon_corridor_wide_junction": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    560,
+    560,
+    296
+   ],
+   "tris": 663,
+   "file": "corridor-wide-junction.glb"
+  },
+  "KDungeon_corridor_wide": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    560,
+    560,
+    296
+   ],
+   "tris": 1150,
+   "file": "corridor-wide.glb"
+  },
+  "KDungeon_corridor": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    280,
+    280,
+    290
+   ],
+   "tris": 450,
+   "file": "corridor.glb"
+  },
+  "KDungeon_gate_door_window": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    308,
+    132,
+    308
+   ],
+   "tris": 524,
+   "file": "gate-door-window.glb"
+  },
+  "KDungeon_gate_door": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    308,
+    132,
+    308
+   ],
+   "tris": 492,
+   "file": "gate-door.glb"
+  },
+  "KDungeon_gate_metal_bars": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    308,
+    98,
+    308
+   ],
+   "tris": 360,
+   "file": "gate-metal-bars.glb"
+  },
+  "KDungeon_gate": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    308,
+    98,
+    308
+   ],
+   "tris": 296,
+   "file": "gate.glb"
+  },
+  "KDungeon_room_corner": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    840,
+    840,
+    296
+   ],
+   "tris": 2317,
+   "file": "room-corner.glb"
+  },
+  "KDungeon_room_large_variation": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    1400,
+    1400,
+    296
+   ],
+   "tris": 4586,
+   "file": "room-large-variation.glb"
+  },
+  "KDungeon_room_large": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    1400,
+    1400,
+    296
+   ],
+   "tris": 4792,
+   "file": "room-large.glb"
+  },
+  "KDungeon_room_small_variation": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    840,
+    840,
+    296
+   ],
+   "tris": 2220,
+   "file": "room-small-variation.glb"
+  },
+  "KDungeon_room_small": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    840,
+    840,
+    296
+   ],
+   "tris": 2194,
+   "file": "room-small.glb"
+  },
+  "KDungeon_room_wide_variation": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    1400,
+    840,
+    296
+   ],
+   "tris": 4372,
+   "file": "room-wide-variation.glb"
+  },
+  "KDungeon_room_wide": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    1400,
+    840,
+    296
+   ],
+   "tris": 3586,
+   "file": "room-wide.glb"
+  },
+  "KDungeon_stairs_wide": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    588,
+    588,
+    599
+   ],
+   "tris": 1575,
+   "file": "stairs-wide.glb"
+  },
+  "KDungeon_stairs": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    308,
+    588,
+    599
+   ],
+   "tris": 1521,
+   "file": "stairs.glb"
+  },
+  "KDungeon_template_corner": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    280,
+    280,
+    296
+   ],
+   "tris": 387,
+   "file": "template-corner.glb"
+  },
+  "KDungeon_template_detail": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    125,
+    125,
+    296
+   ],
+   "tris": 88,
+   "file": "template-detail.glb"
+  },
+  "KDungeon_template_floor_big": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    560,
+    560,
+    296
+   ],
+   "tris": 246,
+   "file": "template-floor-big.glb"
+  },
+  "KDungeon_template_floor_detail_a": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    280,
+    280,
+    7
+   ],
+   "tris": 102,
+   "file": "template-floor-detail-a.glb"
+  },
+  "KDungeon_template_floor_detail": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    280,
+    280,
+    7
+   ],
+   "tris": 102,
+   "file": "template-floor-detail.glb"
+  },
+  "KDungeon_template_floor_layer_hole": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    283,
+    280,
+    216
+   ],
+   "tris": 192,
+   "file": "template-floor-layer-hole.glb"
+  },
+  "KDungeon_template_floor_layer_raised": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    282,
+    280,
+    210
+   ],
+   "tris": 156,
+   "file": "template-floor-layer-raised.glb"
+  },
+  "KDungeon_template_floor_layer": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    282,
+    280,
+    35
+   ],
+   "tris": 84,
+   "file": "template-floor-layer.glb"
+  },
+  "KDungeon_template_floor": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    280,
+    280,
+    0
+   ],
+   "tris": 2,
+   "file": "template-floor.glb"
+  },
+  "KDungeon_template_wall_corner": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    70,
+    70,
+    283
+   ],
+   "tris": 42,
+   "file": "template-wall-corner.glb"
+  },
+  "KDungeon_template_wall_detail_a": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    280,
+    140,
+    296
+   ],
+   "tris": 307,
+   "file": "template-wall-detail-a.glb"
+  },
+  "KDungeon_template_wall_half": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    140,
+    127,
+    290
+   ],
+   "tris": 138,
+   "file": "template-wall-half.glb"
+  },
+  "KDungeon_template_wall_stairs": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    280,
+    44,
+    315
+   ],
+   "tris": 85,
+   "file": "template-wall-stairs.glb"
+  },
+  "KDungeon_template_wall_top": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    280,
+    43,
+    315
+   ],
+   "tris": 165,
+   "file": "template-wall-top.glb"
+  },
+  "KDungeon_template_wall": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    280,
+    140,
+    290
+   ],
+   "tris": 224,
+   "file": "template-wall.glb"
+  }
+ },
+ "skipped": []
+}

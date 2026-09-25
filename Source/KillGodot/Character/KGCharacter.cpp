@@ -1,6 +1,7 @@
 #include "Character/KGCharacter.h"
 #include "Camera/CameraComponent.h"
 #include "Character/KGViewmodelComponent.h"
+#include "Character/KGAppearanceComponent.h"
 #include "Character/KGBodyAnimInstance.h"
 #include "Camera/CameraTypes.h"
 #include "Emote/KGEmoteComponent.h"
@@ -29,6 +30,7 @@
 #include "Net/UnrealNetwork.h"
 #include "Core/KGGameMode.h"
 #include "Core/KGGameState.h"
+#include "Core/KGGameUserSettings.h"
 #include "Core/KGPlayerState.h"
 #include "Roles/KGRoleListGenerator.h"
 #include "World/KGTaskStation.h"
@@ -36,6 +38,7 @@
 #include "Components/PostProcessComponent.h"
 #include "World/KGLadder.h"
 #include "World/KGChoreItem.h"
+#include "Chores/WorldChores/KGWorldChoreWorld.h"
 #include "World/KGWaves.h"
 #include "GameFramework/PhysicsVolume.h"
 #include "Materials/MaterialInterface.h"
@@ -282,6 +285,7 @@ AKGCharacter::AKGCharacter(const FObjectInitializer& ObjectInitializer)
 	// they load through KGFP2::Anim at runtime.
 
 	Viewmodel = CreateDefaultSubobject<UKGViewmodelComponent>(TEXT("Viewmodel"));
+	Appearance = CreateDefaultSubobject<UKGAppearanceComponent>(TEXT("Appearance"));   // SPRINT-027a
 	Mouth = CreateDefaultSubobject<UKGMouthComponent>(TEXT("Mouth"));
 	Health = CreateDefaultSubobject<UKGHealthComponent>(TEXT("Health"));
 	Snapshot = CreateDefaultSubobject<UKGSnapshotComponent>(TEXT("Snapshot"));
@@ -469,6 +473,14 @@ void AKGCharacter::CalcCamera(float DeltaTime, FMinimalViewInfo& OutResult)
 	if (UKGFishingComponent* Fishing = UKGFishingComponent::FindFor(this))
 	{
 		Fishing->ApplyCamera(DeltaTime, OutResult);   // narrower view while reeling, bite nudge
+	}
+	// SPRINT-026: optional CS-style FOV widen at high ground speed (sprint through bhop range).
+	if (IsLocallyControlled() && UKGGameUserSettings::Get()->GetFOVKickOnSpeed())
+	{
+		const float Speed = GetVelocity().Size2D();
+		const float Kick = FMath::GetMappedRangeValueClamped(FVector2D(SprintSpeed, SprintSpeed * 1.35f),
+		                                                     FVector2D(0.0f, 6.0f), Speed);
+		OutResult.FOV += Kick;
 	}
 }
 
@@ -676,6 +688,54 @@ void AKGCharacter::JumpEnd()
 	StopJumping();
 }
 
+void AKGCharacter::OnJumped_Implementation()
+{
+	// Fires once per successful grounded DoJump (both the predicting client and the server run this identically -
+	// same input, same deterministic gate in UKGCharacterMovement::CanAttemptJump/ACharacter::CanJump). The landing-
+	// buffer chain hop does NOT go through here (it bypasses CheckJumpInput entirely - see OnMovementModeChanged in
+	// KGCharacterMovement.cpp); that one is charged and felt from the Tick() HopCounter poll above instead.
+	Super::OnJumped_Implementation();
+	if (IsDead())
+	{
+		return;
+	}
+	Stamina.TrySpend(JumpStaminaCost);
+	if (IsLocallyControlled())
+	{
+		Viewmodel->AddRecoil(FVector(4.0, 0.0, 6.0), FVector(-4.0, 0.0, 0.0));   // small upward dip on takeoff
+	}
+}
+
+void AKGCharacter::Landed(const FHitResult& Hit)
+{
+	Super::Landed(Hit);
+	if (IsDead())
+	{
+		return;
+	}
+	// The landing-buffer chain hop (if any) has already re-launched us by the time Landed() runs (it happens inside
+	// SetPostLandedPhysics -> OnMovementModeChanged, before ACharacter::ProcessLanded calls Landed()); if we are
+	// still falling, the streak continues, otherwise this landing ended the chain.
+	const UKGCharacterMovement* KGMove = Cast<UKGCharacterMovement>(GetCharacterMovement());
+	if (!KGMove || !KGMove->IsFalling())
+	{
+		ChainHopStreak = 0;
+	}
+	if (!IsLocallyControlled())
+	{
+		return;
+	}
+	Viewmodel->AddRecoil(FVector(-6.0, 0.0, -10.0), FVector(6.0, 0.0, 0.0));   // landing dip, heavier than a footstep
+	const UPrimitiveComponent* Floor = Hit.GetComponent();
+	const UStaticMeshComponent* SM = Cast<UStaticMeshComponent>(Floor);
+	const FString MeshName = SM && SM->GetStaticMesh() ? SM->GetStaticMesh()->GetName() : FString();
+	const TCHAR* Kind = MeshName.Contains(TEXT("Wood")) || MeshName.Contains(TEXT("Stair")) ? TEXT("Wood")
+	                  : MeshName.Contains(TEXT("Brick")) || MeshName.Contains(TEXT("Platform")) ? TEXT("Stone")
+	                                                                                             : TEXT("Grass");
+	// Reuses the footstep set (variant 0) at a heavier volume rather than a new, not-yet-authored landing cue.
+	KGAudio::At(this, *FString::Printf(TEXT("S_Step_%s_0"), Kind), GetActorLocation() - FVector(0, 0, 80.0f), 1.0f);
+}
+
 void AKGCharacter::StartSprint()
 {
 	bWantsSprint = true;
@@ -749,9 +809,41 @@ void AKGCharacter::Tick(float DeltaSeconds)
 	GetCharacterMovement()->MaxWalkSpeed = bSprinting ? SprintSpeed : WalkSpeed;
 	// SPRINT-016 hook (Chores/WorldChores): a heavy chore item (fish crate, sacks, firewood) slows its carrier and
 	// forbids sprinting; a second carrier on the crate restores full walking speed.
-	if (const float Carry = AKGChoreItem::SpeedFactorFor(this); Carry < 0.999f)
+	const float CarryFactor = AKGChoreItem::SpeedFactorFor(this);
+	if (CarryFactor < 0.999f)
 	{
-		GetCharacterMovement()->MaxWalkSpeed = WalkSpeed * Carry;
+		GetCharacterMovement()->MaxWalkSpeed = WalkSpeed * CarryFactor;
+	}
+
+	// SPRINT-026: feed context into the CMC's air-strafe / skill bhop (Docs/01_GDD_Core.md movement section).
+	// Bots never press Jump, so UKGCharacterMovement::HopCounter never advances for them regardless of these
+	// settings - this block only ever matters for a human-controlled pawn.
+	if (UKGCharacterMovement* KGMove = Cast<UKGCharacterMovement>(GetCharacterMovement()))
+	{
+		const bool bChoreActive = ActiveTask != nullptr;
+		const UKGFishingComponent* FishingCtx = UKGFishingComponent::FindFor(this);
+		const bool bFishingOut = FishingCtx && FishingCtx->WantsRodInHand();
+		const bool bCarrying = CarryFactor < 0.999f || bHoldingObject;
+		KGMove->SprintSpeedForCap = SprintSpeed;
+		// Carrying, rod out or a chore in progress: no bhop advantage at all (hopping still moves you, it just
+		// never beats sprint-speed-capped air control). The blade out or a tired sprinter still gets a hop, just
+		// capped at plain sprint speed instead of the full 1.35x soft cap.
+		KGMove->bAirStrafeDisabled = bChoreActive || bFishingOut || bCarrying;
+		KGMove->HopGainScale = (bHoldingAssassinBlade || Stamina.bExhausted) ? 0.0f : 1.0f;
+		// Stamina exhaustion stops CHAINING (the landing-buffer re-hop); a plain grounded jump is never blocked.
+		KGMove->bHopChainBlocked = Stamina.bExhausted;
+
+		if (KGMove->HopCounter != LastSeenHopCounter)
+		{
+			LastSeenHopCounter = KGMove->HopCounter;
+			++ChainHopStreak;
+			const float Cost = ChainHopBaseCost + ChainHopStepCost * FMath::Min(ChainHopStreak, ChainHopStreakCostCap);
+			Stamina.TrySpend(Cost);   // accounting only: the hop already happened in the CMC this move.
+			if (IsLocallyControlled())
+			{
+				Viewmodel->AddRecoil(FVector(5.0, 0.0, 8.0), FVector(-5.0, 0.0, 0.0));   // chained hop: a touch stronger than a plain jump
+			}
+		}
 	}
 
 	if (HeldComponent)
@@ -911,6 +1003,7 @@ void AKGCharacter::Tick(float DeltaSeconds)
 	{
 		Viewmodel->SetBackstabReady(bHoldingAssassinBlade && !bHoldingObject && FindBackstabTarget() != nullptr);
 	}
+	TickMoveSmoke(DeltaSeconds);
 }
 
 bool AKGCharacter::TraceView(float Distance, FHitResult& OutHit) const
@@ -922,6 +1015,27 @@ bool AKGCharacter::TraceFrom(const FVector& Start, const FVector& Dir, float Dis
 {
 	FCollisionQueryParams Params(SCENE_QUERY_STAT(KGTraceView), false, this);
 	return GetWorld()->LineTraceSingleByChannel(OutHit, Start, Start + Dir * Distance, ECC_Visibility, Params);
+}
+
+namespace KGInteractTrace
+{
+	// A chore item (the cranked bucket, the fish crate) lying behind a chore spot's or panel station's E box wins: the
+	// item is what the player came for, and those boxes are invisible. Only those boxes are looked through, never walls.
+	static void PreferChoreItem(const AKGCharacter* Self, const FVector& Start, const FVector& Dir, float Distance, FHitResult& Hit)
+	{
+		if (!Hit.GetActor() || !(Hit.GetActor()->IsA<AKGTaskStation>() || Hit.GetActor()->IsA<AKGChoreSpot>()))
+		{
+			return;
+		}
+		FCollisionQueryParams Params(SCENE_QUERY_STAT(KGTraceViewItem), false, Self);
+		Params.AddIgnoredActor(Hit.GetActor());
+		FHitResult Behind;
+		if (Self->GetWorld()->LineTraceSingleByChannel(Behind, Start, Start + Dir * Distance, ECC_Visibility, Params) &&
+		    Cast<AKGChoreItem>(Behind.GetActor()))
+		{
+			Hit = Behind;
+		}
+	}
 }
 
 void AKGCharacter::Interact()
@@ -939,6 +1053,7 @@ void AKGCharacter::Interact()
 		FHitResult Hit;
 		if (TraceFrom(Start, Dir, GrabDistance, Hit))
 		{
+			KGInteractTrace::PreferChoreItem(this, Start, Dir, GrabDistance, Hit);
 			const UPrimitiveComponent* Comp = Hit.GetComponent();
 			const bool bInteractable = Hit.GetActor() && Hit.GetActor()->GetClass()->ImplementsInterface(UKGInteractable::StaticClass());
 			const bool bCarryable = Comp && Comp->IsSimulatingPhysics() && Comp->GetMass() <= MaxGrabMassKg;
@@ -968,6 +1083,7 @@ void AKGCharacter::ServerInteract_Implementation(FVector_NetQuantize10 ViewStart
 	{
 		return;
 	}
+	KGInteractTrace::PreferChoreItem(this, ValidatedViewStart(ViewStart), ViewDir.GetSafeNormal(), GrabDistance, Hit);
 	AActor* HitActor = Hit.GetActor();
 	if (HitActor && HitActor->GetClass()->ImplementsInterface(UKGInteractable::StaticClass()))
 	{
@@ -1491,6 +1607,71 @@ void AKGCharacter::BeginTask(AKGTaskStation* Station)
 	TaskProgress = 0.0f;
 }
 
+void AKGCharacter::TickMoveSmoke(float DeltaSeconds)
+{
+#if !UE_BUILD_SHIPPING
+	static const bool bSmoke = FParse::Param(FCommandLine::Get(), TEXT("KGMoveSmoke"));
+	if (!bSmoke || !IsLocallyControlled() || IsDead())
+	{
+		return;
+	}
+	// Per-instance clock/step (no header change needed, Live Coding - mirrors the footstep StepAccum pattern above).
+	static TMap<TWeakObjectPtr<const AKGCharacter>, float> Clock;
+	static TMap<TWeakObjectPtr<const AKGCharacter>, int32> Step;
+	float& T = Clock.FindOrAdd(this);
+	int32& S = Step.FindOrAdd(this);
+	T += DeltaSeconds;
+
+	// T<1: settle. [1,6): "bad" strafe - straight line, one jump, never pressed again (no chaining possible without
+	// a fresh press - proves holding/forgetting does not keep gaining speed). [6,11): "good" strafe - alternating
+	// A/D + a matching yaw turn every ~0.18s with Jump re-pressed every tick (a human mashing space roughly on
+	// beat), which reliably lands within the ~80ms buffer and keeps re-aiming the wish direction into the turn.
+	const bool bGoodPhase = T >= 6.0f && T < 11.0f;
+	const bool bBadPhase = T >= 1.0f && T < 6.0f;
+	if (bBadPhase)
+	{
+		AddMovementInput(GetActorForwardVector(), 1.0f);
+	}
+	else if (bGoodPhase)
+	{
+		const float Beat = FMath::Fmod(T, 0.36f);
+		const float Sign = Beat < 0.18f ? 1.0f : -1.0f;
+		AddMovementInput(GetActorForwardVector(), 0.6f);
+		AddMovementInput(GetActorRightVector(), Sign);
+		AddControllerYawInput(Sign * 90.0f * DeltaSeconds);
+		JumpStart();   // re-pressed every tick this phase: lands inside the buffer on (almost) every landing
+	}
+
+	struct FStep
+	{
+		float At;
+		TFunction<void()> Run;
+	};
+	const TArray<FStep> Steps = {
+		{1.0f, [&]() { JumpStart(); }},         // the one and only press of the bad phase
+		{1.15f, [&]() { JumpEnd(); }},          // release: bad phase never presses again, so it cannot auto-chain
+		{11.0f, [&]() { JumpEnd(); }},
+		{11.2f, [&]()
+		{
+			const UKGCharacterMovement* KGMove = Cast<UKGCharacterMovement>(GetCharacterMovement());
+			UE_LOG(LogKillGodot, Log, TEXT("KG_MOVE_DONE speed=%.1f corrections=%d"), GetHorizontalSpeed(),
+			       KGMove ? KGMove->CorrectionCount : -1);
+		}},
+	};
+	while (Steps.IsValidIndex(S) && T >= Steps[S].At)
+	{
+		Steps[S].Run();
+		++S;
+	}
+
+	if (T >= 1.0f && T < 11.0f)
+	{
+		UE_LOG(LogKillGodot, Log, TEXT("KG_MOVE_CSV,%.3f,%s,%.1f"), T, bGoodPhase ? TEXT("good_strafe") : bBadPhase ? TEXT("bad_strafe") : TEXT("settle"),
+		       GetHorizontalSpeed());
+	}
+#endif
+}
+
 void AKGCharacter::TickTask(float DeltaSeconds)
 {
 	if (!ActiveTask)
@@ -1633,8 +1814,11 @@ void AKGCharacter::TickWaterAndLadders(float DeltaSeconds)
 	// Footsteps: one every ~1.7 m on the ground, sound by what we stand on (wood decks, stone, else grass).
 	if (Move->IsMovingOnGround())
 	{
-		StepDistance += GetVelocity().Size2D() * DeltaSeconds;
-		const float Stride = GetVelocity().Size2D() > 450.0f ? 210.0f : 165.0f;
+		const float GroundSpeed = GetVelocity().Size2D();
+		StepDistance += GroundSpeed * DeltaSeconds;
+		// SPRINT-026: a third, longer stride for bhop-range landing speed (above plain sprint) so footsteps thin
+		// out rather than machine-gunning once strafe-jumping pushes well past SprintSpeed.
+		const float Stride = GroundSpeed > SprintSpeed ? 260.0f : GroundSpeed > 450.0f ? 210.0f : 165.0f;
 		if (StepDistance > Stride)
 		{
 			StepDistance = 0.0f;

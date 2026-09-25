@@ -83,6 +83,13 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "KillGodot|Settings")
 	void SetViewmodelPreset(int32 Preset);
 
+	/** SPRINT-026: a small FOV widen at high ground speed (sprint/bhop), CS-style. On by default. */
+	UFUNCTION(BlueprintPure, Category = "KillGodot|Settings")
+	bool GetFOVKickOnSpeed() const { return bFOVKickOnSpeed; }
+
+	UFUNCTION(BlueprintCallable, Category = "KillGodot|Settings")
+	void SetFOVKickOnSpeed(bool bValue) { bFOVKickOnSpeed = bValue; }
+
 	// --- Streamer mode (Settings -> Gameplay, SPRINT-015) ---------------------------------------------------------
 
 	/** Hides your role after the reveal (hold the peek key), shows other players under per-match pseudonyms and masks
@@ -168,6 +175,9 @@ protected:
 
 	UPROPERTY(config)
 	int32 ViewmodelPreset = 1;
+
+	UPROPERTY(config)
+	bool bFOVKickOnSpeed = true;
 
 	UPROPERTY(config)
 	bool bStreamerMode = false;

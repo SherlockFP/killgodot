@@ -1,0 +1,1657 @@
+{
+ "tag": "QNature",
+ "source": "D:/Kill Godot/Art/Source/Quaternius_UltimateNature",
+ "props": {
+  "QNature_BirchTree_1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    170,
+    248,
+    357
+   ],
+   "tris": 1704,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/BirchTree_1.fbx"
+  },
+  "QNature_BirchTree_2": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    147,
+    169,
+    403
+   ],
+   "tris": 1566,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/BirchTree_2.fbx"
+  },
+  "QNature_BirchTree_3": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    157,
+    177,
+    409
+   ],
+   "tris": 1730,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/BirchTree_3.fbx"
+  },
+  "QNature_BirchTree_4": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    115,
+    329,
+    356
+   ],
+   "tris": 2338,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/BirchTree_4.fbx"
+  },
+  "QNature_BirchTree_5": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    119,
+    193,
+    501
+   ],
+   "tris": 1734,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/BirchTree_5.fbx"
+  },
+  "QNature_BirchTree_Autumn_1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    170,
+    248,
+    357
+   ],
+   "tris": 1704,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/BirchTree_Autumn_1.fbx"
+  },
+  "QNature_BirchTree_Autumn_2": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    147,
+    169,
+    403
+   ],
+   "tris": 1566,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/BirchTree_Autumn_2.fbx"
+  },
+  "QNature_BirchTree_Autumn_3": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    157,
+    177,
+    409
+   ],
+   "tris": 1730,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/BirchTree_Autumn_3.fbx"
+  },
+  "QNature_BirchTree_Autumn_4": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    115,
+    329,
+    356
+   ],
+   "tris": 2338,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/BirchTree_Autumn_4.fbx"
+  },
+  "QNature_BirchTree_Autumn_5": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    119,
+    193,
+    501
+   ],
+   "tris": 1734,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/BirchTree_Autumn_5.fbx"
+  },
+  "QNature_BirchTree_Dead_1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    48,
+    163,
+    225
+   ],
+   "tris": 820,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/BirchTree_Dead_1.fbx"
+  },
+  "QNature_BirchTree_Dead_2": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    69,
+    88,
+    263
+   ],
+   "tris": 1310,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/BirchTree_Dead_2.fbx"
+  },
+  "QNature_BirchTree_Dead_3": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    72,
+    81,
+    318
+   ],
+   "tris": 1346,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/BirchTree_Dead_3.fbx"
+  },
+  "QNature_BirchTree_Dead_4": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    50,
+    260,
+    269
+   ],
+   "tris": 1570,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/BirchTree_Dead_4.fbx"
+  },
+  "QNature_BirchTree_Dead_5": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    57,
+    105,
+    437
+   ],
+   "tris": 1222,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/BirchTree_Dead_5.fbx"
+  },
+  "QNature_BirchTree_Dead_Snow_1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    48,
+    163,
+    225
+   ],
+   "tris": 876,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/BirchTree_Dead_Snow_1.fbx"
+  },
+  "QNature_BirchTree_Dead_Snow_2": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    69,
+    88,
+    263
+   ],
+   "tris": 1432,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/BirchTree_Dead_Snow_2.fbx"
+  },
+  "QNature_BirchTree_Dead_Snow_3": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    72,
+    81,
+    318
+   ],
+   "tris": 1422,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/BirchTree_Dead_Snow_3.fbx"
+  },
+  "QNature_BirchTree_Dead_Snow_4": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    50,
+    260,
+    269
+   ],
+   "tris": 1718,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/BirchTree_Dead_Snow_4.fbx"
+  },
+  "QNature_BirchTree_Dead_Snow_5": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    57,
+    105,
+    437
+   ],
+   "tris": 1268,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/BirchTree_Dead_Snow_5.fbx"
+  },
+  "QNature_BirchTree_Snow_1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    170,
+    248,
+    359
+   ],
+   "tris": 1804,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/BirchTree_Snow_1.fbx"
+  },
+  "QNature_BirchTree_Snow_2": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    147,
+    169,
+    409
+   ],
+   "tris": 1610,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/BirchTree_Snow_2.fbx"
+  },
+  "QNature_BirchTree_Snow_3": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    157,
+    177,
+    415
+   ],
+   "tris": 1798,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/BirchTree_Snow_3.fbx"
+  },
+  "QNature_BirchTree_Snow_4": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    115,
+    329,
+    360
+   ],
+   "tris": 2478,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/BirchTree_Snow_4.fbx"
+  },
+  "QNature_BirchTree_Snow_5": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    119,
+    193,
+    506
+   ],
+   "tris": 1806,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/BirchTree_Snow_5.fbx"
+  },
+  "QNature_BushBerries_1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    139,
+    172,
+    128
+   ],
+   "tris": 892,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/BushBerries_1.fbx"
+  },
+  "QNature_BushBerries_2": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    134,
+    133,
+    113
+   ],
+   "tris": 796,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/BushBerries_2.fbx"
+  },
+  "QNature_Bush_1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    133,
+    169,
+    124
+   ],
+   "tris": 364,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/Bush_1.fbx"
+  },
+  "QNature_Bush_2": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    135,
+    133,
+    111
+   ],
+   "tris": 268,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/Bush_2.fbx"
+  },
+  "QNature_Bush_Snow_1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    139,
+    178,
+    128
+   ],
+   "tris": 460,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/Bush_Snow_1.fbx"
+  },
+  "QNature_Bush_Snow_2": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    136,
+    136,
+    116
+   ],
+   "tris": 340,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/Bush_Snow_2.fbx"
+  },
+  "QNature_CactusFlower_1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    88,
+    87,
+    36
+   ],
+   "tris": 2112,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/CactusFlower_1.fbx"
+  },
+  "QNature_CactusFlowers_2": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    77,
+    128,
+    194
+   ],
+   "tris": 1488,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/CactusFlowers_2.fbx"
+  },
+  "QNature_CactusFlowers_3": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    48,
+    112,
+    167
+   ],
+   "tris": 1184,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/CactusFlowers_3.fbx"
+  },
+  "QNature_CactusFlowers_4": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    11,
+    97,
+    138
+   ],
+   "tris": 1632,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/CactusFlowers_4.fbx"
+  },
+  "QNature_CactusFlowers_5": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    11,
+    73,
+    94
+   ],
+   "tris": 800,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/CactusFlowers_5.fbx"
+  },
+  "QNature_Cactus_1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    55,
+    56,
+    101
+   ],
+   "tris": 434,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/Cactus_1.fbx"
+  },
+  "QNature_Cactus_2": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    70,
+    105,
+    170
+   ],
+   "tris": 720,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/Cactus_2.fbx"
+  },
+  "QNature_Cactus_3": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    34,
+    100,
+    141
+   ],
+   "tris": 416,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/Cactus_3.fbx"
+  },
+  "QNature_Cactus_4": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    11,
+    92,
+    137
+   ],
+   "tris": 1152,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/Cactus_4.fbx"
+  },
+  "QNature_Cactus_5": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    11,
+    68,
+    88
+   ],
+   "tris": 560,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/Cactus_5.fbx"
+  },
+  "QNature_CommonTree_1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    189,
+    277,
+    248
+   ],
+   "tris": 2888,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/CommonTree_1.fbx"
+  },
+  "QNature_CommonTree_2": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    166,
+    254,
+    312
+   ],
+   "tris": 2952,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/CommonTree_2.fbx"
+  },
+  "QNature_CommonTree_3": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    128,
+    156,
+    346
+   ],
+   "tris": 1584,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/CommonTree_3.fbx"
+  },
+  "QNature_CommonTree_4": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    158,
+    180,
+    278
+   ],
+   "tris": 1352,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/CommonTree_4.fbx"
+  },
+  "QNature_CommonTree_5": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    129,
+    225,
+    253
+   ],
+   "tris": 1836,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/CommonTree_5.fbx"
+  },
+  "QNature_CommonTree_Autumn_1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    189,
+    277,
+    248
+   ],
+   "tris": 2888,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/CommonTree_Autumn_1.fbx"
+  },
+  "QNature_CommonTree_Autumn_2": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    166,
+    254,
+    312
+   ],
+   "tris": 2952,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/CommonTree_Autumn_2.fbx"
+  },
+  "QNature_CommonTree_Autumn_3": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    128,
+    156,
+    346
+   ],
+   "tris": 1584,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/CommonTree_Autumn_3.fbx"
+  },
+  "QNature_CommonTree_Autumn_4": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    158,
+    180,
+    278
+   ],
+   "tris": 1352,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/CommonTree_Autumn_4.fbx"
+  },
+  "QNature_CommonTree_Autumn_5": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    129,
+    225,
+    253
+   ],
+   "tris": 1836,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/CommonTree_Autumn_5.fbx"
+  },
+  "QNature_CommonTree_Dead_1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    104,
+    212,
+    222
+   ],
+   "tris": 2360,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/CommonTree_Dead_1.fbx"
+  },
+  "QNature_CommonTree_Dead_2": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    133,
+    186,
+    296
+   ],
+   "tris": 2360,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/CommonTree_Dead_2.fbx"
+  },
+  "QNature_CommonTree_Dead_3": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    64,
+    81,
+    300
+   ],
+   "tris": 944,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/CommonTree_Dead_3.fbx"
+  },
+  "QNature_CommonTree_Dead_4": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    82,
+    108,
+    237
+   ],
+   "tris": 1008,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/CommonTree_Dead_4.fbx"
+  },
+  "QNature_CommonTree_Dead_5": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    84,
+    120,
+    230
+   ],
+   "tris": 1424,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/CommonTree_Dead_5.fbx"
+  },
+  "QNature_CommonTree_Dead_Snow_1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    104,
+    212,
+    222
+   ],
+   "tris": 2628,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/CommonTree_Dead_Snow_1.fbx"
+  },
+  "QNature_CommonTree_Dead_Snow_2": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    133,
+    186,
+    296
+   ],
+   "tris": 2620,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/CommonTree_Dead_Snow_2.fbx"
+  },
+  "QNature_CommonTree_Dead_Snow_3": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    64,
+    81,
+    300
+   ],
+   "tris": 1008,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/CommonTree_Dead_Snow_3.fbx"
+  },
+  "QNature_CommonTree_Dead_Snow_4": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    82,
+    108,
+    237
+   ],
+   "tris": 1104,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/CommonTree_Dead_Snow_4.fbx"
+  },
+  "QNature_CommonTree_Dead_Snow_5": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    84,
+    120,
+    230
+   ],
+   "tris": 1552,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/CommonTree_Dead_Snow_5.fbx"
+  },
+  "QNature_CommonTree_Snow_1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    189,
+    277,
+    251
+   ],
+   "tris": 2966,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/CommonTree_Snow_1.fbx"
+  },
+  "QNature_CommonTree_Snow_2": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    166,
+    254,
+    316
+   ],
+   "tris": 3050,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/CommonTree_Snow_2.fbx"
+  },
+  "QNature_CommonTree_Snow_3": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    128,
+    156,
+    347
+   ],
+   "tris": 1672,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/CommonTree_Snow_3.fbx"
+  },
+  "QNature_CommonTree_Snow_4": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    158,
+    180,
+    280
+   ],
+   "tris": 1406,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/CommonTree_Snow_4.fbx"
+  },
+  "QNature_CommonTree_Snow_5": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    129,
+    225,
+    257
+   ],
+   "tris": 1916,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/CommonTree_Snow_5.fbx"
+  },
+  "QNature_Corn_1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    82,
+    109,
+    198
+   ],
+   "tris": 566,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/Corn_1.fbx"
+  },
+  "QNature_Corn_2": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    82,
+    109,
+    198
+   ],
+   "tris": 734,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/Corn_2.fbx"
+  },
+  "QNature_Flowers": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    49,
+    61,
+    83
+   ],
+   "tris": 408,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/Flowers.fbx"
+  },
+  "QNature_Grass": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    37,
+    33,
+    101
+   ],
+   "tris": 192,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/Grass.fbx"
+  },
+  "QNature_Grass_2": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    32,
+    44,
+    120
+   ],
+   "tris": 192,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/Grass_2.fbx"
+  },
+  "QNature_Grass_Short": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    32,
+    44,
+    40
+   ],
+   "tris": 192,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/Grass_Short.fbx"
+  },
+  "QNature_Lilypad": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    120,
+    119,
+    22
+   ],
+   "tris": 372,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/Lilypad.fbx"
+  },
+  "QNature_PalmTree_1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    288,
+    261,
+    447
+   ],
+   "tris": 1772,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/PalmTree_1.fbx"
+  },
+  "QNature_PalmTree_2": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    232,
+    318,
+    291
+   ],
+   "tris": 1232,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/PalmTree_2.fbx"
+  },
+  "QNature_PalmTree_3": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    288,
+    251,
+    393
+   ],
+   "tris": 1496,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/PalmTree_3.fbx"
+  },
+  "QNature_PalmTree_4": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    234,
+    259,
+    347
+   ],
+   "tris": 1052,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/PalmTree_4.fbx"
+  },
+  "QNature_PineTree_1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    196,
+    182,
+    270
+   ],
+   "tris": 1920,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/PineTree_1.fbx"
+  },
+  "QNature_PineTree_2": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    180,
+    196,
+    356
+   ],
+   "tris": 1692,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/PineTree_2.fbx"
+  },
+  "QNature_PineTree_3": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    216,
+    195,
+    330
+   ],
+   "tris": 2392,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/PineTree_3.fbx"
+  },
+  "QNature_PineTree_4": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    125,
+    139,
+    334
+   ],
+   "tris": 1704,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/PineTree_4.fbx"
+  },
+  "QNature_PineTree_5": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    147,
+    134,
+    269
+   ],
+   "tris": 1576,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/PineTree_5.fbx"
+  },
+  "QNature_PineTree_Autumn_1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    196,
+    182,
+    270
+   ],
+   "tris": 1920,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/PineTree_Autumn_1.fbx"
+  },
+  "QNature_PineTree_Autumn_2": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    180,
+    196,
+    356
+   ],
+   "tris": 1692,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/PineTree_Autumn_2.fbx"
+  },
+  "QNature_PineTree_Autumn_3": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    216,
+    195,
+    330
+   ],
+   "tris": 2392,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/PineTree_Autumn_3.fbx"
+  },
+  "QNature_PineTree_Autumn_4": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    125,
+    139,
+    334
+   ],
+   "tris": 1704,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/PineTree_Autumn_4.fbx"
+  },
+  "QNature_PineTree_Autumn_5": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    147,
+    134,
+    269
+   ],
+   "tris": 1576,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/PineTree_Autumn_5.fbx"
+  },
+  "QNature_PineTree_Snow_1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    196,
+    182,
+    270
+   ],
+   "tris": 1920,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/PineTree_Snow_1.fbx"
+  },
+  "QNature_PineTree_Snow_2": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    180,
+    196,
+    356
+   ],
+   "tris": 1692,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/PineTree_Snow_2.fbx"
+  },
+  "QNature_PineTree_Snow_3": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    216,
+    195,
+    330
+   ],
+   "tris": 2392,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/PineTree_Snow_3.fbx"
+  },
+  "QNature_PineTree_Snow_4": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    125,
+    139,
+    334
+   ],
+   "tris": 1704,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/PineTree_Snow_4.fbx"
+  },
+  "QNature_PineTree_Snow_5": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    147,
+    134,
+    269
+   ],
+   "tris": 1576,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/PineTree_Snow_5.fbx"
+  },
+  "QNature_Plant_1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    120,
+    95,
+    51
+   ],
+   "tris": 296,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/Plant_1.fbx"
+  },
+  "QNature_Plant_2": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    69,
+    69,
+    177
+   ],
+   "tris": 218,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/Plant_2.fbx"
+  },
+  "QNature_Plant_3": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    109,
+    97,
+    94
+   ],
+   "tris": 600,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/Plant_3.fbx"
+  },
+  "QNature_Plant_4": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    191,
+    212,
+    81
+   ],
+   "tris": 512,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/Plant_4.fbx"
+  },
+  "QNature_Plant_5": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    174,
+    172,
+    139
+   ],
+   "tris": 620,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/Plant_5.fbx"
+  },
+  "QNature_Rock_1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    49,
+    47,
+    88
+   ],
+   "tris": 70,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/Rock_1.fbx"
+  },
+  "QNature_Rock_2": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    56,
+    57,
+    65
+   ],
+   "tris": 80,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/Rock_2.fbx"
+  },
+  "QNature_Rock_3": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    74,
+    80,
+    68
+   ],
+   "tris": 72,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/Rock_3.fbx"
+  },
+  "QNature_Rock_4": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    74,
+    125,
+    78
+   ],
+   "tris": 128,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/Rock_4.fbx"
+  },
+  "QNature_Rock_5": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    66,
+    91,
+    65
+   ],
+   "tris": 90,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/Rock_5.fbx"
+  },
+  "QNature_Rock_6": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    91,
+    114,
+    71
+   ],
+   "tris": 116,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/Rock_6.fbx"
+  },
+  "QNature_Rock_7": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    88,
+    110,
+    85
+   ],
+   "tris": 94,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/Rock_7.fbx"
+  },
+  "QNature_Rock_Moss_1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    49,
+    47,
+    95
+   ],
+   "tris": 70,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/Rock_Moss_1.fbx"
+  },
+  "QNature_Rock_Moss_2": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    61,
+    65,
+    69
+   ],
+   "tris": 78,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/Rock_Moss_2.fbx"
+  },
+  "QNature_Rock_Moss_3": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    74,
+    80,
+    56
+   ],
+   "tris": 68,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/Rock_Moss_3.fbx"
+  },
+  "QNature_Rock_Moss_4": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    74,
+    125,
+    78
+   ],
+   "tris": 128,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/Rock_Moss_4.fbx"
+  },
+  "QNature_Rock_Moss_5": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    66,
+    91,
+    58
+   ],
+   "tris": 88,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/Rock_Moss_5.fbx"
+  },
+  "QNature_Rock_Moss_6": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    91,
+    114,
+    71
+   ],
+   "tris": 116,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/Rock_Moss_6.fbx"
+  },
+  "QNature_Rock_Moss_7": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    88,
+    110,
+    77
+   ],
+   "tris": 88,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/Rock_Moss_7.fbx"
+  },
+  "QNature_Rock_Snow_1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    49,
+    47,
+    98
+   ],
+   "tris": 102,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/Rock_Snow_1.fbx"
+  },
+  "QNature_Rock_Snow_2": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    61,
+    65,
+    72
+   ],
+   "tris": 118,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/Rock_Snow_2.fbx"
+  },
+  "QNature_Rock_Snow_3": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    74,
+    80,
+    58
+   ],
+   "tris": 96,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/Rock_Snow_3.fbx"
+  },
+  "QNature_Rock_Snow_4": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    74,
+    125,
+    80
+   ],
+   "tris": 188,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/Rock_Snow_4.fbx"
+  },
+  "QNature_Rock_Snow_5": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    66,
+    91,
+    61
+   ],
+   "tris": 124,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/Rock_Snow_5.fbx"
+  },
+  "QNature_Rock_Snow_6": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    91,
+    114,
+    74
+   ],
+   "tris": 184,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/Rock_Snow_6.fbx"
+  },
+  "QNature_Rock_Snow_7": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    88,
+    110,
+    79
+   ],
+   "tris": 154,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/Rock_Snow_7.fbx"
+  },
+  "QNature_TreeStump": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    136,
+    103,
+    62
+   ],
+   "tris": 232,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/TreeStump.fbx"
+  },
+  "QNature_TreeStump_Moss": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    136,
+    103,
+    62
+   ],
+   "tris": 232,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/TreeStump_Moss.fbx"
+  },
+  "QNature_TreeStump_Snow": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    136,
+    103,
+    62
+   ],
+   "tris": 258,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/TreeStump_Snow.fbx"
+  },
+  "QNature_Wheat": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    36,
+    36,
+    110
+   ],
+   "tris": 408,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/Wheat.fbx"
+  },
+  "QNature_Willow_1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    145,
+    255,
+    285
+   ],
+   "tris": 1946,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/Willow_1.fbx"
+  },
+  "QNature_Willow_2": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    195,
+    311,
+    332
+   ],
+   "tris": 2752,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/Willow_2.fbx"
+  },
+  "QNature_Willow_3": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    132,
+    198,
+    235
+   ],
+   "tris": 1044,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/Willow_3.fbx"
+  },
+  "QNature_Willow_4": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    219,
+    304,
+    339
+   ],
+   "tris": 1568,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/Willow_4.fbx"
+  },
+  "QNature_Willow_5": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    101,
+    249,
+    242
+   ],
+   "tris": 1624,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/Willow_5.fbx"
+  },
+  "QNature_Willow_Autumn_1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    145,
+    255,
+    285
+   ],
+   "tris": 1946,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/Willow_Autumn_1.fbx"
+  },
+  "QNature_Willow_Autumn_2": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    195,
+    311,
+    332
+   ],
+   "tris": 2752,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/Willow_Autumn_2.fbx"
+  },
+  "QNature_Willow_Autumn_3": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    132,
+    198,
+    235
+   ],
+   "tris": 1044,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/Willow_Autumn_3.fbx"
+  },
+  "QNature_Willow_Autumn_4": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    219,
+    304,
+    339
+   ],
+   "tris": 1568,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/Willow_Autumn_4.fbx"
+  },
+  "QNature_Willow_Autumn_5": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    101,
+    249,
+    242
+   ],
+   "tris": 1624,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/Willow_Autumn_5.fbx"
+  },
+  "QNature_Willow_Dead_1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    50,
+    181,
+    269
+   ],
+   "tris": 1128,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/Willow_Dead_1.fbx"
+  },
+  "QNature_Willow_Dead_2": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    117,
+    240,
+    284
+   ],
+   "tris": 1860,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/Willow_Dead_2.fbx"
+  },
+  "QNature_Willow_Dead_3": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    31,
+    158,
+    191
+   ],
+   "tris": 400,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/Willow_Dead_3.fbx"
+  },
+  "QNature_Willow_Dead_4": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    101,
+    259,
+    272
+   ],
+   "tris": 784,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/Willow_Dead_4.fbx"
+  },
+  "QNature_Willow_Dead_5": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    57,
+    195,
+    204
+   ],
+   "tris": 496,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/Willow_Dead_5.fbx"
+  },
+  "QNature_Willow_Dead_Snow_1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    50,
+    181,
+    269
+   ],
+   "tris": 1220,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/Willow_Dead_Snow_1.fbx"
+  },
+  "QNature_Willow_Dead_Snow_2": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    117,
+    240,
+    284
+   ],
+   "tris": 2056,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/Willow_Dead_Snow_2.fbx"
+  },
+  "QNature_Willow_Dead_Snow_3": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    31,
+    158,
+    191
+   ],
+   "tris": 440,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/Willow_Dead_Snow_3.fbx"
+  },
+  "QNature_Willow_Dead_Snow_4": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    101,
+    259,
+    272
+   ],
+   "tris": 856,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/Willow_Dead_Snow_4.fbx"
+  },
+  "QNature_Willow_Dead_Snow_5": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    57,
+    195,
+    204
+   ],
+   "tris": 564,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/Willow_Dead_Snow_5.fbx"
+  },
+  "QNature_Willow_Snow_1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    145,
+    257,
+    293
+   ],
+   "tris": 2010,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/Willow_Snow_1.fbx"
+  },
+  "QNature_Willow_Snow_2": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    195,
+    316,
+    346
+   ],
+   "tris": 2820,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/Willow_Snow_2.fbx"
+  },
+  "QNature_Willow_Snow_3": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    132,
+    198,
+    241
+   ],
+   "tris": 1096,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/Willow_Snow_3.fbx"
+  },
+  "QNature_Willow_Snow_4": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    219,
+    304,
+    346
+   ],
+   "tris": 1636,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/Willow_Snow_4.fbx"
+  },
+  "QNature_Willow_Snow_5": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    101,
+    249,
+    246
+   ],
+   "tris": 1720,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/Willow_Snow_5.fbx"
+  },
+  "QNature_WoodLog": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    63,
+    267,
+    75
+   ],
+   "tris": 464,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/WoodLog.fbx"
+  },
+  "QNature_WoodLog_Moss": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    90,
+    267,
+    69
+   ],
+   "tris": 614,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/WoodLog_Moss.fbx"
+  },
+  "QNature_WoodLog_Snow": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    63,
+    249,
+    58
+   ],
+   "tris": 280,
+   "file": "Ultimate Nature Pack by Quaternius/FBX/WoodLog_Snow.fbx"
+  }
+ },
+ "skipped": []
+}

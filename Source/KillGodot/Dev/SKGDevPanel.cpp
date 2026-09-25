@@ -1182,9 +1182,27 @@ TSharedRef<SWidget> SKGDevPanel::BuildMeTab()
 	EmoteTools->AddSlot()[ActionButton(LOCTEXT("EmoteBotsAll", "Bots: all emotes"), TEXT("Emote.Bots all"))];
 	EmoteTools->AddSlot()[ActionButton(LOCTEXT("EmoteBotsStop", "Bots: stop"), TEXT("Emote.Bots stop"))];
 
+	// SPRINT-026: a slight live speed readout (ground speed, hop streak, stamina) - dev panel only, also console
+	// command kg.Debug.Speed (KG_SPEED in the log for headless checks).
+	TSharedRef<SWidget> SpeedReadout = SNew(STextBlock)
+		.Font(Font(TEXT("Regular"), 10))
+		.ColorAndOpacity(S().CreamDim)
+		.Text_Lambda([this]()
+		{
+			const AKGCharacter* C = PC.IsValid() ? Cast<AKGCharacter>(PC->GetPawn()) : nullptr;
+			if (!C)
+			{
+				return FText::GetEmpty();
+			}
+			return FText::FromString(FString::Printf(TEXT("%.0f uu/s (%.1f m/s)  |  hop streak %d  |  stamina %.0f%%"),
+			                                          C->GetHorizontalSpeed(), C->GetHorizontalSpeed() / 100.0f,
+			                                          C->GetHopChainStreak(), C->GetStaminaAlpha() * 100.0f));
+		});
+
 	return SNew(SVerticalBox)
 		+ SVerticalBox::Slot().AutoHeight()[Section(LOCTEXT("SecCheats", "CHEATS"), Cheats)]
 		+ SVerticalBox::Slot().AutoHeight().Padding(0.0f, 6.0f, 0.0f, 0.0f)[Row(LOCTEXT("SpeedRow", "Move speed"), Speed)]
+		+ SVerticalBox::Slot().AutoHeight().Padding(0.0f, 2.0f, 0.0f, 0.0f)[Row(LOCTEXT("SpeedReadoutRow", ""), SpeedReadout)]
 		+ SVerticalBox::Slot().AutoHeight()[Section(LOCTEXT("SecRole", "MY ROLE"), Roles)]
 		+ SVerticalBox::Slot().AutoHeight()[Section(LOCTEXT("SecItems", "GIVE ITEMS"), Items)]
 		+ SVerticalBox::Slot().AutoHeight().Padding(0.0f, 6.0f, 0.0f, 0.0f)[Gold]

@@ -2830,7 +2830,17 @@
    ],
    "top_z": "terrain",
    "bottom_z": -3.0,
-   "material": "rock"
+   "material": "rock",
+   "shoulder": {
+    "edge_z": 5.0,
+    "ledge_z": 7.5,
+    "ledge_at_m": 4.0,
+    "bench_to_m": 6.5,
+    "width_m": 13.0,
+    "fade_m": 9.0,
+    "wobble_m": 0.9,
+    "fade_end_m": 4.0
+   }
   },
   {
    "name": "point_sea_cliff",

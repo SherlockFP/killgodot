@@ -1,0 +1,843 @@
+{
+ "tag": "KCastle",
+ "source": "D:/Kill Godot/Art/Source/Kenney_CastleKit/Models/GLB format",
+ "props": {
+  "KCastle_bridge_draw": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    301,
+    249,
+    30
+   ],
+   "tris": 40,
+   "file": "bridge-draw.glb"
+  },
+  "KCastle_bridge_straight_pillar": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    279,
+    279,
+    353
+   ],
+   "tris": 156,
+   "file": "bridge-straight-pillar.glb"
+  },
+  "KCastle_bridge_straight": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    279,
+    279,
+    353
+   ],
+   "tris": 192,
+   "file": "bridge-straight.glb"
+  },
+  "KCastle_door": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    45,
+    108,
+    182
+   ],
+   "tris": 188,
+   "file": "door.glb"
+  },
+  "KCastle_flag_banner_long": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    12,
+    189,
+    651
+   ],
+   "tris": 68,
+   "file": "flag-banner-long.glb"
+  },
+  "KCastle_flag_banner_short": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    12,
+    189,
+    234
+   ],
+   "tris": 68,
+   "file": "flag-banner-short.glb"
+  },
+  "KCastle_flag_pennant": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    32,
+    172,
+    260
+   ],
+   "tris": 101,
+   "file": "flag-pennant.glb"
+  },
+  "KCastle_flag_wide": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    32,
+    164,
+    260
+   ],
+   "tris": 240,
+   "file": "flag-wide.glb"
+  },
+  "KCastle_flag": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    32,
+    130,
+    260
+   ],
+   "tris": 128,
+   "file": "flag.glb"
+  },
+  "KCastle_gate": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    45,
+    199,
+    273
+   ],
+   "tris": 146,
+   "file": "gate.glb"
+  },
+  "KCastle_ground_hills": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    300,
+    300,
+    86
+   ],
+   "tris": 116,
+   "file": "ground-hills.glb"
+  },
+  "KCastle_ground": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    300,
+    300,
+    0
+   ],
+   "tris": 2,
+   "file": "ground.glb"
+  },
+  "KCastle_metal_gate": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    21,
+    209,
+    219
+   ],
+   "tris": 190,
+   "file": "metal-gate.glb"
+  },
+  "KCastle_rocks_large": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    360,
+    404,
+    150
+   ],
+   "tris": 150,
+   "file": "rocks-large.glb"
+  },
+  "KCastle_rocks_small": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    309,
+    332,
+    150
+   ],
+   "tris": 140,
+   "file": "rocks-small.glb"
+  },
+  "KCastle_siege_ballista_demolished": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    526,
+    466,
+    153
+   ],
+   "tris": 601,
+   "file": "siege-ballista-demolished.glb"
+  },
+  "KCastle_siege_ballista": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    489,
+    360,
+    273
+   ],
+   "tris": 642,
+   "file": "siege-ballista.glb"
+  },
+  "KCastle_siege_catapult_demolished": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    503,
+    501,
+    96
+   ],
+   "tris": 825,
+   "file": "siege-catapult-demolished.glb"
+  },
+  "KCastle_siege_catapult": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    520,
+    363,
+    399
+   ],
+   "tris": 894,
+   "file": "siege-catapult.glb"
+  },
+  "KCastle_siege_ram_demolished": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    624,
+    494,
+    217
+   ],
+   "tris": 776,
+   "file": "siege-ram-demolished.glb"
+  },
+  "KCastle_siege_ram": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    626,
+    300,
+    355
+   ],
+   "tris": 1056,
+   "file": "siege-ram.glb"
+  },
+  "KCastle_siege_tower_demolished": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    652,
+    554,
+    629
+   ],
+   "tris": 1113,
+   "file": "siege-tower-demolished.glb"
+  },
+  "KCastle_siege_tower": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    590,
+    363,
+    804
+   ],
+   "tris": 1268,
+   "file": "siege-tower.glb"
+  },
+  "KCastle_siege_trebuchet_demolished": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    580,
+    629,
+    93
+   ],
+   "tris": 804,
+   "file": "siege-trebuchet-demolished.glb"
+  },
+  "KCastle_siege_trebuchet": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    555,
+    377,
+    588
+   ],
+   "tris": 1186,
+   "file": "siege-trebuchet.glb"
+  },
+  "KCastle_stairs_stone_square": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    70,
+    246,
+    202
+   ],
+   "tris": 100,
+   "file": "stairs-stone-square.glb"
+  },
+  "KCastle_stairs_stone": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    70,
+    246,
+    202
+   ],
+   "tris": 104,
+   "file": "stairs-stone.glb"
+  },
+  "KCastle_tower_base": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    300,
+    300,
+    393
+   ],
+   "tris": 332,
+   "file": "tower-base.glb"
+  },
+  "KCastle_tower_hexagon_base": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    270,
+    234,
+    393
+   ],
+   "tris": 68,
+   "file": "tower-hexagon-base.glb"
+  },
+  "KCastle_tower_hexagon_mid": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    286,
+    247,
+    138
+   ],
+   "tris": 404,
+   "file": "tower-hexagon-mid.glb"
+  },
+  "KCastle_tower_hexagon_roof_secondary": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    293,
+    254,
+    226
+   ],
+   "tris": 114,
+   "file": "tower-hexagon-roof-secondary.glb"
+  },
+  "KCastle_tower_hexagon_roof": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    293,
+    254,
+    249
+   ],
+   "tris": 68,
+   "file": "tower-hexagon-roof.glb"
+  },
+  "KCastle_tower_hexagon_top_wood": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    259,
+    224,
+    138
+   ],
+   "tris": 164,
+   "file": "tower-hexagon-top-wood.glb"
+  },
+  "KCastle_tower_hexagon_top": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    259,
+    224,
+    39
+   ],
+   "tris": 168,
+   "file": "tower-hexagon-top.glb"
+  },
+  "KCastle_tower_slant_roof": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    351,
+    341,
+    642
+   ],
+   "tris": 534,
+   "file": "tower-slant-roof.glb"
+  },
+  "KCastle_tower_square_arch": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    279,
+    279,
+    303
+   ],
+   "tris": 308,
+   "file": "tower-square-arch.glb"
+  },
+  "KCastle_tower_square_base_border": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    300,
+    300,
+    135
+   ],
+   "tris": 20,
+   "file": "tower-square-base-border.glb"
+  },
+  "KCastle_tower_square_base_color": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    300,
+    300,
+    303
+   ],
+   "tris": 68,
+   "file": "tower-square-base-color.glb"
+  },
+  "KCastle_tower_square_base": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    300,
+    300,
+    303
+   ],
+   "tris": 28,
+   "file": "tower-square-base.glb"
+  },
+  "KCastle_tower_square_mid_color": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    279,
+    279,
+    60
+   ],
+   "tris": 52,
+   "file": "tower-square-mid-color.glb"
+  },
+  "KCastle_tower_square_mid_door": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    279,
+    279,
+    303
+   ],
+   "tris": 344,
+   "file": "tower-square-mid-door.glb"
+  },
+  "KCastle_tower_square_mid_open_simple": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    279,
+    279,
+    263
+   ],
+   "tris": 176,
+   "file": "tower-square-mid-open-simple.glb"
+  },
+  "KCastle_tower_square_mid_open": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    279,
+    279,
+    303
+   ],
+   "tris": 240,
+   "file": "tower-square-mid-open.glb"
+  },
+  "KCastle_tower_square_mid_windows": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    279,
+    279,
+    303
+   ],
+   "tris": 364,
+   "file": "tower-square-mid-windows.glb"
+  },
+  "KCastle_tower_square_mid": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    279,
+    279,
+    303
+   ],
+   "tris": 76,
+   "file": "tower-square-mid.glb"
+  },
+  "KCastle_tower_square_roof": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    300,
+    300,
+    603
+   ],
+   "tris": 144,
+   "file": "tower-square-roof.glb"
+  },
+  "KCastle_tower_square_top_color": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    300,
+    300,
+    114
+   ],
+   "tris": 156,
+   "file": "tower-square-top-color.glb"
+  },
+  "KCastle_tower_square_top_roof_high_windows": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    300,
+    300,
+    324
+   ],
+   "tris": 258,
+   "file": "tower-square-top-roof-high-windows.glb"
+  },
+  "KCastle_tower_square_top_roof_high": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    300,
+    300,
+    405
+   ],
+   "tris": 116,
+   "file": "tower-square-top-roof-high.glb"
+  },
+  "KCastle_tower_square_top_roof_rounded": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    300,
+    300,
+    285
+   ],
+   "tris": 116,
+   "file": "tower-square-top-roof-rounded.glb"
+  },
+  "KCastle_tower_square_top_roof": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    300,
+    300,
+    300
+   ],
+   "tris": 116,
+   "file": "tower-square-top-roof.glb"
+  },
+  "KCastle_tower_square_top": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    300,
+    300,
+    90
+   ],
+   "tris": 148,
+   "file": "tower-square-top.glb"
+  },
+  "KCastle_tower_square": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    300,
+    300,
+    393
+   ],
+   "tris": 176,
+   "file": "tower-square.glb"
+  },
+  "KCastle_tower_top": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    300,
+    300,
+    39
+   ],
+   "tris": 320,
+   "file": "tower-top.glb"
+  },
+  "KCastle_tree_large": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    267,
+    267,
+    555
+   ],
+   "tris": 229,
+   "file": "tree-large.glb"
+  },
+  "KCastle_tree_log": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    75,
+    300,
+    83
+   ],
+   "tris": 64,
+   "file": "tree-log.glb"
+  },
+  "KCastle_tree_small": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    221,
+    216,
+    405
+   ],
+   "tris": 164,
+   "file": "tree-small.glb"
+  },
+  "KCastle_tree_trunk": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    119,
+    103,
+    113
+   ],
+   "tris": 35,
+   "file": "tree-trunk.glb"
+  },
+  "KCastle_wall_corner_half_tower": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    450,
+    450,
+    432
+   ],
+   "tris": 632,
+   "file": "wall-corner-half-tower.glb"
+  },
+  "KCastle_wall_corner_half": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    300,
+    300,
+    393
+   ],
+   "tris": 144,
+   "file": "wall-corner-half.glb"
+  },
+  "KCastle_wall_corner_slant": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    300,
+    300,
+    393
+   ],
+   "tris": 140,
+   "file": "wall-corner-slant.glb"
+  },
+  "KCastle_wall_corner": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    300,
+    300,
+    393
+   ],
+   "tris": 168,
+   "file": "wall-corner.glb"
+  },
+  "KCastle_wall_doorway": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    150,
+    300,
+    393
+   ],
+   "tris": 500,
+   "file": "wall-doorway.glb"
+  },
+  "KCastle_wall_half_modular": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    181,
+    300,
+    393
+   ],
+   "tris": 80,
+   "file": "wall-half-modular.glb"
+  },
+  "KCastle_wall_half": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    300,
+    300,
+    393
+   ],
+   "tris": 126,
+   "file": "wall-half.glb"
+  },
+  "KCastle_wall_narrow_corner": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    150,
+    150,
+    393
+   ],
+   "tris": 96,
+   "file": "wall-narrow-corner.glb"
+  },
+  "KCastle_wall_narrow_gate": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    189,
+    300,
+    393
+   ],
+   "tris": 192,
+   "file": "wall-narrow-gate.glb"
+  },
+  "KCastle_wall_narrow_stairs_rail": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    298,
+    310,
+    434
+   ],
+   "tris": 430,
+   "file": "wall-narrow-stairs-rail.glb"
+  },
+  "KCastle_wall_narrow_stairs": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    289,
+    300,
+    393
+   ],
+   "tris": 262,
+   "file": "wall-narrow-stairs.glb"
+  },
+  "KCastle_wall_narrow_wood_fence": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    315,
+    300,
+    435
+   ],
+   "tris": 326,
+   "file": "wall-narrow-wood-fence.glb"
+  },
+  "KCastle_wall_narrow_wood": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    300,
+    300,
+    393
+   ],
+   "tris": 266,
+   "file": "wall-narrow-wood.glb"
+  },
+  "KCastle_wall_narrow": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    150,
+    300,
+    393
+   ],
+   "tris": 126,
+   "file": "wall-narrow.glb"
+  },
+  "KCastle_wall_pillar": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    300,
+    300,
+    393
+   ],
+   "tris": 186,
+   "file": "wall-pillar.glb"
+  },
+  "KCastle_wall_stud": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    81,
+    50,
+    333
+   ],
+   "tris": 16,
+   "file": "wall-stud.glb"
+  },
+  "KCastle_wall_to_narrow": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    300,
+    300,
+    393
+   ],
+   "tris": 214,
+   "file": "wall-to-narrow.glb"
+  },
+  "KCastle_wall": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    300,
+    300,
+    393
+   ],
+   "tris": 178,
+   "file": "wall.glb"
+  }
+ },
+ "skipped": []
+}

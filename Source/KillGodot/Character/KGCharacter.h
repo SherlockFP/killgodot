@@ -12,6 +12,7 @@ class UKGHealthComponent;
 class UKGMouthComponent;
 class UKGSnapshotComponent;
 class UKGViewmodelComponent;
+class UKGAppearanceComponent;
 class UKGEmoteComponent;
 class UKGChoreComponent;
 class UKGBodyAnimInstance;
@@ -49,6 +50,11 @@ public:
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 	/** Emotes pull the owner's view out to a third-person camera (UKGEmoteComponent::ApplyCamera). */
 	virtual void CalcCamera(float DeltaTime, struct FMinimalViewInfo& OutResult) override;
+	/** SPRINT-026: landing feel (viewmodel dip + sound) and stamina/footstep bookkeeping. */
+	virtual void Landed(const FHitResult& Hit) override;
+	/** SPRINT-026: a grounded jump actually happened (engine calls this once per successful DoJump on both the
+	 *  predicting client and the server) - charges the base jump stamina cost and kicks the viewmodel. */
+	virtual void OnJumped_Implementation() override;
 
 	/** Player actions (input, bots and automation all call these). */
 	UFUNCTION(BlueprintCallable, Category = "KillGodot|Actions") void Attack();
@@ -72,6 +78,9 @@ public:
 
 	UFUNCTION(BlueprintPure, Category = "KillGodot|Character")
 	UKGViewmodelComponent* GetViewmodel() const { return Viewmodel; }
+	/** SPRINT-027a: per-player villager look, owner-only role cuff, public revealed-role sash. */
+	UKGAppearanceComponent* GetAppearance() const { return Appearance; }
+	USkeletalMeshComponent* GetArmsMesh() const { return ArmsMesh; }
 
 	UFUNCTION(BlueprintPure, Category = "KillGodot|Character")
 	UKGHealthComponent* GetHealth() const { return Health; }
@@ -96,6 +105,14 @@ public:
 
 	UFUNCTION(BlueprintPure, Category = "KillGodot|Character")
 	float GetStaminaAlpha() const { return Stamina.GetAlpha(); }
+
+	/** SPRINT-026 dev panel / HUD readout: current horizontal speed in cm/s (kg.Debug.Speed). */
+	UFUNCTION(BlueprintPure, Category = "KillGodot|Character")
+	float GetHorizontalSpeed() const { return GetVelocity().Size2D(); }
+
+	/** SPRINT-026 dev panel / HUD readout: consecutive landing-buffer chain hops since the streak last reset. */
+	UFUNCTION(BlueprintPure, Category = "KillGodot|Character")
+	int32 GetHopChainStreak() const { return ChainHopStreak; }
 
 	/**
 	 * TF2-spy style backstab test, pure geometry (unit-tested):
@@ -190,6 +207,10 @@ protected:
 	void UpdateBodyAnimation(float DeltaSeconds);
 	void PlayBodyAnim(UAnimSequence* Anim, bool bLoop);
 
+	/** SPRINT-026 (-KGMoveSmoke, dev builds only): scripted bad-strafe-then-good-strafe run, logging KG_MOVE_CSV
+	 *  speed samples and a KG_MOVE_DONE summary with the CMC's correction count (Tools/Unreal/kg_move_smoke.ps1). */
+	void TickMoveSmoke(float DeltaSeconds);
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
 	TObjectPtr<UCameraComponent> FirstPersonCamera;
 
@@ -206,6 +227,9 @@ protected:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
 	TObjectPtr<UKGViewmodelComponent> Viewmodel;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
+	TObjectPtr<UKGAppearanceComponent> Appearance;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
 	TObjectPtr<UKGMouthComponent> Mouth;
@@ -252,6 +276,23 @@ protected:
 
 	UPROPERTY(EditAnywhere, SaveGame, Category = "Movement")
 	FKGStamina Stamina;
+
+	/** SPRINT-026: stamina cost of a plain grounded jump. Spent if available; a jump is never blocked for lack of
+	 *  stamina (only the skill-chain re-hop is - see ChainHopBaseCost / FKGStamina::bExhausted). */
+	UPROPERTY(EditAnywhere, Category = "Movement")
+	float JumpStaminaCost = 6.0f;
+
+	/** SPRINT-026: stamina cost of a landing-buffer chain hop, before the streak surcharge. */
+	UPROPERTY(EditAnywhere, Category = "Movement")
+	float ChainHopBaseCost = 8.0f;
+
+	/** SPRINT-026: extra stamina per consecutive chained hop (streak 1, 2, 3...), so a long bhop run gets
+	 *  progressively more expensive. Capped at ChainHopStreakCostCap consecutive steps. */
+	UPROPERTY(EditAnywhere, Category = "Movement")
+	float ChainHopStepCost = 3.0f;
+
+	UPROPERTY(EditAnywhere, Category = "Movement")
+	int32 ChainHopStreakCostCap = 5;
 
 	UPROPERTY(EditAnywhere, Category = "Combat")
 	float MeleeDamage = 20.0f;
@@ -328,6 +369,11 @@ private:
 	bool bWantsSprint = false;
 	float AttackCooldownRemaining = 0.0f;
 	float ServerAttackCooldown = 0.0f;
+
+	/** SPRINT-026: bunny-hop bookkeeping (both mirror UKGCharacterMovement::HopCounter, polled once per Tick - see
+	 *  the .h comment on HopCounter for why this stays out of the saved-move stream). */
+	int32 LastSeenHopCounter = 0;
+	int32 ChainHopStreak = 0;
 
 	UPROPERTY()
 	TObjectPtr<UPrimitiveComponent> HeldComponent;

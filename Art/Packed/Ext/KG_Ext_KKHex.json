@@ -1,0 +1,2438 @@
+{
+ "tag": "KKHex",
+ "source": "D:/Kill Godot/Art/Source/KayKit_MedievalHexagon/KayKit_Medieval_Hexagon_Pack_1.0_FREE/KayKit_Medieval_Hexagon_Pack_1.0_FREE/Assets/gltf",
+ "props": {
+  "KKHex_building_archeryrange_blue": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    501,
+    465,
+    538
+   ],
+   "tris": 3819,
+   "file": "buildings/blue/building_archeryrange_blue.gltf"
+  },
+  "KKHex_building_barracks_blue": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    432,
+    470,
+    492
+   ],
+   "tris": 4007,
+   "file": "buildings/blue/building_barracks_blue.gltf"
+  },
+  "KKHex_building_blacksmith_blue": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    386,
+    374,
+    296
+   ],
+   "tris": 2410,
+   "file": "buildings/blue/building_blacksmith_blue.gltf"
+  },
+  "KKHex_building_castle_blue": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    593,
+    677,
+    1194
+   ],
+   "tris": 5659,
+   "file": "buildings/blue/building_castle_blue.gltf"
+  },
+  "KKHex_building_church_blue": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    309,
+    347,
+    494
+   ],
+   "tris": 1601,
+   "file": "buildings/blue/building_church_blue.gltf"
+  },
+  "KKHex_building_home_A_blue": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    238,
+    256,
+    279
+   ],
+   "tris": 1011,
+   "file": "buildings/blue/building_home_A_blue.gltf"
+  },
+  "KKHex_building_home_B_blue": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    262,
+    330,
+    384
+   ],
+   "tris": 1393,
+   "file": "buildings/blue/building_home_B_blue.gltf"
+  },
+  "KKHex_building_lumbermill_blue": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    410,
+    357,
+    512
+   ],
+   "tris": 3170,
+   "file": "buildings/blue/building_lumbermill_blue.gltf"
+  },
+  "KKHex_building_market_blue": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    540,
+    395,
+    294
+   ],
+   "tris": 3125,
+   "file": "buildings/blue/building_market_blue.gltf"
+  },
+  "KKHex_building_mine_blue": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    482,
+    576,
+    341
+   ],
+   "tris": 1126,
+   "file": "buildings/blue/building_mine_blue.gltf"
+  },
+  "KKHex_building_tavern_blue": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    352,
+    400,
+    419
+   ],
+   "tris": 2992,
+   "file": "buildings/blue/building_tavern_blue.gltf"
+  },
+  "KKHex_building_tower_A_blue": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    298,
+    346,
+    658
+   ],
+   "tris": 2138,
+   "file": "buildings/blue/building_tower_A_blue.gltf"
+  },
+  "KKHex_building_tower_B_blue": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    359,
+    415,
+    746
+   ],
+   "tris": 2418,
+   "file": "buildings/blue/building_tower_B_blue.gltf"
+  },
+  "KKHex_building_tower_base_blue": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    279,
+    333,
+    450
+   ],
+   "tris": 1538,
+   "file": "buildings/blue/building_tower_base_blue.gltf"
+  },
+  "KKHex_building_tower_catapult_blue": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    279,
+    391,
+    589
+   ],
+   "tris": 2864,
+   "file": "buildings/blue/building_tower_catapult_blue.gltf"
+  },
+  "KKHex_building_watermill_blue": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    315,
+    371,
+    470
+   ],
+   "tris": 1921,
+   "file": "buildings/blue/building_watermill_blue.gltf"
+  },
+  "KKHex_building_well_blue": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    196,
+    225,
+    248
+   ],
+   "tris": 726,
+   "file": "buildings/blue/building_well_blue.gltf"
+  },
+  "KKHex_building_windmill_blue": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    338,
+    245,
+    437
+   ],
+   "tris": 2653,
+   "file": "buildings/blue/building_windmill_blue.gltf"
+  },
+  "KKHex_building_archeryrange_green": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    501,
+    465,
+    538
+   ],
+   "tris": 3819,
+   "file": "buildings/green/building_archeryrange_green.gltf"
+  },
+  "KKHex_building_barracks_green": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    432,
+    470,
+    492
+   ],
+   "tris": 4007,
+   "file": "buildings/green/building_barracks_green.gltf"
+  },
+  "KKHex_building_blacksmith_green": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    386,
+    374,
+    296
+   ],
+   "tris": 2410,
+   "file": "buildings/green/building_blacksmith_green.gltf"
+  },
+  "KKHex_building_castle_green": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    593,
+    677,
+    1194
+   ],
+   "tris": 5659,
+   "file": "buildings/green/building_castle_green.gltf"
+  },
+  "KKHex_building_church_green": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    309,
+    347,
+    494
+   ],
+   "tris": 1601,
+   "file": "buildings/green/building_church_green.gltf"
+  },
+  "KKHex_building_home_A_green": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    238,
+    256,
+    279
+   ],
+   "tris": 1011,
+   "file": "buildings/green/building_home_A_green.gltf"
+  },
+  "KKHex_building_home_B_green": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    262,
+    330,
+    384
+   ],
+   "tris": 1393,
+   "file": "buildings/green/building_home_B_green.gltf"
+  },
+  "KKHex_building_lumbermill_green": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    410,
+    357,
+    512
+   ],
+   "tris": 3170,
+   "file": "buildings/green/building_lumbermill_green.gltf"
+  },
+  "KKHex_building_market_green": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    540,
+    395,
+    294
+   ],
+   "tris": 3125,
+   "file": "buildings/green/building_market_green.gltf"
+  },
+  "KKHex_building_mine_green": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    482,
+    576,
+    341
+   ],
+   "tris": 1126,
+   "file": "buildings/green/building_mine_green.gltf"
+  },
+  "KKHex_building_tavern_green": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    352,
+    400,
+    419
+   ],
+   "tris": 2992,
+   "file": "buildings/green/building_tavern_green.gltf"
+  },
+  "KKHex_building_tower_A_green": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    298,
+    346,
+    658
+   ],
+   "tris": 2138,
+   "file": "buildings/green/building_tower_A_green.gltf"
+  },
+  "KKHex_building_tower_B_green": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    359,
+    415,
+    746
+   ],
+   "tris": 2418,
+   "file": "buildings/green/building_tower_B_green.gltf"
+  },
+  "KKHex_building_tower_base_green": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    279,
+    333,
+    450
+   ],
+   "tris": 1538,
+   "file": "buildings/green/building_tower_base_green.gltf"
+  },
+  "KKHex_building_tower_catapult_green": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    279,
+    391,
+    589
+   ],
+   "tris": 2864,
+   "file": "buildings/green/building_tower_catapult_green.gltf"
+  },
+  "KKHex_building_watermill_green": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    315,
+    371,
+    470
+   ],
+   "tris": 1921,
+   "file": "buildings/green/building_watermill_green.gltf"
+  },
+  "KKHex_building_well_green": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    196,
+    225,
+    248
+   ],
+   "tris": 726,
+   "file": "buildings/green/building_well_green.gltf"
+  },
+  "KKHex_building_windmill_green": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    338,
+    245,
+    437
+   ],
+   "tris": 2653,
+   "file": "buildings/green/building_windmill_green.gltf"
+  },
+  "KKHex_building_bridge_A": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    400,
+    577,
+    375
+   ],
+   "tris": 604,
+   "file": "buildings/neutral/building_bridge_A.gltf"
+  },
+  "KKHex_building_bridge_B": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    400,
+    577,
+    375
+   ],
+   "tris": 604,
+   "file": "buildings/neutral/building_bridge_B.gltf"
+  },
+  "KKHex_building_destroyed": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    462,
+    392,
+    298
+   ],
+   "tris": 882,
+   "file": "buildings/neutral/building_destroyed.gltf"
+  },
+  "KKHex_building_dirt": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    538,
+    602,
+    26
+   ],
+   "tris": 160,
+   "file": "buildings/neutral/building_dirt.gltf"
+  },
+  "KKHex_building_grain": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    562,
+    628,
+    118
+   ],
+   "tris": 230,
+   "file": "buildings/neutral/building_grain.gltf"
+  },
+  "KKHex_building_scaffolding": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    570,
+    633,
+    390
+   ],
+   "tris": 2652,
+   "file": "buildings/neutral/building_scaffolding.gltf"
+  },
+  "KKHex_building_stage_A": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    314,
+    263,
+    86
+   ],
+   "tris": 784,
+   "file": "buildings/neutral/building_stage_A.gltf"
+  },
+  "KKHex_building_stage_B": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    306,
+    339,
+    191
+   ],
+   "tris": 902,
+   "file": "buildings/neutral/building_stage_B.gltf"
+  },
+  "KKHex_building_stage_C": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    348,
+    338,
+    296
+   ],
+   "tris": 1218,
+   "file": "buildings/neutral/building_stage_C.gltf"
+  },
+  "KKHex_fence_stone_straight": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    60,
+    346,
+    81
+   ],
+   "tris": 284,
+   "file": "buildings/neutral/fence_stone_straight.gltf"
+  },
+  "KKHex_fence_stone_straight_gate": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    60,
+    346,
+    89
+   ],
+   "tris": 296,
+   "file": "buildings/neutral/fence_stone_straight_gate.gltf"
+  },
+  "KKHex_fence_wood_straight": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    30,
+    346,
+    165
+   ],
+   "tris": 212,
+   "file": "buildings/neutral/fence_wood_straight.gltf"
+  },
+  "KKHex_fence_wood_straight_gate": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    42,
+    346,
+    195
+   ],
+   "tris": 308,
+   "file": "buildings/neutral/fence_wood_straight_gate.gltf"
+  },
+  "KKHex_projectile_catapult": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    72,
+    76,
+    85
+   ],
+   "tris": 140,
+   "file": "buildings/neutral/projectile_catapult.gltf"
+  },
+  "KKHex_wall_corner_A_gate": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    528,
+    460,
+    425
+   ],
+   "tris": 794,
+   "file": "buildings/neutral/wall_corner_A_gate.gltf"
+  },
+  "KKHex_wall_corner_A_inside": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    554,
+    425,
+    330
+   ],
+   "tris": 364,
+   "file": "buildings/neutral/wall_corner_A_inside.gltf"
+  },
+  "KKHex_wall_corner_A_outside": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    528,
+    430,
+    330
+   ],
+   "tris": 414,
+   "file": "buildings/neutral/wall_corner_A_outside.gltf"
+  },
+  "KKHex_wall_corner_B_inside": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    289,
+    440,
+    330
+   ],
+   "tris": 304,
+   "file": "buildings/neutral/wall_corner_B_inside.gltf"
+  },
+  "KKHex_wall_corner_B_outside": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    289,
+    405,
+    330
+   ],
+   "tris": 384,
+   "file": "buildings/neutral/wall_corner_B_outside.gltf"
+  },
+  "KKHex_wall_straight": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    600,
+    240,
+    330
+   ],
+   "tris": 504,
+   "file": "buildings/neutral/wall_straight.gltf"
+  },
+  "KKHex_wall_straight_gate": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    600,
+    269,
+    424
+   ],
+   "tris": 818,
+   "file": "buildings/neutral/wall_straight_gate.gltf"
+  },
+  "KKHex_building_archeryrange_red": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    501,
+    465,
+    538
+   ],
+   "tris": 3819,
+   "file": "buildings/red/building_archeryrange_red.gltf"
+  },
+  "KKHex_building_barracks_red": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    432,
+    470,
+    492
+   ],
+   "tris": 4007,
+   "file": "buildings/red/building_barracks_red.gltf"
+  },
+  "KKHex_building_blacksmith_red": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    386,
+    374,
+    296
+   ],
+   "tris": 2410,
+   "file": "buildings/red/building_blacksmith_red.gltf"
+  },
+  "KKHex_building_castle_red": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    593,
+    677,
+    1194
+   ],
+   "tris": 5659,
+   "file": "buildings/red/building_castle_red.gltf"
+  },
+  "KKHex_building_church_red": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    309,
+    347,
+    494
+   ],
+   "tris": 1601,
+   "file": "buildings/red/building_church_red.gltf"
+  },
+  "KKHex_building_home_A_red": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    238,
+    256,
+    279
+   ],
+   "tris": 1011,
+   "file": "buildings/red/building_home_A_red.gltf"
+  },
+  "KKHex_building_home_B_red": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    262,
+    330,
+    384
+   ],
+   "tris": 1393,
+   "file": "buildings/red/building_home_B_red.gltf"
+  },
+  "KKHex_building_lumbermill_red": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    410,
+    357,
+    512
+   ],
+   "tris": 3170,
+   "file": "buildings/red/building_lumbermill_red.gltf"
+  },
+  "KKHex_building_market_red": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    540,
+    395,
+    294
+   ],
+   "tris": 3125,
+   "file": "buildings/red/building_market_red.gltf"
+  },
+  "KKHex_building_mine_red": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    482,
+    576,
+    341
+   ],
+   "tris": 1126,
+   "file": "buildings/red/building_mine_red.gltf"
+  },
+  "KKHex_building_tavern_red": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    352,
+    400,
+    419
+   ],
+   "tris": 2992,
+   "file": "buildings/red/building_tavern_red.gltf"
+  },
+  "KKHex_building_tower_A_red": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    298,
+    346,
+    658
+   ],
+   "tris": 2138,
+   "file": "buildings/red/building_tower_A_red.gltf"
+  },
+  "KKHex_building_tower_B_red": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    359,
+    415,
+    746
+   ],
+   "tris": 2418,
+   "file": "buildings/red/building_tower_B_red.gltf"
+  },
+  "KKHex_building_tower_base_red": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    279,
+    333,
+    450
+   ],
+   "tris": 1538,
+   "file": "buildings/red/building_tower_base_red.gltf"
+  },
+  "KKHex_building_tower_catapult_red": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    279,
+    391,
+    589
+   ],
+   "tris": 2864,
+   "file": "buildings/red/building_tower_catapult_red.gltf"
+  },
+  "KKHex_building_watermill_red": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    315,
+    371,
+    470
+   ],
+   "tris": 1921,
+   "file": "buildings/red/building_watermill_red.gltf"
+  },
+  "KKHex_building_well_red": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    196,
+    225,
+    248
+   ],
+   "tris": 726,
+   "file": "buildings/red/building_well_red.gltf"
+  },
+  "KKHex_building_windmill_red": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    338,
+    245,
+    437
+   ],
+   "tris": 2653,
+   "file": "buildings/red/building_windmill_red.gltf"
+  },
+  "KKHex_building_archeryrange_yellow": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    501,
+    465,
+    538
+   ],
+   "tris": 3819,
+   "file": "buildings/yellow/building_archeryrange_yellow.gltf"
+  },
+  "KKHex_building_barracks_yellow": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    432,
+    470,
+    492
+   ],
+   "tris": 4007,
+   "file": "buildings/yellow/building_barracks_yellow.gltf"
+  },
+  "KKHex_building_blacksmith_yellow": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    386,
+    374,
+    296
+   ],
+   "tris": 2410,
+   "file": "buildings/yellow/building_blacksmith_yellow.gltf"
+  },
+  "KKHex_building_castle_yellow": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    593,
+    677,
+    1194
+   ],
+   "tris": 5659,
+   "file": "buildings/yellow/building_castle_yellow.gltf"
+  },
+  "KKHex_building_church_yellow": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    309,
+    347,
+    494
+   ],
+   "tris": 1601,
+   "file": "buildings/yellow/building_church_yellow.gltf"
+  },
+  "KKHex_building_home_A_yellow": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    238,
+    256,
+    279
+   ],
+   "tris": 1011,
+   "file": "buildings/yellow/building_home_A_yellow.gltf"
+  },
+  "KKHex_building_home_B_yellow": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    262,
+    330,
+    384
+   ],
+   "tris": 1393,
+   "file": "buildings/yellow/building_home_B_yellow.gltf"
+  },
+  "KKHex_building_lumbermill_yellow": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    410,
+    357,
+    512
+   ],
+   "tris": 3170,
+   "file": "buildings/yellow/building_lumbermill_yellow.gltf"
+  },
+  "KKHex_building_market_yellow": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    540,
+    395,
+    294
+   ],
+   "tris": 3125,
+   "file": "buildings/yellow/building_market_yellow.gltf"
+  },
+  "KKHex_building_mine_yellow": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    482,
+    576,
+    341
+   ],
+   "tris": 1126,
+   "file": "buildings/yellow/building_mine_yellow.gltf"
+  },
+  "KKHex_building_tavern_yellow": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    352,
+    400,
+    419
+   ],
+   "tris": 2992,
+   "file": "buildings/yellow/building_tavern_yellow.gltf"
+  },
+  "KKHex_building_tower_A_yellow": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    298,
+    346,
+    658
+   ],
+   "tris": 2138,
+   "file": "buildings/yellow/building_tower_A_yellow.gltf"
+  },
+  "KKHex_building_tower_B_yellow": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    359,
+    415,
+    746
+   ],
+   "tris": 2418,
+   "file": "buildings/yellow/building_tower_B_yellow.gltf"
+  },
+  "KKHex_building_tower_base_yellow": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    279,
+    333,
+    450
+   ],
+   "tris": 1538,
+   "file": "buildings/yellow/building_tower_base_yellow.gltf"
+  },
+  "KKHex_building_tower_catapult_yellow": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    279,
+    391,
+    589
+   ],
+   "tris": 2864,
+   "file": "buildings/yellow/building_tower_catapult_yellow.gltf"
+  },
+  "KKHex_building_watermill_yellow": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    315,
+    371,
+    470
+   ],
+   "tris": 1921,
+   "file": "buildings/yellow/building_watermill_yellow.gltf"
+  },
+  "KKHex_building_well_yellow": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    196,
+    225,
+    248
+   ],
+   "tris": 726,
+   "file": "buildings/yellow/building_well_yellow.gltf"
+  },
+  "KKHex_building_windmill_yellow": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    338,
+    245,
+    437
+   ],
+   "tris": 2653,
+   "file": "buildings/yellow/building_windmill_yellow.gltf"
+  },
+  "KKHex_cloud_big": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    1082,
+    673,
+    584
+   ],
+   "tris": 672,
+   "file": "decoration/nature/cloud_big.gltf"
+  },
+  "KKHex_cloud_small": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    701,
+    538,
+    552
+   ],
+   "tris": 366,
+   "file": "decoration/nature/cloud_small.gltf"
+  },
+  "KKHex_hill_single_A": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    333,
+    243,
+    92
+   ],
+   "tris": 60,
+   "file": "decoration/nature/hill_single_A.gltf"
+  },
+  "KKHex_hill_single_B": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    298,
+    408,
+    126
+   ],
+   "tris": 60,
+   "file": "decoration/nature/hill_single_B.gltf"
+  },
+  "KKHex_hill_single_C": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    307,
+    397,
+    177
+   ],
+   "tris": 60,
+   "file": "decoration/nature/hill_single_C.gltf"
+  },
+  "KKHex_hills_A": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    527,
+    521,
+    238
+   ],
+   "tris": 383,
+   "file": "decoration/nature/hills_A.gltf"
+  },
+  "KKHex_hills_A_trees": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    527,
+    521,
+    400
+   ],
+   "tris": 518,
+   "file": "decoration/nature/hills_A_trees.gltf"
+  },
+  "KKHex_hills_B": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    442,
+    487,
+    110
+   ],
+   "tris": 226,
+   "file": "decoration/nature/hills_B.gltf"
+  },
+  "KKHex_hills_B_trees": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    442,
+    487,
+    411
+   ],
+   "tris": 406,
+   "file": "decoration/nature/hills_B_trees.gltf"
+  },
+  "KKHex_hills_C": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    458,
+    442,
+    166
+   ],
+   "tris": 238,
+   "file": "decoration/nature/hills_C.gltf"
+  },
+  "KKHex_hills_C_trees": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    509,
+    570,
+    389
+   ],
+   "tris": 616,
+   "file": "decoration/nature/hills_C_trees.gltf"
+  },
+  "KKHex_mountain_A": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    540,
+    563,
+    428
+   ],
+   "tris": 120,
+   "file": "decoration/nature/mountain_A.gltf"
+  },
+  "KKHex_mountain_A_grass": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    540,
+    563,
+    450
+   ],
+   "tris": 288,
+   "file": "decoration/nature/mountain_A_grass.gltf"
+  },
+  "KKHex_mountain_A_grass_trees": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    557,
+    563,
+    653
+   ],
+   "tris": 468,
+   "file": "decoration/nature/mountain_A_grass_trees.gltf"
+  },
+  "KKHex_mountain_B": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    540,
+    563,
+    531
+   ],
+   "tris": 120,
+   "file": "decoration/nature/mountain_B.gltf"
+  },
+  "KKHex_mountain_B_grass": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    540,
+    563,
+    551
+   ],
+   "tris": 288,
+   "file": "decoration/nature/mountain_B_grass.gltf"
+  },
+  "KKHex_mountain_B_grass_trees": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    540,
+    563,
+    751
+   ],
+   "tris": 558,
+   "file": "decoration/nature/mountain_B_grass_trees.gltf"
+  },
+  "KKHex_mountain_C": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    528,
+    607,
+    452
+   ],
+   "tris": 200,
+   "file": "decoration/nature/mountain_C.gltf"
+  },
+  "KKHex_mountain_C_grass": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    528,
+    607,
+    466
+   ],
+   "tris": 480,
+   "file": "decoration/nature/mountain_C_grass.gltf"
+  },
+  "KKHex_mountain_C_grass_trees": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    528,
+    607,
+    634
+   ],
+   "tris": 750,
+   "file": "decoration/nature/mountain_C_grass_trees.gltf"
+  },
+  "KKHex_rock_single_A": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    89,
+    85,
+    21
+   ],
+   "tris": 18,
+   "file": "decoration/nature/rock_single_A.gltf"
+  },
+  "KKHex_rock_single_B": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    86,
+    75,
+    40
+   ],
+   "tris": 26,
+   "file": "decoration/nature/rock_single_B.gltf"
+  },
+  "KKHex_rock_single_C": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    103,
+    103,
+    58
+   ],
+   "tris": 40,
+   "file": "decoration/nature/rock_single_C.gltf"
+  },
+  "KKHex_rock_single_D": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    86,
+    75,
+    49
+   ],
+   "tris": 22,
+   "file": "decoration/nature/rock_single_D.gltf"
+  },
+  "KKHex_rock_single_E": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    146,
+    104,
+    58
+   ],
+   "tris": 71,
+   "file": "decoration/nature/rock_single_E.gltf"
+  },
+  "KKHex_tree_single_A": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    172,
+    164,
+    359
+   ],
+   "tris": 50,
+   "file": "decoration/nature/tree_single_A.gltf"
+  },
+  "KKHex_tree_single_A_cut": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    51,
+    49,
+    99
+   ],
+   "tris": 16,
+   "file": "decoration/nature/tree_single_A_cut.gltf"
+  },
+  "KKHex_tree_single_B": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    205,
+    216,
+    364
+   ],
+   "tris": 220,
+   "file": "decoration/nature/tree_single_B.gltf"
+  },
+  "KKHex_tree_single_B_cut": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    54,
+    57,
+    71
+   ],
+   "tris": 38,
+   "file": "decoration/nature/tree_single_B_cut.gltf"
+  },
+  "KKHex_trees_A_cut": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    499,
+    505,
+    63
+   ],
+   "tris": 288,
+   "file": "decoration/nature/trees_A_cut.gltf"
+  },
+  "KKHex_trees_A_large": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    584,
+    590,
+    278
+   ],
+   "tris": 864,
+   "file": "decoration/nature/trees_A_large.gltf"
+  },
+  "KKHex_trees_A_medium": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    525,
+    544,
+    389
+   ],
+   "tris": 480,
+   "file": "decoration/nature/trees_A_medium.gltf"
+  },
+  "KKHex_trees_A_small": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    428,
+    431,
+    333
+   ],
+   "tris": 432,
+   "file": "decoration/nature/trees_A_small.gltf"
+  },
+  "KKHex_trees_B_cut": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    421,
+    438,
+    52
+   ],
+   "tris": 266,
+   "file": "decoration/nature/trees_B_cut.gltf"
+  },
+  "KKHex_trees_B_large": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    555,
+    580,
+    352
+   ],
+   "tris": 1540,
+   "file": "decoration/nature/trees_B_large.gltf"
+  },
+  "KKHex_trees_B_medium": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    559,
+    550,
+    352
+   ],
+   "tris": 1100,
+   "file": "decoration/nature/trees_B_medium.gltf"
+  },
+  "KKHex_trees_B_small": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    399,
+    342,
+    277
+   ],
+   "tris": 660,
+   "file": "decoration/nature/trees_B_small.gltf"
+  },
+  "KKHex_waterlily_A": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    44,
+    43,
+    5
+   ],
+   "tris": 68,
+   "file": "decoration/nature/waterlily_A.gltf"
+  },
+  "KKHex_waterlily_B": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    63,
+    63,
+    5
+   ],
+   "tris": 68,
+   "file": "decoration/nature/waterlily_B.gltf"
+  },
+  "KKHex_waterplant_A": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    59,
+    65,
+    40
+   ],
+   "tris": 66,
+   "file": "decoration/nature/waterplant_A.gltf"
+  },
+  "KKHex_waterplant_B": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    47,
+    31,
+    76
+   ],
+   "tris": 162,
+   "file": "decoration/nature/waterplant_B.gltf"
+  },
+  "KKHex_waterplant_C": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    59,
+    65,
+    74
+   ],
+   "tris": 338,
+   "file": "decoration/nature/waterplant_C.gltf"
+  },
+  "KKHex_barrel": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    60,
+    60,
+    64
+   ],
+   "tris": 240,
+   "file": "decoration/props/barrel.gltf"
+  },
+  "KKHex_bucket_arrows": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    42,
+    43,
+    69
+   ],
+   "tris": 260,
+   "file": "decoration/props/bucket_arrows.gltf"
+  },
+  "KKHex_bucket_empty": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    42,
+    42,
+    38
+   ],
+   "tris": 128,
+   "file": "decoration/props/bucket_empty.gltf"
+  },
+  "KKHex_bucket_water": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    42,
+    42,
+    32
+   ],
+   "tris": 128,
+   "file": "decoration/props/bucket_water.gltf"
+  },
+  "KKHex_crate_A_big": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    63,
+    63,
+    63
+   ],
+   "tris": 132,
+   "file": "decoration/props/crate_A_big.gltf"
+  },
+  "KKHex_crate_A_small": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    42,
+    42,
+    42
+   ],
+   "tris": 132,
+   "file": "decoration/props/crate_A_small.gltf"
+  },
+  "KKHex_crate_B_big": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    63,
+    63,
+    63
+   ],
+   "tris": 132,
+   "file": "decoration/props/crate_B_big.gltf"
+  },
+  "KKHex_crate_B_small": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    42,
+    42,
+    42
+   ],
+   "tris": 132,
+   "file": "decoration/props/crate_B_small.gltf"
+  },
+  "KKHex_crate_long_A": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    120,
+    60,
+    45
+   ],
+   "tris": 522,
+   "file": "decoration/props/crate_long_A.gltf"
+  },
+  "KKHex_crate_long_B": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    120,
+    60,
+    45
+   ],
+   "tris": 522,
+   "file": "decoration/props/crate_long_B.gltf"
+  },
+  "KKHex_crate_long_C": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    120,
+    60,
+    60
+   ],
+   "tris": 266,
+   "file": "decoration/props/crate_long_C.gltf"
+  },
+  "KKHex_crate_long_empty": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    120,
+    60,
+    45
+   ],
+   "tris": 42,
+   "file": "decoration/props/crate_long_empty.gltf"
+  },
+  "KKHex_crate_open": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    99,
+    60,
+    62
+   ],
+   "tris": 260,
+   "file": "decoration/props/crate_open.gltf"
+  },
+  "KKHex_flag_blue": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    17,
+    79,
+    83
+   ],
+   "tris": 48,
+   "file": "decoration/props/flag_blue.gltf"
+  },
+  "KKHex_flag_green": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    17,
+    79,
+    83
+   ],
+   "tris": 48,
+   "file": "decoration/props/flag_green.gltf"
+  },
+  "KKHex_flag_red": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    17,
+    79,
+    83
+   ],
+   "tris": 48,
+   "file": "decoration/props/flag_red.gltf"
+  },
+  "KKHex_flag_yellow": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    17,
+    79,
+    83
+   ],
+   "tris": 48,
+   "file": "decoration/props/flag_yellow.gltf"
+  },
+  "KKHex_ladder": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    76,
+    15,
+    231
+   ],
+   "tris": 84,
+   "file": "decoration/props/ladder.gltf"
+  },
+  "KKHex_pallet": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    90,
+    90,
+    24
+   ],
+   "tris": 72,
+   "file": "decoration/props/pallet.gltf"
+  },
+  "KKHex_resource_lumber": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    206,
+    99,
+    63
+   ],
+   "tris": 220,
+   "file": "decoration/props/resource_lumber.gltf"
+  },
+  "KKHex_resource_stone": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    126,
+    107,
+    84
+   ],
+   "tris": 220,
+   "file": "decoration/props/resource_stone.gltf"
+  },
+  "KKHex_sack": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    32,
+    48,
+    19
+   ],
+   "tris": 92,
+   "file": "decoration/props/sack.gltf"
+  },
+  "KKHex_target": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    72,
+    43,
+    91
+   ],
+   "tris": 156,
+   "file": "decoration/props/target.gltf"
+  },
+  "KKHex_tent": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    155,
+    155,
+    155
+   ],
+   "tris": 86,
+   "file": "decoration/props/tent.gltf"
+  },
+  "KKHex_weaponrack": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    60,
+    39,
+    72
+   ],
+   "tris": 42,
+   "file": "decoration/props/weaponrack.gltf"
+  },
+  "KKHex_wheelbarrow": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    71,
+    152,
+    57
+   ],
+   "tris": 396,
+   "file": "decoration/props/wheelbarrow.gltf"
+  },
+  "KKHex_hex_grass": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    600,
+    693,
+    300
+   ],
+   "tris": 36,
+   "file": "tiles/base/hex_grass.gltf"
+  },
+  "KKHex_hex_grass_bottom": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    600,
+    693,
+    300
+   ],
+   "tris": 20,
+   "file": "tiles/base/hex_grass_bottom.gltf"
+  },
+  "KKHex_hex_grass_sloped_high": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    600,
+    693,
+    600
+   ],
+   "tris": 34,
+   "file": "tiles/base/hex_grass_sloped_high.gltf"
+  },
+  "KKHex_hex_grass_sloped_low": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    600,
+    693,
+    450
+   ],
+   "tris": 34,
+   "file": "tiles/base/hex_grass_sloped_low.gltf"
+  },
+  "KKHex_hex_water": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    600,
+    693,
+    240
+   ],
+   "tris": 24,
+   "file": "tiles/base/hex_water.gltf"
+  },
+  "KKHex_hex_coast_A": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    600,
+    693,
+    300
+   ],
+   "tris": 100,
+   "file": "tiles/coast/hex_coast_A.gltf"
+  },
+  "KKHex_hex_coast_B": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    600,
+    693,
+    300
+   ],
+   "tris": 98,
+   "file": "tiles/coast/hex_coast_B.gltf"
+  },
+  "KKHex_hex_coast_C": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    600,
+    693,
+    300
+   ],
+   "tris": 106,
+   "file": "tiles/coast/hex_coast_C.gltf"
+  },
+  "KKHex_hex_coast_D": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    600,
+    693,
+    300
+   ],
+   "tris": 80,
+   "file": "tiles/coast/hex_coast_D.gltf"
+  },
+  "KKHex_hex_coast_E": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    600,
+    693,
+    300
+   ],
+   "tris": 72,
+   "file": "tiles/coast/hex_coast_E.gltf"
+  },
+  "KKHex_hex_coast_A_waterless": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    600,
+    693,
+    300
+   ],
+   "tris": 102,
+   "file": "tiles/coast/waterless/hex_coast_A_waterless.gltf"
+  },
+  "KKHex_hex_coast_B_waterless": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    600,
+    520,
+    300
+   ],
+   "tris": 104,
+   "file": "tiles/coast/waterless/hex_coast_B_waterless.gltf"
+  },
+  "KKHex_hex_coast_C_waterless": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    600,
+    520,
+    300
+   ],
+   "tris": 104,
+   "file": "tiles/coast/waterless/hex_coast_C_waterless.gltf"
+  },
+  "KKHex_hex_coast_D_waterless": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    300,
+    520,
+    300
+   ],
+   "tris": 78,
+   "file": "tiles/coast/waterless/hex_coast_D_waterless.gltf"
+  },
+  "KKHex_hex_coast_E_waterless": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    600,
+    693,
+    300
+   ],
+   "tris": 72,
+   "file": "tiles/coast/waterless/hex_coast_E_waterless.gltf"
+  },
+  "KKHex_hex_river_A": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    600,
+    693,
+    300
+   ],
+   "tris": 82,
+   "file": "tiles/rivers/hex_river_A.gltf"
+  },
+  "KKHex_hex_river_A_curvy": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    600,
+    693,
+    300
+   ],
+   "tris": 210,
+   "file": "tiles/rivers/hex_river_A_curvy.gltf"
+  },
+  "KKHex_hex_river_B": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    600,
+    693,
+    300
+   ],
+   "tris": 186,
+   "file": "tiles/rivers/hex_river_B.gltf"
+  },
+  "KKHex_hex_river_C": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    600,
+    693,
+    300
+   ],
+   "tris": 192,
+   "file": "tiles/rivers/hex_river_C.gltf"
+  },
+  "KKHex_hex_river_D": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    600,
+    693,
+    300
+   ],
+   "tris": 226,
+   "file": "tiles/rivers/hex_river_D.gltf"
+  },
+  "KKHex_hex_river_E": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    600,
+    693,
+    300
+   ],
+   "tris": 188,
+   "file": "tiles/rivers/hex_river_E.gltf"
+  },
+  "KKHex_hex_river_F": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    600,
+    693,
+    300
+   ],
+   "tris": 188,
+   "file": "tiles/rivers/hex_river_F.gltf"
+  },
+  "KKHex_hex_river_G": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    600,
+    693,
+    300
+   ],
+   "tris": 242,
+   "file": "tiles/rivers/hex_river_G.gltf"
+  },
+  "KKHex_hex_river_H": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    600,
+    693,
+    300
+   ],
+   "tris": 274,
+   "file": "tiles/rivers/hex_river_H.gltf"
+  },
+  "KKHex_hex_river_I": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    600,
+    693,
+    300
+   ],
+   "tris": 274,
+   "file": "tiles/rivers/hex_river_I.gltf"
+  },
+  "KKHex_hex_river_J": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    600,
+    693,
+    300
+   ],
+   "tris": 234,
+   "file": "tiles/rivers/hex_river_J.gltf"
+  },
+  "KKHex_hex_river_K": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    600,
+    693,
+    300
+   ],
+   "tris": 322,
+   "file": "tiles/rivers/hex_river_K.gltf"
+  },
+  "KKHex_hex_river_L": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    600,
+    693,
+    300
+   ],
+   "tris": 384,
+   "file": "tiles/rivers/hex_river_L.gltf"
+  },
+  "KKHex_hex_river_crossing_A": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    600,
+    693,
+    300
+   ],
+   "tris": 134,
+   "file": "tiles/rivers/hex_river_crossing_A.gltf"
+  },
+  "KKHex_hex_river_crossing_B": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    600,
+    693,
+    300
+   ],
+   "tris": 134,
+   "file": "tiles/rivers/hex_river_crossing_B.gltf"
+  },
+  "KKHex_hex_river_A_curvy_waterless": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    600,
+    693,
+    300
+   ],
+   "tris": 148,
+   "file": "tiles/rivers/waterless/hex_river_A_curvy_waterless.gltf"
+  },
+  "KKHex_hex_river_A_waterless": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    600,
+    693,
+    300
+   ],
+   "tris": 52,
+   "file": "tiles/rivers/waterless/hex_river_A_waterless.gltf"
+  },
+  "KKHex_hex_river_B_waterless": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    600,
+    693,
+    300
+   ],
+   "tris": 136,
+   "file": "tiles/rivers/waterless/hex_river_B_waterless.gltf"
+  },
+  "KKHex_hex_river_C_waterless": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    600,
+    693,
+    300
+   ],
+   "tris": 126,
+   "file": "tiles/rivers/waterless/hex_river_C_waterless.gltf"
+  },
+  "KKHex_hex_river_D_waterless": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    600,
+    693,
+    300
+   ],
+   "tris": 150,
+   "file": "tiles/rivers/waterless/hex_river_D_waterless.gltf"
+  },
+  "KKHex_hex_river_E_waterless": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    600,
+    693,
+    300
+   ],
+   "tris": 110,
+   "file": "tiles/rivers/waterless/hex_river_E_waterless.gltf"
+  },
+  "KKHex_hex_river_F_waterless": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    600,
+    693,
+    300
+   ],
+   "tris": 110,
+   "file": "tiles/rivers/waterless/hex_river_F_waterless.gltf"
+  },
+  "KKHex_hex_river_G_waterless": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    600,
+    693,
+    300
+   ],
+   "tris": 154,
+   "file": "tiles/rivers/waterless/hex_river_G_waterless.gltf"
+  },
+  "KKHex_hex_river_H_waterless": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    600,
+    693,
+    300
+   ],
+   "tris": 168,
+   "file": "tiles/rivers/waterless/hex_river_H_waterless.gltf"
+  },
+  "KKHex_hex_river_I_waterless": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    600,
+    693,
+    300
+   ],
+   "tris": 168,
+   "file": "tiles/rivers/waterless/hex_river_I_waterless.gltf"
+  },
+  "KKHex_hex_river_J_waterless": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    600,
+    693,
+    300
+   ],
+   "tris": 128,
+   "file": "tiles/rivers/waterless/hex_river_J_waterless.gltf"
+  },
+  "KKHex_hex_river_K_waterless": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    600,
+    693,
+    300
+   ],
+   "tris": 186,
+   "file": "tiles/rivers/waterless/hex_river_K_waterless.gltf"
+  },
+  "KKHex_hex_river_L_waterless": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    600,
+    693,
+    300
+   ],
+   "tris": 204,
+   "file": "tiles/rivers/waterless/hex_river_L_waterless.gltf"
+  },
+  "KKHex_hex_river_crossing_A_waterless": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    600,
+    693,
+    300
+   ],
+   "tris": 100,
+   "file": "tiles/rivers/waterless/hex_river_crossing_A_waterless.gltf"
+  },
+  "KKHex_hex_river_crossing_B_waterless": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    600,
+    693,
+    300
+   ],
+   "tris": 100,
+   "file": "tiles/rivers/waterless/hex_river_crossing_B_waterless.gltf"
+  },
+  "KKHex_hex_road_A": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    600,
+    693,
+    300
+   ],
+   "tris": 58,
+   "file": "tiles/roads/hex_road_A.gltf"
+  },
+  "KKHex_hex_road_A_sloped_high": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    600,
+    693,
+    600
+   ],
+   "tris": 98,
+   "file": "tiles/roads/hex_road_A_sloped_high.gltf"
+  },
+  "KKHex_hex_road_A_sloped_low": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    600,
+    693,
+    450
+   ],
+   "tris": 102,
+   "file": "tiles/roads/hex_road_A_sloped_low.gltf"
+  },
+  "KKHex_hex_road_B": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    600,
+    693,
+    300
+   ],
+   "tris": 118,
+   "file": "tiles/roads/hex_road_B.gltf"
+  },
+  "KKHex_hex_road_C": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    600,
+    693,
+    300
+   ],
+   "tris": 124,
+   "file": "tiles/roads/hex_road_C.gltf"
+  },
+  "KKHex_hex_road_D": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    600,
+    693,
+    300
+   ],
+   "tris": 160,
+   "file": "tiles/roads/hex_road_D.gltf"
+  },
+  "KKHex_hex_road_E": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    600,
+    693,
+    300
+   ],
+   "tris": 136,
+   "file": "tiles/roads/hex_road_E.gltf"
+  },
+  "KKHex_hex_road_F": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    600,
+    693,
+    300
+   ],
+   "tris": 136,
+   "file": "tiles/roads/hex_road_F.gltf"
+  },
+  "KKHex_hex_road_G": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    600,
+    693,
+    300
+   ],
+   "tris": 148,
+   "file": "tiles/roads/hex_road_G.gltf"
+  },
+  "KKHex_hex_road_H": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    600,
+    693,
+    300
+   ],
+   "tris": 190,
+   "file": "tiles/roads/hex_road_H.gltf"
+  },
+  "KKHex_hex_road_I": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    600,
+    693,
+    300
+   ],
+   "tris": 190,
+   "file": "tiles/roads/hex_road_I.gltf"
+  },
+  "KKHex_hex_road_J": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    600,
+    693,
+    300
+   ],
+   "tris": 166,
+   "file": "tiles/roads/hex_road_J.gltf"
+  },
+  "KKHex_hex_road_K": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    600,
+    693,
+    300
+   ],
+   "tris": 220,
+   "file": "tiles/roads/hex_road_K.gltf"
+  },
+  "KKHex_hex_road_L": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    600,
+    693,
+    300
+   ],
+   "tris": 264,
+   "file": "tiles/roads/hex_road_L.gltf"
+  },
+  "KKHex_hex_road_M": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    600,
+    693,
+    300
+   ],
+   "tris": 94,
+   "file": "tiles/roads/hex_road_M.gltf"
+  }
+ },
+ "skipped": []
+}

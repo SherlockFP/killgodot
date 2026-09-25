@@ -1,4 +1,5 @@
 ﻿#include "Chores/UI/KGMinigame.h"
+#include "UI/KGUITokens.h"
 
 #include "Fonts/FontMeasure.h"
 #include "Framework/Application/SlateApplication.h"
@@ -66,18 +67,19 @@ namespace KGMg
 		return FVector2f::Distance(P, A + AB * T);
 	}
 
-	const FLinearColor Ink = C(0x120D17);
-	const FLinearColor Night = C(0x1D1524);
-	const FLinearColor Panel = C(0x2A1F31);
-	const FLinearColor PanelHi = C(0x3A2B42);
-	const FLinearColor Cream = C(0xF6E7C8);
-	const FLinearColor CreamDim = C(0xCDBB98);
-	const FLinearColor Muted = C(0x8E7D6E);
-	const FLinearColor Gold = C(0xF2C230);
-	const FLinearColor Lantern = C(0xF28C28);
-	const FLinearColor Crimson = C(0xC8102E);
-	const FLinearColor Ghost = C(0x4FD1C5);
-	const FLinearColor Good = C(0x8BD160);
+	// SPRINT-025: colour roles from UI/KGUITokens.h (shared with the HUD and the front end).
+	const FLinearColor Ink = C(KGUI::Ink);
+	const FLinearColor Night = C(KGUI::Night);
+	const FLinearColor Panel = C(KGUI::Panel);
+	const FLinearColor PanelHi = C(KGUI::PanelHi);
+	const FLinearColor Cream = C(KGUI::Cream);
+	const FLinearColor CreamDim = C(KGUI::CreamDim);
+	const FLinearColor Muted = C(KGUI::Muted);
+	const FLinearColor Gold = C(KGUI::Gold);
+	const FLinearColor Lantern = C(KGUI::Lantern);
+	const FLinearColor Crimson = C(KGUI::Crimson);
+	const FLinearColor Ghost = C(KGUI::Ghost);
+	const FLinearColor Good = C(KGUI::Good);
 	const FLinearColor Wood = C(0x8A5A3B);
 	const FLinearColor WoodDark = C(0x5C3A26);
 	const FLinearColor WoodLight = C(0xB98256);

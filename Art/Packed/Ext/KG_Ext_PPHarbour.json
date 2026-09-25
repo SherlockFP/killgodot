@@ -1,0 +1,128 @@
+{
+ "tag": "PPHarbour",
+ "source": "D:/Kill Godot/Art/Source/PolyPizza_Harbour",
+ "props": {
+  "PPHarbour_Anchor_ejWQny9Gcz": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    78,
+    95,
+    9
+   ],
+   "tris": 544,
+   "file": "Anchor_ejWQny9Gcz.glb"
+  },
+  "PPHarbour_Boat_5UEl54KsuC": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    467,
+    901,
+    201
+   ],
+   "tris": 224,
+   "file": "Boat_5UEl54KsuC.glb"
+  },
+  "PPHarbour_Bucket_of_Fish_G61jVPof0G": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    86,
+    115,
+    68
+   ],
+   "tris": 3860,
+   "file": "Bucket_of_Fish_G61jVPof0G.glb"
+  },
+  "PPHarbour_Cart_l7bDe7ak6j": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    46,
+    93,
+    80
+   ],
+   "tris": 2631,
+   "file": "Cart_l7bDe7ak6j.glb"
+  },
+  "PPHarbour_Crane_gCcpjaxFdv": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    160,
+    2113,
+    1461
+   ],
+   "tris": 9851,
+   "file": "Crane_gCcpjaxFdv.glb"
+  },
+  "PPHarbour_Fishing_Net_Z11I3AUBO9": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    92,
+    365,
+    63
+   ],
+   "tris": 1864,
+   "file": "Fishing_Net_Z11I3AUBO9.glb"
+  },
+  "PPHarbour_Fishing_Rod_0YAR0Lg58p": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    47,
+    50,
+    634
+   ],
+   "tris": 522,
+   "file": "Fishing_Rod_0YAR0Lg58p.glb"
+  },
+  "PPHarbour_Gallows_9CwQ8V3hdd": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    614,
+    593,
+    475
+   ],
+   "tris": 1116,
+   "file": "Gallows_9CwQ8V3hdd.glb"
+  },
+  "PPHarbour_Hanging_Lantern_3jzk3YShv1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    64,
+    64,
+    141
+   ],
+   "tris": 472,
+   "file": "Hanging_Lantern_3jzk3YShv1.glb"
+  },
+  "PPHarbour_Lantern_CtHBJ1ufeW": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    64,
+    64,
+    93
+   ],
+   "tris": 264,
+   "file": "Lantern_CtHBJ1ufeW.glb"
+  },
+  "PPHarbour_Post_Lantern_ZSQ65S4lEu": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    64,
+    157,
+    330
+   ],
+   "tris": 568,
+   "file": "Post_Lantern_ZSQ65S4lEu.glb"
+  }
+ },
+ "skipped": []
+}

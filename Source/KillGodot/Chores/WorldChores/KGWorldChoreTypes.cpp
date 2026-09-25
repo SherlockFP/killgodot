@@ -10,24 +10,44 @@
 #include "Serialization/JsonSerializer.h"
 
 #include "Chores/WorldChores/KGWorldChoreData.gen.inl"
+#include "Chores/WorldChores/KGWorldChoreData_StormManor.gen.inl"
 
 namespace KGWorldChoreData
 {
 	constexpr double M = 100.0;
 
-	FString EmbeddedJson()
+	/** One entry per map: the embedded JSON chunks and the resolved JSON dev builds read from disk. */
+	struct FSource
+	{
+		const TCHAR* const* Chunks;
+		int32 NumChunks;
+		const TCHAR* ResolvedFile;
+	};
+
+	const TArray<FSource>& Sources()
+	{
+		static const TArray<FSource> S = {
+			{GKGWorldChoreJsonChunks, UE_ARRAY_COUNT(GKGWorldChoreJsonChunks), TEXT("Tools/Level/morrowmere_world_chores.resolved.json")},
+			{GKGWorldChoreJsonChunks_StormManor, UE_ARRAY_COUNT(GKGWorldChoreJsonChunks_StormManor),
+			 TEXT("Tools/Level/stormmanor_world_chores.resolved.json")},
+		};
+		return S;
+	}
+
+	FString EmbeddedJson(int32 Index = 0)
 	{
 		FString Out;
-		for (const TCHAR* Chunk : GKGWorldChoreJsonChunks)
+		const FSource& Src = Sources()[Index];
+		for (int32 i = 0; i < Src.NumChunks; ++i)
 		{
-			Out += Chunk;
+			Out += Src.Chunks[i];
 		}
 		return Out;
 	}
 
-	FString ResolvedPath()
+	FString ResolvedPath(int32 Index = 0)
 	{
-		return FPaths::ProjectDir() / TEXT("Tools/Level/morrowmere_world_chores.resolved.json");
+		return FPaths::ProjectDir() / Sources()[Index].ResolvedFile;
 	}
 
 	FVector ReadVec(const TArray<TSharedPtr<FJsonValue>>* Arr, double Scale, double DefZ = 0.0)
@@ -125,36 +145,58 @@ bool FKGWorldChoreDef::NeedsClimb() const
 
 namespace KGWorldChoreData
 {
+	FKGWorldChoreCatalog LoadOne(int32 Index)
+	{
+		FKGWorldChoreCatalog C;
+		FString Error;
+		FString Json;
+#if !UE_BUILD_SHIPPING
+		// Dev: the resolved JSON next to the tools wins, so tuning anchors needs no C++ rebuild.
+		if (!FFileHelper::LoadFileToString(Json, *ResolvedPath(Index)))
+		{
+			Json.Reset();
+		}
+#endif
+		if (Json.IsEmpty() || !C.Parse(Json, Error))
+		{
+			if (!Json.IsEmpty())
+			{
+				UE_LOG(LogKillGodot, Warning, TEXT("KG_WORLDCHORE data on disk broken (%s) - using the embedded copy"), *Error);
+			}
+			C = FKGWorldChoreCatalog();
+			if (!C.Parse(EmbeddedJson(Index), Error))
+			{
+				UE_LOG(LogKillGodot, Warning, TEXT("KG_WORLDCHORE embedded data broken: %s"), *Error);
+				C = FKGWorldChoreCatalog();
+			}
+		}
+		return C;
+	}
+
+	struct FCatalogSet
+	{
+		TArray<FKGWorldChoreCatalog> All;
+		int32 Active = 0;
+	};
+
+	FCatalogSet& Set()
+	{
+		static FCatalogSet S = []
+		{
+			FCatalogSet Out;
+			for (int32 i = 0; i < Sources().Num(); ++i)
+			{
+				Out.All.Add(LoadOne(i));
+			}
+			return Out;
+		}();
+		return S;
+	}
+
 	FKGWorldChoreCatalog& Mutable()
 	{
-		static FKGWorldChoreCatalog Catalog = []
-		{
-			FKGWorldChoreCatalog C;
-			FString Error;
-			FString Json;
-#if !UE_BUILD_SHIPPING
-			// Dev: the resolved JSON next to the tools wins, so tuning anchors needs no C++ rebuild.
-			if (!FFileHelper::LoadFileToString(Json, *ResolvedPath()))
-			{
-				Json.Reset();
-			}
-#endif
-			if (Json.IsEmpty() || !C.Parse(Json, Error))
-			{
-				if (!Json.IsEmpty())
-				{
-					UE_LOG(LogKillGodot, Warning, TEXT("KG_WORLDCHORE data on disk broken (%s) - using the embedded copy"), *Error);
-				}
-				C = FKGWorldChoreCatalog();
-				if (!C.Parse(EmbeddedJson(), Error))
-				{
-					UE_LOG(LogKillGodot, Warning, TEXT("KG_WORLDCHORE embedded data broken: %s"), *Error);
-					C = FKGWorldChoreCatalog();
-				}
-			}
-			return C;
-		}();
-		return Catalog;
+		FCatalogSet& S = Set();
+		return S.All[S.Active];
 	}
 }
 
@@ -163,22 +205,52 @@ const FKGWorldChoreCatalog& FKGWorldChoreCatalog::Get()
 	return KGWorldChoreData::Mutable();
 }
 
+bool FKGWorldChoreCatalog::SelectForWorld(const UWorld* World)
+{
+	KGWorldChoreData::FCatalogSet& S = KGWorldChoreData::Set();
+	for (int32 i = 0; i < S.All.Num(); ++i)
+	{
+		if (S.All[i].ForMap(World))
+		{
+			S.Active = i;
+			return true;
+		}
+	}
+	return false;
+}
+
+const FKGWorldChoreCatalog* FKGWorldChoreCatalog::FindByMap(const FString& InMapName)
+{
+	for (const FKGWorldChoreCatalog& C : KGWorldChoreData::Set().All)
+	{
+		if (C.MapName.Equals(InMapName, ESearchCase::IgnoreCase))
+		{
+			return &C;
+		}
+	}
+	return nullptr;
+}
+
 bool FKGWorldChoreCatalog::Reload(FString& OutMessage)
 {
-	FString Json;
-	if (!FFileHelper::LoadFileToString(Json, *KGWorldChoreData::ResolvedPath()))
+	KGWorldChoreData::FCatalogSet& S = KGWorldChoreData::Set();
+	for (int32 i = 0; i < S.All.Num(); ++i)
 	{
-		Json = KGWorldChoreData::EmbeddedJson();
+		FString Json;
+		if (!FFileHelper::LoadFileToString(Json, *KGWorldChoreData::ResolvedPath(i)))
+		{
+			Json = KGWorldChoreData::EmbeddedJson(i);
+		}
+		FKGWorldChoreCatalog Fresh;
+		FString Error;
+		if (!Fresh.Parse(Json, Error))
+		{
+			OutMessage = Error;
+			return false;
+		}
+		S.All[i] = MoveTemp(Fresh);
 	}
-	FKGWorldChoreCatalog Fresh;
-	FString Error;
-	if (!Fresh.Parse(Json, Error))
-	{
-		OutMessage = Error;
-		return false;
-	}
-	KGWorldChoreData::Mutable() = MoveTemp(Fresh);
-	OutMessage = FString::Printf(TEXT("%d chores, %d anchors"), Get().Chores.Num(), Get().Anchors.Num());
+	OutMessage = FString::Printf(TEXT("%s: %d chores, %d anchors"), *Get().MapName, Get().Chores.Num(), Get().Anchors.Num());
 	return true;
 }
 

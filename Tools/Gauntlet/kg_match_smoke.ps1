@@ -2,23 +2,26 @@
   Headless whole-match smoke: one windowless -nullrhi listen server fills with bots, starts a seeded match at high
   clock speed and must reach the Epilogue with a decided winner, without fatal errors or ensures.
   Usage: powershell -ExecutionPolicy Bypass -File Tools/Gauntlet/kg_match_smoke.ps1 [-Map /Game/KillGodot/Maps/L_Morrowmere_v2] [-Bots 12]
-  Needs an up-to-date editor build. Log: Saved/Logs/MatchSmoke.log. Exit 0 = passed.
+         [-LogName MatchSmoke.log]   (SPRINT-018: e.g. -Map /Game/KillGodot/Maps/L_StormManor -LogName MatchSmoke_StormManor.log,
+                                      so a second map's smoke never overwrites the invariant's log)
+  Needs an up-to-date editor build. Log: Saved/Logs/<LogName>. Exit 0 = passed.
 #>
 param(
     [string]$Map = "/Game/KillGodot/Maps/L_Morrowmere_v2",
     [int]$Bots = 12,
     [int]$Seed = 7,
     [int]$Speed = 30,
-    [int]$TimeoutSeconds = 600
+    [int]$TimeoutSeconds = 600,
+    [string]$LogName = "MatchSmoke.log"
 )
 $ErrorActionPreference = "Stop"
 $Root = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
 $Exe = "D:\Program Files\Epic Games\UE_5.8\Engine\Binaries\Win64\UnrealEditor.exe"
 $Proj = Join-Path $Root "KillGodot.uproject"
-$Log = Join-Path $Root "Saved\Logs\MatchSmoke.log"
+$Log = Join-Path $Root "Saved\Logs\$LogName"
 Remove-Item $Log -ErrorAction SilentlyContinue
 $Exec = "kg.Bot.Fill $Bots,kg.Match.Start $Seed,kg.Match.Speed $Speed"
-$args_ = "`"$Proj`" `"$Map`?listen`" -game -nullrhi -RenderOffScreen -nosound -unattended -nosplash -log=MatchSmoke.log -ExecCmds=`"$Exec`""
+$args_ = "`"$Proj`" `"$Map`?listen`" -game -nullrhi -RenderOffScreen -nosound -unattended -nosplash -log=$LogName -ExecCmds=`"$Exec`""
 $p = Start-Process $Exe -ArgumentList $args_ -PassThru -WindowStyle Hidden
 $decided = $false
 try {

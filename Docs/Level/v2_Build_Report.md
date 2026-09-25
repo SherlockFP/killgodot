@@ -466,7 +466,8 @@ The first soak run, before the door and unstick fixes, logged 107 stuck events a
 - `Tools/Blender/kg_make_dress_landmarks.py` (reuses the KG_DressTerrace machinery) -> `Art/Packed/KG_DressLandmarks_Clean`
   (20 props), imported in build step 2. Previews `Art/Concept/DressLandmarks_preview*.png`.
 - **Clock tower** (`tower(..., crown="clock")`): on the 4-level shaft (ladder and WindClock unchanged) a stone clock
-  stage with four `ClockDial`s and turning hands (`ClockHand_Hour/Minute` on `KGSpinner`s: one turn per 120 s / 24 min),
+  stage with four `ClockDial`s and turning hands (`ClockHand_Hour/Minute` on `KGSpinner`s that follow the replicated match clock: Dawn 05-06, Day 06-18,
+  Meeting/Trial 18-20, Night 20-05; outside a match they turn slowly),
   an open belfry with a small bell, an octagonal verdigris spire with a gilded ball and a weathervane. Top 24.5 m ->
   about 36 m; the sightlines were re-checked in 3D with the new height: clear.
 - **Bell tower** (`crown="bell"`): an oak beam across the open lookout and a bronze `Bell` hanging from it over the
@@ -486,7 +487,14 @@ The first soak run, before the door and unstick fixes, logged 107 stuck events a
 - **Check** (`verify_v2_build.cliff_faces`, data `PL["faces"]` from `prep_v2_placements.terrain_faces`): every steep
   terrain face > 6 m tall and > 15 m long within 60 m of a walkway must be clad or broken (cliff rock, kit walls,
   quay stones or buildings) with no bare stretch longer than 8 m.
-- Not done: lowering the headland itself (terrain generator, outside this sprint's files; see the proposals).
+- **Lowered** (finishing pass): the basin east cliff has a `shoulder` in the layout (`author_layout_v2.py`), which
+  `kg_build_terrain_v2.py` applies on the land side: the sheer face now stops at a ragged rock lip at about 5 m
+  (was 9-14 m, so the face is about 8 m instead of 12-17 m), a grassy bench at about 7.5 m follows, 4-6.5 m inland,
+  and only then does the land climb back to the ridge. An fbm wobble moves the lip and the bench in height and plan.
+  It fades in over 9 m from the Cliff Stair end and out over 4 m at the Point corner, and it never touches flat
+  terraces, lanes or building pads.
+  `prep_v2_placements.shoulder_dressing()` breaks the top: boulders on the lip and the bench step, scrub, ferns and
+  grass on the bench, and wind-bent trees on the slope above (own RNG).
 
 ### 8.6 Tooling added
 - `kg_build_village_v2.py`: `KG_V2_LEVEL` + `KG_V2_TEST=1` build a copy under `/Game/KillGodot/Maps/Test/` without

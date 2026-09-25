@@ -1,0 +1,535 @@
+{
+ "tag": "QDungeon",
+ "source": "D:/Kill Godot/Art/Source/Quaternius_ModularDungeon",
+ "props": {
+  "QDungeon_Arch": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    328,
+    79,
+    321
+   ],
+   "tris": 4484,
+   "file": ".Updated Modular Dungeon - May 2019/.Updated Modular Dungeon - May 2019/FBX/Arch.fbx"
+  },
+  "QDungeon_Arch_Door": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    194,
+    26,
+    255
+   ],
+   "tris": 1220,
+   "file": ".Updated Modular Dungeon - May 2019/.Updated Modular Dungeon - May 2019/FBX/Arch_Door.fbx"
+  },
+  "QDungeon_Arch_Door_bottompivot": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    194,
+    26,
+    255
+   ],
+   "tris": 1220,
+   "file": ".Updated Modular Dungeon - May 2019/.Updated Modular Dungeon - May 2019/FBX/Arch_Door_bottompivot.fbx"
+  },
+  "QDungeon_Arch_bars": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    198,
+    2,
+    271
+   ],
+   "tris": 1603,
+   "file": ".Updated Modular Dungeon - May 2019/.Updated Modular Dungeon - May 2019/FBX/Arch_bars.fbx"
+  },
+  "QDungeon_Bag_Coins": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    35,
+    18,
+    9
+   ],
+   "tris": 976,
+   "file": ".Updated Modular Dungeon - May 2019/.Updated Modular Dungeon - May 2019/FBX/Bag_Coins.fbx"
+  },
+  "QDungeon_Bag_Standing": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    17,
+    17,
+    20
+   ],
+   "tris": 456,
+   "file": ".Updated Modular Dungeon - May 2019/.Updated Modular Dungeon - May 2019/FBX/Bag_Standing.fbx"
+  },
+  "QDungeon_Banner": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    189,
+    18,
+    304
+   ],
+   "tris": 564,
+   "file": ".Updated Modular Dungeon - May 2019/.Updated Modular Dungeon - May 2019/FBX/Banner.fbx"
+  },
+  "QDungeon_Banner_wall": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    131,
+    47,
+    228
+   ],
+   "tris": 440,
+   "file": ".Updated Modular Dungeon - May 2019/.Updated Modular Dungeon - May 2019/FBX/Banner_wall.fbx"
+  },
+  "QDungeon_Barrel": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    83,
+    83,
+    108
+   ],
+   "tris": 1384,
+   "file": ".Updated Modular Dungeon - May 2019/.Updated Modular Dungeon - May 2019/FBX/Barrel.fbx"
+  },
+  "QDungeon_Barrel2": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    82,
+    81,
+    108
+   ],
+   "tris": 1088,
+   "file": ".Updated Modular Dungeon - May 2019/.Updated Modular Dungeon - May 2019/FBX/Barrel2.fbx"
+  },
+  "QDungeon_Brick": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    57,
+    32,
+    15
+   ],
+   "tris": 140,
+   "file": ".Updated Modular Dungeon - May 2019/.Updated Modular Dungeon - May 2019/FBX/Brick.fbx"
+  },
+  "QDungeon_Bucket": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    30,
+    32,
+    42
+   ],
+   "tris": 360,
+   "file": ".Updated Modular Dungeon - May 2019/.Updated Modular Dungeon - May 2019/FBX/Bucket.fbx"
+  },
+  "QDungeon_Chair": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    50,
+    56,
+    93
+   ],
+   "tris": 1298,
+   "file": ".Updated Modular Dungeon - May 2019/.Updated Modular Dungeon - May 2019/FBX/Chair.fbx"
+  },
+  "QDungeon_Chest": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    94,
+    66,
+    72
+   ],
+   "tris": 1676,
+   "file": ".Updated Modular Dungeon - May 2019/.Updated Modular Dungeon - May 2019/FBX/Chest.fbx"
+  },
+  "QDungeon_Chest_Gold": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    94,
+    119,
+    72
+   ],
+   "tris": 22512,
+   "file": ".Updated Modular Dungeon - May 2019/.Updated Modular Dungeon - May 2019/FBX/Chest_Gold.fbx"
+  },
+  "QDungeon_Cobweb": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    96,
+    73,
+    60
+   ],
+   "tris": 1108,
+   "file": ".Updated Modular Dungeon - May 2019/.Updated Modular Dungeon - May 2019/FBX/Cobweb.fbx"
+  },
+  "QDungeon_Cobweb2": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    107,
+    82,
+    68
+   ],
+   "tris": 868,
+   "file": ".Updated Modular Dungeon - May 2019/.Updated Modular Dungeon - May 2019/FBX/Cobweb2.fbx"
+  },
+  "QDungeon_Coin_Pile": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    11,
+    11,
+    8
+   ],
+   "tris": 3220,
+   "file": ".Updated Modular Dungeon - May 2019/.Updated Modular Dungeon - May 2019/FBX/Coin_Pile.fbx"
+  },
+  "QDungeon_Column": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    104,
+    104,
+    325
+   ],
+   "tris": 440,
+   "file": ".Updated Modular Dungeon - May 2019/.Updated Modular Dungeon - May 2019/FBX/Column.fbx"
+  },
+  "QDungeon_Column2": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    104,
+    104,
+    326
+   ],
+   "tris": 548,
+   "file": ".Updated Modular Dungeon - May 2019/.Updated Modular Dungeon - May 2019/FBX/Column2.fbx"
+  },
+  "QDungeon_Crate": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    110,
+    105,
+    105
+   ],
+   "tris": 2502,
+   "file": ".Updated Modular Dungeon - May 2019/.Updated Modular Dungeon - May 2019/FBX/Crate.fbx"
+  },
+  "QDungeon_Decorative_Wall": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    139,
+    35,
+    122
+   ],
+   "tris": 1104,
+   "file": ".Updated Modular Dungeon - May 2019/.Updated Modular Dungeon - May 2019/FBX/Decorative_Wall.fbx"
+  },
+  "QDungeon_Fence_90_Modular": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    111,
+    111,
+    104
+   ],
+   "tris": 112,
+   "file": ".Updated Modular Dungeon - May 2019/.Updated Modular Dungeon - May 2019/FBX/Fence_90_Modular.fbx"
+  },
+  "QDungeon_Fence_End_Modular": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    111,
+    62,
+    104
+   ],
+   "tris": 102,
+   "file": ".Updated Modular Dungeon - May 2019/.Updated Modular Dungeon - May 2019/FBX/Fence_End_Modular.fbx"
+  },
+  "QDungeon_Fence_Straight_Modular": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    160,
+    62,
+    104
+   ],
+   "tris": 104,
+   "file": ".Updated Modular Dungeon - May 2019/.Updated Modular Dungeon - May 2019/FBX/Fence_Straight_Modular.fbx"
+  },
+  "QDungeon_Floor_BricksSeparate": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    76,
+    96,
+    20
+   ],
+   "tris": 236,
+   "file": ".Updated Modular Dungeon - May 2019/.Updated Modular Dungeon - May 2019/FBX/Floor_BricksSeparate.fbx"
+  },
+  "QDungeon_Floor_BricksSeparate2": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    104,
+    93,
+    38
+   ],
+   "tris": 484,
+   "file": ".Updated Modular Dungeon - May 2019/.Updated Modular Dungeon - May 2019/FBX/Floor_BricksSeparate2.fbx"
+  },
+  "QDungeon_Floor_Modular": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    160,
+    160,
+    20
+   ],
+   "tris": 1176,
+   "file": ".Updated Modular Dungeon - May 2019/.Updated Modular Dungeon - May 2019/FBX/Floor_Modular.fbx"
+  },
+  "QDungeon_Pedestal": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    156,
+    157,
+    175
+   ],
+   "tris": 1844,
+   "file": ".Updated Modular Dungeon - May 2019/.Updated Modular Dungeon - May 2019/FBX/Pedestal.fbx"
+  },
+  "QDungeon_Pedestal2": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    139,
+    139,
+    185
+   ],
+   "tris": 1182,
+   "file": ".Updated Modular Dungeon - May 2019/.Updated Modular Dungeon - May 2019/FBX/Pedestal2.fbx"
+  },
+  "QDungeon_Skull": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    48,
+    35,
+    37
+   ],
+   "tris": 1392,
+   "file": ".Updated Modular Dungeon - May 2019/.Updated Modular Dungeon - May 2019/FBX/Skull.fbx"
+  },
+  "QDungeon_Spikes": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    141,
+    141,
+    94
+   ],
+   "tris": 504,
+   "file": ".Updated Modular Dungeon - May 2019/.Updated Modular Dungeon - May 2019/FBX/Spikes.fbx"
+  },
+  "QDungeon_Stairs_Modular": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    161,
+    164,
+    162
+   ],
+   "tris": 1420,
+   "file": ".Updated Modular Dungeon - May 2019/.Updated Modular Dungeon - May 2019/FBX/Stairs_Modular.fbx"
+  },
+  "QDungeon_Stairs_SideCover": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    35,
+    165,
+    162
+   ],
+   "tris": 892,
+   "file": ".Updated Modular Dungeon - May 2019/.Updated Modular Dungeon - May 2019/FBX/Stairs_SideCover.fbx"
+  },
+  "QDungeon_Stairs_SideCoverWall": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    35,
+    162,
+    163
+   ],
+   "tris": 1252,
+   "file": ".Updated Modular Dungeon - May 2019/.Updated Modular Dungeon - May 2019/FBX/Stairs_SideCoverWall.fbx"
+  },
+  "QDungeon_Statue_Horse": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    139,
+    270,
+    468
+   ],
+   "tris": 1850,
+   "file": ".Updated Modular Dungeon - May 2019/.Updated Modular Dungeon - May 2019/FBX/Statue_Horse.fbx"
+  },
+  "QDungeon_Sword_WallMount": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    85,
+    17,
+    68
+   ],
+   "tris": 2382,
+   "file": ".Updated Modular Dungeon - May 2019/.Updated Modular Dungeon - May 2019/FBX/Sword_WallMount.fbx"
+  },
+  "QDungeon_Table_Big": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    127,
+    264,
+    68
+   ],
+   "tris": 916,
+   "file": ".Updated Modular Dungeon - May 2019/.Updated Modular Dungeon - May 2019/FBX/Table_Big.fbx"
+  },
+  "QDungeon_Table_Small": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    104,
+    158,
+    68
+   ],
+   "tris": 804,
+   "file": ".Updated Modular Dungeon - May 2019/.Updated Modular Dungeon - May 2019/FBX/Table_Small.fbx"
+  },
+  "QDungeon_Torch": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    22,
+    35,
+    92
+   ],
+   "tris": 386,
+   "file": ".Updated Modular Dungeon - May 2019/.Updated Modular Dungeon - May 2019/FBX/Torch.fbx"
+  },
+  "QDungeon_Trap_empty": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    159,
+    159,
+    10
+   ],
+   "tris": 1456,
+   "file": ".Updated Modular Dungeon - May 2019/.Updated Modular Dungeon - May 2019/FBX/Trap_empty.fbx"
+  },
+  "QDungeon_Trap_spikes": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    159,
+    159,
+    94
+   ],
+   "tris": 2032,
+   "file": ".Updated Modular Dungeon - May 2019/.Updated Modular Dungeon - May 2019/FBX/Trap_spikes.fbx"
+  },
+  "QDungeon_Trapdoor": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    139,
+    136,
+    17
+   ],
+   "tris": 504,
+   "file": ".Updated Modular Dungeon - May 2019/.Updated Modular Dungeon - May 2019/FBX/Trapdoor.fbx"
+  },
+  "QDungeon_Trapdoor_open": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    139,
+    213,
+    16
+   ],
+   "tris": 564,
+   "file": ".Updated Modular Dungeon - May 2019/.Updated Modular Dungeon - May 2019/FBX/Trapdoor_open.fbx"
+  },
+  "QDungeon_Vase": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    25,
+    25,
+    29
+   ],
+   "tris": 220,
+   "file": ".Updated Modular Dungeon - May 2019/.Updated Modular Dungeon - May 2019/FBX/Vase.fbx"
+  },
+  "QDungeon_WallCover_Modular": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    161,
+    41,
+    35
+   ],
+   "tris": 280,
+   "file": ".Updated Modular Dungeon - May 2019/.Updated Modular Dungeon - May 2019/FBX/WallCover_Modular.fbx"
+  },
+  "QDungeon_Wall_Modular": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    160,
+    35,
+    160
+   ],
+   "tris": 1672,
+   "file": ".Updated Modular Dungeon - May 2019/.Updated Modular Dungeon - May 2019/FBX/Wall_Modular.fbx"
+  },
+  "QDungeon_Woodfire": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    62,
+    66,
+    66
+   ],
+   "tris": 224,
+   "file": ".Updated Modular Dungeon - May 2019/.Updated Modular Dungeon - May 2019/FBX/Woodfire.fbx"
+  }
+ },
+ "skipped": []
+}

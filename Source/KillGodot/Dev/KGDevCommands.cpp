@@ -1259,6 +1259,17 @@ namespace KGDevPrivate
 			    Prop->SetPropertyValue_InContainer(VM, FloatArg(A, 1, 0.0f));
 			    return FKGDevResult::Ok(FString::Printf(TEXT("%s = %g"), *A[0], Prop->GetPropertyValue_InContainer(VM)));
 		    });
+		Add(TEXT("Debug.Speed"), TEXT(""), TEXT("SPRINT-026: current ground speed, hop streak and stamina (dev panel readout)."), Local,
+		    [](const FKGDevContext& C, const TArray<FString>& A)
+		    {
+			    const AKGCharacter* Me = C.Requester ? Cast<AKGCharacter>(C.Requester->GetPawn()) : nullptr;
+			    KG_DEV_REQUIRE(Me, TEXT("No pawn"));
+			    const FString Line = FString::Printf(TEXT("speed %.0f uu/s (%.2f m/s) | hop streak %d | stamina %.0f%%"),
+			                                         Me->GetHorizontalSpeed(), Me->GetHorizontalSpeed() / 100.0f,
+			                                         Me->GetHopChainStreak(), Me->GetStaminaAlpha() * 100.0f);
+			    UE_LOG(LogKillGodot, Log, TEXT("KG_SPEED %s"), *Line);
+			    return FKGDevResult::Ok(Line);
+		    });
 		Add(TEXT("Debug.Dump"), TEXT(""), TEXT("Match state to the log and the clipboard."), Local,
 		    [](const FKGDevContext& C, const TArray<FString>& A)
 		    {

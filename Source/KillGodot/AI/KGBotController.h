@@ -76,6 +76,8 @@ protected:
 	TWeakObjectPtr<class AKGTaskStation> ChoreTarget;
 	/** Chores this bot could not reach lately (skipped until the list runs dry). */
 	TArray<TWeakObjectPtr<class AKGTaskStation>> FailedChores;
+	// The Impatient put on one world-chore show per match (SPRINT-016); after that they hunt and fake panel chores only.
+	bool bFakedWorldChore = false;
 	float ChoreRepath = 0.0f;
 	float ChoreElapsed = 0.0f;
 	uint32 Step = 0;

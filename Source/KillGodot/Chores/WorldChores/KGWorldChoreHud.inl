@@ -17,15 +17,72 @@ bool IsWorldChoreId(FName Id)
 	return FKGWorldChoreCatalog::Get().IsWorldChore(Id);
 }
 
+FString WorldChoreTitle(FName Chore)
+{
+	const FKGWorldChoreDef* Def = FKGWorldChoreCatalog::Get().FindChore(Chore);
+	return Def ? Def->Title : Chore.ToString();
+}
+
+/** SPRINT-025: one chore's current step ("Carry the bucket to the trough  1/2") and where it is (first open target). */
+FString WorldChoreStepLine(const FKGHudFrame& F, FName Chore, FVector* OutLoc)
+{
+	const UKGWorldChoreComponent* WC = F.Pawn ? UKGWorldChoreComponent::FindFor(F.Pawn) : nullptr;
+	const FKGWorldProgress* Prog = WC ? WC->FindProgress(Chore) : nullptr;
+	const FKGWorldChoreDef* Def = Prog ? FKGWorldChoreCatalog::Get().FindChore(Chore) : nullptr;
+	if (!Def || !Def->Steps.IsValidIndex(Prog->Step))
+	{
+		return FString(TEXT("Start"));
+	}
+	FString Label = Def->StepLabel(Prog->Step, Prog->Variant);
+	const FKGWorldStepDef& S = Def->Steps[Prog->Step];
+	if (S.Repeat > 1)
+	{
+		Label += FString::Printf(TEXT("  %d/%d"), Prog->Reps, S.Repeat);
+	}
+	const int32 N = Def->Targets(Prog->Step, Prog->Variant).Num();
+	if (N > 1)
+	{
+		Label += FString::Printf(TEXT("  %d/%d"), FMath::CountBits(Prog->DoneMask), N);
+	}
+	if (S.Verb == EKGWorldVerb::Bring && IsValid(Prog->Item) && !Prog->Item->IsCarriedBy(F.Pawn))
+	{
+		Label = FString::Printf(TEXT("Pick up your %s"), *FKGWorldChoreCatalog::Get().FindItem(S.Item)->Label);
+	}
+	if (OutLoc)
+	{
+		TArray<FKGWorldWaypoint> Points;
+		WC->GetWaypoints(Points);
+		for (const FKGWorldWaypoint& W : Points)
+		{
+			if (W.Chore == Chore)
+			{
+				*OutLoc = W.Location;
+				break;
+			}
+		}
+	}
+	return Label;
+}
+
 void GatherWorldChorePins(const FKGHudFrame& F, TArray<FKGChorePin>& Out)
 {
 	if (const UKGWorldChoreComponent* WC = F.Pawn ? UKGWorldChoreComponent::FindFor(F.Pawn) : nullptr)
 	{
 		TArray<FKGWorldWaypoint> Points;
 		WC->GetWaypoints(Points);
+		const FVector MeLoc = F.Pawn->GetActorLocation();
 		for (const FKGWorldWaypoint& W : Points)
 		{
-			Out.Add({FVector2D(W.Location), W.bActive});
+			FKGChorePin Pin;
+			Pin.Pos = FVector2D(W.Location);
+			Pin.Loc = W.Location;
+			Pin.bActive = W.bActive;
+			Pin.bItem = W.bItem;
+			Pin.Chore = W.Chore;
+			Pin.Name = WorldChoreTitle(W.Chore);
+			Pin.Step = WorldChoreStepLine(F, W.Chore, nullptr);
+			Pin.Metres = static_cast<float>(FVector::Dist2D(MeLoc, W.Location)) / 100.0f;
+			Out.Add(Pin);
 		}
 	}
 }
@@ -47,11 +104,14 @@ void DrawWorldChoreHud(const FKGHudFrame& F)
 	const FString Label = WC->GetActiveLabel(&ActiveChore);
 
 	// Compass strip under the phase panel: 180 degrees of view, cardinal letters, gold diamonds for waypoints.
+	// SPRINT-025: sits in the shared layout table's Compass slot (no overlap with the phase card at any size).
 	if (Points.Num() > 0)
 	{
-		const float CW = 560.0f * S;
+		const bool bPrep = F.GS->GetPhase() != EKGPhase::Lobby && ((F.Me && F.Me->TaskIds.Num() > 0) || F.Demo != 0);
+		const FBox2D Slot = FKGHudLayout::Compute(F.W, F.H, 0, bPrep).Compass;
+		const float CW = static_cast<float>(Slot.GetSize().X);
 		const float CH = 30.0f * S;
-		const float Y0 = 142.0f * S;
+		const float Y0 = static_cast<float>(Slot.Min.Y);
 		const float X0 = F.CX - CW * 0.5f;
 		const float PxPerDeg = CW / 180.0f;
 		const float Yaw = F.PC && F.PC->PlayerCameraManager ? F.PC->PlayerCameraManager->GetCameraRotation().Yaw : F.Pawn->GetControlRotation().Yaw;
@@ -119,24 +179,18 @@ void DrawWorldChoreHud(const FKGHudFrame& F)
 		}
 	}
 
-	// Work ring around the crosshair (crank, chop, pour, knock, sabotage...).
+	// Work ring (crank, chop, pour, knock, sabotage...): SPRINT-025 item 3, the same E prompt as every other step,
+	// its ring filling with the dwell.
 	const FKGWorldDwell& Dwell = WC->GetDwell();
 	if (Dwell.Kind != EKGDwell::None)
 	{
-		const FVector2D Ctr(F.CX, F.CY);
-		const float R = 34.0f * S;
-		const float Th = FMath::Max(3.0f, 6.0f * S);
-		const FLinearColor Col = Dwell.Kind == EKGDwell::Sabotage ? ImpatientColor : Dwell.Kind == EKGDwell::Dump ? Srgb(140, 210, 90) : Gold;
-		P.Arc(Ctr, R, Th + 6.0f * S, 0.0f, UE_TWO_PI, FLinearColor(0.0f, 0.0f, 0.0f, 0.3f), 2.0f * S);
-		if (Dwell.Alpha() > 0.003f)
-		{
-			P.Arc(Ctr, R, Th, -UE_HALF_PI, -UE_HALF_PI + UE_TWO_PI * Dwell.Alpha(), Col);
-		}
-		const TCHAR* What = Dwell.Kind == EKGDwell::Sabotage ? TEXT("Sabotaging...")
-		                  : Dwell.Kind == EKGDwell::Dump   ? TEXT("Dumping the poison...")
-		                  : Dwell.Kind == EKGDwell::Bring  ? TEXT("Hold it there...")
-		                                                   : TEXT("Working...");
-		P.TextMid(What, F.CX, F.CY + 104.0f * S, 16.0f, Col, 0.5f, true);
+		const FLinearColor Col = Dwell.Kind == EKGDwell::Sabotage ? ImpatientColor : Dwell.Kind == EKGDwell::Dump ? TownColor : Gold;
+		const TCHAR* What = Dwell.Kind == EKGDwell::Sabotage ? TEXT("Sabotaging")
+		                  : Dwell.Kind == EKGDwell::Dump   ? TEXT("Dumping the poison")
+		                  : Dwell.Kind == EKGDwell::Bring  ? TEXT("Hold it there")
+		                                                   : TEXT("Working");
+		const FString Pct = FString::Printf(TEXT("%d%%"), FMath::FloorToInt(Saturate(Dwell.Alpha()) * 100.0f));
+		DrawActionPrompt(F, TEXT("E"), What, FMath::Max(0.01f, Dwell.Alpha()), 1.0f, Col, Pct);
 	}
 
 	// Toasts: a step done (green tick) or a warning (spilled, poisoned, lost).

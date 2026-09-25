@@ -1,0 +1,887 @@
+{
+ "tag": "KSurvival",
+ "source": "D:/Kill Godot/Art/Source/Kenney_SurvivalKit/Models/GLB format",
+ "props": {
+  "KSurvival_barrel_open": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    71,
+    71,
+    103
+   ],
+   "tris": 380,
+   "file": "barrel-open.glb"
+  },
+  "KSurvival_barrel": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    71,
+    71,
+    103
+   ],
+   "tris": 412,
+   "file": "barrel.glb"
+  },
+  "KSurvival_bedroll_frame": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    82,
+    182,
+    44
+   ],
+   "tris": 100,
+   "file": "bedroll-frame.glb"
+  },
+  "KSurvival_bedroll_packed": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    78,
+    27,
+    27
+   ],
+   "tris": 124,
+   "file": "bedroll-packed.glb"
+  },
+  "KSurvival_bedroll": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    93,
+    182,
+    37
+   ],
+   "tris": 144,
+   "file": "bedroll.glb"
+  },
+  "KSurvival_bottle_large": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    22,
+    25,
+    43
+   ],
+   "tris": 96,
+   "file": "bottle-large.glb"
+  },
+  "KSurvival_bottle": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    16,
+    18,
+    46
+   ],
+   "tris": 96,
+   "file": "bottle.glb"
+  },
+  "KSurvival_box_large_open": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    75,
+    150,
+    92
+   ],
+   "tris": 148,
+   "file": "box-large-open.glb"
+  },
+  "KSurvival_box_large": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    75,
+    150,
+    75
+   ],
+   "tris": 124,
+   "file": "box-large.glb"
+  },
+  "KSurvival_box_open": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    75,
+    75,
+    92
+   ],
+   "tris": 148,
+   "file": "box-open.glb"
+  },
+  "KSurvival_box": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    75,
+    75,
+    75
+   ],
+   "tris": 124,
+   "file": "box.glb"
+  },
+  "KSurvival_bucket": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    43,
+    43,
+    58
+   ],
+   "tris": 34,
+   "file": "bucket.glb"
+  },
+  "KSurvival_campfire_fishing_stand": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    118,
+    76,
+    83
+   ],
+   "tris": 100,
+   "file": "campfire-fishing-stand.glb"
+  },
+  "KSurvival_campfire_pit": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    83,
+    81,
+    33
+   ],
+   "tris": 305,
+   "file": "campfire-pit.glb"
+  },
+  "KSurvival_campfire_stand": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    123,
+    37,
+    84
+   ],
+   "tris": 76,
+   "file": "campfire-stand.glb"
+  },
+  "KSurvival_chest": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    78,
+    82,
+    92
+   ],
+   "tris": 322,
+   "file": "chest.glb"
+  },
+  "KSurvival_fence_doorway": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    150,
+    14,
+    155
+   ],
+   "tris": 108,
+   "file": "fence-doorway.glb"
+  },
+  "KSurvival_fence_fortified": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    150,
+    16,
+    155
+   ],
+   "tris": 120,
+   "file": "fence-fortified.glb"
+  },
+  "KSurvival_fence": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    150,
+    13,
+    155
+   ],
+   "tris": 48,
+   "file": "fence.glb"
+  },
+  "KSurvival_fish_large": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    92,
+    29,
+    48
+   ],
+   "tris": 229,
+   "file": "fish-large.glb"
+  },
+  "KSurvival_fish": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    61,
+    20,
+    32
+   ],
+   "tris": 229,
+   "file": "fish.glb"
+  },
+  "KSurvival_floor_hole": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    150,
+    150,
+    20
+   ],
+   "tris": 144,
+   "file": "floor-hole.glb"
+  },
+  "KSurvival_floor_old": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    150,
+    150,
+    15
+   ],
+   "tris": 84,
+   "file": "floor-old.glb"
+  },
+  "KSurvival_floor": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    150,
+    150,
+    15
+   ],
+   "tris": 84,
+   "file": "floor.glb"
+  },
+  "KSurvival_grass_large": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    143,
+    146,
+    43
+   ],
+   "tris": 72,
+   "file": "grass-large.glb"
+  },
+  "KSurvival_grass": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    70,
+    77,
+    43
+   ],
+   "tris": 18,
+   "file": "grass.glb"
+  },
+  "KSurvival_metal_panel_narrow": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    75,
+    15,
+    150
+   ],
+   "tris": 76,
+   "file": "metal-panel-narrow.glb"
+  },
+  "KSurvival_metal_panel_screws_half": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    150,
+    19,
+    75
+   ],
+   "tris": 180,
+   "file": "metal-panel-screws-half.glb"
+  },
+  "KSurvival_metal_panel_screws_narrow": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    75,
+    19,
+    150
+   ],
+   "tris": 116,
+   "file": "metal-panel-screws-narrow.glb"
+  },
+  "KSurvival_metal_panel_screws": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    150,
+    19,
+    150
+   ],
+   "tris": 180,
+   "file": "metal-panel-screws.glb"
+  },
+  "KSurvival_metal_panel": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    150,
+    15,
+    150
+   ],
+   "tris": 140,
+   "file": "metal-panel.glb"
+  },
+  "KSurvival_patch_grass_large": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    420,
+    360,
+    0
+   ],
+   "tris": 33,
+   "file": "patch-grass-large.glb"
+  },
+  "KSurvival_patch_grass": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    360,
+    360,
+    0
+   ],
+   "tris": 33,
+   "file": "patch-grass.glb"
+  },
+  "KSurvival_resource_planks": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    112,
+    188,
+    28
+   ],
+   "tris": 72,
+   "file": "resource-planks.glb"
+  },
+  "KSurvival_resource_stone_large": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    113,
+    101,
+    48
+   ],
+   "tris": 132,
+   "file": "resource-stone-large.glb"
+  },
+  "KSurvival_resource_stone": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    50,
+    43,
+    32
+   ],
+   "tris": 44,
+   "file": "resource-stone.glb"
+  },
+  "KSurvival_resource_wood": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    62,
+    26,
+    19
+   ],
+   "tris": 64,
+   "file": "resource-wood.glb"
+  },
+  "KSurvival_rock_a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    167,
+    186,
+    118
+   ],
+   "tris": 104,
+   "file": "rock-a.glb"
+  },
+  "KSurvival_rock_b": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    250,
+    217,
+    126
+   ],
+   "tris": 156,
+   "file": "rock-b.glb"
+  },
+  "KSurvival_rock_c": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    235,
+    170,
+    153
+   ],
+   "tris": 120,
+   "file": "rock-c.glb"
+  },
+  "KSurvival_rock_flat_grass": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    536,
+    434,
+    68
+   ],
+   "tris": 434,
+   "file": "rock-flat-grass.glb"
+  },
+  "KSurvival_rock_flat": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    536,
+    434,
+    58
+   ],
+   "tris": 222,
+   "file": "rock-flat.glb"
+  },
+  "KSurvival_rock_sand_a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    167,
+    145,
+    118
+   ],
+   "tris": 92,
+   "file": "rock-sand-a.glb"
+  },
+  "KSurvival_rock_sand_b": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    240,
+    237,
+    135
+   ],
+   "tris": 180,
+   "file": "rock-sand-b.glb"
+  },
+  "KSurvival_rock_sand_c": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    235,
+    171,
+    153
+   ],
+   "tris": 144,
+   "file": "rock-sand-c.glb"
+  },
+  "KSurvival_signpost_single": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    63,
+    13,
+    138
+   ],
+   "tris": 28,
+   "file": "signpost-single.glb"
+  },
+  "KSurvival_signpost": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    64,
+    13,
+    138
+   ],
+   "tris": 44,
+   "file": "signpost.glb"
+  },
+  "KSurvival_structure_canvas": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    150,
+    150,
+    150
+   ],
+   "tris": 88,
+   "file": "structure-canvas.glb"
+  },
+  "KSurvival_structure_floor": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    150,
+    150,
+    165
+   ],
+   "tris": 164,
+   "file": "structure-floor.glb"
+  },
+  "KSurvival_structure_metal_doorway": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    161,
+    27,
+    155
+   ],
+   "tris": 160,
+   "file": "structure-metal-doorway.glb"
+  },
+  "KSurvival_structure_metal_floor": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    150,
+    150,
+    154
+   ],
+   "tris": 276,
+   "file": "structure-metal-floor.glb"
+  },
+  "KSurvival_structure_metal_roof": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    163,
+    165,
+    150
+   ],
+   "tris": 316,
+   "file": "structure-metal-roof.glb"
+  },
+  "KSurvival_structure_metal_wall": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    161,
+    27,
+    150
+   ],
+   "tris": 92,
+   "file": "structure-metal-wall.glb"
+  },
+  "KSurvival_structure_metal": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    161,
+    161,
+    150
+   ],
+   "tris": 184,
+   "file": "structure-metal.glb"
+  },
+  "KSurvival_structure_roof": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    161,
+    166,
+    197
+   ],
+   "tris": 188,
+   "file": "structure-roof.glb"
+  },
+  "KSurvival_structure": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    150,
+    150,
+    150
+   ],
+   "tris": 80,
+   "file": "structure.glb"
+  },
+  "KSurvival_tent_canvas_half": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    168,
+    168,
+    147
+   ],
+   "tris": 130,
+   "file": "tent-canvas-half.glb"
+  },
+  "KSurvival_tent_canvas": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    168,
+    168,
+    147
+   ],
+   "tris": 136,
+   "file": "tent-canvas.glb"
+  },
+  "KSurvival_tent": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    168,
+    168,
+    147
+   ],
+   "tris": 124,
+   "file": "tent.glb"
+  },
+  "KSurvival_tool_axe_upgraded": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    44,
+    12,
+    77
+   ],
+   "tris": 140,
+   "file": "tool-axe-upgraded.glb"
+  },
+  "KSurvival_tool_axe": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    34,
+    9,
+    77
+   ],
+   "tris": 84,
+   "file": "tool-axe.glb"
+  },
+  "KSurvival_tool_hammer_upgraded": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    35,
+    15,
+    55
+   ],
+   "tris": 80,
+   "file": "tool-hammer-upgraded.glb"
+  },
+  "KSurvival_tool_hammer": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    27,
+    12,
+    46
+   ],
+   "tris": 52,
+   "file": "tool-hammer.glb"
+  },
+  "KSurvival_tool_hoe_upgraded": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    27,
+    27,
+    72
+   ],
+   "tris": 106,
+   "file": "tool-hoe-upgraded.glb"
+  },
+  "KSurvival_tool_hoe": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    25,
+    21,
+    72
+   ],
+   "tris": 58,
+   "file": "tool-hoe.glb"
+  },
+  "KSurvival_tool_pickaxe_upgraded": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    54,
+    12,
+    72
+   ],
+   "tris": 110,
+   "file": "tool-pickaxe-upgraded.glb"
+  },
+  "KSurvival_tool_pickaxe": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    54,
+    12,
+    72
+   ],
+   "tris": 74,
+   "file": "tool-pickaxe.glb"
+  },
+  "KSurvival_tool_shovel_upgraded": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    27,
+    14,
+    87
+   ],
+   "tris": 176,
+   "file": "tool-shovel-upgraded.glb"
+  },
+  "KSurvival_tool_shovel": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    21,
+    9,
+    87
+   ],
+   "tris": 124,
+   "file": "tool-shovel.glb"
+  },
+  "KSurvival_tree_autumn_tall": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    166,
+    158,
+    513
+   ],
+   "tris": 144,
+   "file": "tree-autumn-tall.glb"
+  },
+  "KSurvival_tree_autumn_trunk": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    60,
+    60,
+    78
+   ],
+   "tris": 48,
+   "file": "tree-autumn-trunk.glb"
+  },
+  "KSurvival_tree_autumn": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    166,
+    158,
+    423
+   ],
+   "tris": 144,
+   "file": "tree-autumn.glb"
+  },
+  "KSurvival_tree_log_small": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    75,
+    195,
+    83
+   ],
+   "tris": 88,
+   "file": "tree-log-small.glb"
+  },
+  "KSurvival_tree_log": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    75,
+    300,
+    83
+   ],
+   "tris": 88,
+   "file": "tree-log.glb"
+  },
+  "KSurvival_tree_tall": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    166,
+    158,
+    513
+   ],
+   "tris": 200,
+   "file": "tree-tall.glb"
+  },
+  "KSurvival_tree_trunk": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    60,
+    60,
+    78
+   ],
+   "tris": 48,
+   "file": "tree-trunk.glb"
+  },
+  "KSurvival_tree": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    166,
+    158,
+    423
+   ],
+   "tris": 172,
+   "file": "tree.glb"
+  },
+  "KSurvival_workbench_anvil": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    97,
+    89,
+    101
+   ],
+   "tris": 298,
+   "file": "workbench-anvil.glb"
+  },
+  "KSurvival_workbench_grind": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    78,
+    99,
+    85
+   ],
+   "tris": 232,
+   "file": "workbench-grind.glb"
+  },
+  "KSurvival_workbench": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    98,
+    89,
+    86
+   ],
+   "tris": 226,
+   "file": "workbench.glb"
+  }
+ },
+ "skipped": []
+}

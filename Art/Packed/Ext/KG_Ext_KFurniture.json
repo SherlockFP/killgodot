@@ -1,0 +1,1547 @@
+{
+ "tag": "KFurniture",
+ "source": "D:/Kill Godot/Art/Source/Kenney_FurnitureKit/Models/GLTF format",
+ "props": {
+  "KFurniture_bathroomCabinet": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    23,
+    13,
+    39
+   ],
+   "tris": 64,
+   "file": "bathroomCabinet.glb"
+  },
+  "KFurniture_bathroomCabinetDrawer": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    43,
+    32,
+    47
+   ],
+   "tris": 384,
+   "file": "bathroomCabinetDrawer.glb"
+  },
+  "KFurniture_bathroomMirror": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    30,
+    14,
+    43
+   ],
+   "tris": 64,
+   "file": "bathroomMirror.glb"
+  },
+  "KFurniture_bathroomSink": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    34,
+    29,
+    56
+   ],
+   "tris": 316,
+   "file": "bathroomSink.glb"
+  },
+  "KFurniture_bathroomSinkSquare": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    43,
+    30,
+    58
+   ],
+   "tris": 234,
+   "file": "bathroomSinkSquare.glb"
+  },
+  "KFurniture_bathtub": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    119,
+    56,
+    42
+   ],
+   "tris": 602,
+   "file": "bathtub.glb"
+  },
+  "KFurniture_bear": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    39,
+    25,
+    45
+   ],
+   "tris": 134,
+   "file": "bear.glb"
+  },
+  "KFurniture_bedBunk": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    57,
+    110,
+    85
+   ],
+   "tris": 572,
+   "file": "bedBunk.glb"
+  },
+  "KFurniture_bedDouble": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    96,
+    112,
+    38
+   ],
+   "tris": 264,
+   "file": "bedDouble.glb"
+  },
+  "KFurniture_bedSingle": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    57,
+    112,
+    37
+   ],
+   "tris": 214,
+   "file": "bedSingle.glb"
+  },
+  "KFurniture_bench": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    40,
+    20,
+    47
+   ],
+   "tris": 170,
+   "file": "bench.glb"
+  },
+  "KFurniture_benchCushion": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    40,
+    20,
+    46
+   ],
+   "tris": 196,
+   "file": "benchCushion.glb"
+  },
+  "KFurniture_benchCushionLow": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    42,
+    22,
+    20
+   ],
+   "tris": 138,
+   "file": "benchCushionLow.glb"
+  },
+  "KFurniture_bookcaseClosed": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    40,
+    25,
+    85
+   ],
+   "tris": 372,
+   "file": "bookcaseClosed.glb"
+  },
+  "KFurniture_bookcaseClosedDoors": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    40,
+    25,
+    85
+   ],
+   "tris": 299,
+   "file": "bookcaseClosedDoors.glb"
+  },
+  "KFurniture_bookcaseClosedWide": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    80,
+    25,
+    79
+   ],
+   "tris": 372,
+   "file": "bookcaseClosedWide.glb"
+  },
+  "KFurniture_bookcaseOpen": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    40,
+    25,
+    88
+   ],
+   "tris": 320,
+   "file": "bookcaseOpen.glb"
+  },
+  "KFurniture_bookcaseOpenLow": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    40,
+    25,
+    40
+   ],
+   "tris": 184,
+   "file": "bookcaseOpenLow.glb"
+  },
+  "KFurniture_books": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    15,
+    9,
+    10
+   ],
+   "tris": 62,
+   "file": "books.glb"
+  },
+  "KFurniture_cabinetBed": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    27,
+    22,
+    23
+   ],
+   "tris": 72,
+   "file": "cabinetBed.glb"
+  },
+  "KFurniture_cabinetBedDrawer": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    27,
+    22,
+    26
+   ],
+   "tris": 182,
+   "file": "cabinetBedDrawer.glb"
+  },
+  "KFurniture_cabinetBedDrawerTable": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    27,
+    22,
+    26
+   ],
+   "tris": 140,
+   "file": "cabinetBedDrawerTable.glb"
+  },
+  "KFurniture_cabinetTelevision": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    80,
+    25,
+    31
+   ],
+   "tris": 132,
+   "file": "cabinetTelevision.glb"
+  },
+  "KFurniture_cabinetTelevisionDoors": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    80,
+    26,
+    31
+   ],
+   "tris": 188,
+   "file": "cabinetTelevisionDoors.glb"
+  },
+  "KFurniture_cardboardBoxClosed": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    21,
+    21,
+    28
+   ],
+   "tris": 30,
+   "file": "cardboardBoxClosed.glb"
+  },
+  "KFurniture_cardboardBoxOpen": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    37,
+    21,
+    28
+   ],
+   "tris": 30,
+   "file": "cardboardBoxOpen.glb"
+  },
+  "KFurniture_ceilingFan": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    45,
+    53,
+    13
+   ],
+   "tris": 214,
+   "file": "ceilingFan.glb"
+  },
+  "KFurniture_chair": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    20,
+    20,
+    47
+   ],
+   "tris": 170,
+   "file": "chair.glb"
+  },
+  "KFurniture_chairCushion": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    20,
+    20,
+    46
+   ],
+   "tris": 198,
+   "file": "chairCushion.glb"
+  },
+  "KFurniture_chairDesk": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    33,
+    31,
+    61
+   ],
+   "tris": 588,
+   "file": "chairDesk.glb"
+  },
+  "KFurniture_chairModernCushion": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    20,
+    20,
+    46
+   ],
+   "tris": 92,
+   "file": "chairModernCushion.glb"
+  },
+  "KFurniture_chairModernFrameCushion": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    20,
+    20,
+    46
+   ],
+   "tris": 284,
+   "file": "chairModernFrameCushion.glb"
+  },
+  "KFurniture_chairRounded": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    20,
+    20,
+    45
+   ],
+   "tris": 280,
+   "file": "chairRounded.glb"
+  },
+  "KFurniture_coatRack": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    45,
+    13,
+    28
+   ],
+   "tris": 132,
+   "file": "coatRack.glb"
+  },
+  "KFurniture_coatRackStanding": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    27,
+    27,
+    77
+   ],
+   "tris": 190,
+   "file": "coatRackStanding.glb"
+  },
+  "KFurniture_computerKeyboard": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    28,
+    12,
+    3
+   ],
+   "tris": 32,
+   "file": "computerKeyboard.glb"
+  },
+  "KFurniture_computerMouse": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    5,
+    9,
+    2
+   ],
+   "tris": 60,
+   "file": "computerMouse.glb"
+  },
+  "KFurniture_computerScreen": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    39,
+    10,
+    29
+   ],
+   "tris": 72,
+   "file": "computerScreen.glb"
+  },
+  "KFurniture_desk": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    73,
+    39,
+    38
+   ],
+   "tris": 198,
+   "file": "desk.glb"
+  },
+  "KFurniture_deskCorner": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    97,
+    97,
+    38
+   ],
+   "tris": 242,
+   "file": "deskCorner.glb"
+  },
+  "KFurniture_doorway": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    49,
+    11,
+    101
+   ],
+   "tris": 188,
+   "file": "doorway.glb"
+  },
+  "KFurniture_doorwayFront": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    49,
+    11,
+    101
+   ],
+   "tris": 154,
+   "file": "doorwayFront.glb"
+  },
+  "KFurniture_doorwayOpen": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    49,
+    9,
+    101
+   ],
+   "tris": 28,
+   "file": "doorwayOpen.glb"
+  },
+  "KFurniture_dryer": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    39,
+    38,
+    47
+   ],
+   "tris": 262,
+   "file": "dryer.glb"
+  },
+  "KFurniture_floorCorner": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    55,
+    55,
+    5
+   ],
+   "tris": 16,
+   "file": "floorCorner.glb"
+  },
+  "KFurniture_floorCornerRound": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    55,
+    55,
+    5
+   ],
+   "tris": 60,
+   "file": "floorCornerRound.glb"
+  },
+  "KFurniture_floorFull": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    5
+   ],
+   "tris": 12,
+   "file": "floorFull.glb"
+  },
+  "KFurniture_floorHalf": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    50,
+    100,
+    5
+   ],
+   "tris": 12,
+   "file": "floorHalf.glb"
+  },
+  "KFurniture_hoodLarge": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    43,
+    28,
+    37
+   ],
+   "tris": 36,
+   "file": "hoodLarge.glb"
+  },
+  "KFurniture_hoodModern": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    43,
+    28,
+    40
+   ],
+   "tris": 28,
+   "file": "hoodModern.glb"
+  },
+  "KFurniture_kitchenBar": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    43,
+    21,
+    42
+   ],
+   "tris": 76,
+   "file": "kitchenBar.glb"
+  },
+  "KFurniture_kitchenBarEnd": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    10,
+    21,
+    42
+   ],
+   "tris": 152,
+   "file": "kitchenBarEnd.glb"
+  },
+  "KFurniture_kitchenBlender": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    14,
+    11,
+    23
+   ],
+   "tris": 150,
+   "file": "kitchenBlender.glb"
+  },
+  "KFurniture_kitchenCabinet": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    43,
+    45,
+    45
+   ],
+   "tris": 114,
+   "file": "kitchenCabinet.glb"
+  },
+  "KFurniture_kitchenCabinetCornerInner": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    46,
+    46,
+    45
+   ],
+   "tris": 54,
+   "file": "kitchenCabinetCornerInner.glb"
+  },
+  "KFurniture_kitchenCabinetCornerRound": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    45,
+    45,
+    45
+   ],
+   "tris": 194,
+   "file": "kitchenCabinetCornerRound.glb"
+  },
+  "KFurniture_kitchenCabinetDrawer": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    43,
+    45,
+    45
+   ],
+   "tris": 174,
+   "file": "kitchenCabinetDrawer.glb"
+  },
+  "KFurniture_kitchenCabinetUpper": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    43,
+    22,
+    39
+   ],
+   "tris": 80,
+   "file": "kitchenCabinetUpper.glb"
+  },
+  "KFurniture_kitchenCabinetUpperCorner": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    22,
+    21,
+    39
+   ],
+   "tris": 188,
+   "file": "kitchenCabinetUpperCorner.glb"
+  },
+  "KFurniture_kitchenCabinetUpperDouble": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    43,
+    22,
+    39
+   ],
+   "tris": 156,
+   "file": "kitchenCabinetUpperDouble.glb"
+  },
+  "KFurniture_kitchenCabinetUpperLow": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    43,
+    22,
+    20
+   ],
+   "tris": 64,
+   "file": "kitchenCabinetUpperLow.glb"
+  },
+  "KFurniture_kitchenCoffeeMachine": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    19,
+    24,
+    18
+   ],
+   "tris": 166,
+   "file": "kitchenCoffeeMachine.glb"
+  },
+  "KFurniture_kitchenFridge": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    43,
+    29,
+    92
+   ],
+   "tris": 220,
+   "file": "kitchenFridge.glb"
+  },
+  "KFurniture_kitchenFridgeBuiltIn": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    43,
+    45,
+    87
+   ],
+   "tris": 238,
+   "file": "kitchenFridgeBuiltIn.glb"
+  },
+  "KFurniture_kitchenFridgeLarge": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    52,
+    41,
+    92
+   ],
+   "tris": 416,
+   "file": "kitchenFridgeLarge.glb"
+  },
+  "KFurniture_kitchenFridgeSmall": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    43,
+    29,
+    60
+   ],
+   "tris": 132,
+   "file": "kitchenFridgeSmall.glb"
+  },
+  "KFurniture_kitchenMicrowave": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    29,
+    23,
+    18
+   ],
+   "tris": 152,
+   "file": "kitchenMicrowave.glb"
+  },
+  "KFurniture_kitchenSink": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    43,
+    45,
+    49
+   ],
+   "tris": 296,
+   "file": "kitchenSink.glb"
+  },
+  "KFurniture_kitchenStove": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    43,
+    45,
+    45
+   ],
+   "tris": 828,
+   "file": "kitchenStove.glb"
+  },
+  "KFurniture_kitchenStoveElectric": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    43,
+    45,
+    45
+   ],
+   "tris": 336,
+   "file": "kitchenStoveElectric.glb"
+  },
+  "KFurniture_lampRoundFloor": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    15,
+    18,
+    86
+   ],
+   "tris": 76,
+   "file": "lampRoundFloor.glb"
+  },
+  "KFurniture_lampRoundTable": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    15,
+    18,
+    31
+   ],
+   "tris": 76,
+   "file": "lampRoundTable.glb"
+  },
+  "KFurniture_lampSquareCeiling": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    12,
+    12,
+    23
+   ],
+   "tris": 60,
+   "file": "lampSquareCeiling.glb"
+  },
+  "KFurniture_lampSquareFloor": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    12,
+    12,
+    86
+   ],
+   "tris": 60,
+   "file": "lampSquareFloor.glb"
+  },
+  "KFurniture_lampSquareTable": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    12,
+    12,
+    29
+   ],
+   "tris": 60,
+   "file": "lampSquareTable.glb"
+  },
+  "KFurniture_lampWall": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    23,
+    15,
+    9
+   ],
+   "tris": 27,
+   "file": "lampWall.glb"
+  },
+  "KFurniture_laptop": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    26,
+    24,
+    16
+   ],
+   "tris": 68,
+   "file": "laptop.glb"
+  },
+  "KFurniture_loungeChair": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    49,
+    41,
+    46
+   ],
+   "tris": 128,
+   "file": "loungeChair.glb"
+  },
+  "KFurniture_loungeChairRelax": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    49,
+    67,
+    63
+   ],
+   "tris": 188,
+   "file": "loungeChairRelax.glb"
+  },
+  "KFurniture_loungeDesignChair": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    73,
+    41,
+    40
+   ],
+   "tris": 116,
+   "file": "loungeDesignChair.glb"
+  },
+  "KFurniture_loungeDesignSofa": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    112,
+    41,
+    40
+   ],
+   "tris": 116,
+   "file": "loungeDesignSofa.glb"
+  },
+  "KFurniture_loungeDesignSofaCorner": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    135,
+    135,
+    40
+   ],
+   "tris": 176,
+   "file": "loungeDesignSofaCorner.glb"
+  },
+  "KFurniture_loungeSofa": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    98,
+    41,
+    46
+   ],
+   "tris": 128,
+   "file": "loungeSofa.glb"
+  },
+  "KFurniture_loungeSofaCorner": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    98,
+    98,
+    46
+   ],
+   "tris": 190,
+   "file": "loungeSofaCorner.glb"
+  },
+  "KFurniture_loungeSofaLong": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    98,
+    82,
+    46
+   ],
+   "tris": 186,
+   "file": "loungeSofaLong.glb"
+  },
+  "KFurniture_loungeSofaOttoman": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    44,
+    45,
+    23
+   ],
+   "tris": 84,
+   "file": "loungeSofaOttoman.glb"
+  },
+  "KFurniture_paneling": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    50,
+    3,
+    59
+   ],
+   "tris": 40,
+   "file": "paneling.glb"
+  },
+  "KFurniture_pillow": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    23,
+    9,
+    22
+   ],
+   "tris": 50,
+   "file": "pillow.glb"
+  },
+  "KFurniture_pillowBlue": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    23,
+    6,
+    13
+   ],
+   "tris": 50,
+   "file": "pillowBlue.glb"
+  },
+  "KFurniture_pillowBlueLong": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    52,
+    9,
+    22
+   ],
+   "tris": 50,
+   "file": "pillowBlueLong.glb"
+  },
+  "KFurniture_pillowLong": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    39,
+    9,
+    22
+   ],
+   "tris": 50,
+   "file": "pillowLong.glb"
+  },
+  "KFurniture_plantSmall1": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    9,
+    9,
+    14
+   ],
+   "tris": 102,
+   "file": "plantSmall1.glb"
+  },
+  "KFurniture_plantSmall2": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    9,
+    9,
+    14
+   ],
+   "tris": 158,
+   "file": "plantSmall2.glb"
+  },
+  "KFurniture_plantSmall3": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    10,
+    8,
+    14
+   ],
+   "tris": 98,
+   "file": "plantSmall3.glb"
+  },
+  "KFurniture_pottedPlant": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    21,
+    24,
+    65
+   ],
+   "tris": 52,
+   "file": "pottedPlant.glb"
+  },
+  "KFurniture_radio": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    31,
+    10,
+    23
+   ],
+   "tris": 432,
+   "file": "radio.glb"
+  },
+  "KFurniture_rugDoormat": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    43,
+    24,
+    1
+   ],
+   "tris": 204,
+   "file": "rugDoormat.glb"
+  },
+  "KFurniture_rugRectangle": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    157,
+    92,
+    1
+   ],
+   "tris": 28,
+   "file": "rugRectangle.glb"
+  },
+  "KFurniture_rugRound": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    92,
+    92,
+    1
+   ],
+   "tris": 188,
+   "file": "rugRound.glb"
+  },
+  "KFurniture_rugRounded": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    157,
+    92,
+    1
+   ],
+   "tris": 204,
+   "file": "rugRounded.glb"
+  },
+  "KFurniture_rugSquare": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    90,
+    92,
+    1
+   ],
+   "tris": 28,
+   "file": "rugSquare.glb"
+  },
+  "KFurniture_shower": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    56,
+    58,
+    109
+   ],
+   "tris": 486,
+   "file": "shower.glb"
+  },
+  "KFurniture_showerRound": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    56,
+    56,
+    109
+   ],
+   "tris": 616,
+   "file": "showerRound.glb"
+  },
+  "KFurniture_sideTable": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    53,
+    22,
+    38
+   ],
+   "tris": 118,
+   "file": "sideTable.glb"
+  },
+  "KFurniture_sideTableDrawers": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    53,
+    22,
+    38
+   ],
+   "tris": 238,
+   "file": "sideTableDrawers.glb"
+  },
+  "KFurniture_speaker": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    15,
+    15,
+    64
+   ],
+   "tris": 228,
+   "file": "speaker.glb"
+  },
+  "KFurniture_speakerSmall": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    15,
+    13,
+    30
+   ],
+   "tris": 220,
+   "file": "speakerSmall.glb"
+  },
+  "KFurniture_stairs": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    182,
+    79,
+    134
+   ],
+   "tris": 308,
+   "file": "stairs.glb"
+  },
+  "KFurniture_stairsCorner": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    177,
+    143,
+    134
+   ],
+   "tris": 312,
+   "file": "stairsCorner.glb"
+  },
+  "KFurniture_stairsOpen": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    182,
+    79,
+    134
+   ],
+   "tris": 366,
+   "file": "stairsOpen.glb"
+  },
+  "KFurniture_stairsOpenSingle": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    182,
+    79,
+    134
+   ],
+   "tris": 230,
+   "file": "stairsOpenSingle.glb"
+  },
+  "KFurniture_stoolBar": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    27,
+    23,
+    44
+   ],
+   "tris": 176,
+   "file": "stoolBar.glb"
+  },
+  "KFurniture_stoolBarSquare": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    15,
+    15,
+    40
+   ],
+   "tris": 142,
+   "file": "stoolBarSquare.glb"
+  },
+  "KFurniture_table": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    84,
+    45,
+    33
+   ],
+   "tris": 120,
+   "file": "table.glb"
+  },
+  "KFurniture_tableCloth": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    84,
+    45,
+    33
+   ],
+   "tris": 140,
+   "file": "tableCloth.glb"
+  },
+  "KFurniture_tableCoffee": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    66,
+    40,
+    23
+   ],
+   "tris": 124,
+   "file": "tableCoffee.glb"
+  },
+  "KFurniture_tableCoffeeGlass": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    66,
+    40,
+    23
+   ],
+   "tris": 138,
+   "file": "tableCoffeeGlass.glb"
+  },
+  "KFurniture_tableCoffeeGlassSquare": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    40,
+    40,
+    23
+   ],
+   "tris": 138,
+   "file": "tableCoffeeGlassSquare.glb"
+  },
+  "KFurniture_tableCoffeeSquare": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    40,
+    40,
+    23
+   ],
+   "tris": 124,
+   "file": "tableCoffeeSquare.glb"
+  },
+  "KFurniture_tableCross": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    85,
+    45,
+    35
+   ],
+   "tris": 178,
+   "file": "tableCross.glb"
+  },
+  "KFurniture_tableCrossCloth": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    85,
+    45,
+    35
+   ],
+   "tris": 198,
+   "file": "tableCrossCloth.glb"
+  },
+  "KFurniture_tableGlass": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    84,
+    45,
+    33
+   ],
+   "tris": 142,
+   "file": "tableGlass.glb"
+  },
+  "KFurniture_tableRound": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    69,
+    80,
+    37
+   ],
+   "tris": 80,
+   "file": "tableRound.glb"
+  },
+  "KFurniture_televisionAntenna": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    26,
+    8,
+    10
+   ],
+   "tris": 44,
+   "file": "televisionAntenna.glb"
+  },
+  "KFurniture_televisionModern": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    68,
+    13,
+    45
+   ],
+   "tris": 72,
+   "file": "televisionModern.glb"
+  },
+  "KFurniture_televisionVintage": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    41,
+    27,
+    27
+   ],
+   "tris": 280,
+   "file": "televisionVintage.glb"
+  },
+  "KFurniture_toaster": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    19,
+    10,
+    13
+   ],
+   "tris": 220,
+   "file": "toaster.glb"
+  },
+  "KFurniture_toilet": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    31,
+    48,
+    45
+   ],
+   "tris": 230,
+   "file": "toilet.glb"
+  },
+  "KFurniture_toiletSquare": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    30,
+    39,
+    45
+   ],
+   "tris": 228,
+   "file": "toiletSquare.glb"
+  },
+  "KFurniture_trashcan": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    21,
+    23,
+    43
+   ],
+   "tris": 68,
+   "file": "trashcan.glb"
+  },
+  "KFurniture_wall": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    5,
+    129
+   ],
+   "tris": 12,
+   "file": "wall.glb"
+  },
+  "KFurniture_wallCorner": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    55,
+    55,
+    129
+   ],
+   "tris": 28,
+   "file": "wallCorner.glb"
+  },
+  "KFurniture_wallCornerRond": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    55,
+    55,
+    129
+   ],
+   "tris": 116,
+   "file": "wallCornerRond.glb"
+  },
+  "KFurniture_wallDoorway": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    9,
+    129
+   ],
+   "tris": 60,
+   "file": "wallDoorway.glb"
+  },
+  "KFurniture_wallDoorwayWide": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    9,
+    129
+   ],
+   "tris": 60,
+   "file": "wallDoorwayWide.glb"
+  },
+  "KFurniture_wallHalf": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    50,
+    5,
+    129
+   ],
+   "tris": 12,
+   "file": "wallHalf.glb"
+  },
+  "KFurniture_wallWindow": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    9,
+    129
+   ],
+   "tris": 106,
+   "file": "wallWindow.glb"
+  },
+  "KFurniture_wallWindowSlide": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    9,
+    129
+   ],
+   "tris": 148,
+   "file": "wallWindowSlide.glb"
+  },
+  "KFurniture_washer": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    39,
+    39,
+    47
+   ],
+   "tris": 449,
+   "file": "washer.glb"
+  },
+  "KFurniture_washerDryerStacked": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    39,
+    39,
+    94
+   ],
+   "tris": 721,
+   "file": "washerDryerStacked.glb"
+  }
+ },
+ "skipped": []
+}

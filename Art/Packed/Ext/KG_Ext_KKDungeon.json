@@ -1,0 +1,2328 @@
+{
+ "tag": "KKDungeon",
+ "source": "D:/Kill Godot/Art/Source/KayKit_DungeonPack/KayKit_Dungeon_Pack_1.1_FREE/KayKit_Dungeon_Pack_1.1_FREE/Assets/gltf",
+ "props": {
+  "KKDungeon_banner_blue": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    150,
+    31,
+    320
+   ],
+   "tris": 97,
+   "file": "banner_blue.gltf"
+  },
+  "KKDungeon_banner_brown": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    150,
+    31,
+    320
+   ],
+   "tris": 97,
+   "file": "banner_brown.gltf"
+  },
+  "KKDungeon_banner_green": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    150,
+    31,
+    320
+   ],
+   "tris": 97,
+   "file": "banner_green.gltf"
+  },
+  "KKDungeon_banner_patternA_blue": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    150,
+    31,
+    320
+   ],
+   "tris": 110,
+   "file": "banner_patternA_blue.gltf"
+  },
+  "KKDungeon_banner_patternA_brown": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    150,
+    31,
+    320
+   ],
+   "tris": 110,
+   "file": "banner_patternA_brown.gltf"
+  },
+  "KKDungeon_banner_patternA_green": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    150,
+    31,
+    320
+   ],
+   "tris": 110,
+   "file": "banner_patternA_green.gltf"
+  },
+  "KKDungeon_banner_patternA_red": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    150,
+    31,
+    320
+   ],
+   "tris": 110,
+   "file": "banner_patternA_red.gltf"
+  },
+  "KKDungeon_banner_patternA_white": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    150,
+    31,
+    320
+   ],
+   "tris": 110,
+   "file": "banner_patternA_white.gltf"
+  },
+  "KKDungeon_banner_patternA_yellow": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    150,
+    31,
+    320
+   ],
+   "tris": 110,
+   "file": "banner_patternA_yellow.gltf"
+  },
+  "KKDungeon_banner_patternB_blue": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    150,
+    31,
+    320
+   ],
+   "tris": 97,
+   "file": "banner_patternB_blue.gltf"
+  },
+  "KKDungeon_banner_patternB_brown": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    150,
+    31,
+    320
+   ],
+   "tris": 97,
+   "file": "banner_patternB_brown.gltf"
+  },
+  "KKDungeon_banner_patternB_green": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    150,
+    31,
+    320
+   ],
+   "tris": 97,
+   "file": "banner_patternB_green.gltf"
+  },
+  "KKDungeon_banner_patternB_red": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    150,
+    31,
+    320
+   ],
+   "tris": 97,
+   "file": "banner_patternB_red.gltf"
+  },
+  "KKDungeon_banner_patternB_white": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    150,
+    31,
+    320
+   ],
+   "tris": 97,
+   "file": "banner_patternB_white.gltf"
+  },
+  "KKDungeon_banner_patternB_yellow": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    150,
+    31,
+    320
+   ],
+   "tris": 97,
+   "file": "banner_patternB_yellow.gltf"
+  },
+  "KKDungeon_banner_patternC_blue": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    150,
+    31,
+    320
+   ],
+   "tris": 97,
+   "file": "banner_patternC_blue.gltf"
+  },
+  "KKDungeon_banner_patternC_brown": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    150,
+    31,
+    320
+   ],
+   "tris": 97,
+   "file": "banner_patternC_brown.gltf"
+  },
+  "KKDungeon_banner_patternC_green": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    150,
+    31,
+    320
+   ],
+   "tris": 97,
+   "file": "banner_patternC_green.gltf"
+  },
+  "KKDungeon_banner_patternC_red": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    150,
+    31,
+    320
+   ],
+   "tris": 97,
+   "file": "banner_patternC_red.gltf"
+  },
+  "KKDungeon_banner_patternC_white": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    150,
+    31,
+    320
+   ],
+   "tris": 97,
+   "file": "banner_patternC_white.gltf"
+  },
+  "KKDungeon_banner_patternC_yellow": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    150,
+    31,
+    320
+   ],
+   "tris": 97,
+   "file": "banner_patternC_yellow.gltf"
+  },
+  "KKDungeon_banner_red": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    150,
+    31,
+    320
+   ],
+   "tris": 97,
+   "file": "banner_red.gltf"
+  },
+  "KKDungeon_banner_shield_blue": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    223,
+    37,
+    320
+   ],
+   "tris": 639,
+   "file": "banner_shield_blue.gltf"
+  },
+  "KKDungeon_banner_shield_brown": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    223,
+    37,
+    320
+   ],
+   "tris": 639,
+   "file": "banner_shield_brown.gltf"
+  },
+  "KKDungeon_banner_shield_green": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    223,
+    37,
+    320
+   ],
+   "tris": 639,
+   "file": "banner_shield_green.gltf"
+  },
+  "KKDungeon_banner_shield_red": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    223,
+    37,
+    320
+   ],
+   "tris": 639,
+   "file": "banner_shield_red.gltf"
+  },
+  "KKDungeon_banner_shield_white": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    223,
+    37,
+    320
+   ],
+   "tris": 639,
+   "file": "banner_shield_white.gltf"
+  },
+  "KKDungeon_banner_shield_yellow": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    223,
+    37,
+    320
+   ],
+   "tris": 639,
+   "file": "banner_shield_yellow.gltf"
+  },
+  "KKDungeon_banner_thin_blue": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    110,
+    36,
+    317
+   ],
+   "tris": 83,
+   "file": "banner_thin_blue.gltf"
+  },
+  "KKDungeon_banner_thin_brown": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    110,
+    36,
+    317
+   ],
+   "tris": 83,
+   "file": "banner_thin_brown.gltf"
+  },
+  "KKDungeon_banner_thin_green": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    110,
+    36,
+    317
+   ],
+   "tris": 83,
+   "file": "banner_thin_green.gltf"
+  },
+  "KKDungeon_banner_thin_red": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    110,
+    36,
+    317
+   ],
+   "tris": 83,
+   "file": "banner_thin_red.gltf"
+  },
+  "KKDungeon_banner_thin_white": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    110,
+    36,
+    317
+   ],
+   "tris": 83,
+   "file": "banner_thin_white.gltf"
+  },
+  "KKDungeon_banner_thin_yellow": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    110,
+    36,
+    317
+   ],
+   "tris": 83,
+   "file": "banner_thin_yellow.gltf"
+  },
+  "KKDungeon_banner_triple_blue": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    370,
+    36,
+    320
+   ],
+   "tris": 263,
+   "file": "banner_triple_blue.gltf"
+  },
+  "KKDungeon_banner_triple_brown": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    370,
+    36,
+    320
+   ],
+   "tris": 263,
+   "file": "banner_triple_brown.gltf"
+  },
+  "KKDungeon_banner_triple_green": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    370,
+    36,
+    320
+   ],
+   "tris": 263,
+   "file": "banner_triple_green.gltf"
+  },
+  "KKDungeon_banner_triple_red": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    370,
+    36,
+    320
+   ],
+   "tris": 263,
+   "file": "banner_triple_red.gltf"
+  },
+  "KKDungeon_banner_triple_white": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    370,
+    36,
+    320
+   ],
+   "tris": 263,
+   "file": "banner_triple_white.gltf"
+  },
+  "KKDungeon_banner_triple_yellow": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    370,
+    36,
+    320
+   ],
+   "tris": 263,
+   "file": "banner_triple_yellow.gltf"
+  },
+  "KKDungeon_banner_white": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    150,
+    31,
+    320
+   ],
+   "tris": 97,
+   "file": "banner_white.gltf"
+  },
+  "KKDungeon_banner_yellow": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    150,
+    31,
+    320
+   ],
+   "tris": 97,
+   "file": "banner_yellow.gltf"
+  },
+  "KKDungeon_barrel_large": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    180,
+    180,
+    200
+   ],
+   "tris": 561,
+   "file": "barrel_large.gltf"
+  },
+  "KKDungeon_barrel_large_decorated": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    194,
+    186,
+    256
+   ],
+   "tris": 1047,
+   "file": "barrel_large_decorated.gltf"
+  },
+  "KKDungeon_barrel_small": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    102
+   ],
+   "tris": 207,
+   "file": "barrel_small.gltf"
+  },
+  "KKDungeon_barrel_small_stack": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    185,
+    100,
+    177
+   ],
+   "tris": 1149,
+   "file": "barrel_small_stack.gltf"
+  },
+  "KKDungeon_barrier": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    400,
+    50,
+    110
+   ],
+   "tris": 90,
+   "file": "barrier.gltf"
+  },
+  "KKDungeon_barrier_colum_half": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    235,
+    70,
+    140
+   ],
+   "tris": 86,
+   "file": "barrier_colum_half.gltf"
+  },
+  "KKDungeon_barrier_column": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    400,
+    70,
+    140
+   ],
+   "tris": 110,
+   "file": "barrier_column.gltf"
+  },
+  "KKDungeon_barrier_corner": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    239,
+    239,
+    140
+   ],
+   "tris": 128,
+   "file": "barrier_corner.gltf"
+  },
+  "KKDungeon_barrier_half": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    200,
+    50,
+    110
+   ],
+   "tris": 42,
+   "file": "barrier_half.gltf"
+  },
+  "KKDungeon_bed_decorated": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    261,
+    306,
+    170
+   ],
+   "tris": 1410,
+   "file": "bed_decorated.gltf"
+  },
+  "KKDungeon_bed_floor": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    150,
+    300,
+    56
+   ],
+   "tris": 232,
+   "file": "bed_floor.gltf"
+  },
+  "KKDungeon_bed_frame": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    150,
+    300,
+    106
+   ],
+   "tris": 304,
+   "file": "bed_frame.gltf"
+  },
+  "KKDungeon_bottle_A_brown": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    37,
+    37,
+    89
+   ],
+   "tris": 144,
+   "file": "bottle_A_brown.gltf"
+  },
+  "KKDungeon_bottle_A_green": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    37,
+    37,
+    89
+   ],
+   "tris": 144,
+   "file": "bottle_A_green.gltf"
+  },
+  "KKDungeon_bottle_A_labeled_brown": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    37,
+    37,
+    89
+   ],
+   "tris": 144,
+   "file": "bottle_A_labeled_brown.gltf"
+  },
+  "KKDungeon_bottle_A_labeled_green": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    37,
+    37,
+    89
+   ],
+   "tris": 144,
+   "file": "bottle_A_labeled_green.gltf"
+  },
+  "KKDungeon_bottle_B_brown": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    55,
+    55,
+    89
+   ],
+   "tris": 144,
+   "file": "bottle_B_brown.gltf"
+  },
+  "KKDungeon_bottle_B_green": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    55,
+    55,
+    89
+   ],
+   "tris": 144,
+   "file": "bottle_B_green.gltf"
+  },
+  "KKDungeon_bottle_C_brown": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    74,
+    74,
+    91
+   ],
+   "tris": 144,
+   "file": "bottle_C_brown.gltf"
+  },
+  "KKDungeon_bottle_C_green": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    74,
+    74,
+    91
+   ],
+   "tris": 144,
+   "file": "bottle_C_green.gltf"
+  },
+  "KKDungeon_box_large": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    150,
+    150,
+    150
+   ],
+   "tris": 188,
+   "file": "box_large.gltf"
+  },
+  "KKDungeon_box_small": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    100
+   ],
+   "tris": 188,
+   "file": "box_small.gltf"
+  },
+  "KKDungeon_box_small_decorated": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    149,
+    149,
+    148
+   ],
+   "tris": 928,
+   "file": "box_small_decorated.gltf"
+  },
+  "KKDungeon_box_stacked": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    348,
+    363,
+    331
+   ],
+   "tris": 2173,
+   "file": "box_stacked.gltf"
+  },
+  "KKDungeon_candle": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    33,
+    33,
+    87
+   ],
+   "tris": 66,
+   "file": "candle.gltf"
+  },
+  "KKDungeon_candle_lit": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    33,
+    33,
+    105
+   ],
+   "tris": 120,
+   "file": "candle_lit.gltf"
+  },
+  "KKDungeon_candle_melted": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    33,
+    33,
+    70
+   ],
+   "tris": 66,
+   "file": "candle_melted.gltf"
+  },
+  "KKDungeon_candle_thin": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    19,
+    19,
+    87
+   ],
+   "tris": 66,
+   "file": "candle_thin.gltf"
+  },
+  "KKDungeon_candle_thin_lit": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    19,
+    19,
+    105
+   ],
+   "tris": 120,
+   "file": "candle_thin_lit.gltf"
+  },
+  "KKDungeon_candle_triple": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    50,
+    39,
+    87
+   ],
+   "tris": 198,
+   "file": "candle_triple.gltf"
+  },
+  "KKDungeon_ceiling_tile": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    400,
+    400,
+    35
+   ],
+   "tris": 60,
+   "file": "ceiling_tile.gltf"
+  },
+  "KKDungeon_chair": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    75,
+    75,
+    123
+   ],
+   "tris": 294,
+   "file": "chair.gltf"
+  },
+  "KKDungeon_chest": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    170,
+    145,
+    130
+   ],
+   "tris": 726,
+   "file": "chest.gltf"
+  },
+  "KKDungeon_chest_gold": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    170,
+    145,
+    130
+   ],
+   "tris": 1566,
+   "file": "chest_gold.gltf"
+  },
+  "KKDungeon_coin": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    36,
+    36,
+    13
+   ],
+   "tris": 80,
+   "file": "coin.gltf"
+  },
+  "KKDungeon_coin_stack_large": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    144,
+    166,
+    116
+   ],
+   "tris": 1776,
+   "file": "coin_stack_large.gltf"
+  },
+  "KKDungeon_coin_stack_medium": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    99,
+    103,
+    64
+   ],
+   "tris": 968,
+   "file": "coin_stack_medium.gltf"
+  },
+  "KKDungeon_coin_stack_small": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    96,
+    90,
+    48
+   ],
+   "tris": 416,
+   "file": "coin_stack_small.gltf"
+  },
+  "KKDungeon_column": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    70,
+    70,
+    140
+   ],
+   "tris": 44,
+   "file": "column.gltf"
+  },
+  "KKDungeon_crates_stacked": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    209,
+    225,
+    214
+   ],
+   "tris": 1331,
+   "file": "crates_stacked.gltf"
+  },
+  "KKDungeon_floor_dirt_large": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    400,
+    400,
+    21
+   ],
+   "tris": 104,
+   "file": "floor_dirt_large.gltf"
+  },
+  "KKDungeon_floor_dirt_large_rocky": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    400,
+    400,
+    39
+   ],
+   "tris": 187,
+   "file": "floor_dirt_large_rocky.gltf"
+  },
+  "KKDungeon_floor_dirt_small_A": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    200,
+    200,
+    19
+   ],
+   "tris": 45,
+   "file": "floor_dirt_small_A.gltf"
+  },
+  "KKDungeon_floor_dirt_small_B": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    200,
+    200,
+    19
+   ],
+   "tris": 36,
+   "file": "floor_dirt_small_B.gltf"
+  },
+  "KKDungeon_floor_dirt_small_C": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    200,
+    200,
+    21
+   ],
+   "tris": 33,
+   "file": "floor_dirt_small_C.gltf"
+  },
+  "KKDungeon_floor_dirt_small_D": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    200,
+    200,
+    14
+   ],
+   "tris": 20,
+   "file": "floor_dirt_small_D.gltf"
+  },
+  "KKDungeon_floor_dirt_small_corner": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    200,
+    200,
+    15
+   ],
+   "tris": 56,
+   "file": "floor_dirt_small_corner.gltf"
+  },
+  "KKDungeon_floor_dirt_small_weeds": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    200,
+    200,
+    30
+   ],
+   "tris": 416,
+   "file": "floor_dirt_small_weeds.gltf"
+  },
+  "KKDungeon_floor_foundation_allsides": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    220,
+    220,
+    200
+   ],
+   "tris": 360,
+   "file": "floor_foundation_allsides.gltf"
+  },
+  "KKDungeon_floor_foundation_corner": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    210,
+    210,
+    200
+   ],
+   "tris": 202,
+   "file": "floor_foundation_corner.gltf"
+  },
+  "KKDungeon_floor_foundation_diagonal_corner": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    210,
+    210,
+    200
+   ],
+   "tris": 111,
+   "file": "floor_foundation_diagonal_corner.gltf"
+  },
+  "KKDungeon_floor_foundation_front": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    200,
+    210,
+    200
+   ],
+   "tris": 123,
+   "file": "floor_foundation_front.gltf"
+  },
+  "KKDungeon_floor_foundation_front_and_back": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    200,
+    220,
+    200
+   ],
+   "tris": 202,
+   "file": "floor_foundation_front_and_back.gltf"
+  },
+  "KKDungeon_floor_foundation_front_and_sides": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    220,
+    210,
+    200
+   ],
+   "tris": 281,
+   "file": "floor_foundation_front_and_sides.gltf"
+  },
+  "KKDungeon_floor_tile_big_grate": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    400,
+    400,
+    105
+   ],
+   "tris": 292,
+   "file": "floor_tile_big_grate.gltf"
+  },
+  "KKDungeon_floor_tile_big_grate_open": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    400,
+    400,
+    105
+   ],
+   "tris": 284,
+   "file": "floor_tile_big_grate_open.gltf"
+  },
+  "KKDungeon_floor_tile_big_spikes": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    400,
+    400,
+    210
+   ],
+   "tris": 638,
+   "file": "floor_tile_big_spikes.gltf"
+  },
+  "KKDungeon_floor_tile_extralarge_grates": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    800,
+    800,
+    113
+   ],
+   "tris": 772,
+   "file": "floor_tile_extralarge_grates.gltf"
+  },
+  "KKDungeon_floor_tile_extralarge_grates_open": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    800,
+    800,
+    113
+   ],
+   "tris": 764,
+   "file": "floor_tile_extralarge_grates_open.gltf"
+  },
+  "KKDungeon_floor_tile_grate": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    400,
+    200,
+    103
+   ],
+   "tris": 142,
+   "file": "floor_tile_grate.gltf"
+  },
+  "KKDungeon_floor_tile_grate_open": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    400,
+    200,
+    103
+   ],
+   "tris": 140,
+   "file": "floor_tile_grate_open.gltf"
+  },
+  "KKDungeon_floor_tile_large": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    400,
+    400,
+    15
+   ],
+   "tris": 188,
+   "file": "floor_tile_large.gltf"
+  },
+  "KKDungeon_floor_tile_large_rocks": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    400,
+    400,
+    64
+   ],
+   "tris": 338,
+   "file": "floor_tile_large_rocks.gltf"
+  },
+  "KKDungeon_floor_tile_small": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    200,
+    200,
+    15
+   ],
+   "tris": 66,
+   "file": "floor_tile_small.gltf"
+  },
+  "KKDungeon_floor_tile_small_broken_A": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    200,
+    200,
+    15
+   ],
+   "tris": 94,
+   "file": "floor_tile_small_broken_A.gltf"
+  },
+  "KKDungeon_floor_tile_small_broken_B": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    200,
+    200,
+    15
+   ],
+   "tris": 76,
+   "file": "floor_tile_small_broken_B.gltf"
+  },
+  "KKDungeon_floor_tile_small_corner": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    200,
+    200,
+    15
+   ],
+   "tris": 31,
+   "file": "floor_tile_small_corner.gltf"
+  },
+  "KKDungeon_floor_tile_small_decorated": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    200,
+    200,
+    77
+   ],
+   "tris": 390,
+   "file": "floor_tile_small_decorated.gltf"
+  },
+  "KKDungeon_floor_tile_small_weeds_A": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    200,
+    200,
+    30
+   ],
+   "tris": 589,
+   "file": "floor_tile_small_weeds_A.gltf"
+  },
+  "KKDungeon_floor_tile_small_weeds_B": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    200,
+    200,
+    30
+   ],
+   "tris": 447,
+   "file": "floor_tile_small_weeds_B.gltf"
+  },
+  "KKDungeon_floor_wood_large": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    400,
+    400,
+    15
+   ],
+   "tris": 270,
+   "file": "floor_wood_large.gltf"
+  },
+  "KKDungeon_floor_wood_large_dark": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    400,
+    400,
+    15
+   ],
+   "tris": 270,
+   "file": "floor_wood_large_dark.gltf"
+  },
+  "KKDungeon_floor_wood_small": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    200,
+    200,
+    15
+   ],
+   "tris": 78,
+   "file": "floor_wood_small.gltf"
+  },
+  "KKDungeon_floor_wood_small_dark": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    200,
+    200,
+    15
+   ],
+   "tris": 78,
+   "file": "floor_wood_small_dark.gltf"
+  },
+  "KKDungeon_keg": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    180,
+    200,
+    205
+   ],
+   "tris": 807,
+   "file": "keg.gltf"
+  },
+  "KKDungeon_keg_decorated": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    352,
+    200,
+    205
+   ],
+   "tris": 2058,
+   "file": "keg_decorated.gltf"
+  },
+  "KKDungeon_key": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    90,
+    14,
+    40
+   ],
+   "tris": 160,
+   "file": "key.gltf"
+  },
+  "KKDungeon_keyring": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    103,
+    121,
+    26
+   ],
+   "tris": 728,
+   "file": "keyring.gltf"
+  },
+  "KKDungeon_keyring_hanging": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    68,
+    38,
+    122
+   ],
+   "tris": 728,
+   "file": "keyring_hanging.gltf"
+  },
+  "KKDungeon_pillar": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    150,
+    150,
+    400
+   ],
+   "tris": 136,
+   "file": "pillar.gltf"
+  },
+  "KKDungeon_pillar_decorated": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    223,
+    171,
+    400
+   ],
+   "tris": 761,
+   "file": "pillar_decorated.gltf"
+  },
+  "KKDungeon_plate": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    97,
+    97,
+    13
+   ],
+   "tris": 120,
+   "file": "plate.gltf"
+  },
+  "KKDungeon_plate_food_A": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    102,
+    97,
+    79
+   ],
+   "tris": 547,
+   "file": "plate_food_A.gltf"
+  },
+  "KKDungeon_plate_food_B": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    97,
+    97,
+    24
+   ],
+   "tris": 306,
+   "file": "plate_food_B.gltf"
+  },
+  "KKDungeon_plate_small": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    49,
+    49,
+    13
+   ],
+   "tris": 120,
+   "file": "plate_small.gltf"
+  },
+  "KKDungeon_plate_stack": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    56
+   ],
+   "tris": 360,
+   "file": "plate_stack.gltf"
+  },
+  "KKDungeon_rubble_half": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    400,
+    300,
+    350
+   ],
+   "tris": 390,
+   "file": "rubble_half.gltf"
+  },
+  "KKDungeon_rubble_large": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    813,
+    318,
+    350
+   ],
+   "tris": 788,
+   "file": "rubble_large.gltf"
+  },
+  "KKDungeon_shelf_large": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    200,
+    50,
+    45
+   ],
+   "tris": 76,
+   "file": "shelf_large.gltf"
+  },
+  "KKDungeon_shelf_small": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    50,
+    40
+   ],
+   "tris": 60,
+   "file": "shelf_small.gltf"
+  },
+  "KKDungeon_shelf_small_candles": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    50,
+    99
+   ],
+   "tris": 231,
+   "file": "shelf_small_candles.gltf"
+  },
+  "KKDungeon_shelves": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    200,
+    50,
+    195
+   ],
+   "tris": 152,
+   "file": "shelves.gltf"
+  },
+  "KKDungeon_stairs": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    500,
+    400,
+    510
+   ],
+   "tris": 358,
+   "file": "stairs.gltf"
+  },
+  "KKDungeon_stairs_long": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    500,
+    800,
+    510
+   ],
+   "tris": 442,
+   "file": "stairs_long.gltf"
+  },
+  "KKDungeon_stairs_long_modular_center": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    200,
+    800,
+    400
+   ],
+   "tris": 54,
+   "file": "stairs_long_modular_center.gltf"
+  },
+  "KKDungeon_stairs_long_modular_left": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    150,
+    800,
+    510
+   ],
+   "tris": 248,
+   "file": "stairs_long_modular_left.gltf"
+  },
+  "KKDungeon_stairs_long_modular_right": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    150,
+    800,
+    510
+   ],
+   "tris": 248,
+   "file": "stairs_long_modular_right.gltf"
+  },
+  "KKDungeon_stairs_modular_center": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    200,
+    400,
+    400
+   ],
+   "tris": 54,
+   "file": "stairs_modular_center.gltf"
+  },
+  "KKDungeon_stairs_modular_left": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    150,
+    400,
+    510
+   ],
+   "tris": 206,
+   "file": "stairs_modular_left.gltf"
+  },
+  "KKDungeon_stairs_modular_right": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    150,
+    400,
+    510
+   ],
+   "tris": 206,
+   "file": "stairs_modular_right.gltf"
+  },
+  "KKDungeon_stairs_narrow": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    400,
+    400,
+    510
+   ],
+   "tris": 358,
+   "file": "stairs_narrow.gltf"
+  },
+  "KKDungeon_stairs_wall_left": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    400,
+    500,
+    510
+   ],
+   "tris": 574,
+   "file": "stairs_wall_left.gltf"
+  },
+  "KKDungeon_stairs_wall_right": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    400,
+    500,
+    510
+   ],
+   "tris": 574,
+   "file": "stairs_wall_right.gltf"
+  },
+  "KKDungeon_stairs_walled": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    500,
+    400,
+    400
+   ],
+   "tris": 790,
+   "file": "stairs_walled.gltf"
+  },
+  "KKDungeon_stairs_wide": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    700,
+    400,
+    510
+   ],
+   "tris": 358,
+   "file": "stairs_wide.gltf"
+  },
+  "KKDungeon_stairs_wood": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    330,
+    600,
+    405
+   ],
+   "tris": 296,
+   "file": "stairs_wood.gltf"
+  },
+  "KKDungeon_stairs_wood_decorated": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    330,
+    600,
+    405
+   ],
+   "tris": 2537,
+   "file": "stairs_wood_decorated.gltf"
+  },
+  "KKDungeon_stool": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    75,
+    75,
+    50
+   ],
+   "tris": 172,
+   "file": "stool.gltf"
+  },
+  "KKDungeon_sword_shield": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    223,
+    34,
+    167
+   ],
+   "tris": 542,
+   "file": "sword_shield.gltf"
+  },
+  "KKDungeon_sword_shield_broken": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    143,
+    34,
+    196
+   ],
+   "tris": 396,
+   "file": "sword_shield_broken.gltf"
+  },
+  "KKDungeon_sword_shield_gold": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    223,
+    34,
+    167
+   ],
+   "tris": 542,
+   "file": "sword_shield_gold.gltf"
+  },
+  "KKDungeon_table_long": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    200,
+    400,
+    100
+   ],
+   "tris": 280,
+   "file": "table_long.gltf"
+  },
+  "KKDungeon_table_long_broken": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    241,
+    440,
+    127
+   ],
+   "tris": 550,
+   "file": "table_long_broken.gltf"
+  },
+  "KKDungeon_table_long_decorated_A": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    206,
+    400,
+    189
+   ],
+   "tris": 1961,
+   "file": "table_long_decorated_A.gltf"
+  },
+  "KKDungeon_table_long_decorated_C": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    200,
+    403,
+    277
+   ],
+   "tris": 3499,
+   "file": "table_long_decorated_C.gltf"
+  },
+  "KKDungeon_table_long_tablecloth": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    200,
+    400,
+    100
+   ],
+   "tris": 354,
+   "file": "table_long_tablecloth.gltf"
+  },
+  "KKDungeon_table_long_tablecloth_decorated_A": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    206,
+    400,
+    189
+   ],
+   "tris": 2035,
+   "file": "table_long_tablecloth_decorated_A.gltf"
+  },
+  "KKDungeon_table_medium": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    200,
+    200,
+    100
+   ],
+   "tris": 256,
+   "file": "table_medium.gltf"
+  },
+  "KKDungeon_table_medium_broken": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    228,
+    243,
+    97
+   ],
+   "tris": 247,
+   "file": "table_medium_broken.gltf"
+  },
+  "KKDungeon_table_medium_decorated_A": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    200,
+    200,
+    189
+   ],
+   "tris": 1186,
+   "file": "table_medium_decorated_A.gltf"
+  },
+  "KKDungeon_table_medium_tablecloth": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    200,
+    200,
+    100
+   ],
+   "tris": 270,
+   "file": "table_medium_tablecloth.gltf"
+  },
+  "KKDungeon_table_medium_tablecloth_decorated_B": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    200,
+    200,
+    189
+   ],
+   "tris": 1200,
+   "file": "table_medium_tablecloth_decorated_B.gltf"
+  },
+  "KKDungeon_table_small": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    100,
+    100
+   ],
+   "tris": 192,
+   "file": "table_small.gltf"
+  },
+  "KKDungeon_table_small_decorated_A": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    104,
+    121,
+    162
+   ],
+   "tris": 986,
+   "file": "table_small_decorated_A.gltf"
+  },
+  "KKDungeon_table_small_decorated_B": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    101,
+    100,
+    216
+   ],
+   "tris": 1576,
+   "file": "table_small_decorated_B.gltf"
+  },
+  "KKDungeon_torch": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    55,
+    55,
+    104
+   ],
+   "tris": 216,
+   "file": "torch.gltf"
+  },
+  "KKDungeon_torch_lit": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    55,
+    55,
+    113
+   ],
+   "tris": 270,
+   "file": "torch_lit.gltf"
+  },
+  "KKDungeon_torch_mounted": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    55,
+    62,
+    106
+   ],
+   "tris": 278,
+   "file": "torch_mounted.gltf"
+  },
+  "KKDungeon_trunk_large_A": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    150,
+    130,
+    100
+   ],
+   "tris": 204,
+   "file": "trunk_large_A.gltf"
+  },
+  "KKDungeon_trunk_large_B": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    150,
+    130,
+    100
+   ],
+   "tris": 204,
+   "file": "trunk_large_B.gltf"
+  },
+  "KKDungeon_trunk_large_C": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    150,
+    130,
+    100
+   ],
+   "tris": 204,
+   "file": "trunk_large_C.gltf"
+  },
+  "KKDungeon_trunk_medium_A": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    95,
+    88,
+    73
+   ],
+   "tris": 148,
+   "file": "trunk_medium_A.gltf"
+  },
+  "KKDungeon_trunk_medium_B": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    95,
+    88,
+    73
+   ],
+   "tris": 148,
+   "file": "trunk_medium_B.gltf"
+  },
+  "KKDungeon_trunk_medium_C": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    95,
+    88,
+    73
+   ],
+   "tris": 148,
+   "file": "trunk_medium_C.gltf"
+  },
+  "KKDungeon_trunk_small_A": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    68,
+    58,
+    48
+   ],
+   "tris": 204,
+   "file": "trunk_small_A.gltf"
+  },
+  "KKDungeon_trunk_small_B": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    68,
+    58,
+    48
+   ],
+   "tris": 204,
+   "file": "trunk_small_B.gltf"
+  },
+  "KKDungeon_trunk_small_C": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    68,
+    58,
+    48
+   ],
+   "tris": 204,
+   "file": "trunk_small_C.gltf"
+  },
+  "KKDungeon_wall": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    400,
+    100,
+    400
+   ],
+   "tris": 494,
+   "file": "wall.gltf"
+  },
+  "KKDungeon_wall_Tsplit": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    400,
+    250,
+    400
+   ],
+   "tris": 596,
+   "file": "wall_Tsplit.gltf"
+  },
+  "KKDungeon_wall_Tsplit_sloped": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    400,
+    250,
+    400
+   ],
+   "tris": 555,
+   "file": "wall_Tsplit_sloped.gltf"
+  },
+  "KKDungeon_wall_arched": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    400,
+    100,
+    400
+   ],
+   "tris": 724,
+   "file": "wall_arched.gltf"
+  },
+  "KKDungeon_wall_archedwindow_gated": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    400,
+    100,
+    400
+   ],
+   "tris": 732,
+   "file": "wall_archedwindow_gated.gltf"
+  },
+  "KKDungeon_wall_archedwindow_gated_scaffold": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    400,
+    100,
+    400
+   ],
+   "tris": 674,
+   "file": "wall_archedwindow_gated_scaffold.gltf"
+  },
+  "KKDungeon_wall_archedwindow_open": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    400,
+    100,
+    400
+   ],
+   "tris": 635,
+   "file": "wall_archedwindow_open.gltf"
+  },
+  "KKDungeon_wall_broken": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    400,
+    100,
+    400
+   ],
+   "tris": 784,
+   "file": "wall_broken.gltf"
+  },
+  "KKDungeon_wall_corner": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    250,
+    250,
+    400
+   ],
+   "tris": 443,
+   "file": "wall_corner.gltf"
+  },
+  "KKDungeon_wall_corner_gated": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    250,
+    250,
+    400
+   ],
+   "tris": 557,
+   "file": "wall_corner_gated.gltf"
+  },
+  "KKDungeon_wall_corner_scaffold": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    250,
+    250,
+    400
+   ],
+   "tris": 515,
+   "file": "wall_corner_scaffold.gltf"
+  },
+  "KKDungeon_wall_corner_small": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    150,
+    150,
+    400
+   ],
+   "tris": 223,
+   "file": "wall_corner_small.gltf"
+  },
+  "KKDungeon_wall_cracked": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    400,
+    126,
+    400
+   ],
+   "tris": 2010,
+   "file": "wall_cracked.gltf"
+  },
+  "KKDungeon_wall_crossing": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    400,
+    400,
+    400
+   ],
+   "tris": 698,
+   "file": "wall_crossing.gltf"
+  },
+  "KKDungeon_wall_doorway": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    400,
+    100,
+    400
+   ],
+   "tris": 1068,
+   "file": "wall_doorway.gltf"
+  },
+  "KKDungeon_wall_doorway_Tsplit": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    800,
+    250,
+    400
+   ],
+   "tris": 1092,
+   "file": "wall_doorway_Tsplit.gltf"
+  },
+  "KKDungeon_wall_doorway_scaffold": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    400,
+    100,
+    400
+   ],
+   "tris": 1150,
+   "file": "wall_doorway_scaffold.gltf"
+  },
+  "KKDungeon_wall_doorway_sides": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    500,
+    400,
+    400
+   ],
+   "tris": 1160,
+   "file": "wall_doorway_sides.gltf"
+  },
+  "KKDungeon_wall_endcap": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    107,
+    100,
+    400
+   ],
+   "tris": 222,
+   "file": "wall_endcap.gltf"
+  },
+  "KKDungeon_wall_gated": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    400,
+    100,
+    400
+   ],
+   "tris": 449,
+   "file": "wall_gated.gltf"
+  },
+  "KKDungeon_wall_half": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    200,
+    100,
+    400
+   ],
+   "tris": 272,
+   "file": "wall_half.gltf"
+  },
+  "KKDungeon_wall_half_endcap": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    200,
+    100,
+    400
+   ],
+   "tris": 268,
+   "file": "wall_half_endcap.gltf"
+  },
+  "KKDungeon_wall_half_endcap_sloped": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    200,
+    100,
+    400
+   ],
+   "tris": 230,
+   "file": "wall_half_endcap_sloped.gltf"
+  },
+  "KKDungeon_wall_open_scaffold": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    400,
+    100,
+    400
+   ],
+   "tris": 196,
+   "file": "wall_open_scaffold.gltf"
+  },
+  "KKDungeon_wall_pillar": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    400,
+    150,
+    400
+   ],
+   "tris": 540,
+   "file": "wall_pillar.gltf"
+  },
+  "KKDungeon_wall_scaffold": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    400,
+    100,
+    400
+   ],
+   "tris": 584,
+   "file": "wall_scaffold.gltf"
+  },
+  "KKDungeon_wall_shelves": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    400,
+    137,
+    400
+   ],
+   "tris": 1582,
+   "file": "wall_shelves.gltf"
+  },
+  "KKDungeon_wall_sloped": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    400,
+    100,
+    400
+   ],
+   "tris": 257,
+   "file": "wall_sloped.gltf"
+  },
+  "KKDungeon_wall_window_closed": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    400,
+    100,
+    400
+   ],
+   "tris": 664,
+   "file": "wall_window_closed.gltf"
+  },
+  "KKDungeon_wall_window_closed_scaffold": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    400,
+    100,
+    400
+   ],
+   "tris": 736,
+   "file": "wall_window_closed_scaffold.gltf"
+  },
+  "KKDungeon_wall_window_open": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    400,
+    100,
+    400
+   ],
+   "tris": 604,
+   "file": "wall_window_open.gltf"
+  },
+  "KKDungeon_wall_window_open_scaffold": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    400,
+    100,
+    400
+   ],
+   "tris": 676,
+   "file": "wall_window_open_scaffold.gltf"
+  }
+ },
+ "skipped": []
+}

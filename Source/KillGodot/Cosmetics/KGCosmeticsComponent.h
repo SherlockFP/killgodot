@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "Character/KGVillagerLook.h"
 #include "KGCosmeticsComponent.generated.h"
 
 class AKGCharacter;
@@ -34,6 +35,20 @@ public:
 	UFUNCTION(BlueprintPure, Category = "KillGodot|Cosmetics")
 	const TArray<FName>& GetEquipped() const { return Equipped; }
 
+	/**
+	 * SPRINT-027a: this player's villager look. Public (everyone renders your body), seeded per match, unique in the
+	 * lobby, assigned by the server on the first tick and re-rolled when the owner locks a preferred archetype.
+	 * A pure function of (seed, player id, other looks, preference): no role goes in (KGVillagerLook.h).
+	 */
+	UFUNCTION(BlueprintPure, Category = "KillGodot|Cosmetics")
+	const FKGVillagerLook& GetLook() const { return Look; }
+
+	/** Authority: (re)generates the look, unique against every other player state in the game state. */
+	void AssignLook(FName PreferredArchetype);
+
+	/** Seed the looks derive from: the running match's seed, else a per-process lobby seed. */
+	static uint64 LookSeed(const UWorld* World);
+
 	/** Owning client (or host): sends the local profile's equipped ids to the server. */
 	void PushLocalLoadout();
 
@@ -53,8 +68,18 @@ protected:
 	UFUNCTION(Server, Reliable)
 	void ServerSetLoadout(const TArray<FName>& Ids);
 
+	/** Owning client -> server: the profile's locked archetype (NAME_None = random). */
+	UFUNCTION(Server, Reliable)
+	void ServerSetPreferredLook(FName Archetype);
+
 	UFUNCTION()
 	void OnRep_Equipped();
+
+	UPROPERTY(Replicated, SaveGame)
+	FKGVillagerLook Look;
+
+	/** Server-side memory of the owner's preference (not replicated; the look itself is). */
+	FName PreferredLook;
 
 	UFUNCTION()
 	void HandlePawnSet(APlayerState* Player, APawn* NewPawn, APawn* OldPawn);

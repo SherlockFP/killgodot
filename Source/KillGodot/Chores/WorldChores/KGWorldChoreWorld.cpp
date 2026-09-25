@@ -885,6 +885,10 @@ void UKGWorldChoreSubsystem::OnWorldBeginPlay(UWorld& InWorld)
 void UKGWorldChoreSubsystem::SetupWorld(bool bForce)
 {
 	UWorld* World = GetWorld();
+	if (World && World->IsGameWorld())
+	{
+		FKGWorldChoreCatalog::SelectForWorld(World);   // one catalog per map (Morrowmere v2, Storm Manor)
+	}
 	const FKGWorldChoreCatalog& Cat = FKGWorldChoreCatalog::Get();
 	if (bSetUp || !World || (!bForce && !Cat.ForMap(World)) || Cat.Anchors.Num() == 0)
 	{
@@ -1165,6 +1169,17 @@ void UKGWorldChoreSubsystem::TickSmoke(float DeltaTime)
 		{
 			++SmokeRegrabs;
 			AimAt(P->Item->GetActorLocation());
+			{
+				// Diagnostics: what does the E trace see from here?
+				FHitResult Hit;
+				const FVector Eye = Char->GetPawnViewLocation();
+				const bool bHit = Char->GetWorld()->LineTraceSingleByChannel(Hit, Eye, Eye + (P->Item->GetActorLocation() - Eye).GetSafeNormal() * 260.0f,
+				                                                              ECC_Visibility, FCollisionQueryParams(SCENE_QUERY_STAT(KGSmokeGrab), false, Char));
+				UE_LOG(LogKillGodot, Log, TEXT("KG_WC_SMOKE regrab %d: me=%s item=%s dist=%.0f hit=%s/%s"), SmokeRegrabs,
+				       *Char->GetActorLocation().ToCompactString(), *P->Item->GetActorLocation().ToCompactString(),
+				       FVector::Dist(Eye, P->Item->GetActorLocation()), bHit && Hit.GetActor() ? *Hit.GetActor()->GetName() : TEXT("-"),
+				       bHit && Hit.GetComponent() ? *Hit.GetComponent()->GetName() : TEXT("-"));
+			}
 			Char->Interact();
 			SmokeStateClock = 0.0f;
 		}

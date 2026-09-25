@@ -1,0 +1,370 @@
+{
+ "tag": "SPDocks",
+ "source": "D:/Kill Godot/Art/Source/SimplePolygon_WoodenDocks",
+ "props": {
+  "SPDocks_Dock_Big_Nails_Cylinder": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    337,
+    345,
+    190
+   ],
+   "tris": 1264,
+   "file": "LowpolyDocks.fbx"
+  },
+  "SPDocks_Dock_Big_Nails_Cylinder_2": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    342,
+    158,
+    190
+   ],
+   "tris": 632,
+   "file": "LowpolyDocks.fbx"
+  },
+  "SPDocks_Dock_Big_Nails_Cylinder_3": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    4567,
+    1051,
+    511
+   ],
+   "tris": 8402,
+   "file": "LowpolyDocks.fbx"
+  },
+  "SPDocks_Dock_Big_Nails_Cylinder_4": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    349,
+    159,
+    190
+   ],
+   "tris": 728,
+   "file": "LowpolyDocks.fbx"
+  },
+  "SPDocks_Dock_Big_Nails_Cylinder_5": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    350,
+    334,
+    190
+   ],
+   "tris": 1456,
+   "file": "LowpolyDocks.fbx"
+  },
+  "SPDocks_Dock_Big_Nails_Cylinder_6": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    322,
+    157,
+    153
+   ],
+   "tris": 636,
+   "file": "LowpolyDocks.fbx"
+  },
+  "SPDocks_Dock_Big_Nails_Cylinder_7": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    331,
+    324,
+    153
+   ],
+   "tris": 1272,
+   "file": "LowpolyDocks.fbx"
+  },
+  "SPDocks_Dock_Big_Nails_Cylinder_8": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    328,
+    187,
+    111
+   ],
+   "tris": 8208,
+   "file": "LowpolyDocks.fbx"
+  },
+  "SPDocks_Dock_Big_Nails_Cylinder_9": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    328,
+    187,
+    202
+   ],
+   "tris": 12312,
+   "file": "LowpolyDocks.fbx"
+  },
+  "SPDocks_Dock_Big_Nails_Cylinder_10": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    629,
+    251,
+    60
+   ],
+   "tris": 144,
+   "file": "LowpolyDocks.fbx"
+  },
+  "SPDocks_Dock_Big_Nails_Cylinder_11": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    629,
+    252,
+    89
+   ],
+   "tris": 216,
+   "file": "LowpolyDocks.fbx"
+  },
+  "SPDocks_Dock_Big_Nails_Cylinder_12": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    606,
+    246,
+    160
+   ],
+   "tris": 276,
+   "file": "LowpolyDocks.fbx"
+  },
+  "SPDocks_Dock_Big_Nails_Cylinder_13": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    607,
+    338,
+    177
+   ],
+   "tris": 460,
+   "file": "LowpolyDocks.fbx"
+  },
+  "SPDocks_Dock_Big_Nails_Cylinder_14": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    2037,
+    841,
+    352
+   ],
+   "tris": 1408,
+   "file": "LowpolyDocks.fbx"
+  },
+  "SPDocks_Dock_Big_Nails_Cylinder_15": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    162,
+    158,
+    190
+   ],
+   "tris": 316,
+   "file": "LowpolyDocks.fbx"
+  },
+  "SPDocks_Dock_Big_Nails_Cylinder_16": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    162,
+    158,
+    190
+   ],
+   "tris": 364,
+   "file": "LowpolyDocks.fbx"
+  },
+  "SPDocks_Dock_Big_Nails_Cylinder_17": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    1053,
+    431,
+    214
+   ],
+   "tris": 244,
+   "file": "LowpolyDocks.fbx"
+  },
+  "SPDocks_Dock_Big_Nails_Cylinder_18": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    1050,
+    428,
+    214
+   ],
+   "tris": 380,
+   "file": "LowpolyDocks.fbx"
+  },
+  "SPDocks_Dock_Big_Nails_Cylinder_19": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    156,
+    156,
+    153
+   ],
+   "tris": 318,
+   "file": "LowpolyDocks.fbx"
+  },
+  "SPDocks_Dock_Big_Nails_Cylinder_20": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    1983,
+    1755,
+    352
+   ],
+   "tris": 3241,
+   "file": "LowpolyDocks.fbx"
+  },
+  "SPDocks_Dock_Big_Nails_Cylinder_21": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    1985,
+    1759,
+    352
+   ],
+   "tris": 1953,
+   "file": "LowpolyDocks.fbx"
+  },
+  "SPDocks_Dock_Big_Nails_Cylinder_22": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    2037,
+    846,
+    352
+   ],
+   "tris": 960,
+   "file": "LowpolyDocks.fbx"
+  },
+  "SPDocks_Dock_Big_Nails_Cylinder_23": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    1036,
+    824,
+    352
+   ],
+   "tris": 534,
+   "file": "LowpolyDocks.fbx"
+  },
+  "SPDocks_Dock_Big_Nails_Cylinder_24": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    1036,
+    825,
+    352
+   ],
+   "tris": 758,
+   "file": "LowpolyDocks.fbx"
+  },
+  "SPDocks_Dock_Big_Nails_Cylinder_25": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    490,
+    50,
+    181
+   ],
+   "tris": 68,
+   "file": "LowpolyDocks.fbx"
+  },
+  "SPDocks_Dock_Big_Nails_Cylinder_26": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    371,
+    48,
+    181
+   ],
+   "tris": 68,
+   "file": "LowpolyDocks.fbx"
+  },
+  "SPDocks_Dock_Big_Nails_Cylinder_27": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    153,
+    185,
+    111
+   ],
+   "tris": 4104,
+   "file": "LowpolyDocks.fbx"
+  },
+  "SPDocks_Dock_Big_Nails_Cylinder_28": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    602,
+    112,
+    90
+   ],
+   "tris": 92,
+   "file": "LowpolyDocks.fbx"
+  },
+  "SPDocks_Dock_Big_Nails_Cylinder_29": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    59,
+    558,
+    25
+   ],
+   "tris": 68,
+   "file": "LowpolyDocks.fbx"
+  },
+  "SPDocks_Dock_Big_Nails_Cylinder_30": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    199,
+    565,
+    25
+   ],
+   "tris": 136,
+   "file": "LowpolyDocks.fbx"
+  },
+  "SPDocks_Dock_Big_Nails_Cylinder_31": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    621,
+    112,
+    30
+   ],
+   "tris": 36,
+   "file": "LowpolyDocks.fbx"
+  },
+  "SPDocks_Dock_Big_Nails_Cylinder_32": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    708,
+    83,
+    352
+   ],
+   "tris": 104,
+   "file": "LowpolyDocks.fbx"
+  },
+  "SPDocks_Dock_Big_Nails_Cylinder_33": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    76,
+    78,
+    352
+   ],
+   "tris": 52,
+   "file": "LowpolyDocks.fbx"
+  }
+ },
+ "skipped": []
+}

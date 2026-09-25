@@ -1,0 +1,392 @@
+{
+ "tag": "Yume",
+ "source": "D:/Kill Godot/Art/Source/YumeForge_JapanVillageFree/Free_JapanVillage/FreePack/GLTF",
+ "props": {
+  "Yume_Barrel": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    104,
+    104,
+    120
+   ],
+   "tris": 228,
+   "file": "Barrel.gltf"
+  },
+  "Yume_Basket_L": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    110,
+    110,
+    40
+   ],
+   "tris": 140,
+   "file": "Basket_L.gltf"
+  },
+  "Yume_Basket_S": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    55,
+    55,
+    20
+   ],
+   "tris": 140,
+   "file": "Basket_S.gltf"
+  },
+  "Yume_Carrot_Orange": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    18,
+    15,
+    35
+   ],
+   "tris": 112,
+   "file": "Carrot_Orange.gltf"
+  },
+  "Yume_CeremicPot": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    51,
+    49,
+    54
+   ],
+   "tris": 296,
+   "file": "CeremicPot.gltf"
+  },
+  "Yume_Chair": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    73,
+    68,
+    91
+   ],
+   "tris": 216,
+   "file": "Chair.gltf"
+  },
+  "Yume_Corn": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    16,
+    16,
+    32
+   ],
+   "tris": 148,
+   "file": "Corn.gltf"
+  },
+  "Yume_Fence_Wood": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    400,
+    27,
+    115
+   ],
+   "tris": 96,
+   "file": "Fence_Wood.gltf"
+  },
+  "Yume_House_4x5": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    552,
+    635,
+    478
+   ],
+   "tris": 1644,
+   "file": "House_4x5.gltf"
+  },
+  "Yume_Ladder": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    94,
+    20,
+    181
+   ],
+   "tris": 110,
+   "file": "Ladder.gltf"
+  },
+  "Yume_LogStorage": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    190,
+    107,
+    150
+   ],
+   "tris": 172,
+   "file": "LogStorage.gltf"
+  },
+  "Yume_Log_Cluster": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    113,
+    84,
+    68
+   ],
+   "tris": 465,
+   "file": "Log_Cluster.gltf"
+  },
+  "Yume_Mallet": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    30,
+    18,
+    45
+   ],
+   "tris": 112,
+   "file": "Mallet.gltf"
+  },
+  "Yume_MarketStall_Table_Flat": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    100,
+    50,
+    50
+   ],
+   "tris": 130,
+   "file": "MarketStall_Table_Flat.gltf"
+  },
+  "Yume_MarketStall_Table_SideTiered": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    200,
+    100,
+    70
+   ],
+   "tris": 148,
+   "file": "MarketStall_Table_SideTiered.gltf"
+  },
+  "Yume_MarketStall_Table_Tiered": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    300,
+    150,
+    80
+   ],
+   "tris": 145,
+   "file": "MarketStall_Table_Tiered.gltf"
+  },
+  "Yume_MarketStall_Table_wSpace": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    200,
+    100,
+    50
+   ],
+   "tris": 138,
+   "file": "MarketStall_Table_wSpace.gltf"
+  },
+  "Yume_Potato": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    15,
+    12,
+    21
+   ],
+   "tris": 124,
+   "file": "Potato.gltf"
+  },
+  "Yume_RiceBin": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    93,
+    93,
+    102
+   ],
+   "tris": 188,
+   "file": "RiceBin.gltf"
+  },
+  "Yume_Road_Corner_Open": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    559,
+    544,
+    17
+   ],
+   "tris": 80,
+   "file": "Road_Corner_Open.gltf"
+  },
+  "Yume_Road_Cross": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    780,
+    745,
+    22
+   ],
+   "tris": 142,
+   "file": "Road_Cross.gltf"
+  },
+  "Yume_Road_End_S": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    312,
+    300,
+    12
+   ],
+   "tris": 32,
+   "file": "Road_End_S.gltf"
+  },
+  "Yume_Sickle": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    47,
+    17,
+    90
+   ],
+   "tris": 74,
+   "file": "Sickle.gltf"
+  },
+  "Yume_Sprout": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    69,
+    33,
+    41
+   ],
+   "tris": 72,
+   "file": "Sprout.gltf"
+  },
+  "Yume_StoneLantern": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    66,
+    66,
+    171
+   ],
+   "tris": 214,
+   "file": "StoneLantern.gltf"
+  },
+  "Yume_Sweets_RiceDumpling_SoySauce": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    9,
+    11,
+    41
+   ],
+   "tris": 72,
+   "file": "Sweets_RiceDumpling_SoySauce.gltf"
+  },
+  "Yume_Sweets_RiceDumpling_Spring": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    9,
+    11,
+    41
+   ],
+   "tris": 72,
+   "file": "Sweets_RiceDumpling_Spring.gltf"
+  },
+  "Yume_Table_Circular": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    114,
+    114,
+    71
+   ],
+   "tris": 92,
+   "file": "Table_Circular.gltf"
+  },
+  "Yume_Tomato": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    21,
+    21,
+    20
+   ],
+   "tris": 100,
+   "file": "Tomato.gltf"
+  },
+  "Yume_ToriGate": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    515,
+    134,
+    428
+   ],
+   "tris": 484,
+   "file": "ToriGate.gltf"
+  },
+  "Yume_Tree_RedPlum": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    448,
+    355,
+    480
+   ],
+   "tris": 128,
+   "file": "Tree_RedPlum.gltf"
+  },
+  "Yume_WoodenBox": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    94,
+    94,
+    88
+   ],
+   "tris": 124,
+   "file": "WoodenBox.gltf"
+  },
+  "Yume_WoodenBox_Stack": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    226,
+    141,
+    177
+   ],
+   "tris": 372,
+   "file": "WoodenBox_Stack.gltf"
+  },
+  "Yume_WoodenCrate_L": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    151,
+    91,
+    70
+   ],
+   "tris": 204,
+   "file": "WoodenCrate_L.gltf"
+  },
+  "Yume_WoodenCrate_S": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    104,
+    65,
+    50
+   ],
+   "tris": 204,
+   "file": "WoodenCrate_S.gltf"
+  }
+ },
+ "skipped": []
+}

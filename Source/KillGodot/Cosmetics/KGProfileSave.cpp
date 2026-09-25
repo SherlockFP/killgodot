@@ -99,6 +99,17 @@ bool UKGProfileSave::Owns(FName CosmeticId) const
 	return OwnedCosmetics.Contains(CosmeticId);
 }
 
+void UKGProfileSave::SetPreferredLook(FName Archetype)
+{
+	if (Archetype == PreferredLook)
+	{
+		return;
+	}
+	PreferredLook = Archetype;
+	SaveProfile();
+	OnProfileChanged().Broadcast();   // the cosmetics component pushes it to the server like the loadout
+}
+
 EKGBuyResult UKGProfileSave::Buy(FName CosmeticId)
 {
 	const FKGCosmeticDef* Def = UKGCosmeticCatalog::Find(CosmeticId);

@@ -1,4 +1,5 @@
 #include "UI/Menu/KGMenuStyle.h"
+#include "UI/KGUITokens.h"
 
 #include "Brushes/SlateNoResource.h"
 #include "Brushes/SlateRoundedBoxBrush.h"
@@ -82,18 +83,19 @@ void FKGMenuStyle::DrawRoundedBox(FSlateWindowElementList& Out, int32 Layer, con
 
 FKGMenuStyle::FKGMenuStyle()
 {
-	Ink = Hex(0x120D17);
-	Night = Hex(0x1D1524);
-	Panel = Hex(0x2A1F31);
-	PanelHi = Hex(0x3A2B42);
-	Cream = Hex(0xF6E7C8);
-	CreamDim = Hex(0xCDBB98);
-	Muted = Hex(0x8E7D6E);
-	Gold = Hex(0xF2C230);
-	Lantern = Hex(0xF28C28);
-	Crimson = Hex(0xC8102E);
-	Ghost = Hex(0x4FD1C5);
-	Good = Hex(0x8BD160);
+	// SPRINT-025: colour roles from UI/KGUITokens.h (shared with the HUD and the chore panel).
+	Ink = Hex(KGUI::Ink);
+	Night = Hex(KGUI::Night);
+	Panel = Hex(KGUI::Panel);
+	PanelHi = Hex(KGUI::PanelHi);
+	Cream = Hex(KGUI::Cream);
+	CreamDim = Hex(KGUI::CreamDim);
+	Muted = Hex(KGUI::Muted);
+	Gold = Hex(KGUI::Gold);
+	Lantern = Hex(KGUI::Lantern);
+	Crimson = Hex(KGUI::Crimson);
+	Ghost = Hex(KGUI::Ghost);
+	Good = Hex(KGUI::Good);
 
 	TitleFont = Font("Black", 108, 20);
 	HeadingFont = Font("Black", 34, 40);

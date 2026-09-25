@@ -1,0 +1,150 @@
+{
+ "tag": "QFarm",
+ "source": "D:/Kill Godot/Art/Source/Quaternius_FarmBuildings",
+ "props": {
+  "QFarm_Barn": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    773,
+    822,
+    601
+   ],
+   "tris": 2910,
+   "file": "Farm Buildings by Quaternius/FBX/Barn.fbx"
+  },
+  "QFarm_BigBarn": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    773,
+    822,
+    789
+   ],
+   "tris": 4220,
+   "file": "Farm Buildings by Quaternius/FBX/BigBarn.fbx"
+  },
+  "QFarm_ChickenCoop": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    241,
+    215,
+    185
+   ],
+   "tris": 948,
+   "file": "Farm Buildings by Quaternius/FBX/ChickenCoop.fbx"
+  },
+  "QFarm_Fence": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    589,
+    17,
+    110
+   ],
+   "tris": 188,
+   "file": "Farm Buildings by Quaternius/FBX/Fence.fbx"
+  },
+  "QFarm_Fence2": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    589,
+    17,
+    117
+   ],
+   "tris": 324,
+   "file": "Farm Buildings by Quaternius/FBX/Fence2.fbx"
+  },
+  "QFarm_OpenBarn": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    574,
+    618,
+    474
+   ],
+   "tris": 1612,
+   "file": "Farm Buildings by Quaternius/FBX/OpenBarn.fbx"
+  },
+  "QFarm_Silo": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    367,
+    351,
+    907
+   ],
+   "tris": 1592,
+   "file": "Farm Buildings by Quaternius/FBX/Silo.fbx"
+  },
+  "QFarm_Silo_House": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    534,
+    351,
+    907
+   ],
+   "tris": 2880,
+   "file": "Farm Buildings by Quaternius/FBX/Silo_House.fbx"
+  },
+  "QFarm_SmallBarn": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    608,
+    627,
+    496
+   ],
+   "tris": 2176,
+   "file": "Farm Buildings by Quaternius/FBX/SmallBarn.fbx"
+  },
+  "QFarm_TowerWindmill": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    792,
+    499,
+    1141
+   ],
+   "tris": 7827,
+   "file": "Farm Buildings by Quaternius/FBX/TowerWindmill.fbx"
+  },
+  "QFarm_WaterTower": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    253,
+    249,
+    843
+   ],
+   "tris": 2507,
+   "file": "Farm Buildings by Quaternius/FBX/WaterTower.fbx"
+  },
+  "QFarm_Well": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    128,
+    149,
+    215
+   ],
+   "tris": 2864,
+   "file": "Farm Buildings by Quaternius/FBX/Well.fbx"
+  },
+  "QFarm_Windmill": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    651,
+    190,
+    1120
+   ],
+   "tris": 1440,
+   "file": "Farm Buildings by Quaternius/FBX/Windmill.fbx"
+  }
+ },
+ "skipped": []
+}

@@ -62,12 +62,19 @@ def _safe_name(name):
 def _download(url, dest_dir, name, source, headers=None):
     name = _safe_name(name)
     ext = _ext(name)
+    r = _req(url, headers=headers)
+    if ext not in ALLOWED:   # itch CDN names are bare ids: take the real file name from Content-Disposition / final URL
+        cd = r.headers.get("Content-Disposition") or ""
+        m = re.search(r"filename\*=UTF-8''([^;]+)", cd) or re.search(r'filename="?([^";]+)"?', cd)
+        name = _safe_name(m.group(1) if m else urllib.parse.urlparse(r.url).path.rsplit("/", 1)[-1])
+        ext = _ext(name)
     if ext in REFUSED or ext not in ALLOWED:
+        r.close()
         print(json.dumps({"skipped": name, "reason": f"extension {ext} not allowed"}))
         return None
     path = os.path.join(dest_dir, name)
     total = 0
-    with _req(url, headers=headers) as r, open(path, "wb") as f:
+    with r, open(path, "wb") as f:
         while True:
             chunk = r.read(1 << 20)
             if not chunk:
@@ -111,6 +118,12 @@ def fetch_itch(page, dest):
             continue
         url = resp["url"]
         name = names.get(uid) or urllib.parse.urlparse(url).path.rsplit("/", 1)[-1]
+        only = os.environ.get("KG_FETCH_ONLY")   # optional regex: skip uploads whose display/CDN name does not match
+        if only and not (re.search(only, name, re.I) or re.search(only, urllib.parse.urlparse(url).path, re.I)):
+            print(json.dumps({"skipped": name, "reason": f"KG_FETCH_ONLY={only}"}))
+            continue
+        if _ext(name) not in ALLOWED:   # itch display names like "Free" carry no extension: use the CDN file name
+            name = urllib.parse.urlparse(url).path.rsplit("/", 1)[-1]
         p = _download(url, dest, name, page)
         if p:
             saved.append(p)

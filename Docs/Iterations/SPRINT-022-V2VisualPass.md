@@ -44,6 +44,10 @@ User feedback, looking at L_Morrowmere_v2 in the editor:
      wall props, Belvedere telescope, and whichever fit.
    All climbable towers keep their ladders; the navmesh test stays 100%.
 5. **Invariants:** run_invariants.ps1 passes; the nav test reaches all targets.
+6. **Lighthouse Point cliff** (added 2026-09-25 with the user's approval): the huge flat smooth brown cliff / retaining
+   face at Lighthouse Point seen from the harbour basin is broken up: lowered, with layered rocks, ledges, vegetation
+   and a natural silhouette. Evidence: the cliff-face check in verify_v2_build.py plus before/after renders from the
+   basin.
 
 ## Writable scope
 - Tools/Level/author_layout_v2.py + morrowmere_layout_v2.json (house count/archetype fields only)

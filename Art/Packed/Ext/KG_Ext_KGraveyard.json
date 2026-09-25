@@ -1,0 +1,1008 @@
+{
+ "tag": "KGraveyard",
+ "source": "D:/Kill Godot/Art/Source/Kenney_GraveyardKit/Models/GLB format",
+ "props": {
+  "KGraveyard_altar_stone": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    208,
+    131,
+    98
+   ],
+   "tris": 166,
+   "file": "altar-stone.glb"
+  },
+  "KGraveyard_altar_wood": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    209,
+    132,
+    108
+   ],
+   "tris": 306,
+   "file": "altar-wood.glb"
+  },
+  "KGraveyard_bench_damaged": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    182,
+    91,
+    104
+   ],
+   "tris": 240,
+   "file": "bench-damaged.glb"
+  },
+  "KGraveyard_bench": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    161,
+    91,
+    105
+   ],
+   "tris": 160,
+   "file": "bench.glb"
+  },
+  "KGraveyard_border_pillar": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    44,
+    44,
+    152
+   ],
+   "tris": 104,
+   "file": "border-pillar.glb"
+  },
+  "KGraveyard_brick_wall_curve_small": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    200,
+    200,
+    145
+   ],
+   "tris": 524,
+   "file": "brick-wall-curve-small.glb"
+  },
+  "KGraveyard_brick_wall_curve": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    200,
+    200,
+    145
+   ],
+   "tris": 348,
+   "file": "brick-wall-curve.glb"
+  },
+  "KGraveyard_brick_wall_end": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    200,
+    90,
+    170
+   ],
+   "tris": 316,
+   "file": "brick-wall-end.glb"
+  },
+  "KGraveyard_brick_wall": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    200,
+    60,
+    145
+   ],
+   "tris": 192,
+   "file": "brick-wall.glb"
+  },
+  "KGraveyard_candle_multiple": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    51,
+    53,
+    40
+   ],
+   "tris": 162,
+   "file": "candle-multiple.glb"
+  },
+  "KGraveyard_candle": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    27,
+    27,
+    40
+   ],
+   "tris": 54,
+   "file": "candle.glb"
+  },
+  "KGraveyard_character_ghost": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    158,
+    98,
+    132
+   ],
+   "tris": 413,
+   "file": "character-ghost.glb"
+  },
+  "KGraveyard_character_keeper": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    162,
+    107,
+    172
+   ],
+   "tris": 1073,
+   "file": "character-keeper.glb"
+  },
+  "KGraveyard_character_skeleton": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    152,
+    63,
+    140
+   ],
+   "tris": 636,
+   "file": "character-skeleton.glb"
+  },
+  "KGraveyard_character_vampire": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    162,
+    91,
+    156
+   ],
+   "tris": 1035,
+   "file": "character-vampire.glb"
+  },
+  "KGraveyard_character_zombie": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    162,
+    69,
+    165
+   ],
+   "tris": 1012,
+   "file": "character-zombie.glb"
+  },
+  "KGraveyard_coffin_old": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    115,
+    168,
+    40
+   ],
+   "tris": 216,
+   "file": "coffin-old.glb"
+  },
+  "KGraveyard_coffin": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    115,
+    168,
+    65
+   ],
+   "tris": 256,
+   "file": "coffin.glb"
+  },
+  "KGraveyard_column_large": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    78,
+    78,
+    226
+   ],
+   "tris": 258,
+   "file": "column-large.glb"
+  },
+  "KGraveyard_cross_column": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    90,
+    90,
+    289
+   ],
+   "tris": 200,
+   "file": "cross-column.glb"
+  },
+  "KGraveyard_cross_wood": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    86,
+    86,
+    209
+   ],
+   "tris": 126,
+   "file": "cross-wood.glb"
+  },
+  "KGraveyard_cross": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    134,
+    50,
+    210
+   ],
+   "tris": 158,
+   "file": "cross.glb"
+  },
+  "KGraveyard_crypt_a": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    124,
+    223,
+    104
+   ],
+   "tris": 108,
+   "file": "crypt-a.glb"
+  },
+  "KGraveyard_crypt_b": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    124,
+    223,
+    104
+   ],
+   "tris": 118,
+   "file": "crypt-b.glb"
+  },
+  "KGraveyard_crypt_door": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    70,
+    42,
+    148
+   ],
+   "tris": 136,
+   "file": "crypt-door.glb"
+  },
+  "KGraveyard_crypt_large_door": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    129,
+    60,
+    148
+   ],
+   "tris": 200,
+   "file": "crypt-large-door.glb"
+  },
+  "KGraveyard_crypt_large_roof": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    395,
+    488,
+    152
+   ],
+   "tris": 406,
+   "file": "crypt-large-roof.glb"
+  },
+  "KGraveyard_crypt_large": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    370,
+    480,
+    200
+   ],
+   "tris": 626,
+   "file": "crypt-large.glb"
+  },
+  "KGraveyard_crypt_small_roof": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    300,
+    288,
+    148
+   ],
+   "tris": 275,
+   "file": "crypt-small-roof.glb"
+  },
+  "KGraveyard_crypt_small": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    270,
+    280,
+    200
+   ],
+   "tris": 414,
+   "file": "crypt-small.glb"
+  },
+  "KGraveyard_crypt": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    144,
+    223,
+    146
+   ],
+   "tris": 252,
+   "file": "crypt.glb"
+  },
+  "KGraveyard_debris_wood": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    92,
+    101,
+    20
+   ],
+   "tris": 108,
+   "file": "debris-wood.glb"
+  },
+  "KGraveyard_debris": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    107,
+    109,
+    32
+   ],
+   "tris": 144,
+   "file": "debris.glb"
+  },
+  "KGraveyard_detail_bowl": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    40,
+    40,
+    26
+   ],
+   "tris": 176,
+   "file": "detail-bowl.glb"
+  },
+  "KGraveyard_detail_chalice": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    33,
+    33,
+    50
+   ],
+   "tris": 136,
+   "file": "detail-chalice.glb"
+  },
+  "KGraveyard_detail_plate": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    54,
+    54,
+    10
+   ],
+   "tris": 116,
+   "file": "detail-plate.glb"
+  },
+  "KGraveyard_fence_damaged": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    200,
+    62,
+    124
+   ],
+   "tris": 196,
+   "file": "fence-damaged.glb"
+  },
+  "KGraveyard_fence_gate": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    200,
+    41,
+    124
+   ],
+   "tris": 200,
+   "file": "fence-gate.glb"
+  },
+  "KGraveyard_fence": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    200,
+    37,
+    124
+   ],
+   "tris": 252,
+   "file": "fence.glb"
+  },
+  "KGraveyard_fire_basket": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    83,
+    83,
+    34
+   ],
+   "tris": 196,
+   "file": "fire-basket.glb"
+  },
+  "KGraveyard_grave_border": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    152,
+    278,
+    22
+   ],
+   "tris": 600,
+   "file": "grave-border.glb"
+  },
+  "KGraveyard_grave": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    145,
+    248,
+    23
+   ],
+   "tris": 256,
+   "file": "grave.glb"
+  },
+  "KGraveyard_gravestone_bevel": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    90,
+    50,
+    106
+   ],
+   "tris": 174,
+   "file": "gravestone-bevel.glb"
+  },
+  "KGraveyard_gravestone_broken": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    102,
+    78,
+    68
+   ],
+   "tris": 134,
+   "file": "gravestone-broken.glb"
+  },
+  "KGraveyard_gravestone_cross_large": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    90,
+    66,
+    188
+   ],
+   "tris": 192,
+   "file": "gravestone-cross-large.glb"
+  },
+  "KGraveyard_gravestone_cross": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    90,
+    66,
+    183
+   ],
+   "tris": 222,
+   "file": "gravestone-cross.glb"
+  },
+  "KGraveyard_gravestone_debris": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    99,
+    128,
+    53
+   ],
+   "tris": 122,
+   "file": "gravestone-debris.glb"
+  },
+  "KGraveyard_gravestone_decorative": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    102,
+    50,
+    119
+   ],
+   "tris": 92,
+   "file": "gravestone-decorative.glb"
+  },
+  "KGraveyard_gravestone_roof": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    97,
+    50,
+    122
+   ],
+   "tris": 172,
+   "file": "gravestone-roof.glb"
+  },
+  "KGraveyard_gravestone_round": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    90,
+    50,
+    115
+   ],
+   "tris": 178,
+   "file": "gravestone-round.glb"
+  },
+  "KGraveyard_gravestone_wide": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    170,
+    60,
+    114
+   ],
+   "tris": 266,
+   "file": "gravestone-wide.glb"
+  },
+  "KGraveyard_hay_bale_bundled": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    121,
+    86,
+    76
+   ],
+   "tris": 364,
+   "file": "hay-bale-bundled.glb"
+  },
+  "KGraveyard_hay_bale": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    121,
+    80,
+    71
+   ],
+   "tris": 180,
+   "file": "hay-bale.glb"
+  },
+  "KGraveyard_iron_fence_bar": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    24,
+    21,
+    134
+   ],
+   "tris": 88,
+   "file": "iron-fence-bar.glb"
+  },
+  "KGraveyard_iron_fence_border_column": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    200,
+    44,
+    176
+   ],
+   "tris": 400,
+   "file": "iron-fence-border-column.glb"
+  },
+  "KGraveyard_iron_fence_border_curve": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    180,
+    180,
+    176
+   ],
+   "tris": 576,
+   "file": "iron-fence-border-curve.glb"
+  },
+  "KGraveyard_iron_fence_border_gate": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    200,
+    44,
+    152
+   ],
+   "tris": 256,
+   "file": "iron-fence-border-gate.glb"
+  },
+  "KGraveyard_iron_fence_border": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    200,
+    30,
+    176
+   ],
+   "tris": 380,
+   "file": "iron-fence-border.glb"
+  },
+  "KGraveyard_iron_fence_curve": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    176,
+    176,
+    176
+   ],
+   "tris": 472,
+   "file": "iron-fence-curve.glb"
+  },
+  "KGraveyard_iron_fence_damaged": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    200,
+    65,
+    176
+   ],
+   "tris": 336,
+   "file": "iron-fence-damaged.glb"
+  },
+  "KGraveyard_iron_fence": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    200,
+    22,
+    176
+   ],
+   "tris": 376,
+   "file": "iron-fence.glb"
+  },
+  "KGraveyard_lantern_candle": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    48,
+    48,
+    78
+   ],
+   "tris": 224,
+   "file": "lantern-candle.glb"
+  },
+  "KGraveyard_lantern_glass": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    48,
+    48,
+    78
+   ],
+   "tris": 186,
+   "file": "lantern-glass.glb"
+  },
+  "KGraveyard_lightpost_all": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    145,
+    145,
+    253
+   ],
+   "tris": 1012,
+   "file": "lightpost-all.glb"
+  },
+  "KGraveyard_lightpost_double": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    42,
+    145,
+    253
+   ],
+   "tris": 572,
+   "file": "lightpost-double.glb"
+  },
+  "KGraveyard_lightpost_single": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    42,
+    93,
+    253
+   ],
+   "tris": 352,
+   "file": "lightpost-single.glb"
+  },
+  "KGraveyard_pillar_large": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    44,
+    44,
+    225
+   ],
+   "tris": 152,
+   "file": "pillar-large.glb"
+  },
+  "KGraveyard_pillar_obelisk": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    70,
+    70,
+    202
+   ],
+   "tris": 76,
+   "file": "pillar-obelisk.glb"
+  },
+  "KGraveyard_pillar_small": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    36,
+    36,
+    151
+   ],
+   "tris": 96,
+   "file": "pillar-small.glb"
+  },
+  "KGraveyard_pillar_square": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    70,
+    70,
+    230
+   ],
+   "tris": 178,
+   "file": "pillar-square.glb"
+  },
+  "KGraveyard_pine_crooked": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    236,
+    267,
+    422
+   ],
+   "tris": 300,
+   "file": "pine-crooked.glb"
+  },
+  "KGraveyard_pine_fall_crooked": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    236,
+    267,
+    422
+   ],
+   "tris": 300,
+   "file": "pine-fall-crooked.glb"
+  },
+  "KGraveyard_pine_fall": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    236,
+    267,
+    460
+   ],
+   "tris": 300,
+   "file": "pine-fall.glb"
+  },
+  "KGraveyard_pine": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    236,
+    267,
+    460
+   ],
+   "tris": 300,
+   "file": "pine.glb"
+  },
+  "KGraveyard_pumpkin_carved": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    75,
+    75,
+    64
+   ],
+   "tris": 486,
+   "file": "pumpkin-carved.glb"
+  },
+  "KGraveyard_pumpkin_tall_carved": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    65,
+    65,
+    72
+   ],
+   "tris": 460,
+   "file": "pumpkin-tall-carved.glb"
+  },
+  "KGraveyard_pumpkin_tall": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    65,
+    65,
+    72
+   ],
+   "tris": 348,
+   "file": "pumpkin-tall.glb"
+  },
+  "KGraveyard_pumpkin": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    75,
+    75,
+    64
+   ],
+   "tris": 348,
+   "file": "pumpkin.glb"
+  },
+  "KGraveyard_road": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    159,
+    158,
+    16
+   ],
+   "tris": 308,
+   "file": "road.glb"
+  },
+  "KGraveyard_rocks_tall": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    207,
+    204,
+    118
+   ],
+   "tris": 364,
+   "file": "rocks-tall.glb"
+  },
+  "KGraveyard_rocks": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    215,
+    193,
+    75
+   ],
+   "tris": 364,
+   "file": "rocks.glb"
+  },
+  "KGraveyard_shovel_dirt": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    124,
+    105,
+    132
+   ],
+   "tris": 280,
+   "file": "shovel-dirt.glb"
+  },
+  "KGraveyard_shovel": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    38,
+    19,
+    122
+   ],
+   "tris": 148,
+   "file": "shovel.glb"
+  },
+  "KGraveyard_stone_wall_column": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    200,
+    70,
+    170
+   ],
+   "tris": 138,
+   "file": "stone-wall-column.glb"
+  },
+  "KGraveyard_stone_wall_curve": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    200,
+    200,
+    145
+   ],
+   "tris": 266,
+   "file": "stone-wall-curve.glb"
+  },
+  "KGraveyard_stone_wall_damaged": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    200,
+    40,
+    145
+   ],
+   "tris": 144,
+   "file": "stone-wall-damaged.glb"
+  },
+  "KGraveyard_stone_wall": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    200,
+    40,
+    145
+   ],
+   "tris": 60,
+   "file": "stone-wall.glb"
+  },
+  "KGraveyard_trunk_long": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    108,
+    108,
+    200
+   ],
+   "tris": 312,
+   "file": "trunk-long.glb"
+  },
+  "KGraveyard_trunk": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    108,
+    111,
+    90
+   ],
+   "tris": 274,
+   "file": "trunk.glb"
+  },
+  "KGraveyard_urn_round": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    53,
+    53,
+    77
+   ],
+   "tris": 230,
+   "file": "urn-round.glb"
+  },
+  "KGraveyard_urn_square": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    53,
+    53,
+    77
+   ],
+   "tris": 218,
+   "file": "urn-square.glb"
+  }
+ },
+ "skipped": []
+}

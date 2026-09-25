@@ -7,6 +7,8 @@
  * SPRINT-016 world chores ("physical chores"): multi-step jobs done with real, carried objects in the village.
  * Data: Tools/Level/morrowmere_world_chores.json -> Tools/Level/gen_world_chores.py -> KGWorldChoreData.gen.inl
  * (dev builds prefer Tools/Level/morrowmere_world_chores.resolved.json when it exists, so data edits need no rebuild).
+ * Storm Manor (SPRINT-018): Tools/Level/gen_stormmanor_chores.py -> KGWorldChoreData_StormManor.gen.inl (+ its
+ * stormmanor_world_chores.resolved.json). Every map has its own catalog; the world picks it at begin play.
  *
  *   take  : E at the spot -> the chore's item pops out there (then you carry it with hold-E)
  *   work  : E at the spot -> stand there Secs (x Repeat)
@@ -149,11 +151,16 @@ struct KILLGODOT_API FKGWorldChoreDef
 class KILLGODOT_API FKGWorldChoreCatalog
 {
 public:
-	/** The catalog (empty when the data is broken). */
+	/** The active map's catalog (empty when the data is broken). One catalog per map (SPRINT-018: Morrowmere v2 and
+	 *  Storm Manor); the first one is active until SelectForWorld picks another. */
 	static const FKGWorldChoreCatalog& Get();
+	/** Make the catalog whose MapName matches the world's map the active one (no change when none matches). */
+	static bool SelectForWorld(const UWorld* World);
+	/** Tests / tools: the catalog of a map by level name (nullptr when there is none). */
+	static const FKGWorldChoreCatalog* FindByMap(const FString& InMapName);
 	/** Tests / tools: parse a JSON text (returns false + error). */
 	bool Parse(const FString& Json, FString& OutError);
-	/** Dev: re-read the resolved JSON from disk (kg.WorldChore.Reload). */
+	/** Dev: re-read every map's resolved JSON from disk (kg.WorldChore.Reload). */
 	static bool Reload(FString& OutMessage);
 
 	FString MapName;

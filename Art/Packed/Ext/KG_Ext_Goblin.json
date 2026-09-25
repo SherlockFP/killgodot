@@ -1,0 +1,150 @@
+{
+ "tag": "Goblin",
+ "source": "D:/Kill Godot/Art/Source/ByndWalker_GoblinCamp/byndwalker_goblin_camp_free/Free/GLB",
+ "props": {
+  "Goblin_branch_cage": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    115,
+    115,
+    176
+   ],
+   "tris": 1712,
+   "file": "branch_cage.glb"
+  },
+  "Goblin_branch_fence_1": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    190,
+    101,
+    74
+   ],
+   "tris": 284,
+   "file": "branch_fence_1.glb"
+  },
+  "Goblin_branch_fence_2": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    199,
+    103,
+    76
+   ],
+   "tris": 360,
+   "file": "branch_fence_2.glb"
+  },
+  "Goblin_cabbin_1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    275,
+    339,
+    301
+   ],
+   "tris": 4012,
+   "file": "cabbin_1.glb"
+  },
+  "Goblin_cabbin_2": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    324,
+    251,
+    248
+   ],
+   "tris": 950,
+   "file": "cabbin_2.glb"
+  },
+  "Goblin_stone_1": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    23,
+    33,
+    11
+   ],
+   "tris": 48,
+   "file": "stone_1.glb"
+  },
+  "Goblin_stone_2": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    25,
+    19,
+    10
+   ],
+   "tris": 48,
+   "file": "stone_2.glb"
+  },
+  "Goblin_stone_house": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    332,
+    220,
+    299
+   ],
+   "tris": 1361,
+   "file": "stone_house.glb"
+  },
+  "Goblin_tent_1": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    243,
+    225,
+    232
+   ],
+   "tris": 803,
+   "file": "tent_1.glb"
+  },
+  "Goblin_tent_2": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    243,
+    225,
+    232
+   ],
+   "tris": 803,
+   "file": "tent_2.glb"
+  },
+  "Goblin_tent_3": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    236,
+    209,
+    176
+   ],
+   "tris": 592,
+   "file": "tent_3.glb"
+  },
+  "Goblin_tent_4": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    236,
+    209,
+    176
+   ],
+   "tris": 592,
+   "file": "tent_4.glb"
+  },
+  "Goblin_tent_5": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    236,
+    209,
+    176
+   ],
+   "tris": 592,
+   "file": "tent_5.glb"
+  }
+ },
+ "skipped": []
+}

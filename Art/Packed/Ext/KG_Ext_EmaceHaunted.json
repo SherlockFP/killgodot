@@ -1,0 +1,1888 @@
+{
+ "tag": "EmaceHaunted",
+ "source": "D:/Kill Godot/Art/Source/EmaceArt_HauntedGrounds/glTF",
+ "props": {
+  "EmaceHaunted_EA01_Env_Road_Cobble_01a": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    308,
+    623,
+    84
+   ],
+   "tris": 3597,
+   "file": "glTF/EA01_Env_Road_Cobble_01a.glb"
+  },
+  "EmaceHaunted_EA01_Env_Road_Cobble_01b": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    417,
+    641,
+    57
+   ],
+   "tris": 3920,
+   "file": "glTF/EA01_Env_Road_Cobble_01b.glb"
+  },
+  "EmaceHaunted_EA01_Env_Road_Cobble_02a": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    276,
+    256,
+    33
+   ],
+   "tris": 285,
+   "file": "glTF/EA01_Env_Road_Cobble_02a.glb"
+  },
+  "EmaceHaunted_EA01_Env_Road_Cobble_02b": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    136,
+    122,
+    31
+   ],
+   "tris": 87,
+   "file": "glTF/EA01_Env_Road_Cobble_02b.glb"
+  },
+  "EmaceHaunted_EA01_Env_Road_Cobble_02c": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    137,
+    124,
+    31
+   ],
+   "tris": 89,
+   "file": "glTF/EA01_Env_Road_Cobble_02c.glb"
+  },
+  "EmaceHaunted_EA01_Env_Road_Cobble_Moss_02a": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    276,
+    256,
+    46
+   ],
+   "tris": 590,
+   "file": "glTF/EA01_Env_Road_Cobble_Moss_02a.glb"
+  },
+  "EmaceHaunted_EA01_Env_Road_Cobble_Moss_02b": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    136,
+    122,
+    36
+   ],
+   "tris": 139,
+   "file": "glTF/EA01_Env_Road_Cobble_Moss_02b.glb"
+  },
+  "EmaceHaunted_EA01_Env_Road_Cobble_Moss_02c": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    137,
+    124,
+    48
+   ],
+   "tris": 198,
+   "file": "glTF/EA01_Env_Road_Cobble_Moss_02c.glb"
+  },
+  "EmaceHaunted_EA01_Env_Road_Cobble_Moss_03a": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    179,
+    366,
+    46
+   ],
+   "tris": 415,
+   "file": "glTF/EA01_Env_Road_Cobble_Moss_03a.glb"
+  },
+  "EmaceHaunted_EA01_Env_Road_Cobble_Moss_03b": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    190,
+    409,
+    46
+   ],
+   "tris": 439,
+   "file": "glTF/EA01_Env_Road_Cobble_Moss_03b.glb"
+  },
+  "EmaceHaunted_EA01_Env_Road_Cobble_Moss_04a": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    276,
+    256,
+    46
+   ],
+   "tris": 590,
+   "file": "glTF/EA01_Env_Road_Cobble_Moss_04a.glb"
+  },
+  "EmaceHaunted_EA01_Env_Road_Cobble_Moss_04b": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    136,
+    122,
+    36
+   ],
+   "tris": 139,
+   "file": "glTF/EA01_Env_Road_Cobble_Moss_04b.glb"
+  },
+  "EmaceHaunted_EA01_Env_Road_Cobble_Moss_04c": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    137,
+    124,
+    48
+   ],
+   "tris": 198,
+   "file": "glTF/EA01_Env_Road_Cobble_Moss_04c.glb"
+  },
+  "EmaceHaunted_EA01_Env_Road_Cobble_Moss_05a": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    179,
+    366,
+    46
+   ],
+   "tris": 417,
+   "file": "glTF/EA01_Env_Road_Cobble_Moss_05a.glb"
+  },
+  "EmaceHaunted_EA01_Env_Road_Cobble_Moss_05b": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    190,
+    409,
+    46
+   ],
+   "tris": 439,
+   "file": "glTF/EA01_Env_Road_Cobble_Moss_05b.glb"
+  },
+  "EmaceHaunted_EA01_Env_Road_Cobble_Moss_06a": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    467,
+    506,
+    46
+   ],
+   "tris": 590,
+   "file": "glTF/EA01_Env_Road_Cobble_Moss_06a.glb"
+  },
+  "EmaceHaunted_EA01_Env_Road_Cobble_Moss_06b": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    427,
+    472,
+    58
+   ],
+   "tris": 590,
+   "file": "glTF/EA01_Env_Road_Cobble_Moss_06b.glb"
+  },
+  "EmaceHaunted_EA03_Environment_Hillock_01c": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    507,
+    543,
+    60
+   ],
+   "tris": 84,
+   "file": "glTF/EA03_Environment_Hillock_01c.glb"
+  },
+  "EmaceHaunted_EA03_Environment_Mud_02": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    398,
+    546,
+    43
+   ],
+   "tris": 236,
+   "file": "glTF/EA03_Environment_Mud_02.glb"
+  },
+  "EmaceHaunted_EA03_Environment_Mud_03": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    438,
+    461,
+    38
+   ],
+   "tris": 194,
+   "file": "glTF/EA03_Environment_Mud_03.glb"
+  },
+  "EmaceHaunted_EA03_Environment_Mud_04": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    852,
+    510,
+    27
+   ],
+   "tris": 40,
+   "file": "glTF/EA03_Environment_Mud_04.glb"
+  },
+  "EmaceHaunted_EA03_Environment_Mud_05": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    568,
+    254,
+    73
+   ],
+   "tris": 2449,
+   "file": "glTF/EA03_Environment_Mud_05.glb"
+  },
+  "EmaceHaunted_EA03_Environment_Mud_06": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    568,
+    301,
+    129
+   ],
+   "tris": 2624,
+   "file": "glTF/EA03_Environment_Mud_06.glb"
+  },
+  "EmaceHaunted_EA03_Environment_Nature_Tree_1b_001": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    389,
+    223,
+    135
+   ],
+   "tris": 227,
+   "file": "glTF/EA03_Environment_Nature_Tree_1b.001.glb"
+  },
+  "EmaceHaunted_EA03_Environment_Nature_Tree_1b": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    1141,
+    1258,
+    1582
+   ],
+   "tris": 2530,
+   "file": "glTF/EA03_Environment_Nature_Tree_1b.glb"
+  },
+  "EmaceHaunted_EA03_Prop_Container_Barrel_01c": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    123,
+    106,
+    100
+   ],
+   "tris": 524,
+   "file": "glTF/EA03_Prop_Container_Barrel_01c.glb"
+  },
+  "EmaceHaunted_EA0_Nature_Tree_Crow_04c": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    166,
+    129,
+    544
+   ],
+   "tris": 1031,
+   "file": "glTF/EA0_Nature_Tree_Crow_04c.glb"
+  },
+  "EmaceHaunted_EA_Arch_Gate_01a": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    164,
+    70,
+    814
+   ],
+   "tris": 261,
+   "file": "glTF/EA_Arch_Gate_01a.glb"
+  },
+  "EmaceHaunted_EA_Arch_Wall02_Ruin_01a": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    382,
+    106,
+    313
+   ],
+   "tris": 296,
+   "file": "glTF/EA_Arch_Wall02_Ruin_01a.glb"
+  },
+  "EmaceHaunted_EA_Arch_Wall02_Ruin_01b": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    399,
+    173,
+    402
+   ],
+   "tris": 496,
+   "file": "glTF/EA_Arch_Wall02_Ruin_01b.glb"
+  },
+  "EmaceHaunted_EA_Arch_Wall03_Corner_01a": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    522,
+    509,
+    332
+   ],
+   "tris": 2009,
+   "file": "glTF/EA_Arch_Wall03_Corner_01a.glb"
+  },
+  "EmaceHaunted_EA_Arch_Wall03_Corner_01b": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    508,
+    550,
+    364
+   ],
+   "tris": 2148,
+   "file": "glTF/EA_Arch_Wall03_Corner_01b.glb"
+  },
+  "EmaceHaunted_EA_Arch_Wall03_Corner_01c": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    550,
+    509,
+    359
+   ],
+   "tris": 2124,
+   "file": "glTF/EA_Arch_Wall03_Corner_01c.glb"
+  },
+  "EmaceHaunted_EA_Arch_Wall03_End_01b": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    236,
+    120,
+    306
+   ],
+   "tris": 491,
+   "file": "glTF/EA_Arch_Wall03_End_01b.glb"
+  },
+  "EmaceHaunted_EA_Arch_Wall03_End_01c": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    525,
+    128,
+    333
+   ],
+   "tris": 1126,
+   "file": "glTF/EA_Arch_Wall03_End_01c.glb"
+  },
+  "EmaceHaunted_EA_Arch_Wall03_End_01d": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    297,
+    120,
+    330
+   ],
+   "tris": 563,
+   "file": "glTF/EA_Arch_Wall03_End_01d.glb"
+  },
+  "EmaceHaunted_EA_Arch_Wall03_Gate_01a": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    869,
+    307,
+    877
+   ],
+   "tris": 1513,
+   "file": "glTF/EA_Arch_Wall03_Gate_01a.glb"
+  },
+  "EmaceHaunted_EA_Arch_Wall03_Rubble_01a": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    373,
+    243,
+    133
+   ],
+   "tris": 432,
+   "file": "glTF/EA_Arch_Wall03_Rubble_01a.glb"
+  },
+  "EmaceHaunted_EA_Arch_Wall03_Rubble_01b": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    148,
+    133,
+    36
+   ],
+   "tris": 20,
+   "file": "glTF/EA_Arch_Wall03_Rubble_01b.glb"
+  },
+  "EmaceHaunted_EA_Arch_Wall03_Rubble_01c": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    106,
+    96,
+    218
+   ],
+   "tris": 256,
+   "file": "glTF/EA_Arch_Wall03_Rubble_01c.glb"
+  },
+  "EmaceHaunted_EA_Arch_Wall03_Rubble_01e": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    106,
+    119,
+    295
+   ],
+   "tris": 320,
+   "file": "glTF/EA_Arch_Wall03_Rubble_01e.glb"
+  },
+  "EmaceHaunted_EA_Arch_Wall03_Rubble_broken_01a": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    172,
+    96,
+    130
+   ],
+   "tris": 63,
+   "file": "glTF/EA_Arch_Wall03_Rubble_broken_01a.glb"
+  },
+  "EmaceHaunted_EA_Arch_Wall03_Rubble_broken_01b": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    192,
+    100,
+    140
+   ],
+   "tris": 72,
+   "file": "glTF/EA_Arch_Wall03_Rubble_broken_01b.glb"
+  },
+  "EmaceHaunted_EA_Arch_Wall03_Ruin_01b": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    603,
+    109,
+    311
+   ],
+   "tris": 472,
+   "file": "glTF/EA_Arch_Wall03_Ruin_01b.glb"
+  },
+  "EmaceHaunted_EA_Arch_Wall03_Ruin_01c": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    460,
+    98,
+    331
+   ],
+   "tris": 360,
+   "file": "glTF/EA_Arch_Wall03_Ruin_01c.glb"
+  },
+  "EmaceHaunted_EA_Arch_Wall03_Seam_01b": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    547,
+    98,
+    315
+   ],
+   "tris": 1082,
+   "file": "glTF/EA_Arch_Wall03_Seam_01b.glb"
+  },
+  "EmaceHaunted_EA_Arch_Wall04_Ruin_01a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    147,
+    121,
+    40
+   ],
+   "tris": 116,
+   "file": "glTF/EA_Arch_Wall04_Ruin_01a.glb"
+  },
+  "EmaceHaunted_EA_Arch_Wall04_Ruin_01b": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    365,
+    181,
+    137
+   ],
+   "tris": 499,
+   "file": "glTF/EA_Arch_Wall04_Ruin_01b.glb"
+  },
+  "EmaceHaunted_EA_Bld_Column_01a": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    519,
+    519,
+    1209
+   ],
+   "tris": 318,
+   "file": "glTF/EA_Bld_Column_01a.glb"
+  },
+  "EmaceHaunted_EA_Bld_Column_01c": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    357,
+    375,
+    1015
+   ],
+   "tris": 338,
+   "file": "glTF/EA_Bld_Column_01c.glb"
+  },
+  "EmaceHaunted_EA_Bld_Monument_1c": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    483,
+    409,
+    830
+   ],
+   "tris": 521,
+   "file": "glTF/EA_Bld_Monument_1c.glb"
+  },
+  "EmaceHaunted_EA_Bld_Monument_1d_LOD0_001": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    539,
+    542,
+    1077
+   ],
+   "tris": 8860,
+   "file": "glTF/EA_Bld_Monument_1d_LOD0.001.glb"
+  },
+  "EmaceHaunted_EA_Bld_Monument_1d_LOD1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    539,
+    542,
+    1076
+   ],
+   "tris": 7078,
+   "file": "glTF/EA_Bld_Monument_1d_LOD1.glb"
+  },
+  "EmaceHaunted_EA_Bld_Monument_1d_LOD2": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    539,
+    542,
+    1076
+   ],
+   "tris": 5298,
+   "file": "glTF/EA_Bld_Monument_1d_LOD2.glb"
+  },
+  "EmaceHaunted_EA_Bld_Monument_1e": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    401,
+    404,
+    861
+   ],
+   "tris": 740,
+   "file": "glTF/EA_Bld_Monument_1e.glb"
+  },
+  "EmaceHaunted_EA_Bld_Monument_2a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    247,
+    223,
+    250
+   ],
+   "tris": 724,
+   "file": "glTF/EA_Bld_Monument_2a.glb"
+  },
+  "EmaceHaunted_EA_Bld_Monument_3a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    539,
+    542,
+    1077
+   ],
+   "tris": 8860,
+   "file": "glTF/EA_Bld_Monument_3a.glb"
+  },
+  "EmaceHaunted_EA_Bld_Monument_3b": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    553,
+    559,
+    1123
+   ],
+   "tris": 12992,
+   "file": "glTF/EA_Bld_Monument_3b.glb"
+  },
+  "EmaceHaunted_EA_Bld_Monument_3c": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    539,
+    542,
+    1081
+   ],
+   "tris": 9520,
+   "file": "glTF/EA_Bld_Monument_3c.glb"
+  },
+  "EmaceHaunted_EA_Bld_Monument_3d": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    592,
+    556,
+    1043
+   ],
+   "tris": 6024,
+   "file": "glTF/EA_Bld_Monument_3d.glb"
+  },
+  "EmaceHaunted_EA_Bld_Obelisk_2b": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    312,
+    279,
+    787
+   ],
+   "tris": 248,
+   "file": "glTF/EA_Bld_Obelisk_2b.glb"
+  },
+  "EmaceHaunted_EA_Bld_Obelisk_2d": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    282,
+    317,
+    911
+   ],
+   "tris": 273,
+   "file": "glTF/EA_Bld_Obelisk_2d.glb"
+  },
+  "EmaceHaunted_EA_Bld_Tomb_Mossy_Ruined_01b": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    501,
+    442,
+    533
+   ],
+   "tris": 551,
+   "file": "glTF/EA_Bld_Tomb_Mossy_Ruined_01b.glb"
+  },
+  "EmaceHaunted_EA_Bld_Tomb_Mossy_Ruined_01c": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    830,
+    348,
+    378
+   ],
+   "tris": 597,
+   "file": "glTF/EA_Bld_Tomb_Mossy_Ruined_01c.glb"
+  },
+  "EmaceHaunted_EA_Bld_Tomb_Mossy_Ruined_01d": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    517,
+    340,
+    388
+   ],
+   "tris": 340,
+   "file": "glTF/EA_Bld_Tomb_Mossy_Ruined_01d.glb"
+  },
+  "EmaceHaunted_EA_Bld_Tomb_Niche_Clean_Class_B_01a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    429,
+    332,
+    635
+   ],
+   "tris": 711,
+   "file": "glTF/EA_Bld_Tomb_Niche_Clean_Class_B_01a.glb"
+  },
+  "EmaceHaunted_EA_Bld_Tomb_Niche_Mossy_Class_C_01a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    325,
+    316,
+    485
+   ],
+   "tris": 462,
+   "file": "glTF/EA_Bld_Tomb_Niche_Mossy_Class_C_01a.glb"
+  },
+  "EmaceHaunted_EA_Bld_Tomb_Niche_Mossy_Class_C_01b": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    371,
+    369,
+    474
+   ],
+   "tris": 694,
+   "file": "glTF/EA_Bld_Tomb_Niche_Mossy_Class_C_01b.glb"
+  },
+  "EmaceHaunted_EA_Bld_Tomb_Segment_Clean_1c": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    239,
+    279,
+    392
+   ],
+   "tris": 566,
+   "file": "glTF/EA_Bld_Tomb_Segment_Clean_1c.glb"
+  },
+  "EmaceHaunted_EA_Bld_Tomb_Segment_Moss_1a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    241,
+    256,
+    397
+   ],
+   "tris": 520,
+   "file": "glTF/EA_Bld_Tomb_Segment_Moss_1a.glb"
+  },
+  "EmaceHaunted_EA_Bld_Tomb_Segment_Moss_1c": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    239,
+    279,
+    392
+   ],
+   "tris": 566,
+   "file": "glTF/EA_Bld_Tomb_Segment_Moss_1c.glb"
+  },
+  "EmaceHaunted_EA_Candle_01a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    75,
+    72,
+    132
+   ],
+   "tris": 378,
+   "file": "glTF/EA_Candle_01a.glb"
+  },
+  "EmaceHaunted_EA_Candle_01b": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    81,
+    89,
+    156
+   ],
+   "tris": 460,
+   "file": "glTF/EA_Candle_01b.glb"
+  },
+  "EmaceHaunted_EA_Candle_01c": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    80,
+    72,
+    214
+   ],
+   "tris": 483,
+   "file": "glTF/EA_Candle_01c.glb"
+  },
+  "EmaceHaunted_EA_Decor_Chain_01b_000": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    19,
+    108,
+    202
+   ],
+   "tris": 2976,
+   "file": "glTF/EA_Decor_Chain_01b.000.glb"
+  },
+  "EmaceHaunted_EA_Environment_Nature_Root_2c": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    425,
+    303,
+    278
+   ],
+   "tris": 1507,
+   "file": "glTF/EA_Environment_Nature_Root_2c.glb"
+  },
+  "EmaceHaunted_EA_Environment_Nature_Tree_3a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    443,
+    410,
+    1008
+   ],
+   "tris": 691,
+   "file": "glTF/EA_Environment_Nature_Tree_3a.glb"
+  },
+  "EmaceHaunted_EA_Environment_Nature_Tree_3b": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    546,
+    447,
+    1081
+   ],
+   "tris": 451,
+   "file": "glTF/EA_Environment_Nature_Tree_3b.glb"
+  },
+  "EmaceHaunted_EA_Environment_Nature_Tree_3c": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    397,
+    342,
+    1008
+   ],
+   "tris": 582,
+   "file": "glTF/EA_Environment_Nature_Tree_3c.glb"
+  },
+  "EmaceHaunted_EA_Environment_Nature_Tree_4a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    570,
+    487,
+    1008
+   ],
+   "tris": 1951,
+   "file": "glTF/EA_Environment_Nature_Tree_4a.glb"
+  },
+  "EmaceHaunted_EA_Environment_Stone_Moss_01b": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    217,
+    228,
+    216
+   ],
+   "tris": 60,
+   "file": "glTF/EA_Environment_Stone_Moss_01b.glb"
+  },
+  "EmaceHaunted_EA_Exterior_Kerb_Dirt_01d": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    538,
+    58,
+    81
+   ],
+   "tris": 152,
+   "file": "glTF/EA_Exterior_Kerb_Dirt_01d.glb"
+  },
+  "EmaceHaunted_EA_Exterior_Kerb_Moss_01e": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    538,
+    58,
+    70
+   ],
+   "tris": 152,
+   "file": "glTF/EA_Exterior_Kerb_Moss_01e.glb"
+  },
+  "EmaceHaunted_EA_Exterior_Kerb_Moss_01f": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    607,
+    50,
+    37
+   ],
+   "tris": 136,
+   "file": "glTF/EA_Exterior_Kerb_Moss_01f.glb"
+  },
+  "EmaceHaunted_EA_Exterior_Kerb_Moss_01g": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    291,
+    44,
+    37
+   ],
+   "tris": 68,
+   "file": "glTF/EA_Exterior_Kerb_Moss_01g.glb"
+  },
+  "EmaceHaunted_EA_Exterior_Lamp_wooden_01a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    31,
+    123,
+    470
+   ],
+   "tris": 374,
+   "file": "glTF/EA_Exterior_Lamp_wooden_01a.glb"
+  },
+  "EmaceHaunted_EA_Exterior_Lantern_Solid_01a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    209,
+    161,
+    652
+   ],
+   "tris": 864,
+   "file": "glTF/EA_Exterior_Lantern_Solid_01a.glb"
+  },
+  "EmaceHaunted_EA_Flower_Leaf_01a": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    25,
+    31,
+    15
+   ],
+   "tris": 51,
+   "file": "glTF/EA_Flower_Leaf_01a.glb"
+  },
+  "EmaceHaunted_EA_Flower_Leaf_01b": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    50,
+    88,
+    17
+   ],
+   "tris": 83,
+   "file": "glTF/EA_Flower_Leaf_01b.glb"
+  },
+  "EmaceHaunted_EA_Flower_Leaf_01c": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    46,
+    54,
+    17
+   ],
+   "tris": 53,
+   "file": "glTF/EA_Flower_Leaf_01c.glb"
+  },
+  "EmaceHaunted_EA_Flower_Leaf_01d": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    40,
+    47,
+    8
+   ],
+   "tris": 33,
+   "file": "glTF/EA_Flower_Leaf_01d.glb"
+  },
+  "EmaceHaunted_EA_Grave_Modern_Mini_01b": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    76,
+    65,
+    154
+   ],
+   "tris": 80,
+   "file": "glTF/EA_Grave_Modern_Mini_01b.glb"
+  },
+  "EmaceHaunted_EA_Grave_Sand_Mini_02b": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    139,
+    198,
+    113
+   ],
+   "tris": 112,
+   "file": "glTF/EA_Grave_Sand_Mini_02b.glb"
+  },
+  "EmaceHaunted_EA_Grave_Stone_Mini_01b": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    67,
+    20,
+    123
+   ],
+   "tris": 80,
+   "file": "glTF/EA_Grave_Stone_Mini_01b.glb"
+  },
+  "EmaceHaunted_EA_Grave_Stone_Mini_01c": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    47,
+    26,
+    79
+   ],
+   "tris": 32,
+   "file": "glTF/EA_Grave_Stone_Mini_01c.glb"
+  },
+  "EmaceHaunted_EA_Grave_Stone_Mini_02a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    53,
+    25,
+    112
+   ],
+   "tris": 100,
+   "file": "glTF/EA_Grave_Stone_Mini_02a.glb"
+  },
+  "EmaceHaunted_EA_Nature_Ivy_01a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    224,
+    61,
+    210
+   ],
+   "tris": 400,
+   "file": "glTF/EA_Nature_Ivy_01a.glb"
+  },
+  "EmaceHaunted_EA_Nature_Ivy_01b": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    290,
+    61,
+    127
+   ],
+   "tris": 278,
+   "file": "glTF/EA_Nature_Ivy_01b.glb"
+  },
+  "EmaceHaunted_EA_Nature_Ivy_01c": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    224,
+    61,
+    210
+   ],
+   "tris": 454,
+   "file": "glTF/EA_Nature_Ivy_01c.glb"
+  },
+  "EmaceHaunted_EA_Nature_Tree_12d": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    650,
+    160,
+    595
+   ],
+   "tris": 1042,
+   "file": "glTF/EA_Nature_Tree_12d.glb"
+  },
+  "EmaceHaunted_EA_Nature_Tree_13c": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    785,
+    733,
+    1004
+   ],
+   "tris": 1486,
+   "file": "glTF/EA_Nature_Tree_13c.glb"
+  },
+  "EmaceHaunted_EA_Nature_Tree_Crow_01d": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    52,
+    71,
+    296
+   ],
+   "tris": 294,
+   "file": "glTF/EA_Nature_Tree_Crow_01d.glb"
+  },
+  "EmaceHaunted_EA_Nature_Tree_Crow_02c": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    170,
+    74,
+    323
+   ],
+   "tris": 274,
+   "file": "glTF/EA_Nature_Tree_Crow_02c.glb"
+  },
+  "EmaceHaunted_EA_Nature_Tree_Crow_04a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    180,
+    128,
+    321
+   ],
+   "tris": 652,
+   "file": "glTF/EA_Nature_Tree_Crow_04a.glb"
+  },
+  "EmaceHaunted_EA_Nature_Tree_Root_1b": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    451,
+    955,
+    84
+   ],
+   "tris": 2285,
+   "file": "glTF/EA_Nature_Tree_Root_1b.glb"
+  },
+  "EmaceHaunted_EA_Nature_Tree_Root_1d": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    93,
+    362,
+    255
+   ],
+   "tris": 1452,
+   "file": "glTF/EA_Nature_Tree_Root_1d.glb"
+  },
+  "EmaceHaunted_EA_Path_Sand_Small_Bend_01a": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    600,
+    608,
+    20
+   ],
+   "tris": 82,
+   "file": "glTF/EA_Path_Sand_Small_Bend_01a.glb"
+  },
+  "EmaceHaunted_EA_Path_Sand_Small_Straight_01a": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    353,
+    666,
+    21
+   ],
+   "tris": 78,
+   "file": "glTF/EA_Path_Sand_Small_Straight_01a.glb"
+  },
+  "EmaceHaunted_EA_Path_Sand_Small_Straight_01b": {
+   "material": "VC",
+   "collision": "complex",
+   "size": [
+    368,
+    1332,
+    19
+   ],
+   "tris": 92,
+   "file": "glTF/EA_Path_Sand_Small_Straight_01b.glb"
+  },
+  "EmaceHaunted_EA_Pavement_Dirt_Straight_01g": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    1800,
+    1800,
+    67
+   ],
+   "tris": 498,
+   "file": "glTF/EA_Pavement_Dirt_Straight_01g.glb"
+  },
+  "EmaceHaunted_EA_Prop_Container_Barrel_01b": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    99,
+    106,
+    118
+   ],
+   "tris": 600,
+   "file": "glTF/EA_Prop_Container_Barrel_01b.glb"
+  },
+  "EmaceHaunted_EA_Prop_Container_Basket_03b": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    48,
+    48,
+    67
+   ],
+   "tris": 1016,
+   "file": "glTF/EA_Prop_Container_Basket_03b.glb"
+  },
+  "EmaceHaunted_EA_Prop_Container_Bowl_01": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    53,
+    68,
+    33
+   ],
+   "tris": 250,
+   "file": "glTF/EA_Prop_Container_Bowl_01.glb"
+  },
+  "EmaceHaunted_EA_Prop_Container_Crate_01b": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    83,
+    103,
+    71
+   ],
+   "tris": 368,
+   "file": "glTF/EA_Prop_Container_Crate_01b.glb"
+  },
+  "EmaceHaunted_EA_Prop_Wehicule_Whell_01b": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    107,
+    37,
+    116
+   ],
+   "tris": 318,
+   "file": "glTF/EA_Prop_Wehicule_Whell_01b.glb"
+  },
+  "EmaceHaunted_EA_Prop_Wehicule_Whell_02b": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    120,
+    28,
+    120
+   ],
+   "tris": 1171,
+   "file": "glTF/EA_Prop_Wehicule_Whell_02b.glb"
+  },
+  "EmaceHaunted_EA_Pumpkin_01a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    112,
+    113,
+    142
+   ],
+   "tris": 1480,
+   "file": "glTF/EA_Pumpkin_01a.glb"
+  },
+  "EmaceHaunted_EA_Pumpkin_01b": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    126,
+    126,
+    164
+   ],
+   "tris": 1534,
+   "file": "glTF/EA_Pumpkin_01b.glb"
+  },
+  "EmaceHaunted_EA_Pumpkin_01c": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    141,
+    141,
+    167
+   ],
+   "tris": 1694,
+   "file": "glTF/EA_Pumpkin_01c.glb"
+  },
+  "EmaceHaunted_EA_Pumpkin_Candle_02a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    142,
+    118,
+    173
+   ],
+   "tris": 2566,
+   "file": "glTF/EA_Pumpkin_Candle_02a.glb"
+  },
+  "EmaceHaunted_EA_Pumpkin_Candle_02b": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    224,
+    243,
+    147
+   ],
+   "tris": 2050,
+   "file": "glTF/EA_Pumpkin_Candle_02b.glb"
+  },
+  "EmaceHaunted_EA_Pumpkin_Candles_Chain_01a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    125,
+    100,
+    139
+   ],
+   "tris": 2566,
+   "file": "glTF/EA_Pumpkin_Candles_Chain_01a.glb"
+  },
+  "EmaceHaunted_EA_Pumpkin_Piece_01a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    44,
+    47,
+    8
+   ],
+   "tris": 32,
+   "file": "glTF/EA_Pumpkin_Piece_01a.glb"
+  },
+  "EmaceHaunted_EA_Pumpkin_Piece_01b": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    32,
+    32,
+    11
+   ],
+   "tris": 16,
+   "file": "glTF/EA_Pumpkin_Piece_01b.glb"
+  },
+  "EmaceHaunted_EA_Swamp_Dirt_Root_04a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    557,
+    414,
+    75
+   ],
+   "tris": 3524,
+   "file": "glTF/EA_Swamp_Dirt_Root_04a.glb"
+  },
+  "EmaceHaunted_EA_Swamp_Dirt_Root_Half_04b": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    192,
+    528,
+    40
+   ],
+   "tris": 2165,
+   "file": "glTF/EA_Swamp_Dirt_Root_Half_04b.glb"
+  },
+  "EmaceHaunted_EA_Swamp_Flower_01a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    87,
+    93,
+    67
+   ],
+   "tris": 370,
+   "file": "glTF/EA_Swamp_Flower_01a.glb"
+  },
+  "EmaceHaunted_EA_Swamp_Flower_01b": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    54,
+    52,
+    47
+   ],
+   "tris": 238,
+   "file": "glTF/EA_Swamp_Flower_01b.glb"
+  },
+  "EmaceHaunted_EA_Swamp_Grass_01a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    18,
+    19,
+    145
+   ],
+   "tris": 35,
+   "file": "glTF/EA_Swamp_Grass_01a.glb"
+  },
+  "EmaceHaunted_EA_Swamp_Grass_01b": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    97,
+    65,
+    75
+   ],
+   "tris": 234,
+   "file": "glTF/EA_Swamp_Grass_01b.glb"
+  },
+  "EmaceHaunted_EA_Swamp_Grass_01c": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    70,
+    24,
+    74
+   ],
+   "tris": 350,
+   "file": "glTF/EA_Swamp_Grass_01c.glb"
+  },
+  "EmaceHaunted_EA_Swamp_Grass_01d": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    73,
+    28,
+    70
+   ],
+   "tris": 426,
+   "file": "glTF/EA_Swamp_Grass_01d.glb"
+  },
+  "EmaceHaunted_EA_Swamp_Grass_01e": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    134,
+    47,
+    303
+   ],
+   "tris": 170,
+   "file": "glTF/EA_Swamp_Grass_01e.glb"
+  },
+  "EmaceHaunted_EA_Swamp_Grass_01f": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    158,
+    116,
+    211
+   ],
+   "tris": 309,
+   "file": "glTF/EA_Swamp_Grass_01f.glb"
+  },
+  "EmaceHaunted_EA_Swamp_Grass_01g": {
+   "material": "VC",
+   "collision": "none",
+   "size": [
+    15,
+    16,
+    37
+   ],
+   "tris": 25,
+   "file": "glTF/EA_Swamp_Grass_01g.glb"
+  },
+  "EmaceHaunted_EA_Swamp_Grass_01h": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    89,
+    71,
+    53
+   ],
+   "tris": 125,
+   "file": "glTF/EA_Swamp_Grass_01h.glb"
+  },
+  "EmaceHaunted_EA_Swamp_Grass_01i": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    186,
+    77,
+    40
+   ],
+   "tris": 400,
+   "file": "glTF/EA_Swamp_Grass_01i.glb"
+  },
+  "EmaceHaunted_EA_Swamp_Grass_01j": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    150,
+    37,
+    37
+   ],
+   "tris": 300,
+   "file": "glTF/EA_Swamp_Grass_01j.glb"
+  },
+  "EmaceHaunted_EA_Swamp_Grass_01jx": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    200,
+    152,
+    21
+   ],
+   "tris": 625,
+   "file": "glTF/EA_Swamp_Grass_01jx.glb"
+  },
+  "EmaceHaunted_EA_Swamp_Grass_02a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    51,
+    50,
+    55
+   ],
+   "tris": 52,
+   "file": "glTF/EA_Swamp_Grass_02a.glb"
+  },
+  "EmaceHaunted_EA_Swamp_Grass_02b": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    158,
+    106,
+    25
+   ],
+   "tris": 105,
+   "file": "glTF/EA_Swamp_Grass_02b.glb"
+  },
+  "EmaceHaunted_EA_Swamp_Grass_02c": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    114,
+    74,
+    66
+   ],
+   "tris": 296,
+   "file": "glTF/EA_Swamp_Grass_02c.glb"
+  },
+  "EmaceHaunted_EA_Swamp_Grass_02d": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    92,
+    58,
+    33
+   ],
+   "tris": 202,
+   "file": "glTF/EA_Swamp_Grass_02d.glb"
+  },
+  "EmaceHaunted_EA_Swamp_Grass_02e": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    133,
+    143,
+    159
+   ],
+   "tris": 65,
+   "file": "glTF/EA_Swamp_Grass_02e.glb"
+  },
+  "EmaceHaunted_EA_Swamp_Grass_03a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    404,
+    263,
+    31
+   ],
+   "tris": 105,
+   "file": "glTF/EA_Swamp_Grass_03a.glb"
+  },
+  "EmaceHaunted_EA_Swamp_Grass_04a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    285,
+    204,
+    8
+   ],
+   "tris": 325,
+   "file": "glTF/EA_Swamp_Grass_04a.glb"
+  },
+  "EmaceHaunted_EA_Swamp_Grass_04b": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    287,
+    136,
+    10
+   ],
+   "tris": 195,
+   "file": "glTF/EA_Swamp_Grass_04b.glb"
+  },
+  "EmaceHaunted_EA_Swamp_Grass_04c": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    294,
+    148,
+    12
+   ],
+   "tris": 195,
+   "file": "glTF/EA_Swamp_Grass_04c.glb"
+  },
+  "EmaceHaunted_EA_Swamp_Grass_Hill_Dead_01a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    260,
+    217,
+    25
+   ],
+   "tris": 206,
+   "file": "glTF/EA_Swamp_Grass_Hill_Dead_01a.glb"
+  },
+  "EmaceHaunted_EA_Swamp_Grass_Hill_Dead_01b": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    172,
+    129,
+    25
+   ],
+   "tris": 206,
+   "file": "glTF/EA_Swamp_Grass_Hill_Dead_01b.glb"
+  },
+  "EmaceHaunted_EA_Swamp_Grass_Hill_Dead_01c": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    233,
+    290,
+    25
+   ],
+   "tris": 172,
+   "file": "glTF/EA_Swamp_Grass_Hill_Dead_01c.glb"
+  },
+  "EmaceHaunted_EA_Swamp_Grass_Hill_Dead_01d": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    162,
+    422,
+    25
+   ],
+   "tris": 288,
+   "file": "glTF/EA_Swamp_Grass_Hill_Dead_01d.glb"
+  },
+  "EmaceHaunted_EA_Swamp_Grass_Mud_01i": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    186,
+    77,
+    40
+   ],
+   "tris": 400,
+   "file": "glTF/EA_Swamp_Grass_Mud_01i.glb"
+  },
+  "EmaceHaunted_EA_Swamp_Grass_Mud_01j": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    186,
+    99,
+    38
+   ],
+   "tris": 549,
+   "file": "glTF/EA_Swamp_Grass_Mud_01j.glb"
+  },
+  "EmaceHaunted_EA_Swamp_Grass_Mud_01jx1": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    260,
+    69,
+    26
+   ],
+   "tris": 498,
+   "file": "glTF/EA_Swamp_Grass_Mud_01jx1.glb"
+  },
+  "EmaceHaunted_EA_Swamp_Grass_Mud_01jx2": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    129,
+    68,
+    26
+   ],
+   "tris": 320,
+   "file": "glTF/EA_Swamp_Grass_Mud_01jx2.glb"
+  },
+  "EmaceHaunted_EA_Swamp_LeafFruits_01a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    143,
+    185,
+    130
+   ],
+   "tris": 2688,
+   "file": "glTF/EA_Swamp_LeafFruits_01a.glb"
+  },
+  "EmaceHaunted_EA_Swamp_Leaf_01a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    175,
+    55,
+    103
+   ],
+   "tris": 88,
+   "file": "glTF/EA_Swamp_Leaf_01a.glb"
+  },
+  "EmaceHaunted_EA_Swamp_Leaf_01b": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    316,
+    292,
+    166
+   ],
+   "tris": 340,
+   "file": "glTF/EA_Swamp_Leaf_01b.glb"
+  },
+  "EmaceHaunted_EA_Swamp_Mud_Half_01a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    190,
+    528,
+    8
+   ],
+   "tris": 690,
+   "file": "glTF/EA_Swamp_Mud_Half_01a.glb"
+  },
+  "EmaceHaunted_EA_Swamp_Root_01a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    383,
+    349,
+    127
+   ],
+   "tris": 3786,
+   "file": "glTF/EA_Swamp_Root_01a.glb"
+  },
+  "EmaceHaunted_EA_Swamp_Root_03c": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    398,
+    256,
+    61
+   ],
+   "tris": 2982,
+   "file": "glTF/EA_Swamp_Root_03c.glb"
+  },
+  "EmaceHaunted_EA_Swamp_Root_03d": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    195,
+    269,
+    65
+   ],
+   "tris": 1488,
+   "file": "glTF/EA_Swamp_Root_03d.glb"
+  },
+  "EmaceHaunted_EA_Swamp_Root_04d": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    193,
+    473,
+    88
+   ],
+   "tris": 3968,
+   "file": "glTF/EA_Swamp_Root_04d.glb"
+  },
+  "EmaceHaunted_EA_Swamp_Stones_02a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    280,
+    186,
+    38
+   ],
+   "tris": 169,
+   "file": "glTF/EA_Swamp_Stones_02a.glb"
+  },
+  "EmaceHaunted_EA_Swamp_Stones_04a": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    262,
+    546,
+    19
+   ],
+   "tris": 726,
+   "file": "glTF/EA_Swamp_Stones_04a.glb"
+  },
+  "EmaceHaunted_EA_Swamp_Stones_04b": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    277,
+    577,
+    17
+   ],
+   "tris": 851,
+   "file": "glTF/EA_Swamp_Stones_04b.glb"
+  },
+  "EmaceHaunted_EA_Swamp_Stones_04c": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    488,
+    527,
+    19
+   ],
+   "tris": 726,
+   "file": "glTF/EA_Swamp_Stones_04c.glb"
+  },
+  "EmaceHaunted_EA_Swamp_Stones_04d": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    514,
+    556,
+    40
+   ],
+   "tris": 776,
+   "file": "glTF/EA_Swamp_Stones_04d.glb"
+  },
+  "EmaceHaunted_EA_Swamp_Stones_04e": {
+   "material": "VC",
+   "collision": "box",
+   "size": [
+    492,
+    411,
+    18
+   ],
+   "tris": 327,
+   "file": "glTF/EA_Swamp_Stones_04e.glb"
+  }
+ },
+ "skipped": [
+  {
+   "file": "glTF/Comp_Merged.glb",
+   "piece": "Comp_Merged",
+   "reason": "73820 tris > 30000"
+  },
+  {
+   "file": "glTF/EA_Bld_Tomb_Niche_Clean_Class_A_01c_LOD0.001.glb",
+   "piece": "EA_Bld_Tomb_Niche_Clean_Class_A_01c_LOD0_001",
+   "reason": "160999 tris > 30000"
+  }
+ ]
+}

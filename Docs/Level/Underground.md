@@ -57,3 +57,23 @@ Owner gets a 0.8 s fade from black; everyone near either end hears the door / la
   camera is below (exposure −1.25 vs the village +0.4, vignette, cooler grade) and a 2D ambience loop with drips.
 - Renders: `powershell -File Tools/Unreal/kg_capture_dig.ps1` → `Saved/Screenshots/Dig/*.png` (13 underground shots,
   2 surface entrances, 9 dig-spot shots via `-KGDigShots`).
+
+## Checks
+- Tests: `KillGodot.Dig.*` (Rules, SpotGeneration, LootDeterminism, ServerValidation, Underground) inside `run_gates.ps1`.
+- Network: `Tools/Unreal/kg_dig_smoke.ps1` (listen server + client, -nullrhi): shovel out, 3 mound stages replicate,
+  loot in the pockets, E on the well rim, both machines see the client in the Well Cellar. Part of invariant I3.
+- Walkability: `Tools/Unreal/kg_underground_walk.ps1 [-Map ...]` (-game -nullrhi, read-only): a character capsule on a
+  25 cm grid over every cell, flood-filled from the shaft ladder and from the crypt stair foot; PASS = every room but
+  the vault reached, both sides meet through the old mine tunnel, and the vault is reached after `kg.Dig.Gate open`.
+  When the real level must not be touched (editor open), `kg_build_underground.py --check-level` builds the
+  underground alone into the scratch map `/Game/KillGodot/Maps/Dev/L_KG_UndergroundCheck` and the check runs there.
+
+## Status (2026-09-25, sprint finish)
+- The v2 pipeline hook works: `kg_build_v2_all.ps1 -From 4 -To 8` rebuilt the village with the underground inside
+  (418 pieces, 28 lights, 44 gameplay actors), dressing, navmesh, material check (PASS) and captures; `verify_v2_build.py`
+  PASS; dig smoke PASS on that map.
+- The first walk check found 4 blockers in that build (the workbench in the shaft arch, an urn in the hall's west arch,
+  a rock in the east-west run of the mine tunnel, the barrel pile closing the tunnel mouth). Fixed in
+  `kg_build_underground.py` and verified PASS on the check map. **The live L_Morrowmere_v2 still has the old props until
+  the next level build** (queued while the editor is open): `kg_build_v2_all.ps1 -From 4 -To 7`, then
+  `kg_underground_walk.ps1` and `kg_capture_dig.ps1`.

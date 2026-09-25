@@ -90,11 +90,35 @@ class Tour:
             if abs(p.x) + abs(p.y) < 1.0:
                 continue
             x, y, z = p.x / 100.0, p.y / 100.0, p.z / 100.0
-            self.shots[name] = ((x - 2.3, y + 1.7, z + 1.75), (x, y, z + 0.1), 70.0)
+            self.shots[name] = (self.clear_eye(x, y, z), (x, y, z + 0.1), 70.0)
             log(f"dig shot {name} at {x:.1f},{y:.1f},{z:.1f}")
         self.todo = [s for s in (self.sel or list(self.shots)) if s in self.shots]
         log(f"{len(self.todo)} shots")
         return True
+
+    def clear_eye(self, x, y, z):
+        """An eye ~2.9 m from the spot, 1.75 m up, with nothing (tree trunk, stone, wall) in a 0.6 m wide tube between it
+        and the spot (a thin centre ray missed the trunk that filled half of dig_grave_open)."""
+        r = 2.86
+        for deg in (143.5, 36.5, -143.5, -36.5, 90.0, -90.0, 180.0, 0.0):
+            ex, ey = x + r * math.cos(math.radians(deg)), y + r * math.sin(math.radians(deg))
+            try:
+                hit = unreal.SystemLibrary.sphere_trace_single(
+                    self.world, unreal.Vector(x * 100, y * 100, z * 100 + 60.0), unreal.Vector(ex * 100, ey * 100, z * 100 + 175.0),
+                    30.0, unreal.TraceTypeQuery.TRACE_TYPE_QUERY1, False, [], unreal.DrawDebugTrace.NONE, True)
+            except Exception as e:  # noqa: BLE001
+                log(f"trace failed ({e}); default eye")
+                break
+            t = hit.to_tuple() if hit else None
+            if not (t and t[0]):     # HitResult.blocking_hit (same use as kg_refurnish.py)
+                log(f"eye at {deg:.0f} deg")
+                return (ex, ey, z + 1.75)
+            try:
+                who = t[9].get_name() if t[9] else "?"
+            except Exception:  # noqa: BLE001
+                who = "?"
+            log(f"eye at {deg:.0f} deg blocked by {who}")
+        return (x - 2.3, y + 1.7, z + 1.75)
 
     def aim(self, name):
         eye, tgt, fov = self.shots[name]

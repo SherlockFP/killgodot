@@ -3,7 +3,8 @@
   a sprint is only done when this passes (Docs/Process/LoopContract.md). Headless: no editor, no windows.
     I1  build + automation tests            Tools/Gauntlet/run_gates.ps1
     I2  v2 map layout/build/clearances      Tools/Level/verify_v2_build.py
-    I3  network smokes (2 windowless procs) chat, emote, fish, chore
+    I3  network smokes (2 windowless procs) chat, emote, fish, chore, dig (dig = digging + the well passage, needs the
+        underground in L_Morrowmere_v2: Tools/Unreal/kg_dig_smoke.ps1)
     I4  whole match with bots reaches a winner  Tools/Gauntlet/kg_match_smoke.ps1
   Usage: powershell -ExecutionPolicy Bypass -File Tools/Gauntlet/run_invariants.ps1 [-Skip I3,I4]
   Writes Saved/Gauntlet/invariants-<stamp>.json. Exit 0 = all green.
@@ -25,7 +26,7 @@ function Run($Id, $Name, [scriptblock]$Body) {
 New-Item -ItemType Directory -Force "Saved\Gauntlet" | Out-Null
 Run "I1" "build+tests" { powershell -NoProfile -ExecutionPolicy Bypass -File Tools/Gauntlet/run_gates.ps1 }
 Run "I2" "v2 verify" { python Tools/Level/verify_v2_build.py }
-foreach ($s in "chat", "emote", "fish", "chore") {
+foreach ($s in "chat", "emote", "fish", "chore", "dig") {   # dig: KG_DIG (Docs/Level/Underground.md)
     Run "I3" "smoke:$s" { powershell -NoProfile -ExecutionPolicy Bypass -File "Tools/Unreal/kg_${s}_smoke.ps1" }
 }
 Run "I4" "match smoke" { powershell -NoProfile -ExecutionPolicy Bypass -File Tools/Gauntlet/kg_match_smoke.ps1 }

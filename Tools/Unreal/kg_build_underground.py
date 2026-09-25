@@ -4,7 +4,8 @@ under Crown Hill (Tools/Level/underground_layout.py), plus the surface ends of t
 Headless (editor closed), standalone: loads the level, rebuilds the underground, saves:
   UnrealEditor-Cmd "D:/Kill Godot/KillGodot.uproject" -run=pythonscript
       -script="D:/Kill Godot/Tools/Unreal/kg_build_underground.py" -unattended -nosplash -nopause -nullrhi
-  options (after the script path, inside -script="..."): --no-save, --no-map (skip the map texture import)
+  options (after the script path, inside -script="..."): --no-save, --no-map (skip the map texture import),
+  --check-level (build the underground alone into the scratch map L_KG_UndergroundCheck; saves nothing else)
 From the village builder (hook, current level, the village step saves):
   import kg_build_underground; kg_build_underground.build_into_current_level()
 
@@ -54,6 +55,8 @@ WALL = 312.0
 MINE = U.MINE_H * M
 STAIR = U.STAIR_H * M
 VAULT_TOP = WALL + 100.0
+SAVE_ASSETS = True         # False in --check-level: write nothing but the new check map
+CHECK_LEVEL = "/Game/KillGodot/Maps/Dev/L_KG_UndergroundCheck"
 LIGHT_K = 0.55             # look round 2: moodier (every light scaled)   # SM_KG_CryptVault_2m: springing on the wall tops, top surface +1.0 m
 
 actors = unreal.get_editor_subsystem(unreal.EditorActorSubsystem)
@@ -115,7 +118,8 @@ def under_materials():
             mel.set_material_instance_vector_parameter_value(mi, "BaseColorFactor",
                                                              unreal.LinearColor(bc.r * t[0], bc.g * t[1], bc.b * t[2], bc.a))
             mel.update_material_instance(mi)
-            eal.save_loaded_asset(mi)
+            if SAVE_ASSETS:
+                eal.save_loaded_asset(mi)
             _mi[(style, kind)] = mi
     log(f"materials: {len(_mi)}")
 
@@ -364,7 +368,8 @@ def crypt_props():
     put(pick(DU + "SkullPile"), x, y, F, 200.0, folder="Underground/Props")
     x, y = at(5, 10, -0.2, 0.2)
     put(pick(DU + "BoneScatter"), x, y, F, 30.0, folder="Underground/Props", collide=False)
-    for k, (i, j, fx, fy) in enumerate(((5, 9, -0.75, 0.0), (7, 9, 0.75, 0.3), (6, 10, 0.2, 0.75))):
+    # corners, clear of the arches at (4|5, 9) and (7|8, 9) and the corridor mouths (walk check, kg_underground_walk.py)
+    for k, (i, j, fx, fy) in enumerate(((5, 10, -0.7, 0.7), (7, 8, 0.75, -0.75), (7, 10, 0.75, 0.75))):
         breakable(P + ("Vase_2" if k % 2 == 0 else "Vase_4"), *at(i, j, fx, fy), "CryptUrn")
     # ossuary: skull walls (niche walls all round), piles, one candle
     for (i, j, fx, fy, yaw) in ((0, 8, 0.0, 0.0, 10.0), (1, 10, 0.2, 0.3, 140.0), (0, 10, -0.3, 0.4, 250.0)):
@@ -442,9 +447,12 @@ def mine_props():
             put(P + "Lantern_Wall", ex + nrm[0] * 25.0, ey + nrm[1] * 25.0, F + 170.0, yaw + 180.0, folder="Underground/Mine",
                 collide=False)
             light(ex + nrm[0] * 45.0, ey + nrm[1] * 45.0, F + 190.0, 9.0, 560.0, (1.0, 0.66, 0.36), 0.1)
-        if n % 2 == 1:
-            x, y = at(i, j, 0.5 if n % 4 == 1 else -0.5, 0.2)
-            put(N + f"Rock_Medium_{1 + n % 3}", x, y, F - 10.0, n * 47.0, scale=0.45, folder="Underground/Mine")
+        axis = corridor_axis(i, j)
+        if n % 2 == 1 and axis:
+            # against a side wall of a straight run (bends and junctions stay clear; walk check, kg_underground_walk.py)
+            side = 0.65 if n % 4 == 1 else -0.65
+            x, y = at(i, j, side, 0.2) if axis == "Y" else at(i, j, 0.2, side)
+            put(N + f"Rock_Medium_{1 + n % 3}", x, y, F - 10.0, n * 47.0, scale=0.35, folder="Underground/Mine")
         if n % 4 == 2:
             x, y = at(i, j, -0.55, -0.4)
             put(N + "Mushroom_Common", x, y, F, n * 31.0, scale=0.6, folder="Underground/Mine", collide=False)
@@ -471,7 +479,7 @@ def cellar_props():
     for k, (i, j, fx, fy) in enumerate(((4, 27, -0.5, 0.0), (4, 28, -0.6, 0.3))):
         x, y = at(i, j, fx, fy)
         put(P + "Crate_Wooden", x, y, F, k * 25.0, scale=0.85, folder="Underground/Cellar")
-    put(P + "Workbench", *at(6, 29, 0.0, 0.3), F, 180.0, folder="Underground/Cellar")
+    put(P + "Workbench", *at(7, 29, 0.25, 0.3), F, 180.0, folder="Underground/Cellar")   # beside the shaft arch, not in it
     put(P + "Shelf_Small_Bottles", *at(7, 29, 0.0, 0.62), F + 110.0, 180.0, folder="Underground/Cellar", collide=False)
     for (i, j) in ((5, 27), (7, 28)):
         x, y = at(i, j)
@@ -480,10 +488,12 @@ def cellar_props():
     for (i, j, side) in ((9, 27, "W"), (9, 29, "S")):
         ex, ey, n, yaw = edge_frame(i, j, side)
         put(P + "Barrel_Holder", ex + n[0] * 45.0, ey + n[1] * 45.0, F, yaw + 90.0, folder="Underground/Cellar")
-    for k, (fx, fy) in enumerate(((-0.6, -0.6), (-0.2, -0.65), (0.25, -0.35))):
+    # the pile covers the west half of the mouth; the east half stays a squeeze-free way in (walk check: the old pile
+    # closed the tunnel, kg_underground_walk.py)
+    for k, (fx, fy) in enumerate(((-0.75, -0.7), (-0.45, -0.2), (-0.95, -0.1))):
         x, y = at(10, 26, fx, fy)
         put(P + "Barrel", x, y, F, k * 50.0, folder="Underground/Cellar")
-    put(P + "Barrel", *at(10, 26, -0.4, -0.3), F + 88.0, 20.0, folder="Underground/Cellar")
+    put(P + "Barrel", *at(10, 26, -0.75, -0.7), F + 88.0, 20.0, folder="Underground/Cellar")
     put(P + "Crate_Wooden", *at(10, 27, 0.5, 0.2), F, 10.0, scale=0.8, folder="Underground/Cellar")
     light(*at(10, 28), F + 240.0, 6.0, 520.0, (1.0, 0.6, 0.3), 0.1)
     # Smugglers' Nook: the loot chest (a crypt key always inside), candles, crates
@@ -625,13 +635,26 @@ def build_into_current_level(do_map=True):
     info_and_markers(do_map)
     rep = {"level": LEVEL, "stats": {k: v for k, v in stats.items() if k != "missing"}, "missing": sorted(set(stats["missing"])),
            "cells": len(list(U.cells())), "secs": round(time.time() - t0, 1)}
-    json.dump(rep, open(REPORT, "w"), indent=1)
+    if SAVE_ASSETS:                     # the check map (--check-level) leaves the real level's report alone
+        json.dump(rep, open(REPORT, "w"), indent=1)
     log(f"built: {json.dumps(rep)}")
     return rep
 
 
 def main(argv):
+    global SAVE_ASSETS
     les = unreal.get_editor_subsystem(unreal.LevelEditorSubsystem)
+    if "--check-level" in argv:
+        # the underground alone in a NEW scratch map (the real level untouched, no shared asset re-saved) for
+        # Tools/Unreal/kg_underground_walk.ps1 -Map /Game/KillGodot/Maps/Dev/L_KG_UndergroundCheck
+        SAVE_ASSETS = False
+        if eal.does_asset_exist(CHECK_LEVEL):
+            les.load_level(CHECK_LEVEL)
+        else:
+            les.new_level(CHECK_LEVEL)
+        build_into_current_level(do_map=False)
+        log(f"saved {CHECK_LEVEL}: {les.save_current_level()}")
+        return
     unreal.EditorLoadingAndSavingUtils.load_map(LEVEL)
     build_into_current_level(do_map="--no-map" not in argv)
     if "--no-save" not in argv:

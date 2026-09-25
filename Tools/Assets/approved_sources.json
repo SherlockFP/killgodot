@@ -166,6 +166,426 @@
    ],
    "license": "CC0",
    "recommended_import": "There are no FBX, glTF or OBJ files, only .blend (saved in Blender 2.91). Use lowpoly_caves_and_props/LowPoly/Lowpoly_Props.blend as the main source. Lowpoly_Buildings.blend is optional and holds only the cave/mine rocks. Open each file in Blender and export glTF (.glb) or FBX, one per object, with applied transforms. Ignore the .blend1 files, which are automatic Blender backups. Textures use a si"
+  },
+  {
+   "folder": "Kenney_PirateKit",
+   "urls": [
+    "https://kenney.nl/assets/pirate-kit"
+   ],
+   "license": "CC0",
+   "licence_risk": "OK",
+   "approved_by_user": "2026-09-25",
+   "recommended_import": "See Tools/Unreal/dressing/pack_ext_index.md (static kits: kg_ext_pack.py -> kg_import_ext_pack.py; characters: kg_import_ext_chars.py)."
+  },
+  {
+   "folder": "Kenney_SurvivalKit",
+   "urls": [
+    "https://kenney.nl/assets/survival-kit"
+   ],
+   "license": "CC0",
+   "licence_risk": "OK",
+   "approved_by_user": "2026-09-25",
+   "recommended_import": "See Tools/Unreal/dressing/pack_ext_index.md (static kits: kg_ext_pack.py -> kg_import_ext_pack.py; characters: kg_import_ext_chars.py)."
+  },
+  {
+   "folder": "Kenney_FurnitureKit",
+   "urls": [
+    "https://kenney.nl/assets/furniture-kit"
+   ],
+   "license": "CC0",
+   "licence_risk": "OK",
+   "approved_by_user": "2026-09-25",
+   "recommended_import": "See Tools/Unreal/dressing/pack_ext_index.md (static kits: kg_ext_pack.py -> kg_import_ext_pack.py; characters: kg_import_ext_chars.py)."
+  },
+  {
+   "folder": "Kenney_GraveyardKit",
+   "urls": [
+    "https://kenney.nl/assets/graveyard-kit"
+   ],
+   "license": "CC0",
+   "licence_risk": "OK",
+   "approved_by_user": "2026-09-25",
+   "recommended_import": "See Tools/Unreal/dressing/pack_ext_index.md (static kits: kg_ext_pack.py -> kg_import_ext_pack.py; characters: kg_import_ext_chars.py)."
+  },
+  {
+   "folder": "Kenney_FoodKit",
+   "urls": [
+    "https://kenney.nl/assets/food-kit"
+   ],
+   "license": "CC0",
+   "licence_risk": "OK",
+   "approved_by_user": "2026-09-25",
+   "recommended_import": "See Tools/Unreal/dressing/pack_ext_index.md (static kits: kg_ext_pack.py -> kg_import_ext_pack.py; characters: kg_import_ext_chars.py)."
+  },
+  {
+   "folder": "Kenney_FantasyTownKit",
+   "urls": [
+    "https://kenney.nl/assets/fantasy-town-kit"
+   ],
+   "license": "CC0",
+   "licence_risk": "OK",
+   "approved_by_user": "2026-09-25",
+   "recommended_import": "See Tools/Unreal/dressing/pack_ext_index.md (static kits: kg_ext_pack.py -> kg_import_ext_pack.py; characters: kg_import_ext_chars.py)."
+  },
+  {
+   "folder": "Kenney_ModularDungeonKit",
+   "urls": [
+    "https://kenney.nl/assets/modular-dungeon-kit"
+   ],
+   "license": "CC0",
+   "licence_risk": "OK",
+   "approved_by_user": "2026-09-25",
+   "recommended_import": "See Tools/Unreal/dressing/pack_ext_index.md (static kits: kg_ext_pack.py -> kg_import_ext_pack.py; characters: kg_import_ext_chars.py)."
+  },
+  {
+   "folder": "Kenney_MiniForest",
+   "urls": [
+    "https://kenney.nl/assets/mini-forest"
+   ],
+   "license": "CC0",
+   "licence_risk": "OK",
+   "approved_by_user": "2026-09-25",
+   "recommended_import": "See Tools/Unreal/dressing/pack_ext_index.md (static kits: kg_ext_pack.py -> kg_import_ext_pack.py; characters: kg_import_ext_chars.py)."
+  },
+  {
+   "folder": "Kenney_NatureKit",
+   "urls": [
+    "https://kenney.nl/assets/nature-kit"
+   ],
+   "license": "CC0",
+   "licence_risk": "OK",
+   "approved_by_user": "2026-09-25",
+   "recommended_import": "See Tools/Unreal/dressing/pack_ext_index.md (static kits: kg_ext_pack.py -> kg_import_ext_pack.py; characters: kg_import_ext_chars.py)."
+  },
+  {
+   "folder": "Kenney_CastleKit",
+   "urls": [
+    "https://kenney.nl/assets/castle-kit"
+   ],
+   "license": "CC0",
+   "licence_risk": "OK",
+   "approved_by_user": "2026-09-25",
+   "recommended_import": "See Tools/Unreal/dressing/pack_ext_index.md (static kits: kg_ext_pack.py -> kg_import_ext_pack.py; characters: kg_import_ext_chars.py)."
+  },
+  {
+   "folder": "KayKit_Forest",
+   "urls": [
+    "https://kaylousberg.itch.io/kaykit-forest"
+   ],
+   "license": "CC0",
+   "licence_risk": "OK",
+   "approved_by_user": "2026-09-25",
+   "recommended_import": "See Tools/Unreal/dressing/pack_ext_index.md (static kits: kg_ext_pack.py -> kg_import_ext_pack.py; characters: kg_import_ext_chars.py)."
+  },
+  {
+   "folder": "KayKit_DungeonPack",
+   "urls": [
+    "https://kaylousberg.itch.io/kaykit-dungeon-pack"
+   ],
+   "license": "CC0",
+   "licence_risk": "OK",
+   "approved_by_user": "2026-09-25",
+   "recommended_import": "See Tools/Unreal/dressing/pack_ext_index.md (static kits: kg_ext_pack.py -> kg_import_ext_pack.py; characters: kg_import_ext_chars.py)."
+  },
+  {
+   "folder": "KayKit_FurnitureBits",
+   "urls": [
+    "https://kaylousberg.itch.io/furniture-bits"
+   ],
+   "license": "CC0",
+   "licence_risk": "OK",
+   "approved_by_user": "2026-09-25",
+   "recommended_import": "See Tools/Unreal/dressing/pack_ext_index.md (static kits: kg_ext_pack.py -> kg_import_ext_pack.py; characters: kg_import_ext_chars.py)."
+  },
+  {
+   "folder": "KayKit_HalloweenBits",
+   "urls": [
+    "https://kaylousberg.itch.io/halloween-bits"
+   ],
+   "license": "CC0",
+   "licence_risk": "OK",
+   "approved_by_user": "2026-09-25",
+   "recommended_import": "See Tools/Unreal/dressing/pack_ext_index.md (static kits: kg_ext_pack.py -> kg_import_ext_pack.py; characters: kg_import_ext_chars.py)."
+  },
+  {
+   "folder": "KayKit_MedievalHexagon",
+   "urls": [
+    "https://kaylousberg.itch.io/kaykit-medieval-hexagon"
+   ],
+   "license": "CC0",
+   "licence_risk": "OK",
+   "approved_by_user": "2026-09-25",
+   "recommended_import": "See Tools/Unreal/dressing/pack_ext_index.md (static kits: kg_ext_pack.py -> kg_import_ext_pack.py; characters: kg_import_ext_chars.py)."
+  },
+  {
+   "folder": "KayKit_RestaurantBits",
+   "urls": [
+    "https://kaylousberg.itch.io/restaurant-bits"
+   ],
+   "license": "CC0",
+   "licence_risk": "OK",
+   "approved_by_user": "2026-09-25",
+   "recommended_import": "See Tools/Unreal/dressing/pack_ext_index.md (static kits: kg_ext_pack.py -> kg_import_ext_pack.py; characters: kg_import_ext_chars.py)."
+  },
+  {
+   "folder": "Quaternius_FarmBuildings",
+   "urls": [
+    "https://quaternius.itch.io/lowpoly-farm-buildings"
+   ],
+   "license": "CC0",
+   "licence_risk": "OK",
+   "approved_by_user": "2026-09-25",
+   "recommended_import": "See Tools/Unreal/dressing/pack_ext_index.md (static kits: kg_ext_pack.py -> kg_import_ext_pack.py; characters: kg_import_ext_chars.py)."
+  },
+  {
+   "folder": "Quaternius_ModularDungeon",
+   "urls": [
+    "https://quaternius.itch.io/lowpoly-modular-dungeon-pack"
+   ],
+   "license": "CC0",
+   "licence_risk": "OK",
+   "approved_by_user": "2026-09-25",
+   "recommended_import": "See Tools/Unreal/dressing/pack_ext_index.md (static kits: kg_ext_pack.py -> kg_import_ext_pack.py; characters: kg_import_ext_chars.py)."
+  },
+  {
+   "folder": "Quaternius_UltimateNature",
+   "urls": [
+    "https://quaternius.itch.io/150-lowpoly-nature-models"
+   ],
+   "license": "CC0",
+   "licence_risk": "OK",
+   "approved_by_user": "2026-09-25",
+   "recommended_import": "See Tools/Unreal/dressing/pack_ext_index.md (static kits: kg_ext_pack.py -> kg_import_ext_pack.py; characters: kg_import_ext_chars.py)."
+  },
+  {
+   "folder": "FertileSoil_ModularVillage",
+   "urls": [
+    "https://fertile-soil-productions.itch.io/modular-village-pack"
+   ],
+   "license": "CC0",
+   "licence_risk": "OK",
+   "approved_by_user": "2026-09-25",
+   "recommended_import": "See Tools/Unreal/dressing/pack_ext_index.md (static kits: kg_ext_pack.py -> kg_import_ext_pack.py; characters: kg_import_ext_chars.py)."
+  },
+  {
+   "folder": "SimplePolygon_WoodenDocks",
+   "urls": [
+    "https://simplepolygon.itch.io/wooden-docks"
+   ],
+   "license": "Custom",
+   "licence_risk": "CC-BY (credit)",
+   "approved_by_user": "2026-09-25",
+   "recommended_import": "See Tools/Unreal/dressing/pack_ext_index.md (static kits: kg_ext_pack.py -> kg_import_ext_pack.py; characters: kg_import_ext_chars.py)."
+  },
+  {
+   "folder": "Vertexcat_Trees",
+   "urls": [
+    "https://vertexcat.itch.io/vertex-color-trees-set"
+   ],
+   "license": "CC0",
+   "licence_risk": "OK",
+   "approved_by_user": "2026-09-25",
+   "recommended_import": "See Tools/Unreal/dressing/pack_ext_index.md (static kits: kg_ext_pack.py -> kg_import_ext_pack.py; characters: kg_import_ext_chars.py)."
+  },
+  {
+   "folder": "EmaceArt_MedievalHouses",
+   "urls": [
+    "https://emaceart.itch.io/free-fantasy-medieval-houses-and-props-pack"
+   ],
+   "license": "CC0 badge + EmacEArt note",
+   "licence_risk": "OK (no resale)",
+   "approved_by_user": "2026-09-25",
+   "recommended_import": "See Tools/Unreal/dressing/pack_ext_index.md (static kits: kg_ext_pack.py -> kg_import_ext_pack.py; characters: kg_import_ext_chars.py)."
+  },
+  {
+   "folder": "EmaceArt_HauntedGrounds",
+   "urls": [
+    "https://emaceart.itch.io/freenecropoly"
+   ],
+   "license": "EmacEArt Asset License",
+   "licence_risk": "OK (no resale)",
+   "approved_by_user": "2026-09-25",
+   "recommended_import": "See Tools/Unreal/dressing/pack_ext_index.md (static kits: kg_ext_pack.py -> kg_import_ext_pack.py; characters: kg_import_ext_chars.py)."
+  },
+  {
+   "folder": "ByndWalker_GoblinCamp",
+   "urls": [
+    "https://byndwalker.itch.io/lowpoly-goblin-camp"
+   ],
+   "license": "CC0",
+   "licence_risk": "OK",
+   "approved_by_user": "2026-09-25",
+   "recommended_import": "See Tools/Unreal/dressing/pack_ext_index.md (static kits: kg_ext_pack.py -> kg_import_ext_pack.py; characters: kg_import_ext_chars.py)."
+  },
+  {
+   "folder": "SynOfPlay_MedievalCafe",
+   "urls": [
+    "https://synofplay.itch.io/medieval-caf-asset-pack-free"
+   ],
+   "license": "CC0 1.0",
+   "licence_risk": "OK",
+   "approved_by_user": "2026-09-25",
+   "recommended_import": "See Tools/Unreal/dressing/pack_ext_index.md (static kits: kg_ext_pack.py -> kg_import_ext_pack.py; characters: kg_import_ext_chars.py)."
+  },
+  {
+   "folder": "YumeForge_JapanVillageFree",
+   "urls": [
+    "https://yumeforge.itch.io/japanese-rural-village"
+   ],
+   "license": "Custom",
+   "licence_risk": "OK (no resale)",
+   "approved_by_user": "2026-09-25",
+   "recommended_import": "See Tools/Unreal/dressing/pack_ext_index.md (static kits: kg_ext_pack.py -> kg_import_ext_pack.py; characters: kg_import_ext_chars.py)."
+  },
+  {
+   "folder": "KarLove_Cemetery",
+   "urls": [
+    "https://karlove-games.itch.io/cemetery-environment-asset-pack"
+   ],
+   "license": "Custom",
+   "licence_risk": "OK (no resale)",
+   "approved_by_user": "2026-09-25",
+   "recommended_import": "See Tools/Unreal/dressing/pack_ext_index.md (static kits: kg_ext_pack.py -> kg_import_ext_pack.py; characters: kg_import_ext_chars.py)."
+  },
+  {
+   "folder": "KyleFuji_Food",
+   "urls": [
+    "https://kyle-fuji.itch.io/low-poly-food-asset-pack"
+   ],
+   "license": "CC0 1.0",
+   "licence_risk": "OK",
+   "approved_by_user": "2026-09-25",
+   "recommended_import": "See Tools/Unreal/dressing/pack_ext_index.md (static kits: kg_ext_pack.py -> kg_import_ext_pack.py; characters: kg_import_ext_chars.py)."
+  },
+  {
+   "folder": "PolyPizza_Manor",
+   "urls": [
+    "https://poly.pizza"
+   ],
+   "license": "CC0 except Painting_rsZqX75a8x, Statue_gieXYyUTYr, AngelStatue_6v4CL0nKfT, Ceiling_Lamp_OTJPOdps4p = CC BY",
+   "licence_risk": "OK / CC-BY (credit) for the 4 named files",
+   "approved_by_user": "2026-09-25",
+   "recommended_import": "See Tools/Unreal/dressing/pack_ext_index.md (static kits: kg_ext_pack.py -> kg_import_ext_pack.py; characters: kg_import_ext_chars.py)."
+  },
+  {
+   "folder": "PolyPizza_Harbour",
+   "urls": [
+    "https://poly.pizza"
+   ],
+   "license": "CC0 except Fishing_Net_Z11I3AUBO9 and Crane_gCcpjaxFdv = CC BY",
+   "licence_risk": "OK / CC-BY (credit) for the 2 named files",
+   "approved_by_user": "2026-09-25",
+   "recommended_import": "See Tools/Unreal/dressing/pack_ext_index.md (static kits: kg_ext_pack.py -> kg_import_ext_pack.py; characters: kg_import_ext_chars.py)."
+  },
+  {
+   "folder": "KayKit_Adventurers",
+   "urls": [
+    "https://kaylousberg.itch.io/kaykit-adventurers"
+   ],
+   "license": "CC0",
+   "licence_risk": "OK",
+   "approved_by_user": "2026-09-25",
+   "recommended_import": "See Tools/Unreal/dressing/pack_ext_index.md (static kits: kg_ext_pack.py -> kg_import_ext_pack.py; characters: kg_import_ext_chars.py)."
+  },
+  {
+   "folder": "KayKit_Skeletons",
+   "urls": [
+    "https://kaylousberg.itch.io/kaykit-skeletons"
+   ],
+   "license": "CC0",
+   "licence_risk": "OK",
+   "approved_by_user": "2026-09-25",
+   "recommended_import": "See Tools/Unreal/dressing/pack_ext_index.md (static kits: kg_ext_pack.py -> kg_import_ext_pack.py; characters: kg_import_ext_chars.py)."
+  },
+  {
+   "folder": "Quaternius_UltimateModularWomen",
+   "urls": [
+    "https://quaternius.com/packs/ultimatemodularwomen.html"
+   ],
+   "license": "CC0",
+   "licence_risk": "OK",
+   "approved_by_user": "2026-09-25",
+   "recommended_import": "See Tools/Unreal/dressing/pack_ext_index.md (static kits: kg_ext_pack.py -> kg_import_ext_pack.py; characters: kg_import_ext_chars.py)."
+  },
+  {
+   "folder": "Quaternius_UltimateModularMen",
+   "urls": [
+    "https://quaternius.com/packs/ultimatemodularcharacters.html"
+   ],
+   "license": "CC0",
+   "licence_risk": "OK",
+   "approved_by_user": "2026-09-25",
+   "recommended_import": "See Tools/Unreal/dressing/pack_ext_index.md (static kits: kg_ext_pack.py -> kg_import_ext_pack.py; characters: kg_import_ext_chars.py)."
+  },
+  {
+   "folder": "Quaternius_AnimatedCharacters",
+   "urls": [
+    "https://opengameart.org/content/animated-characters-pack"
+   ],
+   "license": "CC0",
+   "licence_risk": "OK",
+   "approved_by_user": "2026-09-25",
+   "recommended_import": "See Tools/Unreal/dressing/pack_ext_index.md (static kits: kg_ext_pack.py -> kg_import_ext_pack.py; characters: kg_import_ext_chars.py)."
+  },
+  {
+   "folder": "Quaternius_RPGCharacters",
+   "urls": [
+    "https://opengameart.org/content/lowpoly-rpg-characters"
+   ],
+   "license": "CC0",
+   "licence_risk": "OK",
+   "approved_by_user": "2026-09-25",
+   "recommended_import": "See Tools/Unreal/dressing/pack_ext_index.md (static kits: kg_ext_pack.py -> kg_import_ext_pack.py; characters: kg_import_ext_chars.py)."
+  },
+  {
+   "folder": "Quaternius_AnimatedKnight",
+   "urls": [
+    "https://opengameart.org/content/lowpoly-animated-knight"
+   ],
+   "license": "CC0",
+   "licence_risk": "OK",
+   "approved_by_user": "2026-09-25",
+   "recommended_import": "See Tools/Unreal/dressing/pack_ext_index.md (static kits: kg_ext_pack.py -> kg_import_ext_pack.py; characters: kg_import_ext_chars.py)."
+  },
+  {
+   "folder": "Quaternius_AnimatedAnimals",
+   "urls": [
+    "https://opengameart.org/content/animated-animales-low-poly"
+   ],
+   "license": "CC0",
+   "licence_risk": "OK",
+   "approved_by_user": "2026-09-25",
+   "recommended_import": "See Tools/Unreal/dressing/pack_ext_index.md (static kits: kg_ext_pack.py -> kg_import_ext_pack.py; characters: kg_import_ext_chars.py)."
+  },
+  {
+   "folder": "Quaternius_FarmAnimals",
+   "urls": [
+    "https://quaternius.itch.io/lowpoly-animated-animals"
+   ],
+   "license": "CC0",
+   "licence_risk": "OK",
+   "approved_by_user": "2026-09-25",
+   "recommended_import": "See Tools/Unreal/dressing/pack_ext_index.md (static kits: kg_ext_pack.py -> kg_import_ext_pack.py; characters: kg_import_ext_chars.py)."
+  },
+  {
+   "folder": "Quaternius_AnimatedFish",
+   "urls": [
+    "https://quaternius.itch.io/lowpoly-animated-fish"
+   ],
+   "license": "CC0",
+   "licence_risk": "OK",
+   "approved_by_user": "2026-09-25",
+   "recommended_import": "See Tools/Unreal/dressing/pack_ext_index.md (static kits: kg_ext_pack.py -> kg_import_ext_pack.py; characters: kg_import_ext_chars.py)."
+  },
+  {
+   "folder": "Quaternius_AnimatedMonsters",
+   "urls": [
+    "https://quaternius.itch.io/lowpoly-animated-monsters"
+   ],
+   "license": "CC0",
+   "licence_risk": "OK",
+   "approved_by_user": "2026-09-25",
+   "recommended_import": "See Tools/Unreal/dressing/pack_ext_index.md (static kits: kg_ext_pack.py -> kg_import_ext_pack.py; characters: kg_import_ext_chars.py)."
   }
  ]
 }

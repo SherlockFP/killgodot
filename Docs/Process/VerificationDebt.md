@@ -17,6 +17,7 @@ windowed build with the user present, clears it.
 | 9 | Chore minigames (22) | World effects (bell, smoke, lighthouse glow…) placement; real play times vs the 30–60 s target | 2026-09-25 |
 | 10 | HUD overhaul | Hit direction, low-HP pulse, stamina TIRED state | 2026-09-24 |
 | 11 | Interiors (stairs, rooms, 71 seats, 16 chests) | Tight upstairs walkway in 4 m houses, sitting poses | 2026-09-24 |
+| 12 | Digging + underground | Shovel in first/third person (own FP rig), dig feel + dust, grave noise cue, well ladder down/up, mausoleum door, the underground map layer + toasts, underground light/fog in PIE | 2026-09-25 |
 
 Headless coverage that exists: `Tools/Gauntlet/run_invariants.ps1` (build, tests, v2 verify, chat/emote/fish/chore
 smokes, whole-match bot smoke).

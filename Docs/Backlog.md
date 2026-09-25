@@ -127,9 +127,14 @@ M4–M18 maddeleri, milestone başladığında `09_Roadmap_Gauntlet.md`'den bura
 
 ## Sprint queue (bounded loop, 2026-09-25): start in this order as agent slots free (max 3 running)
 - [~] SPRINT v2 polish (running): calm basin, §11.4 props, bots on v2, v2 as the default map, material fix
-- [~] SPRINT underground (running): shovel/digging/loot, well cellar, catacombs, minimap underground layer
+- [~] SPRINT underground: shovel/digging/loot (5 spot kinds, grave noise + open graves, treasure maps + scraps, 10 loot
+  tables), well cellar, mine tunnel, catacombs (mausoleum door, key gate, vault), minimap underground layer + regions,
+  `kg.Dig.*` verbs — `Source/KillGodot/Dig/`, `01_GDD_Core.md §16`, `Docs/Level/Underground.md`. Tests `KillGodot.Dig.*` (5)
+  + `Tools/Unreal/kg_dig_smoke.ps1` pass; **PIE verification pending** (VerificationDebt #12)
 - [~] SPRINT lore + brand (running): lore bible (TR), text bank, KillGo logo, key art, loading art
 - [ ] SPRINT-016 physical, original chores (USER PRIORITY): Docs/Iterations/SPRINT-016-PhysicalChores.md
+- [ ] SPRINT-022 v2 visual pass (USER REVIEW 2026-09-25): varied houses, geometry validator + Japan garden fix, realistic water, towers/landmarks: Docs/Iterations/SPRINT-022-V2VisualPass.md
+- [ ] SPRINT-023 voice + talking mouths + TF2 voice commands + partner emotes: Docs/Iterations/SPRINT-023-VoiceSocial.md
 - [ ] SPRINT-015 match flow: server list first, role-reveal ceremony, streamer mode: Docs/Iterations/SPRINT-015-MatchFlow.md
 - [ ] SPRINT-017 map 2 "Storm Manor", design only, needs user approval: Docs/Iterations/SPRINT-017-StormManor-Design.md
 - [ ] SPRINT-018 map 2 build (after 017 is approved)
@@ -137,6 +142,11 @@ M4–M18 maddeleri, milestone başladığında `09_Roadmap_Gauntlet.md`'den bura
 - [ ] VERIFICATION session with the user (Docs/Process/VerificationDebt.md): blocks new feature sprints once the debt is >10 items
 
 ## Proposed (needs approval)
+- [proposal] Dig: bots use the passages (nav links + a "go underground" roam target) and dig mounds now and then
+- [proposal] Dig: third-person dig/hold body clips (kg_make_emotes.py Dig_Hold/Dig_Stroke) instead of the torch/sword stand-ins
+- [proposal] Dig: dev panel buttons (Dig.Give / Dig.Spots near / Dig.Finish / Dig.Gate) in the WORLD tab; teleports already list the underground markers
+- [proposal] Dig: Mourner's Tokens convert to profile gold / a cosmetic crate at the epilogue
+- [proposal] Underground: a Coroner/Sexton role that can read who dug which grave (the server would record the digger per grave)
 - [proposal] Lore: wire the 4 loading screens (T_KG_Load_*) into the loading card, with the line from the String Table
 - [proposal] Lore: create ST_Lore (EN/TR/RU). It feeds the role card lines, notice-board posts, seeded epitaphs, bottle messages and town-crier lines.
 - [proposal] Brand: T_KG_Logo as the splash/menu fallback; the app icon as the Windows .ico and store asset

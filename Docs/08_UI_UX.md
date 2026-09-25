@@ -49,6 +49,24 @@
 - **Hızlı Katıl** en iyi eşleşmeye girer. **Kod ile Katıl** 6 haneli kod kullanır. Arkadaş davetleri EOS üzerinden gider.
 - Sonuçlar gelirken satırlar kayarak dolar. Boş durum mesajı: *"Kimse gelmedi. Godot da."*
 
+## 4.1 Maç akışı: sunucu listesi → lobi → rol töreni (SPRINT-015)
+- **Oyna** doğrudan sunucu tarayıcısını açar; **Oyun kur** tarayıcının başlığındaki düğmedir. Kurmak lobi odasını açar
+  (`UI/Menu/SKGLobbyRoom`). Koltuklar adı kendi taşır (`FKGLobbyEntry::Name`): katılan oyuncu, oyuncu durumu
+  replike olmadan önce, her makinede **1 sn içinde adıyla** görünür (`Tools/Unreal/kg_lobby_smoke.ps1`).
+- Host başlatınca maç **ısınma olmadan doğrudan `RoleReveal` fazına** geçer. Köy, tören bitene kadar görünmez.
+- **Rol töreni** (`UI/Reveal/SKGRoleReveal`, tam ekran, çizimle, asset yok): krupiye masası → iki riffle karıştırma →
+  her koltuğa bir kart, seninki öne kayar → kart döner → rol adı, taraf rengi ve kurdelesi, ekip satırı, **hedef**,
+  1–2 **yetenek** satırı, lore'dan **rol sözü** (italik, `Docs/Lore/KillGo_Lore.md §2.4`). Sabırsız takımlar
+  (Saat Kırıcılar) **suç ortaklarını** ad + rol olarak görür, yalnız katiller "Yalnız çalışırsın" görür.
+- Zamanlama sunucuda: faz `FKGMatchClock` ile **10 sn** (`KGReveal::PhaseSeconds`, sözleşme 8–12). Vuruşlar:
+  masa 0–1, karıştırma 1–3.2, dağıtma 3.2–4.2, çevirme 4.2–5, yüz 5–5.8. Kart açılınca **Boşluk / A / sol tık = hazır**;
+  herkes hazırsa sunucu fazı 0.75 sn'ye (kararma) indirir. Tören bitince beden girdisi geri verilir, köy kararmanın
+  altından belirir.
+- Gizlilik: rol `AKGPlayerState::PrivateRoleId` (`COND_OwnerOnly`); suç ortakları ve hazır sayacı her insan
+  oyuncunun kontrolcüsündeki `UKGRevealComponent`'te, tüm alanlar `COND_OwnerOnly` (test `KillGodot.Reveal.OwnerOnly`).
+- Kanıt: `Tools/Unreal/kg_reveal_shots.ps1` → `Saved/UIShots/reveal-<rol>-<aşama>_<W>x<H>.png`
+  (`kg.UIShot revealall:<Rol>`).
+
 ## 5. Lobi: Geç Kalan Meyhanesi (3D)
 - Oyuncular meyhanede **karakter olarak** doğar. Yürürler, konuşurlar (proximity voice) ve mini oyun oynarlar: dart, satranç, bilek güreşi, piyano.
 - **Arka bahçede atış poligonu** var: silahlar ve skinler burada serbest, inspect gösterisi yapılır.
@@ -228,6 +246,18 @@ Tasarım: `01_GDD_Core.md §15`. Hepsi canvas çizimi, `FKGPainter` paleti.
   "IT GOT AWAY"; koi: "SACRILEGE!" (pembe) + kesilen vergi.
 - **Bildirimler** (ortanın altında çip, 3 sn): rod yok, çok erken, ısırık kaçtı, uzaklaştın, ödünç olta, satış, cep dolu, irkildin.
 - **Dev katmanı:** `kg.Fish.Tension` sol ortada tahmin vs sunucu gerilim/dayanıklılık/mesafe, yön takvimi, seri numaraları.
+
+### 6.5 Yayıncı modu (Ayarlar → Oynanış → Yayıncı modu, SPRINT-015)
+Tamamen yerel: diğer oyuncular hiçbir fark görmez. `UKGGameUserSettings::bStreamerMode` + `StreamerPeekKey`
+(varsayılan **Tab**; Sol Alt / Caps Lock / Q seçilebilir). Kod: `UI/Reveal/KGStreamerMode`.
+- **Rol gizli:** tören bittikten sonra HUD'daki rol çipi "ROL GİZLİ · basılı tut" çipine döner, rol kartı çizilmez.
+  Tuş basılıyken rol görünür. (Görevlerdeki "FAKING" etiketi `Chores/` altında: kanca önerisi Backlog'da.)
+- **Takma adlar:** diğer oyuncuların adı maç boyu sabit, köy temalı takma adlarla değişir ("Foggy Herring"):
+  lobi, sohbet (gönderen + metin içindeki adlar), tellal duyuruları, toplantı sayımı, dava, epilog, tören suç ortakları,
+  tarayıcıdaki host adları. Eşleme dünya başına rastgele tuzla (`FKGPseudonyms`): maç içinde sabit, maçtan maça farklı,
+  hiçbir zaman gerçek ad değil (test `KillGodot.Reveal.Pseudonyms`). Kendi adın değişmez.
+- **Maskeleme:** lobi katılım kodu `••••••`, host ekranındaki LAN adresi ve tarayıcıdaki kod/adres kutusu gizli.
+- Dev: `kg.Streamer 1|0|dump`, komut satırı `-KGStreamer`.
 
 ## 7. Dil ve lokalizasyon
 - **Çıkış dilleri:** **Türkçe, İngilizce, Rusça.** Sonra Almanca, İspanyolca, Portekizce (BR), Lehçe, Çince ve daha fazlası eklenebilir.

@@ -288,3 +288,51 @@ Görevlerle bağ kurulmadı (bilinçli): balık tutma Hazırlık barını doldur
 **Ağ:** sunucu yetkili (atış başlangıcı doğrulanır, ısırık/tür/ağırlık `FKGRng`, çekme simülasyonu sahibin girdileriyle,
 envanter). Sahip istemci atış yayını, gücü ve çekmeyi tahmin eder, sunucuyla yumuşak uzlaşır (balığın yön takvimi
 birebir alınır). Herkes oltayı, misinayı, şamandırayı, sıçramaları ve avı (misinada sallanan balık) görür.
+
+## 16. Kazı, ganimet ve yeraltı (`Source/KillGodot/Dig/`, `Tools/Level/underground_layout.py`)
+**Kürek:** `Shovel` eşyası (cepte olmalı). Her maç 4 kürek yerde durur (mezarlık kapısı, çiftlik avlusu, sahil, oduncu);
+Kiler sandığından ve `Cellar` ganimetinden de çıkabilir. `Q` küreği çıkarır / kaldırır (olta ile aynı anda olmaz:
+biri çıkınca diğeri kalkar). Toplantı, mahkeme, ölüm, bıçak, eşya taşımak küreği kaldırır. Kürek çıkınca sol/sağ tık
+yumruk atmaz, kazar.
+
+**Kazı noktaları** (her maç `FKGRng` ile, maç tohumu değişince yeniden): taze toprak yığınları (16), kırmızı **X**
+işaretleri (4, zengin), **parıltılar** (5, tek vuruş), mezarlıktaki her mezar taşının önündeki **mezar** (~30) ve gizli
+**gömülü sandıklar** (4, sadece hazine haritasıyla bulunur). Bölgeler: mezarlık, çakıllı sahil (0.4-2.6 m), tarlalar,
+batı ormanı + kuzey korusu + kamp, elma bahçesi. Nokta sadece açık araziye düşer (çatı, patika, ağaç, su yok).
+
+**Kazmak:** noktaya bak, `sol tık` basılı tut. Her **kademe** kısa bir basılı tutma (1.1 sn; mezar 1.4, sandık 1.3,
+parıltı 0.9): kürek toprağa girer, kaldırır, fırlatır; toprak parçaları sıçrar. Basılı tutmaya devam edersen sıradaki
+kademe başlar. Delik her kademede derinleşir (yığın -> çukur 1/2/3 + yanında büyüyen toprak yığını) ve **herkes görür**
+(replike FastArray). Yığın/X 3 kademe, mezar ve sandık 4, parıltı 1. Ara kademeler `DigShallow` (%65 boş: 1-2 altın,
+kemik, eski çizme, harita parçası), son kademe noktanın kendi tablosu. Ganimet cebe girer, sığmayan deliğin yanına düşer;
+HUD'da "kazıldı" kartı. Sunucu her şeyi doğrular: bakış başlangıcı, bakılan zemin noktası noktanın üstünde mi, kazan
+yanında mı (3.3 m), süre (`FKGMatchClock`), bir delikte tek kürek, darbe alınca ritim kaçar, uzaklaşınca durur.
+
+**Mezar kazmak şüphelidir:** her mezar kademesi **yüksek ses** yapar (kürek taşa/tahtaya, 40 m'den duyulur) ve 40 m
+içindeki herkesin HUD'unda "Birisi mezar kazıyor..." yazısı çıkar (kim olduğu yazmaz). Açılan mezar maç boyunca **açık
+kalır** (tabut kapağı, toprak yığını). "Dün gece mezarlığa kim gitti?" tartışmasının kanıtı.
+
+**Hazine haritası:** `TreasureMap` eşyası (X, mezar, sandık ganimetleri) veya **3 harita parçası** (`MapScrap`)
+birleşince olur. Haritan varsa bir gömülü sandığın yeri **minimap + tam harita + dünyada** kırmızı X ile işaretlenir
+(her oyuncunun haritası farklı sandığı gösterebilir, en fazla 3). X'e gidip boş zemini kaz: sandık açığa çıkar (4 kademe,
+`BuriedChest`), harita tükenir.
+
+**Ganimet tabloları** (`KGLoot.cpp`): `DigShallow`, `DigMound`, `DigX`, `DigGlint`, `DigGraveShallow`, `DigGrave`,
+`BuriedChest`, `CryptUrn` (yeraltı küpleri), `CryptVault` (hazine odası sandığı), `Cellar` (kiler sandığı). Yeni eşyalar:
+Kürek, **Mahzen Anahtarı** (`CryptKey`), Harita Parçası, Kafatası, **Yaslı Jetonu** (`MournerToken`, Nadir-kozmetik jeton;
+maç sonu kozmetik takası sonraki iş).
+
+**Yeraltı** (aynı haritada, köyün altında, zemin z 1.8 m; terrain delinmez, girişler geçit):
+- **Kuyu Kilerı:** Well Court'taki Eski Kuyu'ya `E` = "Kuyudan in": kuyu bacasındaki merdivenin tepesine inersin
+  (`KGLadder`, `S` iner, `Space` bırakır), kemerli kapıdan kilere çıkarsın. Kiler: fıçı rafları, kırılabilir fıçılar,
+  **Kaçakçı Köşesi** (sandık: her maç 1 Mahzen Anahtarı + `Cellar` ganimeti), **Fıçı Deposu**; deponun köşesinde fıçıların
+  arkasında gizli **eski maden tüneli**. Merdivenden yukarı tırmanınca yüzeye, kuyunun yanına çıkarsın.
+- **Katakomplar** (Taç Tepesi'nin altında): Mozole kapısına `E` = "Katakomplara in": taş merdivenin tepesinde, kapının
+  önünde çıkarsın. Kemik nişli koridorlar, mumlar, **Kript Salonu**, **Kemikhane**, **Kript Şapeli** (lahit),
+  **Hazine Odası** (demir kapı: Mahzen Anahtarı ile açılır, anahtar kilitte kalır; açıldıktan sonra herkes açıp kapatır),
+  kırılabilir küpler.
+- **Gizli kısayol:** katakomplar -> **Kırık Duvar** -> maden tüneli -> fıçı deposu -> kiler -> kuyu. Taç Tepesi ile
+  Well Court arasında karanlık, riskli bir yol: katil için ideal, kasabalı için kaçış.
+- Yeraltında HUD haritası **yeraltı katına** geçer (kiler/tünel/katakomp planı, köy silik altta), konum bildirimi
+  ("KUYU KİLERİ", "KATAKOMPLAR"...), kendi ışığı (mumlar/fenerler, gölgesiz; daha karanlık pozlama + vinyet), damla ve
+  uğultu sesleri. Botlar şimdilik yeraltına inmez (öneri listesinde).

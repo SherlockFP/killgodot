@@ -124,3 +124,16 @@
 
 ## Sonraki milestone'lar
 M4–M18 maddeleri, milestone başladığında `09_Roadmap_Gauntlet.md`'den buraya ayrıntılı olarak açılır.
+
+## Sprint queue (bounded loop, 2026-09-25): start in this order as agent slots free (max 3 running)
+- [~] SPRINT v2 polish (running): calm basin, §11.4 props, bots on v2, v2 as the default map, material fix
+- [~] SPRINT underground (running): shovel/digging/loot, well cellar, catacombs, minimap underground layer
+- [~] SPRINT lore + brand (running): lore bible (TR), text bank, KillGo logo, key art, loading art
+- [ ] SPRINT-016 physical, original chores (USER PRIORITY): Docs/Iterations/SPRINT-016-PhysicalChores.md
+- [ ] SPRINT-015 match flow: server list first, role-reveal ceremony, streamer mode: Docs/Iterations/SPRINT-015-MatchFlow.md
+- [ ] SPRINT-017 map 2 "Storm Manor", design only, needs user approval: Docs/Iterations/SPRINT-017-StormManor-Design.md
+- [ ] SPRINT-018 map 2 build (after 017 is approved)
+- [ ] SPRINT-019 spectator mode + replays ("record")
+- [ ] VERIFICATION session with the user (Docs/Process/VerificationDebt.md): blocks new feature sprints once the debt is >10 items
+
+## Proposed (needs approval)

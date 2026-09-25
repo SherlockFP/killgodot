@@ -39,7 +39,7 @@ limit, or revert the sprint.
 - New feature sprints pause when that list grows past ~10 unverified items; a verification sprint comes first.
 
 ## Usage budget (user, 2026-09-25: "the 5-hour limit runs out in 40 minutes")
-- Max **2 agents running at once**, one of them writing code. No parallel workflows. Design and research work runs one
+- Max **2 main-model agents** at once, plus up to **2 `model: sonnet` agents** for self-contained code or research with disjoint files (user, 2026-09-25: "more agents, but don't burn the limit"). No parallel workflows. Design and research work runs one
   at a time, after the code sprints.
 - Pick the cheapest model that can do the job: code sprints inherit the main model at medium effort; docs, research,
   asset lists and mechanical fixes use `model: sonnet`.

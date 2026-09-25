@@ -9,7 +9,7 @@ problems; they may not change the objective.
 | Objective | One Backlog item, stated as the user-visible outcome. Fixed for the whole sprint. |
 | Acceptance | 2–6 checkable criteria (a test, a smoke check, a measured number, a named screenshot). Written up front, never edited mid-sprint. |
 | Writable scope | Explicit file/folder list. Anything else is read-only. Parallel agents never share writable files. |
-| Limits | Max 3 build/fix attempts per failing check; max 2 look-and-iterate rounds for visuals; one agent per sprint unless files are disjoint; max 3 agents at once. |
+| Limits | Max 3 build/fix attempts per failing check; max 2 look-and-iterate rounds for visuals; one agent per sprint unless files are disjoint; max 3 WRITING agents at once (read-only analysis/design agents that only write their own new doc files don't count, max 6 of those). |
 | Plateau | Two rounds without measurable improvement on an acceptance metric = stop and report the item as open. |
 | Stop | Stop when the acceptance criteria pass. Not when "it could be better". |
 

@@ -46,10 +46,10 @@ BRAND = {
                      "sun_yaw": AXIS_SEAWARD_YAW + 180.0,
                      "props": [{"mesh": VILLAGER_M, "anim": ANIM + "A_KG_Idle_Loop", "at": (-2.1, -45.0, 14.0),
                                 "face": AXIS_SEAWARD_YAW + 6.0}]},
-    "br_belvedere_b": {"eye": (-3.6, -47.8, 14.6), "tgt": (3.0, -10.0, 16.2), "fov": 60.0, "look": "sunset",
+    "br_belvedere_b": {"eye": (-4.6, -49.6, 15.0), "tgt": (4.0, -10.0, 15.6), "fov": 52.0, "look": "sunset",
                        "sun_yaw": AXIS_SEAWARD_YAW + 180.0,
                        "props": [{"mesh": VILLAGER_M, "anim": ANIM + "A_KG_Idle_Loop", "at": (-2.1, -45.0, 14.0),
-                                  "face": AXIS_SEAWARD_YAW + 6.0}]},
+                                  "face": AXIS_SEAWARD_YAW + 6.0, "silhouette": True}]},
     "br_lighthouse_night": {"eye": (18.0, 99.0, 4.2), "tgt": (68.0, 95.0, 21.0), "fov": 60.0, "look": "night"},
     "br_lighthouse_night_b": {"eye": (-24.0, 67.2, 3.2), "tgt": (68.0, 95.0, 22.0), "fov": 48.0, "look": "night"},
     "br_cove_dusk": {"eye": (40.0, 200.0, 70.0), "tgt": (5.0, 0.0, 8.0), "fov": 55.0, "look": "dusk", "sun_yaw": 60.0},
@@ -131,7 +131,7 @@ class BrandTour(Tour):
     def clear_props(self):
         for a in self.props:
             try:
-                a.destroy_component(a)
+                a.destroy_actor()
             except Exception:
                 pass
         self.props = []
@@ -141,21 +141,33 @@ class BrandTour(Tour):
             x, y, z = p["at"]
             xf = unreal.Transform(location=unreal.Vector(x * 100.0, y * 100.0, z * 100.0),
                                   rotation=unreal.Rotator(roll=0.0, pitch=0.0, yaw=p["face"] - 90.0))
-            # Python in -game cannot spawn actors (no deferred-spawn binding), so the villager is an unattached
-            # SkeletalMeshComponent added to the capture camera actor (AddComponentByClass, manual attachment):
-            # it keeps its own world transform while the camera moves. Runtime only, never saved.
-            try:
-                comp = self.cam.add_component_by_class(unreal.SkeletalMeshComponent, True, unreal.Transform(), False)
-                comp.set_world_transform(xf, False, False)
-            except Exception as e:
-                log(f"spawn failed {e}")
+            # Python in -game has no actor-spawn binding, so the villager comes from the dev cheat "summon"
+            # (CheatManager, non-shipping builds) and is then moved into place. Runtime only, never saved.
+            before = set(x.get_name() for x in
+                         unreal.GameplayStatics.get_all_actors_of_class(self.world, unreal.SkeletalMeshActor))
+            unreal.SystemLibrary.execute_console_command(self.world, "EnableCheats")
+            unreal.SystemLibrary.execute_console_command(self.world, "summon /Script/Engine.SkeletalMeshActor")
+            new = [x for x in unreal.GameplayStatics.get_all_actors_of_class(self.world, unreal.SkeletalMeshActor)
+                   if x.get_name() not in before]
+            if not new:
+                log("spawn failed: summon produced no SkeletalMeshActor")
                 continue
-            a = comp
+            a = new[0]
+            comp = a.skeletal_mesh_component
+            comp.set_mobility(unreal.ComponentMobility.MOVABLE)
+            a.set_actor_transform(xf, False, False)
             mesh = unreal.load_asset(p["mesh"])
             try:
                 comp.set_skinned_asset_and_update(mesh, True)
             except Exception:
                 comp.set_skeletal_mesh_asset(mesh)
+            if p.get("silhouette"):
+                # near-black stand-in material so the figure reads as a silhouette against the sunset
+                base = unreal.load_asset("/Engine/BasicShapes/BasicShapeMaterial")
+                for i in range(comp.get_num_materials()):
+                    mid = comp.create_dynamic_material_instance(i, base)
+                    if mid:
+                        mid.set_vector_parameter_value("Color", unreal.LinearColor(0.012, 0.008, 0.014, 1.0))
             anim = unreal.load_asset(p["anim"]) if p.get("anim") else None
             if anim:
                 comp.play_animation(anim, True)

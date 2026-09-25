@@ -66,12 +66,34 @@ def line(d, a, b, color, width):
     d.line([a, b], fill=color, width=max(1, int(round(width))))
 
 
-def draw_clock(img, cx, cy, em, st, shadow=None):
+def tapered(d, pts, widths, color):
+    """A polyline whose width tapers point by point (a crack), drawn as one polygon."""
+    left, right = [], []
+    n = len(pts)
+    for i, (p, w) in enumerate(zip(pts, widths)):
+        a = pts[max(0, i - 1)]
+        b = pts[min(n - 1, i + 1)]
+        dx, dy = b[0] - a[0], b[1] - a[1]
+        L = math.hypot(dx, dy) or 1.0
+        nx, ny = -dy / L, dx / L
+        left.append((p[0] + nx * w / 2, p[1] + ny * w / 2))
+        right.append((p[0] - nx * w / 2, p[1] - ny * w / 2))
+    d.polygon(left + right[::-1], fill=color)
+
+
+def draw_clock(img, cx, cy, em, st, shadow=None, round_caps=False):
     """The SKGClockGlyph face at centre (cx, cy) for font size em (px)."""
     radius = em * 0.37
     ring = em * 0.155
     face = radius - ring
     d = ImageDraw.Draw(img)
+
+    def line(d, a, b, color, width):
+        d.line([a, b], fill=color, width=max(1, int(round(width))))
+        if round_caps:
+            r = width / 2
+            for p in (a, b):
+                d.ellipse([p[0] - r, p[1] - r, p[0] + r, p[1] + r], fill=color)
     if shadow:
         sx, sy, scol = shadow
         d.ellipse([cx + sx - radius, cy + sy - radius, cx + sx + radius, cy + sy + radius], fill=scol)
@@ -96,12 +118,20 @@ def draw_clock(img, cx, cy, em, st, shadow=None):
     mx, my = clock_dir(MINUTE_DEG)
     line(d, (cx - mx * em * 0.04, cy - my * em * 0.04), (cx + mx * face * 0.84, cy + my * face * 0.84),
          st["minute"] + (255,), em * 0.034)
-    main = [(38.0, 1.02), (46.0, 0.80), (33.0, 0.63), (44.0, 0.44)]
+    # Crack: the in-game path (38/1.02 -> 46/0.80 -> 33/0.63 -> 44/0.44, branch 46/0.80 -> 62/0.93), tapered from
+    # the rim inward and clipped to the ring so it reads as a crack, not a stick.
+    main = [(38.0, 1.04), (46.0, 0.80), (33.0, 0.63), (44.0, 0.44)]
     pts = [(cx + clock_dir(a)[0] * radius * f, cy + clock_dir(a)[1] * radius * f) for a, f in main]
-    d.line(pts, fill=st["crack"] + (255,), width=max(1, int(round(em * 0.028))), joint="curve")
-    b0 = pts[1]
-    b1 = (cx + clock_dir(62.0)[0] * radius * 0.93, cy + clock_dir(62.0)[1] * radius * 0.93)
-    line(d, b0, b1, st["crack"] + (255,), em * 0.018)
+    b1 = (cx + clock_dir(62.0)[0] * radius * 0.95, cy + clock_dir(62.0)[1] * radius * 0.95)
+    crack = Image.new("RGBA", img.size, (0, 0, 0, 0))
+    cd = ImageDraw.Draw(crack)
+    tapered(cd, pts, [em * 0.040, em * 0.030, em * 0.018, em * 0.002], st["crack"] + (255,))
+    tapered(cd, [pts[1], b1], [em * 0.022, em * 0.002], st["crack"] + (255,))
+    disc = Image.new("L", img.size, 0)
+    ImageDraw.Draw(disc).ellipse([cx - radius, cy - radius, cx + radius, cy + radius], fill=255)
+    crack.putalpha(ImageChops.multiply(crack.getchannel("A"), disc))
+    img.alpha_composite(crack)
+    d = ImageDraw.Draw(img)
     hub = em * 0.045
     d.ellipse([cx - hub, cy - hub, cx + hub, cy + hub], fill=st["hub"] + (255,))
 
@@ -216,17 +246,21 @@ def app_icon(size=1024):
     glow = glow.filter(ImageFilter.GaussianBlur(S * 0.09))
     img = Image.alpha_composite(img, glow)
     d = ImageDraw.Draw(img)
-    # glints on the sea
-    for i in range(14):
-        y = horizon + 8 * SS + (i ** 1.35) * 10 * SS
+    # soft glints on the sea
+    gl = Image.new("RGBA", (S, S), (0, 0, 0, 0))
+    gd2 = ImageDraw.Draw(gl)
+    for i in range(12):
+        y = horizon + 10 * SS + (i ** 1.4) * 9 * SS
         if y > S:
             break
-        half = (60 + 40 * ((i * 37) % 7) / 7) * SS * (1 + i * 0.05)
-        a = int(90 * (1 - i / 14))
-        d.line([(S * 0.5 - half, y), (S * 0.5 + half, y)], fill=(0xF7, 0xA4, 0x5A, a), width=int(3 * SS * (1 + i * 0.05)))
-    # the clock: em chosen so the ring fills ~70 % of the icon
-    em = S * 0.70 / (2 * 0.37)
-    cx, cy = S * 0.5, S * 0.47
+        half = (120 + 90 * ((i * 37) % 7) / 7) * SS * (1 + i * 0.06)
+        a = int(150 * (1 - i / 12))
+        h = 3.5 * SS * (1 + i * 0.08)
+        gd2.ellipse([S * 0.5 - half, y - h, S * 0.5 + half, y + h], fill=(0xF7, 0xA4, 0x5A, a))
+    img = Image.alpha_composite(img, gl.filter(ImageFilter.GaussianBlur(2 * SS)))
+    # the clock: em chosen so the ring fills ~64 % of the icon
+    em = S * 0.64 / (2 * 0.37)
+    cx, cy = S * 0.5, S * 0.46
     shadow = (em * 0.0225, em * 0.04125, RUST + (242,))
     halo = Image.new("RGBA", (S, S), (0, 0, 0, 0))
     hd = ImageDraw.Draw(halo)
@@ -234,7 +268,7 @@ def app_icon(size=1024):
     hd.ellipse([cx - r, cy - r, cx + r, cy + r], fill=(0xFF, 0xC8, 0x70, 150))
     img = Image.alpha_composite(img, halo.filter(ImageFilter.GaussianBlur(S * 0.05)))
     clock = Image.new("RGBA", (S, S), (0, 0, 0, 0))
-    draw_clock(clock, cx, cy, em, STYLES["game"], shadow=shadow)
+    draw_clock(clock, cx, cy, em, STYLES["game"], shadow=shadow, round_caps=True)
     img = Image.alpha_composite(img, clock)
     return img.resize((size, size), Image.LANCZOS).convert("RGB")
 
@@ -256,7 +290,7 @@ def sheet(logos, icon):
         scale = (W // 2 - 2 * pad) / im.width
         small = im.resize((int(im.width * scale), int(im.height * scale)), Image.LANCZOS)
         rows.append((name, small, bg))
-    H = pad + sum(r[1].height + 2 * pad for r in rows[::2]) + 700
+    H = pad + sum(max(r[1].height for r in rows[i:i + 2]) + 2 * pad for i in range(0, len(rows), 2)) + 720
     out = Image.new("RGB", (W, H), (40, 32, 46))
     y = pad
     font = ImageFont.truetype(BOLD, 28)

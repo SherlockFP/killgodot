@@ -3,6 +3,8 @@
 > **"Herkes bekliyor. Biri sabırsız."**
 > *Everyone's waiting. Someone's impatient.*
 
+**Lore ve marka:** dünya, bölgeler, rol sözleri ve oyun içi metin bankası → [`Lore/KillGo_Lore.md`](Lore/KillGo_Lore.md) (logo, key art ve yükleme ekranları: `Art/Brand/`).
+
 ## Tek cümlede oyun
 Denize kıyısı olan, dağlarla çevrili, sisin içinde zamana hapsolmuş bir balıkçı köyünde geçen, **first-person**, **proximity sesli chat** odaklı bir sosyal çıkarım oyunu. Gündüz herkes mesleğinde çalışıp görev yapar, gece Sabırsızlar avlanır. Kasaba konuşarak, delil toplayarak ve gerekirse tavayla dövüşerek kendini savunur.
 

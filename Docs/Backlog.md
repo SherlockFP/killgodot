@@ -137,3 +137,8 @@ M4–M18 maddeleri, milestone başladığında `09_Roadmap_Gauntlet.md`'den bura
 - [ ] VERIFICATION session with the user (Docs/Process/VerificationDebt.md): blocks new feature sprints once the debt is >10 items
 
 ## Proposed (needs approval)
+- [proposal] Lore: wire the 4 loading screens (T_KG_Load_*) into the loading card, with the line from the String Table
+- [proposal] Lore: create ST_Lore (EN/TR/RU). It feeds the role card lines, notice-board posts, seeded epitaphs, bottle messages and town-crier lines.
+- [proposal] Brand: T_KG_Logo as the splash/menu fallback; the app icon as the Windows .ico and store asset
+- [proposal] Lighting: the Lighthouse Point cliff renders flat black at night; the night sky needs a PP grade
+- [proposal] Dev: a spawn_actor helper for render tours

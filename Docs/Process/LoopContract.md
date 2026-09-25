@@ -37,3 +37,14 @@ limit, or revert the sprint.
 ## Verification debt
 - Features built headless but never seen in a real session are listed in `Docs/Process/VerificationDebt.md`.
 - New feature sprints pause when that list grows past ~10 unverified items; a verification sprint comes first.
+
+## Usage budget (user, 2026-09-25: "the 5-hour limit runs out in 40 minutes")
+- Max **2 agents running at once**, one of them writing code. No parallel workflows. Design and research work runs one
+  at a time, after the code sprints.
+- Pick the cheapest model that can do the job: code sprints inherit the main model at medium effort; docs, research,
+  asset lists and mechanical fixes use `model: sonnet`.
+- One reviewer per design, not three. No critic loops on docs.
+- Agents read only the files their contract names (grep before reading whole files, never dump big logs) and keep
+  final reports short: a table plus file paths.
+- User requests are batched: new asks go into the Backlog queue and are planned in one pass, not one design workflow
+  per message.

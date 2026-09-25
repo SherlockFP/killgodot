@@ -1008,8 +1008,8 @@ namespace
 		case EKGPhase::RoleReveal: return TEXT("Roles are dealt");
 		case EKGPhase::Dawn: return FString::Printf(TEXT("Dawn %d"), Day + 1);
 		case EKGPhase::Day: return FString::Printf(TEXT("Day %d"), Day);
-		case EKGPhase::Meeting: return TEXT("Town meeting");
-		case EKGPhase::Trial: return TEXT("Trial");
+		case EKGPhase::Meeting: return FString::Printf(TEXT("Day %d - Town meeting"), Day);
+		case EKGPhase::Trial: return FString::Printf(TEXT("Day %d - Trial"), Day);
 		case EKGPhase::Night: return FString::Printf(TEXT("Night %d"), Day);
 		case EKGPhase::Epilogue: return TEXT("Epilogue");
 		case EKGPhase::Migrating: return TEXT("Host migrating...");

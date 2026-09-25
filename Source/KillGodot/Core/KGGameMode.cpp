@@ -28,8 +28,10 @@
 namespace
 {
 	// Playtest-friendly lengths; the GDD values (120 s warmup, 90 s epilogue) return with the lobby flow (M4).
-	TAutoConsoleVariable<float> CVarWarmup(TEXT("kg.WarmupSeconds"), 25.0f, TEXT("Warmup length (s)."));
+	TAutoConsoleVariable<float> CVarWarmup(TEXT("kg.WarmupSeconds"), 15.0f, TEXT("Warmup length (s)."));
 	TAutoConsoleVariable<float> CVarEpilogue(TEXT("kg.EpilogueSeconds"), 20.0f, TEXT("Epilogue length (s)."));
+	TAutoConsoleVariable<float> CVarPhaseScale(TEXT("kg.PhaseScale"), 1.0f,
+		TEXT("Multiplier on Dawn/Day/Meeting/Trial/Night lengths (1 = default, 0.5 = twice as fast)."));
 	TAutoConsoleVariable<int32> CVarBotFill(TEXT("kg.BotFill"), 6, TEXT("Fill the match with bots up to N players (0 = off)."));
 	TAutoConsoleVariable<int32> CVarSkipPhase(TEXT("kg.SkipPhase"), 0, TEXT("Dev: end the current phase now (auto-resets)."));
 	TAutoConsoleVariable<int32> CVarAutoStart(TEXT("kg.AutoStart"), 1, TEXT("Start the match flow automatically."));
@@ -70,16 +72,18 @@ float AKGGameMode::GetPhaseDuration(EKGPhase Phase, int32 NumPlayers)
 		return CVarWarmup.GetValueOnGameThread();
 	case EKGPhase::RoleReveal:
 		return KGReveal::PhaseSeconds;   // the reveal ceremony (UI/Reveal), 8-12 s by contract (SPRINT-015)
+	// Faster rhythm (user, 2026-09-25: "the game is too slow"): a full day cycle is ~4.5 min at 12 players
+	// (was ~7). Scaled by kg.PhaseScale for playtests. Pacing targets: Docs/Design/KillGo_Pillars.md.
 	case EKGPhase::Dawn:
-		return 12.0f;
+		return 8.0f * CVarPhaseScale.GetValueOnGameThread();
 	case EKGPhase::Day:
-		return 150.0f + 6.0f * N;
+		return (90.0f + 4.0f * N) * CVarPhaseScale.GetValueOnGameThread();
 	case EKGPhase::Meeting:
-		return 45.0f + 3.0f * N;
+		return (30.0f + 2.0f * N) * CVarPhaseScale.GetValueOnGameThread();
 	case EKGPhase::Trial:
-		return 20.0f + 15.0f + 8.0f; // defense + judgement + last words
+		return (14.0f + 12.0f + 6.0f) * CVarPhaseScale.GetValueOnGameThread(); // defense + judgement + last words
 	case EKGPhase::Night:
-		return 75.0f + 3.0f * N;
+		return (45.0f + 2.0f * N) * CVarPhaseScale.GetValueOnGameThread();
 	case EKGPhase::Epilogue:
 		return CVarEpilogue.GetValueOnGameThread();
 	default:
@@ -721,12 +725,13 @@ void AKGGameMode::AnnounceDawn()
 	AKGGameState* GS = GetKGGameState();
 	if (NightDeaths.Num() == 0)
 	{
-		GS->Announce(TEXT("Dawn. Nobody died last night... Mr. Godot could not make it, but he will surely come tomorrow."), 9.0f);
+		GS->Announce(FString::Printf(TEXT("Dawn of day %d. Nobody died last night... Mr. Godot could not make it, but he will surely come tomorrow."),
+		                             GS->DayIndex + 1), 7.0f);
 	}
 	else
 	{
-		GS->Announce(FString::Printf(TEXT("Dawn. Found dead this morning: %s."), *FString::Join(NightDeaths, TEXT(", "))),
-		             10.0f);
+		GS->Announce(FString::Printf(TEXT("Dawn of day %d. Found dead this morning: %s."), GS->DayIndex + 1,
+		                             *FString::Join(NightDeaths, TEXT(", "))), 8.0f);
 	}
 	NightDeaths.Reset();
 }

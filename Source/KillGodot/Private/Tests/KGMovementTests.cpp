@@ -62,14 +62,21 @@ bool FKGAirStrafeTest::RunTest(const FString& Parameters)
 	}
 
 	// The soft cap tapers, it does not hard-clamp: pushed well above it, a tick still adds a little, but far less
-	// than the same tick would add below the cap.
+	// than the same tick would add below the cap. The taper is continuous (factor 1 - (speed - cap) / cap), so it is
+	// exactly 1 AT the cap by design - a discontinuity there would be a hard step, not a soft cap. The sample
+	// therefore sits 30% above the cap (the case the comment describes), and the cap itself is checked for
+	// continuity: the same gain as below it. (Stabilisation 2026-09-26: the test sampled the cap point and expected
+	// a smaller gain there, which contradicts the soft-cap definition in KGCharacterMovement.h.)
 	{
+		const FVector2D VAboveCap(SoftCap * 1.3f, 0.0f);
 		const FVector2D VAtCap(SoftCap, 0.0f);
 		const FVector2D BelowCap(WishSpeed * 0.5f, 0.0f);
+		const FVector2D GainAboveCap = UKGCharacterMovement::ComputeAirStrafeVelocity2D(VAboveCap, FVector2D(0.0f, 1.0f), WishSpeed, Accelerate, Dt, SoftCap) - VAboveCap;
 		const FVector2D GainAtCap = UKGCharacterMovement::ComputeAirStrafeVelocity2D(VAtCap, FVector2D(0.0f, 1.0f), WishSpeed, Accelerate, Dt, SoftCap) - VAtCap;
 		const FVector2D GainBelowCap = UKGCharacterMovement::ComputeAirStrafeVelocity2D(BelowCap, FVector2D(0.0f, 1.0f), WishSpeed, Accelerate, Dt, SoftCap) - BelowCap;
-		TestTrue(TEXT("Gain still positive right at the soft cap"), GainAtCap.Size() > 0.0f);
-		TestTrue(TEXT("Gain at the soft cap is smaller than well below it"), GainAtCap.Size() < GainBelowCap.Size());
+		TestTrue(TEXT("Gain still positive well above the soft cap"), GainAboveCap.Size() > 0.0f);
+		TestTrue(TEXT("Gain above the soft cap is smaller than well below it"), GainAboveCap.Size() < GainBelowCap.Size());
+		TestTrue(TEXT("The taper is continuous at the cap (no hard step)"), FMath::IsNearlyEqual(GainAtCap.Size(), GainBelowCap.Size(), 0.01f));
 	}
 
 	// Jump buffer: a press right before landing (small positive elapsed time) counts; a stale one (held/way earlier)

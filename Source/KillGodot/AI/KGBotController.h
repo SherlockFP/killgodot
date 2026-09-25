@@ -67,6 +67,12 @@ protected:
 	int32 BotSeed = 0;
 	/** Night hunt: stays locked on one villager until they die or dawn breaks. */
 	TWeakObjectPtr<AKGCharacter> Prey;
+	/** Seconds spent hunting the current Prey without a stab. Past PreyGiveUpSeconds the hunt re-picks (skipping the
+	 *  stale one for a while): a villager stuck off the navmesh, or a spawn pawn nobody can path to, used to lock the
+	 *  Impatient forever and stall the whole match (kg_match_smoke: "no winner within 600 s", 2026-09-25/26). */
+	float PreyHuntSeconds = 0.0f;
+	static constexpr float PreyGiveUpSeconds = 25.0f;
+	TWeakObjectPtr<AKGCharacter> StalePrey;
 	float SidestepRemaining = 0.0f;
 	FVector SidestepDir = FVector::ZeroVector;
 	float VoteDelay = -1.0f;

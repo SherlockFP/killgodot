@@ -42,3 +42,29 @@ Starts after the SPRINT-016 finisher is done, because they share the chore HUD f
 - 3 fix attempts per failing check
 - plateau stop
 - extras go in as proposals
+
+## Stabilisation 2026-09-26 (sprint was cut off by the usage limit)
+- `KillGodot.HUD.MapInput`: "release exactly at HoldSeconds closes" failed on double arithmetic
+  ((50.0 + 0.3) - 50.0 < 0.3). Code fixed, not the test: `KGMapInput::HeldLongEnough` compares with a 1 µs tolerance so
+  the documented inclusive threshold holds for world-time stamps.
+- `KillGodot.Chores.Timing`: MendNets and FuelLighthouse were "UNSOLVED" (120 s give-up), not slow.
+  - MendNets: `AutoPlay` tied every rope but never called `Solve()` (only `OnRelease` did). Fixed in the minigame:
+    the scripted player now completes the stage like a real release does. Median 7.7 s.
+  - FuelLighthouse wick stage: the cut only ended at `CutProg >= 1.0`, but the float projection of a cursor sitting on
+    the end point lands at 0.9999999 on some slopes (2 of 3 seeds stalled). Fixed in the minigame: the cut ends within a
+    quarter pixel of the end. Median 10.9 s. Both floors still sit under the scripted times.
+- Game-thread hang (found by the "after" HUD shot run, which froze the frame after `kg.Chore.Reset all`): the chore
+  tracker's step-shortening loop in `UI/KGHUDChoreMarkers.inl` cut 2 characters and appended 3 dots per pass, so a step
+  that did not fit made the string grow forever. Rewritten to shorten until "<step>..." fits. This would have frozen a
+  real session the first time a long step met a narrow tracker.
+- `Tools/Unreal/kg_hud_shots.py`: `PlayerController.get_pawn` does not exist in the Python API (every placement step
+  failed in the "before" run, so the near/mid/far/edge shots were all taken from the spawn point); uses
+  `get_controlled_pawn()` now.
+- `kg.Map.Debug 2` (forced "tapped open") behaved like a real tap, so `kg.Map.Debug 0` left the map open and the two HUD
+  demo shots were taken under the map. `KGHUDMap.inl` now closes the map when a forced state ends.
+- Evidence (offscreen, `Tools/Unreal/kg_hud_shots.ps1 -Tag after`, both 1280x720 and 1920x1080):
+  `Saved/Screenshots/HUD/after_<WxH>_{near,mid,far,edge}.png` (markers + tracker at 3 m / 12 m / 35 m and behind the
+  camera, with distances), `after_<WxH>_bigmap.png` (hold-M, "Release to close"), `after_<WxH>_fullmap.png` (tap,
+  "Close · hold to peek"), `after_<WxH>_{demo2,demo3}.png` (UI pass: working a chore, interact prompt);
+  before/after contact sheets `Saved/Screenshots/HUD/contact_1280x720.png`, `contact_1920x1080.png`
+  (`Tools/Unreal/kg_contact_sheet.py`). Panel minigame shots stay in `Saved/UIShots/chore_*_1280x720.png`.

@@ -41,3 +41,24 @@ automatic: it should use strafe logic."
 - 3 fix attempts per failing check
 - 2 feel rounds
 - plateau stop
+
+## Stabilisation 2026-09-26 (sprint was cut off by the usage limit)
+- `KillGodot.Character.AirStrafe` failed on its soft-cap check: the test sampled the gain exactly AT the cap and expected
+  it smaller than below the cap, but the taper `1 - (speed - cap) / cap` is continuous and equals 1 at the cap by
+  design (a step there would be a hard cap). Test fixed: samples 1.3x cap for "smaller", checks continuity at the cap.
+- Evidence run `Tools/Unreal/kg_move_smoke.ps1` (two windowless -nullrhi processes, PktLag 50 ms each way):
+  - client `KG_MOVE_DONE speed=621.9 corrections=15`; 12 051 `KG_MOVE_CSV` samples (the -nullrhi client runs ~1200 fps).
+  - `python Tools/Unreal/kg_move_curve.py` -> `Docs/Level/SPRINT-026_speed_curve.csv` + `.png`: bad strafe plateaus
+    at 320 uu/s (walk speed, one jump, no chaining); good strafe climbs 320 -> 1138 uu/s in 3 s, then drops at
+    8.9 s / 10.0 s / 10.5 s (server snaps).
+  - Fix applied: the smoke script only runs on player pawns (`IsPlayerControlled()`); listen-server bots are also
+    "locally controlled" and had been running it (6 bot `KG_MOVE_DONE` lines in the server log).
+- **Open (acceptance 1 not met): 15 corrections at 100 ms ping.** Cause: the chain-hop gate (`bHopChainBlocked`,
+  `HopGainScale` from `Stamina.bExhausted`) and the hop stamina charge (`HopCounter` poll) live in `AKGCharacter::Tick`,
+  outside the CMC move stream. The server simulates a batch of client moves against a flag that is only refreshed once
+  per server frame, and client replays after a correction re-increment `HopCounter` (double charge). The first
+  correction lands exactly when stamina runs out (~6 chain hops, 8.9 s) and the disagreement then cascades. The bad
+  phase (no chaining) has 0 corrections, so the strafe math itself replays cleanly. Proposal in the Backlog: move
+  stamina / hop-streak / `TimeSinceJumpPressed` into a custom `FSavedMove_Character` and charge hops inside the CMC.
+- **Open (acceptance 2, tuning):** the good strafe reaches 1138 uu/s = 1.96x sprint against the "about 1.35x" soft cap;
+  the taper (floor 0.08) only bites near 1.9x cap. Proposal: a steeper taper or a hard ceiling at ~1.5x cap.

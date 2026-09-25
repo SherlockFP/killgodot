@@ -1611,7 +1611,9 @@ void AKGCharacter::TickMoveSmoke(float DeltaSeconds)
 {
 #if !UE_BUILD_SHIPPING
 	static const bool bSmoke = FParse::Param(FCommandLine::Get(), TEXT("KGMoveSmoke"));
-	if (!bSmoke || !IsLocallyControlled() || IsDead())
+	// Player pawns only: on the listen server the bots are "locally controlled" too and would run the script (the
+	// 2026-09-26 run had 6 bot KG_MOVE_DONE lines in the server log; contract: bots never hop).
+	if (!bSmoke || !IsLocallyControlled() || !IsPlayerControlled() || IsDead())
 	{
 		return;
 	}

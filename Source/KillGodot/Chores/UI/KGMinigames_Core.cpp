@@ -1110,6 +1110,12 @@ public:
 				break;
 			}
 		}
+		// Same completion rule as OnRelease: the stage is done once every rope is tied. (Stabilisation 2026-09-26:
+		// the scripted player tied every rope but never solved the stage - KillGodot.Chores.Timing hit the give-up.)
+		if (!bSolved && !Linked.Contains(-1))
+		{
+			Solve();
+		}
 	}
 
 	virtual void DebugPose() override

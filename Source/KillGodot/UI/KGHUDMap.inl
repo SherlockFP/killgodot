@@ -39,6 +39,9 @@ struct FKGMapFx
 	// SPRINT-025: this frame's chore pins (tracker, markers, minimap and full map share one gather)
 	TArray<struct FKGChorePin> Pins;
 	uint64 PinsFrame = 0;
+
+	/** kg.Map.Debug value seen last frame: leaving a forced state (2 -> 0) closes the map it forced open. */
+	int32 LastForced = 0;
 };
 
 #if !UE_BUILD_SHIPPING
@@ -1195,6 +1198,13 @@ void DrawMapLayer(const FKGHudFrame& F, bool bLoadingCard)
 		{
 			M.Input.bOpen = true;
 		}
+		else if (Forced != M.LastForced)
+		{
+			// Stabilisation 2026-09-26: a forced "tapped open" (2) behaved like a real tap, so kg.Map.Debug 0 left the
+			// map open and the HUD demo shots after it were taken under the map. Leaving a forced state closes it.
+			KGMapInput::Close(M.Input);
+		}
+		M.LastForced = Forced;
 		if (M.Input.bOpen && F.PC->WasInputKeyJustPressed(EKeys::Escape))
 		{
 			KGMapInput::Close(M.Input);

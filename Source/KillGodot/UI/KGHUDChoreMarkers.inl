@@ -373,10 +373,17 @@ float DrawChoreTracker(const FKGHudFrame& F)
 			if (Room > 30.0f * S)
 			{
 				FString Step = TEXT("·  ") + Row.Step;
-				while (Step.Len() > 5 && P.Measure(Step, KGUI::TypeBody - 1.0f, false).X > Room)
+				if (P.Measure(Step, KGUI::TypeBody - 1.0f, false).X > Room)
 				{
-					Step.LeftInline(Step.Len() - 2);
-					Step += TEXT("...");
+					// Shorten the step until "<step>..." fits. (Stabilisation 2026-09-26: the old loop cut 2 chars and
+					// appended 3 dots each pass, so the string grew and the game thread hung forever the first time a
+					// step did not fit - the "after" HUD shot runs froze right after the fresh chores were dealt.)
+					FString Base = Step;
+					while (Base.Len() > 4 && P.Measure(Base + TEXT("..."), KGUI::TypeBody - 1.0f, false).X > Room)
+					{
+						Base.LeftChopInline(1, EAllowShrinking::No);
+					}
+					Step = Base.TrimEnd() + TEXT("...");
 				}
 				P.TextMid(Step, StepX, MidY + 0.5f * S, KGUI::TypeBody - 1.0f, Row.bActive ? Lantern : CreamDim, 0.0f, false);
 			}

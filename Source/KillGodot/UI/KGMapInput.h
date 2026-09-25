@@ -22,6 +22,15 @@ namespace KGMapInput
 {
 	inline constexpr double HoldSeconds = 0.3;
 
+	/** Held for HoldSeconds or longer. Timestamps are world seconds (large doubles), so "exactly HoldSeconds" after
+	 *  the press is not representable: (50.0 + 0.3) - 50.0 < 0.3 in double arithmetic. A microsecond of tolerance
+	 *  keeps the threshold inclusive as documented (KGHudTests: "exactly at the threshold counts as a hold"). */
+	inline bool HeldLongEnough(const FKGMapInput& S, double Now)
+	{
+		constexpr double Tolerance = 1e-6;
+		return Now - S.DownAt >= HoldSeconds - Tolerance;
+	}
+
 	/** Feed the key state for this frame. Returns true when the open state changed. */
 	inline bool Update(FKGMapInput& S, bool bKeyDown, double Now)
 	{
@@ -44,7 +53,7 @@ namespace KGMapInput
 		else if (!bKeyDown && S.bDown)
 		{
 			S.bDown = false;
-			if (S.bHoldOpened && Now - S.DownAt >= HoldSeconds)
+			if (S.bHoldOpened && HeldLongEnough(S, Now))
 			{
 				S.bOpen = false;
 			}
@@ -56,7 +65,7 @@ namespace KGMapInput
 	/** The map is up because the key is being held (release will close it). */
 	inline bool IsHolding(const FKGMapInput& S, double Now)
 	{
-		return S.bDown && S.bHoldOpened && S.bOpen && Now - S.DownAt >= HoldSeconds;
+		return S.bDown && S.bHoldOpened && S.bOpen && HeldLongEnough(S, Now);
 	}
 
 	inline void Close(FKGMapInput& S)

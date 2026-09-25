@@ -747,11 +747,27 @@ void AKGBotController::Tick(float DeltaSeconds)
 			Me->ToggleDevBlade();   // sheathe: walking around with a knife out is a confession
 		}
 		DecisionCooldown = 0.4f;
+		// A hunt that goes nowhere (prey off the navmesh, or unreachable) is dropped after PreyGiveUpSeconds and that
+		// prey skipped on the next pick, so the Impatient moves on instead of stalling the match.
+		if (Prey.IsValid() && !Prey->IsDead())
+		{
+			PreyHuntSeconds += 0.4f;   // one decision step (DecisionCooldown cadence above)
+			if (PreyHuntSeconds >= PreyGiveUpSeconds)
+			{
+				UE_LOG(LogKillGodot, Log, TEXT("KG_BOT hunt stale %s -> %s after %.0fs, re-picking"), *Me->GetName(),
+				       *Prey->GetName(), PreyHuntSeconds);
+				StalePrey = Prey;
+				Prey = nullptr;
+				PreyHuntSeconds = 0.0f;
+			}
+		}
 		// At night the Impatient hunt: lock onto the nearest villager and slip in behind them.
 		if (GS && GS->GetPhase() == EKGPhase::Night && (!Prey.IsValid() || Prey->IsDead()))
 		{
 			Prey = nullptr;
+			PreyHuntSeconds = 0.0f;
 			double Best = TNumericLimits<double>::Max();
+			for (int32 Pass = 0; Pass < 2 && !Prey.IsValid(); ++Pass)
 			for (TActorIterator<AKGCharacter> It(GetWorld()); It; ++It)
 			{
 				const AKGPlayerState* PS = It->GetPlayerState<AKGPlayerState>();
@@ -760,6 +776,10 @@ void AKGBotController::Tick(float DeltaSeconds)
 				if (*It == Me || It->IsDead() || !PS || (R && R->GetAlignment() == EKGAlignment::Impatient))
 				{
 					continue;
+				}
+				if (Pass == 0 && StalePrey.IsValid() && *It == StalePrey.Get())
+				{
+					continue;   // second pass only: when nobody else is left, the stale one is tried again
 				}
 				const double D = FVector::DistSquared2D(It->GetActorLocation(), Me->GetActorLocation());
 				if (D < Best)

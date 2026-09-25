@@ -1290,7 +1290,10 @@ private:
 					SnipAcc = 0.0f;
 					Sound(TEXT("S_Chore_Scrape"), 0.35f, 1.4f + 0.3f * CutProg);
 				}
-				if (CutProg >= 1.0f)
+				// The cut is done within a quarter pixel of the end: Proj is a float projection of the cursor, so a
+				// cursor sitting exactly on the end point can project to 0.9999999 (slope dependent) and never reach
+				// 1.0 (stabilisation 2026-09-26: the scripted player stalled on two of three seeds).
+				if (CutProg >= 1.0f - 0.25f / Len)
 				{
 					CutProg = 1.0f;
 					bCutting = false;

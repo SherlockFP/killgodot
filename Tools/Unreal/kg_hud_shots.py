@@ -83,7 +83,13 @@ class Capture:
     def place(self, dist, yaw_off=0.0):
         if not self.station:
             return
-        pawn = self.pc().get_editor_property("pawn")
+        # unreal.Controller exposes K2_GetPawn as get_controlled_pawn (there is no get_pawn); the reflected property
+        # is the fallback.
+        pc = self.pc()
+        pawn = pc.get_controlled_pawn() if hasattr(pc, "get_controlled_pawn") else pc.get_editor_property("pawn")
+        if pawn is None:
+            log("no pawn yet")
+            return
         at = self.station.get_actor_location()
         fwd = self.station.get_actor_forward_vector()
         # Stand along the station's facing so the prop is between us and the building behind it.

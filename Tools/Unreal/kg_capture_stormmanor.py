@@ -213,6 +213,11 @@ class Session:
         start = unreal.Vector(-400.0, -900.0, Z0 * 100.0 + 60.0)
         res, bad = {}, []
         for name, p in targets:
+            # like kg.WorldChore.Routes (NavPoint): the nearest navmesh within 1.5 m / 2.5 m up-down of the spot
+            q = unreal.NavigationSystemV1.project_point_to_navigation(w, p, None, None, unreal.Vector(150.0, 150.0, 90.0))
+            if q is None:   # same floor first (a roof deck 2.4 m up must not win), then the routes' wider box
+                q = unreal.NavigationSystemV1.project_point_to_navigation(w, p, None, None, unreal.Vector(150.0, 150.0, 250.0))
+            p = q if q is not None else p
             path = unreal.NavigationSystemV1.find_path_to_location_synchronously(w, start, p)
             ok = bool(path and path.is_valid() and not path.is_partial())
             length = path.get_path_length() / 100.0 if path else -1.0
@@ -246,9 +251,14 @@ class Session:
                 v = (b[1] + (b[4] - b[1]) * fv) * s[1]
                 x = p["x"] + u * c - v * sn
                 y = p["y"] + u * sn + v * c
+                # start just under the prop: a trace started inside its own collision stopped there (the first
+                # blocking hit ends a multi trace), which read as "floating" for 385 props in the first round
+                # clutter without collision (a jar on a shelf board) is traced against the visual triangles from just
+                # above its bottom, so the board it stands on counts even where the shelf's simple box is coarser
+                solid = p.get("collide", True)
                 hits = unreal.SystemLibrary.line_trace_multi(
-                    w, unreal.Vector(x, y, bottom + 40.0), unreal.Vector(x, y, bottom - 150.0),
-                    unreal.TraceTypeQuery.TRACE_TYPE_QUERY1, True, [], unreal.DrawDebugTrace.NONE, True)
+                    w, unreal.Vector(x, y, bottom + (-0.3 if solid else 2.0)), unreal.Vector(x, y, bottom - 150.0),
+                    unreal.TraceTypeQuery.TRACE_TYPE_QUERY1, not solid, [], unreal.DrawDebugTrace.NONE, True)
                 gap = None
                 for hit in hits or []:
                     t = hit.to_tuple()
@@ -272,6 +282,8 @@ class Session:
                         continue
                     gap = bottom - loc_.z
                     break
+                if gap is None and p.get("floor_prop") and abs(bottom - p["floor"]) <= 3.0:
+                    gap = bottom - p["floor"]          # started inside the 2 cm floor tile (initial overlap)
                 gaps.append(gap)
             real = [g for g in gaps if g is not None]
             if not real or min(real) > 8.0:

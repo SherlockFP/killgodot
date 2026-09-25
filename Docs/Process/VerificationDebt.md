@@ -23,3 +23,4 @@ windowed build with the user present, clears it.
 
 Headless coverage that exists: `Tools/Gauntlet/run_invariants.ps1` (build, tests, v2 verify, chat/emote/fish/chore
 smokes, whole-match bot smoke).
+| 15 | Storm Manor map (SPRINT-018) | Walk all 24 rooms + secret passages, room vignettes, storm look (reads grey dusk), a real match with players, white-mesh props | 2026-09-26 |

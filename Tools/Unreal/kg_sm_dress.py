@@ -105,7 +105,11 @@ def room_for(rid, cap=1, style=0, inset_int=22.0):
     g.rects = []
     reserve(h, g, rid)
     Bm.SHIM.room = rid
+    CUR[0] = (h, g)
     return h, g
+
+
+CUR = [None]        # the room being dressed (done() runs its external-kit vignette layer on the same free-space map)
 
 
 def keep_rect(g, x0, y0, x1, y1, tag="keep"):
@@ -152,6 +156,12 @@ def reserve(h, g, rid):
             if s[end] == rid:
                 lx, ly = loc(h, *s["at_" + end])
                 keep_rect(g, lx - 110.0, ly - 110.0, lx + 110.0, ly + 110.0)
+                # and where the passage puts the traveller: 1.3 m in front, towards the room's middle (builder secrets())
+                ax, ay = s["at_" + end]
+                cx, cy = (h.rect[0] + h.rect[2]) / 2.0, (h.rect[1] + h.rect[3]) / 2.0
+                d = math.hypot(cx - ax, cy - ay) or 1.0
+                px, py = loc(h, ax + (cx - ax) / d * 1.3, ay + (cy - ay) / d * 1.3)
+                keep_rect(g, px - 80.0, py - 80.0, px + 80.0, py + 80.0)
     for tid, name, prid, (x, y) in Bm.PANELS:
         if prid == rid:
             lx, ly = loc(h, x, y)
@@ -159,6 +169,14 @@ def reserve(h, g, rid):
 
 
 def done(h, rid):
+    fn = EXT.get(rid)
+    if fn and CUR[0] and CUR[0][0] is h:
+        try:
+            fn(h, CUR[0][1])
+        except Exception:
+            import traceback
+            Bm.log(f"dress ext {rid} FAILED:\n{traceback.format_exc()}")
+            Bm.stats.setdefault("dress_failed", []).append("ext_" + rid)
     DRESSED[rid] = DRESSED.get(rid, 0) + h.count
 
 
@@ -326,6 +344,8 @@ def great_hall():
         lx, ly = loc(h, 0.0, ym)
         h.put(I + "Rug_Runner", lx, ly, g.z + 0.3, 90.0, scale=(1.15, 1.9, 1.0), collide=False)
     for k in range(9):
+        if k in (0, 4):
+            continue            # gaps in the benches: the decanter (hall_table) and the chandelier chore are reached here
         ym = -13.9 + k * 1.2
         for side, yaw in ((-1.25, -90.0), (1.25, 90.0)):
             lx, ly = loc(h, side, ym)
@@ -830,7 +850,7 @@ def nursery():
     lx, ly = loc(h, 9.7, 2.5)
     h.put(P + "Pouch_Large", lx - 12.0, ly, g.z + 150.0, 90.0, scale=(2.0, 2.0, 1.8), collide=False)
     box = place(h, g, BD + "BedsideTable", 4.0, 5.2, 0.0)
-    on(h, box, P + "Workbench_Drawers", 0.0, 0.0, scale=(0.7, 0.7, 0.7))
+    on(h, box, P + "CandleStick", 0.0, 0.0)                     # the night light, still lit
     for xm, ym, yaw in ((-3.0, 4.0, 30.0), (1.5, 6.5, -60.0)):
         lx, ly = loc(h, xm, ym)
         h.put(WP + "Rowboat", lx, ly, g.z + 5.0, yaw, scale=(0.18, 0.18, 0.18), collide=False)
@@ -1100,6 +1120,596 @@ def cliff_path():
         KI.seat(g, P + "Bench", lx, ly, -90.0, stand=58.0)
     scatter(h, g, [N + "Grass_Wispy_Short", N + "Pebble_Round_2", N + "Rock_Medium_2"], 6, collide=False)
     done(h, "cliff_path")
+
+
+# =================================================================================================== external kits
+# SPRINT-018 "big, full and detailed inside": a second layer per room from the 42 free packs under /Env/Ext
+# (Tools/Unreal/dressing/pack_ext_*.md). It runs from done() on the same free-space map, so the first layer's
+# reservations (doors, stairs, chores, secrets, meeting ring) still hold. Pack scales (notes): KKFurniture, KKRestaurant,
+# KGraveyard, QDungeon ~ real size; KFurniture x1.9 (Kenney is small); KKDungeon x0.5 (chunky); PPManor per mesh.
+XROOT = "/Game/KillGodot/Env/Ext/KG_Ext_{0}/StaticMeshes/SM_KG_{0}_{1}"
+
+
+def xp(tag, piece):
+    return XROOT.format(tag, piece)
+
+
+def KKF(p): return xp("KKFurniture", p)
+def KF(p): return xp("KFurniture", p)
+def PPM(p): return xp("PPManor", p)
+def KKR(p): return xp("KKRestaurant", p)
+def KKD(p): return xp("KKDungeon", p)
+def KKH(p): return xp("KKHalloween", p)
+def KGY(p): return xp("KGraveyard", p)
+def QD(p): return xp("QDungeon", p)
+
+
+BATHTUB = "Bathtub_2MbbdwbTjt"
+BOOKCASE = "Bookcase_with_Books_tACDGJ4CGW"
+CLOCK = "Grandfathers_Clock_09YKIkFZnA"
+GLOBE = "Globe_Y4Dof9b2p5"
+TELESCOPE = "Telescope_RjyTCQvA8b"
+LUTE = "Lute_q3IXa6QH1C"
+MANNEQUIN = "Mannequin_tYwjQJvcFX"
+STATUE = "Statue_gieXYyUTYr"
+ANGEL = "AngelStatue_6v4CL0nKfT"
+HORSE = "Horse_Statue_AK9CmjFnL6"
+CHANDELIER = "Light_Chandelier_q3k8I8YYX9"
+CHANDELIER2 = "Chandelier_RPLTkXHOOM"
+COFFIN = "Coffin_ySERERWPgE"
+CAULDRON = "Cauldron_QaWJOPa6Gt"
+RUG = "Rug_7H5qKjuxVY"
+ARMCHAIR = "Armchair_myd1WSucAz"
+FRAMES = ["pictureframe_large_A", "pictureframe_medium", "pictureframe_small_A", "pictureframe_small_B",
+          "pictureframe_small_C"]
+
+
+def S(f):
+    return (f, f, f) if isinstance(f, (int, float)) else tuple(f)
+
+
+def xwall(h, g, path, walls, n=1, s=1.0, gap=3.0, tag="block", collide=True, yaw=0.0, tall=None):
+    """Up to n copies with their back to one of `walls` (kit furniture faces local +Y)."""
+    out = []
+    if not Bm.have(path):
+        return out
+    for _ in range(n):
+        it = g.on_wall(path, walls, scale=S(s), gap=gap, tag=tag, collide=collide, extra_yaw=yaw, tall=tall)
+        if not it:
+            break
+        out.append(it)
+    return out
+
+
+def xat(h, g, path, xm, ym, yaw=0.0, s=1.0, tag="block", collide=True, check=True):
+    if not Bm.have(path):
+        return None
+    return place(h, g, path, xm, ym, yaw, scale=S(s), tag=tag, collide=collide, check=check)
+
+
+def xscatter(h, g, paths, n, s=1.0, pad=15.0, collide=True, yaw_any=True, tries=40, area=None, tag="block"):
+    """n free-standing pieces on free floor (area = world-metre rect to stay in)."""
+    paths = [p for p in paths if Bm.have(p)]
+    if not paths:
+        return 0
+    if area:
+        ax0, ay0 = loc(h, area[0], area[1])
+        ax1, ay1 = loc(h, area[2], area[3])
+    else:
+        ax0, ay0, ax1, ay1 = g.x0 + 60, g.y0 + 60, g.x1 - 60, g.y1 - 60
+    k = 0
+    for _ in range(n * tries):
+        if k >= n:
+            break
+        path = h.R.choice(paths)
+        lx, ly = h.R.uniform(min(ax0, ax1), max(ax0, ax1)), h.R.uniform(min(ay0, ay1), max(ay0, ay1))
+        yaw = h.R.uniform(0, 360) if yaw_any else h.R.choice((0.0, 90.0, 180.0, 270.0))
+        if g.spot(path, lx, ly, yaw, scale=S(s), pad=pad):
+            g.place(path, lx, ly, yaw, scale=S(s), collide=collide, tag=tag)
+            k += 1
+    return k
+
+
+def xon(h, base, path, u, v, s=1.0, lyaw=0.0, z=None):
+    if base and Bm.have(path):
+        return on(h, base, path, u, v, z=z, lyaw=lyaw, scale=S(s))
+    return None
+
+
+def xtop(h, base, paths, n, s=1.0):
+    """n pieces of clutter spread over the top of `base`."""
+    if not base:
+        return
+    b = KI.bounds(base.path)
+    w = (b[3] - b[0]) * base.scale[0]
+    d = (b[4] - b[1]) * base.scale[1]
+    cx = (b[0] + b[3]) / 2 * base.scale[0]
+    cy = (b[1] + b[4]) / 2 * base.scale[1]
+    for k in range(n):
+        u = cx + (-0.5 + (k + 0.5) / n) * w * 0.75
+        xon(h, base, h.R.choice(paths), u / base.scale[0], (cy + h.R.uniform(-0.2, 0.2) * d) / base.scale[1],
+            s=s, lyaw=h.R.uniform(-40, 40))
+
+
+def xmount(h, g, path, walls, z, every=450.0, s=1.0, skip=0):
+    """Hang copies on closed wall every `every` cm (pictures, banners, mirrors), scaled."""
+    if not Bm.have(path):
+        return 0
+    n = 0
+    sc = S(s)
+    for wall in walls:
+        yaw = {"back": 180.0, "front": 0.0, "left": -90.0, "right": 90.0}[wall]
+        fp = KI.footprint(path, yaw, sc)
+        lo, hi = (g.x0, g.x1) if wall in ("front", "back") else (g.y0, g.y1)
+        t = lo + every / 2.0
+        k = 0
+        while t < hi - 40.0:
+            k += 1
+            half = max(fp[2] - fp[0], fp[3] - fp[1]) / 2.0 + 10.0
+            if k > skip and h.wall_ok(0, wall, t - half, t + half, 999.0):
+                if wall == "back":
+                    lx, ly = t - (fp[0] + fp[2]) / 2, g.y1 - 0.5 - fp[3]
+                elif wall == "front":
+                    lx, ly = t - (fp[0] + fp[2]) / 2, g.y0 + 0.5 - fp[1]
+                elif wall == "right":
+                    lx, ly = g.x1 - 0.5 - fp[2], t - (fp[1] + fp[3]) / 2
+                else:
+                    lx, ly = g.x0 + 0.5 - fp[0], t - (fp[1] + fp[3]) / 2
+                r = (lx + fp[0], ly + fp[1], lx + fp[2], ly + fp[3])
+                if g.inside(r) and not any(KI.overlap(r, q) for q, tag in g.rects if tag in ("stair", "tall")):
+                    h.put(path, lx, ly, g.z + z, yaw, scale=sc, collide=False)
+                    n += 1
+            t += every
+    return n
+
+
+def pictures(h, g, walls, z=170.0, every=380.0):
+    return xmount(h, g, KKF(h.R.choice(FRAMES)), walls, z, every=every)
+
+
+def reading_table(h, g, chairs, table=None, s=1.0):
+    """A free-standing table with chairs round it and a few things on it, wherever the floor is free."""
+    table = table or KKF("table_medium_long")
+    if not Bm.have(table):
+        return None
+    for _ in range(60):
+        lx, ly = h.R.uniform(g.x0 + 200, g.x1 - 200), h.R.uniform(g.y0 + 200, g.y1 - 200)
+        yaw = h.R.choice((0.0, 90.0))
+        if not g.spot(table, lx, ly, yaw, scale=S(s), pad=110.0):
+            continue
+        t = g.place(table, lx, ly, yaw, scale=S(s))
+        b = KI.bounds(table)
+        hy = (b[4] - b[1]) * s / 2.0 + 30.0
+        for k in range(chairs):
+            side = 1.0 if k % 2 == 0 else -1.0
+            u = 0.0 if chairs <= 2 else (-45.0 if k < 2 else 45.0) * s
+            x, y = t.at(u / s, side * hy / s)
+            cyaw = t.lyaw + (180.0 if side > 0 else 0.0)
+            if g.spot(KKF("chair_B_wood"), x, y, cyaw):
+                g.place(KKF("chair_B_wood"), x, y, cyaw)
+        xtop(h, t, [KKF("book_set"), KKF("book_single"), KKF("lamp_table"), KKR("jar_A_small")], 3, s=0.6)
+        return t
+    return None
+
+
+def xhang(h, path, xm, ym, zc, s=1.0):
+    if Bm.have(path):
+        return hang(h, path, xm, ym, zc, scale=S(s))
+    return None
+
+
+def clock_stopped(h, g, walls):
+    """Anselm's grandfather clocks: all stopped at the same minute (story beat)."""
+    return xwall(h, g, PPM(CLOCK), walls, 1, s=1.5, gap=2.0, tag="tall")
+
+
+def sitting_corner(h, g, walls, lamp=True):
+    """Armchair + side table + lamp + books against a wall."""
+    ch = xwall(h, g, KKF("armchair_pillows"), walls, 1, gap=6.0)
+    if not ch:
+        return None
+    x, y = ch[0].at(95.0, 10.0)
+    t = g.place(KKF("table_small"), x, y, ch[0].lyaw, scale=S(0.8)) if g.spot(KKF("table_small"), x, y, ch[0].lyaw,
+                                                                                   scale=S(0.8)) else None
+    if t:
+        xon(h, t, KKF("lamp_table"), 0.0, 0.0, s=0.7) if lamp else None
+        xon(h, t, KKF("book_single"), 15.0, 15.0, lyaw=30.0)
+    return ch[0]
+
+
+# --------------------------------------------------------------------------------------------------- ground floor
+def ext_great_hall(h, g):
+    clock_stopped(h, g, ["front"])
+    xwall(h, g, KKF("cabinet_medium_decorated"), ["left", "right"], 2, gap=3.0, tag="tall")
+    for it in xwall(h, g, KKF("shelf_B_large_decorated"), ["left", "right"], 2, gap=2.0):
+        pass
+    for xm, ym in ((-8.6, -1.2), (8.6, -1.2), (-8.6, -19.0), (8.6, -19.0)):
+        xat(h, g, KKF("lamp_standing"), xm, ym)
+    xscatter(h, g, [PPM(STATUE)], 2, s=1.0, pad=40.0, area=(-9.2, -19.3, 9.2, -16.5), yaw_any=False)
+    xscatter(h, g, [KF("pottedPlant")], 4, s=1.9, pad=30.0)
+    xmount(h, g, KKD("banner_shield_red"), ["left", "right"], 180.0, every=700.0, s=0.55)
+    pictures(h, g, ["back"], z=190.0, every=520.0)
+    for ym in (-17.5, -9.0, -1.5):
+        xhang(h, PPM(CHANDELIER), -6.5, ym, 2.0 * Bm.H - 90.0, s=1.4)
+        xhang(h, PPM(CHANDELIER), 6.5, ym, 2.0 * Bm.H - 90.0, s=1.4)
+
+
+def ext_vestibule(h, g):
+    # the guests' luggage, just carried in out of the rain
+    xscatter(h, g, [KKD("trunk_small_A"), KKD("trunk_small_B"), KKD("trunk_medium_A"), KKD("trunk_medium_C")], 6, s=0.8,
+             pad=8.0, area=(-9.0, 6.5, -3.0, 9.3))
+    xwall(h, g, KF("coatRackStanding"), ["back", "left", "right"], 3, s=2.0, gap=10.0)
+    xwall(h, g, KF("benchCushion"), ["left", "right"], 2, s=2.1, gap=3.0)
+    clock_stopped(h, g, ["front", "right"])
+    xwall(h, g, KKF("cabinet_small_decorated"), ["left", "right"], 2, gap=3.0)
+    xscatter(h, g, [KF("rugDoormat")], 2, s=2.2, pad=0.0, collide=False, tag=None)
+    xscatter(h, g, [KF("pottedPlant")], 3, s=1.9, pad=30.0)
+    pictures(h, g, ["left", "right"], z=180.0)
+    xhang(h, PPM(CHANDELIER2), 0.0, 5.0, Bm.H - 80.0, s=1.3)
+
+
+def ext_dining(h, g):
+    for sb in xwall(h, g, KKF("cabinet_medium_decorated"), ["left", "front", "back"], 3, gap=3.0, tag="tall"):
+        pass
+    for sb in xwall(h, g, KKF("cabinet_medium"), ["left", "front", "back"], 2, gap=3.0):
+        xtop(h, sb, [KKR("jar_A_medium"), KKR("plate_small"), KKR("bowl_small"), KKD("bottle_A_labeled_brown")], 3,
+             s=0.8)
+    clock_stopped(h, g, ["back", "left"])
+    xwall(h, g, KKF("lamp_standing"), ["front", "back"], 2, gap=8.0)
+    pictures(h, g, ["front", "back", "left"], z=180.0, every=420.0)
+    xscatter(h, g, [KF("pottedPlant")], 2, s=1.9, pad=30.0)
+    xhang(h, PPM(CHANDELIER), -16.0, -13.0, Bm.H - 70.0, s=1.6)
+
+
+def ext_kitchen(h, g):
+    st = xwall(h, g, KKR("stove_multi_decorated"), ["front", "left"], 1, gap=2.0)
+    for c in xwall(h, g, KKR("kitchencounter_straight_A_decorated"), ["front", "left", "back"], 3, gap=2.0):
+        pass
+    for c in xwall(h, g, KKR("kitchencounter_straight_B"), ["front", "left", "back"], 2, gap=2.0):
+        xtop(h, c, [KKR("pot_A_stew"), KKR("cuttingboard"), KKR("jar_B_large"), KKR("food_ingredient_carrot_chopped")], 2)
+    xwall(h, g, KKR("shelf_papertowel_decorated"), ["back", "right"], 1, gap=2.0)
+    xwall(h, g, KKR("dishrack_plates"), ["back", "right"], 1, gap=2.0)
+    # dinner abandoned mid-preparation: the big table with chopped vegetables and a knife
+    t = xscatter(h, g, [KKR("kitchentable_A_large_decorated")], 1, pad=60.0, yaw_any=False)
+    xscatter(h, g, [KKR("crate_carrots"), KKR("crate_potatoes"), KKR("crate_onions"), KKR("crate_tomatoes")], 4,
+             s=0.6, pad=12.0)
+    xscatter(h, g, [PPM(CAULDRON)], 1, s=2.6, pad=20.0)
+    xscatter(h, g, [KKR("chair_stool")], 3, pad=15.0)
+
+
+def ext_pantry(h, g):
+    xwall(h, g, KKD("shelves"), ["front", "back", "left", "right"], 2, s=0.55, gap=2.0, tag="tall")
+    for sh in xwall(h, g, KKR("shelf_papertowel_decorated"), ["front", "back", "left", "right"], 2, gap=2.0):
+        pass
+    for t in xwall(h, g, KKR("kitchentable_A"), ["front", "back", "left", "right"], 1, gap=2.0):
+        xtop(h, t, [KKR("jar_A_small"), KKR("jar_B_small"), KKR("jar_C_small"), KKR("jar_D_small")], 4, s=0.9)
+    xscatter(h, g, [KKR("crate_potatoes"), KKR("crate_onions"), KKR("crate_cheese"), KKR("crate_ham"),
+                    KKR("crate_buns"), KKR("crate_lettuce")], 6, s=0.6, pad=10.0)
+    xscatter(h, g, [KKD("barrel_small"), QD("Barrel")], 4, s=0.55, pad=10.0)
+
+
+def ext_laundry(h, g):
+    for it in xwall(h, g, KKD("trunk_medium_B"), ["front", "back", "left", "right"], 3, s=0.9, gap=3.0):
+        pass
+    xwall(h, g, KKR("towelrail"), ["left", "right"], 2, s=1.2, gap=2.0)
+    for sh in xwall(h, g, KKF("shelf_B_small_decorated"), ["front", "back"], 2, gap=2.0):
+        pass
+    xscatter(h, g, [QD("Bucket")], 4, s=1.6, pad=8.0)
+    xscatter(h, g, [KKF("chair_stool_wood")], 2, pad=15.0)
+    xscatter(h, g, [KF("cardboardBoxOpen"), KF("cardboardBoxClosed")], 3, s=1.9, pad=10.0)
+
+
+def ext_chapel(h, g):
+    # a closed coffin on trestles before the altar: the vigil nobody explains
+    xscatter(h, g, [PPM(COFFIN)], 1, s=0.6, pad=40.0, yaw_any=False, area=(13.0, -18.5, 19.0, -15.0))
+    for c in xwall(h, g, KGY("candle_multiple"), ["front", "left", "right"], 5, gap=6.0, collide=False):
+        pass
+    xwall(h, g, KGY("urn_round"), ["front", "back"], 2, gap=6.0)
+    xwall(h, g, KGY("cross_wood"), ["front"], 1, s=0.7, gap=4.0, tag="tall")
+    xscatter(h, g, [PPM(ANGEL)], 1, s=0.45, pad=30.0, yaw_any=False)
+    xscatter(h, g, [KKH("candle_triple"), KKH("candle_melted")], 5, s=1.0, pad=8.0, collide=False)
+    xmount(h, g, KKD("banner_thin_white"), ["left", "right"], 150.0, every=500.0, s=0.5)
+
+
+def ext_library(h, g):
+    for bc in xwall(h, g, PPM(BOOKCASE), ["front", "back", "left", "right"], 5, s=0.8, gap=2.0, tag="tall"):
+        pass
+    sitting_corner(h, g, ["left", "right", "back"])
+    sitting_corner(h, g, ["left", "right", "back", "front"])
+    t = xscatter(h, g, [KKF("table_medium")], 1, s=0.8, pad=60.0)
+    xscatter(h, g, [PPM(TELESCOPE)], 1, s=1.3, pad=20.0)
+    xscatter(h, g, [KKF("rug_oval_A")], 1, pad=0.0, collide=False, tag=None, yaw_any=False)
+    for bc in xwall(h, g, KF("bookcaseClosedWide"), ["front", "back", "left", "right"], 6, s=2.2, gap=2.0, tag="tall"):
+        pass
+    reading_table(h, g, 4)
+    for gl in xwall(h, g, KKF("table_small"), ["front", "back"], 1, s=0.8, gap=6.0):
+        xon(h, gl, PPM(GLOBE), 0.0, 0.0, s=1.8)
+    xwall(h, g, KKF("lamp_standing"), ["front", "back", "left"], 2, gap=8.0)
+
+
+def ext_ballroom(h, g):
+    # the ball that never started: chairs lining the walls, punch tables, the lute on its chair, dust sheets
+    xwall(h, g, KKF("couch_pillows"), ["front", "back", "left", "right"], 3, gap=4.0)
+    xwall(h, g, KKF("chair_B_wood"), ["front", "back", "left", "right"], 10, gap=6.0)
+    for t in xwall(h, g, KKR("table_round_A_small_decorated"), ["front", "back"], 2, gap=30.0):
+        pass
+    xscatter(h, g, [PPM(STATUE)], 2, pad=40.0, yaw_any=False)
+    xwall(h, g, PPM(LUTE), ["left", "right", "back"], 1, s=0.75, gap=4.0, yaw=15.0)
+    xwall(h, g, KKF("lamp_standing"), ["front", "back", "left", "right"], 4, gap=8.0)
+    xscatter(h, g, [KF("pottedPlant")], 4, s=2.0, pad=30.0)
+    pictures(h, g, ["front", "back"], z=200.0, every=600.0)
+    for xm, ym in ((16.0, -2.0), (22.0, -2.0), (28.0, -2.0)):
+        xhang(h, PPM(CHANDELIER), xm, ym, Bm.H - 90.0, s=1.6)
+
+
+def ext_servants_corridor(h, g):
+    xwall(h, g, KKD("shelf_small_candles"), ["front", "back"], 3, s=0.6, gap=2.0)
+    xwall(h, g, KKD("trunk_small_C"), ["front", "back"], 2, s=0.8, gap=3.0)
+    xscatter(h, g, [QD("Bucket")], 2, s=1.6, pad=8.0)
+
+
+# --------------------------------------------------------------------------------------------------- cellar
+def ext_wine_cellar(h, g):
+    # (the KayKit kegs render untextured white: barrels only)
+    xwall(h, g, QD("Barrel"), ["front", "back", "left", "right"], 6, s=0.9, gap=3.0)
+    xwall(h, g, KKD("barrel_small_stack"), ["front", "left"], 2, s=0.5, gap=3.0)
+    xwall(h, g, KKD("shelves"), ["back", "right"], 3, s=0.55, gap=2.0, tag="tall")
+    for t in xwall(h, g, KKD("table_long"), ["back", "right", "left"], 1, s=0.45, gap=3.0, yaw=90.0):
+        xtop(h, t, [KKD("bottle_A_brown"), KKD("bottle_A_green"), KKD("bottle_B_green"), KKD("candle_lit")], 4, s=0.35)
+    xscatter(h, g, [KKD("barrel_small"), KKD("barrel_small_stack"), QD("Barrel2")], 5, s=0.5, pad=10.0)
+    xmount(h, g, QD("Cobweb"), ["front", "back"], 200.0, every=600.0)
+    xmount(h, g, KKD("torch_mounted"), ["left", "right"], 140.0, every=700.0, s=0.5)
+
+
+def ext_spark_room(h, g):
+    for t in xwall(h, g, KKD("table_medium"), ["front", "back"], 1, s=0.5, gap=3.0):
+        xtop(h, t, [KKD("candle_lit"), KKD("key"), KKD("bottle_C_green"), KKD("coin_stack_small")], 3, s=0.4)
+    xwall(h, g, KKD("chest"), ["left", "right", "front"], 1, s=0.5, gap=3.0)
+    xscatter(h, g, [QD("Crate"), KKD("box_small")], 3, s=0.6, pad=10.0)
+    xmount(h, g, QD("Cobweb2"), ["front", "back"], 210.0, every=700.0)
+
+
+def ext_cistern(h, g):
+    xscatter(h, g, [QD("Bucket")], 3, s=1.6, pad=8.0)
+    xscatter(h, g, [KKH("skull_candle"), KKH("bone_A"), KKH("bone_C")], 3, s=0.6, pad=8.0, collide=False)
+    xwall(h, g, KGY("coffin_old"), ["front", "left"], 1, s=0.8, gap=4.0)
+    xmount(h, g, QD("Cobweb"), ["front", "back", "left"], 200.0, every=650.0)
+    xmount(h, g, KKD("torch_mounted"), ["left", "right"], 140.0, every=900.0, s=0.5)
+
+
+def ext_smugglers_tunnel(h, g):
+    # the smugglers' cache: an open chest of coins, crates and a lantern left burning
+    # (a 2 m passage: nothing solid along its walls, the bots and the chore routes need the full width)
+    xscatter(h, g, [KKD("coin_stack_small"), KKD("coin_stack_medium")], 3, s=0.4, pad=6.0, collide=False)
+    xscatter(h, g, [KKH("lantern_standing"), KKH("candle_melted")], 3, pad=6.0, collide=False)
+    xmount(h, g, KKD("torch_mounted"), ["left", "right"], 140.0, every=800.0, s=0.5)
+    xmount(h, g, QD("Cobweb2"), ["left", "right"], 180.0, every=900.0)
+
+
+def ext_boathouse(h, g):
+    xwall(h, g, QD("Crate"), ["front", "left", "right"], 4, s=0.7, gap=3.0)
+    xwall(h, g, KKD("barrel_small"), ["front", "left", "right"], 3, s=0.55, gap=3.0)
+    xscatter(h, g, [KKH("lantern_standing")], 2, pad=10.0, collide=False)
+    xwall(h, g, KKD("shelf_large"), ["front"], 1, s=0.6, gap=2.0)
+
+
+# --------------------------------------------------------------------------------------------------- first floor
+def ext_gallery(h, g):
+    for wall in ("front", "back", "left", "right"):
+        xmount(h, g, KKF("pictureframe_large_B"), [wall], 190.0, every=420.0)
+        xmount(h, g, KKF("pictureframe_medium"), [wall], 120.0, every=420.0, skip=0)
+    xscatter(h, g, [PPM(STATUE)], 2, pad=40.0, yaw_any=False)
+    xwall(h, g, QD("Pedestal2"), ["left", "right"], 3, s=0.55, gap=6.0)
+    xwall(h, g, KF("benchCushion"), ["left", "right"], 2, s=2.2, gap=40.0)
+    xwall(h, g, KKF("lamp_standing"), ["front", "back"], 2, gap=8.0)
+
+
+def ext_corridor(h, g):
+    pictures(h, g, ["front", "back"], z=175.0, every=520.0)
+    xwall(h, g, KKF("cabinet_small_decorated"), ["front", "back"], 2, gap=3.0)
+    xwall(h, g, KF("pottedPlant"), ["front", "back"], 2, s=1.9, gap=4.0)
+
+
+def ext_bedroom(h, g):
+    for d in xwall(h, g, KKF("cabinet_medium_decorated"), ["front", "left", "right", "back"], 1, gap=3.0, tag="tall"):
+        pass
+    sitting_corner(h, g, ["front", "left", "right", "back"])
+    xwall(h, g, KKF("lamp_standing"), ["front", "left", "right", "back"], 1, gap=8.0)
+    # the guest's trunk, half unpacked
+    xscatter(h, g, [KKD("trunk_medium_A"), KKD("trunk_medium_B")], 1, s=0.9, pad=15.0)
+    xscatter(h, g, [KKF("rug_oval_B"), KKF("rug_rectangle_stripes_A")], 1, pad=0.0, collide=False, tag=None,
+             yaw_any=False)
+    pictures(h, g, ["front", "left", "right"], z=170.0, every=460.0)
+    xmount(h, g, KKF("pictureframe_large_B"), ["back", "front"], 190.0, every=700.0)
+    xscatter(h, g, [KF("pottedPlant")], 2, s=1.9, pad=25.0)
+    # the rest of a 12 m guest room: a dresser, a wardrobe, a couch, shelves, a writing desk, a tea table
+    xwall(h, g, KKF("cabinet_medium"), ["front", "left", "right", "back"], 1, gap=3.0)
+    xwall(h, g, KKF("cabinet_small_decorated"), ["front", "left", "right", "back"], 2, gap=3.0)
+    xwall(h, g, KKF("couch_pillows"), ["front", "left", "right", "back"], 1, gap=4.0)
+    xwall(h, g, KKF("shelf_B_large_decorated"), ["front", "left", "right", "back"], 2, gap=2.0)
+    for d in xwall(h, g, KF("desk"), ["front", "left", "right", "back"], 1, s=1.9, gap=3.0):
+        xtop(h, d, [KKF("book_single"), KKF("lamp_table"), KKF("pictureframe_standing_A")], 3, s=0.5)
+        x, y = d.at(0.0, 60.0)
+        if g.spot(KKF("chair_A_wood"), x, y, d.lyaw + 180.0):
+            g.place(KKF("chair_A_wood"), x, y, d.lyaw + 180.0)
+    reading_table(h, g, 2, table=KKF("table_small"), s=0.9)
+    xwall(h, g, KKF("lamp_standing"), ["front", "left", "right", "back"], 1, gap=8.0)
+
+
+def ext_bath(h, g):
+    # the bath still drawn, a towel dropped, the copper boiler ticking
+    xwall(h, g, PPM(BATHTUB), ["back", "right", "front"], 1, s=1.2, gap=4.0)
+    xwall(h, g, KF("bathroomSinkSquare"), ["front", "right", "back"], 2, s=2.0, gap=2.0)
+    xmount(h, g, KF("bathroomMirror"), ["front", "right"], 140.0, every=500.0, s=2.0)
+    xwall(h, g, KF("bathroomCabinetDrawer"), ["front", "left", "right"], 2, s=2.0, gap=2.0)
+    xwall(h, g, KKR("towelrail"), ["left", "right", "back"], 2, s=1.2, gap=2.0)
+    for sh in xwall(h, g, KKF("shelf_B_small_decorated"), ["front", "back", "left"], 2, gap=2.0):
+        pass
+    xscatter(h, g, [KKF("chair_stool")], 2, pad=12.0)
+    xscatter(h, g, [KF("pottedPlant")], 2, s=1.9, pad=20.0)
+    xscatter(h, g, [KKF("rug_rectangle_A")], 1, pad=0.0, collide=False, tag=None, yaw_any=False)
+    xscatter(h, g, [QD("Bucket")], 2, s=1.6, pad=8.0)
+
+
+def ext_studio(h, g):
+    xscatter(h, g, [PPM(MANNEQUIN)], 2, s=0.2, pad=25.0)
+    xwall(h, g, KKF("pictureframe_standing_A"), ["front", "back", "left", "right"], 4, s=1.8, gap=3.0, yaw=0.0)
+    for t in xwall(h, g, KKF("table_small"), ["front", "back", "right"], 2, s=0.9, gap=3.0):
+        xtop(h, t, [KKR("jar_A_small"), KKR("jar_C_small"), KKR("jar_D_small"), KKR("bowl_small")], 3, s=0.8)
+    xscatter(h, g, [KKF("rug_rectangle_stripes_B")], 1, pad=0.0, collide=False, tag=None, yaw_any=False)
+    xwall(h, g, KKF("lamp_standing"), ["front", "back"], 2, gap=8.0)
+    pictures(h, g, ["front", "back"], z=180.0, every=360.0)
+
+
+def ext_nursery(h, g):
+    # kept ready: toys out, the toy chest open, a lamp left on
+    xscatter(h, g, [KF("bear")], 2, s=1.6, pad=6.0, collide=False)
+    for bc in xwall(h, g, KF("bookcaseOpenLow"), ["front", "left", "back"], 3, s=2.0, gap=2.0):
+        xon(h, bc, KKF("book_set"), 0.0, 0.0, s=0.5)
+    xwall(h, g, KKF("cabinet_small"), ["front", "left", "back"], 1, gap=3.0)          # the toy chest
+    xscatter(h, g, [KKF("chair_stool"), KKF("pillow_A"), KKF("pillow_B")], 4, pad=8.0)
+    reading_table(h, g, 2, table=KKF("table_small"), s=0.8)                              # the tea party table
+    xwall(h, g, KKF("armchair"), ["front", "left", "back"], 1, gap=6.0)
+    xscatter(h, g, [KKF("rug_rectangle_stripes_A")], 1, pad=0.0, collide=False, tag=None, yaw_any=False)
+    xwall(h, g, KKF("lamp_table"), ["front", "left"], 1, s=0.9, gap=3.0)
+    xmount(h, g, KKF("pictureframe_small_B"), ["front", "left", "back"], 150.0, every=300.0)
+    xwall(h, g, KKF("shelf_A_small"), ["front", "left"], 1, gap=2.0)
+
+
+def ext_study(h, g):
+    clock_stopped(h, g, ["front", "right", "left"])
+    sitting_corner(h, g, ["front", "right", "left"])
+    xscatter(h, g, [PPM(GLOBE)], 1, s=3.2, pad=12.0)
+    xwall(h, g, KKF("cabinet_small_decorated"), ["front", "right"], 1, gap=3.0)
+    xscatter(h, g, [KKF("rug_rectangle_B")], 1, pad=0.0, collide=False, tag=None, yaw_any=False)
+    xwall(h, g, KF("bookcaseClosedWide"), ["front", "right", "left", "back"], 2, s=2.2, gap=2.0, tag="tall")
+    pictures(h, g, ["front", "right"], z=175.0, every=420.0)
+
+
+def ext_billiard(h, g):
+    xwall(h, g, KKF("couch"), ["front", "back", "left", "right"], 1, gap=4.0)
+    sitting_corner(h, g, ["front", "back", "left", "right"])
+    for sh in xwall(h, g, KKF("shelf_B_large_decorated"), ["front", "back", "left", "right"], 1, gap=2.0):
+        pass
+    for t in xwall(h, g, KKF("table_small"), ["front", "back", "left", "right"], 1, s=0.8, gap=4.0):
+        xtop(h, t, [KKD("bottle_A_labeled_brown"), KKD("bottle_C_brown")], 2, s=0.35)
+    xwall(h, g, KF("coatRackStanding"), ["front", "back", "left", "right"], 1, s=2.0, gap=10.0)
+    xwall(h, g, KKF("lamp_standing"), ["front", "back", "left", "right"], 2, gap=8.0)
+    pictures(h, g, ["front", "back", "left", "right"], z=180.0, every=480.0)
+
+
+def ext_storm_terrace(h, g):
+    xwall(h, g, KGY("urn_round"), ["front", "back", "right"], 4, gap=8.0)
+    xscatter(h, g, [KKH("lantern_standing")], 2, pad=12.0, collide=False)
+    xscatter(h, g, [KKH("bench")], 2, pad=25.0, yaw_any=False)
+    # one urn blown over by the wind
+    xscatter(h, g, [KGY("debris")], 1, s=0.6, pad=10.0, collide=False)
+
+
+# --------------------------------------------------------------------------------------------------- upper floors
+def ext_attic(h, g):
+    # a century of the family under dust: trunks, a dress form, old frames, a broken bed, cobwebs
+    xscatter(h, g, [KKD("trunk_large_A"), KKD("trunk_large_B"), KKD("trunk_large_C"), KKD("trunk_medium_C")], 7,
+             s=0.6, pad=15.0)
+    xscatter(h, g, [PPM(MANNEQUIN)], 1, s=0.2, pad=25.0)
+    xscatter(h, g, [KF("cardboardBoxClosed"), KF("cardboardBoxOpen")], 6, s=1.9, pad=8.0)
+    xwall(h, g, KKF("pictureframe_standing_B"), ["front", "back", "left"], 3, s=1.8, gap=3.0)
+    xscatter(h, g, [KKD("bed_frame")], 1, s=0.6, pad=30.0, yaw_any=False)
+    xscatter(h, g, [KKF("chair_A_wood"), KKF("chair_C")], 3, pad=15.0)
+    xscatter(h, g, [PPM(ARMCHAIR)], 1, s=1.4, pad=15.0)
+    xmount(h, g, QD("Cobweb"), ["front", "back", "left", "right"], 190.0, every=600.0)
+    xwall(h, g, KKF("cabinet_small"), ["back", "left"], 2, gap=3.0)
+
+
+def ext_clock_room(h, g):
+    for _ in range(3):
+        clock_stopped(h, g, ["front", "left", "right", "back"])
+    for t in xwall(h, g, KKD("table_small"), ["back", "left"], 1, s=0.55, gap=3.0):
+        xtop(h, t, [KKD("key"), KKD("candle_melted"), KKD("coin_stack_small")], 3, s=0.35)
+    xmount(h, g, QD("Cobweb2"), ["front", "back"], 200.0, every=700.0)
+
+
+def ext_storm_tower(h, g):
+    # the storm watcher's post: a telescope at the window, a log book, a cold supper, a chest of flares
+    xscatter(h, g, [PPM(TELESCOPE)], 1, s=1.3, pad=20.0)
+    for t in xwall(h, g, KKD("table_small"), ["front", "left", "right"], 1, s=0.6, gap=3.0):
+        xtop(h, t, [KKD("candle_lit"), KKD("plate_food_B"), KKD("bottle_A_green")], 3, s=0.35)
+        x, y = t.at(0.0, 75.0)
+        if g.spot(KKF("chair_A_wood"), x, y, t.lyaw + 180.0):
+            g.place(KKF("chair_A_wood"), x, y, t.lyaw + 180.0)
+    xwall(h, g, KKD("chest"), ["front", "left", "right", "back"], 1, s=0.45, gap=3.0)
+    xwall(h, g, KKD("trunk_small_A"), ["front", "left", "right", "back"], 1, s=0.8, gap=3.0)
+    xscatter(h, g, [QD("Bucket"), KKH("lantern_standing")], 3, pad=8.0, collide=False)
+    xmount(h, g, KKD("torch_mounted"), ["left", "right"], 140.0, every=500.0, s=0.5)
+    xmount(h, g, QD("Cobweb"), ["front", "back"], 200.0, every=500.0)
+    xscatter(h, g, [KKF("rug_oval_A")], 1, pad=0.0, collide=False, tag=None, yaw_any=False)
+
+
+def ext_tower_top(h, g):
+    xscatter(h, g, [KKH("lantern_standing")], 2, pad=12.0, collide=False)
+    xscatter(h, g, [KKD("barrel_small")], 1, s=0.5, pad=12.0)
+
+
+# --------------------------------------------------------------------------------------------------- grounds
+def ext_courtyard(h, g):
+    xscatter(h, g, [PPM(HORSE)], 1, s=0.5, pad=60.0, yaw_any=False, area=(4.0, 12.0, 30.0, 30.0))
+    for xm in (-1.9, 1.9):
+        for ym in (14.0, 22.0, 30.0):
+            xat(h, g, KGY("urn_round"), xm, ym)
+    xscatter(h, g, [KKH("pumpkin_orange_small"), KKH("pumpkin_yellow_small"), KKH("pumpkin_orange")], 6, pad=10.0,
+             area=(22.0, 26.0, 33.0, 33.0))
+    xscatter(h, g, [KGY("hay_bale")], 2, pad=20.0, area=(24.0, 8.0, 33.0, 16.0))
+    xscatter(h, g, [KKH("bench")], 3, pad=30.0, yaw_any=False)
+
+
+def ext_service_yard(h, g):
+    # the G. parcels' delivery crates, still stacked where the boat left them
+    xscatter(h, g, [KKR("crate_carrots"), KKR("crate_potatoes"), KKR("crate_lid"), KKR("crate_cheese")], 6, s=0.6,
+             pad=10.0, area=(-33.0, 12.0, -22.0, 18.0))
+    xscatter(h, g, [KKD("barrel_small"), QD("Barrel")], 4, s=0.55, pad=10.0)
+    xscatter(h, g, [KGY("hay_bale"), KGY("hay_bale_bundled")], 3, pad=15.0)
+    xscatter(h, g, [KGY("shovel"), QD("Bucket")], 3, s=1.0, pad=8.0, collide=False)
+    xscatter(h, g, [KKD("trunk_medium_B")], 1, s=0.9, pad=12.0)
+
+
+def ext_greenhouse(h, g):
+    xscatter(h, g, [KKF("cactus_medium_A"), KKF("cactus_medium_B"), KKF("cactus_small_A"), KKF("cactus_small_B")], 6,
+             pad=10.0)
+    xscatter(h, g, [KF("pottedPlant")], 5, s=1.9, pad=15.0)
+    xscatter(h, g, [KKR("crate_tomatoes"), KKR("crate_lettuce")], 2, s=0.6, pad=10.0)
+    xscatter(h, g, [QD("Bucket")], 2, s=1.6, pad=8.0)
+
+
+def ext_graveyard(h, g):
+    stones = [KGY("gravestone_bevel"), KGY("gravestone_decorative"), KGY("gravestone_round"), KGY("gravestone_roof"),
+              KGY("gravestone_cross"), KGY("gravestone_broken"), KKH("gravestone"), KKH("grave_A")]
+    xscatter(h, g, stones, 12, pad=25.0, yaw_any=False)
+    # the freshly dug grave with the shovel still in the mound (whose?)
+    xscatter(h, g, [KGY("grave_border")], 1, pad=40.0, yaw_any=False, collide=False)
+    xscatter(h, g, [KGY("shovel_dirt")], 1, pad=15.0)
+    xscatter(h, g, [PPM(ANGEL)], 1, s=0.5, pad=40.0, yaw_any=False)
+    xscatter(h, g, [KKH("tree_dead_medium"), KKH("tree_dead_small")], 2, pad=30.0, collide=False)
+    xscatter(h, g, [KKH("post_lantern"), KGY("lantern_candle")], 3, pad=20.0)
+    xscatter(h, g, [KGY("pumpkin_carved"), KKH("candle_melted"), KKH("skull_candle")], 5, pad=10.0, collide=False)
+    xscatter(h, g, [KGY("urn_square")], 2, pad=15.0)
+
+
+def ext_cliff_path(h, g):
+    xscatter(h, g, [KGY("rocks"), KGY("rocks_tall")], 2, s=0.6, pad=20.0)
+    xscatter(h, g, [KGY("lantern_glass")], 1, pad=10.0)
+
+
+EXT = {"great_hall": ext_great_hall, "vestibule": ext_vestibule, "dining": ext_dining, "kitchen": ext_kitchen,
+       "pantry": ext_pantry, "laundry": ext_laundry, "chapel": ext_chapel, "library": ext_library,
+       "ballroom": ext_ballroom, "servants_corridor": ext_servants_corridor, "wine_cellar": ext_wine_cellar,
+       "spark_room": ext_spark_room, "cistern": ext_cistern, "smugglers_tunnel": ext_smugglers_tunnel,
+       "boathouse": ext_boathouse, "gallery": ext_gallery, "corridor_w": ext_corridor, "corridor_e": ext_corridor,
+       "blue_room": ext_bedroom, "red_room": ext_bedroom, "master": ext_bedroom, "bath": ext_bath,
+       "studio": ext_studio, "nursery": ext_nursery, "study": ext_study, "billiard": ext_billiard,
+       "storm_terrace": ext_storm_terrace, "attic": ext_attic, "clock_room": ext_clock_room,
+       "storm_tower": ext_storm_tower, "tower_top": ext_tower_top, "courtyard": ext_courtyard,
+       "service_yard": ext_service_yard, "greenhouse": ext_greenhouse, "graveyard": ext_graveyard,
+       "cliff_path": ext_cliff_path}
 
 
 # =================================================================================================== entry

@@ -141,6 +141,14 @@ class Batcher:
     def flush(self):
         groups = {}
         for r in self.recs:
+            # wall shelves carry clutter: they keep a collision (mounted high, nobody walks into them)
+            if r["kind"] == "prop" and "/Shelf_" in r["m"]:
+                r["collide"] = True
+            # small clutter (mugs, books, jars) needs no collision: players do not snag on it and it batches
+            elif r["kind"] == "prop" and r["collide"]:
+                b = bounds(r["m"])
+                if (b[5] - b[2]) * r["s"][2] < 30.0:
+                    r["collide"] = False
             special = r["hidden"] or r["material"] or r["label"] or not r["nav"] or not r["shadow"]
             f = fid_of_z(r["z"])
             key = (r["m"], bool(r["collide"]), f)
@@ -162,7 +170,9 @@ class Batcher:
         fld = self.fields.get(key)
         if fld is None:
             cls = unreal.load_class(None, "/Script/KillGodot.KGFoliageField")
-            fld = _real.spawn_actor_from_class(cls, unreal.Vector(0.0, 0.0, fz(f)))
+            # at the origin: the field's HISMs are not attached to its root after a save/load, so instances stored
+            # relative to a raised actor ended up fz(f) too low in -game (F0 walls in the cellar, floors under it)
+            fld = _real.spawn_actor_from_class(cls, unreal.Vector(0.0, 0.0, 0.0))
             fld.set_actor_label(f"KG_SM_{f}_{'Solid' if collide else 'Clutter'}")
             fld.set_folder_path(f"StormManor/Instanced")
             self.fields[key] = fld
@@ -538,13 +548,19 @@ def island_and_sea():
             "RockDark", "StormManor/Island")
         n += 1
     # cliff skirt: the plateau's outer faces between the cellar level and the ground floor (boxes on the rim cells)
+    # (a stair hole through the ground floor is not the plateau's edge: rim boxes there filled the cellar round the
+    # cellar and crypt stair feet, 2.4 m of rock that cut the cellar off the navmesh)
+    inner = set(holes0)
     rim = [c for c in plateau if any((c[0] + d[0], c[1] + d[1]) not in plateau and (c[0] + d[0], c[1] + d[1]) not in lower
-                                     for d in ((1, 0), (-1, 0), (0, 1), (0, -1)))]
+                                     and (c[0] + d[0], c[1] + d[1]) not in inner
+                                     for d in ((1, 0), (-1, 0), (0, 1), (0, -1))) and c not in GRID.occ["C"]]
     for i0, j0, i1, j1 in rects_from_cells(rim):
         box(i0 * 2.0, j0 * 2.0, (i1 + 1) * 2.0, (j1 + 1) * 2.0, fz("F0") - 58.0, H - 60.0, "Rock", "StormManor/Island")
         n += 1
     # the rim between the plateau and the lower shelf too (the boathouse's back wall of rock)
-    rim2 = [c for c in plateau if any((c[0] + d[0], c[1] + d[1]) in lower for d in ((1, 0), (-1, 0), (0, 1), (0, -1)))]
+    # (never over a cellar-level room: the tunnel runs under the plateau's edge to the boathouse)
+    rim2 = [c for c in plateau if any((c[0] + d[0], c[1] + d[1]) in lower for d in ((1, 0), (-1, 0), (0, 1), (0, -1)))
+            and c not in GRID.occ["C"]]
     for i0, j0, i1, j1 in rects_from_cells(rim2):
         box(i0 * 2.0, j0 * 2.0, (i1 + 1) * 2.0, (j1 + 1) * 2.0, fz("F0") - 58.0, H - 60.0, "Rock", "StormManor/Island")
         n += 1
@@ -563,8 +579,22 @@ def island_and_sea():
         pick = rng.choice(cliffs)
         cb = bounds(pick)
         sz = rng.uniform(1.0, 1.4)
-        put(pick, cx * M + dx * 150.0, cy * M + dy * 150.0, ztop - 45.0 - cb[5] * sz, yaw + rng.uniform(-25, 25),
-            scale=(rng.uniform(0.9, 1.3), rng.uniform(0.9, 1.3), sz), folder="StormManor/Cliffs",
+        sxy = (rng.uniform(0.9, 1.3), rng.uniform(0.9, 1.3))
+        px, py = cx * M + dx * 150.0, cy * M + dy * 150.0
+        # never into a cellar room (a cliff mesh showed through the wine cellar as a pale blob in look round 1)
+        # (pushed out to sea until clear, else left out)
+        rad = 0.5 * max(cb[3] - cb[0], cb[4] - cb[1]) * max(sxy) + 120.0
+
+        def hits_cellar(x, y):
+            return ztop - 45.0 > fz("C") and any(math.hypot(x - (q[0] * 200.0 + 100.0), y - (q[1] * 200.0 + 100.0)) < rad
+                                                 for q in GRID.occ["C"])
+        push = 0
+        while hits_cellar(px, py) and push < 5 and (dx or dy):
+            px, py, push = px + dx * 100.0, py + dy * 100.0, push + 1
+        if hits_cellar(px, py):
+            continue
+        put(pick, px, py, ztop - 45.0 - cb[5] * sz, yaw + rng.uniform(-25, 25),
+            scale=(sxy[0], sxy[1], sz), folder="StormManor/Cliffs",
             collide=False, kind="prop")
     # the lower shelf's sea edge: a low wall so nobody walks off the boathouse ledge into the storm
     for c in lower_open:
@@ -842,6 +872,19 @@ def wall_run(fid, orient, coord, t0, t1, typ, a, b, nsign, z):
         x, y, yaw, nx, ny = piece_xf(orient, coord, tend, nsign, off)
         put(V + f"Wall_{style}_Straight", x, y, z, yaw, scale=(0.31 if typ == "ext" else 0.21, 1.0, 1.0),
             folder=folder, kind="arch")
+    # collision proxies: one hidden box per closed stretch between openings (the kit walls only have complex-as-
+    # simple collision; a plain box gives players, bots, bullets and the navmesh a clean simple wall)
+    gaps = sorted((tc - (0.62 if kind == "door" else 1.0), tc + (0.62 if kind == "door" else 1.0))
+                  for tc, half, kind, ref in pieces if kind in ("door", "arch", "open"))
+    cur = t0 - 0.2
+    for g0, g1 in gaps + [(t1 + 0.2, t1 + 0.2)]:
+        if g0 - cur > 0.05:
+            tc = (cur + g0) / 2.0
+            x, y, yaw, nx, ny = piece_xf(orient, coord, tc, nsign, off)
+            put(E + "Cube", x - 10.5 * nx, y - 10.5 * ny, z + 156.0, yaw, scale=(g0 - cur, 0.41, 3.12),
+                folder=f"StormManor/Collision/{fid}", hidden=True, kind="proxy")
+            stats["wall_proxies"] = stats.get("wall_proxies", 0) + 1
+        cur = max(cur, g1)
 
 
 def fill(pieces, a, b):
@@ -972,6 +1015,7 @@ FLOOR_MAT = {"great_hall": "Floor_Brick", "vestibule": "checker", "chapel": "Flo
              "storm_tower": "Floor_UnevenBrick", "greenhouse": "Floor_RedBrick", "boathouse": "Floor_WoodDark",
              "storm_terrace": "Floor_UnevenBrick", "roof_walk": "Floor_WoodDark", "tower_top": "Floor_UnevenBrick"}
 DECKS = {f: set() for f in G.ORDER}
+FLOOR_CELLS = {f: set() for f in G.ORDER}
 CHIMNEY_ROOMS = ("great_hall", "library", "kitchen", "red_room", "master", "dining")
 
 
@@ -990,6 +1034,7 @@ def build_floors():
             put(V + tile, c[0] * 200.0 + 100.0, c[1] * 200.0 + 100.0, z, 0.0, folder=f"StormManor/Floors/{fid}",
                 kind="arch")
             stats["floor_tiles"] += 1
+            FLOOR_CELLS[fid].add(c)
     # ceilings: the floor above covers it, else a roof deck (the ceiling seen from below, the roof from above)
     for fi, fid in enumerate(G.ORDER[:-1]):
         up = G.ORDER[fi + 1]
@@ -1006,6 +1051,13 @@ def build_floors():
             put(V + "Floor_UnevenBrick", c[0] * 200.0 + 100.0, c[1] * 200.0 + 100.0, fz(up), 0.0,
                 folder=f"StormManor/Roofs/{up}", kind="arch")
             DECKS[up].add(c)
+    # collision proxies under the kit tiles (complex-as-simple only, 2 cm thin; see wall_run): merged hidden slabs
+    for fid in G.ORDER:
+        for i0, j0, i1, j1 in rects_from_cells(FLOOR_CELLS[fid] | DECKS[fid]):
+            put(E + "Cube", (i0 + i1 + 1) * 100.0, (j0 + j1 + 1) * 100.0, fz(fid) + 1.0 - 10.0, 0.0,
+                scale=((i1 - i0 + 1) * 2.0, (j1 - j0 + 1) * 2.0, 0.2), folder=f"StormManor/Collision/{fid}",
+                hidden=True, kind="proxy")
+            stats["floor_proxies"] = stats.get("floor_proxies", 0) + 1
     gx0, gy0, gx1, gy1 = G.rect_of(R["greenhouse"]["poly"])
     box(gx0, gy0, gx1, gy1, fz("F1") + 2.0, 4.0, "Glass", "StormManor/Roofs/Glass")
     for k in range(int(gx0) + 2, int(gx1), 2):      # glazing bars (a kit post laid along -Y from the south edge)
@@ -1182,18 +1234,35 @@ def meeting_and_starts():
     B.plain["F0"] += n + 2
 
 
+BOT_AT = {"gallery": (-8.5, -10.0)}      # m; the gallery is a 3 m ring round the hall void: its west walk
+
+
 def bot_spots():
     """One KG_BotSpot at the middle of every walkable room / garden (bots roam the whole manor, every floor)."""
     n = 0
     for r in L["rooms"]:
-        cells = [c for c in G.cells_of(r["poly"]) if c not in GRID.holes[r["floor"]] and c not in GRID.stair_cells[r["floor"]]]
+        cells = [c for c in G.cells_of(r["poly"]) if c not in GRID.holes[r["floor"]] and c not in GRID.stair_cells[r["floor"]]
+                 and not GRID.is_void(r["floor"], c)]
         if not cells:
             continue
         cx = sum(c[0] for c in cells) / len(cells)
         cy = sum(c[1] for c in cells) / len(cells)
-        best = min(cells, key=lambda c: (c[0] - cx) ** 2 + (c[1] - cy) ** 2)
-        t = _real.spawn_actor_from_class(unreal.TargetPoint, unreal.Vector(best[0] * 200.0 + 100.0, best[1] * 200.0 + 100.0,
-                                                                           fz(r["floor"]) + 60.0))
+        # the most central cell whose middle no blocking prop covers (a spot inside a table is unreachable)
+        fid = r["floor"]
+        solid = [(q["x"], q["y"], 0.5 * max((bounds(q["m"])[3] - bounds(q["m"])[0]) * q["s"][0],
+                                            (bounds(q["m"])[4] - bounds(q["m"])[1]) * q["s"][1]))
+                 for q in B.recs if q.get("room") == r["id"] and q["kind"] == "prop" and q["collide"]
+                 and fid_of_z(q["z"]) == fid]
+
+        def clear(c):
+            px, py = c[0] * 200.0 + 100.0, c[1] * 200.0 + 100.0
+            return all(math.hypot(px - x, py - y) > rad + 70.0 for x, y, rad in solid)
+        cs = set(cells)
+        inner = [c for c in cells if all((c[0] + di, c[1] + dj) in cs for di in (-1, 0, 1) for dj in (-1, 0, 1))]
+        free = [c for c in inner if clear(c)] or [c for c in cells if clear(c)] or cells
+        best = min(free, key=lambda c: (c[0] - cx) ** 2 + (c[1] - cy) ** 2)
+        bx, by = BOT_AT.get(r["id"], (best[0] * 2.0 + 1.0, best[1] * 2.0 + 1.0))
+        t = _real.spawn_actor_from_class(unreal.TargetPoint, unreal.Vector(bx * M, by * M, fz(r["floor"]) + 60.0))
         t.tags = ["KG_BotSpot"]
         t.set_actor_label(f"BotSpot_{r['id']}")
         t.set_folder_path("Gameplay/BotSpots")
@@ -1279,6 +1348,16 @@ def navigation():
     vol.set_actor_scale3d(unreal.Vector(*e))
     vol.set_folder_path("Gameplay")
     stats["nav_bounds_m"] = [lo, hi]
+    # the RecastNavMesh actor must exist before ResavePackages -BuildNavigationData (else it builds nothing: the
+    # step-3 log said "Unable to find RecastNavMesh" and the probe found 0 paths); same as kg_build_village_v2
+    world = unreal.get_editor_subsystem(unreal.UnrealEditorSubsystem).get_editor_world()
+    try:
+        unreal.SystemLibrary.execute_console_command(world, "RebuildNavigation")
+    except Exception as ex:
+        log(f"nav rebuild failed: {ex}")
+    navs = [a for a in _real.get_all_level_actors() if a.get_class().get_name() == "RecastNavMesh"]
+    stats["navmesh_actors"] = len(navs)
+    log(f"nav: RecastNavMesh actors after rebuild: {len(navs)}")
 
 
 def capture_camera():
@@ -1383,7 +1462,10 @@ def precheck():
 MOUNTED = ("Banner", "Lantern_Wall", "Peg_Rack", "Shelf_Simple", "Shelf_Arch", "HerbRack", "HerbBundle", "Chandelier",
            "ClockFace", "ClockDial", "ClockHand", "Shield_Wooden", "Rope_", "Lifebuoy", "Ladder_4m", "Pouch_Large",
            "Corner_Exterior_Wood", "/Cube", "/Plane", "/Sphere", "Rug_", "RockPath", "LaundryLine", "Torch", "Prop_Chimney",
-           "Planks", "Chain_Coil", "Axe_", "Sword_", "Cannon_Ball", "WellMouth", "Rowboat")
+           "Planks", "Chain_Coil", "Axe_", "Sword_", "Cannon_Ball", "WellMouth", "Rowboat",
+           # external kits hung on walls / from ceilings by kg_sm_dress (ext layer)
+           "pictureframe_large", "pictureframe_medium", "pictureframe_small", "Cobweb", "_banner_", "torch_mounted",
+           "bathroomMirror")
 
 
 def dump_props():
@@ -1397,10 +1479,11 @@ def dump_props():
         floor_top = fz(fid) + 1.0
         bottom = r["z"] + b[2] * r["s"][2]
         tipped = abs(r["pitch"]) > 5.0 or abs(r["roll"]) > 5.0
-        mounted = any(k in r["m"] for k in MOUNTED)
+        mounted = any(k in r["m"] for k in MOUNTED) or ("/Shelf_" in r["m"] and bottom > floor_top + 30.0)
         out.append({"m": r["m"].split("/")[-1], "x": round(r["x"], 1), "y": round(r["y"], 1), "z": round(r["z"], 1),
                     "yaw": round(r["yaw"], 1), "s": [round(v, 3) for v in r["s"]], "b": [round(v, 1) for v in b],
                     "room": r["room"], "floor": floor_top, "hism": bool(r.get("hism")), "label": r.get("label"),
+                    "collide": bool(r["collide"]),
                     "floor_prop": (not mounted) and abs(bottom - floor_top) < 30.0,
                     "check": (not mounted) and (not tipped) and r["s"][0] > 0 and (b[5] - b[2]) * r["s"][2] > 3.0})
     with open(f"{ROOT}/Saved/KG_SM_Props.json", "w") as f:

@@ -74,14 +74,21 @@ def main():
     check(3, "every chore spot reachable on the navmesh", nav and not unreach_chore, f"{unreach_chore}")
     rlist = routes.get("routes") or routes.get("chores") or []
     if isinstance(routes, dict) and not rlist:
-        rlist = [v for v in routes.values() if isinstance(v, dict)]
+        # kg.WorldChore.Routes writes {ChoreId: [variant objects], "pass": n, "fail": n, ...}
+        for cid, vs in routes.items():
+            if isinstance(vs, list):
+                rlist += [dict(v, chore=cid) for v in vs if isinstance(v, dict)]
     manor_ids = {c["id"] for c in chores.get("chores", [])}
     mine = [r for r in rlist if isinstance(r, dict) and r.get("chore", r.get("id")) in manor_ids]
     bad_routes = [f"{r.get('chore', r.get('id'))}/{r.get('variant')}" for r in mine if not r.get("reachable", r.get("ok"))]
     check(3, "route check: every chore x variant reachable (kg.WorldChore.Routes)", mine and not bad_routes,
           f"{len(mine)} routes, failing {bad_routes}")
-    unreach_room = [k for k in nav.get("unreachable", []) if k.startswith("room ") or k.startswith("start ")]
-    check(3, "bots: every room and start reachable from the meeting table", nav and not unreach_room, f"{unreach_room}")
+    # the tower top is reached by the KGLadder only (no navmesh link; bots do not climb): listed, not failed
+    LADDER_ONLY = {"room tower_top"}
+    unreach_room = [k for k in nav.get("unreachable", []) if (k.startswith("room ") or k.startswith("start "))
+                    and k not in LADDER_ONLY]
+    check(3, "bots: every room and start reachable from the meeting table", nav and not unreach_room,
+          f"{unreach_room} (ladder-only, not counted: {sorted(LADDER_ONLY)})")
     other = [k for k in nav.get("unreachable", []) if not (k.startswith("room ") or k.startswith("start ") or k.startswith("chore "))]
     check(3, "doors (both sides) and secret ends reachable", nav and not other, f"{other[:10]}")
     menu = open(os.path.join(ROOT, "Source", "KillGodot", "UI", "Menu", "KGMenuActions.cpp"), encoding="utf-8").read()

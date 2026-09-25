@@ -54,4 +54,13 @@ materials. Their helpers are imported read-only or copied into the new files.
 - No commit.
 
 ## Result
-(filled in at the end of the sprint)
+2026-09-26: `verify_stormmanor_build.py` ALL PASS (23 checks), `run_invariants.ps1` ALL INVARIANTS HOLD.
+- 1: built headless in ~3 s + navmesh; 42 lights (3 hero), 52 doors, 129 windows, 10 stairs, 12 passage ends.
+- 2: 1597 dressing meshes over 37 rooms/grounds; a second vignette layer from the /Env/Ext packs (`kg_sm_dress.py`,
+  EXT table); plain actors per floor C 153 / F0 411 / F1 275 / F2 120 / F3 15; 1054 props traced: 0 floating, 0 sunk.
+- 3: 19 chores / 56 anchors all reachable, 28/28 chore routes; 236/237 nav targets (the tower top is ladder-only).
+- 4: menu entry; match smoke on L_StormManor: "Match decided: Impatient win" (12 bots).
+- 5: `Docs/Level/StormManor_Renders.png` (24 shots), 2 look rounds (round 2: fuller bedrooms/library/nursery, the
+  cellar cliff blob and the untextured kegs removed).
+- Fixed on the way: HISM fields were saved fz(floor) too low (spawned at the origin now), no RecastNavMesh before the
+  nav step, rim rock boxes filling the cellar at the stair feet and over the tunnel, the probe's own-collision traces.

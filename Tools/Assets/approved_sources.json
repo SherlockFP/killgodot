@@ -1,0 +1,171 @@
+{
+ "approved_by_user": "2026-09-24",
+ "sources": [
+  {
+   "folder": "Azrael68_Bookshelves",
+   "urls": [
+    "https://azrael68.itch.io/medieval-bookshelf-library-pack-low-poly"
+   ],
+   "license": "CC0",
+   "recommended_import": "Import Pack_10_Estanterias.fbx directly. It is binary FBX 7.x exported from Blender 5.0.1, and it is the only format offered (no glTF, no .blend). There are no texture files and no image references inside the FBX. All 78 meshes share one material, 'Madera_Procedural' (Spanish for procedural wood). A procedural shader does not survive FBX export, so it will come in as a flat colour. The meshes do h"
+  },
+  {
+   "folder": "Azrael68_Doors",
+   "urls": [
+    "https://azrael68.itch.io/freepaid-medieval-door-pack-low-poly"
+   ],
+   "license": "CC0",
+   "recommended_import": "Import the single root file Pack_10_Puertas_Medievales_LowPoly.fbx. It is binary FBX exported from Blender 5.0.1 (FBX IO 5.14.0). The file has no textures, no Material nodes, no vertex colours and no animation. It does have UV layers (40 UV layer elements across 20 meshes). Texture plan: add our own materials. The best fit is our shared palette atlas or a tileable wood/iron material, remapped onto"
+  },
+  {
+   "folder": "Azrael68_FantasyFurniture",
+   "urls": [
+    "https://azrael68.itch.io/medieval-fantasy-furniture"
+   ],
+   "license": "CC0",
+   "recommended_import": "Import the 4 binary FBX files (Kaydara FBX Binary) from Medieval_Furniture_Pack/01_Medieval_Set/ directly. Ignore the zip, which is only the original archive. There are no .blend, OBJ or glTF files. Textures: none. None of the FBX files contain Texture or Video nodes, and each one has a LayerElementColor layer, which matches the page's vertex-colour claim. Recolouring is therefore done by editing "
+  },
+  {
+   "folder": "Azrael68_InnBeds",
+   "urls": [
+    "https://azrael68.itch.io/medieval-inn-beds"
+   ],
+   "license": "CC0",
+   "recommended_import": "Import Medieval_Inn_Beds/Pack_Camas_Clasico.fbx. It is a single binary FBX (Blender 5.0.1 FBX IO), and no .blend or OBJ copy is included. It has no texture files, no embedded Texture or Video nodes and no vertex colours. It uses 7 flat-colour materials, split into wood (Madera_100, Madera_321) and cloth (Tela_000, Tela_235, Tela_400, Tela_655, Tela_999), and every mesh has UVs. Recolouring is easy"
+  },
+  {
+   "folder": "Drillimpact_FPArms",
+   "urls": [
+    "https://drillimpact.itch.io/psx-first-person-arms-free"
+   ],
+   "license": "CC0",
+   "recommended_import": "Use the current version in psx-first-person-arms-free-game-assets/. Import arms_rig.glb, which has the texture embedded, or arms_rig.fbx with arms_01.png. arms_rig.blend is the editable Blender source. The glTF holds 1 skinned mesh named 'ArmsMesh' (about 1,176 triangles), a 52-joint armature, and 1 material named 'Arms' that uses the 512x512 arms_01.png. The textures are plain PSX-style hand-pain"
+  },
+  {
+   "folder": "JayBee_Bedroom",
+   "urls": [
+    "https://jaybeelittlecreations.itch.io/low-poly-medieval-bedroom-furniture-asset-pack"
+   ],
+   "license": "CC0",
+   "recommended_import": "Import FreeMedievalBedroom/FreeMedievalBedroom/gltf/*.glb into Blender. Each GLB has the texture embedded (1 material and 1 image per file, and no animations). The FBX files in fbx/ are an equal fallback for UE and point to Textures/Texture2.png. Textures use a single palette atlas: one tiny 200x100 RGBA PNG made of colour swatches. That makes recolouring easy: edit or swap the palette PNG, or shi"
+  },
+  {
+   "folder": "JayBee_Kitchen",
+   "urls": [
+    "https://jaybeelittlecreations.itch.io/low-poly-medieval-kitchen-asset-pack"
+   ],
+   "license": "CC0",
+   "recommended_import": "Import the glb set from FreeKitchen/FreeKitchen/glb/ (25 models). It is the larger set, and every glb embeds the texture: 1 image and 1 material called \"Standard Pallete\", with UVs. For the items that exist only as FBX (Bench, Kettle, Plank_Table, RedJar), add them from FreeKitchen/FreeKitchen/fbx/. All 22 FBX files point to Textures/Texture.png. Texture approach: a single palette atlas, Textures/"
+  },
+  {
+   "folder": "JayBee_ModularTownHouse",
+   "urls": [
+    "https://jaybeelittlecreations.itch.io/modular-medieval-town-house"
+   ],
+   "license": "CC0",
+   "recommended_import": "Import Free Modular Medieval Assets/Free Modular Medieval Assets/GLB/FreeModularAssets.glb. It is glTF, has the palette texture embedded and keeps materials and names cleanly. The FBX in FBX/FreeModularAssets.fbx is a good fallback for UE; it is binary FBX, header \"Kaydara FBX Binary\". Textures use one tiny palette atlas, Textures/Texture.png (60x20 px), through the material \"Standard Pallete\" plu"
+  },
+  {
+   "folder": "PolyPizza_Melee",
+   "urls": [
+    "https://poly.pizza/m/o0CUgpt8pm",
+    "https://poly.pizza/m/u1SOUzLBQc",
+    "https://poly.pizza/m/HPvkMpqqTg",
+    "https://poly.pizza/m/5oxca5I4QV",
+    "https://poly.pizza/m/7hMOlBjln0",
+    "https://poly.pizza/m/tknOVwxT8B",
+    "https://poly.pizza/m/nbI0WJqJN3"
+   ],
+   "license": "CC0",
+   "recommended_import": "Import the 7 .glb files straight from the folder root; there are no subfolders. All 7 are valid glTF 2.0 binaries whose header length matches the file size. Six were converted with FBX2glTF and the Rolling Pin with obj2gltf. No FBX or OBJ copies are on disk. Textures are packed inside the files, and there are no vertex colours. They come in two kinds. (a) Flat colour materials with no texture: Fry"
+  },
+  {
+   "folder": "Quaternius_FantasyPropsMegaKit",
+   "urls": [
+    "https://quaternius.itch.io/fantasy-props-megakit"
+   ],
+   "license": "CC0",
+   "recommended_import": "Import from 'Fantasy Props MegaKit[Standard]/Exports/glTF' (Blender / Godot; each .gltf has a .bin next to it, and a copy of the textures sits in that folder) or 'Exports/FBX' (UE). Skip OBJ. Textures: this is not a flat palette or vertex-colour pack. It is a shared trim-sheet PBR set with 4 material families (Cloth, Furniture, Metal, Props). Each family has BaseColor, Normal and ORM (Occlusion/Ro"
+  },
+  {
+   "folder": "Quaternius_MedievalVillageMegaKit",
+   "urls": [
+    "https://quaternius.itch.io/medieval-village-megakit"
+   ],
+   "license": "CC0",
+   "recommended_import": "Import from \".../Medieval Village MegaKit[Standard]/Medieval Village MegaKit[Standard]/glTF/\" (.gltf + .bin, with 22 textures in the same folder), which is best for Blender/UE. The files use PBR metallic-roughness materials such as MI_WoodTrim, MI_Plaster and MI_Brick, and each links BaseColor, Normal and Roughness/ORM textures. The FBX folder (8 MB) is a second choice; its materials will need to "
+  },
+  {
+   "folder": "Quaternius_ModularOutfitsFantasy",
+   "urls": [
+    "https://quaternius.itch.io/modular-character-outfits-fantasy"
+   ],
+   "license": "CC0",
+   "recommended_import": "Import from 'Modular Character Outfits - Fantasy[Standard]/Modular Character Outfits - Fantasy[Standard]/Exports/glTF (Godot-Unreal)/'. The source authors this folder for Godot and Unreal. Each .gltf sits next to its .bin and PNG textures, so the materials link automatically in Blender and UE. Use 'Outfits/' for the whole outfits: each file has 1 skin with 65 joints and 0 animations. Use 'Modular "
+  },
+  {
+   "folder": "Quaternius_StylizedNatureMegaKit",
+   "urls": [
+    "https://quaternius.itch.io/stylized-nature-megakit"
+   ],
+   "license": "CC0",
+   "recommended_import": "Import from glTF/ (.gltf + .bin, with the PNGs in the same folder, so textures resolve through relative URIs) into Blender/UE. FBX/ is the alternative, with textures assigned by hand from Textures/. Skip \"FBX (Unity)\" and OBJ. The pack uses several small hand-painted textures rather than one palette atlas or vertex colours: bark diffuse and normal maps for Normal, Dead and Twisted trees, alpha-cut"
+  },
+  {
+   "folder": "Quaternius_UniversalAnimationLibrary",
+   "urls": [
+    "https://quaternius.itch.io/universal-animation-library"
+   ],
+   "license": "CC0",
+   "recommended_import": "For UE5 and Blender, use Unreal-Godot/UAL1_Standard.glb (glTF, 7.6 MB). It has the same 43 clips as the FBX but is about a third of the size. Use UAL1_Standard_RM.glb when you want root motion baked in; the RM files are the root-motion versions. Unity/UAL1_Standard(.fbx/_RM.fbx) is a binary FBX with the same content, useful as a fallback if UE's glTF import has problems. There are no textures: the"
+  },
+  {
+   "folder": "Quaternius_UniversalAnimationLibrary2",
+   "urls": [
+    "https://quaternius.itch.io/universal-animation-library-2"
+   ],
+   "license": "CC0",
+   "recommended_import": "For UE and Blender, import Unreal-Godot/UAL2_Standard.glb (glTF). This version has root motion turned off, so it suits in-place locomotion. Use UAL2_Standard_RM.glb only if you want the root motion baked in. The FBX files under Unity/ are an alternative, but they are about 3x larger (about 24.8 MB each against 8.1 MB) and hold the same content. The Female Mannequin is in Female Mannequin/Unreal-Go"
+  },
+  {
+   "folder": "Quaternius_UniversalBaseCharacters",
+   "urls": [
+    "https://quaternius.itch.io/universal-base-characters"
+   ],
+   "license": "CC0",
+   "recommended_import": "Use glTF, not FBX. The pack's own Base Characters/Unreal-Engine-README.txt recommends glTF because rigged FBX files exported from Blender import into UE at the wrong scale. Bodies: 'Base Characters/Godot - UE/Superhero_Male_FullBody.gltf' and 'Superhero_Female_FullBody.gltf'. Each has 3 meshes (body, eyes, hair), 1 skin with 65 joints, and no animations. Hair and beards: 'Hairstyles/Rigged to Head"
+  },
+  {
+   "folder": "loafbrr_MineObjects",
+   "urls": [
+    "https://loafbrr.itch.io/mine-object-collection"
+   ],
+   "license": "CC0",
+   "recommended_import": "Import from \"Mines Asset_FBX_GLTF_Blend/FBXs/<Category>/*.fbx\". These are one object per file in binary FBX, which is the cleanest route for Blender or UE. Each category also has a *Collection.fbx that holds everything in that category in one file. An alternative is \"Mines Asset_FBX_GLTF_Blend/GLTF/MinesPack.gltf\": one self-contained glTF with the buffer and images embedded, holding 84 meshes with"
+  },
+  {
+   "folder": "loafbrr_MinesAndCave",
+   "urls": [
+    "https://loafbrr.itch.io/mines-and-cave-set"
+   ],
+   "license": "CC0",
+   "recommended_import": "Import from MinesAndCaves_Set_blend_gltf_fbx/fbx_unreal: 165 separate FBX meshes, one per asset, already oriented for UE. For Blender, the master file MinesAndCave_Set.blend (30 MB) is the easiest place to modify and recolour. There is also gltf/Modular_Mine_Set.glb, a single file with 344 meshes and 4 materials, but it has no textures embedded. Texture approach: several tiling or trim PBR texture"
+  },
+  {
+   "folder": "zisongbr_CaveEntrance",
+   "urls": [
+    "https://opengameart.org/content/lowpoly-cave-entrance"
+   ],
+   "license": "CC0",
+   "recommended_import": "Import Cave_Entrance_lowpoly/Cave_Entrance_lowpoly/Cave_Entrance.fbx (binary FBX, 33.5 KB, exported by Blender 2.78 FBX IO 3.7.7). It holds one mesh object, 'Plane', plus a 'Sun' lamp; delete the Sun on import. For Blender edits, cave_entrance.blend works too. Cave_Entrance.blend1 is an older auto-backup (same size, different bytes), so ignore it. There are no textures at all. The model uses 3 fla"
+  },
+  {
+   "folder": "zisongbr_PirateProps",
+   "urls": [
+    "https://opengameart.org/content/lowpoly-pirate-props"
+   ],
+   "license": "CC0",
+   "recommended_import": "There are no FBX, glTF or OBJ files, only .blend (saved in Blender 2.91). Use lowpoly_caves_and_props/LowPoly/Lowpoly_Props.blend as the main source. Lowpoly_Buildings.blend is optional and holds only the cave/mine rocks. Open each file in Blender and export glTF (.glb) or FBX, one per object, with applied transforms. Ignore the .blend1 files, which are automatic Blender backups. Textures use a si"
+  }
+ ]
+}

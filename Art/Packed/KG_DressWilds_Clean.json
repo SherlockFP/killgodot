@@ -1,0 +1,52 @@
+{
+ "props": {
+  "CaveMouth": {
+   "material": "VC",
+   "collision": "complex"
+  },
+  "Mausoleum": {
+   "material": "Glow",
+   "collision": "complex"
+  },
+  "TeaHouse": {
+   "material": "Glow",
+   "collision": "complex"
+  },
+  "WoodBridge": {
+   "material": "VC",
+   "collision": "complex"
+  },
+  "Campfire": {
+   "material": "Glow",
+   "collision": "box"
+  },
+  "Tent_A": {
+   "material": "VC",
+   "collision": "complex"
+  },
+  "Menhir_A": {
+   "material": "VC",
+   "collision": "complex"
+  },
+  "Menhir_B": {
+   "material": "VC",
+   "collision": "complex"
+  },
+  "Menhir_C": {
+   "material": "VC",
+   "collision": "complex"
+  },
+  "GateArch": {
+   "material": "VC",
+   "collision": "complex"
+  },
+  "Gravestone_Round": {
+   "material": "VC",
+   "collision": "box"
+  },
+  "Gravestone_Cross": {
+   "material": "VC",
+   "collision": "box"
+  }
+ }
+}

@@ -1,0 +1,7727 @@
+[
+ {
+  "path": "/Game/KillGodot/Env/Birds/KG_Gull/StaticMeshes/KG_Gull",
+  "folder": "/Game/KillGodot/Env/Birds/KG_Gull/StaticMeshes",
+  "name": "KG_Gull",
+  "size": [
+   64,
+   124,
+   13
+  ],
+  "min": [
+   -34,
+   -62,
+   -6
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/Bedroom_BedsideCabinet",
+  "folder": "/Game/KillGodot/Env/Furniture",
+  "name": "Bedroom_BedsideCabinet",
+  "size": [
+   40,
+   42,
+   51
+  ],
+  "min": [
+   -20,
+   -20,
+   -6
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/Bedroom_BedsideTable",
+  "folder": "/Game/KillGodot/Env/Furniture",
+  "name": "Bedroom_BedsideTable",
+  "size": [
+   40,
+   40,
+   46
+  ],
+  "min": [
+   -20,
+   -20,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/Bedroom_ChestRoundIron",
+  "folder": "/Game/KillGodot/Env/Furniture",
+  "name": "Bedroom_ChestRoundIron",
+  "size": [
+   70,
+   44,
+   44
+  ],
+  "min": [
+   -35,
+   -22,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/Bedroom_ChestSquareIron",
+  "folder": "/Game/KillGodot/Env/Furniture",
+  "name": "Bedroom_ChestSquareIron",
+  "size": [
+   70,
+   44,
+   44
+  ],
+  "min": [
+   -35,
+   -22,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/Bedroom_DoubleBedBlue",
+  "folder": "/Game/KillGodot/Env/Furniture",
+  "name": "Bedroom_DoubleBedBlue",
+  "size": [
+   160,
+   215,
+   97
+  ],
+  "min": [
+   -80,
+   -107,
+   1
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/Bedroom_DoubleBedRed",
+  "folder": "/Game/KillGodot/Env/Furniture",
+  "name": "Bedroom_DoubleBedRed",
+  "size": [
+   160,
+   215,
+   97
+  ],
+  "min": [
+   -80,
+   -107,
+   1
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/Bedroom_FancyChairRed",
+  "folder": "/Game/KillGodot/Env/Furniture",
+  "name": "Bedroom_FancyChairRed",
+  "size": [
+   45,
+   42,
+   87
+  ],
+  "min": [
+   -22,
+   -22,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/Bedroom_SingleBedBlue",
+  "folder": "/Game/KillGodot/Env/Furniture",
+  "name": "Bedroom_SingleBedBlue",
+  "size": [
+   97,
+   215,
+   97
+  ],
+  "min": [
+   -49,
+   -107,
+   1
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/Bedroom_SingleBedRed",
+  "folder": "/Game/KillGodot/Env/Furniture",
+  "name": "Bedroom_SingleBedRed",
+  "size": [
+   97,
+   215,
+   97
+  ],
+  "min": [
+   -49,
+   -107,
+   1
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/Bedroom_SmallTable2",
+  "folder": "/Game/KillGodot/Env/Furniture",
+  "name": "Bedroom_SmallTable2",
+  "size": [
+   90,
+   55,
+   45
+  ],
+  "min": [
+   -45,
+   -28,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/Bedroom_WallShelf",
+  "folder": "/Game/KillGodot/Env/Furniture",
+  "name": "Bedroom_WallShelf",
+  "size": [
+   85,
+   23,
+   16
+  ],
+  "min": [
+   -42,
+   -11,
+   -14
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/Bedroom_Wardrobe",
+  "folder": "/Game/KillGodot/Env/Furniture",
+  "name": "Bedroom_Wardrobe",
+  "size": [
+   97,
+   63,
+   204
+  ],
+  "min": [
+   -48,
+   -29,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/KG_Bedroom/StaticMeshes/Bedroom_BedsideCabinet",
+  "folder": "/Game/KillGodot/Env/Furniture/KG_Bedroom/StaticMeshes",
+  "name": "Bedroom_BedsideCabinet",
+  "size": [
+   40,
+   42,
+   51
+  ],
+  "min": [
+   -20,
+   -20,
+   -6
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/KG_Bedroom/StaticMeshes/Bedroom_BedsideTable",
+  "folder": "/Game/KillGodot/Env/Furniture/KG_Bedroom/StaticMeshes",
+  "name": "Bedroom_BedsideTable",
+  "size": [
+   40,
+   40,
+   46
+  ],
+  "min": [
+   -20,
+   -20,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/KG_Bedroom/StaticMeshes/Bedroom_ChestRoundIron",
+  "folder": "/Game/KillGodot/Env/Furniture/KG_Bedroom/StaticMeshes",
+  "name": "Bedroom_ChestRoundIron",
+  "size": [
+   70,
+   44,
+   44
+  ],
+  "min": [
+   -35,
+   -22,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/KG_Bedroom/StaticMeshes/Bedroom_ChestSquareIron",
+  "folder": "/Game/KillGodot/Env/Furniture/KG_Bedroom/StaticMeshes",
+  "name": "Bedroom_ChestSquareIron",
+  "size": [
+   70,
+   44,
+   44
+  ],
+  "min": [
+   -35,
+   -22,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/KG_Bedroom/StaticMeshes/Bedroom_DoubleBedBlue",
+  "folder": "/Game/KillGodot/Env/Furniture/KG_Bedroom/StaticMeshes",
+  "name": "Bedroom_DoubleBedBlue",
+  "size": [
+   160,
+   215,
+   97
+  ],
+  "min": [
+   -80,
+   -107,
+   1
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/KG_Bedroom/StaticMeshes/Bedroom_DoubleBedRed",
+  "folder": "/Game/KillGodot/Env/Furniture/KG_Bedroom/StaticMeshes",
+  "name": "Bedroom_DoubleBedRed",
+  "size": [
+   160,
+   215,
+   97
+  ],
+  "min": [
+   -80,
+   -107,
+   1
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/KG_Bedroom/StaticMeshes/Bedroom_FancyChairRed",
+  "folder": "/Game/KillGodot/Env/Furniture/KG_Bedroom/StaticMeshes",
+  "name": "Bedroom_FancyChairRed",
+  "size": [
+   45,
+   42,
+   87
+  ],
+  "min": [
+   -22,
+   -22,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/KG_Bedroom/StaticMeshes/Bedroom_SingleBedBlue",
+  "folder": "/Game/KillGodot/Env/Furniture/KG_Bedroom/StaticMeshes",
+  "name": "Bedroom_SingleBedBlue",
+  "size": [
+   97,
+   215,
+   97
+  ],
+  "min": [
+   -49,
+   -107,
+   1
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/KG_Bedroom/StaticMeshes/Bedroom_SingleBedRed",
+  "folder": "/Game/KillGodot/Env/Furniture/KG_Bedroom/StaticMeshes",
+  "name": "Bedroom_SingleBedRed",
+  "size": [
+   97,
+   215,
+   97
+  ],
+  "min": [
+   -49,
+   -107,
+   1
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/KG_Bedroom/StaticMeshes/Bedroom_SmallTable2",
+  "folder": "/Game/KillGodot/Env/Furniture/KG_Bedroom/StaticMeshes",
+  "name": "Bedroom_SmallTable2",
+  "size": [
+   90,
+   55,
+   45
+  ],
+  "min": [
+   -45,
+   -28,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/KG_Bedroom/StaticMeshes/Bedroom_WallShelf",
+  "folder": "/Game/KillGodot/Env/Furniture/KG_Bedroom/StaticMeshes",
+  "name": "Bedroom_WallShelf",
+  "size": [
+   85,
+   23,
+   16
+  ],
+  "min": [
+   -42,
+   -11,
+   -14
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/KG_Bedroom/StaticMeshes/Bedroom_Wardrobe",
+  "folder": "/Game/KillGodot/Env/Furniture/KG_Bedroom/StaticMeshes",
+  "name": "Bedroom_Wardrobe",
+  "size": [
+   97,
+   63,
+   204
+  ],
+  "min": [
+   -48,
+   -29,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/KG_InteriorProps/StaticMeshes/SM_KG_Bread",
+  "folder": "/Game/KillGodot/Env/Furniture/KG_InteriorProps/StaticMeshes",
+  "name": "SM_KG_Bread",
+  "size": [
+   30,
+   17,
+   12
+  ],
+  "min": [
+   -15,
+   -9,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/KG_InteriorProps/StaticMeshes/SM_KG_Cheese",
+  "folder": "/Game/KillGodot/Env/Furniture/KG_InteriorProps/StaticMeshes",
+  "name": "SM_KG_Cheese",
+  "size": [
+   28,
+   28,
+   8
+  ],
+  "min": [
+   -14,
+   -14,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/KG_InteriorProps/StaticMeshes/SM_KG_Firewood",
+  "folder": "/Game/KillGodot/Env/Furniture/KG_InteriorProps/StaticMeshes",
+  "name": "SM_KG_Firewood",
+  "size": [
+   55,
+   61,
+   47
+  ],
+  "min": [
+   -27,
+   -30,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/KG_InteriorProps/StaticMeshes/SM_KG_Hearth",
+  "folder": "/Game/KillGodot/Env/Furniture/KG_InteriorProps/StaticMeshes",
+  "name": "SM_KG_Hearth",
+  "size": [
+   196,
+   95,
+   297
+  ],
+  "min": [
+   -98,
+   0,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/KG_InteriorProps/StaticMeshes/SM_KG_HerbBundle",
+  "folder": "/Game/KillGodot/Env/Furniture/KG_InteriorProps/StaticMeshes",
+  "name": "SM_KG_HerbBundle",
+  "size": [
+   13,
+   13,
+   39
+  ],
+  "min": [
+   -7,
+   -7,
+   -39
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/KG_InteriorProps/StaticMeshes/SM_KG_HerbRack",
+  "folder": "/Game/KillGodot/Env/Furniture/KG_InteriorProps/StaticMeshes",
+  "name": "SM_KG_HerbRack",
+  "size": [
+   100,
+   17,
+   49
+  ],
+  "min": [
+   -50,
+   0,
+   -45
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/KG_InteriorProps/StaticMeshes/SM_KG_RailPost",
+  "folder": "/Game/KillGodot/Env/Furniture/KG_InteriorProps/StaticMeshes",
+  "name": "SM_KG_RailPost",
+  "size": [
+   14,
+   14,
+   108
+  ],
+  "min": [
+   -7,
+   -7,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/KG_InteriorProps/StaticMeshes/SM_KG_Railing_1m",
+  "folder": "/Game/KillGodot/Env/Furniture/KG_InteriorProps/StaticMeshes",
+  "name": "SM_KG_Railing_1m",
+  "size": [
+   100,
+   9,
+   102
+  ],
+  "min": [
+   -50,
+   -4,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/KG_InteriorProps/StaticMeshes/SM_KG_Rug_Oval",
+  "folder": "/Game/KillGodot/Env/Furniture/KG_InteriorProps/StaticMeshes",
+  "name": "SM_KG_Rug_Oval",
+  "size": [
+   192,
+   125,
+   1
+  ],
+  "min": [
+   -96,
+   -63,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/KG_InteriorProps/StaticMeshes/SM_KG_Rug_Rect",
+  "folder": "/Game/KillGodot/Env/Furniture/KG_InteriorProps/StaticMeshes",
+  "name": "SM_KG_Rug_Rect",
+  "size": [
+   234,
+   151,
+   1
+  ],
+  "min": [
+   -117,
+   -75,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/KG_InteriorProps/StaticMeshes/SM_KG_Rug_Round",
+  "folder": "/Game/KillGodot/Env/Furniture/KG_InteriorProps/StaticMeshes",
+  "name": "SM_KG_Rug_Round",
+  "size": [
+   141,
+   141,
+   1
+  ],
+  "min": [
+   -71,
+   -71,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/KG_InteriorProps/StaticMeshes/SM_KG_Rug_Runner",
+  "folder": "/Game/KillGodot/Env/Furniture/KG_InteriorProps/StaticMeshes",
+  "name": "SM_KG_Rug_Runner",
+  "size": [
+   254,
+   80,
+   1
+  ],
+  "min": [
+   -127,
+   -40,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/KG_InteriorProps/StaticMeshes/SM_KG_StairRail",
+  "folder": "/Game/KillGodot/Env/Furniture/KG_InteriorProps/StaticMeshes",
+  "name": "SM_KG_StairRail",
+  "size": [
+   14,
+   391,
+   398
+  ],
+  "min": [
+   -88,
+   -386,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/KG_Kitchen/StaticMeshes/Kitchen_Book",
+  "folder": "/Game/KillGodot/Env/Furniture/KG_Kitchen/StaticMeshes",
+  "name": "Kitchen_Book",
+  "size": [
+   20,
+   5,
+   30
+  ],
+  "min": [
+   -14,
+   -3,
+   -15
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/KG_Kitchen/StaticMeshes/Kitchen_Bottle",
+  "folder": "/Game/KillGodot/Env/Furniture/KG_Kitchen/StaticMeshes",
+  "name": "Kitchen_Bottle",
+  "size": [
+   15,
+   15,
+   42
+  ],
+  "min": [
+   -7,
+   -7,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/KG_Kitchen/StaticMeshes/Kitchen_Bowl",
+  "folder": "/Game/KillGodot/Env/Furniture/KG_Kitchen/StaticMeshes",
+  "name": "Kitchen_Bowl",
+  "size": [
+   20,
+   20,
+   8
+  ],
+  "min": [
+   -10,
+   -10,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/KG_Kitchen/StaticMeshes/Kitchen_Chair",
+  "folder": "/Game/KillGodot/Env/Furniture/KG_Kitchen/StaticMeshes",
+  "name": "Kitchen_Chair",
+  "size": [
+   40,
+   42,
+   90
+  ],
+  "min": [
+   -20,
+   -20,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/KG_Kitchen/StaticMeshes/Kitchen_Cooker",
+  "folder": "/Game/KillGodot/Env/Furniture/KG_Kitchen/StaticMeshes",
+  "name": "Kitchen_Cooker",
+  "size": [
+   89,
+   87,
+   102
+  ],
+  "min": [
+   -44,
+   -44,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/KG_Kitchen/StaticMeshes/Kitchen_Cup",
+  "folder": "/Game/KillGodot/Env/Furniture/KG_Kitchen/StaticMeshes",
+  "name": "Kitchen_Cup",
+  "size": [
+   7,
+   7,
+   9
+  ],
+  "min": [
+   -4,
+   -4,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/KG_Kitchen/StaticMeshes/Kitchen_Cupboard",
+  "folder": "/Game/KillGodot/Env/Furniture/KG_Kitchen/StaticMeshes",
+  "name": "Kitchen_Cupboard",
+  "size": [
+   100,
+   102,
+   90
+  ],
+  "min": [
+   -50,
+   -49,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/KG_Kitchen/StaticMeshes/Kitchen_DoubleCupboard",
+  "folder": "/Game/KillGodot/Env/Furniture/KG_Kitchen/StaticMeshes",
+  "name": "Kitchen_DoubleCupboard",
+  "size": [
+   196,
+   102,
+   90
+  ],
+  "min": [
+   -50,
+   -49,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/KG_Kitchen/StaticMeshes/Kitchen_Jar",
+  "folder": "/Game/KillGodot/Env/Furniture/KG_Kitchen/StaticMeshes",
+  "name": "Kitchen_Jar",
+  "size": [
+   15,
+   15,
+   15
+  ],
+  "min": [
+   -8,
+   -8,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/KG_Kitchen/StaticMeshes/Kitchen_KitchenKnife",
+  "folder": "/Game/KillGodot/Env/Furniture/KG_Kitchen/StaticMeshes",
+  "name": "Kitchen_KitchenKnife",
+  "size": [
+   35,
+   1,
+   5
+  ],
+  "min": [
+   -7,
+   -1,
+   -3
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/KG_Kitchen/StaticMeshes/Kitchen_Laddle",
+  "folder": "/Game/KillGodot/Env/Furniture/KG_Kitchen/StaticMeshes",
+  "name": "Kitchen_Laddle",
+  "size": [
+   10,
+   14,
+   25
+  ],
+  "min": [
+   -5,
+   -5,
+   -5
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/KG_Kitchen/StaticMeshes/Kitchen_LongTable",
+  "folder": "/Game/KillGodot/Env/Furniture/KG_Kitchen/StaticMeshes",
+  "name": "Kitchen_LongTable",
+  "size": [
+   165,
+   85,
+   67
+  ],
+  "min": [
+   -83,
+   -43,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/KG_Kitchen/StaticMeshes/Kitchen_PepperShaker",
+  "folder": "/Game/KillGodot/Env/Furniture/KG_Kitchen/StaticMeshes",
+  "name": "Kitchen_PepperShaker",
+  "size": [
+   10,
+   10,
+   17
+  ],
+  "min": [
+   -5,
+   -5,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/KG_Kitchen/StaticMeshes/Kitchen_Plate",
+  "folder": "/Game/KillGodot/Env/Furniture/KG_Kitchen/StaticMeshes",
+  "name": "Kitchen_Plate",
+  "size": [
+   35,
+   35,
+   2
+  ],
+  "min": [
+   -18,
+   -18,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/KG_Kitchen/StaticMeshes/Kitchen_Shelf2",
+  "folder": "/Game/KillGodot/Env/Furniture/KG_Kitchen/StaticMeshes",
+  "name": "Kitchen_Shelf2",
+  "size": [
+   93,
+   37,
+   189
+  ],
+  "min": [
+   -47,
+   -18,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/KG_Kitchen/StaticMeshes/Kitchen_Shelf4",
+  "folder": "/Game/KillGodot/Env/Furniture/KG_Kitchen/StaticMeshes",
+  "name": "Kitchen_Shelf4",
+  "size": [
+   48,
+   43,
+   189
+  ],
+  "min": [
+   -24,
+   -21,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/KG_Kitchen/StaticMeshes/Kitchen_Sink",
+  "folder": "/Game/KillGodot/Env/Furniture/KG_Kitchen/StaticMeshes",
+  "name": "Kitchen_Sink",
+  "size": [
+   173,
+   87,
+   133
+  ],
+  "min": [
+   -84,
+   -44,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/KG_Kitchen/StaticMeshes/Kitchen_SmallPan",
+  "folder": "/Game/KillGodot/Env/Furniture/KG_Kitchen/StaticMeshes",
+  "name": "Kitchen_SmallPan",
+  "size": [
+   56,
+   31,
+   6
+  ],
+  "min": [
+   -16,
+   -16,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/KG_Kitchen/StaticMeshes/Kitchen_SmallPot",
+  "folder": "/Game/KillGodot/Env/Furniture/KG_Kitchen/StaticMeshes",
+  "name": "Kitchen_SmallPot",
+  "size": [
+   42,
+   32,
+   15
+  ],
+  "min": [
+   -21,
+   -16,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/KG_Kitchen/StaticMeshes/Kitchen_SmallPotLid",
+  "folder": "/Game/KillGodot/Env/Furniture/KG_Kitchen/StaticMeshes",
+  "name": "Kitchen_SmallPotLid",
+  "size": [
+   42,
+   32,
+   20
+  ],
+  "min": [
+   -21,
+   -16,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/KG_Kitchen/StaticMeshes/Kitchen_Spoon",
+  "folder": "/Game/KillGodot/Env/Furniture/KG_Kitchen/StaticMeshes",
+  "name": "Kitchen_Spoon",
+  "size": [
+   17,
+   4,
+   2
+  ],
+  "min": [
+   -5,
+   -2,
+   -2
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/KG_Kitchen/StaticMeshes/Kitchen_Square_Table",
+  "folder": "/Game/KillGodot/Env/Furniture/KG_Kitchen/StaticMeshes",
+  "name": "Kitchen_Square_Table",
+  "size": [
+   85,
+   85,
+   67
+  ],
+  "min": [
+   -42,
+   -43,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/KG_Kitchen/StaticMeshes/Kitchen_Stool",
+  "folder": "/Game/KillGodot/Env/Furniture/KG_Kitchen/StaticMeshes",
+  "name": "Kitchen_Stool",
+  "size": [
+   50,
+   50,
+   68
+  ],
+  "min": [
+   -25,
+   -25,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/KG_Kitchen/StaticMeshes/Kitchen_YellowBottle",
+  "folder": "/Game/KillGodot/Env/Furniture/KG_Kitchen/StaticMeshes",
+  "name": "Kitchen_YellowBottle",
+  "size": [
+   15,
+   15,
+   42
+  ],
+  "min": [
+   -7,
+   -7,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/KG_Kitchen/StaticMeshes/Kitchen_YellowJar",
+  "folder": "/Game/KillGodot/Env/Furniture/KG_Kitchen/StaticMeshes",
+  "name": "Kitchen_YellowJar",
+  "size": [
+   15,
+   15,
+   15
+  ],
+  "min": [
+   -8,
+   -8,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/Kitchen_Book",
+  "folder": "/Game/KillGodot/Env/Furniture",
+  "name": "Kitchen_Book",
+  "size": [
+   20,
+   5,
+   30
+  ],
+  "min": [
+   -14,
+   -3,
+   -15
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/Kitchen_Bottle",
+  "folder": "/Game/KillGodot/Env/Furniture",
+  "name": "Kitchen_Bottle",
+  "size": [
+   15,
+   15,
+   42
+  ],
+  "min": [
+   -7,
+   -7,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/Kitchen_Bowl",
+  "folder": "/Game/KillGodot/Env/Furniture",
+  "name": "Kitchen_Bowl",
+  "size": [
+   20,
+   20,
+   8
+  ],
+  "min": [
+   -10,
+   -10,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/Kitchen_Chair",
+  "folder": "/Game/KillGodot/Env/Furniture",
+  "name": "Kitchen_Chair",
+  "size": [
+   40,
+   42,
+   90
+  ],
+  "min": [
+   -20,
+   -20,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/Kitchen_Cooker",
+  "folder": "/Game/KillGodot/Env/Furniture",
+  "name": "Kitchen_Cooker",
+  "size": [
+   89,
+   87,
+   102
+  ],
+  "min": [
+   -44,
+   -44,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/Kitchen_Cup",
+  "folder": "/Game/KillGodot/Env/Furniture",
+  "name": "Kitchen_Cup",
+  "size": [
+   7,
+   7,
+   9
+  ],
+  "min": [
+   -4,
+   -4,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/Kitchen_Cupboard",
+  "folder": "/Game/KillGodot/Env/Furniture",
+  "name": "Kitchen_Cupboard",
+  "size": [
+   100,
+   102,
+   90
+  ],
+  "min": [
+   -50,
+   -49,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/Kitchen_DoubleCupboard",
+  "folder": "/Game/KillGodot/Env/Furniture",
+  "name": "Kitchen_DoubleCupboard",
+  "size": [
+   196,
+   102,
+   90
+  ],
+  "min": [
+   -50,
+   -49,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/Kitchen_Jar",
+  "folder": "/Game/KillGodot/Env/Furniture",
+  "name": "Kitchen_Jar",
+  "size": [
+   15,
+   15,
+   15
+  ],
+  "min": [
+   -8,
+   -8,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/Kitchen_KitchenKnife",
+  "folder": "/Game/KillGodot/Env/Furniture",
+  "name": "Kitchen_KitchenKnife",
+  "size": [
+   35,
+   1,
+   5
+  ],
+  "min": [
+   -7,
+   -1,
+   -3
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/Kitchen_Laddle",
+  "folder": "/Game/KillGodot/Env/Furniture",
+  "name": "Kitchen_Laddle",
+  "size": [
+   10,
+   14,
+   25
+  ],
+  "min": [
+   -5,
+   -5,
+   -5
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/Kitchen_LongTable",
+  "folder": "/Game/KillGodot/Env/Furniture",
+  "name": "Kitchen_LongTable",
+  "size": [
+   165,
+   85,
+   67
+  ],
+  "min": [
+   -83,
+   -43,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/Kitchen_PepperShaker",
+  "folder": "/Game/KillGodot/Env/Furniture",
+  "name": "Kitchen_PepperShaker",
+  "size": [
+   10,
+   10,
+   17
+  ],
+  "min": [
+   -5,
+   -5,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/Kitchen_Plate",
+  "folder": "/Game/KillGodot/Env/Furniture",
+  "name": "Kitchen_Plate",
+  "size": [
+   35,
+   35,
+   2
+  ],
+  "min": [
+   -18,
+   -18,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/Kitchen_Shelf2",
+  "folder": "/Game/KillGodot/Env/Furniture",
+  "name": "Kitchen_Shelf2",
+  "size": [
+   93,
+   37,
+   189
+  ],
+  "min": [
+   -47,
+   -18,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/Kitchen_Shelf4",
+  "folder": "/Game/KillGodot/Env/Furniture",
+  "name": "Kitchen_Shelf4",
+  "size": [
+   48,
+   43,
+   189
+  ],
+  "min": [
+   -24,
+   -21,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/Kitchen_Sink",
+  "folder": "/Game/KillGodot/Env/Furniture",
+  "name": "Kitchen_Sink",
+  "size": [
+   173,
+   87,
+   133
+  ],
+  "min": [
+   -84,
+   -44,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/Kitchen_SmallPan",
+  "folder": "/Game/KillGodot/Env/Furniture",
+  "name": "Kitchen_SmallPan",
+  "size": [
+   56,
+   31,
+   6
+  ],
+  "min": [
+   -16,
+   -16,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/Kitchen_SmallPot",
+  "folder": "/Game/KillGodot/Env/Furniture",
+  "name": "Kitchen_SmallPot",
+  "size": [
+   42,
+   32,
+   15
+  ],
+  "min": [
+   -21,
+   -16,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/Kitchen_SmallPotLid",
+  "folder": "/Game/KillGodot/Env/Furniture",
+  "name": "Kitchen_SmallPotLid",
+  "size": [
+   42,
+   32,
+   20
+  ],
+  "min": [
+   -21,
+   -16,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/Kitchen_Spoon",
+  "folder": "/Game/KillGodot/Env/Furniture",
+  "name": "Kitchen_Spoon",
+  "size": [
+   17,
+   4,
+   2
+  ],
+  "min": [
+   -5,
+   -2,
+   -2
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/Kitchen_Square_Table",
+  "folder": "/Game/KillGodot/Env/Furniture",
+  "name": "Kitchen_Square_Table",
+  "size": [
+   85,
+   85,
+   67
+  ],
+  "min": [
+   -42,
+   -43,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/Kitchen_Stool",
+  "folder": "/Game/KillGodot/Env/Furniture",
+  "name": "Kitchen_Stool",
+  "size": [
+   50,
+   50,
+   68
+  ],
+  "min": [
+   -25,
+   -25,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/Kitchen_YellowBottle",
+  "folder": "/Game/KillGodot/Env/Furniture",
+  "name": "Kitchen_YellowBottle",
+  "size": [
+   15,
+   15,
+   42
+  ],
+  "min": [
+   -7,
+   -7,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/Kitchen_YellowJar",
+  "folder": "/Game/KillGodot/Env/Furniture",
+  "name": "Kitchen_YellowJar",
+  "size": [
+   15,
+   15,
+   15
+  ],
+  "min": [
+   -8,
+   -8,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/SM_KG_Bread",
+  "folder": "/Game/KillGodot/Env/Furniture",
+  "name": "SM_KG_Bread",
+  "size": [
+   30,
+   17,
+   12
+  ],
+  "min": [
+   -15,
+   -9,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/SM_KG_Cheese",
+  "folder": "/Game/KillGodot/Env/Furniture",
+  "name": "SM_KG_Cheese",
+  "size": [
+   28,
+   28,
+   8
+  ],
+  "min": [
+   -14,
+   -14,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/SM_KG_Firewood",
+  "folder": "/Game/KillGodot/Env/Furniture",
+  "name": "SM_KG_Firewood",
+  "size": [
+   55,
+   61,
+   47
+  ],
+  "min": [
+   -27,
+   -30,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/SM_KG_Hearth",
+  "folder": "/Game/KillGodot/Env/Furniture",
+  "name": "SM_KG_Hearth",
+  "size": [
+   196,
+   95,
+   297
+  ],
+  "min": [
+   -98,
+   0,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/SM_KG_HerbBundle",
+  "folder": "/Game/KillGodot/Env/Furniture",
+  "name": "SM_KG_HerbBundle",
+  "size": [
+   13,
+   13,
+   39
+  ],
+  "min": [
+   -7,
+   -7,
+   -39
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/SM_KG_HerbRack",
+  "folder": "/Game/KillGodot/Env/Furniture",
+  "name": "SM_KG_HerbRack",
+  "size": [
+   100,
+   17,
+   49
+  ],
+  "min": [
+   -50,
+   0,
+   -45
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/SM_KG_RailPost",
+  "folder": "/Game/KillGodot/Env/Furniture",
+  "name": "SM_KG_RailPost",
+  "size": [
+   14,
+   14,
+   108
+  ],
+  "min": [
+   -7,
+   -7,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/SM_KG_Railing_1m",
+  "folder": "/Game/KillGodot/Env/Furniture",
+  "name": "SM_KG_Railing_1m",
+  "size": [
+   100,
+   9,
+   102
+  ],
+  "min": [
+   -50,
+   -4,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/SM_KG_Rug_Oval",
+  "folder": "/Game/KillGodot/Env/Furniture",
+  "name": "SM_KG_Rug_Oval",
+  "size": [
+   192,
+   125,
+   1
+  ],
+  "min": [
+   -96,
+   -63,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/SM_KG_Rug_Rect",
+  "folder": "/Game/KillGodot/Env/Furniture",
+  "name": "SM_KG_Rug_Rect",
+  "size": [
+   234,
+   151,
+   1
+  ],
+  "min": [
+   -117,
+   -75,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/SM_KG_Rug_Round",
+  "folder": "/Game/KillGodot/Env/Furniture",
+  "name": "SM_KG_Rug_Round",
+  "size": [
+   141,
+   141,
+   1
+  ],
+  "min": [
+   -71,
+   -71,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/SM_KG_Rug_Runner",
+  "folder": "/Game/KillGodot/Env/Furniture",
+  "name": "SM_KG_Rug_Runner",
+  "size": [
+   254,
+   80,
+   1
+  ],
+  "min": [
+   -127,
+   -40,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Furniture/SM_KG_StairRail",
+  "folder": "/Game/KillGodot/Env/Furniture",
+  "name": "SM_KG_StairRail",
+  "size": [
+   14,
+   391,
+   398
+  ],
+  "min": [
+   -88,
+   -386,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/Island/KG_Island/StaticMeshes/KG_Island",
+  "folder": "/Game/KillGodot/Env/Island/KG_Island/StaticMeshes",
+  "name": "KG_Island",
+  "size": [
+   8400,
+   8400,
+   905
+  ],
+  "min": [
+   -4200,
+   -4200,
+   -300
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/JapanC3/KG_JapanProps_Clean2/StaticMeshes/SM_KG_ArchBridge",
+  "folder": "/Game/KillGodot/Env/JapanC3/KG_JapanProps_Clean2/StaticMeshes",
+  "name": "SM_KG_ArchBridge",
+  "size": [
+   660,
+   200,
+   341
+  ],
+  "min": [
+   -330,
+   -100,
+   -130
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/JapanC3/KG_JapanProps_Clean2/StaticMeshes/SM_KG_Bamboo",
+  "folder": "/Game/KillGodot/Env/JapanC3/KG_JapanProps_Clean2/StaticMeshes",
+  "name": "SM_KG_Bamboo",
+  "size": [
+   277,
+   349,
+   549
+  ],
+  "min": [
+   -149,
+   -178,
+   -10
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/JapanC3/KG_JapanProps_Clean2/StaticMeshes/SM_KG_BonsaiPine",
+  "folder": "/Game/KillGodot/Env/JapanC3/KG_JapanProps_Clean2/StaticMeshes",
+  "name": "SM_KG_BonsaiPine",
+  "size": [
+   615,
+   412,
+   540
+  ],
+  "min": [
+   -204,
+   -190,
+   -25
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/JapanC3/KG_JapanProps_Clean2/StaticMeshes/SM_KG_GardenLamp",
+  "folder": "/Game/KillGodot/Env/JapanC3/KG_JapanProps_Clean2/StaticMeshes",
+  "name": "SM_KG_GardenLamp",
+  "size": [
+   41,
+   41,
+   94
+  ],
+  "min": [
+   -21,
+   -21,
+   -14
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/JapanC3/KG_JapanProps_Clean2/StaticMeshes/SM_KG_GardenRock",
+  "folder": "/Game/KillGodot/Env/JapanC3/KG_JapanProps_Clean2/StaticMeshes",
+  "name": "SM_KG_GardenRock",
+  "size": [
+   129,
+   111,
+   150
+  ],
+  "min": [
+   -36,
+   -45,
+   -12
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/JapanC3/KG_JapanProps_Clean2/StaticMeshes/SM_KG_Koi",
+  "folder": "/Game/KillGodot/Env/JapanC3/KG_JapanProps_Clean2/StaticMeshes",
+  "name": "SM_KG_Koi",
+  "size": [
+   50,
+   25,
+   14
+  ],
+  "min": [
+   -25,
+   -12,
+   -7
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/JapanC3/KG_JapanProps_Clean2/StaticMeshes/SM_KG_KoiPondRim",
+  "folder": "/Game/KillGodot/Env/JapanC3/KG_JapanProps_Clean2/StaticMeshes",
+  "name": "SM_KG_KoiPondRim",
+  "size": [
+   802,
+   497,
+   90
+  ],
+  "min": [
+   -362,
+   -234,
+   -67
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/JapanC3/KG_JapanProps_Clean2/StaticMeshes/SM_KG_Maple",
+  "folder": "/Game/KillGodot/Env/JapanC3/KG_JapanProps_Clean2/StaticMeshes",
+  "name": "SM_KG_Maple",
+  "size": [
+   527,
+   487,
+   411
+  ],
+  "min": [
+   -250,
+   -245,
+   -21
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/JapanC3/KG_JapanProps_Clean2/StaticMeshes/SM_KG_Noren_Stall",
+  "folder": "/Game/KillGodot/Env/JapanC3/KG_JapanProps_Clean2/StaticMeshes",
+  "name": "SM_KG_Noren_Stall",
+  "size": [
+   244,
+   182,
+   254
+  ],
+  "min": [
+   -121,
+   -71,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/JapanC3/KG_JapanProps_Clean2/StaticMeshes/SM_KG_Pagoda",
+  "folder": "/Game/KillGodot/Env/JapanC3/KG_JapanProps_Clean2/StaticMeshes",
+  "name": "SM_KG_Pagoda",
+  "size": [
+   500,
+   520,
+   840
+  ],
+  "min": [
+   -250,
+   -250,
+   -9
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/JapanC3/KG_JapanProps_Clean2/StaticMeshes/SM_KG_Sakura_A",
+  "folder": "/Game/KillGodot/Env/JapanC3/KG_JapanProps_Clean2/StaticMeshes",
+  "name": "SM_KG_Sakura_A",
+  "size": [
+   754,
+   691,
+   638
+  ],
+  "min": [
+   -344,
+   -351,
+   -27
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/JapanC3/KG_JapanProps_Clean2/StaticMeshes/SM_KG_Sakura_B",
+  "folder": "/Game/KillGodot/Env/JapanC3/KG_JapanProps_Clean2/StaticMeshes",
+  "name": "SM_KG_Sakura_B",
+  "size": [
+   559,
+   539,
+   601
+  ],
+  "min": [
+   -214,
+   -283,
+   -28
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/JapanC3/KG_JapanProps_Clean2/StaticMeshes/SM_KG_SteppingStone",
+  "folder": "/Game/KillGodot/Env/JapanC3/KG_JapanProps_Clean2/StaticMeshes",
+  "name": "SM_KG_SteppingStone",
+  "size": [
+   60,
+   48,
+   18
+  ],
+  "min": [
+   -27,
+   -24,
+   -3
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/JapanC3/KG_JapanProps_Clean2/StaticMeshes/SM_KG_Torii",
+  "folder": "/Game/KillGodot/Env/JapanC3/KG_JapanProps_Clean2/StaticMeshes",
+  "name": "SM_KG_Torii",
+  "size": [
+   1142,
+   561,
+   1101
+  ],
+  "min": [
+   -571,
+   -280,
+   -41
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/JapanC3/KG_JapanProps_Clean2/StaticMeshes/SM_KG_ToroLantern",
+  "folder": "/Game/KillGodot/Env/JapanC3/KG_JapanProps_Clean2/StaticMeshes",
+  "name": "SM_KG_ToroLantern",
+  "size": [
+   149,
+   130,
+   232
+  ],
+  "min": [
+   -75,
+   -65,
+   -6
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/JapanC3/KG_JapanProps_Clean2/StaticMeshes/SM_KG_WoodWalk",
+  "folder": "/Game/KillGodot/Env/JapanC3/KG_JapanProps_Clean2/StaticMeshes",
+  "name": "SM_KG_WoodWalk",
+  "size": [
+   400,
+   141,
+   95
+  ],
+  "min": [
+   -200,
+   -71,
+   -95
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Nature/StaticMeshes/Bush_Common",
+  "folder": "/Game/KillGodot/Env/KG_Nature/StaticMeshes",
+  "name": "Bush_Common",
+  "size": [
+   191,
+   197,
+   158
+  ],
+  "min": [
+   -92,
+   -97,
+   -23
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Nature/StaticMeshes/Bush_Common_Flowers",
+  "folder": "/Game/KillGodot/Env/KG_Nature/StaticMeshes",
+  "name": "Bush_Common_Flowers",
+  "size": [
+   191,
+   197,
+   158
+  ],
+  "min": [
+   -92,
+   -97,
+   -23
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Nature/StaticMeshes/Clover_1",
+  "folder": "/Game/KillGodot/Env/KG_Nature/StaticMeshes",
+  "name": "Clover_1",
+  "size": [
+   80,
+   76,
+   114
+  ],
+  "min": [
+   -50,
+   -40,
+   -1
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Nature/StaticMeshes/Clover_2",
+  "folder": "/Game/KillGodot/Env/KG_Nature/StaticMeshes",
+  "name": "Clover_2",
+  "size": [
+   85,
+   84,
+   126
+  ],
+  "min": [
+   -50,
+   -47,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Nature/StaticMeshes/CommonTree_1",
+  "folder": "/Game/KillGodot/Env/KG_Nature/StaticMeshes",
+  "name": "CommonTree_1",
+  "size": [
+   431,
+   458,
+   727
+  ],
+  "min": [
+   -219,
+   -222,
+   -25
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Nature/StaticMeshes/CommonTree_2",
+  "folder": "/Game/KillGodot/Env/KG_Nature/StaticMeshes",
+  "name": "CommonTree_2",
+  "size": [
+   446,
+   428,
+   766
+  ],
+  "min": [
+   -222,
+   -185,
+   -26
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Nature/StaticMeshes/CommonTree_3",
+  "folder": "/Game/KillGodot/Env/KG_Nature/StaticMeshes",
+  "name": "CommonTree_3",
+  "size": [
+   406,
+   424,
+   943
+  ],
+  "min": [
+   -199,
+   -206,
+   -24
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Nature/StaticMeshes/CommonTree_4",
+  "folder": "/Game/KillGodot/Env/KG_Nature/StaticMeshes",
+  "name": "CommonTree_4",
+  "size": [
+   383,
+   376,
+   946
+  ],
+  "min": [
+   -180,
+   -208,
+   -27
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Nature/StaticMeshes/CommonTree_5",
+  "folder": "/Game/KillGodot/Env/KG_Nature/StaticMeshes",
+  "name": "CommonTree_5",
+  "size": [
+   367,
+   422,
+   701
+  ],
+  "min": [
+   -191,
+   -216,
+   -24
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Nature/StaticMeshes/DeadTree_1",
+  "folder": "/Game/KillGodot/Env/KG_Nature/StaticMeshes",
+  "name": "DeadTree_1",
+  "size": [
+   630,
+   594,
+   953
+  ],
+  "min": [
+   -269,
+   -303,
+   -35
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Nature/StaticMeshes/DeadTree_2",
+  "folder": "/Game/KillGodot/Env/KG_Nature/StaticMeshes",
+  "name": "DeadTree_2",
+  "size": [
+   699,
+   642,
+   1152
+  ],
+  "min": [
+   -233,
+   -256,
+   -37
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Nature/StaticMeshes/DeadTree_3",
+  "folder": "/Game/KillGodot/Env/KG_Nature/StaticMeshes",
+  "name": "DeadTree_3",
+  "size": [
+   643,
+   647,
+   1334
+  ],
+  "min": [
+   -386,
+   -343,
+   -40
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Nature/StaticMeshes/DeadTree_4",
+  "folder": "/Game/KillGodot/Env/KG_Nature/StaticMeshes",
+  "name": "DeadTree_4",
+  "size": [
+   798,
+   777,
+   1280
+  ],
+  "min": [
+   -336,
+   -364,
+   -37
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Nature/StaticMeshes/DeadTree_5",
+  "folder": "/Game/KillGodot/Env/KG_Nature/StaticMeshes",
+  "name": "DeadTree_5",
+  "size": [
+   842,
+   849,
+   1649
+  ],
+  "min": [
+   -403,
+   -485,
+   -37
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Nature/StaticMeshes/Fern_1",
+  "folder": "/Game/KillGodot/Env/KG_Nature/StaticMeshes",
+  "name": "Fern_1",
+  "size": [
+   283,
+   265,
+   84
+  ],
+  "min": [
+   -138,
+   -128,
+   -8
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Nature/StaticMeshes/Flower_3_Group",
+  "folder": "/Game/KillGodot/Env/KG_Nature/StaticMeshes",
+  "name": "Flower_3_Group",
+  "size": [
+   149,
+   159,
+   205
+  ],
+  "min": [
+   -61,
+   -80,
+   -3
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Nature/StaticMeshes/Flower_3_Single",
+  "folder": "/Game/KillGodot/Env/KG_Nature/StaticMeshes",
+  "name": "Flower_3_Single",
+  "size": [
+   91,
+   88,
+   207
+  ],
+  "min": [
+   -48,
+   -52,
+   -2
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Nature/StaticMeshes/Flower_4_Group",
+  "folder": "/Game/KillGodot/Env/KG_Nature/StaticMeshes",
+  "name": "Flower_4_Group",
+  "size": [
+   178,
+   137,
+   249
+  ],
+  "min": [
+   -93,
+   -64,
+   -6
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Nature/StaticMeshes/Flower_4_Single",
+  "folder": "/Game/KillGodot/Env/KG_Nature/StaticMeshes",
+  "name": "Flower_4_Single",
+  "size": [
+   107,
+   77,
+   242
+  ],
+  "min": [
+   -51,
+   -40,
+   -3
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Nature/StaticMeshes/Grass_Common_Short",
+  "folder": "/Game/KillGodot/Env/KG_Nature/StaticMeshes",
+  "name": "Grass_Common_Short",
+  "size": [
+   64,
+   74,
+   133
+  ],
+  "min": [
+   -36,
+   -48,
+   -2
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Nature/StaticMeshes/Grass_Common_Tall",
+  "folder": "/Game/KillGodot/Env/KG_Nature/StaticMeshes",
+  "name": "Grass_Common_Tall",
+  "size": [
+   90,
+   99,
+   187
+  ],
+  "min": [
+   -40,
+   -48,
+   -3
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Nature/StaticMeshes/Grass_Wispy_Short",
+  "folder": "/Game/KillGodot/Env/KG_Nature/StaticMeshes",
+  "name": "Grass_Wispy_Short",
+  "size": [
+   132,
+   121,
+   107
+  ],
+  "min": [
+   -73,
+   -58,
+   -9
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Nature/StaticMeshes/Grass_Wispy_Tall",
+  "folder": "/Game/KillGodot/Env/KG_Nature/StaticMeshes",
+  "name": "Grass_Wispy_Tall",
+  "size": [
+   154,
+   159,
+   167
+  ],
+  "min": [
+   -74,
+   -82,
+   -4
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Nature/StaticMeshes/Mushroom_Common",
+  "folder": "/Game/KillGodot/Env/KG_Nature/StaticMeshes",
+  "name": "Mushroom_Common",
+  "size": [
+   56,
+   78,
+   46
+  ],
+  "min": [
+   -33,
+   -45,
+   -2
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Nature/StaticMeshes/Mushroom_Laetiporus",
+  "folder": "/Game/KillGodot/Env/KG_Nature/StaticMeshes",
+  "name": "Mushroom_Laetiporus",
+  "size": [
+   137,
+   110,
+   77
+  ],
+  "min": [
+   -65,
+   -33,
+   -16
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Nature/StaticMeshes/Pebble_Round_1",
+  "folder": "/Game/KillGodot/Env/KG_Nature/StaticMeshes",
+  "name": "Pebble_Round_1",
+  "size": [
+   50,
+   37,
+   10
+  ],
+  "min": [
+   -22,
+   -16,
+   -1
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Nature/StaticMeshes/Pebble_Round_2",
+  "folder": "/Game/KillGodot/Env/KG_Nature/StaticMeshes",
+  "name": "Pebble_Round_2",
+  "size": [
+   45,
+   41,
+   9
+  ],
+  "min": [
+   -22,
+   -22,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Nature/StaticMeshes/Pebble_Round_3",
+  "folder": "/Game/KillGodot/Env/KG_Nature/StaticMeshes",
+  "name": "Pebble_Round_3",
+  "size": [
+   45,
+   48,
+   10
+  ],
+  "min": [
+   -23,
+   -22,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Nature/StaticMeshes/Pebble_Round_4",
+  "folder": "/Game/KillGodot/Env/KG_Nature/StaticMeshes",
+  "name": "Pebble_Round_4",
+  "size": [
+   41,
+   45,
+   10
+  ],
+  "min": [
+   -21,
+   -23,
+   -1
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Nature/StaticMeshes/Pebble_Round_5",
+  "folder": "/Game/KillGodot/Env/KG_Nature/StaticMeshes",
+  "name": "Pebble_Round_5",
+  "size": [
+   42,
+   35,
+   10
+  ],
+  "min": [
+   -22,
+   -20,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Nature/StaticMeshes/Pebble_Square_1",
+  "folder": "/Game/KillGodot/Env/KG_Nature/StaticMeshes",
+  "name": "Pebble_Square_1",
+  "size": [
+   43,
+   44,
+   13
+  ],
+  "min": [
+   -23,
+   -20,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Nature/StaticMeshes/Pebble_Square_2",
+  "folder": "/Game/KillGodot/Env/KG_Nature/StaticMeshes",
+  "name": "Pebble_Square_2",
+  "size": [
+   39,
+   28,
+   14
+  ],
+  "min": [
+   -20,
+   -12,
+   -1
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Nature/StaticMeshes/Pebble_Square_3",
+  "folder": "/Game/KillGodot/Env/KG_Nature/StaticMeshes",
+  "name": "Pebble_Square_3",
+  "size": [
+   37,
+   32,
+   16
+  ],
+  "min": [
+   -19,
+   -17,
+   -1
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Nature/StaticMeshes/Pebble_Square_4",
+  "folder": "/Game/KillGodot/Env/KG_Nature/StaticMeshes",
+  "name": "Pebble_Square_4",
+  "size": [
+   34,
+   29,
+   17
+  ],
+  "min": [
+   -17,
+   -16,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Nature/StaticMeshes/Pebble_Square_5",
+  "folder": "/Game/KillGodot/Env/KG_Nature/StaticMeshes",
+  "name": "Pebble_Square_5",
+  "size": [
+   35,
+   45,
+   15
+  ],
+  "min": [
+   -17,
+   -23,
+   -1
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Nature/StaticMeshes/Pebble_Square_6",
+  "folder": "/Game/KillGodot/Env/KG_Nature/StaticMeshes",
+  "name": "Pebble_Square_6",
+  "size": [
+   46,
+   26,
+   14
+  ],
+  "min": [
+   -22,
+   -12,
+   -1
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Nature/StaticMeshes/Petal_1",
+  "folder": "/Game/KillGodot/Env/KG_Nature/StaticMeshes",
+  "name": "Petal_1",
+  "size": [
+   46,
+   45,
+   24
+  ],
+  "min": [
+   -26,
+   -23,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Nature/StaticMeshes/Petal_2",
+  "folder": "/Game/KillGodot/Env/KG_Nature/StaticMeshes",
+  "name": "Petal_2",
+  "size": [
+   67,
+   63,
+   24
+  ],
+  "min": [
+   -32,
+   -33,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Nature/StaticMeshes/Petal_3",
+  "folder": "/Game/KillGodot/Env/KG_Nature/StaticMeshes",
+  "name": "Petal_3",
+  "size": [
+   62,
+   61,
+   19
+  ],
+  "min": [
+   -31,
+   -27,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Nature/StaticMeshes/Petal_4",
+  "folder": "/Game/KillGodot/Env/KG_Nature/StaticMeshes",
+  "name": "Petal_4",
+  "size": [
+   33,
+   24,
+   25
+  ],
+  "min": [
+   -14,
+   -12,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Nature/StaticMeshes/Petal_5",
+  "folder": "/Game/KillGodot/Env/KG_Nature/StaticMeshes",
+  "name": "Petal_5",
+  "size": [
+   83,
+   80,
+   29
+  ],
+  "min": [
+   -40,
+   -42,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Nature/StaticMeshes/Pine_1",
+  "folder": "/Game/KillGodot/Env/KG_Nature/StaticMeshes",
+  "name": "Pine_1",
+  "size": [
+   494,
+   454,
+   736
+  ],
+  "min": [
+   -245,
+   -248,
+   -25
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Nature/StaticMeshes/Pine_2",
+  "folder": "/Game/KillGodot/Env/KG_Nature/StaticMeshes",
+  "name": "Pine_2",
+  "size": [
+   573,
+   522,
+   739
+  ],
+  "min": [
+   -289,
+   -269,
+   -25
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Nature/StaticMeshes/Pine_3",
+  "folder": "/Game/KillGodot/Env/KG_Nature/StaticMeshes",
+  "name": "Pine_3",
+  "size": [
+   361,
+   400,
+   742
+  ],
+  "min": [
+   -211,
+   -229,
+   -26
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Nature/StaticMeshes/Pine_4",
+  "folder": "/Game/KillGodot/Env/KG_Nature/StaticMeshes",
+  "name": "Pine_4",
+  "size": [
+   580,
+   537,
+   1026
+  ],
+  "min": [
+   -287,
+   -295,
+   -25
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Nature/StaticMeshes/Pine_5",
+  "folder": "/Game/KillGodot/Env/KG_Nature/StaticMeshes",
+  "name": "Pine_5",
+  "size": [
+   642,
+   622,
+   873
+  ],
+  "min": [
+   -299,
+   -378,
+   -24
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Nature/StaticMeshes/Plant_1",
+  "folder": "/Game/KillGodot/Env/KG_Nature/StaticMeshes",
+  "name": "Plant_1",
+  "size": [
+   127,
+   139,
+   101
+  ],
+  "min": [
+   -71,
+   -76,
+   -4
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Nature/StaticMeshes/Plant_1_Big",
+  "folder": "/Game/KillGodot/Env/KG_Nature/StaticMeshes",
+  "name": "Plant_1_Big",
+  "size": [
+   181,
+   195,
+   235
+  ],
+  "min": [
+   -87,
+   -104,
+   -4
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Nature/StaticMeshes/Plant_7",
+  "folder": "/Game/KillGodot/Env/KG_Nature/StaticMeshes",
+  "name": "Plant_7",
+  "size": [
+   105,
+   96,
+   25
+  ],
+  "min": [
+   -45,
+   -46,
+   8
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Nature/StaticMeshes/Plant_7_Big",
+  "folder": "/Game/KillGodot/Env/KG_Nature/StaticMeshes",
+  "name": "Plant_7_Big",
+  "size": [
+   131,
+   136,
+   25
+  ],
+  "min": [
+   -70,
+   -85,
+   5
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Nature/StaticMeshes/RockPath_Round_Small_1",
+  "folder": "/Game/KillGodot/Env/KG_Nature/StaticMeshes",
+  "name": "RockPath_Round_Small_1",
+  "size": [
+   107,
+   149,
+   15
+  ],
+  "min": [
+   -55,
+   -71,
+   -3
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Nature/StaticMeshes/RockPath_Round_Small_2",
+  "folder": "/Game/KillGodot/Env/KG_Nature/StaticMeshes",
+  "name": "RockPath_Round_Small_2",
+  "size": [
+   115,
+   136,
+   16
+  ],
+  "min": [
+   -57,
+   -76,
+   -4
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Nature/StaticMeshes/RockPath_Round_Small_3",
+  "folder": "/Game/KillGodot/Env/KG_Nature/StaticMeshes",
+  "name": "RockPath_Round_Small_3",
+  "size": [
+   118,
+   131,
+   15
+  ],
+  "min": [
+   -59,
+   -70,
+   -3
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Nature/StaticMeshes/RockPath_Round_Thin",
+  "folder": "/Game/KillGodot/Env/KG_Nature/StaticMeshes",
+  "name": "RockPath_Round_Thin",
+  "size": [
+   153,
+   211,
+   24
+  ],
+  "min": [
+   -76,
+   -109,
+   -5
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Nature/StaticMeshes/RockPath_Round_Wide",
+  "folder": "/Game/KillGodot/Env/KG_Nature/StaticMeshes",
+  "name": "RockPath_Round_Wide",
+  "size": [
+   214,
+   215,
+   29
+  ],
+  "min": [
+   -105,
+   -113,
+   -9
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Nature/StaticMeshes/RockPath_Square_Small_1",
+  "folder": "/Game/KillGodot/Env/KG_Nature/StaticMeshes",
+  "name": "RockPath_Square_Small_1",
+  "size": [
+   102,
+   99,
+   20
+  ],
+  "min": [
+   -52,
+   -48,
+   -4
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Nature/StaticMeshes/RockPath_Square_Small_2",
+  "folder": "/Game/KillGodot/Env/KG_Nature/StaticMeshes",
+  "name": "RockPath_Square_Small_2",
+  "size": [
+   99,
+   97,
+   18
+  ],
+  "min": [
+   -50,
+   -49,
+   -3
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Nature/StaticMeshes/RockPath_Square_Small_3",
+  "folder": "/Game/KillGodot/Env/KG_Nature/StaticMeshes",
+  "name": "RockPath_Square_Small_3",
+  "size": [
+   85,
+   111,
+   21
+  ],
+  "min": [
+   -40,
+   -57,
+   -2
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Nature/StaticMeshes/RockPath_Square_Thin",
+  "folder": "/Game/KillGodot/Env/KG_Nature/StaticMeshes",
+  "name": "RockPath_Square_Thin",
+  "size": [
+   157,
+   200,
+   32
+  ],
+  "min": [
+   -77,
+   -100,
+   -5
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Nature/StaticMeshes/RockPath_Square_Wide",
+  "folder": "/Game/KillGodot/Env/KG_Nature/StaticMeshes",
+  "name": "RockPath_Square_Wide",
+  "size": [
+   207,
+   201,
+   35
+  ],
+  "min": [
+   -103,
+   -101,
+   -5
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Nature/StaticMeshes/Rock_Medium_1",
+  "folder": "/Game/KillGodot/Env/KG_Nature/StaticMeshes",
+  "name": "Rock_Medium_1",
+  "size": [
+   326,
+   302,
+   228
+  ],
+  "min": [
+   -176,
+   -118,
+   -28
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Nature/StaticMeshes/Rock_Medium_2",
+  "folder": "/Game/KillGodot/Env/KG_Nature/StaticMeshes",
+  "name": "Rock_Medium_2",
+  "size": [
+   305,
+   248,
+   190
+  ],
+  "min": [
+   -171,
+   -116,
+   -6
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Nature/StaticMeshes/Rock_Medium_3",
+  "folder": "/Game/KillGodot/Env/KG_Nature/StaticMeshes",
+  "name": "Rock_Medium_3",
+  "size": [
+   344,
+   354,
+   232
+  ],
+  "min": [
+   -184,
+   -89,
+   -32
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Nature/StaticMeshes/TwistedTree_1",
+  "folder": "/Game/KillGodot/Env/KG_Nature/StaticMeshes",
+  "name": "TwistedTree_1",
+  "size": [
+   1352,
+   1155,
+   1675
+  ],
+  "min": [
+   -217,
+   -673,
+   -23
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Nature/StaticMeshes/TwistedTree_2",
+  "folder": "/Game/KillGodot/Env/KG_Nature/StaticMeshes",
+  "name": "TwistedTree_2",
+  "size": [
+   1056,
+   920,
+   1897
+  ],
+  "min": [
+   -662,
+   -554,
+   -22
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Nature/StaticMeshes/TwistedTree_3",
+  "folder": "/Game/KillGodot/Env/KG_Nature/StaticMeshes",
+  "name": "TwistedTree_3",
+  "size": [
+   1136,
+   1151,
+   1611
+  ],
+  "min": [
+   -449,
+   -652,
+   -24
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Nature/StaticMeshes/TwistedTree_4",
+  "folder": "/Game/KillGodot/Env/KG_Nature/StaticMeshes",
+  "name": "TwistedTree_4",
+  "size": [
+   1038,
+   1129,
+   1878
+  ],
+  "min": [
+   -433,
+   -714,
+   -24
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Nature/StaticMeshes/TwistedTree_5",
+  "folder": "/Game/KillGodot/Env/KG_Nature/StaticMeshes",
+  "name": "TwistedTree_5",
+  "size": [
+   949,
+   939,
+   1567
+  ],
+  "min": [
+   -375,
+   -634,
+   -21
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Anvil",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "Anvil",
+  "size": [
+   108,
+   40,
+   56
+  ],
+  "min": [
+   -48,
+   -20,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Anvil_Log",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "Anvil_Log",
+  "size": [
+   93,
+   82,
+   107
+  ],
+  "min": [
+   -41,
+   -35,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Axe_Bronze",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "Axe_Bronze",
+  "size": [
+   29,
+   5,
+   83
+  ],
+  "min": [
+   -20,
+   -2,
+   -38
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Bag",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "Bag",
+  "size": [
+   66,
+   54,
+   80
+  ],
+  "min": [
+   -33,
+   -24,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Banner_1",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "Banner_1",
+  "size": [
+   161,
+   19,
+   239
+  ],
+  "min": [
+   0,
+   -9,
+   -155
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Banner_1_Cloth",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "Banner_1_Cloth",
+  "size": [
+   81,
+   6,
+   225
+  ],
+  "min": [
+   -41,
+   -3,
+   -225
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Banner_2",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "Banner_2",
+  "size": [
+   161,
+   19,
+   208
+  ],
+  "min": [
+   0,
+   -9,
+   -123
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Banner_2_Cloth",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "Banner_2_Cloth",
+  "size": [
+   81,
+   6,
+   193
+  ],
+  "min": [
+   -41,
+   -3,
+   -193
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Barrel",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "Barrel",
+  "size": [
+   70,
+   70,
+   90
+  ],
+  "min": [
+   -35,
+   -35,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Barrel_Apples",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "Barrel_Apples",
+  "size": [
+   70,
+   70,
+   90
+  ],
+  "min": [
+   -35,
+   -35,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Barrel_Holder",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "Barrel_Holder",
+  "size": [
+   136,
+   74,
+   126
+  ],
+  "min": [
+   -68,
+   -35,
+   -1
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Bed_Twin1",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "Bed_Twin1",
+  "size": [
+   188,
+   241,
+   81
+  ],
+  "min": [
+   -94,
+   -121,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Bed_Twin2",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "Bed_Twin2",
+  "size": [
+   188,
+   241,
+   76
+  ],
+  "min": [
+   -94,
+   -121,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Bench",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "Bench",
+  "size": [
+   278,
+   53,
+   53
+  ],
+  "min": [
+   -139,
+   -26,
+   -1
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/BookGroup_Medium_1",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "BookGroup_Medium_1",
+  "size": [
+   106,
+   25,
+   30
+  ],
+  "min": [
+   -54,
+   -16,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/BookGroup_Medium_2",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "BookGroup_Medium_2",
+  "size": [
+   110,
+   25,
+   29
+  ],
+  "min": [
+   -55,
+   -16,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/BookGroup_Medium_3",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "BookGroup_Medium_3",
+  "size": [
+   104,
+   25,
+   29
+  ],
+  "min": [
+   -53,
+   -16,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/BookGroup_Small_1",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "BookGroup_Small_1",
+  "size": [
+   29,
+   23,
+   30
+  ],
+  "min": [
+   -17,
+   -12,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/BookGroup_Small_2",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "BookGroup_Small_2",
+  "size": [
+   23,
+   24,
+   28
+  ],
+  "min": [
+   -10,
+   -13,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/BookGroup_Small_3",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "BookGroup_Small_3",
+  "size": [
+   24,
+   24,
+   28
+  ],
+  "min": [
+   -10,
+   -13,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/BookStand",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "BookStand",
+  "size": [
+   51,
+   51,
+   145
+  ],
+  "min": [
+   -25,
+   -26,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Book_5",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "Book_5",
+  "size": [
+   21,
+   29,
+   6
+  ],
+  "min": [
+   -12,
+   -14,
+   -3
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Book_7",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "Book_7",
+  "size": [
+   25,
+   33,
+   7
+  ],
+  "min": [
+   -13,
+   -17,
+   -3
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Book_Simplified_Single",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "Book_Simplified_Single",
+  "size": [
+   6,
+   21,
+   27
+  ],
+  "min": [
+   -3,
+   -12,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Book_Stack_1",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "Book_Stack_1",
+  "size": [
+   28,
+   23,
+   21
+  ],
+  "min": [
+   -15,
+   -11,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Book_Stack_2",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "Book_Stack_2",
+  "size": [
+   27,
+   23,
+   20
+  ],
+  "min": [
+   -14,
+   -10,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Bookcase_2",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "Bookcase_2",
+  "size": [
+   146,
+   43,
+   254
+  ],
+  "min": [
+   -73,
+   -21,
+   -2
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Bottle_1",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "Bottle_1",
+  "size": [
+   11,
+   11,
+   36
+  ],
+  "min": [
+   -6,
+   -6,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Bucket_Metal",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "Bucket_Metal",
+  "size": [
+   49,
+   45,
+   37
+  ],
+  "min": [
+   -24,
+   -21,
+   -1
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Bucket_Wooden_1",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "Bucket_Wooden_1",
+  "size": [
+   43,
+   38,
+   29
+  ],
+  "min": [
+   -22,
+   -20,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Cabinet",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "Cabinet",
+  "size": [
+   136,
+   36,
+   100
+  ],
+  "min": [
+   -68,
+   -18,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Cage_Small",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "Cage_Small",
+  "size": [
+   85,
+   88,
+   81
+  ],
+  "min": [
+   -43,
+   -42,
+   -4
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/CandleStick",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "CandleStick",
+  "size": [
+   26,
+   18,
+   16
+  ],
+  "min": [
+   -18,
+   -9,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/CandleStick_Stand",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "CandleStick_Stand",
+  "size": [
+   73,
+   73,
+   131
+  ],
+  "min": [
+   -37,
+   -37,
+   -1
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/CandleStick_Triple",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "CandleStick_Triple",
+  "size": [
+   44,
+   14,
+   46
+  ],
+  "min": [
+   -22,
+   -7,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Candle_1",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "Candle_1",
+  "size": [
+   9,
+   11,
+   13
+  ],
+  "min": [
+   -5,
+   -6,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Candle_2",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "Candle_2",
+  "size": [
+   9,
+   10,
+   25
+  ],
+  "min": [
+   -5,
+   -5,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Carrot",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "Carrot",
+  "size": [
+   18,
+   22,
+   57
+  ],
+  "min": [
+   -11,
+   -11,
+   -24
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Cauldron",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "Cauldron",
+  "size": [
+   99,
+   94,
+   82
+  ],
+  "min": [
+   -49,
+   -47,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Chain_Coil",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "Chain_Coil",
+  "size": [
+   107,
+   91,
+   9
+  ],
+  "min": [
+   -58,
+   -41,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Chair_1",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "Chair_1",
+  "size": [
+   58,
+   55,
+   112
+  ],
+  "min": [
+   -29,
+   -29,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Chalice",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "Chalice",
+  "size": [
+   12,
+   12,
+   26
+  ],
+  "min": [
+   -6,
+   -6,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Chandelier",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "Chandelier",
+  "size": [
+   130,
+   130,
+   146
+  ],
+  "min": [
+   -65,
+   -65,
+   -142
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Coin",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "Coin",
+  "size": [
+   7,
+   1,
+   7
+  ],
+  "min": [
+   -3,
+   -1,
+   -3
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Coin_Pile",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "Coin_Pile",
+  "size": [
+   20,
+   15,
+   7
+  ],
+  "min": [
+   -10,
+   -8,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Coin_Pile_2",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "Coin_Pile_2",
+  "size": [
+   28,
+   20,
+   6
+  ],
+  "min": [
+   -17,
+   -10,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Crate_Metal",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "Crate_Metal",
+  "size": [
+   86,
+   87,
+   87
+  ],
+  "min": [
+   -43,
+   -43,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Crate_Wooden",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "Crate_Wooden",
+  "size": [
+   84,
+   91,
+   93
+  ],
+  "min": [
+   -43,
+   -45,
+   -5
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Dummy",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "Dummy",
+  "size": [
+   81,
+   58,
+   186
+  ],
+  "min": [
+   -40,
+   -29,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/FarmCrate_Apple",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "FarmCrate_Apple",
+  "size": [
+   71,
+   41,
+   24
+  ],
+  "min": [
+   -36,
+   -21,
+   -2
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/FarmCrate_Carrot",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "FarmCrate_Carrot",
+  "size": [
+   71,
+   57,
+   41
+  ],
+  "min": [
+   -36,
+   -36,
+   -2
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/FarmCrate_Empty",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "FarmCrate_Empty",
+  "size": [
+   71,
+   41,
+   24
+  ],
+  "min": [
+   -36,
+   -21,
+   -2
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Key_Gold",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "Key_Gold",
+  "size": [
+   6,
+   12,
+   1
+  ],
+  "min": [
+   -3,
+   -5,
+   -1
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Key_Metal",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "Key_Metal",
+  "size": [
+   5,
+   11,
+   1
+  ],
+  "min": [
+   -2,
+   -5,
+   -1
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Lantern_Wall",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "Lantern_Wall",
+  "size": [
+   36,
+   130,
+   134
+  ],
+  "min": [
+   -18,
+   -5,
+   8
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Mug",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "Mug",
+  "size": [
+   19,
+   15,
+   18
+  ],
+  "min": [
+   -7,
+   -7,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Nightstand_Shelf",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "Nightstand_Shelf",
+  "size": [
+   69,
+   39,
+   122
+  ],
+  "min": [
+   -35,
+   -19,
+   -1
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Peg_Rack",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "Peg_Rack",
+  "size": [
+   118,
+   10,
+   35
+  ],
+  "min": [
+   -59,
+   0,
+   -17
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Pickaxe_Bronze",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "Pickaxe_Bronze",
+  "size": [
+   81,
+   14,
+   120
+  ],
+  "min": [
+   -41,
+   -7,
+   -49
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Pot_1",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "Pot_1",
+  "size": [
+   54,
+   49,
+   22
+  ],
+  "min": [
+   -27,
+   -24,
+   -2
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Pot_1_Lid",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "Pot_1_Lid",
+  "size": [
+   54,
+   49,
+   28
+  ],
+  "min": [
+   -27,
+   -24,
+   -2
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Potion_1",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "Potion_1",
+  "size": [
+   11,
+   11,
+   14
+  ],
+  "min": [
+   -6,
+   -6,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Potion_2",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "Potion_2",
+  "size": [
+   13,
+   13,
+   26
+  ],
+  "min": [
+   -6,
+   -6,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Potion_4",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "Potion_4",
+  "size": [
+   15,
+   15,
+   20
+  ],
+  "min": [
+   -7,
+   -7,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Pouch_Large",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "Pouch_Large",
+  "size": [
+   23,
+   12,
+   16
+  ],
+  "min": [
+   -11,
+   -5,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Rope_1",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "Rope_1",
+  "size": [
+   56,
+   61,
+   10
+  ],
+  "min": [
+   -29,
+   -33,
+   -3
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Rope_2",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "Rope_2",
+  "size": [
+   81,
+   85,
+   12
+  ],
+  "min": [
+   -38,
+   -45,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Rope_3",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "Rope_3",
+  "size": [
+   123,
+   95,
+   10
+  ],
+  "min": [
+   -83,
+   -51,
+   -3
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Scroll_1",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "Scroll_1",
+  "size": [
+   24,
+   6,
+   6
+  ],
+  "min": [
+   -12,
+   -3,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Scroll_2",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "Scroll_2",
+  "size": [
+   23,
+   6,
+   6
+  ],
+  "min": [
+   -11,
+   -3,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Shelf_Arch",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "Shelf_Arch",
+  "size": [
+   125,
+   31,
+   159
+  ],
+  "min": [
+   -62,
+   0,
+   -61
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Shelf_Simple",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "Shelf_Simple",
+  "size": [
+   118,
+   29,
+   31
+  ],
+  "min": [
+   -59,
+   4,
+   -20
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Shelf_Small_Bottles",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "Shelf_Small_Bottles",
+  "size": [
+   114,
+   28,
+   65
+  ],
+  "min": [
+   -57,
+   1,
+   -2
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Shield_Wooden",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "Shield_Wooden",
+  "size": [
+   61,
+   18,
+   62
+  ],
+  "min": [
+   -31,
+   0,
+   -31
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/SmallBottle",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "SmallBottle",
+  "size": [
+   6,
+   5,
+   12
+  ],
+  "min": [
+   -3,
+   -2,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/SmallBottles_1",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "SmallBottles_1",
+  "size": [
+   22,
+   6,
+   15
+  ],
+  "min": [
+   -11,
+   -3,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Stall_Cart_Empty",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "Stall_Cart_Empty",
+  "size": [
+   302,
+   106,
+   263
+  ],
+  "min": [
+   -211,
+   -53,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Stall_Empty",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "Stall_Empty",
+  "size": [
+   184,
+   93,
+   263
+  ],
+  "min": [
+   -92,
+   -46,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Stool",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "Stool",
+  "size": [
+   47,
+   47,
+   59
+  ],
+  "min": [
+   -24,
+   -24,
+   -1
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Sword_Bronze",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "Sword_Bronze",
+  "size": [
+   27,
+   7,
+   113
+  ],
+  "min": [
+   -13,
+   -3,
+   -21
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Table_Fork",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "Table_Fork",
+  "size": [
+   5,
+   26,
+   1
+  ],
+  "min": [
+   -3,
+   -18,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Table_Knife",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "Table_Knife",
+  "size": [
+   4,
+   29,
+   1
+  ],
+  "min": [
+   -3,
+   -20,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Table_Large",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "Table_Large",
+  "size": [
+   285,
+   110,
+   81
+  ],
+  "min": [
+   -142,
+   -54,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Table_Plate",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "Table_Plate",
+  "size": [
+   33,
+   34,
+   2
+  ],
+  "min": [
+   -17,
+   -17,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Table_Spoon",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "Table_Spoon",
+  "size": [
+   5,
+   27,
+   2
+  ],
+  "min": [
+   -2,
+   -19,
+   -2
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Torch_Metal",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "Torch_Metal",
+  "size": [
+   22,
+   39,
+   65
+  ],
+  "min": [
+   -11,
+   0,
+   -28
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Vase_2",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "Vase_2",
+  "size": [
+   69,
+   69,
+   52
+  ],
+  "min": [
+   -35,
+   -35,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Vase_4",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "Vase_4",
+  "size": [
+   36,
+   36,
+   49
+  ],
+  "min": [
+   -18,
+   -18,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Vase_Rubble_Medium",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "Vase_Rubble_Medium",
+  "size": [
+   80,
+   60,
+   17
+  ],
+  "min": [
+   -38,
+   -28,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/WeaponStand",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "WeaponStand",
+  "size": [
+   139,
+   98,
+   111
+  ],
+  "min": [
+   -69,
+   -49,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Whetstone",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "Whetstone",
+  "size": [
+   114,
+   90,
+   117
+  ],
+  "min": [
+   -56,
+   -37,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Workbench",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "Workbench",
+  "size": [
+   202,
+   102,
+   89
+  ],
+  "min": [
+   -101,
+   -51,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Workbench_Drawers",
+  "folder": "/Game/KillGodot/Env/KG_Props/StaticMeshes",
+  "name": "Workbench_Drawers",
+  "size": [
+   42,
+   30,
+   24
+  ],
+  "min": [
+   30,
+   -50,
+   88
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Balcony_Cross_Corner",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Balcony_Cross_Corner",
+  "size": [
+   212,
+   212,
+   123
+  ],
+  "min": [
+   -102,
+   -110,
+   -11
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Balcony_Cross_Straight",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Balcony_Cross_Straight",
+  "size": [
+   203,
+   21,
+   123
+  ],
+  "min": [
+   -102,
+   90,
+   -11
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Balcony_Simple_Corner",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Balcony_Simple_Corner",
+  "size": [
+   210,
+   210,
+   123
+  ],
+  "min": [
+   -100,
+   -110,
+   -11
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Balcony_Simple_Straight",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Balcony_Simple_Straight",
+  "size": [
+   200,
+   21,
+   123
+  ],
+  "min": [
+   -100,
+   90,
+   -11
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Corner_ExteriorWide_Brick",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Corner_ExteriorWide_Brick",
+  "size": [
+   84,
+   84,
+   322
+  ],
+  "min": [
+   -49,
+   -31,
+   -13
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Corner_ExteriorWide_Wood",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Corner_ExteriorWide_Wood",
+  "size": [
+   29,
+   33,
+   300
+  ],
+  "min": [
+   -15,
+   -17,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Corner_Exterior_Brick",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Corner_Exterior_Brick",
+  "size": [
+   67,
+   70,
+   318
+  ],
+  "min": [
+   -42,
+   -28,
+   -9
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Corner_Exterior_TopDown",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Corner_Exterior_TopDown",
+  "size": [
+   9,
+   9,
+   247
+  ],
+  "min": [
+   -9,
+   0,
+   65
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Corner_Exterior_TopOnly",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Corner_Exterior_TopOnly",
+  "size": [
+   9,
+   9,
+   23
+  ],
+  "min": [
+   -9,
+   0,
+   288
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Corner_Exterior_Wood",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Corner_Exterior_Wood",
+  "size": [
+   21,
+   24,
+   300
+  ],
+  "min": [
+   -11,
+   -12,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Corner_Interior_Big",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Corner_Interior_Big",
+  "size": [
+   33,
+   37,
+   300
+  ],
+  "min": [
+   -1,
+   -32,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Corner_Interior_Small",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Corner_Interior_Small",
+  "size": [
+   21,
+   24,
+   300
+  ],
+  "min": [
+   19,
+   -42,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/DoorFrame_Flat_Brick",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "DoorFrame_Flat_Brick",
+  "size": [
+   172,
+   60,
+   250
+  ],
+  "min": [
+   -85,
+   -36,
+   -8
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/DoorFrame_Flat_WoodDark",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "DoorFrame_Flat_WoodDark",
+  "size": [
+   157,
+   39,
+   231
+  ],
+  "min": [
+   -79,
+   -24,
+   -1
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/DoorFrame_Round_Brick",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "DoorFrame_Round_Brick",
+  "size": [
+   170,
+   72,
+   282
+  ],
+  "min": [
+   -88,
+   -42,
+   -8
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/DoorFrame_Round_WoodDark",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "DoorFrame_Round_WoodDark",
+  "size": [
+   141,
+   54,
+   256
+  ],
+  "min": [
+   -70,
+   -24,
+   -1
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Door_1_Flat",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Door_1_Flat",
+  "size": [
+   112,
+   12,
+   210
+  ],
+  "min": [
+   -5,
+   -6,
+   4
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Door_1_Round",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Door_1_Round",
+  "size": [
+   112,
+   12,
+   232
+  ],
+  "min": [
+   -5,
+   -6,
+   3
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Door_2_Flat",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Door_2_Flat",
+  "size": [
+   111,
+   26,
+   210
+  ],
+  "min": [
+   -4,
+   -13,
+   4
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Door_2_Round",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Door_2_Round",
+  "size": [
+   112,
+   26,
+   233
+  ],
+  "min": [
+   -4,
+   -13,
+   3
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Door_4_Flat",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Door_4_Flat",
+  "size": [
+   112,
+   23,
+   209
+  ],
+  "min": [
+   -5,
+   -12,
+   4
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Door_4_Round",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Door_4_Round",
+  "size": [
+   113,
+   21,
+   233
+  ],
+  "min": [
+   -5,
+   -12,
+   3
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Door_8_Flat",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Door_8_Flat",
+  "size": [
+   112,
+   20,
+   210
+  ],
+  "min": [
+   -5,
+   -11,
+   4
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Door_8_Round",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Door_8_Round",
+  "size": [
+   115,
+   22,
+   233
+  ],
+  "min": [
+   -6,
+   -11,
+   3
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Floor_Brick",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Floor_Brick",
+  "size": [
+   200,
+   200,
+   2
+  ],
+  "min": [
+   -100,
+   -100,
+   -1
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Floor_RedBrick",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Floor_RedBrick",
+  "size": [
+   200,
+   200,
+   2
+  ],
+  "min": [
+   -100,
+   -100,
+   -1
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Floor_UnevenBrick",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Floor_UnevenBrick",
+  "size": [
+   200,
+   200,
+   2
+  ],
+  "min": [
+   -100,
+   -100,
+   -1
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Floor_WoodDark",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Floor_WoodDark",
+  "size": [
+   200,
+   200,
+   2
+  ],
+  "min": [
+   -100,
+   -100,
+   -1
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Floor_WoodDark_Half1",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Floor_WoodDark_Half1",
+  "size": [
+   100,
+   200,
+   2
+  ],
+  "min": [
+   -100,
+   -100,
+   -1
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Floor_WoodDark_Half2",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Floor_WoodDark_Half2",
+  "size": [
+   100,
+   200,
+   2
+  ],
+  "min": [
+   0,
+   -100,
+   -1
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Floor_WoodDark_Half3",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Floor_WoodDark_Half3",
+  "size": [
+   200,
+   100,
+   2
+  ],
+  "min": [
+   -100,
+   -100,
+   -1
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Floor_WoodDark_OverhangCorner",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Floor_WoodDark_OverhangCorner",
+  "size": [
+   100,
+   176,
+   2
+  ],
+  "min": [
+   -100,
+   -76,
+   -1
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Floor_WoodDark_OverhangCorner2",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Floor_WoodDark_OverhangCorner2",
+  "size": [
+   96,
+   175,
+   2
+  ],
+  "min": [
+   -100,
+   -75,
+   -1
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Floor_WoodLight",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Floor_WoodLight",
+  "size": [
+   200,
+   200,
+   2
+  ],
+  "min": [
+   -100,
+   -100,
+   -1
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Floor_WoodLight_OverhangCorner",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Floor_WoodLight_OverhangCorner",
+  "size": [
+   100,
+   176,
+   2
+  ],
+  "min": [
+   -100,
+   -76,
+   -1
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Floor_WoodLight_OverhangCorner2",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Floor_WoodLight_OverhangCorner2",
+  "size": [
+   96,
+   175,
+   2
+  ],
+  "min": [
+   -100,
+   -75,
+   -1
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/HoleCover_90Angle",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "HoleCover_90Angle",
+  "size": [
+   212,
+   212,
+   21
+  ],
+  "min": [
+   -100,
+   -112,
+   -11
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/HoleCover_90Half",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "HoleCover_90Half",
+  "size": [
+   112,
+   112,
+   21
+  ],
+  "min": [
+   0,
+   -112,
+   -11
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/HoleCover_90Stairs",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "HoleCover_90Stairs",
+  "size": [
+   32,
+   212,
+   21
+  ],
+  "min": [
+   80,
+   -112,
+   -11
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/HoleCover_Straight",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "HoleCover_Straight",
+  "size": [
+   200,
+   24,
+   21
+  ],
+  "min": [
+   -100,
+   -112,
+   -11
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/HoleCover_StraightHalf",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "HoleCover_StraightHalf",
+  "size": [
+   100,
+   24,
+   21
+  ],
+  "min": [
+   -50,
+   -112,
+   -11
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Overhang_Plaster_Corner",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Overhang_Plaster_Corner",
+  "size": [
+   311,
+   311,
+   314
+  ],
+  "min": [
+   -200,
+   -111,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Overhang_Plaster_Corner_Front",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Overhang_Plaster_Corner_Front",
+  "size": [
+   312,
+   312,
+   315
+  ],
+  "min": [
+   -200,
+   -112,
+   -4
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Overhang_Plaster_Long",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Overhang_Plaster_Long",
+  "size": [
+   200,
+   220,
+   303
+  ],
+  "min": [
+   -100,
+   -20,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Overhang_Plaster_Short",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Overhang_Plaster_Short",
+  "size": [
+   200,
+   132,
+   312
+  ],
+  "min": [
+   -100,
+   -20,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Overhang_RoofIncline_Plaster",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Overhang_RoofIncline_Plaster",
+  "size": [
+   200,
+   143,
+   27
+  ],
+  "min": [
+   -100,
+   -102,
+   -32
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Overhang_RoofIncline_UnevenBricks",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Overhang_RoofIncline_UnevenBricks",
+  "size": [
+   200,
+   143,
+   27
+  ],
+  "min": [
+   -100,
+   -102,
+   -32
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Overhang_Roof_Plaster",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Overhang_Roof_Plaster",
+  "size": [
+   200,
+   202,
+   27
+  ],
+  "min": [
+   -100,
+   -102,
+   -32
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Overhang_Roof_UnevenBricks",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Overhang_Roof_UnevenBricks",
+  "size": [
+   200,
+   202,
+   27
+  ],
+  "min": [
+   -100,
+   -102,
+   -32
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Overhang_Side_Plaster_Long_L",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Overhang_Side_Plaster_Long_L",
+  "size": [
+   48,
+   231,
+   613
+  ],
+  "min": [
+   -117,
+   -31,
+   -1
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Overhang_Side_Plaster_Long_R",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Overhang_Side_Plaster_Long_R",
+  "size": [
+   48,
+   231,
+   613
+  ],
+  "min": [
+   69,
+   -31,
+   -1
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Overhang_Side_Plaster_Short_L",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Overhang_Side_Plaster_Short_L",
+  "size": [
+   48,
+   144,
+   614
+  ],
+  "min": [
+   -117,
+   -31,
+   -1
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Overhang_Side_Plaster_Short_R",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Overhang_Side_Plaster_Short_R",
+  "size": [
+   48,
+   144,
+   614
+  ],
+  "min": [
+   69,
+   -31,
+   -1
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Overhang_Side_UnevenBrick_Long_L",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Overhang_Side_UnevenBrick_Long_L",
+  "size": [
+   48,
+   231,
+   613
+  ],
+  "min": [
+   -117,
+   -31,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Overhang_Side_UnevenBrick_Long_R",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Overhang_Side_UnevenBrick_Long_R",
+  "size": [
+   48,
+   231,
+   613
+  ],
+  "min": [
+   69,
+   -31,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Overhang_Side_UnevenBrick_Short_L",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Overhang_Side_UnevenBrick_Short_L",
+  "size": [
+   48,
+   144,
+   613
+  ],
+  "min": [
+   -117,
+   -31,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Overhang_Side_UnevenBrick_Short_R",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Overhang_Side_UnevenBrick_Short_R",
+  "size": [
+   48,
+   144,
+   613
+  ],
+  "min": [
+   69,
+   -31,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Overhang_UnevenBrick_Corner",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Overhang_UnevenBrick_Corner",
+  "size": [
+   312,
+   311,
+   314
+  ],
+  "min": [
+   -200,
+   -111,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Overhang_UnevenBrick_Corner_Front",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Overhang_UnevenBrick_Corner_Front",
+  "size": [
+   312,
+   312,
+   312
+  ],
+  "min": [
+   -200,
+   -112,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Overhang_UnevenBrick_Long",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Overhang_UnevenBrick_Long",
+  "size": [
+   200,
+   220,
+   303
+  ],
+  "min": [
+   -100,
+   -20,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Overhang_UnevenBrick_Short",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Overhang_UnevenBrick_Short",
+  "size": [
+   200,
+   132,
+   312
+  ],
+  "min": [
+   -100,
+   -20,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Prop_Brick1",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Prop_Brick1",
+  "size": [
+   35,
+   25,
+   21
+  ],
+  "min": [
+   -17,
+   -13,
+   -11
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Prop_Brick2",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Prop_Brick2",
+  "size": [
+   40,
+   22,
+   24
+  ],
+  "min": [
+   -19,
+   -11,
+   -11
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Prop_Brick3",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Prop_Brick3",
+  "size": [
+   38,
+   22,
+   25
+  ],
+  "min": [
+   -18,
+   -11,
+   -11
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Prop_Brick4",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Prop_Brick4",
+  "size": [
+   26,
+   22,
+   25
+  ],
+  "min": [
+   -13,
+   -11,
+   -11
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Prop_Chimney",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Prop_Chimney",
+  "size": [
+   97,
+   100,
+   318
+  ],
+  "min": [
+   -50,
+   -50,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Prop_Chimney2",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Prop_Chimney2",
+  "size": [
+   95,
+   99,
+   300
+  ],
+  "min": [
+   -50,
+   -49,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Prop_Crate",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Prop_Crate",
+  "size": [
+   112,
+   121,
+   107
+  ],
+  "min": [
+   -56,
+   -61,
+   -1
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Prop_ExteriorBorder_Corner",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Prop_ExteriorBorder_Corner",
+  "size": [
+   70,
+   70,
+   13
+  ],
+  "min": [
+   -70,
+   0,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Prop_ExteriorBorder_Straight1",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Prop_ExteriorBorder_Straight1",
+  "size": [
+   200,
+   70,
+   13
+  ],
+  "min": [
+   -100,
+   0,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Prop_ExteriorBorder_Straight2",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Prop_ExteriorBorder_Straight2",
+  "size": [
+   200,
+   70,
+   13
+  ],
+  "min": [
+   -100,
+   0,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Prop_MetalFence_Ornament",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Prop_MetalFence_Ornament",
+  "size": [
+   197,
+   16,
+   308
+  ],
+  "min": [
+   -98,
+   -8,
+   -23
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Prop_MetalFence_Simple",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Prop_MetalFence_Simple",
+  "size": [
+   195,
+   16,
+   292
+  ],
+  "min": [
+   -97,
+   -8,
+   -5
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Prop_Support",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Prop_Support",
+  "size": [
+   20,
+   204,
+   171
+  ],
+  "min": [
+   -10,
+   -12,
+   121
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Prop_Vine1",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Prop_Vine1",
+  "size": [
+   154,
+   22,
+   260
+  ],
+  "min": [
+   -78,
+   -4,
+   -212
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Prop_Vine2",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Prop_Vine2",
+  "size": [
+   139,
+   21,
+   260
+  ],
+  "min": [
+   -49,
+   -4,
+   -212
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Prop_Vine4",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Prop_Vine4",
+  "size": [
+   102,
+   15,
+   159
+  ],
+  "min": [
+   -72,
+   -3,
+   -101
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Prop_Vine5",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Prop_Vine5",
+  "size": [
+   230,
+   113,
+   299
+  ],
+  "min": [
+   -132,
+   -102,
+   -195
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Prop_Vine6",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Prop_Vine6",
+  "size": [
+   414,
+   147,
+   247
+  ],
+  "min": [
+   -204,
+   -137,
+   -107
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Prop_Vine9",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Prop_Vine9",
+  "size": [
+   414,
+   147,
+   147
+  ],
+  "min": [
+   -204,
+   -75,
+   -63
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Prop_Wagon",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Prop_Wagon",
+  "size": [
+   204,
+   405,
+   159
+  ],
+  "min": [
+   -102,
+   -318,
+   -2
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Prop_WoodenFence_Extension1",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Prop_WoodenFence_Extension1",
+  "size": [
+   205,
+   11,
+   84
+  ],
+  "min": [
+   -101,
+   -6,
+   -3
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Prop_WoodenFence_Extension2",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Prop_WoodenFence_Extension2",
+  "size": [
+   203,
+   11,
+   84
+  ],
+  "min": [
+   -99,
+   -6,
+   -3
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Prop_WoodenFence_Single",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Prop_WoodenFence_Single",
+  "size": [
+   206,
+   12,
+   84
+  ],
+  "min": [
+   -103,
+   -6,
+   -3
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Roof_2x4_RoundTile",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Roof_2x4_RoundTile",
+  "size": [
+   332,
+   432,
+   267
+  ],
+  "min": [
+   -166,
+   -219,
+   -34
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Roof_Dormer_RoundTile",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Roof_Dormer_RoundTile",
+  "size": [
+   202,
+   244,
+   281
+  ],
+  "min": [
+   -9,
+   -122,
+   -11
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Roof_FrontSupports",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Roof_FrontSupports",
+  "size": [
+   549,
+   65,
+   23
+  ],
+  "min": [
+   -274,
+   -3,
+   -12
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Roof_Front_Brick2",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Roof_Front_Brick2",
+  "size": [
+   261,
+   75,
+   177
+  ],
+  "min": [
+   -133,
+   -33,
+   -13
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Roof_Front_Brick4",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Roof_Front_Brick4",
+  "size": [
+   440,
+   113,
+   307
+  ],
+  "min": [
+   -218,
+   -33,
+   -13
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Roof_Front_Brick4_Half_L",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Roof_Front_Brick4_Half_L",
+  "size": [
+   241,
+   49,
+   320
+  ],
+  "min": [
+   -228,
+   -33,
+   -13
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Roof_Front_Brick4_Half_R",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Roof_Front_Brick4_Half_R",
+  "size": [
+   242,
+   49,
+   320
+  ],
+  "min": [
+   -13,
+   -33,
+   -13
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Roof_Front_Brick6",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Roof_Front_Brick6",
+  "size": [
+   669,
+   119,
+   456
+  ],
+  "min": [
+   -335,
+   -33,
+   -13
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Roof_Front_Brick6_Half_L",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Roof_Front_Brick6_Half_L",
+  "size": [
+   341,
+   54,
+   452
+  ],
+  "min": [
+   -336,
+   -33,
+   -13
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Roof_Front_Brick6_Half_R",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Roof_Front_Brick6_Half_R",
+  "size": [
+   340,
+   54,
+   452
+  ],
+  "min": [
+   -5,
+   -33,
+   -13
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Roof_Front_Brick8",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Roof_Front_Brick8",
+  "size": [
+   851,
+   119,
+   545
+  ],
+  "min": [
+   -425,
+   -33,
+   -13
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Roof_Front_Brick8_Half_L",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Roof_Front_Brick8_Half_L",
+  "size": [
+   433,
+   55,
+   545
+  ],
+  "min": [
+   -428,
+   -33,
+   -13
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Roof_Front_Brick8_Half_R",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Roof_Front_Brick8_Half_R",
+  "size": [
+   435,
+   55,
+   545
+  ],
+  "min": [
+   -5,
+   -33,
+   -13
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Roof_Log",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Roof_Log",
+  "size": [
+   115,
+   1070,
+   139
+  ],
+  "min": [
+   -59,
+   -535,
+   385
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Roof_Modular_RoundTiles",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Roof_Modular_RoundTiles",
+  "size": [
+   66,
+   225,
+   51
+  ],
+  "min": [
+   -33,
+   -121,
+   1
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Roof_RoundTile_2x1",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Roof_RoundTile_2x1",
+  "size": [
+   332,
+   197,
+   266
+  ],
+  "min": [
+   -166,
+   -47,
+   -34
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Roof_RoundTile_2x1_Long",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Roof_RoundTile_2x1_Long",
+  "size": [
+   435,
+   198,
+   333
+  ],
+  "min": [
+   -217,
+   -47,
+   -101
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Roof_RoundTiles_4x4",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Roof_RoundTiles_4x4",
+  "size": [
+   551,
+   584,
+   432
+  ],
+  "min": [
+   -276,
+   -288,
+   -52
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Roof_RoundTiles_4x6",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Roof_RoundTiles_4x6",
+  "size": [
+   551,
+   786,
+   423
+  ],
+  "min": [
+   -276,
+   -393,
+   -52
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Roof_RoundTiles_4x8",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Roof_RoundTiles_4x8",
+  "size": [
+   551,
+   994,
+   431
+  ],
+  "min": [
+   -276,
+   -497,
+   -52
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Roof_RoundTiles_6x10",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Roof_RoundTiles_6x10",
+  "size": [
+   826,
+   1217,
+   594
+  ],
+  "min": [
+   -413,
+   -617,
+   -78
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Roof_RoundTiles_6x12",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Roof_RoundTiles_6x12",
+  "size": [
+   826,
+   1375,
+   574
+  ],
+  "min": [
+   -413,
+   -686,
+   -78
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Roof_RoundTiles_6x14",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Roof_RoundTiles_6x14",
+  "size": [
+   826,
+   1575,
+   582
+  ],
+  "min": [
+   -413,
+   -788,
+   -78
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Roof_RoundTiles_6x4",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Roof_RoundTiles_6x4",
+  "size": [
+   826,
+   525,
+   578
+  ],
+  "min": [
+   -413,
+   -20,
+   -88
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Roof_RoundTiles_6x6",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Roof_RoundTiles_6x6",
+  "size": [
+   826,
+   819,
+   575
+  ],
+  "min": [
+   -413,
+   -410,
+   -78
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Roof_RoundTiles_6x8",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Roof_RoundTiles_6x8",
+  "size": [
+   826,
+   980,
+   575
+  ],
+  "min": [
+   -413,
+   -485,
+   -78
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Roof_RoundTiles_8x10",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Roof_RoundTiles_8x10",
+  "size": [
+   1044,
+   1209,
+   720
+  ],
+  "min": [
+   -528,
+   -604,
+   -104
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Roof_RoundTiles_8x12",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Roof_RoundTiles_8x12",
+  "size": [
+   1031,
+   1429,
+   706
+  ],
+  "min": [
+   -515,
+   -719,
+   -91
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Roof_RoundTiles_8x14",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Roof_RoundTiles_8x14",
+  "size": [
+   1090,
+   1605,
+   728
+  ],
+  "min": [
+   -550,
+   -813,
+   -118
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Roof_RoundTiles_8x8",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Roof_RoundTiles_8x8",
+  "size": [
+   1099,
+   1054,
+   727
+  ],
+  "min": [
+   -550,
+   -528,
+   -118
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Roof_Support2",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Roof_Support2",
+  "size": [
+   20,
+   77,
+   74
+  ],
+  "min": [
+   -10,
+   0,
+   -68
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Roof_Tower_RoundTiles",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Roof_Tower_RoundTiles",
+  "size": [
+   569,
+   578,
+   749
+  ],
+  "min": [
+   -284,
+   -289,
+   -70
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Roof_Wooden_2x1",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Roof_Wooden_2x1",
+  "size": [
+   226,
+   156,
+   125
+  ],
+  "min": [
+   -113,
+   -4,
+   -16
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Roof_Wooden_2x1_Center",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Roof_Wooden_2x1_Center",
+  "size": [
+   200,
+   150,
+   121
+  ],
+  "min": [
+   -100,
+   0,
+   -15
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Roof_Wooden_2x1_Center_Mirror",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Roof_Wooden_2x1_Center_Mirror",
+  "size": [
+   200,
+   150,
+   121
+  ],
+  "min": [
+   -100,
+   -150,
+   -15
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Roof_Wooden_2x1_Corner",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Roof_Wooden_2x1_Corner",
+  "size": [
+   154,
+   156,
+   118
+  ],
+  "min": [
+   -10,
+   -144,
+   -17
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Roof_Wooden_2x1_L",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Roof_Wooden_2x1_L",
+  "size": [
+   213,
+   156,
+   125
+  ],
+  "min": [
+   -113,
+   -4,
+   -16
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Roof_Wooden_2x1_Middle",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Roof_Wooden_2x1_Middle",
+  "size": [
+   200,
+   200,
+   14
+  ],
+  "min": [
+   -100,
+   -100,
+   92
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Roof_Wooden_2x1_R",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Roof_Wooden_2x1_R",
+  "size": [
+   213,
+   156,
+   125
+  ],
+  "min": [
+   -100,
+   -4,
+   -16
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Stair_Interior_Rails",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Stair_Interior_Rails",
+  "size": [
+   176,
+   459,
+   393
+  ],
+  "min": [
+   -86,
+   -435,
+   2
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Stair_Interior_Simple",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Stair_Interior_Simple",
+  "size": [
+   177,
+   464,
+   310
+  ],
+  "min": [
+   -88,
+   -458,
+   -1
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Stair_Interior_Solid",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Stair_Interior_Solid",
+  "size": [
+   178,
+   479,
+   321
+  ],
+  "min": [
+   -89,
+   -443,
+   -3
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Stair_Interior_SolidExtended",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Stair_Interior_SolidExtended",
+  "size": [
+   193,
+   627,
+   329
+  ],
+  "min": [
+   -97,
+   -591,
+   -11
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Stairs_Exterior_NoFirstStep",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Stairs_Exterior_NoFirstStep",
+  "size": [
+   200,
+   208,
+   100
+  ],
+  "min": [
+   -100,
+   -108,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Stairs_Exterior_Platform",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Stairs_Exterior_Platform",
+  "size": [
+   200,
+   200,
+   100
+  ],
+  "min": [
+   -100,
+   -100,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Stairs_Exterior_Platform45",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Stairs_Exterior_Platform45",
+  "size": [
+   200,
+   200,
+   100
+  ],
+  "min": [
+   -100,
+   -100,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Stairs_Exterior_Platform45Clean",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Stairs_Exterior_Platform45Clean",
+  "size": [
+   200,
+   200,
+   100
+  ],
+  "min": [
+   -100,
+   -100,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Stairs_Exterior_PlatformU",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Stairs_Exterior_PlatformU",
+  "size": [
+   200,
+   200,
+   100
+  ],
+  "min": [
+   -100,
+   -100,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Stairs_Exterior_SidePlatform",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Stairs_Exterior_SidePlatform",
+  "size": [
+   200,
+   200,
+   100
+  ],
+  "min": [
+   -100,
+   -100,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Stairs_Exterior_Sides",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Stairs_Exterior_Sides",
+  "size": [
+   200,
+   200,
+   100
+  ],
+  "min": [
+   -100,
+   -100,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Stairs_Exterior_Sides45",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Stairs_Exterior_Sides45",
+  "size": [
+   200,
+   200,
+   100
+  ],
+  "min": [
+   -100,
+   -100,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Stairs_Exterior_SidesU",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Stairs_Exterior_SidesU",
+  "size": [
+   200,
+   200,
+   100
+  ],
+  "min": [
+   -100,
+   -100,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Stairs_Exterior_SingleSide",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Stairs_Exterior_SingleSide",
+  "size": [
+   20,
+   200,
+   100
+  ],
+  "min": [
+   -100,
+   -100,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Stairs_Exterior_SingleSideThick",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Stairs_Exterior_SingleSideThick",
+  "size": [
+   40,
+   200,
+   100
+  ],
+  "min": [
+   -20,
+   -100,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Stairs_Exterior_Straight",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Stairs_Exterior_Straight",
+  "size": [
+   200,
+   208,
+   120
+  ],
+  "min": [
+   -100,
+   -108,
+   -20
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Stairs_Exterior_Straight_Center",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Stairs_Exterior_Straight_Center",
+  "size": [
+   200,
+   208,
+   102
+  ],
+  "min": [
+   -100,
+   -108,
+   -20
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Stairs_Exterior_Straight_L",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Stairs_Exterior_Straight_L",
+  "size": [
+   200,
+   208,
+   120
+  ],
+  "min": [
+   -100,
+   -108,
+   -20
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Stairs_Exterior_Straight_R",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Stairs_Exterior_Straight_R",
+  "size": [
+   200,
+   208,
+   120
+  ],
+  "min": [
+   -100,
+   -108,
+   -20
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Wall_Arch",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Wall_Arch",
+  "size": [
+   200,
+   6,
+   300
+  ],
+  "min": [
+   -100,
+   0,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Wall_BottomCover",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Wall_BottomCover",
+  "size": [
+   200,
+   43,
+   24
+  ],
+  "min": [
+   -100,
+   -31,
+   -12
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Wall_Plaster_Door_Flat",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Wall_Plaster_Door_Flat",
+  "size": [
+   200,
+   41,
+   312
+  ],
+  "min": [
+   -100,
+   -31,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Wall_Plaster_Door_Round",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Wall_Plaster_Door_Round",
+  "size": [
+   200,
+   41,
+   312
+  ],
+  "min": [
+   -100,
+   -31,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Wall_Plaster_Door_RoundInset",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Wall_Plaster_Door_RoundInset",
+  "size": [
+   200,
+   109,
+   312
+  ],
+  "min": [
+   -100,
+   -100,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Wall_Plaster_Straight",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Wall_Plaster_Straight",
+  "size": [
+   200,
+   41,
+   312
+  ],
+  "min": [
+   -100,
+   -31,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Wall_Plaster_Straight_Base",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Wall_Plaster_Straight_Base",
+  "size": [
+   200,
+   41,
+   312
+  ],
+  "min": [
+   -100,
+   -31,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Wall_Plaster_Straight_L",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Wall_Plaster_Straight_L",
+  "size": [
+   200,
+   41,
+   312
+  ],
+  "min": [
+   -100,
+   -31,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Wall_Plaster_Straight_R",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Wall_Plaster_Straight_R",
+  "size": [
+   200,
+   41,
+   312
+  ],
+  "min": [
+   -100,
+   -31,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Wall_Plaster_Window_Thin_Round",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Wall_Plaster_Window_Thin_Round",
+  "size": [
+   200,
+   41,
+   312
+  ],
+  "min": [
+   -100,
+   -31,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Wall_Plaster_Window_Wide_Flat",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Wall_Plaster_Window_Wide_Flat",
+  "size": [
+   200,
+   41,
+   312
+  ],
+  "min": [
+   -100,
+   -31,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Wall_Plaster_Window_Wide_Flat2",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Wall_Plaster_Window_Wide_Flat2",
+  "size": [
+   200,
+   41,
+   315
+  ],
+  "min": [
+   -100,
+   -31,
+   -2
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Wall_Plaster_Window_Wide_Round",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Wall_Plaster_Window_Wide_Round",
+  "size": [
+   200,
+   41,
+   312
+  ],
+  "min": [
+   -100,
+   -31,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Wall_Plaster_WoodGrid",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Wall_Plaster_WoodGrid",
+  "size": [
+   203,
+   41,
+   312
+  ],
+  "min": [
+   -101,
+   -31,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Wall_UnevenBrick_Door_Flat",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Wall_UnevenBrick_Door_Flat",
+  "size": [
+   200,
+   41,
+   312
+  ],
+  "min": [
+   -100,
+   -31,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Wall_UnevenBrick_Door_Round",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Wall_UnevenBrick_Door_Round",
+  "size": [
+   200,
+   41,
+   312
+  ],
+  "min": [
+   -100,
+   -31,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Wall_UnevenBrick_Straight",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Wall_UnevenBrick_Straight",
+  "size": [
+   200,
+   41,
+   312
+  ],
+  "min": [
+   -100,
+   -31,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Wall_UnevenBrick_Window_Thin_Round",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Wall_UnevenBrick_Window_Thin_Round",
+  "size": [
+   200,
+   41,
+   312
+  ],
+  "min": [
+   -100,
+   -31,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Wall_UnevenBrick_Window_Wide_Flat",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Wall_UnevenBrick_Window_Wide_Flat",
+  "size": [
+   200,
+   41,
+   312
+  ],
+  "min": [
+   -100,
+   -31,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Wall_UnevenBrick_Window_Wide_Round",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Wall_UnevenBrick_Window_Wide_Round",
+  "size": [
+   200,
+   41,
+   312
+  ],
+  "min": [
+   -100,
+   -31,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/WindowShutters_Thin_Flat_Closed",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "WindowShutters_Thin_Flat_Closed",
+  "size": [
+   85,
+   14,
+   142
+  ],
+  "min": [
+   -42,
+   17,
+   109
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/WindowShutters_Thin_Flat_Open",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "WindowShutters_Thin_Flat_Open",
+  "size": [
+   135,
+   38,
+   142
+  ],
+  "min": [
+   -69,
+   14,
+   109
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/WindowShutters_Thin_Round_Closed",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "WindowShutters_Thin_Round_Closed",
+  "size": [
+   87,
+   14,
+   152
+  ],
+  "min": [
+   -43,
+   15,
+   109
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/WindowShutters_Thin_Round_Open",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "WindowShutters_Thin_Round_Open",
+  "size": [
+   161,
+   38,
+   152
+  ],
+  "min": [
+   -82,
+   6,
+   109
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/WindowShutters_Wide_Flat_Closed",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "WindowShutters_Wide_Flat_Closed",
+  "size": [
+   135,
+   14,
+   142
+  ],
+  "min": [
+   -67,
+   15,
+   109
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/WindowShutters_Wide_Flat_Open",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "WindowShutters_Wide_Flat_Open",
+  "size": [
+   248,
+   46,
+   142
+  ],
+  "min": [
+   -124,
+   14,
+   109
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/WindowShutters_Wide_Round_Closed",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "WindowShutters_Wide_Round_Closed",
+  "size": [
+   135,
+   15,
+   165
+  ],
+  "min": [
+   -67,
+   14,
+   109
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/WindowShutters_Wide_Round_Open",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "WindowShutters_Wide_Round_Open",
+  "size": [
+   230,
+   47,
+   165
+  ],
+  "min": [
+   -120,
+   9,
+   109
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Window_Roof_Thin",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Window_Roof_Thin",
+  "size": [
+   85,
+   118,
+   118
+  ],
+  "min": [
+   -39,
+   -8,
+   134
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Window_Roof_Wide",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Window_Roof_Wide",
+  "size": [
+   142,
+   118,
+   118
+  ],
+  "min": [
+   -66,
+   -8,
+   134
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Window_Thin_Flat1",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Window_Thin_Flat1",
+  "size": [
+   79,
+   44,
+   156
+  ],
+  "min": [
+   -41,
+   -27,
+   97
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Window_Thin_Round1",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Window_Thin_Round1",
+  "size": [
+   89,
+   35,
+   161
+  ],
+  "min": [
+   -44,
+   -25,
+   102
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Window_Wide_Flat1",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Window_Wide_Flat1",
+  "size": [
+   161,
+   68,
+   158
+  ],
+  "min": [
+   -80,
+   -27,
+   94
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/KG_Village/StaticMeshes/Window_Wide_Round1",
+  "folder": "/Game/KillGodot/Env/KG_Village/StaticMeshes",
+  "name": "Window_Wide_Round1",
+  "size": [
+   137,
+   55,
+   173
+  ],
+  "min": [
+   -69,
+   -27,
+   102
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes/SM_KG_Pirate_Barrel_0",
+  "folder": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes",
+  "name": "SM_KG_Pirate_Barrel_0",
+  "size": [
+   100,
+   99,
+   100
+  ],
+  "min": [
+   -50,
+   -49,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes/SM_KG_Pirate_Barrel_1",
+  "folder": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes",
+  "name": "SM_KG_Pirate_Barrel_1",
+  "size": [
+   100,
+   99,
+   103
+  ],
+  "min": [
+   -50,
+   -49,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes/SM_KG_Pirate_Barrel_10",
+  "folder": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes",
+  "name": "SM_KG_Pirate_Barrel_10",
+  "size": [
+   100,
+   99,
+   100
+  ],
+  "min": [
+   -50,
+   -49,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes/SM_KG_Pirate_Barrel_11",
+  "folder": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes",
+  "name": "SM_KG_Pirate_Barrel_11",
+  "size": [
+   100,
+   99,
+   103
+  ],
+  "min": [
+   -50,
+   -49,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes/SM_KG_Pirate_Barrel_12",
+  "folder": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes",
+  "name": "SM_KG_Pirate_Barrel_12",
+  "size": [
+   100,
+   99,
+   107
+  ],
+  "min": [
+   -50,
+   -49,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes/SM_KG_Pirate_Barrel_13",
+  "folder": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes",
+  "name": "SM_KG_Pirate_Barrel_13",
+  "size": [
+   100,
+   99,
+   116
+  ],
+  "min": [
+   -50,
+   -49,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes/SM_KG_Pirate_Barrel_2",
+  "folder": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes",
+  "name": "SM_KG_Pirate_Barrel_2",
+  "size": [
+   100,
+   99,
+   103
+  ],
+  "min": [
+   -50,
+   -49,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes/SM_KG_Pirate_Barrel_3",
+  "folder": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes",
+  "name": "SM_KG_Pirate_Barrel_3",
+  "size": [
+   100,
+   99,
+   100
+  ],
+  "min": [
+   -50,
+   -49,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes/SM_KG_Pirate_Barrel_4",
+  "folder": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes",
+  "name": "SM_KG_Pirate_Barrel_4",
+  "size": [
+   100,
+   99,
+   100
+  ],
+  "min": [
+   -50,
+   -49,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes/SM_KG_Pirate_Barrel_5",
+  "folder": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes",
+  "name": "SM_KG_Pirate_Barrel_5",
+  "size": [
+   100,
+   99,
+   111
+  ],
+  "min": [
+   -50,
+   -49,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes/SM_KG_Pirate_Barrel_6",
+  "folder": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes",
+  "name": "SM_KG_Pirate_Barrel_6",
+  "size": [
+   100,
+   99,
+   108
+  ],
+  "min": [
+   -50,
+   -49,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes/SM_KG_Pirate_Barrel_7",
+  "folder": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes",
+  "name": "SM_KG_Pirate_Barrel_7",
+  "size": [
+   100,
+   99,
+   113
+  ],
+  "min": [
+   -50,
+   -49,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes/SM_KG_Pirate_Barrel_8",
+  "folder": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes",
+  "name": "SM_KG_Pirate_Barrel_8",
+  "size": [
+   100,
+   99,
+   111
+  ],
+  "min": [
+   -50,
+   -49,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes/SM_KG_Pirate_Barrel_9",
+  "folder": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes",
+  "name": "SM_KG_Pirate_Barrel_9",
+  "size": [
+   100,
+   99,
+   111
+  ],
+  "min": [
+   -50,
+   -49,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes/SM_KG_Pirate_Broken_Flag_0",
+  "folder": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes",
+  "name": "SM_KG_Pirate_Broken_Flag_0",
+  "size": [
+   18,
+   21,
+   323
+  ],
+  "min": [
+   -9,
+   -10,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes/SM_KG_Pirate_Broken_Flag_1",
+  "folder": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes",
+  "name": "SM_KG_Pirate_Broken_Flag_1",
+  "size": [
+   316,
+   406,
+   28
+  ],
+  "min": [
+   -158,
+   -203,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes/SM_KG_Pirate_Cannon_Ball_0",
+  "folder": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes",
+  "name": "SM_KG_Pirate_Cannon_Ball_0",
+  "size": [
+   98,
+   97,
+   76
+  ],
+  "min": [
+   -49,
+   -49,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes/SM_KG_Pirate_Cannon_Ball_1",
+  "folder": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes",
+  "name": "SM_KG_Pirate_Cannon_Ball_1",
+  "size": [
+   113,
+   112,
+   88
+  ],
+  "min": [
+   -57,
+   -56,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes/SM_KG_Pirate_FlagLow_0",
+  "folder": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes",
+  "name": "SM_KG_Pirate_FlagLow_0",
+  "size": [
+   28,
+   28,
+   756
+  ],
+  "min": [
+   -14,
+   -14,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes/SM_KG_Pirate_FlagLow_1",
+  "folder": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes",
+  "name": "SM_KG_Pirate_FlagLow_1",
+  "size": [
+   141,
+   1,
+   118
+  ],
+  "min": [
+   -70,
+   -1,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes/SM_KG_Pirate_FlagTall_0",
+  "folder": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes",
+  "name": "SM_KG_Pirate_FlagTall_0",
+  "size": [
+   181,
+   1,
+   118
+  ],
+  "min": [
+   -90,
+   -1,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes/SM_KG_Pirate_FlagTall_1",
+  "folder": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes",
+  "name": "SM_KG_Pirate_FlagTall_1",
+  "size": [
+   28,
+   28,
+   966
+  ],
+  "min": [
+   -14,
+   -14,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes/SM_KG_Pirate_Planks_0",
+  "folder": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes",
+  "name": "SM_KG_Pirate_Planks_0",
+  "size": [
+   197,
+   45,
+   10
+  ],
+  "min": [
+   -99,
+   -22,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes/SM_KG_Pirate_Planks_1",
+  "folder": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes",
+  "name": "SM_KG_Pirate_Planks_1",
+  "size": [
+   232,
+   44,
+   10
+  ],
+  "min": [
+   -116,
+   -22,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes/SM_KG_Pirate_Planks_2",
+  "folder": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes",
+  "name": "SM_KG_Pirate_Planks_2",
+  "size": [
+   197,
+   45,
+   10
+  ],
+  "min": [
+   -99,
+   -22,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes/SM_KG_Pirate_Planks_3",
+  "folder": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes",
+  "name": "SM_KG_Pirate_Planks_3",
+  "size": [
+   232,
+   44,
+   10
+  ],
+  "min": [
+   -116,
+   -22,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes/SM_KG_Pirate_Torch_0",
+  "folder": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes",
+  "name": "SM_KG_Pirate_Torch_0",
+  "size": [
+   65,
+   27,
+   267
+  ],
+  "min": [
+   -32,
+   -14,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes/SM_KG_Pirate_Torch_1",
+  "folder": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes",
+  "name": "SM_KG_Pirate_Torch_1",
+  "size": [
+   58,
+   39,
+   270
+  ],
+  "min": [
+   -29,
+   -20,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes/SM_KG_Pirate_Torch_2",
+  "folder": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes",
+  "name": "SM_KG_Pirate_Torch_2",
+  "size": [
+   65,
+   27,
+   267
+  ],
+  "min": [
+   -32,
+   -14,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes/SM_KG_Pirate_Torch_3",
+  "folder": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes",
+  "name": "SM_KG_Pirate_Torch_3",
+  "size": [
+   49,
+   27,
+   243
+  ],
+  "min": [
+   -25,
+   -14,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes/SM_KG_Pirate_cannon_0",
+  "folder": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes",
+  "name": "SM_KG_Pirate_cannon_0",
+  "size": [
+   357,
+   197,
+   194
+  ],
+  "min": [
+   -178,
+   -99,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes/SM_KG_Pirate_cannon_0_001",
+  "folder": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes",
+  "name": "SM_KG_Pirate_cannon_0_001",
+  "size": [
+   254,
+   152,
+   131
+  ],
+  "min": [
+   -127,
+   -76,
+   8
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes/SM_KG_Pirate_chest_common_0",
+  "folder": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes",
+  "name": "SM_KG_Pirate_chest_common_0",
+  "size": [
+   101,
+   115,
+   96
+  ],
+  "min": [
+   -51,
+   -57,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes/SM_KG_Pirate_chest_diamond_0",
+  "folder": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes",
+  "name": "SM_KG_Pirate_chest_diamond_0",
+  "size": [
+   138,
+   157,
+   131
+  ],
+  "min": [
+   -69,
+   -78,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes/SM_KG_Pirate_chest_gold_0",
+  "folder": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes",
+  "name": "SM_KG_Pirate_chest_gold_0",
+  "size": [
+   118,
+   134,
+   112
+  ],
+  "min": [
+   -59,
+   -67,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes/SM_KG_Pirate_chest_silver_0",
+  "folder": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes",
+  "name": "SM_KG_Pirate_chest_silver_0",
+  "size": [
+   109,
+   124,
+   104
+  ],
+  "min": [
+   -54,
+   -62,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes/SM_KG_Pirate_crates_0",
+  "folder": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes",
+  "name": "SM_KG_Pirate_crates_0",
+  "size": [
+   70,
+   70,
+   70
+  ],
+  "min": [
+   -35,
+   -35,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes/SM_KG_Pirate_crates_1",
+  "folder": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes",
+  "name": "SM_KG_Pirate_crates_1",
+  "size": [
+   70,
+   70,
+   70
+  ],
+  "min": [
+   -35,
+   -35,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes/SM_KG_Pirate_pier_0",
+  "folder": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes",
+  "name": "SM_KG_Pirate_pier_0",
+  "size": [
+   488,
+   250,
+   243
+  ],
+  "min": [
+   -244,
+   -125,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes/SM_KG_Pirate_pier_1",
+  "folder": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes",
+  "name": "SM_KG_Pirate_pier_1",
+  "size": [
+   488,
+   255,
+   244
+  ],
+  "min": [
+   -244,
+   -128,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes/SM_KG_Pirate_pier_2",
+  "folder": "/Game/KillGodot/Env/PirateC3/KG_PirateProps_Clean2/StaticMeshes",
+  "name": "SM_KG_Pirate_pier_2",
+  "size": [
+   485,
+   255,
+   244
+  ],
+  "min": [
+   -242,
+   -128,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/WaterProps/KG_WaterProps/StaticMeshes/SM_KG_Bobber",
+  "folder": "/Game/KillGodot/Env/WaterProps/KG_WaterProps/StaticMeshes",
+  "name": "SM_KG_Bobber",
+  "size": [
+   6,
+   6,
+   12
+  ],
+  "min": [
+   -3,
+   -3,
+   -5
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/WaterProps/KG_WaterProps/StaticMeshes/SM_KG_DigMound",
+  "folder": "/Game/KillGodot/Env/WaterProps/KG_WaterProps/StaticMeshes",
+  "name": "SM_KG_DigMound",
+  "size": [
+   121,
+   121,
+   32
+  ],
+  "min": [
+   -61,
+   -61,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/WaterProps/KG_WaterProps/StaticMeshes/SM_KG_Doorbell",
+  "folder": "/Game/KillGodot/Env/WaterProps/KG_WaterProps/StaticMeshes",
+  "name": "SM_KG_Doorbell",
+  "size": [
+   24,
+   13,
+   35
+  ],
+  "min": [
+   0,
+   -6,
+   -28
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/WaterProps/KG_WaterProps/StaticMeshes/SM_KG_DugHole",
+  "folder": "/Game/KillGodot/Env/WaterProps/KG_WaterProps/StaticMeshes",
+  "name": "SM_KG_DugHole",
+  "size": [
+   120,
+   121,
+   45
+  ],
+  "min": [
+   -61,
+   -60,
+   -30
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/WaterProps/KG_WaterProps/StaticMeshes/SM_KG_Fish_Cod",
+  "folder": "/Game/KillGodot/Env/WaterProps/KG_WaterProps/StaticMeshes",
+  "name": "SM_KG_Fish_Cod",
+  "size": [
+   55,
+   13,
+   16
+  ],
+  "min": [
+   -28,
+   -7,
+   -7
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/WaterProps/KG_WaterProps/StaticMeshes/SM_KG_Fish_GoldenCarp",
+  "folder": "/Game/KillGodot/Env/WaterProps/KG_WaterProps/StaticMeshes",
+  "name": "SM_KG_Fish_GoldenCarp",
+  "size": [
+   50,
+   12,
+   22
+  ],
+  "min": [
+   -25,
+   -6,
+   -10
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/WaterProps/KG_WaterProps/StaticMeshes/SM_KG_Fish_Mackerel",
+  "folder": "/Game/KillGodot/Env/WaterProps/KG_WaterProps/StaticMeshes",
+  "name": "SM_KG_Fish_Mackerel",
+  "size": [
+   35,
+   7,
+   10
+  ],
+  "min": [
+   -18,
+   -3,
+   -5
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/WaterProps/KG_WaterProps/StaticMeshes/SM_KG_Fish_Salmon",
+  "folder": "/Game/KillGodot/Env/WaterProps/KG_WaterProps/StaticMeshes",
+  "name": "SM_KG_Fish_Salmon",
+  "size": [
+   60,
+   11,
+   19
+  ],
+  "min": [
+   -30,
+   -5,
+   -8
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/WaterProps/KG_WaterProps/StaticMeshes/SM_KG_FishingRod",
+  "folder": "/Game/KillGodot/Env/WaterProps/KG_WaterProps/StaticMeshes",
+  "name": "SM_KG_FishingRod",
+  "size": [
+   190,
+   6,
+   11
+  ],
+  "min": [
+   0,
+   -4,
+   -9
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/WaterProps/KG_WaterProps/StaticMeshes/SM_KG_Oar",
+  "folder": "/Game/KillGodot/Env/WaterProps/KG_WaterProps/StaticMeshes",
+  "name": "SM_KG_Oar",
+  "size": [
+   220,
+   15,
+   5
+  ],
+  "min": [
+   0,
+   -8,
+   -3
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/WaterProps/KG_WaterProps/StaticMeshes/SM_KG_Rowboat",
+  "folder": "/Game/KillGodot/Env/WaterProps/KG_WaterProps/StaticMeshes",
+  "name": "SM_KG_Rowboat",
+  "size": [
+   328,
+   129,
+   89
+  ],
+  "min": [
+   -164,
+   -65,
+   -31
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Env/WaterProps/KG_WaterProps/StaticMeshes/SM_KG_Shovel",
+  "folder": "/Game/KillGodot/Env/WaterProps/KG_WaterProps/StaticMeshes",
+  "name": "SM_KG_Shovel",
+  "size": [
+   147,
+   26,
+   8
+  ],
+  "min": [
+   0,
+   -13,
+   -5
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Items/Melee/Baguette_HPvkMpqqTg/StaticMeshes/SM_KG_Baguette",
+  "folder": "/Game/KillGodot/Items/Melee/Baguette_HPvkMpqqTg/StaticMeshes",
+  "name": "SM_KG_Baguette",
+  "size": [
+   37,
+   123,
+   27
+  ],
+  "min": [
+   -19,
+   -62,
+   -1
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Items/Melee/Candlestick_tknOVwxT8B/StaticMeshes/SM_KG_Candlestick",
+  "folder": "/Game/KillGodot/Items/Melee/Candlestick_tknOVwxT8B/StaticMeshes",
+  "name": "SM_KG_Candlestick",
+  "size": [
+   5,
+   6,
+   27
+  ],
+  "min": [
+   -2,
+   -3,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Items/Melee/Closed_Umbrella_o0CUgpt8pm/StaticMeshes/SM_KG_Closed_Umbrella",
+  "folder": "/Game/KillGodot/Items/Melee/Closed_Umbrella_o0CUgpt8pm/StaticMeshes",
+  "name": "SM_KG_Closed_Umbrella",
+  "size": [
+   33,
+   32,
+   73
+  ],
+  "min": [
+   -17,
+   -16,
+   0
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Items/Melee/Frying_Pan_u1SOUzLBQc/StaticMeshes/SM_KG_Frying_Pan",
+  "folder": "/Game/KillGodot/Items/Melee/Frying_Pan_u1SOUzLBQc/StaticMeshes",
+  "name": "SM_KG_Frying_Pan",
+  "size": [
+   22,
+   3,
+   36
+  ],
+  "min": [
+   -11,
+   -2,
+   -14
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Items/Melee/Hunters_Knife_a2avVUVeYD/StaticMeshes/SM_KG_Hunters_Knife",
+  "folder": "/Game/KillGodot/Items/Melee/Hunters_Knife_a2avVUVeYD/StaticMeshes",
+  "name": "SM_KG_Hunters_Knife",
+  "size": [
+   13,
+   51,
+   8
+  ],
+  "min": [
+   -6,
+   -32,
+   -4
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Items/Melee/Rolling_Pin_nbI0WJqJN3/StaticMeshes/SM_KG_Rolling_Pin",
+  "folder": "/Game/KillGodot/Items/Melee/Rolling_Pin_nbI0WJqJN3/StaticMeshes",
+  "name": "SM_KG_Rolling_Pin",
+  "size": [
+   100,
+   763,
+   100
+  ],
+  "min": [
+   -50,
+   -382,
+   -50
+  ]
+ },
+ {
+  "path": "/Game/KillGodot/Items/Storage/SM_KG_Chest_Wood",
+  "folder": "/Game/KillGodot/Items/Storage",
+  "name": "SM_KG_Chest_Wood",
+  "size": [
+   128,
+   76,
+   72
+  ],
+  "min": [
+   -64,
+   -38,
+   -2
+  ]
+ }
+]

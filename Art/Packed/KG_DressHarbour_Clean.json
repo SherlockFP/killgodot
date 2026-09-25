@@ -1,0 +1,116 @@
+{
+ "props": {
+  "Shipwreck": {
+   "material": "VC",
+   "collision": "complex"
+  },
+  "ShipwreckMast": {
+   "material": "Sway",
+   "collision": "complex"
+  },
+  "SmokeHut": {
+   "material": "Glow",
+   "collision": "complex"
+  },
+  "CargoHoist": {
+   "material": "VC",
+   "collision": "complex"
+  },
+  "SeaStack_A": {
+   "material": "VC",
+   "collision": "complex"
+  },
+  "SeaStack_B": {
+   "material": "VC",
+   "collision": "complex"
+  },
+  "BellBuoy": {
+   "material": "Glow",
+   "collision": "box"
+  },
+  "NetRack": {
+   "material": "Sway",
+   "collision": "box"
+  },
+  "JettySection": {
+   "material": "VC",
+   "collision": "complex"
+  },
+  "TidePool": {
+   "material": "VC",
+   "collision": "complex"
+  },
+  "NetPile": {
+   "material": "VC",
+   "collision": "box"
+  },
+  "LobsterTrap": {
+   "material": "VC",
+   "collision": "box"
+  },
+  "LobsterTrapStack": {
+   "material": "VC",
+   "collision": "box"
+  },
+  "Buoy_Red": {
+   "material": "VC",
+   "collision": "box"
+  },
+  "Buoy_Striped": {
+   "material": "VC",
+   "collision": "box"
+  },
+  "Anchor": {
+   "material": "VC",
+   "collision": "box"
+  },
+  "Bollard": {
+   "material": "VC",
+   "collision": "box"
+  },
+  "Piling": {
+   "material": "VC",
+   "collision": "box"
+  },
+  "Driftwood_A": {
+   "material": "VC",
+   "collision": "box"
+  },
+  "Driftwood_B": {
+   "material": "VC",
+   "collision": "none"
+  },
+  "FishRack": {
+   "material": "VC",
+   "collision": "box"
+  },
+  "SeaweedClump": {
+   "material": "Sway",
+   "collision": "none"
+  },
+  "ShellCluster": {
+   "material": "VC",
+   "collision": "none"
+  },
+  "Oars": {
+   "material": "VC",
+   "collision": "none"
+  },
+  "FishBasket": {
+   "material": "VC",
+   "collision": "box"
+  },
+  "FishBarrel": {
+   "material": "VC",
+   "collision": "box"
+  },
+  "Lifebuoy": {
+   "material": "VC",
+   "collision": "none"
+  },
+  "SandCastle": {
+   "material": "VC",
+   "collision": "none"
+  }
+ }
+}

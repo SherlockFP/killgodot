@@ -1,0 +1,76 @@
+{
+ "props": {
+  "Fountain": {
+   "material": "VC",
+   "collision": "complex"
+  },
+  "Maypole": {
+   "material": "Sway",
+   "collision": "box"
+  },
+  "Maypole_Ribbons": {
+   "material": "Sway",
+   "collision": "none"
+  },
+  "Windmill_Body": {
+   "material": "VC",
+   "collision": "complex"
+  },
+  "Windmill_Sails": {
+   "material": "VC",
+   "collision": "none"
+  },
+  "Stage": {
+   "material": "VC",
+   "collision": "complex"
+  },
+  "Bunting": {
+   "material": "Sway",
+   "collision": "none"
+  },
+  "LaundryLine": {
+   "material": "Sway",
+   "collision": "complex"
+  },
+  "FlowerBox": {
+   "material": "VC",
+   "collision": "none"
+  },
+  "Planter_Large": {
+   "material": "VC",
+   "collision": "box"
+  },
+  "Planter_Pot": {
+   "material": "VC",
+   "collision": "box"
+  },
+  "HangingSign_Fish": {
+   "material": "VC",
+   "collision": "none"
+  },
+  "HangingSign_Bread": {
+   "material": "VC",
+   "collision": "none"
+  },
+  "HangingSign_Ale": {
+   "material": "VC",
+   "collision": "none"
+  },
+  "HangingSign_Anvil": {
+   "material": "VC",
+   "collision": "none"
+  },
+  "HangingSign_Herb": {
+   "material": "VC",
+   "collision": "none"
+  },
+  "SignBracket": {
+   "material": "VC",
+   "collision": "none"
+  },
+  "SignPost": {
+   "material": "VC",
+   "collision": "complex"
+  }
+ }
+}

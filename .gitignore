@@ -1,0 +1,26 @@
+# Unreal generated
+Binaries/
+DerivedDataCache/
+Intermediate/
+Saved/
+.vs/
+.idea/
+*.sln
+*.suo
+*.opensdf
+*.sdf
+*.VC.db
+*.VC.opendb
+
+# Blender
+*.blend1
+*.blend2
+
+# Local
+Art/Concept/**/*_tmp*
+Tools/**/__pycache__/
+
+# Raw third-party packs (2+ GB): re-fetch with Tools/Assets/kg_fetch.py using Tools/Assets/approved_sources.json.
+# Only processed, palette-fitted assets under Content/ are versioned.
+Art/Source/
+Saved/

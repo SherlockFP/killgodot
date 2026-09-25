@@ -1,0 +1,780 @@
+{
+  "_doc": "Morrowmere layout, shared by Tools/Blender/kg_build_terrain.py (flattening + path painting) and Tools/Unreal/kg_build_village.py (buildings, props, tasks). Units: METRES in the UE frame (x east, +y towards the sea, z up); the UE builder multiplies by 100, Blender uses (x, -y). Plateau height 4 m.",
+  "plateau_z": 4.0,
+  "lanes": [
+    {
+      "name": "harbour_street",
+      "width": 5.0,
+      "points": [
+        [
+          0,
+          -2
+        ],
+        [
+          2,
+          10
+        ],
+        [
+          -1,
+          22
+        ],
+        [
+          3,
+          34
+        ],
+        [
+          2,
+          46
+        ],
+        [
+          0,
+          53
+        ]
+      ]
+    },
+    {
+      "name": "west_lane",
+      "width": 3.6,
+      "points": [
+        [
+          -8,
+          -8
+        ],
+        [
+          -18,
+          -6
+        ],
+        [
+          -27,
+          -10
+        ],
+        [
+          -36,
+          -8
+        ],
+        [
+          -46,
+          -2
+        ],
+        [
+          -56,
+          4
+        ]
+      ]
+    },
+    {
+      "name": "east_market",
+      "width": 4.2,
+      "points": [
+        [
+          8,
+          -8
+        ],
+        [
+          18,
+          -4
+        ],
+        [
+          28,
+          -6
+        ],
+        [
+          38,
+          -2
+        ],
+        [
+          48,
+          6
+        ],
+        [
+          58,
+          18
+        ],
+        [
+          64,
+          34
+        ],
+        [
+          66,
+          50
+        ]
+      ]
+    },
+    {
+      "name": "church_lane",
+      "width": 3.2,
+      "points": [
+        [
+          -4,
+          -16
+        ],
+        [
+          -9,
+          -26
+        ],
+        [
+          -16,
+          -34
+        ],
+        [
+          -24,
+          -40
+        ]
+      ]
+    },
+    {
+      "name": "farm_track",
+      "width": 3.0,
+      "points": [
+        [
+          10,
+          -18
+        ],
+        [
+          18,
+          -28
+        ],
+        [
+          28,
+          -36
+        ],
+        [
+          38,
+          -42
+        ]
+      ]
+    },
+    {
+      "name": "back_alley",
+      "width": 2.4,
+      "points": [
+        [
+          -18,
+          -6
+        ],
+        [
+          -16,
+          6
+        ],
+        [
+          -8,
+          14
+        ],
+        [
+          2,
+          16
+        ]
+      ]
+    },
+    {
+      "name": "fish_alley",
+      "width": 2.4,
+      "points": [
+        [
+          3,
+          34
+        ],
+        [
+          12,
+          38
+        ],
+        [
+          22,
+          36
+        ],
+        [
+          30,
+          30
+        ],
+        [
+          38,
+          -2
+        ]
+      ]
+    }
+  ],
+  "areas": [
+    {
+      "name": "square",
+      "center": [
+        0,
+        -8
+      ],
+      "radius": 13.0
+    },
+    {
+      "name": "fish_market",
+      "center": [
+        4,
+        46
+      ],
+      "radius": 8.0
+    },
+    {
+      "name": "church_yard",
+      "center": [
+        -27,
+        -44
+      ],
+      "radius": 9.0
+    },
+    {
+      "name": "smithy_yard",
+      "center": [
+        -36,
+        -2
+      ],
+      "radius": 6.0
+    },
+    {
+      "name": "farm",
+      "center": [
+        40,
+        -44
+      ],
+      "radius": 11.0
+    },
+    {
+      "name": "woodcutter",
+      "center": [
+        -60,
+        8
+      ],
+      "radius": 8.0
+    },
+    {
+      "name": "lighthouse",
+      "center": [
+        68,
+        55
+      ],
+      "radius": 6.0
+    },
+    {
+      "name": "japan_garden",
+      "center": [
+        26,
+        20
+      ],
+      "radius": 11.0
+    }
+  ],
+  "houses": [
+    {
+      "at": [
+        -14,
+        4
+      ],
+      "size": [
+        6,
+        6
+      ],
+      "face": [
+        -8,
+        14
+      ]
+    },
+    {
+      "at": [
+        -9,
+        26
+      ],
+      "size": [
+        6,
+        8
+      ],
+      "face": [
+        0,
+        24
+      ]
+    },
+    {
+      "at": [
+        11,
+        20
+      ],
+      "size": [
+        6,
+        6
+      ],
+      "face": [
+        1,
+        20
+      ]
+    },
+    {
+      "at": [
+        12,
+        29
+      ],
+      "size": [
+        4,
+        6
+      ],
+      "face": [
+        3,
+        30
+      ]
+    },
+    {
+      "at": [
+        -10,
+        38
+      ],
+      "size": [
+        6,
+        6
+      ],
+      "face": [
+        1,
+        38
+      ]
+    },
+    {
+      "at": [
+        -22,
+        -18
+      ],
+      "size": [
+        6,
+        6
+      ],
+      "face": [
+        -18,
+        -6
+      ]
+    },
+    {
+      "at": [
+        -33,
+        -18
+      ],
+      "size": [
+        4,
+        6
+      ],
+      "face": [
+        -30,
+        -9
+      ]
+    },
+    {
+      "at": [
+        -46,
+        -12
+      ],
+      "size": [
+        6,
+        8
+      ],
+      "face": [
+        -44,
+        -3
+      ]
+    },
+    {
+      "at": [
+        -30,
+        6
+      ],
+      "size": [
+        6,
+        6
+      ],
+      "face": [
+        -30,
+        -8
+      ]
+    },
+    {
+      "at": [
+        20,
+        6
+      ],
+      "size": [
+        6,
+        6
+      ],
+      "face": [
+        20,
+        -4
+      ]
+    },
+    {
+      "at": [
+        32,
+        6
+      ],
+      "size": [
+        4,
+        6
+      ],
+      "face": [
+        32,
+        -4
+      ]
+    },
+    {
+      "at": [
+        30,
+        -16
+      ],
+      "size": [
+        6,
+        6
+      ],
+      "face": [
+        26,
+        -6
+      ]
+    },
+    {
+      "at": [
+        48,
+        -8
+      ],
+      "size": [
+        6,
+        8
+      ],
+      "face": [
+        42,
+        -2
+      ]
+    },
+    {
+      "at": [
+        50,
+        16
+      ],
+      "size": [
+        6,
+        6
+      ],
+      "face": [
+        58,
+        18
+      ]
+    },
+    {
+      "at": [
+        18,
+        -28
+      ],
+      "size": [
+        4,
+        6
+      ],
+      "face": [
+        16,
+        -24
+      ]
+    },
+    {
+      "at": [
+        -18,
+        16
+      ],
+      "size": [
+        4,
+        6
+      ],
+      "face": [
+        -10,
+        14
+      ]
+    }
+  ],
+  "landmarks": {
+    "town_hall": {
+      "at": [
+        0,
+        -27
+      ],
+      "size": [
+        8,
+        10
+      ],
+      "face": [
+        0,
+        -8
+      ]
+    },
+    "church": {
+      "at": [
+        -28,
+        -48
+      ],
+      "size": [
+        8,
+        12
+      ],
+      "face": [
+        -24,
+        -40
+      ]
+    },
+    "bell_tower": {
+      "at": [
+        -19,
+        -52
+      ]
+    },
+    "inn": {
+      "at": [
+        22,
+        -14
+      ],
+      "size": [
+        8,
+        8
+      ],
+      "face": [
+        18,
+        -6
+      ]
+    },
+    "bakery": {
+      "at": [
+        -12,
+        -20
+      ],
+      "size": [
+        6,
+        6
+      ],
+      "face": [
+        -6,
+        -12
+      ]
+    },
+    "smithy": {
+      "at": [
+        -38,
+        4
+      ]
+    },
+    "well": {
+      "at": [
+        -7,
+        -3
+      ]
+    },
+    "gallows": {
+      "at": [
+        6,
+        -12
+      ]
+    },
+    "notice_board": {
+      "at": [
+        -6,
+        -14
+      ]
+    },
+    "lighthouse": {
+      "at": [
+        70,
+        57
+      ]
+    },
+    "boathouse": {
+      "at": [
+        -12,
+        48
+      ],
+      "size": [
+        6,
+        8
+      ],
+      "face": [
+        0,
+        48
+      ]
+    },
+    "mill_barn": {
+      "at": [
+        48,
+        -52
+      ],
+      "size": [
+        8,
+        8
+      ],
+      "face": [
+        40,
+        -44
+      ]
+    },
+    "graveyard": {
+      "at": [
+        -38,
+        -40
+      ]
+    }
+  },
+  "tasks": [
+    {
+      "id": "DrawWater",
+      "name": "Draw water from the well",
+      "at": [
+        -7,
+        -3
+      ],
+      "secs": 4
+    },
+    {
+      "id": "PostNotice",
+      "name": "Post the notice at the board",
+      "at": [
+        -6,
+        -14
+      ],
+      "secs": 3
+    },
+    {
+      "id": "FileReports",
+      "name": "File the reports in the town hall",
+      "at": [
+        2,
+        -29
+      ],
+      "secs": 5
+    },
+    {
+      "id": "RingBell",
+      "name": "Ring the church bell",
+      "at": [
+        -19,
+        -52
+      ],
+      "secs": 3
+    },
+    {
+      "id": "LightCandles",
+      "name": "Light the church candles",
+      "at": [
+        -28,
+        -52
+      ],
+      "secs": 4
+    },
+    {
+      "id": "TendGraves",
+      "name": "Tend the graves",
+      "at": [
+        -38,
+        -40
+      ],
+      "secs": 5
+    },
+    {
+      "id": "ForgeNails",
+      "name": "Forge nails at the smithy",
+      "at": [
+        -39,
+        1
+      ],
+      "secs": 6
+    },
+    {
+      "id": "SharpenTools",
+      "name": "Sharpen the tools",
+      "at": [
+        -34,
+        6
+      ],
+      "secs": 4
+    },
+    {
+      "id": "BakeBread",
+      "name": "Bake bread at the bakery",
+      "at": [
+        -12,
+        -18
+      ],
+      "secs": 6
+    },
+    {
+      "id": "PourAle",
+      "name": "Pour ale at the inn",
+      "at": [
+        22,
+        -12
+      ],
+      "secs": 3
+    },
+    {
+      "id": "StockStall",
+      "name": "Stock the market stall",
+      "at": [
+        14,
+        -4
+      ],
+      "secs": 4
+    },
+    {
+      "id": "MendNets",
+      "name": "Mend the fishing nets",
+      "at": [
+        8,
+        47
+      ],
+      "secs": 6
+    },
+    {
+      "id": "UnloadFish",
+      "name": "Unload the fish crates",
+      "at": [
+        0,
+        60
+      ],
+      "secs": 5
+    },
+    {
+      "id": "FuelLighthouse",
+      "name": "Refuel the lighthouse lamp",
+      "at": [
+        70,
+        57
+      ],
+      "secs": 7
+    },
+    {
+      "id": "HarvestCarrots",
+      "name": "Harvest carrots at the farm",
+      "at": [
+        38,
+        -46
+      ],
+      "secs": 5
+    },
+    {
+      "id": "FeedAnimals",
+      "name": "Fill the feed trough",
+      "at": [
+        46,
+        -40
+      ],
+      "secs": 4
+    },
+    {
+      "id": "ChopWood",
+      "name": "Chop firewood at the camp",
+      "at": [
+        -60,
+        8
+      ],
+      "secs": 6
+    },
+    {
+      "id": "FixBoat",
+      "name": "Tar the boat in the boathouse",
+      "at": [
+        -12,
+        48
+      ],
+      "secs": 6
+    }
+  ]
+}

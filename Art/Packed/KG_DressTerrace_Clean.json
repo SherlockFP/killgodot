@@ -1,0 +1,36 @@
+{
+ "props": {
+  "Balustrade_2m": {
+   "material": "VC",
+   "collision": "box"
+  },
+  "Balustrade_Post": {
+   "material": "VC",
+   "collision": "box"
+  },
+  "QuayWall_4m": {
+   "material": "VC",
+   "collision": "box"
+  },
+  "QuayWall_4m_Ring": {
+   "material": "VC",
+   "collision": "box"
+  },
+  "QuaySteps": {
+   "material": "VC",
+   "collision": "complex"
+  },
+  "StoneArchBridge_7m": {
+   "material": "VC",
+   "collision": "complex"
+  },
+  "HarbourLight": {
+   "material": "Glow",
+   "collision": "box"
+  },
+  "ClockFace": {
+   "material": "VC",
+   "collision": "none"
+  }
+ }
+}

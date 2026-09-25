@@ -125,6 +125,8 @@
 ## Sonraki milestone'lar
 M4–M18 maddeleri, milestone başladığında `09_Roadmap_Gauntlet.md`'den buraya ayrıntılı olarak açılır.
 
+## NEXT (user, 2026-09-26): SPRINT-040 Storm Manor expansion (much bigger, secrets, hidden compartments, secret + manor-only chores, traps): Docs/Iterations/SPRINT-040-StormManor-Expansion.md, starts when the v2 cliff/stairs agent frees a main slot
+
 ## NEXT (user, 2026-09-25 evening): v2 harbour cliff lower + lighthouse to the corner
 - [ ] The stepped rock wall around the harbour/Lighthouse Point (the user's screenshot: blocky stacked rock terraces above the basin water) must be MUCH lower: a gentle 2-4 m rocky shore, not a wall. Also cl_point.
 - [ ] Move the lighthouse tower further out to the corner/tip of the headland, off the main view axis. Keep the FuelLighthouse chore reachable and nav 100%.

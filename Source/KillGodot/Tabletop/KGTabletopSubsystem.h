@@ -68,6 +68,7 @@ private:
 	int32 SmokeSent = -1;
 	int32 SmokeBadSent = 0;
 	float SmokeNextSend = 0.0f;
+	float SmokeNextDiag = 0.0f;
 	bool bSmokeDone = false;
 	TWeakObjectPtr<AKGBoardTable> SmokeTable;
 };

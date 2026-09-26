@@ -6,6 +6,7 @@
     mouth_closed.png, mouth_open.png        a bot's face with the mouth pinned (acceptance 2)
     bark_1..3.png                           three frames of a real bark (mouth chewing the syllables)
     bark_ui.png, talking_ui.png             speaking marker + bubble + NEAR line; own mic pill (acceptance 1/3)
+    radial_ui.png                           the X (Deduction) voice-command radial held open (kg.Voice.Wheel)
     partner_highfive/rps/danceoff.png       two bots aligned, synced clips (acceptance 4)
     partner_rps_result_ui.png, partner_offer_ui.png
   Log lines: KG_VOICE_SHOTS, KG_BARK, KG_PARTNER_START

@@ -140,6 +140,10 @@ class Capture:
         s.append((1.5, lambda: self.cmd("kg.Voice.Tone 1")))
         s.append((1.2, lambda: self.shot("talking_ui", ui=True)))
         s.append((0.3, lambda: self.cmd("kg.Voice.Tone 0")))
+        # 4b. the X (Deduction) radial held open, aimed at slot 2
+        s.append((0.5, lambda: self.cmd("kg.Voice.Wheel 1 2")))
+        s.append((0.6, lambda: self.shot("radial_ui", ui=True)))
+        s.append((0.2, lambda: self.cmd("kg.Voice.Wheel close")))
         # 5. my own offer prompt (pill), then partner emotes between the two bots from the side
         s.append((0.5, lambda: self.cmd("kg.Partner highfive")))
         s.append((1.0, lambda: self.shot("partner_offer_ui", ui=True)))

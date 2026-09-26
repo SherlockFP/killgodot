@@ -27,6 +27,8 @@ namespace KGVoiceSubsystemPrivate
 {
 	TAutoConsoleVariable<float> CVarWheelSensitivity(TEXT("kg.Voice.WheelSensitivity"), 10.0f,
 		TEXT("Voice-command radials: mouse delta to virtual cursor scale."));
+	TAutoConsoleVariable<bool> CVarWheelPin(TEXT("kg.Voice.WheelPin"), false,
+		TEXT("Voice-command radials: keep an open wheel up although its key is not held (kg.Voice.Wheel, screenshots)."));
 }
 
 bool UKGVoiceSubsystem::DoesSupportWorldType(const EWorldType::Type WorldType) const
@@ -166,7 +168,8 @@ void UKGVoiceSubsystem::TickLocalPlayer(APlayerController* PC, UKGVoiceComponent
 			}
 		}
 		const int32 Menu = FKGVoiceUI::GetOpenMenu(PC);
-		const bool bHeld = Menus.IsValidIndex(Menu) && PC->IsInputKeyDown(Menus[Menu].Key);
+		const bool bHeld = (Menus.IsValidIndex(Menu) && PC->IsInputKeyDown(Menus[Menu].Key))
+			|| KGVoiceSubsystemPrivate::CVarWheelPin.GetValueOnGameThread();   // kg.Voice.Wheel keeps a console-opened wheel up for shots
 		if (bBlocked || !bHeld)
 		{
 			const int32 Cmd = FKGVoiceUI::CloseWheel(PC, !bBlocked);

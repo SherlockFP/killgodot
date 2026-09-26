@@ -1508,7 +1508,7 @@ def sea_life():
             sch.set_editor_property(k, v)
         sch.set_folder_path("V2/Sea/Fish")
     for x, y, count, radius, lo, hi in [(O[0] * M, O[1] * M, 7, 1600.0, -1900.0, -1200.0), (4500.0, 15000.0, 5, 1200.0, -2200.0, -1500.0),
-                                         (6800.0, 9500.0, 4, 900.0, -3000.0, -2400.0)]:
+                                         (9600.0, 9000.0, 4, 900.0, -3000.0, -2400.0)]:   # gulls round the lighthouse (moved 2026-09-26)
         flock = _real_actors.spawn_actor_from_class(cls, unreal.Vector(x, y, 0.0))
         flock.set_editor_property("fish_mesh", mesh("/Game/KillGodot/Env/Birds/KG_Gull/StaticMeshes/KG_Gull"))
         for k, v in (("count", count), ("radius", radius), ("min_depth", lo), ("max_depth", hi), ("speed", 480.0),

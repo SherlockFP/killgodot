@@ -56,7 +56,7 @@ foreach ($l in @($SrvLog, $CliLog)) {
 $fail = @()
 function Lines($Path, $Pattern) { if (Test-Path $Path) { @(Select-String -Path $Path -Pattern $Pattern | ForEach-Object { $_.Line }) } else { @() } }
 function Fen($Path) {
-    $l = Lines $Path 'KG_TABLE_FINAL'
+    $l = @(Lines $Path 'KG_TABLE_FINAL')   # @(): one line unrolls to a string and [0] would be its first char
     if ($l.Count -eq 0) { return $null }
     if ($l[0] -match 'fen="([^"]+)"') { return $Matches[1] } else { return $null }
 }

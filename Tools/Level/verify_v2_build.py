@@ -488,10 +488,22 @@ def stair_fit(L, out, err):
             return max(zs_) if zs_ else None
 
         # landings (kit: walk surface before the foot / past the head; quay: the quay beside the top tread)
+        # planters stand on the Grand Stair landings by design (STAIR_OK) and share the V2/Stairs folder: a walk hit
+        # inside a planter footprint is the planter, not the stair
+        planters = []
+        for p in fl["pieces"]:
+            if p["m"].endswith("Planter_Large"):
+                b0, b1 = p["bmin"], p["bmax"]
+                planters.append(_Poly([_to_world(p, (x_, y_, 0.0))[:2] for x_, y_ in
+                                       ((b0[0], b0[1]), (b1[0], b0[1]), (b1[0], b1[1]), (b0[0], b1[1]))]).buffer(0.05))
         by_off = {}
         for off, s_, _v, walk, wf, g in fl["line"]:
             # the walk surface counts only where it is the stair itself (ramp box / treads / terrain), not a planter
             ok_w = wf in ("V2/StairRamps", "V2/Stairs", "V2/Terrain") or wf.startswith("V2/Terrain")
+            if ok_w and planters and wf == "V2/Stairs":
+                from shapely.geometry import Point as _Pt
+                q_ = _Pt(lo[0] + u[0] * s_ + perp[0] * off, lo[1] + u[1] * s_ + perp[1] * off)
+                ok_w = not any(pp.contains(q_) for pp in planters)
             by_off.setdefault(off, []).append((s_, walk if ok_w else None, g))
         cl = by_off.get(0.0, [])
         z_foot = z_head = None
@@ -605,6 +617,8 @@ def stair_fit(L, out, err):
             along = X[0] * u[0] + X[1] * u[1]
             if abs(along) < 0.9 * math.hypot(X[0], X[1]):
                 continue                                          # another flight's box
+            if abs(X[2]) < 0.02:
+                continue    # a flat box under a landing / head slab: its height is judged by the landing + float rules
             if X[2] * along <= 0:
                 bad.append(f"{p['a']} ramp box falls up the flight")
         report[name] = bad[:6] + ([f"... {len(bad) - 6} more"] if len(bad) > 6 else [])

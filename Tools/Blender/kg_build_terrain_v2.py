@@ -421,7 +421,9 @@ class Field:
             # each 1 m piece, 0.5 m back = one grid cell), 5 cm down, so no grid triangle pokes through a tread
             # (stair_fit "sunk" rule); the tiles + hidden boxes of the landings sit over the dip after each flight.
             # The 0.3 m margin beside the pieces keeps the nosing line - 5 cm.
-            env = tread_top(P, ax - 0.5) - 0.05
+            # The look-back is one grid triangle measured along the flight: CORE_STEP * (|ux| + |uy|) (a skewed flight
+            # spans up to 0.71 m per triangle; 0.5 left the scala terrain 4 cm through a tread)
+            env = tread_top(P, ax - (CORE_STEP * (abs(u[0]) + abs(u[1])) + 0.02)) - 0.05
             tz = np.where(np.abs(ay) <= s["width"] / 2.0, env, np.interp(ax, ks, kz) - 0.05)
             zb, kb, cb = z[bb], kind[bb], corridor[bb]
             zb = np.where(sel, tz, zb)

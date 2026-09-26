@@ -26,6 +26,25 @@ namespace KGTablePanelPrivate
 		return FSlateApplication::Get().GetRenderer()->GetFontMeasureService()->Measure(Text, Font);
 	}
 
+	/** Text shortened with an ellipsis until it measures at most MaxWidth (chip names, the footer hint). */
+	FString Fit(const FString& Text, const FSlateFontInfo& Font, float MaxWidth)
+	{
+		if (MaxWidth <= 0.0f || Measure(Text, Font).X <= MaxWidth)
+		{
+			return Text;
+		}
+		const FString Ellipsis = TEXT("…");
+		for (int32 Len = Text.Len() - 1; Len > 0; --Len)
+		{
+			const FString Short = Text.Left(Len).TrimEnd() + Ellipsis;
+			if (Measure(Short, Font).X <= MaxWidth)
+			{
+				return Short;
+			}
+		}
+		return Ellipsis;
+	}
+
 	/** Align 0 left, 0.5 centre, 1 right; Pos.Y is the top of the line. */
 	void Text(FSlateWindowElementList& Out, int32 Layer, const FGeometry& G, const FVector2f& Pos, const FString& S,
 	          const FSlateFontInfo& Font, const FLinearColor& Colour, float Align = 0.0f)
@@ -371,6 +390,8 @@ int32 SKGTablePanel::OnPaint(const FPaintArgs& Args, const FGeometry& G, const F
 			Name = LOCTEXT("You", "You").ToString();
 		}
 		const FString ClockStr = V.bTimed ? ClockText(V.Clock[Colour]) : FString();
+		// The name takes what the clock leaves in the chip (a 14-letter name and "1:26" do not both fit 150 px).
+		Name = Fit(Name, Body, ChipSize.X - 24.0f * S - static_cast<float>(Measure(ClockStr, Clock).X) - (ClockStr.IsEmpty() ? 0.0f : 8.0f * S));
 		if (Align < 0.5f)
 		{
 			Text(Out, Layer + 1, G, Pos + FVector2f(12.0f * S, 4.0f * S), Name, Body, TextColour, 0.0f);
@@ -506,7 +527,9 @@ int32 SKGTablePanel::OnPaint(const FPaintArgs& Args, const FGeometry& G, const F
 	{
 		Hint = LOCTEXT("HintWait", "Opponent is thinking · E: stand up").ToString();
 	}
-	Text(Out, Layer, G, FVector2f(L.BoardPos.X, FooterY + 8.0f * S), Hint, Small, St.CreamDim);
+	// The hint stops short of the buttons (seated players see Draw / Resign or Rematch at the right of the footer).
+	const float HintMax = V.MyColour >= 0 ? L.DrawButton.X - 12.0f * S - L.BoardPos.X : 8.0f * L.Cell;
+	Text(Out, Layer, G, FVector2f(L.BoardPos.X, FooterY + 8.0f * S), Fit(Hint, Small, HintMax), Small, St.CreamDim);
 	if (V.MyColour >= 0)
 	{
 		auto Button = [&](const FVector2f& Pos, const FString& Label, const FLinearColor& Fill, const FLinearColor& TextColour)

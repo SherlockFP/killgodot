@@ -26,6 +26,7 @@
 #include "Voice/KGVoiceCommands.h"
 #include "Voice/KGVoiceComponent.h"
 #include "Voice/KGVoiceSubsystem.h"
+#include "Voice/KGVoiceUI.h"
 #include "Fishing/KGFishingComponent.h"
 #include "Fishing/KGFishingTypes.h"
 #include "Fishing/KGFishMarket.h"
@@ -980,6 +981,34 @@ namespace KGDevPrivate
 			    Voice->SetSyntheticTone(bOn);
 			    Voice->SetTransmitting(bOn);
 			    return FKGDevResult::Ok(bOn ? TEXT("Voice tone ON (kg.Voice.Tone 0 stops)") : TEXT("Voice tone off"));
+		    });
+		Add(TEXT("Voice.Wheel"), TEXT("<0|1|2|close> [Slot]"), TEXT("Open a voice-command radial (0 Z Calls, 1 X Deduction, 2 C Social) as if the key were held, optionally aiming at a slot 0-7; close = release without sending (screenshots)."), Local,
+		    [](const FKGDevContext& C, const TArray<FString>& A)
+		    {
+			    APlayerController* PC = C.Requester;
+			    KG_DEV_REQUIRE(PC, TEXT("No local player controller"));
+			    IConsoleVariable* Pin = IConsoleManager::Get().FindConsoleVariable(TEXT("kg.Voice.WheelPin"));
+			    if (A.Num() > 0 && A[0].Equals(TEXT("close"), ESearchCase::IgnoreCase))
+			    {
+				    if (Pin)
+				    {
+					    Pin->Set(false);
+				    }
+				    FKGVoiceUI::CloseWheel(PC, false);
+				    return FKGDevResult::Ok(TEXT("Voice wheel closed"));
+			    }
+			    const int32 Menu = FMath::Clamp(A.Num() > 0 ? FCString::Atoi(*A[0]) : 0, 0, 2);
+			    if (Pin)
+			    {
+				    Pin->Set(true);   // the voice subsystem would otherwise close + send it next tick (key not held)
+			    }
+			    FKGVoiceUI::OpenWheel(PC, Menu);
+			    if (A.Num() > 1)
+			    {
+				    const float Angle = FCString::Atoi(*A[1]) * (2.0f * PI / 8.0f);   // slot 0 at the top, clockwise
+				    FKGVoiceUI::UpdateWheel(PC, FVector2D(FMath::Sin(Angle), -FMath::Cos(Angle)) * 160.0);
+			    }
+			    return FKGDevResult::Ok(FString::Printf(TEXT("Voice wheel %d open (kg.Voice.Wheel close)"), Menu));
 		    });
 		Add(TEXT("Voice.Mute"), TEXT("<Player> [0|1]"), TEXT("Mute / unmute a player's voice and text on this machine (same list as /mute)."), Local,
 		    [](const FKGDevContext& C, const TArray<FString>& A)

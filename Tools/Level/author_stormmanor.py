@@ -31,7 +31,10 @@ FLOORS = [
     {"id": "F1", "name_tr": "Birinci Kat", "name_en": "First floor", "z": 3.0},
     {"id": "F2", "name_tr": "Çatı Katı", "name_en": "Attic floor", "z": 6.0},
     {"id": "F3", "name_tr": "Kule Tepesi", "name_en": "Tower top", "z": 9.0},
+    # SPRINT-040: the second basement (vaults, wine catacombs, ossuary, the crypt under the chapel)
+    {"id": "C2", "name_tr": "Alt Mahzen", "name_en": "Lower vaults", "z": -6.0},
 ]
+FLOORS.sort(key=lambda f: f["z"])
 
 
 def rect(x0, x1, y0, y1):
@@ -173,6 +176,134 @@ room("tower_top", "F3", rect(26, 34, -24, -16), "Kule Tepesi", "Tower Top", kind
      risk="tehlikeli", min_n=10, surface="wet", counts=False, dead_end_ok=True, part_of="storm_tower",
      purpose="signal lamp for the Messenger Boy's boat; lightning rod", dressing="signal lamp, rod, parapet")
 
+# ------------------------------------------------------------------------------------------------ SPRINT-040 expansion
+# "Much bigger, a rich house that goes on and on": a north block (grand staircase hall between two enfilades of
+# salons, a 68 m portrait gallery behind them, guest rooms above), a West Servants' Wing, an East Guest Wing, a
+# second basement (wine catacombs, vault, ossuary) and two secret rooms (the crypt under the chapel, a hidden
+# observatory on the east roof). Wings open by player count (Region Gates, min_n): north + west at 8, east at 10,
+# the lower vaults at 12; a 6-player match keeps the original 24-room manor.
+NORTH, WEST, EAST, DEEP = 8, 8, 10, 12
+# F0 north block: an enfilade (doors on the y = -32 axis) from the music room to the trophy room
+room("music_room", "F0", rect(-34, -24, -40, -24), "Müzik Salonu", "Music Room", wing="north", min_n=NORTH,
+     surface="wood", purpose="grand piano, harp, the tuning chore", dressing="grand piano, harp, music stands, "
+     "sheet music, gilt chairs in rows, hearth")
+room("green_salon", "F0", rect(-24, -16, -40, -24), "Yeşil Salon", "Green Salon", wing="north", min_n=NORTH,
+     surface="carpet", purpose="enfilade salon", dressing="green sofas, tea tables, palms, portraits, cabinets")
+room("blue_salon", "F0", rect(-16, -8, -40, -24), "Mavi Salon", "Blue Salon", wing="north", min_n=NORTH,
+     surface="carpet", purpose="enfilade salon; ladies' card tables", dressing="blue armchairs, card tables, vitrines")
+room("staircase_hall", "F0", rect(-8, 8, -40, -24), "Büyük Merdiven Holü", "Grand Staircase Hall", wing="north",
+     min_n=NORTH, surface="stone", purpose="twin grand stairs to the guest floor; a chandelier (trap)",
+     dressing="twin stairs, statues on plinths, a great chandelier, banners, a grandfather clock")
+room("yellow_salon", "F0", rect(8, 16, -40, -24), "Sarı Salon", "Yellow Salon", wing="north", min_n=NORTH,
+     surface="carpet", purpose="enfilade salon", dressing="yellow sofas, harpsichord, flower vases, mirrors")
+room("card_room", "F0", rect(16, 24, -40, -24), "Kart Odası", "Card Room", wing="north", min_n=NORTH,
+     surface="wood", purpose="card tables; the fireplace passage (secret S7)", dressing="card tables, "
+     "chips, decanters, a hearth with a false back")
+room("trophy_room", "F0", rect(24, 34, -40, -24), "Av Odası", "Trophy Room", wing="north", min_n=NORTH,
+     surface="wood", purpose="hunting trophies; the room that locks itself (trap)", dressing="mounted heads, "
+     "gun racks, a bear rug, leather chairs, cabinets")
+room("long_gallery", "F0", rect(-34, 34, -44, -40), "Uzun Portre Galerisi", "Long Portrait Gallery",
+     kind="circulation", wing="north", min_n=NORTH, risk="tehlikeli", surface="carpet",
+     purpose="68 m portrait corridor behind the salons; creaking boards; lamps that go out",
+     dressing="portraits end to end, busts, runner rugs, clocks, benches")
+# F0 West Servants' Wing
+room("west_passage", "F0", rect(-38, -34, -44, -24), "Batı Hizmet Geçidi", "West Service Passage",
+     kind="circulation", wing="west", min_n=WEST, surface="stone", purpose="servants' passage; stair up",
+     dressing="coat hooks, bell board, lamps, crates")
+room("servants_hall", "F0", rect(-54, -44, -44, -34), "Hizmetkâr Salonu", "Servants' Hall", wing="west",
+     min_n=WEST, surface="stone", purpose="the servants' long table; the crawlway (secret S9)",
+     dressing="long table, benches, dresser with crockery, bell board, hearth")
+room("housekeeper", "F0", rect(-54, -44, -34, -24), "Kâhya Odası", "Housekeeper's Room", wing="west",
+     min_n=WEST, surface="wood", purpose="keys, ledgers, the jam cupboard", dressing="desk, key board, ledgers, "
+     "armchair, jam shelves, a bed in the corner")
+room("silver_room", "F0", rect(-44, -38, -44, -34), "Gümüş Odası", "Silver Room", wing="west", min_n=WEST,
+     surface="wood", purpose="the butler's pantry: silver chest, polishing bench", dressing="silver chest, "
+     "cabinets of plate, polishing bench, candlesticks")
+room("boiler_room", "F0", rect(-44, -38, -34, -24), "Kazan Dairesi", "Boiler Room", wing="west", min_n=WEST,
+     surface="stone", purpose="the boiler that heats the bath; lamp oil", dressing="boiler, pipes, coal heap, "
+     "lamp shelves, oil cans")
+# F0 East Guest Wing
+room("east_hall", "F0", rect(34, 38, -44, 0), "Doğu Kanat Holü", "East Wing Hall", kind="circulation",
+     wing="east", min_n=EAST, surface="stone", purpose="44 m hall of the guest wing; stair up; creaking floor",
+     dressing="runner rugs, console tables, busts, sconces")
+room("smoking_room", "F0", rect(38, 46, -44, -34), "Tütün Odası", "Smoking Room", wing="east", min_n=EAST,
+     surface="carpet", purpose="gentlemen's smoking room", dressing="leather chesterfields, humidor, pipe racks, "
+     "a wall safe behind a painting")
+room("gun_room", "F0", rect(46, 54, -44, -34), "Silah Odası", "Gun Room", wing="east", min_n=EAST,
+     surface="wood", purpose="gun cabinets (locked), boots, game bags", dressing="gun cabinets, boot rack, "
+     "game bags, antlers, a workbench")
+room("map_room", "F0", rect(38, 46, -34, -24), "Harita Odası", "Map Room", wing="east", min_n=EAST,
+     surface="carpet", purpose="sea charts of the coast; the star chart goes here", dressing="map table, globes, "
+     "chart chests, a telescope, framed charts")
+room("games_room", "F0", rect(46, 54, -34, -24), "Oyun Odası", "Games Room", wing="east", min_n=EAST,
+     surface="wood", purpose="the chessboard chore; backgammon, cards", dressing="chess table, game boxes, "
+     "armchairs, a dart board")
+room("orangery", "F0", rect(38, 54, -24, -10), "Portakallık", "Orangery", wing="east", min_n=EAST,
+     surface="stone", purpose="orange trees in tubs; the aviary", dressing="orange trees, aviary cage, benches, "
+     "a fountain, watering cans")
+room("morning_room", "F0", rect(38, 54, -10, 0), "Sabah Odası", "Morning Room", wing="east", min_n=EAST,
+     surface="carpet", purpose="breakfast room over the greenhouse", dressing="breakfast table, sideboard, "
+     "sofas, flowers, a writing desk")
+# F1: the guest floor over the north block and the wings
+room("north_corridor", "F1", rect(-34, 34, -44, -40), "Üst Portre Koridoru", "Upper Portrait Corridor",
+     kind="circulation", wing="north", min_n=NORTH, surface="carpet",
+     purpose="the guest floor's north spine over the long gallery", dressing="portraits, runner, side tables")
+room("grand_landing", "F1", rect(-8, 8, -40, -24), "Büyük Sahanlık", "Grand Landing", kind="circulation",
+     wing="north", min_n=NORTH, surface="carpet", purpose="top of the twin grand stairs",
+     dressing="balustrades, statues, sofas, a tall window")
+room("lilac_room", "F1", rect(-34, -24, -40, -24), "Leylak Misafir Odası", "Lilac Guest Room", wing="north",
+     min_n=NORTH, surface="carpet", purpose="guest bedroom", dressing="lilac bed, wardrobe, vanity, trunk")
+room("sewing_room", "F1", rect(-24, -8, -40, -24), "Dikiş Odası", "Sewing Room", wing="north", min_n=NORTH,
+     surface="wood", purpose="dress forms, the linen press", dressing="dress forms, sewing tables, bolts of "
+     "cloth, linen press, baskets")
+room("chinese_room", "F1", rect(8, 24, -40, -24), "Çin Odası", "Chinese Room", wing="north", min_n=NORTH,
+     surface="carpet", purpose="Pozzo senior's collection: lacquer, vases", dressing="lacquer cabinets, vases, "
+     "screens, a daybed, silk hangings")
+room("dressing_room", "F1", rect(24, 34, -40, -24), "Giyinme Odası", "Dressing Room", wing="north",
+     min_n=NORTH, surface="carpet", purpose="Pozzo's wardrobes; the fireplace passage comes out here",
+     dressing="wardrobes, mirrors, shoe racks, a chaise, hat boxes")
+room("upper_west", "F1", rect(-38, -34, -44, -24), "Batı Üst Geçit", "Upper West Passage", kind="circulation",
+     wing="west", min_n=WEST, surface="wood", purpose="top of the service stair", dressing="linen shelves, lamps")
+room("picture_gallery", "F1", rect(-54, -38, -44, -24), "Resim Galerisi", "Picture Gallery", wing="west",
+     min_n=WEST, surface="carpet", purpose="the family's great paintings; a portrait that watches",
+     dressing="paintings frame to frame, statues, benches, velvet ropes")
+room("east_corridor", "F1", rect(34, 38, -44, -4), "Doğu Misafir Koridoru", "East Guest Corridor",
+     kind="circulation", wing="east", min_n=EAST, surface="carpet", purpose="the guest wing's corridor",
+     dressing="runner, guest door plaques, side tables, sconces")
+room("green_room", "F1", rect(38, 46, -44, -34), "Yeşil Misafir Odası", "Green Guest Room", wing="east",
+     min_n=EAST, surface="carpet", purpose="guest bedroom; the room that locks (trap)", dressing="green bed, "
+     "wardrobe, desk, trunk")
+room("gold_room", "F1", rect(46, 54, -44, -34), "Altın Misafir Odası", "Gold Guest Room", wing="east",
+     min_n=EAST, surface="carpet", purpose="guest bedroom; a panel to the hidden observatory (secret S10)",
+     dressing="gold bed, wardrobe, vanity, a ladder behind the panel")
+room("rose_room", "F1", rect(38, 46, -34, -24), "Gül Misafir Odası", "Rose Guest Room", wing="east",
+     min_n=EAST, surface="carpet", purpose="guest bedroom", dressing="rose bed, wardrobe, washstand")
+room("ivory_room", "F1", rect(46, 54, -34, -24), "Fildişi Misafir Odası", "Ivory Guest Room", wing="east",
+     min_n=EAST, surface="carpet", purpose="guest bedroom", dressing="ivory bed, wardrobe, writing desk")
+room("guest_bath", "F1", rect(38, 54, -24, -16), "Misafir Hamamı", "Guest Bath", wing="east", min_n=EAST,
+     surface="wet", purpose="the guest wing's bath", dressing="bathtubs, basins, mirrors, towel rails")
+# F2: the hidden observatory on the east roof (secret room: reached only through S10)
+room("observatory", "F2", rect(46, 54, -44, -36), "Gizli Rasathane", "Hidden Observatory", wing="east",
+     min_n=EAST, surface="wood", secret=True, dead_end_ok=True,
+     purpose="Anselm's secret star room: a brass telescope under a slit roof", dressing="telescope, star charts, "
+     "orrery, a cot, notebooks")
+# C2: the lower vaults
+room("wine_catacombs", "C2", rect(-34, -22, -16, 0), "Şarap Katakombları", "Wine Catacombs", wing="deep",
+     min_n=DEEP, risk="tehlikeli", surface="dust", purpose="racks of old vintages in vaulted niches",
+     dressing="wine niches, barrels, candles, cobwebs")
+room("catacomb_steps", "C2", rect(-22, -18, -10, -2), "Katakomb Merdiveni", "Catacomb Steps", kind="circulation",
+     wing="cellar", min_n=8, surface="stone", purpose="stair down from the wine cellar", dressing="lantern, rope")
+room("vault", "C2", rect(-18, -6, -16, -4), "Kasa Dairesi", "Strong Vault", wing="deep", min_n=DEEP,
+     risk="tehlikeli", surface="stone", purpose="the family strongroom: a floor safe", dressing="iron chests, "
+     "strongboxes, shelves of deeds, a floor safe")
+room("ossuary", "C2", rect(-6, 6, -16, -4), "Kemiklik", "Ossuary", wing="deep", min_n=DEEP, risk="tehlikeli",
+     surface="dust", purpose="bones of the old monks under the cistern", dressing="skull walls, niches, candles")
+room("ossuary_steps", "C2", rect(6, 10, -12, -4), "Kemiklik Merdiveni", "Ossuary Steps", kind="circulation",
+     wing="cellar", surface="stone", purpose="stair down from the cistern", dressing="lantern, rope rail")
+room("crypt", "C2", rect(10, 22, -20, -10), "Şapel Kriptası", "Chapel Crypt", wing="deep", surface="stone",
+     secret=True, dead_end_ok=True, purpose="the Pozzo crypt under the chapel (secret S8): a relic",
+     dressing="sarcophagi, candles, a reliquary, bones")
+
 R = {r["id"]: r for r in ROOMS}
 
 # ------------------------------------------------------------------------------------------------ doors
@@ -245,6 +376,78 @@ door("study", "master", (22, -18))
 door("attic", "clock_room", (-10, -15))
 door("clock_room", "roof_walk", (10, -19))
 door("roof_walk", "storm_tower", (26, -20))
+# SPRINT-040 F0 north block: the enfilade on y = -32, the long gallery behind, service doors to the old house
+door("staircase_hall", "servants_corridor", (0, -24), 4.0, "double", note="gate: opens at 8 players")
+door("green_salon", "servants_corridor", (-19, -24))
+door("yellow_salon", "servants_corridor", (12, -24))
+door("music_room", "kitchen", (-29, -24))
+door("trophy_room", "library", (28, -24))
+door("music_room", "green_salon", (-24, -32), 2.0, "double")
+door("green_salon", "blue_salon", (-16, -32), 2.0, "double")
+door("blue_salon", "staircase_hall", (-8, -32), 2.0, "double")
+door("staircase_hall", "yellow_salon", (8, -32), 2.0, "double")
+door("yellow_salon", "card_room", (16, -32), 2.0, "double")
+door("card_room", "trophy_room", (24, -32), 2.0, "double")
+door("long_gallery", "music_room", (-29, -40))
+door("long_gallery", "blue_salon", (-12, -40))
+door("long_gallery", "staircase_hall", (0, -40), 4.0, "arch")
+door("long_gallery", "card_room", (20, -40))
+door("long_gallery", "trophy_room", (29, -40))
+# F0 west wing
+door("west_passage", "long_gallery", (-34, -42))
+door("west_passage", "music_room", (-34, -36))
+door("west_passage", "cliff_path", (-36, -24), kind="gate", note="gate: opens at 8 players")
+door("west_passage", "silver_room", (-38, -39))
+door("west_passage", "boiler_room", (-38, -29))
+door("silver_room", "servants_hall", (-44, -39))
+door("boiler_room", "housekeeper", (-44, -29))
+door("servants_hall", "housekeeper", (-49, -34))
+# F0 east wing
+door("east_hall", "long_gallery", (34, -42))
+door("east_hall", "trophy_room", (34, -30))
+door("east_hall", "ballroom", (34, -5), note="gate: opens at 10 players")
+door("east_hall", "greenhouse", (36, 0))
+door("east_hall", "smoking_room", (38, -39))
+door("east_hall", "map_room", (38, -29))
+door("east_hall", "orangery", (38, -19))
+door("east_hall", "morning_room", (38, -3))
+door("smoking_room", "gun_room", (46, -39))
+door("map_room", "games_room", (46, -29))
+door("gun_room", "games_room", (50, -34))
+door("games_room", "orangery", (50, -24))
+door("orangery", "morning_room", (46, -10), 2.0, "double")
+door("morning_room", "greenhouse", (44, 0), kind="french")
+# F1
+door("north_corridor", "upper_west", (-34, -42))
+door("north_corridor", "east_corridor", (34, -42))
+door("north_corridor", "lilac_room", (-29, -40))
+door("north_corridor", "sewing_room", (-16, -40))
+door("north_corridor", "grand_landing", (0, -40), 4.0, "arch")
+door("north_corridor", "chinese_room", (16, -40))
+door("north_corridor", "dressing_room", (29, -40))
+door("grand_landing", "sewing_room", (-8, -30))
+door("grand_landing", "chinese_room", (8, -30))
+door("lilac_room", "sewing_room", (-24, -30))
+door("chinese_room", "dressing_room", (24, -30))
+door("lilac_room", "blue_room", (-28, -24), note="the lilac room's door to the old guest floor")
+door("upper_west", "picture_gallery", (-38, -40))
+door("upper_west", "picture_gallery", (-38, -28))
+DOORS[-1]["id"] += "_s"
+DOORS[-2]["id"] += "_n"
+door("east_corridor", "corridor_e", (34, -10), note="gate: opens at 10 players")
+door("east_corridor", "green_room", (38, -39))
+door("east_corridor", "rose_room", (38, -29))
+door("east_corridor", "guest_bath", (38, -20))
+door("green_room", "gold_room", (46, -39))
+door("rose_room", "ivory_room", (46, -29))
+door("gold_room", "ivory_room", (50, -34))
+door("ivory_room", "guest_bath", (50, -24))
+# C2
+door("catacomb_steps", "wine_catacombs", (-22, -3), note="gate: opens at 12 players")
+door("catacomb_steps", "vault", (-18, -7), kind="gate", note="iron gate; opens at 12 players")
+door("vault", "wine_catacombs", (-18, -14))
+door("vault", "ossuary", (-6, -10))
+door("ossuary", "ossuary_steps", (6, -5), note="gate: opens at 12 players")
 
 # ------------------------------------------------------------------------------------------------ stairs
 STAIRS = []
@@ -268,6 +471,15 @@ stair("st_clock", "Saat Merdiveni", "gallery", "clock_room", (6, -18), (0, -18),
 stair("st_tower_spiral", "Kule Merdiveni", "master", "storm_tower", (30, -22), (30, -19), 2.0, "spiral")
 stair("st_tower_ladder", "Kule Merdiveni (el)", "storm_tower", "tower_top", (28, -22), (28, -22), 1.0, "ladder")
 stair("st_sea", "Rıhtım Merdiveni", "boathouse", "courtyard", (0, 39), (0, 33), 4.0, "outdoor")
+# SPRINT-040 (authored in the build form: 6 m run per 3 m rise on whole 2 m cells, no STAIR_FIX needed)
+stair("st_grand_nw", "Büyük Merdiven (kuzey-batı)", "staircase_hall", "grand_landing", (-5, -26), (-5, -32), 2.0,
+      "grand")
+stair("st_grand_ne", "Büyük Merdiven (kuzey-doğu)", "staircase_hall", "grand_landing", (5, -26), (5, -32), 2.0,
+      "grand")
+stair("st_west", "Batı Hizmet Merdiveni", "west_passage", "upper_west", (-35, -26), (-35, -32), 2.0, "service")
+stair("st_east", "Doğu Kanat Merdiveni", "east_hall", "east_corridor", (37, -8), (37, -14), 2.0, "service")
+stair("st_catacomb", "Katakomb Merdiveni", "catacomb_steps", "wine_cellar", (-21, -4), (-21, -10), 2.0, "service")
+stair("st_ossuary", "Kemiklik Merdiveni", "ossuary_steps", "cistern", (7, -6), (7, -12), 2.0, "service")
 
 # ------------------------------------------------------------------------------------------------ secret passages
 SECRETS = [
@@ -284,7 +496,23 @@ SECRETS = [
      "how": "the old well under the greenhouse drains into the cistern; iron rungs"},
     {"id": "S6", "name_tr": "Duvar Arası", "a": "nursery", "at_a": [8.8, 7], "b": "master", "at_b": [33, -13],
      "how": "the back of the nursery wardrobe: a crawl between the walls to Pozzo's bedroom"},
+    # SPRINT-040
+    {"id": "S7", "name_tr": "Şömine Geçidi", "kind": "fireplace", "a": "card_room", "at_a": [16.8, -27.0],
+     "b": "dressing_room", "at_b": [33.2, -36.0],
+     "how": "the card room hearth's back plate swings in: a sooty stair up behind Pozzo's wardrobes"},
+    {"id": "S8", "name_tr": "Kripta Kapağı", "kind": "crypt", "a": "chapel", "at_a": [16.0, -19.0], "b": "crypt",
+     "at_b": [16.0, -19.0], "how": "the altar slab slides aside: steps down to the Pozzo crypt"},
+    {"id": "S9", "name_tr": "Uşak Sürünme Yolu", "kind": "crawlway", "a": "servants_hall", "at_a": [-53.2, -36.0],
+     "b": "music_room", "at_b": [-33.2, -27.0],
+     "how": "a low hatch behind the servants' dresser: a crawl between the walls to the music room"},
+    {"id": "S10", "name_tr": "Rasathane Merdiveni", "kind": "observatory", "a": "gold_room", "at_a": [53.2, -38.5],
+     "b": "observatory", "at_b": [53.2, -38.5],
+     "how": "a panel beside the gold room's bed: a ladder up to Anselm's hidden observatory"},
 ]
+SECRET_KIND = {"S1": "bookcase", "S2": "dumbwaiter", "S3": "portrait", "S4": "tomb", "S5": "well", "S6": "wardrobe"}
+for _s in SECRETS:
+    _s.setdefault("kind", SECRET_KIND.get(_s["id"], "panel"))
+SECRET_ROOMS = [r["id"] for r in ROOMS if r.get("secret")]
 SECRET_RULES = {
     "who": "everyone once discovered; the Impatient see all of them on their map from the start",
     "discover": "a seam glints for 0.35 s during a lightning flash within 4 m (LOS); opening it marks it for "
@@ -295,6 +523,11 @@ SECRET_RULES = {
     "counter": "any player can wedge a passage shut for the rest of the day (4 s, visible wedge); the Locksmith "
                "can lock or unlock it",
     "not_for_connectivity": True,
+    # SPRINT-040 build: every end is an AKGSecretPassage. Undiscovered, E examines it (the seam, the loose plate) and
+    # opens it for everyone (server-replicated, stays open); only then is it drawn on the minimap (the Impatient see
+    # all of them from the start). The secret rooms (crypt, observatory) are reached through their passage only.
+    "build": "AKGSecretPassage pairs; discovered state replicated; minimap draws discovered ones only",
+    "secret_rooms": "crypt (S8), observatory (S10)",
 }
 
 # ------------------------------------------------------------------------------------------------ anchors + chores
@@ -340,7 +573,6 @@ anchor("win_red", "red_room", (-33, -2), "Kırmızı Oda penceresi", "Shutter", 
 anchor("win_studio", "studio", (-16, 3), "atölye penceresi", "Shutter", r=1.2)
 anchor("win_nursery", "nursery", (0, 7), "çocuk odası penceresi", "Shutter", r=1.2)
 anchor("win_billiard", "billiard", (19, 5), "bilardo penceresi", "Shutter", r=1.2)
-anchor("win_master", "master", (33, -20), "yatak odası penceresi", "Shutter", r=1.2)
 anchor("laundry_tub", "laundry", (-18, -1), "ıslak çarşaf sepeti", "Basket")
 anchor("bath_rack", "bath", (-19, -14), "hamam kurutma askısı", "Lines")
 anchor("studio_easel", "studio", (-16, -3), "bitmiş portre", "Easel")
@@ -355,7 +587,7 @@ anchor("g_parcel", "boathouse", (-8, 44), "denizden vuran G. kolisi", "Parcel")
 anchor("pantry_china", "pantry", (-31, -3), "porselen dolabı", "Shelf")
 anchor("parcel_corner", "vestibule", (-6, 8), "G. kolileri köşesi", "ParcelPile")
 anchor("gallery_cleat", "gallery", (-8, -18.5), "galerideki avize halatı", "Winch")
-anchor("win_ballroom", "ballroom", (33, -5), "balo salonu penceresi", "Shutter", r=1.2)
+anchor("win_ballroom", "ballroom", (32, 5.2), "balo salonu penceresi", "Shutter", r=1.2)
 anchor("courtyard_pots", "courtyard", (24, 24), "limon saksıları", "Pots")
 anchor("greenhouse_bench", "greenhouse", (44, 14), "sera tezgâhı", "Bench")
 anchor("grave_1", "graveyard", (-48, 9), "mezar feneri 1", "GraveLamp", r=1.2)
@@ -363,6 +595,54 @@ anchor("grave_2", "graveyard", (-40, 11), "mezar feneri 2", "GraveLamp", r=1.2)
 anchor("grave_3", "graveyard", (-44, 17), "mezar feneri 3", "GraveLamp", r=1.2)
 anchor("grave_4", "graveyard", (-38, 23), "mezar feneri 4", "GraveLamp", r=1.2)
 anchor("fuse_coil", "clock_room", (6, -12), "kıvılcım bobini (ikinci şalter)", "SparkCoil")
+# SPRINT-040 manor chores (new wings) + secret chores
+anchor("clock_long", "long_gallery", (-24, -43.2), "uzun galerideki büyük saat", "Clock")
+anchor("clock_stair", "staircase_hall", (-6.5, -38.8), "merdiven holündeki saat", "Clock")
+anchor("clock_trophy", "trophy_room", (33.0, -37.0), "av odasındaki saat", "Clock")
+anchor("silver_chest", "silver_room", (-42.8, -43.0), "gümüş sandığı", "SilverChest")
+anchor("silver_bench", "silver_room", (-39.0, -35.0), "cila tezgâhı", "Bench")
+anchor("piano", "music_room", (-29.0, -34.0), "kuyruklu piyano", "Piano")
+anchor("music_cabinet", "blue_salon", (-9.0, -38.8), "nota dolabı (akort çatalı)", "Cabinet")
+anchor("aviary", "orangery", (52.5, -12.0), "kuşhane", "Aviary")
+anchor("seed_sack", "greenhouse", (47.0, 5.0), "kuş yemi çuvalı", "Sack")
+anchor("coal_heap", "service_yard", (-32.0, 7.0), "kömür yığını", "Coal")
+anchor("boiler", "boiler_room", (-42.8, -26.0), "kazan", "Boiler")
+anchor("chess_box", "card_room", (22.8, -38.8), "satranç taşı kutusu", "Box")
+anchor("chessboard", "games_room", (50.0, -29.0), "satranç masası", "Chess")
+anchor("rack_1", "wine_catacombs", (-33.0, -14.0), "eski bağ nişi 1", "WineRack")
+anchor("rack_2", "wine_catacombs", (-33.0, -5.0), "eski bağ nişi 2", "WineRack")
+anchor("rack_3", "wine_catacombs", (-27.0, -15.0), "eski bağ nişi 3", "WineRack")
+anchor("chapel_cand_w", "chapel", (11.0, -11.2), "batı şamdanı", "Candles")
+anchor("chapel_cand_e", "chapel", (21.0, -13.0), "doğu şamdanı", "Candles")
+anchor("portrait_1", "long_gallery", (-10.0, -43.2), "tozlu portre 1", "Frame")
+anchor("portrait_2", "long_gallery", (14.0, -43.2), "tozlu portre 2", "Frame")
+anchor("portrait_3", "picture_gallery", (-46.0, -43.0), "tozlu tablo", "Frame")
+anchor("win_green", "green_room", (40.0, -43.2), "Yeşil Oda penceresi", "Shutter", r=1.2)
+anchor("win_gold", "gold_room", (52.0, -43.2), "Altın Oda penceresi", "Shutter", r=1.2)
+anchor("win_ivory", "ivory_room", (53.2, -28.0), "Fildişi Oda penceresi", "Shutter", r=1.2)
+anchor("linen_press", "sewing_room", (-12.0, -38.8), "çarşaf dolabı", "Linen")
+anchor("bed_green", "green_room", (42.0, -36.0), "Yeşil Oda yatağı", "Bed")
+anchor("bed_rose", "rose_room", (42.0, -26.5), "Gül Oda yatağı", "Bed")
+anchor("bed_lilac", "lilac_room", (-29.0, -26.5), "Leylak Oda yatağı", "Bed")
+anchor("bath_e_tub", "guest_bath", (50.0, -22.0), "misafir küveti", "Boiler")
+anchor("vase_chinese", "chinese_room", (16.0, -26.0), "Çin vazosu", "Pots")
+anchor("hall_trophies", "trophy_room", (29.0, -26.0), "av trofeleri", "Frame")
+anchor("housekeeper_keys", "housekeeper", (-49.0, -25.0), "anahtar panosu", "Keys")
+anchor("servants_table", "servants_hall", (-49.0, -39.0), "hizmetkâr masası", "Table", r=2.0)
+anchor("gun_bench", "gun_room", (50.0, -43.0), "tüfek tezgâhı", "Bench")
+anchor("smoking_humidor", "smoking_room", (42.0, -35.0), "puro kutusu", "Box")
+anchor("morning_table", "morning_room", (46.0, -5.0), "kahvaltı masası", "Table", r=2.0)
+anchor("dressing_mirror", "dressing_room", (26.0, -38.8), "boy aynası", "Frame")
+anchor("vault_ledger", "vault", (-12.0, -15.2), "tapu rafları", "Shelf")
+anchor("ossuary_niche", "ossuary", (0.0, -15.2), "kafatası nişi", "Shelf")
+# secret chores (given to whoever discovers the secret)
+anchor("crypt_relic", "crypt", (19.0, -12.0), "kriptadaki rölikerlik", "Relic")
+anchor("chapel_reliquary", "chapel", (17.8, -19.2), "şapeldeki boş rölikerlik", "Relic")
+anchor("obs_scope", "observatory", (48.5, -41.5), "pirinç teleskop", "Scope")
+anchor("map_table", "map_room", (42.0, -29.0), "harita masası", "Table", r=2.0)
+anchor("smuggler_ledger", "wine_cellar", (-31.0, -15.2), "sahte raftaki kaçakçı defteri", "Book")
+anchor("study_safe", "study", (20.5, -22.6), "Pozzo'nun kasası", "Safe")
+anchor("red_book", "library", (29.0, -11.0), "kırmızı kitabın rafı", "Book")
 
 ITEMS = {
     "Bottles": {"label_tr": "şarap sepeti", "speed": 1.0, "fragile": True},
@@ -380,6 +660,18 @@ ITEMS = {
     "Pot": {"label_tr": "limon saksısı", "speed": 0.7},
     "Parcel": {"label_tr": "G. kolisi", "speed": 0.55, "two_person": True},
     "Taper": {"label_tr": "yanan fitil", "speed": 1.0, "flame": True},
+    # SPRINT-040
+    "Silver": {"label_tr": "gümüş takımı", "speed": 1.0, "fragile": True},
+    "Fork": {"label_tr": "akort çatalı", "speed": 1.0},
+    "Seed": {"label_tr": "kuş yemi", "speed": 1.0},
+    "Coal": {"label_tr": "kömür kovası", "speed": 0.85},
+    "Chessmen": {"label_tr": "satranç taşları", "speed": 1.0},
+    "Linen": {"label_tr": "temiz çarşaflar", "speed": 1.0, "count": 3},
+    "Keys": {"label_tr": "kâhyanın anahtarları", "speed": 1.0, "count": 3},
+    "Relic": {"label_tr": "kriptanın röliği", "speed": 0.9},
+    "Chart": {"label_tr": "yıldız haritası", "speed": 1.0},
+    "Ledger": {"label_tr": "kaçakçı defteri", "speed": 1.0},
+    "RedBook": {"label_tr": "kırmızı kitap", "speed": 1.0},
 }
 
 CHORES = []
@@ -431,7 +723,8 @@ chore("Shutters", "Kepenkleri Kapat", "Close the shutters",
       [work(["$w1", "$w2", "$w3"], 2.0, "Çarpan 3 kepengi kapat ve mandalla", any_order=True)],
       variants=[{"name": "west", "vars": {"w1": "win_blue", "w2": "win_red", "w3": "win_studio"}},
                 {"name": "front", "vars": {"w1": "win_nursery", "w2": "win_billiard", "w3": "win_ballroom"}},
-                {"name": "east", "vars": {"w1": "win_nursery", "w2": "win_billiard", "w3": "win_master"}}],
+                # (SPRINT-040: the master bedroom's windows now face the east guest wing: the studio instead)
+                {"name": "east", "vars": {"w1": "win_studio", "w2": "win_nursery", "w3": "win_billiard"}}],
       twist="the Impatient can throw a shutter open again (noise cover 25 m, rain wets the floor = footprints)")
 chore("SignalLamp", "Sinyal Feneri", "Signal lamp",
       [take("attic_oil", "OilCan", 2.0, "Tavan arasından bir yağ bidonu al"),
@@ -487,6 +780,80 @@ chore("GraveLanterns", "Mezar Fenerleri", "Grave lanterns",
 chore("SetTheTable", "Sofrayı Kur", "Set the table",
       [take("pantry_china", "Plates", 1.5, "Kilerdeki porselen dolabından tabakları al"),
        bring("dining_table", "Plates", 2.0, "Ziyafet masasına diz (koşarsan tabak kırılır)")])
+
+# ---- SPRINT-040 manor-only chores (the new wings; SPRINT-016 "simple but fun": take / bring / work)
+chore("WindTheClocks", "Büyük Saatleri Kur", "Wind the grand clocks",
+      [work(["clock_long", "clock_stair", "clock_trophy"], 2.5, "Üç büyük saati kur (hepsi aynı dakikada durmuş)",
+            any_order=True)],
+      twist="the clocks chime together for 5 s when the last one is wound: heard all over the north block")
+chore("PolishTheSilver", "Gümüşleri Parlat", "Polish the silver",
+      [take("silver_chest", "Silver", 2.0, "Gümüş odasındaki sandıktan takımı al"),
+       bring("$dst", "Silver", 3.0, "Gümüşleri parlatıp $dst diz (koşarsan şıngırdar)")],
+      variants=[{"name": "dining", "vars": {"dst": "dining_table"}},
+                {"name": "servants", "vars": {"dst": "servants_table"}}])
+chore("TuneThePiano", "Piyanoyu Akort Et", "Tune the piano",
+      [take("music_cabinet", "Fork", 1.5, "Mavi salondaki nota dolabından akort çatalını al"),
+       bring("piano", "Fork", 4.0, "Müzik salonundaki kuyruklu piyanoyu akort et")],
+      twist="a tuned piano can be played (E): 20 s of music that masks footsteps in the enfilade")
+chore("FeedTheAviary", "Kuşhaneyi Besle", "Feed the aviary",
+      [take("seed_sack", "Seed", 1.5, "Seradaki çuvaldan kuş yemi al"),
+       bring("aviary", "Seed", 2.5, "Portakallıktaki kuşhaneyi besle")],
+      twist="fed birds sing; startled birds (someone running past) screech for 3 s")
+chore("StokeTheBoiler", "Kazanı Besle", "Stoke the boiler",
+      [take("coal_heap", "Coal", 2.0, "Hizmet avlusundaki yığından bir kova kömür al"),
+       bring("boiler", "Coal", 2.5, "Batı kanadındaki kazana kömürü at")],
+      twist="a stoked boiler steams the bath house for the day (sight 5 m there)")
+chore("SetTheChessboard", "Satranç Tahtasını Diz", "Set the chessboard",
+      [take("chess_box", "Chessmen", 1.5, "Kart odasındaki kutudan satranç taşlarını al"),
+       bring("chessboard", "Chessmen", 3.0, "Oyun odasındaki satranç tahtasını diz")])
+chore("SortTheWine", "Şarapları Ayır", "Sort the wine",
+      [work(["rack_1", "rack_2", "rack_3"], 2.0, "Katakombdaki üç nişte eski şarapları yıllarına göre diz",
+            any_order=True)])
+chore("LightTheChapel", "Şapeli Aydınlat", "Light the chapel",
+      [take("chapel_candles", "Taper", 1.5, "Şapelin mum kutusundan yanan bir fitil al"),
+       work(["chapel_cand_w", "chapel_cand_e"], 1.5, "İki büyük şamdanı yak", any_order=True)],
+      twist="a lit chapel shows shadows on the stained glass: who is inside is visible from the hall")
+chore("DustThePortraits", "Portrelerin Tozunu Al", "Dust the portraits",
+      [work(["portrait_1", "portrait_2", "portrait_3"], 2.0, "Galerilerdeki üç tozlu portreyi sil", any_order=True)],
+      twist="one portrait's eyes follow you (the witness portrait trap)")
+chore("AirTheGuestRooms", "Misafir Odalarını Havalandır", "Air the guest rooms",
+      [work(["win_green", "win_gold", "win_ivory"], 2.0, "Doğu kanadındaki üç pencereyi aç, havalandır, kapat",
+            any_order=True)])
+chore("MakeTheBeds", "Yatakları Yap", "Make the beds",
+      [take("linen_press", "Linen", 2.0, "Dikiş odasındaki dolaptan temiz çarşafları al"),
+       bring(["bed_lilac", "bed_green", "bed_rose"], "Linen", 2.0, "Üç misafir yatağını yap", any_order=True)])
+chore("HotWater", "Sıcak Su", "Hot water",
+      [take("boiler", "Bucket", 2.5, "Kazandan bir kova sıcak su al", fill=1.0),
+       bring("bath_e_tub", "Bucket", 1.5, "Misafir hamamının küvetine dök (yürü, koşma!)", min_fill=0.35)])
+chore("TheDeedCount", "Tapuları Say", "Count the deeds",
+      [work("vault_ledger", 3.0, "Kasa dairesindeki tapuları say"),
+       work("ossuary_niche", 2.0, "Kemiklikteki nişe sayım defterini koy")])
+chore("KeyRound", "Anahtar Turu", "The key round",
+      [take("housekeeper_keys", "Keys", 1.5, "Kâhyanın panosundan anahtar demetini al"),
+       bring(["smoking_humidor", "gun_bench", "morning_table"], "Keys", 1.5, "Doğu kanadında üç dolabı kilitle",
+             any_order=True)])
+chore("DustTheChina", "Porselenlerin Tozunu Al", "Dust the china",
+      [work(["vase_chinese", "dressing_mirror", "hall_trophies"], 2.0, "Çin vazosunu, boy aynasını ve trofeleri sil",
+            any_order=True)])
+
+# ---- SPRINT-040 SECRET chores: never dealt; given to whoever discovers their secret. Reward = map knowledge
+# (reward_secret: another passage opens for everyone = a shortcut) or a clue (reward_compartment opens for everyone).
+chore("CryptRelic", "Kriptanın Röliği", "The crypt relic",
+      [take("crypt_relic", "Relic", 2.0, "Kriptadaki röliği al"),
+       bring("chapel_reliquary", "Relic", 2.0, "Röliği şapeldeki boş rölikerliğe koy")])
+CHORES[-1].update(secret="S8", reward_secret="S2")
+chore("StarChart", "Yıldız Haritası", "The star chart",
+      [take("obs_scope", "Chart", 3.0, "Teleskoptan fırtına yıldızlarını haritaya geçir"),
+       bring("map_table", "Chart", 2.0, "Haritayı harita odasındaki masaya bırak")])
+CHORES[-1].update(secret="S10", reward_compartment="K9")
+chore("SmugglersLedger", "Kaçakçı Defteri", "The smugglers' ledger",
+      [take("smuggler_ledger", "Ledger", 1.5, "Sahte şarap rafının arkasındaki defteri al"),
+       bring("study_safe", "Ledger", 2.0, "Defteri Pozzo'nun kasasına kilitle")])
+CHORES[-1].update(secret="S4", reward_secret="S7")
+chore("LibraryCipher", "Kırmızı Kitabın Şifresi", "The red book's cipher",
+      [take("red_book", "RedBook", 1.5, "Dönen kitaplığı açan kırmızı kitabı al"),
+       bring("study_safe", "RedBook", 2.0, "Kitaptaki şifreyi kasada dene")])
+CHORES[-1].update(secret="S1", reward_compartment="K4")
 
 # ------------------------------------------------------------------------------------------------ hides + evidence
 HIDES = {
@@ -551,6 +918,125 @@ EVIDENCE = {
     "courtyard": "mud footprints; lemon pots",
     "service_yard": "mud footprints; chopping block (axe = weapon)",
 }
+# SPRINT-040 rooms
+HIDES.update({
+    "music_room": [((-33, -39), "behind the harp's cover")], "green_salon": [((-23, -39), "behind the palm screen")],
+    "blue_salon": [((-15, -25), "curtained window seat")], "staircase_hall": [((7, -39), "under the stair")],
+    "yellow_salon": [((15, -39), "behind the harpsichord")], "card_room": [((17, -25), "curtained alcove")],
+    "trophy_room": [((33, -25), "behind the bear")], "servants_hall": [((-53, -43), "coal cupboard")],
+    "housekeeper": [((-53, -25), "the bed curtain")], "silver_room": [((-39, -43), "plate cupboard")],
+    "boiler_room": [((-43, -33), "behind the boiler")], "smoking_room": [((45, -43), "chesterfield alcove")],
+    "gun_room": [((53, -43), "boot cupboard")], "map_room": [((45, -25), "chart chest")],
+    "games_room": [((53, -25), "behind the dart board screen")], "orangery": [((39, -23), "among the orange tubs")],
+    "morning_room": [((53, -1), "behind the sofa")], "lilac_room": [((-33, -39), "wardrobe")],
+    "sewing_room": [((-23, -39), "among the dress forms")], "chinese_room": [((23, -39), "lacquer screen")],
+    "dressing_room": [((25, -25), "wardrobe")], "picture_gallery": [((-53, -25), "behind a velvet curtain")],
+    "green_room": [((45, -43), "wardrobe")], "gold_room": [((47, -43), "wardrobe")],
+    "rose_room": [((45, -25), "wardrobe")], "ivory_room": [((53, -25), "wardrobe")],
+    "guest_bath": [((53, -23), "behind the screen")], "wine_catacombs": [((-33, -1), "empty niche")],
+    "vault": [((-7, -15), "behind the iron chests")], "ossuary": [((5, -15), "bone niche")],
+    "crypt": [((21, -11), "behind a sarcophagus")], "observatory": [((47, -37), "under the cot")],
+})
+EVIDENCE.update({
+    "music_room": "the piano lid shows fresh fingerprints; the metronome still ticking",
+    "green_salon": "tea cups still warm (someone was here < 60 s ago)",
+    "blue_salon": "a card game abandoned mid-hand",
+    "staircase_hall": "the chandelier's state; footprints on the stone stairs",
+    "yellow_salon": "the harpsichord's dust shows who touched it",
+    "card_room": "soot on the hearth plate (S7 used)",
+    "trophy_room": "a missing rifle from the rack; the door that locks",
+    "servants_hall": "the bell board shows the last room that rang",
+    "housekeeper": "the key board: a missing key is visible",
+    "silver_room": "a missing knife from the silver canteen",
+    "boiler_room": "coal dust on shoes (45 s)",
+    "smoking_room": "fresh ash in the tray",
+    "gun_room": "a gun cabinet ajar",
+    "map_room": "the star chart (secret chore) on the table",
+    "games_room": "the chess position changes",
+    "orangery": "wet soil footprints; the birds screech when startled",
+    "morning_room": "the breakfast is half eaten",
+    "lilac_room": "unmade bed", "sewing_room": "a pair of shears missing (weapon)",
+    "chinese_room": "a vase moved: its dust ring", "dressing_room": "a wardrobe door ajar (S7)",
+    "picture_gallery": "the watching portrait remembers who passed",
+    "green_room": "the door that locks itself", "gold_room": "a loose panel beside the bed (S10)",
+    "rose_room": "unmade bed", "ivory_room": "letters under the door", "guest_bath": "wet footprints",
+    "wine_catacombs": "dust floor: footprints 120 s", "vault": "the floor safe's dial position",
+    "ossuary": "dust floor: footprints 120 s", "crypt": "the relic's empty place", "observatory": "the telescope's aim",
+})
+# ------------------------------------------------------------------------------------------------ SPRINT-040 compartments
+# Hidden compartments (AKGHiddenCompartment): E on the odd brick / drawer / book opens it for everyone (replicated);
+# loot spills out (a KGLoot table) or a clue stays readable in it (evidence). K4 and K9 are also opened by the
+# rewards of the secret chores LibraryCipher and StarChart.
+COMPARTMENTS = []
+
+
+def compartment(cid, rid, at, kind, prompt, loot=None, clue=None, yaw=0.0):
+    COMPARTMENTS.append({"id": cid, "room": rid, "at": list(at), "kind": kind, "prompt": prompt, "loot": loot,
+                         "clue": clue, "yaw": yaw})
+
+
+compartment("K1", "wine_catacombs", (-33.4, -9.0), "LooseBrick", "Tap the loose brick",
+            clue="A torn label in the bricks: 'G. - 1893 - not for the committee'.")
+compartment("K2", "study", (13.0, -23.4), "FalseDrawer", "Pull the desk drawer all the way out", loot="Chest")
+compartment("K3", "library", (31.0, -23.4), "HollowBook", "Open the heavy atlas",
+            clue="Pages cut into a hollow. Inside: a list of the guests' rooms, one name circled in red.")
+compartment("K4", "vault", (-12.0, -8.0), "FloorSafe", "Try the floor safe's dial", loot="CryptVault")
+compartment("K5", "kitchen", (-33.4, -15.0), "LooseBrick", "Tap the loose brick by the range", loot="Pot")
+compartment("K6", "housekeeper", (-45.0, -33.4), "FalseDrawer", "Pull the ledger drawer",
+            clue="The housekeeper's ledger: one guest has asked for the key to the gun room twice.")
+compartment("K7", "chinese_room", (9.0, -38.0), "LacquerBox", "Slide the lacquer box's false bottom", loot="Pot")
+compartment("K8", "master", (24.0, -22.8), "FloorSafe", "Lift the board under the rug", loot="Chest")
+compartment("K9", "smoking_room", (39.0, -43.4), "WallSafe", "Swing the painting aside",
+            clue="A letter: 'The boat will not come while the storm holds. Wait. - G.'")
+compartment("K10", "sewing_room", (-23.0, -25.0), "SewingBox", "Lift the sewing box's tray",
+            clue="A scrap of cloth with a dark stain, cut from a coat sleeve.")
+compartment("K11", "ossuary", (0.0, -4.8), "LooseBrick", "Push the skull in the wall", loot="CryptUrn")
+compartment("K12", "green_room", (45.2, -36.0), "FalseDrawer", "Pull the writing desk's drawer", loot="Pot")
+
+# ------------------------------------------------------------------------------------------------ SPRINT-040 traps
+# The generic trap framework (Source/KillGodot/Traps/): arm -> telegraph -> trigger -> cooldown, event log hook.
+# Every trap is seen or heard before it hurts; none kills outright. The Impatient arm the sabotage ones (E, then a
+# 60 s personal cooldown); the alarm floors and the watching portraits are passive (always armed).
+TRAPS = []
+
+
+def trap(tid, effect, rid, at, zone, policy="Impatient", passive=False, telegraph=2.0, active=1.0, cooldown=45.0,
+         damage=0.0, radius=600.0, target=None, target_room=None, note=""):
+    TRAPS.append({"id": tid, "effect": effect, "room": rid, "at": list(at), "zone": list(zone), "policy": policy,
+                  "passive": passive, "telegraph_s": telegraph, "active_s": active, "cooldown_s": cooldown,
+                  "damage": damage, "radius_cm": radius, "target": list(target) if target else None,
+                  "target_room": target_room, "note": note})
+
+
+trap("T1", "Trapdoor", "dining", (-19.0, -16.0), (1.0, 1.0), telegraph=1.2, active=3.0, damage=10.0,
+     target=(-26.0, -12.0), target_room="wine_cellar", note="the boards groan and sag 1.2 s before they drop")
+trap("T2", "Trapdoor", "ballroom", (12.0, -7.0), (1.0, 1.0), telegraph=1.2, active=3.0, damage=10.0,
+     target=(10.0, -12.0), target_room="cistern", note="drops into the cistern (knee-deep water)")
+trap("T3", "FallingObject", "ballroom", (24.0, -2.0), (1.6, 1.6), telegraph=2.5, active=4.0, cooldown=90.0,
+     damage=40.0, note="the ballroom chandelier sways and creaks 2.5 s, then falls")
+trap("T4", "FallingObject", "staircase_hall", (0.0, -35.0), (1.6, 1.6), telegraph=2.5, active=4.0, cooldown=90.0,
+     damage=40.0, note="the great chandelier of the staircase hall")
+trap("T5", "LockDoors", "trophy_room", (29.0, -32.0), (4.6, 7.6), telegraph=1.0, active=20.0, cooldown=90.0,
+     note="the trophy room seals for 20 s (clunk of every lock first)")
+trap("T6", "LockDoors", "green_room", (42.0, -39.0), (3.6, 4.6), telegraph=1.0, active=20.0, cooldown=90.0,
+     note="the green guest room seals for 20 s")
+trap("T7", "LightsOut", "long_gallery", (0.0, -42.0), (30.0, 1.6), telegraph=1.5, active=25.0, cooldown=90.0,
+     radius=3600.0, note="the gallery's gas lamps flicker, then go out for 25 s")
+trap("T8", "LightsOut", "servants_hall", (-49.0, -39.0), (4.6, 4.6), telegraph=1.5, active=25.0, cooldown=90.0,
+     radius=1600.0, note="the servants' hall lamps go out")
+trap("T9", "Alarm", "long_gallery", (-18.0, -42.0), (1.0, 1.6), policy="None", passive=True, telegraph=0.3,
+     active=8.0, cooldown=20.0, note="a creaking board: pings everyone's minimap for 8 s")
+trap("T10", "Alarm", "east_hall", (36.0, -24.0), (1.6, 1.0), policy="None", passive=True, telegraph=0.3,
+     active=8.0, cooldown=20.0, note="a creaking board in the east wing hall")
+trap("T11", "Alarm", "north_corridor", (12.0, -42.0), (1.0, 1.6), policy="None", passive=True, telegraph=0.3,
+     active=8.0, cooldown=20.0, note="a creaking board on the guest floor")
+trap("T12", "Witness", "gallery", (-9.6, -12.0), (0.5, 0.5), policy="None", passive=True, radius=900.0,
+     note="Anselm's portrait: its eyes remember who passed")
+trap("T13", "Witness", "picture_gallery", (-53.6, -34.0), (0.5, 0.5), policy="None", passive=True, radius=1100.0,
+     note="the Pozzo matriarch's portrait watches the picture gallery")
+trap("T14", "Witness", "long_gallery", (0.0, -43.6), (0.5, 0.5), policy="None", passive=True, radius=1400.0,
+     note="the founder's portrait at the middle of the long gallery")
+
 for rid, lst in HIDES.items():
     R[rid]["hides"] = [{"at": list(p), "what": w} for p, w in lst]
 for rid, ev in EVIDENCE.items():

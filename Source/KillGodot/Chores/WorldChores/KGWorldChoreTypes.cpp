@@ -358,6 +358,15 @@ bool FKGWorldChoreCatalog::Parse(const FString& Json, FString& OutError)
 		C.Title = O->GetStringField(TEXT("title"));
 		O->TryGetStringField(TEXT("blurb"), C.Blurb);
 		O->TryGetBoolField(TEXT("bots"), C.bBots);
+		{
+			// SPRINT-040 hook: manor secret fields (all optional).
+			FString Str;
+			if (O->TryGetStringField(TEXT("secret"), Str)) { C.SecretId = FName(*Str); }
+			if (O->TryGetStringField(TEXT("reward_secret"), Str)) { C.RewardSecret = FName(*Str); }
+			if (O->TryGetStringField(TEXT("reward_compartment"), Str)) { C.RewardCompartment = FName(*Str); }
+			double Num = 0.0;
+			if (O->TryGetNumberField(TEXT("min_players"), Num)) { C.MinPlayers = static_cast<int32>(Num); }
+		}
 		const TArray<TSharedPtr<FJsonValue>>* Rep = nullptr;
 		if (O->TryGetArrayField(TEXT("replaces"), Rep))
 		{
@@ -523,6 +532,9 @@ bool FKGWorldChoreCatalog::ForMap(const UWorld* World) const
 
 // ---- rules -------------------------------------------------------------------------------------------------------------
 
+TFunction<bool(const FKGWorldChoreDef&)> FKGWorldChoreRules::DealFilter;   // SPRINT-040 hook
+FKGOnWorldChoreDone FKGWorldChoreRules::OnChoreDone;                       // SPRINT-040 hook
+
 TArray<FName> FKGWorldChoreRules::Deal(const TArray<FName>& Pool, const FKGWorldChoreCatalog& Catalog, bool bBot, int32 Count, FKGRng& Rng)
 {
 	TArray<FName> World;
@@ -531,6 +543,10 @@ TArray<FName> FKGWorldChoreRules::Deal(const TArray<FName>& Pool, const FKGWorld
 	{
 		if (const FKGWorldChoreDef* Def = Catalog.FindChore(Id))
 		{
+			if (!Def->SecretId.IsNone() || (DealFilter && !DealFilter(*Def)))
+			{
+				continue;   // SPRINT-040 hook: secret chores are given, never dealt; the manor filter may veto
+			}
 			if (!bBot || (Def->bBots && !Def->NeedsClimb()))
 			{
 				World.AddUnique(Id);

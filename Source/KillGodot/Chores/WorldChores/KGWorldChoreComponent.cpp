@@ -782,6 +782,10 @@ void UKGWorldChoreComponent::CompleteChore(FName Chore)
 		}
 		bCounted = !bFake;
 	}
+	if (bCounted)
+	{
+		FKGWorldChoreRules::OnChoreDone.Broadcast(this, Chore);   // SPRINT-040 hook
+	}
 	UE_LOG(LogKillGodot, Log, TEXT("KG_WORLDCHORE_DONE %s by %s fake=%d counted=%d secs=%.1f"), *Chore.ToString(),
 	       PS ? *PS->GetPlayerName() : TEXT("?"), bFake ? 1 : 0, bCounted ? 1 : 0, Secs);
 	const int32 Index = Progress.IndexOfByPredicate([Chore](const FKGWorldProgress& X) { return X.Chore == Chore; });

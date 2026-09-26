@@ -135,6 +135,13 @@ struct KILLGODOT_API FKGWorldChoreDef
 	bool bBots = true;
 	TArray<FKGWorldVariant> Variants;
 	TArray<FKGWorldStepDef> Steps;
+	// SPRINT-040 hook: manor secrets. A chore with SecretId is never dealt; it is given when that secret is found.
+	// RewardSecret / RewardCompartment: discovered / opened for everyone when the chore completes (counted).
+	// MinPlayers: not dealt below this many players (UKGManorSubsystem installs FKGWorldChoreRules::DealFilter).
+	FName SecretId;
+	FName RewardSecret;
+	FName RewardCompartment;
+	int32 MinPlayers = 0;
 
 	int32 NumSteps() const { return Steps.Num(); }
 	int32 NumVariants() const { return FMath::Max(1, Variants.Num()); }
@@ -184,9 +191,18 @@ private:
 	TMap<FName, int32> AnchorLookup;
 };
 
+class UKGWorldChoreComponent;
+/** SPRINT-040 hook: a world chore was completed and counted (not faked by the Impatient). */
+DECLARE_MULTICAST_DELEGATE_TwoParams(FKGOnWorldChoreDone, UKGWorldChoreComponent*, FName);
+
 /** Pure rules (unit-tested in KillGodot.WorldChores.*). */
 struct KILLGODOT_API FKGWorldChoreRules
 {
+	/** SPRINT-040 hook: optional deal filter (false = never deal this chore); no filter = the SPRINT-016 deal. */
+	static TFunction<bool(const FKGWorldChoreDef&)> DealFilter;
+	/** SPRINT-040 hook: broadcast by UKGWorldChoreComponent::CompleteChore when the chore counted. */
+	static FKGOnWorldChoreDone OnChoreDone;
+
 	/** Target share of world chores in a dealt list (acceptance 4: about 70 / 30). */
 	static constexpr float WorldShare = 0.7f;
 	/** Sprinting with water spills this much per second; a fall/jump more. */

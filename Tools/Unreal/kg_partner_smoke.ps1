@@ -75,7 +75,7 @@ if (-not $rh -or -not $rc) { $fail += "RPS result missing (host='$rh' client='$r
 elseif ($rh -ne $rc) { $fail += "RPS outcome differs: host $rh vs client $rc" }
 if (-not (Lines $SrvLog "KG_PARTNER_STOP .*kind=handshake .*reason=Attacked")) { $fail += "attack did not cancel the handshake on the server" }
 if (-not (Lines $SrvLog "KG_PARTNER_START .*kind=highfive")) { $fail += "high five never started on the server" }
-$dist = Lines $SrvLog "KG_PARTNER_START .*kind=highfive .*dist=(\d+)"
+$dist = @(Lines $SrvLog "KG_PARTNER_START .*kind=highfive .*dist=(\d+)")   # @(): a single line unrolls to a string, [-1] would be its last char
 if ($dist -and -not ($dist[-1] -match "dist=(9[0-9]|1[0-9][0-9])\b")) { $fail += "high five bodies not aligned ~95 cm apart: $($dist[-1])" }
 
 if ($fail.Count -gt 0) {

@@ -12,6 +12,7 @@
 #include "Misc/CommandLine.h"
 #include "Tabletop/KGBoardTable.h"
 #include "Tabletop/KGTableRules.h"
+#include "EngineUtils.h"
 #include "Tabletop/KGTabletopRPCComponent.h"
 #include "Tabletop/SKGTablePanel.h"
 #include "World/KGSeat.h"
@@ -344,6 +345,9 @@ void UKGTabletopSubsystem::TickSmoke(float DeltaTime)
 			const bool bA = Table->ServerSeat(Me, 0);
 			const bool bB = Table->ServerSeat(Other, 1);
 			UE_LOG(LogKillGodot, Log, TEXT("KG_TABLE_SMOKE Host table=%s seated white=%d black=%d"), *Table->GetName(), bA ? 1 : 0, bB ? 1 : 0);
+			// Hold White's first move so the client's out-of-turn probe (sent as soon as it sees Playing at ply 0) reaches
+			// an untouched board; otherwise e7e5 can race e2e4 and be accepted as Black's real reply.
+			SmokeNextSend = SmokeClock + 4.0f;
 			SmokeStep = 1;
 			return;
 		}
@@ -384,6 +388,20 @@ void UKGTabletopSubsystem::TickSmoke(float DeltaTime)
 	// ---- client ----
 	AKGBoardTable* Table = AKGBoardTable::FindTableOf(Me);
 	UKGTabletopRPCComponent* Relay = UKGTabletopRPCComponent::FindFor(LocalPC);
+	if (SmokeClock >= SmokeNextDiag)
+	{
+		// Progress line while waiting (diagnoses a stuck client without a debugger): which lookup is still missing.
+		SmokeNextDiag = SmokeClock + 5.0f;
+		int32 NumTables = 0;
+		for (TActorIterator<AKGBoardTable> It(World); It; ++It)
+		{
+			++NumTables;
+		}
+		UE_LOG(LogKillGodot, Log, TEXT("KG_TABLE_SMOKE Client wait t=%.0f tables=%d table=%s relay=%d seat=%s colour=%d status=%s"),
+		       SmokeClock, NumTables, Table ? *Table->GetName() : TEXT("none"), Relay ? 1 : 0,
+		       AKGSeat::FindSeatOf(Me) ? *AKGSeat::FindSeatOf(Me)->GetName() : TEXT("none"),
+		       Table ? Table->ColourOfCharacter(Me) : -1, Table ? FKGTableRules::StatusText(Table->GetStatus()) : TEXT("-"));
+	}
 	if (!Table || !Relay)
 	{
 		return;

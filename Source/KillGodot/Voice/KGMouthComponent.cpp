@@ -18,7 +18,7 @@ namespace KGMouthPrivate
 		TEXT("Pin every mouth to this opening (0 closed .. 1 open) for screenshots; -1 = voice/bark driven."));
 	// Mouth placement relative to the Head bone in the villager's component space (mesh +Y = forward, +Z = up).
 	TAutoConsoleVariable<float> CVarFwd(TEXT("kg.Mouth.Fwd"), 9.5f, TEXT("Mouth offset forward of the Head bone (cm)."));
-	TAutoConsoleVariable<float> CVarUp(TEXT("kg.Mouth.Up"), 4.0f, TEXT("Mouth offset above the Head bone (cm)."));
+	TAutoConsoleVariable<float> CVarUp(TEXT("kg.Mouth.Up"), 2.5f, TEXT("Mouth offset above the Head bone (cm)."));   // 4.0 sat under the nostrils (Voice shots 2026-09-26)
 	TAutoConsoleVariable<float> CVarWidth(TEXT("kg.Mouth.Width"), 4.2f, TEXT("Mouth width (cm)."));
 	TAutoConsoleVariable<float> CVarOpen(TEXT("kg.Mouth.OpenHeight"), 3.2f, TEXT("Mouth height when fully open (cm)."));
 

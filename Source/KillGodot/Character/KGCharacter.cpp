@@ -46,6 +46,7 @@
 #include "PhysicsEngine/PhysicsHandleComponent.h"
 #include "UObject/ConstructorHelpers.h"
 #include "Voice/KGMouthComponent.h"
+#include "Voice/KGVoiceUI.h"
 #include "World/KGInteractable.h"
 #include "Audio/KGAudio.h"
 #include "Fishing/KGFishingComponent.h"
@@ -345,6 +346,18 @@ namespace KGDevActions
 void AKGCharacter::BeginPlay()
 {
 	Super::BeginPlay();
+	// SPRINT-026 stabilisation: stamina is predicted move state, simulated inside UKGCharacterMovement (the HUD still
+	// reads this->Stamina); the costs stay tunable here.
+	if (UKGCharacterMovement* KGMove = Cast<UKGCharacterMovement>(GetCharacterMovement()))
+	{
+		KGMove->Stamina = &Stamina;
+		KGMove->JumpStaminaCost = JumpStaminaCost;
+		KGMove->ChainHopBaseCost = ChainHopBaseCost;
+		KGMove->ChainHopStepCost = ChainHopStepCost;
+		KGMove->ChainHopStreakCostCap = ChainHopStreakCostCap;
+		KGMove->SprintSpeedForCap = SprintSpeed;
+		KGMove->WalkSpeedForMove = WalkSpeed;
+	}
 	Health->OnDeath.AddDynamic(this, &AKGCharacter::HandleDeath);
 
 	// Live Coding does not always rebuild the CDO: make sure a pawn spawned from a stale default still gets the
@@ -590,14 +603,13 @@ void AKGCharacter::CreateDefaultInput()
 	Map(LookAction, EKeys::Mouse2D, false, false, true);
 	Map(JumpAction, EKeys::SpaceBar);
 	Map(SprintAction, EKeys::LeftShift);
-	Map(CrouchAction, EKeys::LeftControl);
-	Map(CrouchAction, EKeys::C);
+	Map(CrouchAction, EKeys::LeftControl);   // SPRINT-023: C is the "Social" voice-command radial now
 	Map(InteractAction, EKeys::E);
 	Map(AttackAction, EKeys::LeftMouseButton);
 	Map(ShoveAction, EKeys::RightMouseButton);
 	Map(InspectAction, EKeys::F);
 	Map(DevBladeAction, EKeys::B);
-	Map(AccuseAction, EKeys::V);
+	Map(AccuseAction, EKeys::MiddleMouseButton);   // SPRINT-023: V is push-to-talk
 	Map(RotateHeldAction, EKeys::R);
 	Map(GuiltyAction, EKeys::Y);
 	Map(InnocentAction, EKeys::N);
@@ -659,6 +671,10 @@ void AKGCharacter::Move(const FInputActionValue& Value)
 void AKGCharacter::Look(const FInputActionValue& Value)
 {
 	const FVector2D Axis = Value.Get<FVector2D>();
+	if (FKGVoiceUI::IsWheelOpen(Cast<APlayerController>(GetController())))
+	{
+		return;   // the mouse steers the voice-command radial, not the view
+	}
 	AddControllerYawInput(Axis.X);
 	AddControllerPitchInput(Axis.Y);
 	Viewmodel->AddLookInput(Axis.X, Axis.Y);
@@ -693,13 +709,13 @@ void AKGCharacter::OnJumped_Implementation()
 	// Fires once per successful grounded DoJump (both the predicting client and the server run this identically -
 	// same input, same deterministic gate in UKGCharacterMovement::CanAttemptJump/ACharacter::CanJump). The landing-
 	// buffer chain hop does NOT go through here (it bypasses CheckJumpInput entirely - see OnMovementModeChanged in
-	// KGCharacterMovement.cpp); that one is charged and felt from the Tick() HopCounter poll above instead.
+	// KGCharacterMovement.cpp); that one is felt from the Tick() HopCounter poll instead. Both stamina charges are
+	// predicted inside the CMC move (UKGCharacterMovement::DoJump / landing hook), not here.
 	Super::OnJumped_Implementation();
 	if (IsDead())
 	{
 		return;
 	}
-	Stamina.TrySpend(JumpStaminaCost);
 	if (IsLocallyControlled())
 	{
 		Viewmodel->AddRecoil(FVector(4.0, 0.0, 6.0), FVector(-4.0, 0.0, 0.0));   // small upward dip on takeoff
@@ -713,14 +729,7 @@ void AKGCharacter::Landed(const FHitResult& Hit)
 	{
 		return;
 	}
-	// The landing-buffer chain hop (if any) has already re-launched us by the time Landed() runs (it happens inside
-	// SetPostLandedPhysics -> OnMovementModeChanged, before ACharacter::ProcessLanded calls Landed()); if we are
-	// still falling, the streak continues, otherwise this landing ended the chain.
-	const UKGCharacterMovement* KGMove = Cast<UKGCharacterMovement>(GetCharacterMovement());
-	if (!KGMove || !KGMove->IsFalling())
-	{
-		ChainHopStreak = 0;
-	}
+	// The hop streak is predicted CMC state now (UKGCharacterMovement::HopStreak, reset in its landing hook).
 	if (!IsLocallyControlled())
 	{
 		return;
@@ -739,6 +748,10 @@ void AKGCharacter::Landed(const FHitResult& Hit)
 void AKGCharacter::StartSprint()
 {
 	bWantsSprint = true;
+	if (UKGCharacterMovement* KGMove = Cast<UKGCharacterMovement>(GetCharacterMovement()))
+	{
+		KGMove->bWantsToSprint = true;   // predicted: travels to the server in every saved move (FLAG_Custom_0)
+	}
 	if (!HasAuthority())
 	{
 		ServerSetSprint(true);
@@ -748,6 +761,10 @@ void AKGCharacter::StartSprint()
 void AKGCharacter::StopSprint()
 {
 	bWantsSprint = false;
+	if (UKGCharacterMovement* KGMove = Cast<UKGCharacterMovement>(GetCharacterMovement()))
+	{
+		KGMove->bWantsToSprint = false;
+	}
 	if (!HasAuthority())
 	{
 		ServerSetSprint(false);
@@ -804,16 +821,11 @@ void AKGCharacter::Tick(float DeltaSeconds)
 	UpdateRevealGlow();
 	ServerAttackCooldown = FMath::Max(0.0f, ServerAttackCooldown - DeltaSeconds);
 	UpdateBodyAnimation(DeltaSeconds);
-	const bool bMoving = GetVelocity().SizeSquared2D() > 100.0f;
-	const bool bSprinting = Stamina.Tick(DeltaSeconds, bWantsSprint && !bIsCrouched, bMoving);
-	GetCharacterMovement()->MaxWalkSpeed = bSprinting ? SprintSpeed : WalkSpeed;
+	// Stamina (sprint drain/regen) and the walk/sprint speed are simulated per move inside UKGCharacterMovement
+	// (predicted, SPRINT-026 stabilisation); Tick only feeds it context.
 	// SPRINT-016 hook (Chores/WorldChores): a heavy chore item (fish crate, sacks, firewood) slows its carrier and
 	// forbids sprinting; a second carrier on the crate restores full walking speed.
 	const float CarryFactor = AKGChoreItem::SpeedFactorFor(this);
-	if (CarryFactor < 0.999f)
-	{
-		GetCharacterMovement()->MaxWalkSpeed = WalkSpeed * CarryFactor;
-	}
 
 	// SPRINT-026: feed context into the CMC's air-strafe / skill bhop (Docs/01_GDD_Core.md movement section).
 	// Bots never press Jump, so UKGCharacterMovement::HopCounter never advances for them regardless of these
@@ -825,20 +837,19 @@ void AKGCharacter::Tick(float DeltaSeconds)
 		const bool bFishingOut = FishingCtx && FishingCtx->WantsRodInHand();
 		const bool bCarrying = CarryFactor < 0.999f || bHoldingObject;
 		KGMove->SprintSpeedForCap = SprintSpeed;
+		KGMove->WalkSpeedForMove = CarryFactor < 0.999f ? WalkSpeed * CarryFactor : WalkSpeed;
+		KGMove->bSprintAllowed = CarryFactor >= 0.999f;
 		// Carrying, rod out or a chore in progress: no bhop advantage at all (hopping still moves you, it just
-		// never beats sprint-speed-capped air control). The blade out or a tired sprinter still gets a hop, just
-		// capped at plain sprint speed instead of the full 1.35x soft cap.
+		// never beats sprint-speed-capped air control). The blade out (or, inside the move, a tired sprinter) still
+		// gets a hop, just capped at plain sprint speed instead of the 1.35x soft cap / 1.5x ceiling.
 		KGMove->bAirStrafeDisabled = bChoreActive || bFishingOut || bCarrying;
-		KGMove->HopGainScale = (bHoldingAssassinBlade || Stamina.bExhausted) ? 0.0f : 1.0f;
-		// Stamina exhaustion stops CHAINING (the landing-buffer re-hop); a plain grounded jump is never blocked.
-		KGMove->bHopChainBlocked = Stamina.bExhausted;
+		KGMove->HopGainScale = bHoldingAssassinBlade ? 0.0f : 1.0f;
+		// Stamina exhaustion stops CHAINING inside the move (UKGCharacterMovement::IsHopChainBlocked).
+		ChainHopStreak = KGMove->HopStreak;   // dev panel readout
 
 		if (KGMove->HopCounter != LastSeenHopCounter)
 		{
 			LastSeenHopCounter = KGMove->HopCounter;
-			++ChainHopStreak;
-			const float Cost = ChainHopBaseCost + ChainHopStepCost * FMath::Min(ChainHopStreak, ChainHopStreakCostCap);
-			Stamina.TrySpend(Cost);   // accounting only: the hop already happened in the CMC this move.
 			if (IsLocallyControlled())
 			{
 				Viewmodel->AddRecoil(FVector(5.0, 0.0, 8.0), FVector(-5.0, 0.0, 0.0));   // chained hop: a touch stronger than a plain jump
@@ -1043,6 +1054,10 @@ void AKGCharacter::Interact()
 	if (IsDead())
 	{
 		return;
+	}
+	if (Emote->TryAcceptNearbyOffer())
+	{
+		return;   // SPRINT-023: E next to someone offering a high five / handshake / RPS / dance-off accepts it
 	}
 	Emote->NotifyLocalAction();
 	const FVector Start = FirstPersonCamera->GetComponentLocation();
@@ -1630,17 +1645,31 @@ void AKGCharacter::TickMoveSmoke(float DeltaSeconds)
 	// beat), which reliably lands within the ~80ms buffer and keeps re-aiming the wish direction into the turn.
 	const bool bGoodPhase = T >= 6.0f && T < 11.0f;
 	const bool bBadPhase = T >= 1.0f && T < 6.0f;
+	// Lane (stabilisation 2026-09-26): L_Dev_Greybox's floor is 60 x 60 m. The old +X run left the floor at ~9 s
+	// and fell into the sea (swim corrections, not hop ones), and its turn pattern drifted ~20 deg off-axis. Now the
+	// bad phase walks +Y along x = -900 (clear of the houses, the ramp and the dummy) and the good phase comes back
+	// along -Y (4600 uu of floor ahead); the yaw is set explicitly as a triangle wave CENTRED on the lane heading
+	// (same +-225 deg/s turn rate as before, i.e. 90 deg/s x the legacy 2.5 yaw scale), so the path does not drift.
+	AController* SmokeController = GetController();
 	if (bBadPhase)
 	{
-		AddMovementInput(GetActorForwardVector(), 1.0f);
+		if (SmokeController)
+		{
+			SmokeController->SetControlRotation(FRotator(0.0f, 90.0f, 0.0f));
+		}
+		AddMovementInput(FVector(0.0f, 1.0f, 0.0f), 1.0f);
 	}
 	else if (bGoodPhase)
 	{
-		const float Beat = FMath::Fmod(T, 0.36f);
+		const float Beat = FMath::Fmod(T - 6.0f, 0.36f);
 		const float Sign = Beat < 0.18f ? 1.0f : -1.0f;
+		const float Tri = Beat < 0.18f ? Beat / 0.18f - 0.5f : 0.5f - (Beat - 0.18f) / 0.18f;   // -0.5 .. 0.5 .. -0.5
+		if (SmokeController)
+		{
+			SmokeController->SetControlRotation(FRotator(0.0f, -90.0f + 40.5f * Tri, 0.0f));
+		}
 		AddMovementInput(GetActorForwardVector(), 0.6f);
 		AddMovementInput(GetActorRightVector(), Sign);
-		AddControllerYawInput(Sign * 90.0f * DeltaSeconds);
 		JumpStart();   // re-pressed every tick this phase: lands inside the buffer on (almost) every landing
 	}
 

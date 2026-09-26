@@ -25,6 +25,7 @@ struct FKGSettingsSnapshot
 	int32 ViewmodelPreset = 1;
 	bool bStreamerMode = false;
 	FName StreamerPeekKey;
+	bool bOpenMic = false;
 	float Volumes[4] = {};
 
 	static FKGSettingsSnapshot Capture(const UKGGameUserSettings& Settings);

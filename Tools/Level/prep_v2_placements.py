@@ -17,7 +17,8 @@ DL the SPRINT-022 pack KG_DressLandmarks (Tools/Blender/kg_make_dress_landmarks.
 buttresses, tower crowns), DT the plan 11.4 pack KG_DressTerrace (Tools/Blender/kg_make_dress_terrace.py: balustrades, quay wall + steps, stone
 arch bridge; used when Art/Packed/KG_DressTerrace_Clean.json exists and KG_NO_TERRACE is unset, kit fallbacks otherwise).
 Kit conventions (measured): wall pieces are 2 m wide, exterior faces local -Y, span y -0.31..+0.09, 3.12 m tall;
-Stairs_Exterior_Straight_* climb 1 m toward local +Y over y -1.08..+1.0 (2.08 m run), 2 m wide.
+Stairs_Exterior_Straight_* climb toward local -Y (treads 0 .. 0.82 m from y +1.0 to -1.08, 2.08 m run; the next
+1 m module adds the 0.18 m riser), 2 m wide; _L / _R carry a side trim on local -X / +X.
 """
 import json
 import math
@@ -136,6 +137,7 @@ BUILDINGS = [b for b in L["houses"]] + [b for b in L["infill"]] + [
     dict(b, _key=k) for k, b in L["landmarks"].items() if "size" in b and not b.get("is_prop")]
 B_RECTS = unary_union([rect(b) for b in BUILDINGS])
 STAIR_P = {s["name"]: T.stair_profile(s) for s in L["stairs"]}
+STAIR_BODIES = None      # set below, once the helpers exist
 CORRIDORS = unary_union([LineString([s["from"], s["to"]]).buffer(s["width"] / 2 + 0.3, cap_style=2) for s in L["stairs"]] +
                         [LineString(r["points"]).buffer(r["width"] / 2 + 0.3, cap_style=2) for r in L["ramps"]])
 LANES = unary_union([LineString(l["points"]).buffer(l["width"] / 2.0, cap_style=2) for l in L["lanes"]])
@@ -196,7 +198,30 @@ def wall_stack(x, y, yaw, top, bottom, length, sy=1.6, f="V2/Walls", d=None, cap
     return n
 
 
+def _stair_body(s):
+    P = STAIR_P[s["name"]]
+    lo, u = P["lo"], P["u"]
+    e = max(P["length"], P["risers"][-1][0] + RISER_RUN + HEAD_SLAB)
+    return LineString([lo, (lo[0] + u[0] * e, lo[1] + u[1] * e)]).buffer(s["width"] / 2.0, cap_style=2)
+
+
+HEAD_SLAB = 0.6          # m of landing tiles past the last riser of every flight (covers the top-tread transition)
+RISER_RUN = T.RISER_RUN
+
+
 def retaining_wall(pts, top, bottom, courses, parapet, district=None, name="", skip=None, cap=True):
+    """User 2026-09-26 (stair fit): a run never reaches into a stair - it stops 0.6 m (its body's reach toward the low
+    side) short of every flight, the end pilaster fills the slot; split runs are built part by part."""
+    if STAIR_BODIES is not None:
+        rest = LineString(pts).difference(STAIR_BODIES.buffer(0.6))
+        parts = [g for g in getattr(rest, "geoms", [rest]) if g.geom_type == "LineString" and g.length > 0.5]
+        if len(parts) != 1 or abs(parts[0].length - LineString(pts).length) > 1e-6:
+            return sum(_retaining_wall(list(g.coords), top, bottom, courses, parapet, district, name, skip, cap)
+                       for g in parts)
+    return _retaining_wall(pts, top, bottom, courses, parapet, district, name, skip, cap)
+
+
+def _retaining_wall(pts, top, bottom, courses, parapet, district=None, name="", skip=None, cap=True):
     pieces, S = resample(pts, 2.0)
     prev_t, since = None, 99.0
     balustrade = bool(parapet) and TERRACE and name.startswith(BALUSTRADE_WALLS)
@@ -320,9 +345,21 @@ def walls():
         n1 = (-ty, tx)
         sea = n1 if not LAND.covers(Point(ws[0] + n1[0] * 2, ws[1] + n1[1] * 2)) else (-n1[0], -n1[1])
         if TERRACE:
-            # QuaySteps: top tread at the quay (local 0), 12 x 0.25 m down along local +X, 1.3 m out to sea (+Y)
+            # QuaySteps: top tread at the quay (local 0), 12 x 0.25 m down along local +X, 1.3 m out to sea (+Y).
+            # The quay is an arc of straight 4 m QuayWall chords (quay_wall_pack): the flight lies along the chord that
+            # holds the water step, centred on it, 1 cm off the coping lip (bounds y -0.90..+0.08) - laid on the arc it
+            # cut into the neighbouring chords at both ends (stair_fit clip rule)
+            nq = max(1, int(math.ceil(line.length / 4.0 - 1e-6)))
+            stq = line.length / nq
+            kq = min(nq - 1, int(sp // stq))
+            ca, cb = line.interpolate(kq * stq), line.interpolate((kq + 1) * stq)
+            tx, ty = norm(cb.x - ca.x, cb.y - ca.y)
+            n1 = (-ty, tx)
+            mx, my = (ca.x + cb.x) / 2, (ca.y + cb.y) / 2
+            sea = n1 if not LAND.covers(Point(mx + n1[0] * 2, my + n1[1] * 2)) else (-n1[0], -n1[1])
             lx, ly = sea[1], -sea[0]                               # local +X for yaw_up(sea)
-            put("DT:QuaySteps", ws[0] - lx * 2.1 + sea[0] * QUAY_FACE, ws[1] - ly * 2.1 + sea[1] * QUAY_FACE, q["top_z"],
+            off = QUAY_FACE + 0.09
+            put("DT:QuaySteps", mx - lx * 2.1 + sea[0] * off, my - ly * 2.1 + sea[1] * off, q["top_z"],
                 yaw_up(*sea), f="V2/Quay")
             continue
         ox, oy = ws[0] + sea[0] * 1.6, ws[1] + sea[1] * 1.6      # centreline 1.6 m out from the wall line
@@ -348,9 +385,12 @@ RISERS = {1: ["V:Stairs_Exterior_Straight"]}
 
 
 def riser_row(n):
+    """Kit pieces of one riser row from the -perp edge to the +perp edge. The kit mesh climbs toward its local -Y and
+    the _L / _R side trims sit on its local -X / +X; placed with local -Y up the flight, local +X is -perp, so the
+    -perp edge takes _R and the +perp edge _L (both trims outside; measured by verify_v2_build.stair_fit)."""
     if n == 1:
         return ["V:Stairs_Exterior_Straight"]
-    return ["V:Stairs_Exterior_Straight_L"] + ["V:Stairs_Exterior_Straight_Center"] * (n - 2) + ["V:Stairs_Exterior_Straight_R"]
+    return ["V:Stairs_Exterior_Straight_R"] + ["V:Stairs_Exterior_Straight_Center"] * (n - 2) + ["V:Stairs_Exterior_Straight_L"]
 
 
 def side_walls(pts_fn, length, zfn, half_w, f, near_ok):
@@ -368,7 +408,9 @@ def side_walls(pts_fn, length, zfn, half_w, f, near_ok):
                     for s in (s0, sm, s1)]
             diff_hi = max(sd - sz for sd, sz in zip(side, zs))
             diff_lo = max(sz - sd for sd, sz in zip(side, zs))
-            wx, wy = cx + px * (half_w + 0.55), cy + py * (half_w + 0.55)
+            # cutting walls are 0.8 m thick (sy 2.0, exterior face 0.63 m in front of the centre): centre at half_w + 0.65
+            # puts the face 2 cm clear of the treads (it stood 8 cm inside them - stair_fit clip rule)
+            wx, wy = cx + px * (half_w + 0.65), cy + py * (half_w + 0.65)
             if B_RECTS.distance(Point(wx, wy)) < 0.3 or near_ok(wx, wy):
                 continue
             if diff_hi > 0.35:      # cutting: wall faces into the corridor, top at the terrain
@@ -382,21 +424,32 @@ def stairs():
     for s in L["stairs"]:
         P = STAIR_P[s["name"]]
         lo, u, length = P["lo"], P["u"], P["length"]
-        perp = (u[1], -u[0])              # local +X when local +Y = u (UE yaw convention)
-        yaw = yaw_up(*u)
+        perp = (u[1], -u[0])
+        # user 2026-09-26 ("the stairs are geometrically broken"): the kit piece climbs toward its local -Y (tread tops
+        # 0 / 0.22 / 0.42 / 0.61 / 0.82 m from local y +1.00 to -1.08), so local -Y points UP the flight (it was +Y:
+        # every flight was built backwards, a 0.8 m wall at each foot)
+        yaw = yaw_up(*u) + 180.0
         ncross = int(round(s["width"] / 2.0))
         row = riser_row(ncross)
         for (s0, zb) in P["risers"]:
-            sc = s0 + 1.08
+            sc = s0 + 1.001                   # piece spans local y +1.001 (the foot tread) .. -1.077 (the head tread)
             for k, m in enumerate(row):
                 off = -s["width"] / 2.0 + 1.0 + 2.0 * k
                 x = lo[0] + u[0] * sc + perp[0] * off
                 y = lo[1] + u[1] * sc + perp[1] * off
                 put(m, x, y, zb, yaw, c=False, f="V2/Stairs")
-        # landings: brick tiles at the landing level
-        knots = P["knots"]
+        # landings: brick tiles at the landing level, on every flat stretch (landings, the lead at the foot, the tail at
+        # the head) plus a head slab HEAD_SLAB m past the last riser; each flat stretch also gets a hidden flat box at the
+        # tile top, so the walk surface is the tile (the ground under it stays below the treads)
+        knots = list(P["knots"])
+        e_last = P["risers"][-1][0] + RISER_RUN
+        if knots[-1][0] < e_last + HEAD_SLAB:
+            knots[-1] = (e_last + HEAD_SLAB, knots[-1][1])
         for (sa, za), (sb, zb2) in zip(knots, knots[1:]):
-            if abs(za - zb2) < 1e-6 and sb - sa > 0.3:
+            if abs(za - zb2) < 1e-6 and sb - sa > 0.05:
+                sm_ = (sa + sb) / 2
+                put("E:Cube", lo[0] + u[0] * sm_, lo[1] + u[1] * sm_, za + 0.02 - 0.1, yaw_x(*u),
+                    s=(sb - sa + 0.02, s["width"], 0.2), f="V2/StairRamps", h=True)
                 nal = max(1, int(math.ceil((sb - sa) / 2.0 - 1e-6)))
                 ln = (sb - sa) / nal
                 for i in range(nal):
@@ -405,7 +458,7 @@ def stairs():
                         off = -s["width"] / 2.0 + 1.0 + 2.0 * k
                         put("V:Floor_Brick", lo[0] + u[0] * sm + perp[0] * off, lo[1] + u[1] * sm + perp[1] * off,
                             za + 0.01, yaw, s=(1.0, ln / 2.0, 1.0), f="V2/Stairs")
-                if s["name"] == "grand_stair" and sb - sa > 2.5:
+                if s["name"] == "grand_stair" and sb - sa > 2.5 and sb <= P["length"]:
                     for sg in (-1, 1):
                         sm = (sa + sb) / 2
                         off = sg * (s["width"] / 2.0 - 0.7)
@@ -580,9 +633,12 @@ def harbour():
             r = rng.uniform(2.6, 3.4)
             put(f"N:Rock_Medium_{1 + (k + 1) % 3}", cx - out[0] * r, cy - out[1] * r, -1.2, float(rng.uniform(0, 360)),
                 s=(0.9, 0.9, 0.9), f="V2/Mole")
-    # sea stacks off Lighthouse Point, bell buoy at the harbour mouth
+    # sea stacks off Lighthouse Point (user 2026-09-26, "keep this place LOWER": squat, ~2.5 m out of the water, not
+    # pillars), bell buoy at the harbour mouth
     for (x, y, sc, yw) in ((60.0, 118.0, 1.0, 30.0), (88.0, 114.0, 0.8, 110.0), (112.0, 101.0, 1.2, 200.0), (47.0, 108.0, 0.6, 300.0)):
-        put("DH:SeaStack_A" if yw < 150 else "DH:SeaStack_B", x, y, g1(x, y) - 0.5, yw, s=(sc, sc, sc), f="V2/Coast")
+        H = 11.4 if yw < 150 else 6.62
+        sz = min(sc, (2.5 - (g1(x, y) - 0.5)) / H)
+        put("DH:SeaStack_A" if yw < 150 else "DH:SeaStack_B", x, y, g1(x, y) - 0.5, yw, s=(sc, sc, round(sz, 3)), f="V2/Coast")
     put("DH:BellBuoy", 34.0, 104.0, -0.6, 0.0, f="V2/Harbour")
     put("DH:CargoHoist", *L["landmarks"]["crane"]["at"], 2.0, L["landmarks"]["crane"]["face_deg"] - 90.0, f="V2/Harbour")
 
@@ -758,11 +814,18 @@ def nature():
     Z = ground(X, Y)
     ok &= Z > 2.2
     n_tr = 0
+    # user 2026-09-26: the lowered headland keeps an open grassy top - no grove within 16 m of its low shore and
+    # only every third tree elsewhere on the point (checked after the RNG draws: the stream stays the same)
+    head = Polygon(next(t for t in L["terraces"] if t["name"] == "headland")["polygon"])
+    shore = unary_union([LineString(c["points"]).buffer(16.0) for c in L["cliffs"] if c.get("shoulder")])
     for x, y, z, c in zip(X[ok], Y[ok], Z[ok], clump[ok]):
         near_brook = STREAM.distance(Point(x, y)) < 12.0
         m = (twisted if near_brook and rng.random() < 0.15 else trees)[int(rng.integers(0, 5))]
         if y < -95 and rng.random() < 0.5:
             m = pines[int(rng.integers(0, 5))]
+        if head.contains(Point(x, y)) and (shore.contains(Point(x, y)) or int(abs(x * 7.0 + y * 13.0)) % 3 != 0):
+            rng.uniform(0, 360), rng.uniform(0.9, 1.6)
+            continue
         inst("forest", m, x, y, gmin(x, y, 0.7) - 0.2, float(rng.uniform(0, 360)), float(rng.uniform(0.9, 1.6)))
         n_tr += 1
     stats["grove_trees"] = n_tr
@@ -1050,8 +1113,8 @@ def cliffs():
     n_p = 0
     k = 0
     for c in L["cliffs"]:
-        if c["name"] == "fish_market_cliff":
-            continue
+        if c["name"] == "fish_market_cliff" or c.get("shoulder"):
+            continue                          # a shoulder cliff is a LOW rocky shore now: rocky_shore(), no tiers
         line = LineString(c["points"])
         S = line.length
         s = 0.0
@@ -1100,7 +1163,8 @@ def cliffs():
                                         it["p"][1] / 100.0 + math.sin(math.radians(it["y"])) * 3.5)]).buffer(2.4)
                            for it in items if it["m"].startswith("DL:Cliff")] or [Point(0, 0).buffer(0.01)])
     near = WALK.buffer(60.0)
-    keep_clear = unary_union([CORRIDORS.buffer(4.0), LANES.buffer(1.5)])
+    keep_clear = unary_union([CORRIDORS.buffer(4.0), LANES.buffer(1.5)] +
+                             [LineString(c["points"]).buffer(5.0) for c in L["cliffs"] if c.get("shoulder")])
     for x, y, hi, lo, ux, uy in sorted(terrain_faces(), key=lambda q: (q[0], q[1])):
         if hi - lo < 4.0 or covered.contains(Point(x, y)) or not near.contains(Point(x, y)):
             continue
@@ -1132,6 +1196,71 @@ def cliffs():
         k += 1
     stats["cliff_pieces"] = n_p
     shoulder_dressing()
+    rocky_shore()
+
+
+# name, footprint x / y, height (m), mesh bottom below the pivot (m) - asset_catalog.md
+SHORE_ROCKS = [("N:Rock_Medium_1", 3.26, 3.02, 2.28, 0.28), ("N:Rock_Medium_2", 3.05, 2.48, 1.90, 0.06),
+               ("N:Rock_Medium_3", 3.44, 3.54, 2.32, 0.32)]
+
+
+def rocky_shore():
+    """User 2026-09-26 ("keep this place LOWER"): a shoulder cliff is a low natural rocky shore, not stacked cladding
+    tiers. Along the edge a loose rampart of boulders of mixed size, stretch and rotation stands on the rocky shelf
+    (kg_build_terrain_v2.py), their tops from 1.2 m under to 0.4 m over the grass edge; smaller rocks lie half in the
+    water in front; now and then a boulder stands out in the water. Own RNG (the global stream feeds other passes)."""
+    r = np.random.default_rng(260926)
+    keep_out = unary_union([CORRIDORS.buffer(1.0), LANES.buffer(1.0), B_RECTS.buffer(1.0)])
+    boats = unary_union([Point(b).buffer(6.0) for b in L.get("boats", [])] + [LineString(L["mole"]["points"]).buffer(8.0)])
+    n = {"edge": 0, "wash": 0, "water": 0}
+
+    def rock(x, y, want_top, lo, hi, f_out):
+        m, bw, bd, bh, b0 = SHORE_ROCKS[int(r.integers(0, 3))]
+        bed = gmin(x, y, 0.4 * max(bw, bd) * lo)
+        sc = float(np.clip((want_top - bed) / (bh * 0.9), lo, hi))
+        sx, sy = sc * r.uniform(0.8, 1.3), sc * r.uniform(0.8, 1.3)
+        sz = sc * r.uniform(0.75, 1.1)
+        bed = gmin(x, y, 0.4 * max(bw * sx, bd * sy))
+        z = bed - 0.1 * bh * sz + b0 * sz
+        put(m, x, y, z, float(r.uniform(0, 360)), float(r.uniform(-9, 9)), float(r.uniform(-9, 9)),
+            s=(round(sx, 3), round(sy, 3), round(sz, 3)), f=f_out)
+
+    for c in L["cliffs"]:
+        if not c.get("shoulder"):
+            continue
+        line = LineString(c["points"])
+        S = line.length
+        s = 0.8
+        while s < S - 0.5:
+            p = line.interpolate(s)
+            a, b = line.interpolate(max(0.0, s - 1.0)), line.interpolate(min(S, s + 1.0))
+            u = norm(b.x - a.x, b.y - a.y)
+            nrm = (-u[1], u[0])
+            if g1(p.x + nrm[0] * 4.0, p.y + nrm[1] * 4.0) > g1(p.x - nrm[0] * 4.0, p.y - nrm[1] * 4.0):
+                nrm = (-nrm[0], -nrm[1])                      # seaward
+            top = g1(p.x - nrm[0] * 1.2, p.y - nrm[1] * 1.2)
+            # 1) the edge rampart
+            o, t = r.uniform(0.5, 1.7), r.uniform(-0.7, 0.7)
+            x, y = p.x + nrm[0] * o + u[0] * t, p.y + nrm[1] * o + u[1] * t
+            if not keep_out.contains(Point(x, y)):
+                rock(x, y, top + r.uniform(-1.2, 0.4), 0.7, 2.1, "V2/Shore")
+                n["edge"] += 1
+            # 2) smaller rocks half in the water
+            if r.random() < 0.55:
+                o = r.uniform(2.3, 3.8)
+                x, y = p.x + nrm[0] * o + u[0] * r.uniform(-1.0, 1.0), p.y + nrm[1] * o + u[1] * r.uniform(-1.0, 1.0)
+                if not keep_out.contains(Point(x, y)) and not boats.contains(Point(x, y)):
+                    rock(x, y, r.uniform(0.1, 0.8), 0.4, 1.0, "V2/Shore")
+                    n["wash"] += 1
+            # 3) a few boulders out in the water
+            if r.random() < 0.13:
+                o = r.uniform(5.0, 8.5)
+                x, y = p.x + nrm[0] * o, p.y + nrm[1] * o
+                if not boats.contains(Point(x, y)) and not LANES.buffer(3.0).contains(Point(x, y)):
+                    rock(x, y, r.uniform(0.5, 1.4), 0.8, 2.4, "V2/Shore")
+                    n["water"] += 1
+            s += r.uniform(1.8, 3.0)
+    stats["rocky_shore"] = n
 
 
 def shoulder_dressing():
@@ -1160,9 +1289,11 @@ def shoulder_dressing():
             land = (-u[1], u[0])
             if g1(p.x + land[0] * 4.0, p.y + land[1] * 4.0) < g1(p.x - land[0] * 4.0, p.y - land[1] * 4.0):
                 land = (-land[0], -land[1])                    # inland = uphill
+            # user 2026-09-26: grass and bushes on top of the low shore; only the odd tree, set back, so the point
+            # does not turn into a wall of red crowns seen from the basin
             for dd, kind in ((1.4, "rock"), (r.uniform(3.0, 4.2), "rock"), (r.uniform(4.6, 6.4), "scrub"),
-                             (r.uniform(4.6, 6.4), "scrub"), (r.uniform(7.0, 10.5), "scrub"), (r.uniform(8.0, 11.5), "tree")):
-                if kind == "rock" and r.random() < 0.25 or kind == "tree" and r.random() < 0.55:
+                             (r.uniform(4.6, 6.4), "scrub"), (r.uniform(7.0, 10.5), "scrub"), (r.uniform(12.0, 16.0), "tree")):
+                if kind == "rock" and r.random() < 0.25 or kind == "tree" and r.random() < 0.9:
                     continue
                 x = p.x + land[0] * dd + u[0] * r.uniform(-1.2, 1.2)
                 y = p.y + land[1] * dd + u[1] * r.uniform(-1.2, 1.2)
@@ -1255,6 +1386,8 @@ def terrain_faces(step=0.75):
 
 # ================================================================================================ main
 def main():
+    global STAIR_BODIES
+    STAIR_BODIES = unary_union([_stair_body(s) for s in L["stairs"]])
     walls()
     stairs()
     ramps()

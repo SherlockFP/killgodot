@@ -82,8 +82,9 @@ def keeper_yard():
         yaw = K.face_dir(s[0], s[1], s[0] + 300.0, s[1] + 800.0)
         K.prop(PIR + "cannon_0", s[0], s[1], C.ground_min(s[0], s[1], 120.0), yaw=yaw, sub="Cannon", claim=180.0)
         for k in range(4):
-            K.clutter(PIR + "Cannon_Ball_0", s[0] - 150.0 + (k % 2) * 30.0, s[1] + 90.0 + (k // 2) * 25.0,
-                      C.ground(s[0], s[1]) + (20.0 if k == 3 else 0.0), None, 0.35)
+            bx, by = s[0] - 150.0 + (k % 2) * 30.0, s[1] + 90.0 + (k // 2) * 25.0
+            # each ball on its own ground (the point is a low, sloping shore now: one z for all left one floating)
+            K.clutter(PIR + "Cannon_Ball_0", bx, by, C.ground_min(bx, by, 12.0) - 2.0 + (20.0 if k == 3 else 0.0), None, 0.35)
 
 
 def headland_road():

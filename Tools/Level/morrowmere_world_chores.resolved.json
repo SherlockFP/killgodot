@@ -713,14 +713,15 @@
   {
    "id": "oil_shelf",
    "kind": "OilShelf",
-   "at": [
-    72.0,
-    92.7
-   ],
-   "z": 14.0,
-   "yaw": 300.0,
    "r": 1.5,
    "label": "the oil crate at the lighthouse door",
+   "at": [
+    95.55,
+    85.42
+   ],
+   "z": 4.4,
+   "yaw": -130.0,
+   "house": "lighthouse",
    "climb_m": 0.0
   },
   {
@@ -730,17 +731,17 @@
    "label": "the lighthouse lamp (top)",
    "sabotage": "snuff",
    "at": [
-    67.71,
-    93.91
+    94.87,
+    89.9
    ],
-   "z": 26.02,
+   "z": 16.42,
    "stand": [
-    70.27,
-    93.08,
-    14.0
+    94.97,
+    87.21,
+    4.4
    ],
    "climb_m": 12.0,
-   "yaw": 30.0
+   "yaw": 320.0
   }
  ],
  "chores": [

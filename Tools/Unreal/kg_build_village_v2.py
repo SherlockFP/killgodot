@@ -1076,7 +1076,8 @@ def gallows(spec):
     for ox in (-100.0, 100.0):
         for oy in (-100.0, 100.0):
             f.put(V + "Stairs_Exterior_Platform", ox, oy, 0.0, 0.0, fo, tinted=False)
-    f.put(V + "Stairs_Exterior_Straight", 0.0, 300.0, 0.0, 180.0, fo, tinted=False)
+    # the kit riser climbs toward its local -Y: yaw 0 runs it up to the platform edge (y 200); at 180 it climbed away
+    f.put(V + "Stairs_Exterior_Straight", 0.0, 308.0, 0.0, 0.0, fo, tinted=False)
     for ox in (-180.0, 180.0):
         f.put(V + "Corner_Exterior_Wood", ox, -180.0, 100.0, 0.0, fo, scale=(1.4, 1.4, 1.2), tinted=False)
     f.put(V + "Corner_Exterior_Wood", -215.0, -180.0, 460.0, 0.0, fo, scale=(1.4, 1.4, 1.43), pitch=-90.0, tinted=False)

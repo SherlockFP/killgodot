@@ -24,3 +24,4 @@ windowed build with the user present, clears it.
 Headless coverage that exists: `Tools/Gauntlet/run_invariants.ps1` (build, tests, v2 verify, chat/emote/fish/chore
 smokes, whole-match bot smoke).
 | 15 | Storm Manor map (SPRINT-018) | Walk all 24 rooms + secret passages, room vignettes, storm look (reads grey dusk), a real match with players, white-mesh props | 2026-09-26 |
+| 16 | Proximity voice + mouths + Z/X/C barks + partner emotes (SPRINT-023) | A real microphone end to end (capture device, Opus quality, latency, echo), spatial playback and the 8 m / 25 m feel, the mouth oval placement on every archetype (kg.Mouth.Fwd/Up), bark voices (placeholder synth: are they readable/annoying?), radial feel with the mouse, partner alignment on slopes, the offer prompt, RPS/dance-off result bubbles; only injected-tone smokes, tests and offscreen renders so far | 2026-09-26 |

@@ -89,20 +89,34 @@ zıt A/D) gerektirsin, ve katiller (Sabırsız) bu sayede herkesi sonsuza dek ge
   (`UKGCharacterMovement::ComputeAirStrafeVelocity2D`, testli: `KillGodot.Character.AirStrafe`).
   `AirAccelerate = 8`, `AirWishSpeed = 320 uu/s (3.2 m/s)`. Düz gitmek (kötü strafe) yalnızca wish hızına
   yaklaştırır; fareyle dönüp zıt tuşa basmak (iyi strafe) hız eklemeye devam eder.
-- **Yumuşak tavan (soft cap):** koşu hızının **~1.35 katı** = `580 × 1.35 = 783 uu/s (≈7.83 m/s)`. Tavanın üstünde
-  kazanç sıfırlanmaz, azalır (`BunnyHopSoftCapMultiplier`) — yalnızca sürekli iyi strafe oraya ulaşır.
-- **Bağlama göre ceza/kapama (`AKGCharacter::Tick`, `HopGainScale` / `bAirStrafeDisabled`):**
+- **Yumuşak tavan (soft cap):** koşu hızının **1.35 katı** = `580 × 1.35 = 783 uu/s (≈7.83 m/s)`. Tavanın üstünde
+  kazanç **karesel** azalır: `(1 − t)²`, `t = (hız − 783) / (870 − 783)` — bandın ortasında kazanç ~%25, tavana
+  yaklaşınca yalnızca %8'lik bir "dönüş" payı kalır (`BunnyHopSoftCapMultiplier`).
+- **Sert tavan (hard ceiling):** koşu hızının **1.5 katı** = `580 × 1.5 = 870 uu/s (8.7 m/s)`. Hava strafe'i yatay
+  hızı bunun üstüne asla çıkaramaz; orada da yön değiştirebilirsin ama hız eklenmez (`BunnyHopHardCapMultiplier`).
+  Neden: SPRINT-026'nın ilk ölçümünde iyi strafe 1138 uu/s'ye (koşunun 1.96 katı) çıktı — bir katil herkesten
+  kaçabilir, herkese yetişebilirdi. Kalıcı hız artık **1.35–1.5×** bandında: iyi strafe'çi bir koşucudan ~%35–50 hızlı
+  ama kısa süreli (stamina, aşağıda), sonsuza dek değil.
+- **Bağlama göre ceza/kapama (`AKGCharacter::Tick` → `HopGainScale` / `bAirStrafeDisabled`; tükenme hareket
+  simülasyonunun içinde):**
   | Bağlam | Etki | Efektif tavan |
   |---|---|---|
-  | Boş elle | tam bonus | 783 uu/s (7.83 m/s) |
+  | Boş elle | tam bonus | 783 uu/s yumuşak, 870 uu/s sert |
   | Sabırsız bıçağı elde (`bHoldingAssassinBlade`) | bonus yok, ama strafe hâlâ hissedilir | 580 uu/s (5.8 m/s, düz koşu) |
   | Stamina tükenmiş (`bExhausted`) | zincir kilitli + bonus yok | 580 uu/s, yeni zincir başlamaz |
   | Eşya taşıma / olta elde / görev yapıyor | strafe kazancı tamamen kapalı | motorun temel hava kontrolü, bonus yok |
 - **Stamina maliyeti** (`FKGStamina`, maks 100, yenilenme 16/sn, 0.8 sn gecikmeyle):
   - Düz zıplama: **6** (her zaman harcanır ama asla zıplamayı engellemez — parkur/temel hareket kilitlenmesin diye).
   - Zincir sıçraması (landing-buffer): **8 + 3 × min(zincir, 5)** — yani 1. zincir 11, 5.+ zincir 23 stamina.
-  - **Tükenme zinciri durdurur:** `bExhausted` iken yeni zincir sıçraması hiç tetiklenmez (`bHopChainBlocked`); düz
-    zıplama yine de çalışır (stamina yetersizse ücretsiz kalır, asla bloklanmaz).
+  - **Tükenme zinciri durdurur:** `bExhausted` iken ya da sıradaki zincirin bedeli ödenemiyorsa zincir sıçraması
+    tetiklenmez (`UKGCharacterMovement::IsHopChainBlocked`); ödenemeyen bir zincir denemesi barı boşaltıp tükenmeye
+    sokar (25'e dönene kadar ~2.4 sn zincir yok). 100 stamina ile ~5 zincir (11+14+17+20+23 = 85). Düz zıplama yine
+    de çalışır (stamina yetersizse ücretsiz kalır, asla bloklanmaz).
+  - **Ağ (tahmin):** stamina (koşu harcaması, zıplama ve zincir bedelleri), zincir sayacı ve jump-buffer zamanlayıcısı
+    CMC'nin tahmin edilen hareket durumudur: yalnızca simüle edilen hareketin içinde değişir, `FKGSavedMove`
+    birleştirmede geri alır, koşu isteği `FLAG_Custom_0` ile gider, düzeltmeler sunucunun değerlerini taşır
+    (`FKGMoveResponseDataContainer`). Böylece tekrar oynatma (replay) iki kez ücret kesmez. HUD aynı
+    `AKGCharacter::Stamina` değerini okur.
 - **His:** iniş/kalkışta viewmodel'de küçük bir geri tepme (`UKGViewmodelComponent::AddRecoil`), inişte ayak
   sesi (zemine göre), adım sesi hıza göre 3 kademeli (165/210/260 cm), Ayarlar'da açılabilir **FOV kick**
   (koşu→bhop aralığında görüş açısı +0–6°, `UKGGameUserSettings::GetFOVKickOnSpeed`). Geliştirici panelinde küçük bir

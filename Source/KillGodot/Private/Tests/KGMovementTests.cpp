@@ -16,6 +16,7 @@ bool FKGAirStrafeTest::RunTest(const FString& Parameters)
 	const float WishSpeed = 320.0f;
 	const float Accelerate = 8.0f;
 	const float SoftCap = 783.0f;   // 1.35x a 580 sprint speed
+	const float HardCap = 870.0f;   // 1.5x a 580 sprint speed (GDD 4.1)
 
 	// A "bad" strafe: no wish direction at all never adds speed.
 	{
@@ -79,6 +80,35 @@ bool FKGAirStrafeTest::RunTest(const FString& Parameters)
 		TestTrue(TEXT("The taper is continuous at the cap (no hard step)"), FMath::IsNearlyEqual(GainAtCap.Size(), GainBelowCap.Size(), 0.01f));
 	}
 
+	// Hard ceiling (stabilisation 2026-09-26: the smoke's good strafe reached 1138 uu/s = 1.96x sprint). The best
+	// possible strafe - wish direction perpendicular to velocity every tick, full AccelSpeed each time - saturates at
+	// the hard cap and never passes it; the quadratic taper means it sits above the soft cap only in that band.
+	{
+		FVector2D V(WishSpeed, 0.0f);
+		float MaxSeen = 0.0f;
+		for (int32 i = 0; i < 60 * 30; ++i)   // 30 s of perfect strafing
+		{
+			const FVector2D WishDir = V.GetSafeNormal().GetRotated(90.0f);
+			V = UKGCharacterMovement::ComputeAirStrafeVelocity2D(V, WishDir, WishSpeed, Accelerate, Dt, SoftCap, HardCap);
+			MaxSeen = FMath::Max(MaxSeen, static_cast<float>(V.Size()));
+		}
+		TestTrue(TEXT("Perfect strafing never exceeds the hard cap"), MaxSeen <= HardCap + 0.01f);
+		TestTrue(TEXT("Perfect strafing does reach past the soft cap"), V.Size() > SoftCap);
+
+		// Above the ceiling (a launch put us there) a strafe still turns the velocity but never adds speed.
+		const FVector2D Fast(HardCap * 1.2f, 0.0f);
+		const FVector2D Turned = UKGCharacterMovement::ComputeAirStrafeVelocity2D(Fast, FVector2D(0.0f, 1.0f), WishSpeed, Accelerate, Dt, SoftCap, HardCap);
+		TestTrue(TEXT("Above the ceiling: no speed gain"), Turned.Size() <= Fast.Size() + 0.01f);
+		TestTrue(TEXT("Above the ceiling: still steers"), Turned.Y > 0.0f);
+
+		// The taper is steeper than the old linear one: halfway through the band a tick adds at most ~25%.
+		const FVector2D Mid((SoftCap + HardCap) * 0.5f, 0.0f);
+		const FVector2D Slow(WishSpeed * 0.5f, 0.0f);
+		const float MidGain = (UKGCharacterMovement::ComputeAirStrafeVelocity2D(Mid, FVector2D(0.0f, 1.0f), WishSpeed, Accelerate, Dt, SoftCap, HardCap) - Mid).Size();
+		const float SlowGain = (UKGCharacterMovement::ComputeAirStrafeVelocity2D(Slow, FVector2D(0.0f, 1.0f), WishSpeed, Accelerate, Dt, SoftCap, HardCap) - Slow).Size();
+		TestTrue(TEXT("Mid-band gain is tapered to about a quarter"), MidGain <= SlowGain * 0.26f);
+	}
+
 	// Jump buffer: a press right before landing (small positive elapsed time) counts; a stale one (held/way earlier)
 	// does not. This is what makes each hop need "a fresh jump press timed on landing" rather than auto-repeating.
 	TestTrue(TEXT("A press 0ms before landing is buffered"), UKGCharacterMovement::IsWithinJumpBuffer(0.0f, 0.08f));
@@ -89,7 +119,7 @@ bool FKGAirStrafeTest::RunTest(const FString& Parameters)
 }
 
 // SPRINT-026 stamina costs: each jump costs stamina, chaining costs more, and exhaustion actually stops further
-// chaining (TrySpend fails once bExhausted, matching UKGCharacterMovement::bHopChainBlocked's gate).
+// chaining (TrySpend fails once bExhausted, matching UKGCharacterMovement::IsHopChainBlocked's gate).
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FKGHopStaminaTest, "KillGodot.Character.HopStamina",
                                  EAutomationTestFlags_ApplicationContextMask | EAutomationTestFlags::ProductFilter)
 
@@ -122,6 +152,24 @@ bool FKGHopStaminaTest::RunTest(const FString& Parameters)
 	}
 	TestTrue(TEXT("Exhausted"), S.bExhausted);
 	TestFalse(TEXT("Chain hop cost refused while exhausted"), S.TrySpend(ChainBase));
+
+	// The predicted gate inside the CMC (stabilisation 2026-09-26): the cost escalates with the predicted HopStreak,
+	// and the chain is blocked when exhausted OR when the next chain hop is unaffordable.
+	UKGCharacterMovement* Move = NewObject<UKGCharacterMovement>();
+	FKGStamina Fresh;
+	Move->Stamina = &Fresh;
+	Move->HopStreak = 0;
+	TestEqual(TEXT("First chain hop costs base + 1 step"), Move->NextChainHopCost(), ChainBase + ChainStep);
+	Move->HopStreak = 9;
+	TestEqual(TEXT("Chain cost is capped at 5 steps"), Move->NextChainHopCost(), ChainBase + ChainStep * 5.0f);
+	TestFalse(TEXT("Full stamina: chain allowed"), Move->IsHopChainBlocked());
+	Fresh.Current = ChainBase + ChainStep * 5.0f - 1.0f;
+	TestTrue(TEXT("Unaffordable next chain hop: blocked"), Move->IsHopChainBlocked());
+	Fresh.Current = Fresh.Max;
+	Fresh.bExhausted = true;
+	TestTrue(TEXT("Exhausted: blocked"), Move->IsHopChainBlocked());
+	Move->Stamina = nullptr;
+	TestFalse(TEXT("No stamina bound (bots before BeginPlay): never blocked"), Move->IsHopChainBlocked());
 	return true;
 }
 

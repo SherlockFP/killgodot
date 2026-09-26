@@ -28,6 +28,41 @@ struct KILLGODOT_API FKGEmotePlayback
 	uint8 Serial = 0;
 };
 
+/** SPRINT-023: the replicated partner-emote state of one body (TF2 partner taunts). */
+USTRUCT()
+struct KILLGODOT_API FKGPartnerState
+{
+	GENERATED_BODY()
+
+	/** EKGPartnerKind */
+	UPROPERTY()
+	uint8 Kind = 0;
+
+	/** EKGPartnerStage */
+	UPROPERTY()
+	uint8 Stage = 0;
+
+	/** The other body once accepted (null while offering). */
+	UPROPERTY()
+	TObjectPtr<APlayerState> Partner;
+
+	/** Bumped on every offer so repeats replay everywhere. */
+	UPROPERTY()
+	uint8 Serial = 0;
+
+	/** RPS: FKGPartnerRules::PackRps; dance-off: 1 = initiator wins, 2 = acceptor wins. */
+	UPROPERTY()
+	uint8 Result = 0;
+
+	/** This body made the offer (its component runs the pairing's clock). */
+	UPROPERTY()
+	uint8 bInitiator = 0;
+
+	EKGPartnerKind GetKind() const { return static_cast<EKGPartnerKind>(Kind); }
+	EKGPartnerStage GetStage() const { return static_cast<EKGPartnerStage>(Stage); }
+	bool IsActive() const { return Stage != 0; }
+};
+
 /**
  * Emotes on a villager body (default subobject of AKGCharacter).
  *
@@ -98,7 +133,54 @@ public:
 	/** Body state the rules need (server; tests read it). */
 	FKGEmoteBodyState MakeBodyState() const;
 
+	// ---- Partner emotes (SPRINT-023) ----
+
+	/** Owning client: offer a partner emote (/highfive, kg.Partner highfive). */
+	void RequestPartnerOffer(FName IdOrAlias);
+	/** Owning client: withdraw an offer / leave a pairing. */
+	void RequestPartnerCancel();
+	/** Owning client (E): accept the nearest open offer within FKGPartnerRules::AcceptRadius. True if one was sent. */
+	bool TryAcceptNearbyOffer();
+	/** This machine: a body offering a partner emote within AcceptRadius of Me (prompt + E), or null. */
+	static UKGEmoteComponent* FindNearbyOffer(const AKGCharacter* Me);
+
+	/** Authority: start offering. */
+	EKGEmoteReject ServerPartnerOffer(FName IdOrAlias, bool bIgnoreRateLimit = false);
+	/** Authority, on the ACCEPTOR's component: pair with Offerer (validates distance, state, phase), aligns both. */
+	EKGEmoteReject ServerPartnerAccept(UKGEmoteComponent* Offerer);
+	/** Authority: end the pairing for both bodies. */
+	void ServerPartnerEnd(EKGEmoteStop Reason);
+
+	const FKGPartnerState& GetPartner() const { return Partner; }
+	const FKGPartnerEmoteDef* GetPartnerDef() const;
+	/** "Waiting for a partner..." (owner) / "E  High five?" (nearby) / result line. Empty when idle. */
+	FText GetPartnerPrompt(bool bForOwner) const;
+	/** Result narration once Stage == Result ("rock beats scissors: Wanderer wins"). */
+	FString GetPartnerResultText() const;
+
 protected:
+	UFUNCTION(Server, Reliable)
+	void ServerRequestPartnerOffer(FName IdOrAlias);
+
+	UFUNCTION(Server, Reliable)
+	void ServerRequestPartnerAccept(APlayerState* Offerer);
+
+	UFUNCTION(Server, Reliable)
+	void ServerRequestPartnerCancel();
+
+	UFUNCTION()
+	void OnRep_Partner();
+
+	UPROPERTY(ReplicatedUsing = OnRep_Partner)
+	FKGPartnerState Partner;
+
+	void TickPartnerServer(float DeltaTime);
+	void SetPartnerState(const FKGPartnerState& NewState);
+	void PartnerRevealResult();
+	float PartnerElapsed = 0.0f;
+	FKGChatRateLimiter PartnerLimiter;
+	uint8 PartnerLoggedSerial = 0;
+	uint8 PartnerLoggedStage = 0;
 	UFUNCTION(Server, Reliable)
 	void ServerStopEmote(EKGEmoteStop Reason);
 

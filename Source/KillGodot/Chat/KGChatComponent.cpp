@@ -545,6 +545,25 @@ void UKGChatComponent::Deliver(const FKGChatMessage& Message, const FKGChatParti
 	UE_LOG(LogKillGodot, Verbose, TEXT("[Chat] delivered to %d"), Delivered);
 }
 
+void UKGChatComponent::ServerSay(EKGChatChannel Channel, const FString& Text, uint8 Flags, int32 EmojiIndex)
+{
+	APlayerState* Me = Cast<APlayerState>(GetOwner());
+	if (!Me || !Me->HasAuthority())
+	{
+		return;
+	}
+	const FKGChatParticipant Sender = MakeParticipant(Me);
+	const FString Clean = FKGChatRules::Sanitize(Text);
+	if (!Clean.IsEmpty())
+	{
+		Deliver(MakeMessage(Channel, Clean, Flags), Sender, false, INDEX_NONE);
+	}
+	if (EmojiIndex != INDEX_NONE && EmojiIndex < FKGEmoji::Num())
+	{
+		Deliver(FKGChatMessage(), Sender, true, EmojiIndex);
+	}
+}
+
 void UKGChatComponent::BroadcastSystem(UWorld* World, const FString& Text)
 {
 	const AGameStateBase* GS = World ? World->GetGameState() : nullptr;

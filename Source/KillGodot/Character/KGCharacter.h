@@ -88,6 +88,9 @@ public:
 	UFUNCTION(BlueprintPure, Category = "KillGodot|Character")
 	UKGEmoteComponent* GetEmote() const { return Emote; }
 
+	/** SPRINT-023: the talking mouth (voice amplitude / barks). */
+	UKGMouthComponent* GetMouth() const { return Mouth; }
+
 	/** Chore minigames (server-validated sessions + the owner's panel). */
 	UKGChoreComponent* GetChores() const { return Chores; }
 
@@ -370,8 +373,8 @@ private:
 	float AttackCooldownRemaining = 0.0f;
 	float ServerAttackCooldown = 0.0f;
 
-	/** SPRINT-026: bunny-hop bookkeeping (both mirror UKGCharacterMovement::HopCounter, polled once per Tick - see
-	 *  the .h comment on HopCounter for why this stays out of the saved-move stream). */
+	/** SPRINT-026: cosmetic mirrors of the CMC's predicted hop state (HopCounter drives the viewmodel kick, the streak
+	 *  is the dev-panel readout); the gameplay state itself lives in UKGCharacterMovement's saved moves. */
 	int32 LastSeenHopCounter = 0;
 	int32 ChainHopStreak = 0;
 

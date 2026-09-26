@@ -53,7 +53,7 @@
   {"id": "box_H16", "kind": "Letterbox", "door": ["H16", 1.15, 0.2], "r": 1.6, "label": "Mr Pozzo's box", "name": "MR POZZO"},
   {"id": "barn_sacks", "kind": "Sacks", "at": [63.1, -76.7], "z": 9.5, "yaw": 270, "r": 1.6, "label": "the barn"},
   {"id": "mill_hopper", "kind": "Hopper", "at": [91.95, -64.1], "z": 9.6, "yaw": 252, "r": 1.8, "label": "the windmill hopper"},
-  {"id": "oil_shelf", "kind": "OilShelf", "at": [72.0, 92.7], "z": 14.0, "yaw": 300.0, "r": 1.5, "label": "the oil crate at the lighthouse door"},
+  {"id": "oil_shelf", "kind": "OilShelf", "door": ["lighthouse", 1.6, 1.0], "r": 1.5, "label": "the oil crate at the lighthouse door"},
   {"id": "lighthouse_lamp", "kind": "LighthouseLamp", "tower_top": ["lighthouse", 5, -80, -80], "r": 1.5, "label": "the lighthouse lamp (top)", "sabotage": "snuff"}
  ],
  "chores": [

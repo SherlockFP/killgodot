@@ -37,6 +37,10 @@ protected:
 private:
 	void TickLocalPlayer(APlayerController* PC);
 	void TickSmoke(APlayerController* PC, float DeltaTime);
+	/** -KGPartnerSmoke: offer -> accept -> synced clips, RPS outcome, cancel by attack (Tools/Unreal/kg_partner_smoke.ps1). */
+	void TickPartnerSmoke(APlayerController* PC, float DeltaTime);
 	float SmokeClock = -1.0f;
 	int32 SmokeStep = 0;
+	float PartnerClock = -1.0f;
+	int32 PartnerStep = 0;
 };

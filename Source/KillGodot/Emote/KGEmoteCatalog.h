@@ -130,6 +130,84 @@ struct KILLGODOT_API FKGEmoteCatalog
 	static TArray<FSoftObjectPath> GetAllClipPaths();
 };
 
+/** SPRINT-023 partner emotes (TF2 partner taunts). */
+UENUM(BlueprintType)
+enum class EKGPartnerKind : uint8
+{
+	None,
+	HighFive,
+	Handshake,
+	RockPaperScissors,
+	DanceOff
+};
+
+UENUM(BlueprintType)
+enum class EKGPartnerStage : uint8
+{
+	None,
+	/** The initiator waits with the prompt showing; anyone within AcceptRadius presses E. */
+	Offering,
+	/** Both bodies aligned and playing their clips. */
+	Playing,
+	/** RPS / dance-off outcome shown (bubble + NEAR line). */
+	Result
+};
+
+/** One partner emote: who plays what, how far apart, how long. Clips are rows of FKGEmoteCatalog. */
+struct KILLGODOT_API FKGPartnerEmoteDef
+{
+	EKGPartnerKind Kind = EKGPartnerKind::None;
+	/** /highfive, kg.Partner argument. */
+	FName Id;
+	FText DisplayName;
+	/** Emote ids for the initiator (A) and the acceptor (B). */
+	FName EmoteA;
+	FName EmoteB;
+	/** Bodies face each other this far apart (cm). */
+	float Distance = 90.0f;
+	/** Playing stage length. */
+	float PlaySeconds = 2.0f;
+	/** Result stage length (0 = no result: high-five, handshake). */
+	float ResultSeconds = 0.0f;
+	/** FKGEmoji id for the offer bubble. */
+	FString Emoji;
+
+	bool IsResolved() const { return ResultSeconds > 0.0f; }
+};
+
+struct KILLGODOT_API FKGPartnerCatalog
+{
+	static const TArray<FKGPartnerEmoteDef>& GetAll();
+	static const FKGPartnerEmoteDef* Find(FName IdOrAlias);
+	static const FKGPartnerEmoteDef* Get(EKGPartnerKind Kind);
+};
+
+/** Pure partner-emote rules (KillGodot.Emote.Partner* tests). */
+struct KILLGODOT_API FKGPartnerRules
+{
+	/** An offer nobody accepts expires after this long. */
+	static constexpr float OfferSeconds = 8.0f;
+	/** E accepts an offer from a body this close (cm). */
+	static constexpr float AcceptRadius = 300.0f;
+
+	/** Rock 0, paper 1, scissors 2. Winner: 0 tie, 1 = A, 2 = B. */
+	static int32 RpsWinner(uint8 A, uint8 B);
+	static const TCHAR* RpsName(uint8 Pick);
+	/** Packs picks and winner into the replicated result byte (A | B << 2 | Winner << 4). */
+	static uint8 PackRps(uint8 A, uint8 B);
+	static void UnpackRps(uint8 Packed, uint8& A, uint8& B, uint8& Winner);
+	/** Deterministic outcome for (Seed, Serial): both machines only ever see the server's byte. */
+	static uint8 RollRps(uint64 Seed, uint8 Serial);
+	/** Dance-off: 1 = A wins, 2 = B wins (the crowd is never undecided). */
+	static uint8 RollDanceOff(uint64 Seed, uint8 Serial);
+	static bool WithinAcceptRadius(const FVector& Offerer, const FVector& Acceptor);
+	/** Where the acceptor stands and both yaws, so they face each other Distance apart. */
+	static void Align(const FVector& OffererLoc, const FVector& AcceptorLoc, float Distance, FVector& OutAcceptorLoc,
+	                  float& OutOffererYaw, float& OutAcceptorYaw);
+	/** Reasons that end a running partner emote for both (moving, attacking, damage, death, phase, cancel). */
+	static bool StopEndsPartner(EKGEmoteStop Reason);
+};
+
 /** What the server knows about the body that wants to emote (built from the character; tests fill it by hand). */
 struct KILLGODOT_API FKGEmoteBodyState
 {

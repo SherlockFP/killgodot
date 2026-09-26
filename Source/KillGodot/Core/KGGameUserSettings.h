@@ -126,6 +126,15 @@ public:
 	 */
 	void ApplyAudioSettings();
 
+	// --- Voice chat (SPRINT-023) ----------------------------------------------------------------------------------
+
+	/** Open microphone: transmit whenever you speak. Off = hold V (push-to-talk). */
+	UFUNCTION(BlueprintPure, Category = "KillGodot|Settings")
+	bool GetOpenMic() const { return bOpenMic; }
+
+	UFUNCTION(BlueprintCallable, Category = "KillGodot|Settings")
+	void SetOpenMic(bool bValue) { bOpenMic = bValue; }
+
 	// --- Language -----------------------------------------------------------------------------------------------
 
 	/** Culture codes offered in Settings -> Language (en, tr, ru). */
@@ -184,6 +193,9 @@ protected:
 
 	UPROPERTY(config)
 	FName StreamerPeekKey = TEXT("Tab");
+
+	UPROPERTY(config)
+	bool bOpenMic = false;
 
 	UPROPERTY(config)
 	float MasterVolume = 1.0f;

@@ -116,6 +116,7 @@ void UKGGameUserSettings::SetKGDefaults()
 	ViewmodelPreset = 1;
 	bFOVKickOnSpeed = true;
 	bStreamerMode = false;
+	bOpenMic = false;
 	StreamerPeekKey = GetStreamerPeekKeys()[0];
 	MasterVolume = 1.0f;
 	MusicVolume = 0.7f;

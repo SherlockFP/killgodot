@@ -1,5 +1,6 @@
 #include "Emote/KGEmoteCatalog.h"
 #include "Core/KGPlayerState.h"
+#include "Core/KGRng.h"
 
 #define LOCTEXT_NAMESPACE "KGEmote"
 
@@ -269,6 +270,162 @@ FKGChatRateLimiter FKGEmoteRules::MakeLimiter()
 	Limiter.RefillPerSecond = 0.5f;
 	Limiter.DuplicateWindow = 0.0f;
 	return Limiter;
+}
+
+// ---------------------------------------------------------------------------------------------------------------
+// Partner emotes
+// ---------------------------------------------------------------------------------------------------------------
+
+const TArray<FKGPartnerEmoteDef>& FKGPartnerCatalog::GetAll()
+{
+	static const TArray<FKGPartnerEmoteDef> All = []()
+	{
+		TArray<FKGPartnerEmoteDef> Out;
+		auto Add = [&Out](EKGPartnerKind Kind, const TCHAR* Id, FText Name, const TCHAR* A, const TCHAR* B, float Dist, float Play,
+		                  float Result, const TCHAR* Emoji)
+		{
+			FKGPartnerEmoteDef& D = Out.AddDefaulted_GetRef();
+			D.Kind = Kind;
+			D.Id = FName(Id);
+			D.DisplayName = Name;
+			D.EmoteA = FName(A);
+			D.EmoteB = FName(B);
+			D.Distance = Dist;
+			D.PlaySeconds = Play;
+			D.ResultSeconds = Result;
+			D.Emoji = Emoji;
+		};
+		// Placeholder clips from the shipped emote set (dedicated partner clips are a proposal, see the sprint report).
+		Add(EKGPartnerKind::HighFive, TEXT("highfive"), LOCTEXT("HighFive", "High five"), TEXT("cheer"), TEXT("cheer"), 95.0f, 2.2f, 0.0f, TEXT("clap"));
+		Add(EKGPartnerKind::Handshake, TEXT("handshake"), LOCTEXT("Handshake", "Handshake"), TEXT("point"), TEXT("point"), 85.0f, 2.2f, 0.0f, TEXT("heart"));
+		Add(EKGPartnerKind::RockPaperScissors, TEXT("rps"), LOCTEXT("Rps", "Rock, paper, scissors"), TEXT("clap"), TEXT("clap"), 110.0f, 2.4f, 3.0f, TEXT("question"));
+		Add(EKGPartnerKind::DanceOff, TEXT("danceoff"), LOCTEXT("DanceOff", "Dance-off"), TEXT("dance"), TEXT("dance"), 160.0f, 6.0f, 3.0f, TEXT("fire"));
+		return Out;
+	}();
+	return All;
+}
+
+const FKGPartnerEmoteDef* FKGPartnerCatalog::Find(FName IdOrAlias)
+{
+	const FString Word = IdOrAlias.ToString().ToLower().Replace(TEXT("-"), TEXT("")).Replace(TEXT("_"), TEXT(""));
+	for (const FKGPartnerEmoteDef& D : GetAll())
+	{
+		if (D.Id.ToString() == Word)
+		{
+			return &D;
+		}
+	}
+	if (Word == TEXT("rockpaperscissors") || Word == TEXT("roshambo"))
+	{
+		return Get(EKGPartnerKind::RockPaperScissors);
+	}
+	if (Word == TEXT("shake"))
+	{
+		return Get(EKGPartnerKind::Handshake);
+	}
+	if (Word == TEXT("five") || Word == TEXT("hi5"))
+	{
+		return Get(EKGPartnerKind::HighFive);
+	}
+	if (Word == TEXT("dancebattle"))
+	{
+		return Get(EKGPartnerKind::DanceOff);
+	}
+	return nullptr;
+}
+
+const FKGPartnerEmoteDef* FKGPartnerCatalog::Get(EKGPartnerKind Kind)
+{
+	for (const FKGPartnerEmoteDef& D : GetAll())
+	{
+		if (D.Kind == Kind)
+		{
+			return &D;
+		}
+	}
+	return nullptr;
+}
+
+int32 FKGPartnerRules::RpsWinner(uint8 A, uint8 B)
+{
+	if (A == B)
+	{
+		return 0;
+	}
+	// rock(0) beats scissors(2), paper(1) beats rock(0), scissors(2) beats paper(1)
+	return ((A + 1) % 3 == B) ? 2 : 1;
+}
+
+const TCHAR* FKGPartnerRules::RpsName(uint8 Pick)
+{
+	switch (Pick % 3)
+	{
+	case 0: return TEXT("rock");
+	case 1: return TEXT("paper");
+	default: return TEXT("scissors");
+	}
+}
+
+uint8 FKGPartnerRules::PackRps(uint8 A, uint8 B)
+{
+	return static_cast<uint8>((A % 3) | ((B % 3) << 2) | (static_cast<uint8>(RpsWinner(A % 3, B % 3)) << 4));
+}
+
+void FKGPartnerRules::UnpackRps(uint8 Packed, uint8& A, uint8& B, uint8& Winner)
+{
+	A = Packed & 3;
+	B = (Packed >> 2) & 3;
+	Winner = (Packed >> 4) & 3;
+}
+
+uint8 FKGPartnerRules::RollRps(uint64 Seed, uint8 Serial)
+{
+	FKGRng Rng(Seed ^ (static_cast<uint64>(Serial) * 0x9E3779B97F4A7C15ull), 23u);
+	const uint8 A = static_cast<uint8>(Rng.RandRange(0, 2));
+	const uint8 B = static_cast<uint8>(Rng.RandRange(0, 2));
+	return PackRps(A, B);
+}
+
+uint8 FKGPartnerRules::RollDanceOff(uint64 Seed, uint8 Serial)
+{
+	FKGRng Rng(Seed ^ (static_cast<uint64>(Serial) * 0xC2B2AE3D27D4EB4Full), 29u);
+	return static_cast<uint8>(Rng.RandRange(1, 2));
+}
+
+bool FKGPartnerRules::WithinAcceptRadius(const FVector& Offerer, const FVector& Acceptor)
+{
+	return FVector::DistSquared2D(Offerer, Acceptor) <= FMath::Square(AcceptRadius) && FMath::Abs(Offerer.Z - Acceptor.Z) < 150.0f;
+}
+
+void FKGPartnerRules::Align(const FVector& OffererLoc, const FVector& AcceptorLoc, float Distance, FVector& OutAcceptorLoc,
+                            float& OutOffererYaw, float& OutAcceptorYaw)
+{
+	FVector Dir = (AcceptorLoc - OffererLoc);
+	Dir.Z = 0.0;
+	if (!Dir.Normalize())
+	{
+		Dir = FVector::ForwardVector;
+	}
+	OutAcceptorLoc = FVector(OffererLoc.X + Dir.X * Distance, OffererLoc.Y + Dir.Y * Distance, AcceptorLoc.Z);
+	OutOffererYaw = static_cast<float>(Dir.Rotation().Yaw);
+	OutAcceptorYaw = static_cast<float>((-Dir).Rotation().Yaw);
+}
+
+bool FKGPartnerRules::StopEndsPartner(EKGEmoteStop Reason)
+{
+	switch (Reason)
+	{
+	case EKGEmoteStop::Moved:
+	case EKGEmoteStop::Attacked:
+	case EKGEmoteStop::Damaged:
+	case EKGEmoteStop::Died:
+	case EKGEmoteStop::Phase:
+	case EKGEmoteStop::Busy:
+	case EKGEmoteStop::Requested:
+		return true;
+	default:
+		return false;   // Finished / Replaced: the clip ran out or the partner emote swapped it, the pairing goes on
+	}
 }
 
 EKGChatReject FKGEmoteRules::ToChatReject(EKGEmoteReject Reject)

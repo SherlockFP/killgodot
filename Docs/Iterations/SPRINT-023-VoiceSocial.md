@@ -50,3 +50,57 @@ User request (2026-09-25):
 - 2 look rounds for the mouth and emotes
 - plateau stop
 - extra ideas go in as proposals
+
+---
+
+## Implementation notes (2026-09-26)
+
+### Voice (Source/KillGodot/Voice/)
+- `FKGVoiceRules` (pure, tested): full volume <= 8 m, linear to silence at 25 m; ghosts hear ghosts anywhere and
+  the living never receive ghost voice; ghosts hear the living; Meeting/Trial = everyone alive hears everyone;
+  revenants, migration and the role-reveal curfew close the mic; whispering at night is allowed.
+- `UKGVoiceComponent` (one per `AKGPlayerState`, attached by `UKGVoiceSubsystem` like the chat relay): the owning
+  client captures the microphone through the engine **Voice** module (16 kHz mono, Opus, ~190 B per 60 ms packet,
+  ~3 KB/s per talker) and sends `ServerVoice`; the listen server applies the rules **per receiver per packet** and
+  forwards with the gain (`ClientVoice`), so a machine that may not hear a packet never gets it. Receivers decode into a
+  `USoundWaveProcedural` attached to the speaker's Head (spatialised, volume = server gain x Voice slider), feed the
+  amplitude to the speaker's mouth and remember who they heard (overlay marker). `/mute` (the chat list) drops a
+  speaker's voice and barks on arrival. Push-to-talk **V** (Accuse moved to **middle mouse**), open mic in Settings ->
+  Audio -> Voice chat.
+- Headless: there is no microphone, so `-KGVoiceSmoke` injects a synthetic tone through the same encode -> send path
+  (`InjectPCM`); everything after the capture is the shipping code. `kg.Voice.Tone 1` does the same in PIE.
+- **EOS later:** EOS RTC replaces capture / wire / playback (lobby voice room). The seam is
+  `UKGVoiceComponent::OnVoiceHeard(Speaker, Packet, Gain)`: the RTC unmixed-audio delegate feeds it per participant,
+  `FKGVoiceRules::HearGain` becomes the per-participant volume set at 10 Hz (`SetPlayerVolume`), and the mouth, the
+  indicator, the barks, the mute list and the smoke stay as they are (Docs/Research/TechResearch.md §4).
+
+### Mouth
+The Quaternius villager skeleton has `Head / neck_01 / spine_*` only, no jaw bone, and morph targets are not
+imported, so `UKGMouthComponent` attaches a small dark oval (engine sphere, character material tinted near-black) to
+the Head bone: a 0.7 cm slit at rest that opens to 3.2 cm with `JawOpen`. Placement/size: `kg.Mouth.Fwd/Up/Width/
+OpenHeight`; `kg.Mouth.Force 0..1` pins it for shots. Drivers: live voice amplitude (dB gate, gamma, attack/release)
+and the bark envelope (`FKGVoiceCommandCatalog::MouthEnvelope`, one sine hump per syllable, deterministic per line).
+
+### Voice commands (Z / X / C)
+`FKGVoiceCommandCatalog`: 3 radials x 8 lines (Calls / Deduction / Social). Each bark: server validates (phase =
+reaction rules, 3-burst then 1 per 2 s limiter), fills `{place}` from `AKGMapInfo::FindRegionAt` (the minimap region
+the speaker stands in), posts the line on **NEAR** (Dead channel for ghosts) through `UKGChatComponent::ServerSay`,
+starts the gesture emote, and sends `ClientBark` to everyone who could see a reaction bubble: bark audio at the head
+(`/Game/KillGodot/Audio/Barks/S_Bark_<Voice>_<Id>`, 4 placeholder voices from `Tools/Audio/kg_synth_barks.py`:
+MaleLow / MaleYoung / Female / Old, picked from the villager look), the mouth envelope and the emoji bubble. Bots:
+`kg.Bark.Bots <id|all>`.
+
+### Partner emotes (Emote/)
+`FKGPartnerCatalog`: high five, handshake, rock-paper-scissors, dance-off, built from shipped clips (cheer / point /
+clap / dance) as placeholders. `UKGEmoteComponent` gained a replicated `FKGPartnerState` (kind, stage, partner,
+serial, result): offer (8 s, rate-limited, same body rules as an emote) -> the acceptor presses **E** within 3 m
+(`AKGCharacter::Interact` hook) -> the server snaps the acceptor to `Distance` in front of the offerer, turns both to
+face each other and starts both clips; RPS / dance-off outcomes are one server byte rolled from the match seed
+(`FKGRng`), revealed after the clips with a NEAR line + bubble. Moving, attacking, damage, death, a phase change or
+a cancel end it for both.
+
+### Tools
+- `Tools/Unreal/kg_voice_smoke.ps1` (I3), `kg_partner_smoke.ps1` (I3), `kg_voice_shots.ps1` (offscreen renders to
+  `Saved/Screenshots/Voice/`), `kg_import_barks.py`, `Tools/Audio/kg_synth_barks.py`.
+- Dev verbs: `kg.Voice.Tone`, `kg.Voice.Mute`, `kg.Bark`, `kg.Bark.Bots`, `kg.Mouth.Pin`, `kg.Partner`,
+  `kg.Partner.Bots`.

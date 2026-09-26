@@ -31,6 +31,7 @@ public class KillGodot : ModuleRules
 			"OnlineSubsystemUtils",
 			"SignalProcessing",
 			"AudioMixer",
+			"Voice",            // SPRINT-023: microphone capture + Opus for the proximity voice relay (Voice/)
 			"EngineSettings",   // UGameMapsSettings, UGeneralProjectSettings (menus)
 			"Sockets",          // ISocketSubsystem (LAN address in the host screen)
 			"Json",             // dev panel: teleport targets from Tools/Level layout JSON

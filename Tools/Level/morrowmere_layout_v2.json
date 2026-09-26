@@ -2268,20 +2268,24 @@
       8.0
      ],
      [
-      25,
-      9.5
+      12,
+      7.4
      ],
      [
-      50,
-      12.5
+      26,
+      5.8
      ],
      [
-      62,
-      14.0
+      40,
+      4.9
+     ],
+     [
+      58,
+      4.4
      ],
      [
       95,
-      14.0
+      4.2
      ]
     ]
    },
@@ -2358,7 +2362,7 @@
      21.0
     ]
    ],
-   "note": "Lighthouse Point: ridge rising south to 14, sea cliffs on three sides."
+   "note": "Lighthouse Point: a low grassy point falling south from 8 to ~4, a low rocky shore (2-3 m) on three sides."
   }
  ],
  "coast": {
@@ -2832,14 +2836,18 @@
    "bottom_z": -3.0,
    "material": "rock",
    "shoulder": {
-    "edge_z": 5.0,
-    "ledge_z": 7.5,
-    "ledge_at_m": 4.0,
-    "bench_to_m": 6.5,
-    "width_m": 13.0,
-    "fade_m": 9.0,
-    "wobble_m": 0.9,
-    "fade_end_m": 4.0
+    "edge_z": 2.6,
+    "ledge_z": 3.4,
+    "ledge_at_m": 3.0,
+    "bench_to_m": 5.0,
+    "width_m": 14.0,
+    "fade_m": 3.0,
+    "fade_end_m": 0.3,
+    "wobble_m": 0.6,
+    "shelf": {
+     "z": -0.7,
+     "width_m": 6.5
+    }
    }
   },
   {
@@ -2872,11 +2880,29 @@
     [
      110.0,
      93.0
+    ],
+    [
+     132.0,
+     88.0
     ]
    ],
    "top_z": "terrain",
    "bottom_z": -4.0,
-   "material": "rock"
+   "material": "rock",
+   "shoulder": {
+    "edge_z": 2.8,
+    "ledge_z": 3.5,
+    "ledge_at_m": 3.0,
+    "bench_to_m": 5.0,
+    "width_m": 12.0,
+    "fade_m": 0.3,
+    "fade_end_m": 3.0,
+    "wobble_m": 0.6,
+    "shelf": {
+     "z": -0.7,
+     "width_m": 7.0
+    }
+   }
   },
   {
    "name": "fish_market_cliff",
@@ -5411,24 +5437,24 @@
      44.0
     ],
     [
-     73.5,
-     58.0
+     76.5,
+     57.0
     ],
     [
-     71.5,
-     72.0
+     82.0,
+     69.0
     ],
     [
-     69.0,
-     84.0
+     88.5,
+     79.0
     ],
     [
-     68.5,
-     90.2
+     93.9,
+     86.6
     ]
    ],
    "dead_end_ok": true,
-   "note": "Ridge road to the lighthouse: the long lonely trip."
+   "note": "Down the spine of the point to the lighthouse on its far corner: the long lonely trip."
   },
   {
    "name": "orchard_link",
@@ -5814,8 +5840,8 @@
   {
    "name": "lighthouse",
    "center": [
-    68.0,
-    90.0
+    94.2,
+    86.6
    ],
    "radius": 5.0
   },
@@ -7531,20 +7557,20 @@
    "name": "Keeper's hut",
    "district": "lighthouse_point",
    "terrace": "headland",
-   "z": 12.39,
+   "z": 4.67,
    "at": [
-    64.34,
-    78.44
+    82.27,
+    79.87
    ],
    "size": [
     4,
     6
    ],
-   "face_deg": 11.77,
-   "yaw": 101.77,
+   "face_deg": 326.98,
+   "yaw": 56.98,
    "face": [
-    71.19,
-    79.87
+    88.13,
+    76.05
    ],
    "storeys": 1,
    "shell": true,
@@ -7901,24 +7927,24 @@
    "name": "Lighthouse",
    "district": "lighthouse_point",
    "terrace": "headland",
-   "z": 14.0,
+   "z": 4.4,
    "at": [
-    68.0,
-    95.0
+    96.0,
+    90.0
    ],
    "size": [
     4,
     4
    ],
-   "face_deg": 300.0,
-   "yaw": 30.0,
+   "face_deg": 230.0,
+   "yaw": 320.0,
    "face": [
-    71.0,
-    89.8
+    92.14,
+    85.4
    ],
    "storeys": 5,
    "ladder": true,
-   "top_z": 36.5,
+   "top_z": 26.9,
    "style": 43,
    "interior": false
   },
@@ -8652,8 +8678,8 @@
    "id": "FuelLighthouse",
    "name": "Refuel the lighthouse lamp",
    "at": [
-    68.0,
-    95.0
+    96.0,
+    90.0
    ],
    "secs": 7,
    "district": "lighthouse_point",
@@ -8925,12 +8951,12 @@
     67.2
    ],
    "to": [
-    68.0,
-    95.0
+    96.0,
+    90.0
    ],
    "eye_z": 3.7,
-   "target_z": 30.0,
-   "note": "Coming round the brook bend onto the west quay: the whole basin and the lighthouse on its cliff."
+   "target_z": 22.0,
+   "note": "Coming round the brook bend onto the west quay: the whole basin, the low point and the lighthouse on its far corner."
   },
   {
    "name": "S6_bridge",
@@ -9027,7 +9053,7 @@
    "size": 11
   },
   {
-   "text": "LIGHTHOUSE POINT  z 8-14",
+   "text": "LIGHTHOUSE POINT  z 3-8",
    "at": [
     100.0,
     58.0

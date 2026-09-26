@@ -293,7 +293,10 @@ def prof_z(pr, p):
 
 BROOK_PROFILE = profile((0.0, 66.0), (0.0, -1.0), [(0, 1.2), (6, 2.0), (24, 5.0), (46, 8.0), (88, 14.0), (180, 18.0)])
 ORCHARD_PROFILE = profile((35.0, 0.0), (0.55, -0.835), [(0, 8.0), (40, 8.5), (100, 10.0), (170, 11.0)])
-HEADLAND_PROFILE = profile((0.0, 30.0), (0.0, 1.0), [(-10, 8.0), (0, 8.0), (25, 9.5), (50, 12.5), (62, 14.0), (95, 14.0)])
+# User 2026-09-26 ("keep this place LOWER"): the headland no longer climbs to a 14 m ridge; it falls gently from the
+# garden (8) to a low grassy point (~4.3), and the shore shoulders (cliffs below) drop its edge to 2-3 m over the water.
+HEADLAND_PROFILE = profile((0.0, 30.0), (0.0, 1.0), [(-10, 8.0), (0, 8.0), (12, 7.4), (26, 5.8), (40, 4.9), (58, 4.4),
+                                                     (95, 4.2)])
 
 slope_raw = {
     "brookside": [(-130.0, -118.0), (-92.0, -118.0), P(R_CROWN_BACK, TH_CROWN[0]), P(R_CROWN_WALL, TH_CROWN[0]),
@@ -308,7 +311,7 @@ slope_raw = {
 SLOPE_META = {
     "brookside": ("brookside", BROOK_PROFILE, "grass", "Brook valley: tilted plane falling to the shingle beach, the Morrow Brook cut 1.2 m into it."),
     "orchard": ("orchard_upland", ORCHARD_PROFILE, "grass", "Orchard Upland: apple rows, walled fields, windmill knoll (mound)."),
-    "headland": ("lighthouse_point", HEADLAND_PROFILE, "grass", "Lighthouse Point: ridge rising south to 14, sea cliffs on three sides."),
+    "headland": ("lighthouse_point", HEADLAND_PROFILE, "grass", "Lighthouse Point: a low grassy point falling south from 8 to ~4, a low rocky shore (2-3 m) on three sides."),
 }
 
 # ================================================================================================ STREETS
@@ -385,9 +388,12 @@ lane("sakura_walk", 2.6, [(48.4, 13.9), (54.0, 13.2), (60.0, 16.0), (64.5, 21.5)
      surface="gravel", note="Garden Stair top -> through the Sakura Garden -> Headland Road.")
 lane("koi_path", 2.2, [P(45.4, 54.3), (57.0, 25.0), (60.0, 16.0)], kind="path", surface="gravel",
      note="Cliff Stair top -> Sakura Walk.")
-HEAD_RD = [(69.0, 30.5), (73.0, 44.0), (73.5, 58.0), (71.5, 72.0), (69.0, 84.0), (68.5, 90.2)]
+# the lighthouse sits on the far south-east corner of the point (user 2026-09-26: "put the tower more to the corners"),
+# out of the harbour view axis; the road runs down the spine of the point to its door
+LIGHTHOUSE_AT, LIGHTHOUSE_FACE = (96.0, 90.0), 230.0
+HEAD_RD = [(69.0, 30.5), (73.0, 44.0), (76.5, 57.0), (82.0, 69.0), (88.5, 79.0), (93.9, 86.6)]
 lane("headland_road", 3.0, HEAD_RD, kind="lane", surface="dirt", dead_end_ok=True,
-     note="Ridge road to the lighthouse: the long lonely trip.")
+     note="Down the spine of the point to the lighthouse on its far corner: the long lonely trip.")
 lane("orchard_link", 2.6, [(69.0, 30.5), (70.0, 22.5), (66.2, 12.5), (64.2, 7.5)], kind="path", surface="dirt",
      note="Headland Road <-> top of the Orchard Ramp (closes the east loop).")
 # --- Sea ---
@@ -523,12 +529,17 @@ cliffs = [
     {"name": "basin_east_cliff", "points": [rd(p) for p in [P(R_QUAY_EDGE, TH_QUAY[1]), (46.0, 54.0), (48.8, 64.0), (50.6, 76.0),
                                                                 (51.6, 88.0), (53.0, 97.0)]],
      "top_z": "terrain", "bottom_z": -3.0, "material": "rock",
-     # SPRINT-022 acceptance 6 (user): the face seen from the basin is lowered. The land side drops to a ragged rock lip
-     # at ~5 m, a grassy bench at ~7.5 m, then climbs back to the headland (Tools/Blender/kg_build_terrain_v2.py).
-     "shoulder": {"edge_z": 5.0, "ledge_z": 7.5, "ledge_at_m": 4.0, "bench_to_m": 6.5, "width_m": 13.0, "fade_m": 9.0, "fade_end_m": 4.0,
-                  "wobble_m": 0.9}},
+     # User 2026-09-26 ("keep this place LOWER"): a LOW natural rocky shore. The land side drops to a ragged rock edge
+     # at ~2-3 m over the water, a short grassy step at ~3.4, then rises gently to the headland; under the water a
+     # rocky shelf (-0.7 at the foot) carries the shore boulders (Tools/Blender/kg_build_terrain_v2.py, rocky_shore()
+     # in Tools/Level/prep_v2_placements.py - no stacked cladding tiers on a shoulder cliff).
+     "shoulder": {"edge_z": 2.6, "ledge_z": 3.4, "ledge_at_m": 3.0, "bench_to_m": 5.0, "width_m": 14.0, "fade_m": 3.0,
+                  "fade_end_m": 0.3, "wobble_m": 0.6, "shelf": {"z": -0.7, "width_m": 6.5}}},
     {"name": "point_sea_cliff", "points": [[53.0, 97.0], [56.5, 104.5], [63.0, 109.0], [73.0, 110.5], [85.0, 106.0],
-                                           [97.0, 99.5], [110.0, 93.0]], "top_z": "terrain", "bottom_z": -4.0, "material": "rock"},
+                                           [97.0, 99.5], [110.0, 93.0], [132.0, 88.0]], "top_z": "terrain", "bottom_z": -4.0,
+     "material": "rock",
+     "shoulder": {"edge_z": 2.8, "ledge_z": 3.5, "ledge_at_m": 3.0, "bench_to_m": 5.0, "width_m": 12.0, "fade_m": 0.3,
+                  "fade_end_m": 3.0, "wobble_m": 0.6, "shelf": {"z": -0.7, "width_m": 7.0}}},
     {"name": "fish_market_cliff", "points": [rd(P(R_QUAY_EDGE, TH_QUAY[1])), rd(P(R_HARBOUR_WALL, TH_QUAY[1]))],
      "top_z": "terrain", "bottom_z": Z_QUAY, "material": "rock"},
 ]
@@ -637,8 +648,9 @@ bldg("special", (97.0, -62.8), 8, 6, 162.0, "Windmill", "orchard_upland", "orcha
 # ---- Garden / headland ----
 bldg("special", (45.0, 21.2), 4, 4, 90.0, "Garden pavilion (on the island axis)", "sakura_garden", "garden", Z_GARDEN, 1,
      legacy="pavilion", open=True)
-bldg("tower", (68.0, 95.0), 4, 4, -60.0, "Lighthouse", "lighthouse_point", "headland", 14.0, 5, legacy="lighthouse",
-     ladder=True, top_z=14.0 + 5 * 3 + 7.5)
+_lh_z = round(prof_z(HEADLAND_PROFILE, LIGHTHOUSE_AT), 1)
+bldg("tower", LIGHTHOUSE_AT, 4, 4, LIGHTHOUSE_FACE, "Lighthouse", "lighthouse_point", "headland", _lh_z, 5,
+     legacy="lighthouse", ladder=True, top_z=_lh_z + 5 * 3 + 7.5)
 along(HEAD_RD, 50.0, +1, 4, 6, 3.0, "infill", "Keeper's hut", "lighthouse_point", "headland", storeys=1)
 
 # SPRINT-022 ("you can reduce the number of houses very slightly"): the three weakest infill shells go, the lone
@@ -802,7 +814,7 @@ areas = [
     {"name": "smithy_yard", "center": [-91.0, 11.0], "radius": 6.0},
     {"name": "farm", "center": [57.0, -70.0], "radius": 9.0},
     {"name": "woodcutter", "center": [-101.0, -4.0], "radius": 5.0},
-    {"name": "lighthouse", "center": [68.0, 90.0], "radius": 5.0},
+    {"name": "lighthouse", "center": [94.2, 86.6], "radius": 5.0},
     {"name": "japan_garden", "center": [47.0, 18.0], "radius": 8.0},
     {"name": "well_court", "center": rd(P(98.5, -22.2)), "radius": 5.0},
     {"name": "quay_head", "center": rd(P(30.0, 0.0)), "radius": 5.0},
@@ -848,7 +860,7 @@ TASKS = [
     ("StockStall", "Stock the market stall", A(7.2, 66.0), 4, "heart", None),
     ("MendNets", "Mend the fishing nets", P(29.0, -48.0), 6, "harbour_row", None),
     ("UnloadFish", "Unload the fish crates", A(3.5, -10.0), 5, "harbour_row", None),
-    ("FuelLighthouse", "Refuel the lighthouse lamp", (68.0, 95.0), 7, "lighthouse_point", "lighthouse"),
+    ("FuelLighthouse", "Refuel the lighthouse lamp", LIGHTHOUSE_AT, 7, "lighthouse_point", "lighthouse"),
     ("HarvestCarrots", "Harvest carrots at the farm", (57.8, -95.0), 5, "orchard_upland", None),
     ("FeedAnimals", "Fill the feed trough", (78.0, -66.7), 4, "orchard_upland", None),
     ("ChopWood", "Chop firewood at the camp", (-98.4, -2.4), 6, "brookside", None),
@@ -880,8 +892,8 @@ sightlines = [
      "note": "Belvedere panorama down the stepped axis to the basin, the lighthouse on the left, the island beyond."},
     {"name": "S4_garden_axis", "from": [45.0, 24.3], "to": rd(PAGODA), "eye_z": Z_GARDEN + 1.7, "target_z": 12.0,
      "note": "Pavilion -> over the koi cascade and the fish market roof -> harbour mouth -> pagoda (x = 45)."},
-    {"name": "S5_lighthouse_reveal", "from": [-24.0, 67.2], "to": [68.0, 95.0], "eye_z": 2.0 + 1.7, "target_z": 30.0,
-     "note": "Coming round the brook bend onto the west quay: the whole basin and the lighthouse on its cliff."},
+    {"name": "S5_lighthouse_reveal", "from": [-24.0, 67.2], "to": list(LIGHTHOUSE_AT), "eye_z": 2.0 + 1.7, "target_z": 22.0,
+     "note": "Coming round the brook bend onto the west quay: the whole basin, the low point and the lighthouse on its far corner."},
     {"name": "S6_bridge", "from": [-63.0, 18.2], "to": [-80.0, 3.5], "eye_z": 8.0 + 1.7, "target_z": 10.5,
      "note": "Approaching the Old Stone Bridge: brook, turning waterwheel, forge glow."},
     {"name": "S7_windmill", "from": rd(P(91.0, 33.0)), "to": [97.0, -62.0], "eye_z": Z_UPPER + 1.7, "target_z": 20.0,
@@ -897,7 +909,7 @@ map_labels = [
     {"text": "BROOKSIDE", "at": [-112.0, 36.0], "size": 14},
     {"text": "ORCHARD UPLAND  z 8-11", "at": [96.0, -118.0], "size": 13},
     {"text": "SAKURA GARDEN  z 8", "at": [62.0, 4.0], "size": 11},
-    {"text": "LIGHTHOUSE POINT  z 8-14", "at": [100.0, 58.0], "size": 12},
+    {"text": "LIGHTHOUSE POINT  z 3-8", "at": [100.0, 58.0], "size": 12},
     {"text": "HARBOUR BASIN  -3", "at": [42.0, 78.0], "size": 10},
     {"text": "SHRINE ISLAND", "at": [45.0, 170.0], "size": 12},
     {"text": "the Long Ope", "at": rd(P(66.0, -34.5)), "size": 7, "rot_deg": 0},

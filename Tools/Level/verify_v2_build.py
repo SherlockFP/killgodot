@@ -372,6 +372,250 @@ def house_variety(L, info_lines, out, err):
         err.append(f"house variety: town-core coverage {cov_v} % < 20 %")
 
 
+# ============================================================================================ stair fit (2026-09-26)
+# User: "the stairs are geometrically broken". Every kit flight + quay water step, measured in the built level by
+# Tools/Unreal/kg_placement_check_v2.py (stair_fit): walk-surface and terrain traces along three lines, the placed
+# pieces (transforms + bounds) and the render triangles of the visual stair meshes (the kit treads have no collision,
+# so the visual tread surface is ray-cast here). Fails on:
+#   landing   - the ground 0.4-1.2 m before the foot / past the head is off the terrace height by > 5 cm
+#   foot/head - the first tread is not flush with the bottom landing (> 5 cm), or the last riser to the top landing is
+#               not one ordinary step (-5 .. +25 cm)
+#   gap       - a sample inside the flight with no tread under it
+#   reversed  - the visual treads descend in the climbing direction (a piece turned the wrong way), or a riser > 27 cm
+#   sunk      - the terrain pokes through a tread (> 3 cm); floating - the walk surface (ramp box) lies > 5 cm under the
+#               treads, or > 40 cm over them
+#   width     - a lateral scan of the treads is off the layout width by > 15 cm or off-centre by > 10 cm
+#   trims     - an _L/_R side trim is not on the outer edge of its flight
+#   direction - a piece's climb axis (measured from its mesh) or its ramp box does not point up the flight
+#   clip      - a tread piece overlaps a wall / retaining wall / quay wall piece (> 0.02 m2 in plan, > 10 cm in z)
+STAIR_TOL = {"landing": 0.05, "foot": 0.05, "head_lo": -0.05, "head_hi": 0.25, "riser": 0.27, "sunk": 0.03,
+             "float_lo": 0.05, "float_hi": 0.40, "width": 0.15, "centre": 0.10}
+STAIR_WALLS = ("V2/Walls", "V2/StairWalls", "V2/Parapets", "V2/RampWalls")
+
+
+def _rot_axes(r):
+    """UE FRotator (roll, pitch, yaw) degrees -> the rotated X, Y, Z axes (FRotationMatrix)."""
+    ro, pi, ya = (math.radians(v) for v in r)
+    sp, cp, sy, cy, sr, cr = math.sin(pi), math.cos(pi), math.sin(ya), math.cos(ya), math.sin(ro), math.cos(ro)
+    X = (cp * cy, cp * sy, sp)
+    Y = (sr * sp * cy - cr * sy, sr * sp * sy + cr * cy, -sr * cp)
+    Z = (-(cr * sp * cy + sr * sy), cy * sr - cr * sp * sy, cr * cp)
+    return X, Y, Z
+
+
+def _to_world(pc, v):
+    X, Y, Z = _rot_axes(pc["r"])
+    x, y, z = v[0] * pc["s"][0], v[1] * pc["s"][1], v[2] * pc["s"][2]
+    return tuple((pc["p"][i] + x * X[i] + y * Y[i] + z * Z[i]) / 100.0 for i in range(3))
+
+
+def _world_tris(pc, mesh):
+    import numpy as np
+    V = np.array(mesh["v"], dtype=float) * np.array(pc["s"])
+    X, Y, Z = (np.array(a) for a in _rot_axes(pc["r"]))
+    W_ = (np.array(pc["p"]) + V[:, :1] * X + V[:, 1:2] * Y + V[:, 2:3] * Z) / 100.0
+    T = np.array(mesh["t"], dtype=int).reshape(-1, 3)
+    return W_[T]                                                   # (n, 3, 3) metres
+
+
+def _ray_top(tris, x, y):
+    """Highest intersection of the vertical line through (x, y) with the triangles, or None."""
+    import numpy as np
+    if tris is None or not len(tris):
+        return None
+    a, b, c = tris[:, 0], tris[:, 1], tris[:, 2]
+    v0x, v0y = c[:, 0] - a[:, 0], c[:, 1] - a[:, 1]
+    v1x, v1y = b[:, 0] - a[:, 0], b[:, 1] - a[:, 1]
+    v2x, v2y = x - a[:, 0], y - a[:, 1]
+    den = v0x * v1y - v1x * v0y
+    ok = np.abs(den) > 1e-9
+    den = np.where(ok, den, 1.0)
+    u = (v2x * v1y - v1x * v2y) / den
+    v = (v0x * v2y - v2x * v0y) / den
+    hit = ok & (u >= -1e-6) & (v >= -1e-6) & (u + v <= 1 + 1e-6)
+    if not hit.any():
+        return None
+    z = a[:, 2] + u * (c[:, 2] - a[:, 2]) + v * (b[:, 2] - a[:, 2])
+    return float(z[hit].max())
+
+
+def _mesh_climb(mesh):
+    """Local climb axis of a stair mesh, measured: the side (+Y / -Y, +X / -X) whose vertices sit higher."""
+    import numpy as np
+    V = np.array(mesh["v"], dtype=float)
+    best = None
+    for ax in (0, 1):
+        hi = V[V[:, ax] > 0.25 * V[:, ax].max(), 2].mean() if (V[:, ax] > 0).any() else 0.0
+        lo = V[V[:, ax] < 0.25 * V[:, ax].min(), 2].mean() if (V[:, ax] < 0).any() else 0.0
+        d = hi - lo
+        if best is None or abs(d) > abs(best[1]):
+            best = (ax, d)
+    ax, d = best
+    vec = [0.0, 0.0, 0.0]
+    vec[ax] = 1.0 if d > 0 else -1.0
+    return vec
+
+
+def stair_fit(L, out, err):
+    import numpy as np
+    from shapely.geometry import Polygon as _Poly
+    path = os.environ.get("KG_PLACE_SAMPLES") or os.path.join(ROOT, "Saved", "KG_V2_PlacementSamples.json")
+    D = json.load(open(path)) if os.path.exists(path) else {}
+    flights, meshes = D.get("stairs"), D.get("stair_meshes") or {}
+    if not flights:
+        out["info"]["stair_fit"] = "not measured (run Tools/Unreal/kg_placement_check_v2.ps1)"
+        err.append("stair fit: no measurements (run Tools/Unreal/kg_placement_check_v2.ps1)")
+        return
+    T = STAIR_TOL
+    report = {}
+    for fl in flights:
+        name, w, Ls = fl["name"], fl["width"], fl["length"]
+        u = fl["u"]
+        perp = (u[1], -u[0])
+        lo = fl["lo"]
+        bad = []
+        vis_pcs = [p for p in fl["pieces"] if p["m"] in meshes and
+                   (p["f"] == "V2/Stairs" if fl["kind"] == "kit" else p["m"] == "SM_KG_QuaySteps")]
+        tris = [_world_tris(p, meshes[p["m"]]) for p in vis_pcs]
+        tris = np.concatenate(tris) if tris else None
+
+        def vis(s_, off):
+            # three rays 3 cm apart: a sample exactly on the joint of two pieces (the centreline of an even row) must
+            # not fall through the ~1 mm rounding gap between them
+            zs_ = [_ray_top(tris, lo[0] + u[0] * s_ + perp[0] * o_, lo[1] + u[1] * s_ + perp[1] * o_)
+                   for o_ in (off, off - 0.03, off + 0.03)]
+            zs_ = [z_ for z_ in zs_ if z_ is not None]
+            return max(zs_) if zs_ else None
+
+        # landings (kit: walk surface before the foot / past the head; quay: the quay beside the top tread)
+        by_off = {}
+        for off, s_, _v, walk, wf, g in fl["line"]:
+            # the walk surface counts only where it is the stair itself (ramp box / treads / terrain), not a planter
+            ok_w = wf in ("V2/StairRamps", "V2/Stairs", "V2/Terrain") or wf.startswith("V2/Terrain")
+            by_off.setdefault(off, []).append((s_, walk if ok_w else None, g))
+        cl = by_off.get(0.0, [])
+        z_foot = z_head = None
+        if fl["kind"] == "kit":
+            foot = [wk for s_, wk, g in cl if -1.2 <= s_ <= -0.4 and wk is not None]
+            head = [wk for s_, wk, g in cl if Ls + 0.4 <= s_ <= Ls + 1.2 and wk is not None]
+            z_foot = float(np.median(foot)) if foot else None
+            z_head = float(np.median(head)) if head else None
+            if z_foot is None or abs(z_foot - fl["zlo"]) > T["landing"]:
+                bad.append(f"bottom landing {z_foot} vs terrace {fl['zlo']}")
+            if z_head is None or abs(z_head - fl["zhi"]) > T["landing"]:
+                bad.append(f"top landing {z_head} vs terrace {fl['zhi']}")
+        else:
+            z_head = fl.get("side_walk")
+            if z_head is None or abs(z_head - fl["zhi"]) > T["landing"]:
+                bad.append(f"quay beside the head {z_head} vs quay {fl['zhi']}")
+        # visual profile along the three lines
+        worst = {"gap": 0, "reversed": 0, "riser": 0.0, "sunk": 0.0, "float": 0.0, "over": 0.0}
+        where = {}
+        for off, pts in by_off.items():
+            prof = []
+            for s_, walk, g in pts:
+                if s_ < 0.05 or s_ > Ls - 0.05:
+                    continue
+                v = vis(s_, off)
+                prof.append((s_, v, walk, g))
+                if v is None:
+                    worst["gap"] += 1
+                    where.setdefault("gap", (s_, off))
+                    continue
+                if g is not None and g - v > max(T["sunk"], worst["sunk"]):
+                    worst["sunk"], where["sunk"] = g - v, (s_, off)
+                if fl["kind"] == "kit" and walk is not None:
+                    if v - walk > max(T["float_lo"], worst["float"]):
+                        worst["float"], where["float"] = v - walk, (s_, off)
+                    if walk - v > max(T["float_hi"], worst["over"]):
+                        worst["over"], where["over"] = walk - v, (s_, off)
+            zs = [(s_, v) for s_, v, _, _ in prof if v is not None]
+            for (s0, z0), (s1, z1) in zip(zs, zs[1:]):
+                if z1 - z0 < -0.03:
+                    worst["reversed"] += 1
+                worst["riser"] = max(worst["riser"], z1 - z0)
+            if off == 0.0 and zs and fl["kind"] == "kit":
+                if z_foot is not None and abs(zs[0][1] - z_foot) > T["foot"]:
+                    bad.append(f"first tread {zs[0][1]:.2f} vs bottom landing {z_foot:.2f}")
+                if z_head is not None and not (T["head_lo"] <= z_head - zs[-1][1] <= T["head_hi"]):
+                    bad.append(f"last tread {zs[-1][1]:.2f} vs top landing {z_head:.2f}")
+            if off == 0.0 and zs and fl["kind"] == "quay" and z_head is not None:
+                if not (T["head_lo"] <= z_head - zs[-1][1] <= T["head_hi"]):
+                    bad.append(f"top tread {zs[-1][1]:.2f} vs quay {z_head:.2f}")
+        at = {k: f" (s {v[0]:.1f}, off {v[1]:+.2f})" for k, v in where.items()}
+        if worst["gap"]:
+            bad.append(f"{worst['gap']} samples with no tread" + at["gap"])
+        if worst["reversed"]:
+            bad.append(f"treads descend up the flight at {worst['reversed']} samples (reversed pieces)")
+        if worst["riser"] > T["riser"]:
+            bad.append(f"riser {worst['riser']:.2f} m")
+        if worst["sunk"]:
+            bad.append(f"terrain {worst['sunk']:.2f} m over a tread" + at["sunk"])
+        if worst["float"]:
+            bad.append(f"walk surface {worst['float']:.2f} m under the treads" + at["float"])
+        if worst["over"]:
+            bad.append(f"ramp box {worst['over']:.2f} m over the treads" + at["over"])
+        # width: lateral scans every 0.52 m
+        ext = []
+        k = 0
+        while 0.26 + 0.52 * k < Ls - 0.1:
+            s_ = 0.26 + 0.52 * k
+            k += 1
+            offs = [o for o in np.arange(-(w / 2 + 0.6), w / 2 + 0.6001, 0.05) if vis(s_, float(o)) is not None]
+            if offs:
+                ext.append((s_, min(offs) - 0.025, max(offs) + 0.025))
+        for s_, a_, b_ in ext:
+            if abs((b_ - a_) - w) > T["width"] or abs((a_ + b_) / 2.0) > T["centre"]:
+                bad.append(f"width {b_ - a_:.2f} (centre {(a_ + b_) / 2:+.2f}) at s {s_:.1f} vs {w}")
+                break
+        # trims, direction, clipping (kit pieces)
+        clip_pcs = [p for p in fl["pieces"] if any(p["f"] == f_ or p["f"].startswith(f_ + "/") for f_ in STAIR_WALLS)
+                    or (fl["kind"] == "quay" and p["m"].startswith("SM_KG_QuayWall"))]
+        for p in vis_pcs:
+            if p["m"] == "Floor_Brick":
+                continue
+            c = _mesh_climb(meshes[p["m"]])
+            X, Y, Z = _rot_axes(p["r"])
+            cw = [c[0] * X[i] + c[1] * Y[i] for i in range(2)]
+            n_ = math.hypot(*cw) or 1.0
+            if (cw[0] * u[0] + cw[1] * u[1]) / n_ < 0.95:
+                bad.append(f"{p['a']} ({p['m']}) climbs away from the flight")
+            if p["m"].endswith("_L") or p["m"].endswith("_R"):
+                tx = -90.0 if p["m"].endswith("_L") else 90.0
+                wp = _to_world(p, (tx, 0.0, 50.0))
+                o = (wp[0] - lo[0]) * perp[0] + (wp[1] - lo[1]) * perp[1]
+                if abs(o) < w / 2.0 - 0.3:
+                    bad.append(f"{p['a']} side trim on the inside ({o:+.2f} m of {w / 2:.1f})")
+            b0, b1 = p["bmin"], p["bmax"]
+            fp = _Poly([_to_world(p, (x_, y_, 0.0))[:2] for x_, y_ in
+                        ((b0[0] + 2, b0[1] + 2), (b1[0] - 2, b0[1] + 2), (b1[0] - 2, b1[1] - 2), (b0[0] + 2, b1[1] - 2))])
+            z0, z1 = (p["p"][2] + b0[2] * p["s"][2]) / 100.0, (p["p"][2] + b1[2] * p["s"][2]) / 100.0
+            for q in clip_pcs:
+                c0, c1 = q["bmin"], q["bmax"]
+                qp = _Poly([_to_world(q, (x_, y_, 0.0))[:2] for x_, y_ in
+                            ((c0[0], c0[1]), (c1[0], c0[1]), (c1[0], c1[1]), (c0[0], c1[1]))])
+                q0, q1 = (q["p"][2] + c0[2] * q["s"][2]) / 100.0, (q["p"][2] + c1[2] * q["s"][2]) / 100.0
+                if min(z1, q1) - max(z0, q0) > 0.1 and fp.is_valid and qp.is_valid and fp.intersection(qp).area > 0.02:
+                    bad.append(f"{p['a']} clips {q['a']} ({q['m']})")
+                    break
+        for p in fl["pieces"]:
+            if p["f"] != "V2/StairRamps" or fl["kind"] != "kit":
+                continue
+            X, _, _ = _rot_axes(p["r"])
+            along = X[0] * u[0] + X[1] * u[1]
+            if abs(along) < 0.9 * math.hypot(X[0], X[1]):
+                continue                                          # another flight's box
+            if X[2] * along <= 0:
+                bad.append(f"{p['a']} ramp box falls up the flight")
+        report[name] = bad[:6] + ([f"... {len(bad) - 6} more"] if len(bad) > 6 else [])
+        for b_ in bad[:6]:
+            err.append(f"stair fit {name}: {b_}")
+    n_bad = sum(1 for v in report.values() if v)
+    out["info"]["stair_fit"] = f"{len(report)} flights measured, {n_bad} broken" + (
+        ": " + ", ".join(k for k, v in report.items() if v) if n_bad else "")
+    out["stair_fit"] = report
+
+
 # ============================================================================================ cliff faces (SPRINT-022 #6)
 FACE_H, FACE_L, FACE_GAP = 6.0, 15.0, 8.0      # m: a face this tall and long must be broken at least every FACE_GAP m
 
@@ -396,6 +640,10 @@ def cliff_faces(L, out, err):
             w = {"DL:Cliff_A": 8.9, "DL:Cliff_B": 7.0, "DL:Cliff_C": 5.85, "DL:CliffTalus": 9.0}[m] * it.get("s", [1, 1, 1])[0]
             ux, uy = math.cos(yaw), math.sin(yaw)
             cover.append(LineString([(x - ux * w / 2, y - uy * w / 2), (x + ux * w / 2, y + uy * w / 2)]).buffer(2.5))
+        elif it["f"] == "V2/Shore":
+            # rocky-shore boulders (prep_v2_placements.rocky_shore, user 2026-09-26) break a low shore face like the
+            # cladding does: count each rock's own footprint (Rock_Medium ~3.3 m x its xy scale)
+            cover.append(Point(x, y).buffer(1.65 * max(it.get("s", [1, 1, 1])[:2]) + 0.5))
         elif it["f"].split("/")[1] in ("Walls", "Quay", "Parapets", "StairWalls", "RampWalls", "Mole"):
             cover.append(Point(x, y).buffer(2.2))
     for bid, _, b in VL.World(L).buildings:
@@ -527,7 +775,8 @@ def main():
             per.setdefault("n", 0)
             per["n"] += 1
     need = sum(int(abs(s["z1"] - s["z0"])) * int(round(s["width"] / 2)) for s in L["stairs"])
-    ramps = sum(1 for it in PL["items"] if it["f"] == "V2/StairRamps")
+    ramps = sum(1 for it in PL["items"] if it["f"] == "V2/StairRamps" and abs(it.get("pi", 0.0)) > 1.0)   # pitched
+    # flight boxes; the flat ones under landings / head slabs (2026-09-26 stair fit) are not counted here
     flights = sum(len([f for f in PP.STAIR_P[s["name"]]["flights"] if f]) for s in L["stairs"])
     out["info"]["stair_risers"] = f"{per.get('n', 0)}/{need}"
     out["info"]["stair_hidden_ramps"] = f"{ramps}/{flights}"
@@ -592,6 +841,7 @@ def main():
     dressing(L, W, out, err)
     placement(L, W, out, err)
     cliff_faces(L, out, err)
+    stair_fit(L, out, err)
 
     path = os.path.join(ROOT, "Saved", "KG_V2_Verify.json")
     json.dump(out, open(path, "w"), indent=1)

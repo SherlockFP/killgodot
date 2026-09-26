@@ -103,8 +103,122 @@ void UKGEmoteSubsystem::Tick(float DeltaTime)
 		{
 			TickLocalPlayer(PC);
 			TickSmoke(PC, DeltaTime);
+			TickPartnerSmoke(PC, DeltaTime);
 		}
 	}
+}
+
+void UKGEmoteSubsystem::TickPartnerSmoke(APlayerController* PC, float DeltaTime)
+{
+#if !UE_BUILD_SHIPPING
+	static const bool bSmoke = FParse::Param(FCommandLine::Get(), TEXT("KGPartnerSmoke"));
+	if (!bSmoke || PartnerStep > 20)
+	{
+		return;
+	}
+	UWorld* World = PC->GetWorld();
+	const bool bHost = World->GetNetMode() != NM_Client;
+	APlayerState* Other = nullptr;
+	int32 Bodies = 0;
+	if (const AGameStateBase* GS = World->GetGameState())
+	{
+		for (APlayerState* PS : GS->PlayerArray)
+		{
+			if (PS && !PS->IsABot() && Cast<AKGCharacter>(PS->GetPawn()))
+			{
+				++Bodies;
+				if (PS != PC->PlayerState)
+				{
+					Other = PS;
+				}
+			}
+		}
+	}
+	if (PartnerClock < 0.0f)
+	{
+		if (Bodies < 2 || !Other || !UKGChatComponent::FindForController(PC))
+		{
+			return;
+		}
+		PartnerClock = 0.0f;
+	}
+	PartnerClock += DeltaTime;
+	const TCHAR* Machine = bHost ? TEXT("Host") : TEXT("Client");
+	const FString Me = PC->PlayerState ? PC->PlayerState->GetPlayerName() : TEXT("?");
+	AKGCharacter* MyBody = Cast<AKGCharacter>(PC->GetPawn());
+	AKGCharacter* TheirBody = Cast<AKGCharacter>(Other->GetPawn());
+	UKGEmoteComponent* Mine = MyBody ? MyBody->GetEmote() : nullptr;
+	auto Dump = [World, Machine, &Me](const TCHAR* Tag)
+	{
+		for (TActorIterator<AKGCharacter> It(World); It; ++It)
+		{
+			const UKGEmoteComponent* Emote = It->GetEmote();
+			const APlayerState* PS = It->GetPlayerState();
+			if (!Emote || !PS || PS->IsABot())
+			{
+				continue;
+			}
+			const FKGPartnerState& P = Emote->GetPartner();
+			const FKGPartnerEmoteDef* Def = Emote->GetPartnerDef();
+			const FKGEmoteDef* Shown = Emote->GetShownEmote();
+			UE_LOG(LogKillGodot, Log, TEXT("KG_PARTNER_SEEN %s tag=%s viewer=%s body=%s local=%d stage=%d kind=%s partner=%s result=%d shown=%s yaw=%.0f loc=%s"),
+			       Machine, Tag, *Me, *PS->GetPlayerName(), It->IsLocallyControlled() ? 1 : 0, P.Stage, Def ? *Def->Id.ToString() : TEXT("none"),
+			       P.Partner ? *P.Partner->GetPlayerName() : TEXT("-"), P.Result, Shown ? *Shown->Id.ToString() : TEXT("None"),
+			       It->GetActorRotation().Yaw, *It->GetActorLocation().ToCompactString());
+		}
+	};
+	auto HostOffer = [&](const TCHAR* Id)
+	{
+		if (bHost && Mine)
+		{
+			Mine->ServerPartnerOffer(Id, true);
+		}
+	};
+	auto ClientAccept = [&]()
+	{
+		if (!bHost && Mine)
+		{
+			UE_LOG(LogKillGodot, Log, TEXT("KG_PARTNER_SMOKE Client accept -> %d"), Mine->TryAcceptNearbyOffer() ? 1 : 0);
+		}
+	};
+	struct FStep
+	{
+		float At;
+		TFunction<void()> Run;
+	};
+	const TArray<FStep> Steps = {
+		{2.0f, [&]()
+		{
+			if (bHost && MyBody && TheirBody)
+			{
+				TheirBody->TeleportTo(MyBody->GetActorLocation() + MyBody->GetActorForwardVector() * 150.0f, MyBody->GetActorRotation(), false, true);
+			}
+		}},
+		{4.0f, [&]() { HostOffer(TEXT("highfive")); }},
+		{6.0f, [&]() { ClientAccept(); }},
+		{7.5f, [&]() { Dump(TEXT("highfive")); }},
+		{11.0f, [&]() { HostOffer(TEXT("rps")); }},
+		{13.0f, [&]() { ClientAccept(); }},
+		{17.0f, [&]() { Dump(TEXT("rps")); }},
+		{20.0f, [&]() { HostOffer(TEXT("handshake")); }},
+		{22.0f, [&]() { ClientAccept(); }},
+		{23.2f, [&]() { if (bHost && MyBody) { MyBody->Attack(); } }},
+		{24.5f, [&]() { Dump(TEXT("cancelled")); }},
+		{27.0f, [&]() { HostOffer(TEXT("danceoff")); }},
+		{29.0f, [&]() { ClientAccept(); }},
+		{31.5f, [&]() { Dump(TEXT("danceoff")); }},
+		{34.0f, [&]() { UE_LOG(LogKillGodot, Log, TEXT("KG_PARTNER_DONE %s me=%s"), Machine, *Me); }},
+	};
+	while (Steps.IsValidIndex(PartnerStep) && PartnerClock >= Steps[PartnerStep].At)
+	{
+		Steps[PartnerStep].Run();
+		++PartnerStep;
+	}
+	if (PartnerStep >= Steps.Num())
+	{
+		PartnerStep = 99;
+	}
+#endif
 }
 
 void UKGEmoteSubsystem::TickLocalPlayer(APlayerController* PC)

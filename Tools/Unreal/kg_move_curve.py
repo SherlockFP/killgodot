@@ -24,9 +24,11 @@ import matplotlib.pyplot as plt  # noqa: E402
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 LINE_RE = re.compile(r"KG_MOVE_CSV,([0-9.]+),(\w+),([0-9.]+)")
 
-# Reference lines from Docs/01_GDD_Core.md §4.1 (SprintSpeed=580, BunnyHopSoftCapMultiplier=1.35).
+# Reference lines from Docs/01_GDD_Core.md §4.1 (SprintSpeed=580, BunnyHopSoftCapMultiplier=1.35,
+# BunnyHopHardCapMultiplier=1.5).
 SPRINT_SPEED = 580.0
 SOFT_CAP = SPRINT_SPEED * 1.35
+HARD_CAP = SPRINT_SPEED * 1.5
 
 
 def parse(path):
@@ -70,6 +72,7 @@ def main():
         ax.plot([t for t, _ in good], [s for _, s in good], color="#27ae60", linewidth=2, label="good strafe (alternating A/D + yaw + buffered jump)")
     ax.axhline(SPRINT_SPEED, color="#7f8c8d", linestyle="--", linewidth=1, label=f"sprint speed ({SPRINT_SPEED:.0f} uu/s)")
     ax.axhline(SOFT_CAP, color="#2c3e50", linestyle=":", linewidth=1, label=f"soft cap 1.35x ({SOFT_CAP:.0f} uu/s)")
+    ax.axhline(HARD_CAP, color="#c0392b", linestyle="-.", linewidth=1, label=f"hard ceiling 1.5x ({HARD_CAP:.0f} uu/s)")
     ax.set_xlabel("time (s)")
     ax.set_ylabel("horizontal speed (uu/s)")
     ax.set_title("SPRINT-026: air-strafe speed curve, good vs bad strafe")

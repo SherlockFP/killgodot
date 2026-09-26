@@ -1909,7 +1909,7 @@ namespace
 		P.TextMid(TEXT("TOWN MEETING"), X + 20.0f * S, Y + 30.0f * S, 15.0f, TownColor, 0.0f, true, 2.5f);
 		P.TextMid(FString::Printf(TEXT("%d VOTES = TRIAL"), Needed), X + W - 20.0f * S, Y + 30.0f * S, 14.0f, Gold, 1.0f,
 		          true, 1.5f);
-		P.KeyHint(TEXT("V"), TEXT("Accuse who you look at"), X + 20.0f * S, Y + 70.0f * S, 18.0f, Cream);
+		P.KeyHint(TEXT("MMB"), TEXT("Accuse who you look at"), X + 20.0f * S, Y + 70.0f * S, 18.0f, Cream);
 		float RowY = Y + 100.0f * S;
 		if (Rows.Num() == 0)
 		{

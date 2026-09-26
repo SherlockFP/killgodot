@@ -100,6 +100,11 @@ public:
 
 	/** Authority: a crier line to everyone (or only to ghosts / one faction via Channel = Dead / Team rules). */
 	static void BroadcastSystem(UWorld* World, const FString& Text);
+	/**
+	 * Authority: a line spoken by this player through the normal channel rules (SPRINT-023 voice-command barks post
+	 * their NEAR line here; partner emotes their result). Optional EmojiIndex pops the reaction bubble too.
+	 */
+	void ServerSay(EKGChatChannel Channel, const FString& Text, uint8 Flags, int32 EmojiIndex = INDEX_NONE);
 	/** Authority: Blackmailer hook - no written chat until cleared (reactions still allowed). */
 	void SetSilenced(bool bInSilenced);
 	bool IsSilenced() const { return bSilenced; }

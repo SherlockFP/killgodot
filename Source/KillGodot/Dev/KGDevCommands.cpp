@@ -23,6 +23,9 @@
 #include "Emote/KGEmoteCatalog.h"
 #include "Emote/KGEmoteComponent.h"
 #include "Emote/KGEmoteSubsystem.h"
+#include "Voice/KGVoiceCommands.h"
+#include "Voice/KGVoiceComponent.h"
+#include "Voice/KGVoiceSubsystem.h"
 #include "Fishing/KGFishingComponent.h"
 #include "Fishing/KGFishingTypes.h"
 #include "Fishing/KGFishMarket.h"
@@ -965,6 +968,133 @@ namespace KGDevPrivate
 		    {
 			    UKGChoreComponent::SetAutoWin(BoolArg(A, 0, UKGChoreComponent::IsAutoWin()));
 			    return FKGDevResult::Ok(UKGChoreComponent::IsAutoWin() ? TEXT("Chore auto-win on") : TEXT("Chore auto-win off"));
+		    });
+
+		// ---- Voice / barks / partner emotes (SPRINT-023) ----
+		Add(TEXT("Voice.Tone"), TEXT("[0|1]"), TEXT("Transmit a synthetic 220 Hz tone from this machine (routing / mouth test without a microphone)."), Local,
+		    [](const FKGDevContext& C, const TArray<FString>& A)
+		    {
+			    UKGVoiceComponent* Voice = UKGVoiceComponent::FindForController(C.Requester);
+			    KG_DEV_REQUIRE(Voice, TEXT("No voice relay for this player yet"));
+			    const bool bOn = BoolArg(A, 0, !Voice->IsSyntheticToneOn());
+			    Voice->SetSyntheticTone(bOn);
+			    Voice->SetTransmitting(bOn);
+			    return FKGDevResult::Ok(bOn ? TEXT("Voice tone ON (kg.Voice.Tone 0 stops)") : TEXT("Voice tone off"));
+		    });
+		Add(TEXT("Voice.Mute"), TEXT("<Player> [0|1]"), TEXT("Mute / unmute a player's voice and text on this machine (same list as /mute)."), Local,
+		    [](const FKGDevContext& C, const TArray<FString>& A)
+		    {
+			    UKGChatComponent* Chat = UKGChatComponent::FindForController(C.Requester);
+			    KG_DEV_REQUIRE(Chat && A.IsValidIndex(0), TEXT("Usage: Voice.Mute <Player> [0|1]"));
+			    const AKGPlayerState* PS = FindPlayer(C.World, A[0]);
+			    KG_DEV_REQUIRE(PS, FString::Printf(TEXT("No player '%s'"), *A[0]));
+			    const bool bMute = BoolArg(A, 1, !Chat->IsMuted(PS->GetPlayerId()));
+			    Chat->SetMuted(PS->GetPlayerId(), bMute);
+			    return FKGDevResult::Ok(FString::Printf(TEXT("%s %s"), *PS->GetPlayerName(), bMute ? TEXT("muted") : TEXT("unmuted")));
+		    });
+		Add(TEXT("Bark"), TEXT("<Id|list>"), TEXT("Say a voice command (Z/X/C radial line) through the relay: bark audio, mouth, gesture, NEAR line."), Local,
+		    [](const FKGDevContext& C, const TArray<FString>& A)
+		    {
+			    const FString Arg = A.IsValidIndex(0) ? A[0] : TEXT("list");
+			    if (Arg.Equals(TEXT("list"), ESearchCase::IgnoreCase))
+			    {
+				    FString Line;
+				    for (const FKGVoiceMenuDef& Menu : FKGVoiceCommandCatalog::GetMenus())
+				    {
+					    Line += FString::Printf(TEXT("[%s %s] "), *Menu.Key.ToString(), *Menu.Title.ToString());
+					    for (const int32 Index : Menu.Commands)
+					    {
+						    if (const FKGVoiceCommandDef* Def = FKGVoiceCommandCatalog::Get(Index))
+						    {
+							    Line += Def->Id.ToString() + TEXT(" ");
+						    }
+					    }
+				    }
+				    UE_LOG(LogKillGodot, Log, TEXT("Voice commands: %s"), *Line);
+				    return FKGDevResult::Ok(FString::Printf(TEXT("%d voice commands (see log)"), FKGVoiceCommandCatalog::GetAll().Num()));
+			    }
+			    const FKGVoiceCommandDef* Def = FKGVoiceCommandCatalog::Find(FName(*Arg));
+			    KG_DEV_REQUIRE(Def, FString::Printf(TEXT("Unknown voice command '%s' (kg.Bark list)"), *Arg));
+			    UKGVoiceSubsystem::RequestBark(C.Requester, Def->Id);
+			    return FKGDevResult::Ok(FString::Printf(TEXT("Bark %s requested"), *Def->Id.ToString()));
+		    });
+		Add(TEXT("Bark.Bots"), TEXT("<Id|all>"), TEXT("Every bot says a voice command (all = a different line each); ignores the rate limit."), Server,
+		    [](const FKGDevContext& C, const TArray<FString>& A)
+		    {
+			    const AGameStateBase* GS = C.World ? C.World->GetGameState() : nullptr;
+			    KG_DEV_REQUIRE(GS, TEXT("No game state"));
+			    const FString Arg = A.IsValidIndex(0) ? A[0] : TEXT("all");
+			    const bool bAll = Arg.Equals(TEXT("all"), ESearchCase::IgnoreCase);
+			    const FKGVoiceCommandDef* Def = FKGVoiceCommandCatalog::Find(FName(*Arg));
+			    KG_DEV_REQUIRE(bAll || Def, FString::Printf(TEXT("Unknown voice command '%s' (kg.Bark list)"), *Arg));
+			    const TArray<FKGVoiceCommandDef>& All = FKGVoiceCommandCatalog::GetAll();
+			    int32 Done = 0;
+			    int32 Next = 0;
+			    for (APlayerState* PS : GS->PlayerArray)
+			    {
+				    UKGVoiceComponent* Voice = PS && PS->IsABot() ? UKGVoiceComponent::FindForPlayer(PS) : nullptr;
+				    if (Voice && Voice->ServerSayBark(bAll ? All[Next++ % All.Num()].Id : Def->Id, true))
+				    {
+					    ++Done;
+				    }
+			    }
+			    return FKGDevResult::Ok(FString::Printf(TEXT("%d bots barked"), Done));
+		    });
+		Add(TEXT("Mouth.Pin"), TEXT("<-1|0..1>"), TEXT("Pin every mouth to an opening for screenshots (-1 = voice / bark driven); sets kg.Mouth.Force."), Local,
+		    [](const FKGDevContext& C, const TArray<FString>& A)
+		    {
+			    IConsoleVariable* CVar = IConsoleManager::Get().FindConsoleVariable(TEXT("kg.Mouth.Force"));
+			    KG_DEV_REQUIRE(CVar, TEXT("kg.Mouth.Force missing"));
+			    const float Value = A.IsValidIndex(0) ? FCString::Atof(*A[0]) : -1.0f;
+			    CVar->Set(Value, ECVF_SetByConsole);
+			    return FKGDevResult::Ok(FString::Printf(TEXT("Mouths %s"), Value < 0.0f ? TEXT("voice driven") : *FString::Printf(TEXT("pinned at %.2f"), Value)));
+		    });
+		Add(TEXT("Partner"), TEXT("<highfive|handshake|rps|danceoff|accept|cancel>"),
+		    TEXT("Offer a partner emote (a nearby player accepts with E), accept the nearest offer, or cancel."), Local,
+		    [](const FKGDevContext& C, const TArray<FString>& A)
+		    {
+			    UKGEmoteComponent* Emote = C.Requester ? UKGEmoteComponent::FindForPlayer(C.Requester->PlayerState) : nullptr;
+			    KG_DEV_REQUIRE(Emote, TEXT("No body"));
+			    const FString Arg = A.IsValidIndex(0) ? A[0] : TEXT("highfive");
+			    if (Arg.Equals(TEXT("accept"), ESearchCase::IgnoreCase))
+			    {
+				    return Emote->TryAcceptNearbyOffer() ? FKGDevResult::Ok(TEXT("Accepting the nearest offer"))
+				                                       : FKGDevResult::Fail(TEXT("Nobody within 3 m is offering a partner emote"));
+			    }
+			    if (Arg.Equals(TEXT("cancel"), ESearchCase::IgnoreCase))
+			    {
+				    Emote->RequestPartnerCancel();
+				    return FKGDevResult::Ok(TEXT("Partner emote cancelled"));
+			    }
+			    const FKGPartnerEmoteDef* Def = FKGPartnerCatalog::Find(FName(*Arg));
+			    KG_DEV_REQUIRE(Def, FString::Printf(TEXT("Unknown partner emote '%s' (highfive|handshake|rps|danceoff)"), *Arg));
+			    Emote->RequestPartnerOffer(Def->Id);
+			    return FKGDevResult::Ok(FString::Printf(TEXT("Offering %s - a partner presses E within %.0f s"), *Def->DisplayName.ToString(), FKGPartnerRules::OfferSeconds));
+		    });
+		Add(TEXT("Partner.Bots"), TEXT("<highfive|handshake|rps|danceoff>"), TEXT("Two bots perform a partner emote next to each other (renders / smoke)."), Server,
+		    [](const FKGDevContext& C, const TArray<FString>& A)
+		    {
+			    const AGameStateBase* GS = C.World ? C.World->GetGameState() : nullptr;
+			    KG_DEV_REQUIRE(GS, TEXT("No game state"));
+			    const FKGPartnerEmoteDef* Def = FKGPartnerCatalog::Find(FName(*(A.IsValidIndex(0) ? A[0] : TEXT("highfive"))));
+			    KG_DEV_REQUIRE(Def, TEXT("Unknown partner emote (highfive|handshake|rps|danceoff)"));
+			    TArray<AKGCharacter*> Bots;
+			    for (APlayerState* PS : GS->PlayerArray)
+			    {
+				    if (AKGCharacter* Bot = PS && PS->IsABot() ? CharacterOf(PS) : nullptr; Bot && !Bot->IsDead())
+				    {
+					    Bots.Add(Bot);
+				    }
+			    }
+			    KG_DEV_REQUIRE(Bots.Num() >= 2, TEXT("Need two living bots (kg.Bot.Add 2, kg.Bot.AI 0)"));
+			    AKGCharacter* A0 = Bots[0];
+			    AKGCharacter* B0 = Bots[1];
+			    B0->TeleportTo(A0->GetActorLocation() + A0->GetActorForwardVector() * 150.0f, A0->GetActorRotation(), false, true);
+			    const EKGEmoteReject Offer = A0->GetEmote()->ServerPartnerOffer(Def->Id, true);
+			    KG_DEV_REQUIRE(Offer == EKGEmoteReject::None, FString::Printf(TEXT("Offer refused: %s"), *StaticEnum<EKGEmoteReject>()->GetNameStringByValue(int64(Offer))));
+			    const EKGEmoteReject Accept = B0->GetEmote()->ServerPartnerAccept(A0->GetEmote());
+			    KG_DEV_REQUIRE(Accept == EKGEmoteReject::None, FString::Printf(TEXT("Accept refused: %s"), *StaticEnum<EKGEmoteReject>()->GetNameStringByValue(int64(Accept))));
+			    return FKGDevResult::Ok(FString::Printf(TEXT("%s and %s: %s"), *A0->GetName(), *B0->GetName(), *Def->DisplayName.ToString()));
 		    });
 
 		// ---- Emotes ----

@@ -9,7 +9,7 @@ Blender gets (x, -y) at the very end. Two grids sample the same height():
   - outer 640 m at 2.5 m step, faces fully inside the core rectangle dropped (SM_KG_TerrainV2_Outer)
 Core seam vertices are re-interpolated from the 2.5 m samples, so the two grids meet without cracks.
 
-Height priority (first match wins): kit stairs (tread line - 5 cm) and ramps (linear) > brook bed / pond > building
+Height priority (first match wins): kit stairs (tread line - 5 cm; - 28 cm under the flights) and ramps (linear) > brook bed / pond > building
 pads on slope land > flat terraces > slope terraces (profile + mounds + gentle noise, blended toward flat neighbours)
 > natural land (meadow + mountain ring, blended toward terraces) ; sea (outside coast.land_polygon), the round basin
 and the mole override below the land.
@@ -191,6 +191,23 @@ def stair_profile(s):
     knots.append((length, zhi))
     return dict(lo=lo, hi=hi, zlo=zlo, zhi=zhi, length=length, u=u, knots=knots, risers=risers, land=land,
                 flights=flights)
+
+
+# kit riser piece (Stairs_Exterior_Straight_*, measured): tread tops (m over its base) and the riser positions along
+# the flight from the piece's foot; the next 1 m module adds the last 0.18 m riser
+TREAD_S = [0.465, 0.852, 1.223, 1.62]
+TREAD_Z = [0.0, 0.22, 0.416, 0.596, 0.805]
+
+
+def tread_top(P, s):
+    """Visual tread top of a kit stair at arc length s (landings / lead / tail: the knot height)."""
+    z = np.interp(s, [k[0] for k in P["knots"]], [k[1] for k in P["knots"]])
+    tz = np.array(TREAD_Z)
+    for s0, zb in P["risers"]:
+        m = (s >= s0) & (s < s0 + RISER_RUN)
+        if m.any():
+            z[m] = zb + tz[np.searchsorted(TREAD_S, s[m] - s0, side="right")]
+    return z
 
 
 # ================================================================================================ height field
@@ -400,7 +417,12 @@ class Field:
             sel = (np.abs(ay) <= hw) & (ax >= -0.3) & (ax <= length + 0.3)
             ks = [k[0] for k in P["knots"]]
             kz = [k[1] for k in P["knots"]]
-            tz = np.interp(ax, ks, kz) - 0.05
+            # under the kit treads the ground follows the lower envelope of the real tread profile (the tread tops of
+            # each 1 m piece, 0.5 m back = one grid cell), 5 cm down, so no grid triangle pokes through a tread
+            # (stair_fit "sunk" rule); the tiles + hidden boxes of the landings sit over the dip after each flight.
+            # The 0.3 m margin beside the pieces keeps the nosing line - 5 cm.
+            env = tread_top(P, ax - 0.5) - 0.05
+            tz = np.where(np.abs(ay) <= s["width"] / 2.0, env, np.interp(ax, ks, kz) - 0.05)
             zb, kb, cb = z[bb], kind[bb], corridor[bb]
             zb = np.where(sel, tz, zb)
             kb[sel] = 4
@@ -425,6 +447,24 @@ class Field:
         bs = L["basin"]
         rb = np.hypot(px - bs["center"][0], py - bs["center"][1])
         zsea = np.where(rb <= bs["radius"], np.minimum(zsea, bs["floor_z"]), zsea)
+        # rocky shelf under a low shore (user 2026-09-26): a cliff whose shoulder has a "shelf" gets a shallow, wobbly
+        # rock ledge at its foot (shelf z) falling to the sea bed over width_m, so the face above the water stays low
+        # and the shore boulders sit half out of the water instead of on a 3 m deep dredged floor.
+        self.shelf_k = np.zeros(shape)
+        for c in L["cliffs"]:
+            sf_ = (c.get("shoulder") or {}).get("shelf")
+            if not sf_:
+                continue
+            Wm = sf_["width_m"]
+            bb = bbox_mask(px, py, c["points"], Wm + 2.0)
+            d, s_at, _, _, total = polyline_info(px[bb], py[bb], c["points"])
+            wob = fbm(px[bb] * 0.7 + 3.0, py[bb] * 0.7 + 9.0, 3.0, 2, seed=23)
+            sh = c["shoulder"]
+            fade = smooth(0.0, sh["fade_m"], s_at) * smooth(0.0, sh.get("fade_end_m", sh["fade_m"]), total - s_at)
+            k = (1.0 - smooth(1.0, Wm, d + 1.5 * wob)) * fade
+            zb = zsea[bb]
+            zsea[bb] = np.maximum(zb, zb + (sf_["z"] + 0.5 * wob - zb) * k)
+            self.shelf_k[bb] = np.maximum(self.shelf_k[bb], k)
         # mole: 3.5 m walk at 2.5, 1:1 armour down to the sea bed
         mo = L["mole"]
         bb = bbox_mask(px, py, mo["points"], mo["width"] + 6.0)
@@ -478,6 +518,11 @@ class Field:
         # raise the rim toward the grid edge on the land sides so no sea shows past the mountains
         rim = smooth(235.0, 318.0, np.maximum(np.abs(px), -py)) * (1.0 - smooth(40.0, 90.0, py))
         h = h + rim * (30.0 + 12.0 * fbm(px - 70, py, 50.0, 3, seed=4))
+        # user 2026-09-26 ("keep this place LOWER"): the east coast past Lighthouse Point is a low shore too, not a
+        # 40 m sheer sea cliff seen from the point; the land rises gently inland (~20 deg) to the mountain ring
+        east = smooth(25.0, 80.0, py) * smooth(112.0, 140.0, px) * (1.0 - smooth(250.0, 290.0, px))
+        low = 3.5 + 0.35 * np.maximum(0.0, 88.0 - py)
+        h = h + (np.minimum(h, low) - h) * east
         return h
 
     def colours(self):
@@ -532,6 +577,7 @@ class Field:
         paint(sand, SAND, smooth(1.4, 0.4, z))
         paint(sea, WET_SAND, 1.0)
         paint(sea & (z < -4.0), (0.55, 0.52, 0.40), smooth(-4.0, -9.0, z))
+        paint(sea, ROCK_DARK, 0.85 * self.shelf_k)          # the rocky shelf under a low shore
         paint(self.stream_d < 2.2, WET_SAND, 1.0 - smooth(1.6, 2.2, self.stream_d))
         paint(self.mole_d < 1.9, FLAGS, 1.0)
         # slopes + cliffs: rock

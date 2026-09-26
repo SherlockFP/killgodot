@@ -4,8 +4,12 @@
 #include "Character/KGBodyAnimInstance.h"
 #include "Character/KGCharacter.h"
 #include "Chat/KGChatComponent.h"
+#include "Chat/KGEmoji.h"
 #include "Components/SkeletalMeshComponent.h"
+#include "Core/KGGameMode.h"
 #include "Core/KGGameState.h"
+#include "EngineUtils.h"
+#include "GameFramework/PlayerController.h"
 #include "Core/KGPlayerState.h"
 #include "Engine/World.h"
 #include "GameFramework/CharacterMovementComponent.h"
@@ -68,6 +72,7 @@ UKGEmoteComponent::UKGEmoteComponent()
 	PrimaryComponentTick.bStartWithTickEnabled = true;
 	SetIsReplicatedByDefault(true);
 	Limiter = FKGEmoteRules::MakeLimiter();
+	PartnerLimiter = FKGEmoteRules::MakeLimiter();
 }
 
 void UKGEmoteComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
@@ -76,6 +81,7 @@ void UKGEmoteComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Ou
 	FDoRepLifetimeParams Params;
 	Params.bIsPushBased = true;
 	DOREPLIFETIME_WITH_PARAMS_FAST(UKGEmoteComponent, Playback, Params);
+	DOREPLIFETIME_WITH_PARAMS_FAST(UKGEmoteComponent, Partner, Params);
 }
 
 UKGEmoteComponent* UKGEmoteComponent::FindForPlayer(const APlayerState* PlayerState)
@@ -232,6 +238,10 @@ void UKGEmoteComponent::ServerStop(EKGEmoteStop Reason)
 	LastStop = Reason;
 	Character->ForceNetUpdate();
 	SyncPresentation();
+	if (Partner.IsActive() && FKGPartnerRules::StopEndsPartner(Reason))
+	{
+		ServerPartnerEnd(Reason);   // walking off, attacking, being hit or dying breaks the pairing for both
+	}
 }
 
 void UKGEmoteComponent::ServerStopEmote_Implementation(EKGEmoteStop Reason)
@@ -528,9 +538,445 @@ void UKGEmoteComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 	if (GetOwner() && GetOwner()->HasAuthority())
 	{
 		TickServer(DeltaTime);
+		TickPartnerServer(DeltaTime);
 	}
 	TickPresentation(DeltaTime);
 	TickOwnerView(DeltaTime);
+}
+
+// ---- partner emotes (SPRINT-023) ----------------------------------------------------------------------------------
+
+namespace KGEmotePrivate
+{
+	uint64 MatchSeedOf(const UWorld* World)
+	{
+		const AKGGameMode* GM = World ? World->GetAuthGameMode<AKGGameMode>() : nullptr;
+		const int64 Seed = GM ? GM->GetMatchSeed() : 0;
+		return Seed != 0 ? static_cast<uint64>(Seed) : 0x4B47504152544E52ull;   // "KGPARTNR": deterministic pre-match too
+	}
+
+	const TCHAR* StageName(uint8 Stage)
+	{
+		switch (static_cast<EKGPartnerStage>(Stage))
+		{
+		case EKGPartnerStage::Offering: return TEXT("Offering");
+		case EKGPartnerStage::Playing: return TEXT("Playing");
+		case EKGPartnerStage::Result: return TEXT("Result");
+		default: return TEXT("None");
+		}
+	}
+}
+
+const FKGPartnerEmoteDef* UKGEmoteComponent::GetPartnerDef() const
+{
+	return Partner.IsActive() ? FKGPartnerCatalog::Get(Partner.GetKind()) : nullptr;
+}
+
+void UKGEmoteComponent::SetPartnerState(const FKGPartnerState& NewState)
+{
+	Partner = NewState;
+	MARK_PROPERTY_DIRTY_FROM_NAME(UKGEmoteComponent, Partner, this);
+	if (AActor* Owner = GetOwner())
+	{
+		Owner->ForceNetUpdate();
+	}
+	OnRep_Partner();
+}
+
+void UKGEmoteComponent::RequestPartnerOffer(FName IdOrAlias)
+{
+	if (IsOwnerView() || (GetOwner() && GetOwner()->HasAuthority() && GetCharacter() && GetCharacter()->IsLocallyControlled()))
+	{
+		ServerRequestPartnerOffer(IdOrAlias);
+	}
+}
+
+void UKGEmoteComponent::RequestPartnerCancel()
+{
+	if (Partner.IsActive())
+	{
+		ServerRequestPartnerCancel();
+	}
+}
+
+UKGEmoteComponent* UKGEmoteComponent::FindNearbyOffer(const AKGCharacter* Me)
+{
+	if (!Me || !Me->GetWorld())
+	{
+		return nullptr;
+	}
+	UKGEmoteComponent* Best = nullptr;
+	float BestDist = TNumericLimits<float>::Max();
+	for (TActorIterator<AKGCharacter> It(Me->GetWorld()); It; ++It)
+	{
+		UKGEmoteComponent* Other = *It != Me ? It->GetEmote() : nullptr;
+		if (!Other || Other->Partner.GetStage() != EKGPartnerStage::Offering || Other->Partner.Partner || It->IsDead())
+		{
+			continue;
+		}
+		if (!FKGPartnerRules::WithinAcceptRadius(It->GetActorLocation(), Me->GetActorLocation()))
+		{
+			continue;
+		}
+		const float D = static_cast<float>(FVector::DistSquared(It->GetActorLocation(), Me->GetActorLocation()));
+		if (D < BestDist)
+		{
+			BestDist = D;
+			Best = Other;
+		}
+	}
+	return Best;
+}
+
+bool UKGEmoteComponent::TryAcceptNearbyOffer()
+{
+	AKGCharacter* Me = GetCharacter();
+	if (!Me || !Me->IsLocallyControlled() || Partner.IsActive())
+	{
+		return false;
+	}
+	UKGEmoteComponent* Offer = FindNearbyOffer(Me);
+	if (!Offer || !Offer->GetCharacter())
+	{
+		return false;
+	}
+	ServerRequestPartnerAccept(Offer->GetCharacter()->GetPlayerState());
+	return true;
+}
+
+void UKGEmoteComponent::ServerRequestPartnerOffer_Implementation(FName IdOrAlias)
+{
+	ServerPartnerOffer(IdOrAlias);
+}
+
+void UKGEmoteComponent::ServerRequestPartnerAccept_Implementation(APlayerState* Offerer)
+{
+	ServerPartnerAccept(FindForPlayer(Offerer));
+}
+
+void UKGEmoteComponent::ServerRequestPartnerCancel_Implementation()
+{
+	ServerPartnerEnd(EKGEmoteStop::Requested);
+}
+
+EKGEmoteReject UKGEmoteComponent::ServerPartnerOffer(FName IdOrAlias, bool bIgnoreRateLimit)
+{
+	AKGCharacter* Character = GetCharacter();
+	UWorld* World = GetWorld();
+	if (!Character || !World || !Character->HasAuthority())
+	{
+		return EKGEmoteReject::NoBody;
+	}
+	const FKGPartnerEmoteDef* Def = FKGPartnerCatalog::Find(IdOrAlias);
+	const FKGEmoteDef* ClipA = Def ? FKGEmoteCatalog::Find(Def->EmoteA) : nullptr;
+	if (!Def || !ClipA)
+	{
+		return EKGEmoteReject::Unknown;
+	}
+	if (Partner.IsActive())
+	{
+		ServerPartnerEnd(EKGEmoteStop::Replaced);
+	}
+	const AKGGameState* GS = World->GetGameState<AKGGameState>();
+	const EKGPhase Phase = GS ? GS->GetPhase() : EKGPhase::Lobby;
+	const float Remaining = GS ? GS->GetPhaseRemaining() : 0.0f;
+	const FKGChatParticipant Who = UKGChatComponent::MakeParticipant(Character->GetPlayerState());
+	EKGEmoteReject Reject = FKGEmoteRules::CanStart(*ClipA, Who, MakeBodyState(), Phase, Remaining);
+	if (Reject == EKGEmoteReject::None && !bIgnoreRateLimit &&
+	    PartnerLimiter.TryConsume(World->GetRealTimeSeconds(), FString()) != EKGChatReject::None)
+	{
+		Reject = EKGEmoteReject::RateLimited;
+	}
+	if (Reject != EKGEmoteReject::None)
+	{
+		UE_LOG(LogKillGodot, Log, TEXT("KG_PARTNER_REJECT %s pawn=%s kind=%s reason=%s"), KGEmotePrivate::MachineName(World),
+		       *Character->GetName(), *Def->Id.ToString(), *StaticEnum<EKGEmoteReject>()->GetNameStringByValue(int64(Reject)));
+		return Reject;
+	}
+	FKGPartnerState S;
+	S.Kind = static_cast<uint8>(Def->Kind);
+	S.Stage = static_cast<uint8>(EKGPartnerStage::Offering);
+	S.Serial = static_cast<uint8>(Partner.Serial + 1);
+	S.bInitiator = 1;
+	PartnerElapsed = 0.0f;
+	SetPartnerState(S);
+	if (UKGChatComponent* Chat = UKGChatComponent::FindForPlayer(Character->GetPlayerState()))
+	{
+		Chat->ServerSay(EKGChatChannel::Nearby, FString::Printf(TEXT("offers a %s (E to accept)"), *Def->DisplayName.ToString().ToLower()),
+		                EKGChatFlags::Action, FKGEmoji::Find(Def->Emoji));
+	}
+	UE_LOG(LogKillGodot, Log, TEXT("KG_PARTNER_OFFER %s pawn=%s kind=%s serial=%d"), KGEmotePrivate::MachineName(World),
+	       *Character->GetName(), *Def->Id.ToString(), S.Serial);
+	return EKGEmoteReject::None;
+}
+
+EKGEmoteReject UKGEmoteComponent::ServerPartnerAccept(UKGEmoteComponent* Offerer)
+{
+	AKGCharacter* Me = GetCharacter();
+	AKGCharacter* Them = Offerer ? Offerer->GetCharacter() : nullptr;
+	UWorld* World = GetWorld();
+	if (!Me || !World || !Me->HasAuthority())
+	{
+		return EKGEmoteReject::NoBody;
+	}
+	const FKGPartnerEmoteDef* Def = Offerer ? Offerer->GetPartnerDef() : nullptr;
+	const FKGEmoteDef* ClipB = Def ? FKGEmoteCatalog::Find(Def->EmoteB) : nullptr;
+	if (!Them || !Def || !ClipB || Offerer->Partner.GetStage() != EKGPartnerStage::Offering || Offerer->Partner.Partner ||
+	    Offerer == this)
+	{
+		return EKGEmoteReject::Unknown;
+	}
+	if (!FKGPartnerRules::WithinAcceptRadius(Them->GetActorLocation(), Me->GetActorLocation()))
+	{
+		UE_LOG(LogKillGodot, Log, TEXT("KG_PARTNER_REJECT %s pawn=%s kind=%s reason=TooFar"), KGEmotePrivate::MachineName(World),
+		       *Me->GetName(), *Def->Id.ToString());
+		return EKGEmoteReject::Busy;
+	}
+	const AKGGameState* GS = World->GetGameState<AKGGameState>();
+	const EKGPhase Phase = GS ? GS->GetPhase() : EKGPhase::Lobby;
+	const float Remaining = GS ? GS->GetPhaseRemaining() : 0.0f;
+	const FKGChatParticipant Who = UKGChatComponent::MakeParticipant(Me->GetPlayerState());
+	FKGEmoteBodyState Body = MakeBodyState();
+	Body.Speed = 0.0f;   // we snap the acceptor into place below
+	const EKGEmoteReject Reject = FKGEmoteRules::CanStart(*ClipB, Who, Body, Phase, Remaining);
+	if (Reject != EKGEmoteReject::None)
+	{
+		UE_LOG(LogKillGodot, Log, TEXT("KG_PARTNER_REJECT %s pawn=%s kind=%s reason=%s"), KGEmotePrivate::MachineName(World),
+		       *Me->GetName(), *Def->Id.ToString(), *StaticEnum<EKGEmoteReject>()->GetNameStringByValue(int64(Reject)));
+		return Reject;
+	}
+	if (Partner.IsActive())
+	{
+		ServerPartnerEnd(EKGEmoteStop::Replaced);
+	}
+	// Align: the acceptor steps to Distance in front of the offerer, both turn to face each other.
+	FVector MyLoc;
+	float TheirYaw;
+	float MyYaw;
+	FKGPartnerRules::Align(Them->GetActorLocation(), Me->GetActorLocation(), Def->Distance, MyLoc, TheirYaw, MyYaw);
+	auto Face = [](AKGCharacter* Char, float Yaw)
+	{
+		const FRotator Rot(0.0f, Yaw, 0.0f);
+		Char->SetActorRotation(Rot);
+		if (AController* C = Char->GetController())
+		{
+			C->SetControlRotation(Rot);
+			if (APlayerController* PC = Cast<APlayerController>(C))
+			{
+				PC->ClientSetRotation(Rot, false);
+			}
+		}
+	};
+	Me->TeleportTo(MyLoc, FRotator(0.0f, MyYaw, 0.0f), false, true);
+	Face(Me, MyYaw);
+	Face(Them, TheirYaw);
+
+	const uint8 Serial = Offerer->Partner.Serial;
+	uint8 Result = 0;
+	if (Def->Kind == EKGPartnerKind::RockPaperScissors)
+	{
+		Result = FKGPartnerRules::RollRps(KGEmotePrivate::MatchSeedOf(World), Serial);
+	}
+	else if (Def->Kind == EKGPartnerKind::DanceOff)
+	{
+		Result = FKGPartnerRules::RollDanceOff(KGEmotePrivate::MatchSeedOf(World), Serial);
+	}
+	FKGPartnerState Mine;
+	Mine.Kind = static_cast<uint8>(Def->Kind);
+	Mine.Stage = static_cast<uint8>(EKGPartnerStage::Playing);
+	Mine.Partner = Them->GetPlayerState();
+	Mine.Serial = Serial;
+	Mine.Result = Result;
+	Mine.bInitiator = 0;
+	FKGPartnerState Theirs = Mine;
+	Theirs.Partner = Me->GetPlayerState();
+	Theirs.bInitiator = 1;
+	PartnerElapsed = 0.0f;
+	Offerer->PartnerElapsed = 0.0f;
+	SetPartnerState(Mine);
+	Offerer->SetPartnerState(Theirs);
+	Offerer->ServerTryStart(Def->EmoteA, true);
+	ServerTryStart(Def->EmoteB, true);
+	UE_LOG(LogKillGodot, Log, TEXT("KG_PARTNER_START %s kind=%s a=%s b=%s serial=%d dist=%.0f result=%d"), KGEmotePrivate::MachineName(World),
+	       *Def->Id.ToString(), *Them->GetName(), *Me->GetName(), Serial, FVector::Dist2D(Them->GetActorLocation(), Me->GetActorLocation()), Result);
+	return EKGEmoteReject::None;
+}
+
+void UKGEmoteComponent::ServerPartnerEnd(EKGEmoteStop Reason)
+{
+	if (!GetOwner() || !GetOwner()->HasAuthority() || !Partner.IsActive())
+	{
+		return;
+	}
+	UKGEmoteComponent* Other = Partner.Partner ? FindForPlayer(Partner.Partner) : nullptr;
+	const FKGPartnerEmoteDef* Def = GetPartnerDef();
+	UE_LOG(LogKillGodot, Log, TEXT("KG_PARTNER_STOP %s pawn=%s kind=%s stage=%s reason=%s"), KGEmotePrivate::MachineName(GetWorld()),
+	       *GetNameSafe(GetOwner()), Def ? *Def->Id.ToString() : TEXT("?"), KGEmotePrivate::StageName(Partner.Stage),
+	       KGEmotePrivate::StopName(Reason));
+	const bool bWasPlaying = Partner.GetStage() == EKGPartnerStage::Playing;
+	FKGPartnerState Cleared;
+	Cleared.Serial = Partner.Serial;
+	SetPartnerState(Cleared);
+	if (bWasPlaying && Playback.Emote != 0)
+	{
+		ServerStop(EKGEmoteStop::Requested);   // our own clip; Requested does not recurse into the pairing (already cleared)
+	}
+	const APlayerState* MyPS = GetCharacter() ? GetCharacter()->GetPlayerState() : nullptr;
+	if (Other && Other->Partner.IsActive() && Other->Partner.Partner == MyPS)
+	{
+		Other->ServerPartnerEnd(Reason);
+	}
+}
+
+void UKGEmoteComponent::PartnerRevealResult()
+{
+	const FKGPartnerEmoteDef* Def = GetPartnerDef();
+	AKGCharacter* Me = GetCharacter();
+	if (!Def || !Me || !Partner.bInitiator)
+	{
+		return;
+	}
+	if (UKGChatComponent* Chat = UKGChatComponent::FindForPlayer(Me->GetPlayerState()))
+	{
+		const TCHAR* Emoji = Def->Kind == EKGPartnerKind::RockPaperScissors ? TEXT("exclamation") : TEXT("crown");
+		Chat->ServerSay(EKGChatChannel::Nearby, GetPartnerResultText(), EKGChatFlags::Action, FKGEmoji::Find(Emoji));
+	}
+}
+
+void UKGEmoteComponent::TickPartnerServer(float DeltaTime)
+{
+	if (!Partner.IsActive())
+	{
+		return;
+	}
+	const FKGPartnerEmoteDef* Def = GetPartnerDef();
+	AKGCharacter* Me = GetCharacter();
+	if (!Def || !Me || Me->IsDead())
+	{
+		ServerPartnerEnd(EKGEmoteStop::Died);
+		return;
+	}
+	PartnerElapsed += DeltaTime;
+	switch (Partner.GetStage())
+	{
+	case EKGPartnerStage::Offering:
+		if (PartnerElapsed >= FKGPartnerRules::OfferSeconds)
+		{
+			ServerPartnerEnd(EKGEmoteStop::Finished);
+		}
+		break;
+	case EKGPartnerStage::Playing:
+	{
+		AKGCharacter* Them = Partner.Partner ? Cast<AKGCharacter>(Partner.Partner->GetPawn()) : nullptr;
+		if (!Them || Them->IsDead())
+		{
+			ServerPartnerEnd(EKGEmoteStop::Died);
+			return;
+		}
+		if (Partner.bInitiator && PartnerElapsed >= Def->PlaySeconds)
+		{
+			UKGEmoteComponent* Other = FindForPlayer(Partner.Partner);
+			if (Def->IsResolved())
+			{
+				FKGPartnerState S = Partner;
+				S.Stage = static_cast<uint8>(EKGPartnerStage::Result);
+				PartnerElapsed = 0.0f;
+				SetPartnerState(S);
+				if (Other && Other->Partner.IsActive())
+				{
+					FKGPartnerState O = Other->Partner;
+					O.Stage = S.Stage;
+					Other->PartnerElapsed = 0.0f;
+					Other->SetPartnerState(O);
+				}
+				PartnerRevealResult();
+			}
+			else
+			{
+				ServerPartnerEnd(EKGEmoteStop::Finished);
+			}
+		}
+		break;
+	}
+	case EKGPartnerStage::Result:
+		if (Partner.bInitiator && PartnerElapsed >= Def->ResultSeconds)
+		{
+			ServerPartnerEnd(EKGEmoteStop::Finished);
+		}
+		break;
+	default:
+		break;
+	}
+}
+
+void UKGEmoteComponent::OnRep_Partner()
+{
+	if (Partner.Serial == PartnerLoggedSerial && Partner.Stage == PartnerLoggedStage)
+	{
+		return;
+	}
+	PartnerLoggedSerial = Partner.Serial;
+	PartnerLoggedStage = Partner.Stage;
+	const FKGPartnerEmoteDef* Def = GetPartnerDef();
+	UE_LOG(LogKillGodot, Log, TEXT("KG_PARTNER_REP %s pawn=%s kind=%s stage=%s partner=%s serial=%d initiator=%d"),
+	       KGEmotePrivate::MachineName(GetWorld()), *GetNameSafe(GetOwner()), Def ? *Def->Id.ToString() : TEXT("none"),
+	       KGEmotePrivate::StageName(Partner.Stage), Partner.Partner ? *Partner.Partner->GetPlayerName() : TEXT("-"), Partner.Serial,
+	       Partner.bInitiator);
+	if (Def && Partner.GetStage() == EKGPartnerStage::Result && Partner.bInitiator)
+	{
+		// One line per machine per outcome: the network smoke compares them across host and client.
+		UE_LOG(LogKillGodot, Log, TEXT("KG_PARTNER_RESULT %s kind=%s serial=%d result=%d text=\"%s\""), KGEmotePrivate::MachineName(GetWorld()),
+		       *Def->Id.ToString(), Partner.Serial, Partner.Result, *GetPartnerResultText());
+	}
+}
+
+FString UKGEmoteComponent::GetPartnerResultText() const
+{
+	const FKGPartnerEmoteDef* Def = GetPartnerDef();
+	const AKGCharacter* Me = GetCharacter();
+	if (!Def || !Me || !Me->GetPlayerState())
+	{
+		return FString();
+	}
+	const FString A = Partner.bInitiator ? Me->GetPlayerState()->GetPlayerName() : (Partner.Partner ? Partner.Partner->GetPlayerName() : TEXT("?"));
+	const FString B = Partner.bInitiator ? (Partner.Partner ? Partner.Partner->GetPlayerName() : TEXT("?")) : Me->GetPlayerState()->GetPlayerName();
+	if (Def->Kind == EKGPartnerKind::RockPaperScissors)
+	{
+		uint8 PA, PB, Winner;
+		FKGPartnerRules::UnpackRps(Partner.Result, PA, PB, Winner);
+		if (Winner == 0)
+		{
+			return FString::Printf(TEXT("%s and %s both throw %s - a draw!"), *A, *B, FKGPartnerRules::RpsName(PA));
+		}
+		const FString& W = Winner == 1 ? A : B;
+		return FString::Printf(TEXT("%s: %s, %s: %s - %s wins!"), *A, FKGPartnerRules::RpsName(PA), *B, FKGPartnerRules::RpsName(PB), *W);
+	}
+	if (Def->Kind == EKGPartnerKind::DanceOff)
+	{
+		return FString::Printf(TEXT("dance-off: the crowd goes with %s!"), Partner.Result == 2 ? *B : *A);
+	}
+	return FString();
+}
+
+FText UKGEmoteComponent::GetPartnerPrompt(bool bForOwner) const
+{
+	const FKGPartnerEmoteDef* Def = GetPartnerDef();
+	if (!Def)
+	{
+		return FText::GetEmpty();
+	}
+	switch (Partner.GetStage())
+	{
+	case EKGPartnerStage::Offering:
+		return bForOwner ? FText::Format(NSLOCTEXT("KGEmote", "PartnerWaiting", "{0}: waiting for a partner (they press E)"), Def->DisplayName)
+		                 : FText::Format(NSLOCTEXT("KGEmote", "PartnerAccept", "E  {0}?"), Def->DisplayName);
+	case EKGPartnerStage::Playing:
+		return Def->DisplayName;
+	case EKGPartnerStage::Result:
+		return FText::FromString(GetPartnerResultText());
+	default:
+		return FText::GetEmpty();
+	}
 }
 
 void UKGEmoteComponent::EndPlay(const EEndPlayReason::Type EndPlayReason)

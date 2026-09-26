@@ -101,6 +101,7 @@ FKGSettingsSnapshot FKGSettingsSnapshot::Capture(const UKGGameUserSettings& Sett
 	Out.ViewmodelPreset = Settings.GetViewmodelPreset();
 	Out.bStreamerMode = Settings.GetStreamerMode();
 	Out.StreamerPeekKey = Settings.GetStreamerPeekKey();
+	Out.bOpenMic = Settings.GetOpenMic();
 	for (int32 Channel = 0; Channel < 4; ++Channel)
 	{
 		Out.Volumes[Channel] = Settings.GetVolume(SettingsChannel(Channel));
@@ -132,6 +133,7 @@ void FKGSettingsSnapshot::Restore(UKGGameUserSettings& Settings) const
 	Settings.SetViewmodelPreset(ViewmodelPreset);
 	Settings.SetStreamerMode(bStreamerMode);
 	Settings.SetStreamerPeekKey(StreamerPeekKey);
+	Settings.SetOpenMic(bOpenMic);
 	for (int32 Channel = 0; Channel < 4; ++Channel)
 	{
 		Settings.SetVolume(SettingsChannel(Channel), Volumes[Channel]);
@@ -145,7 +147,7 @@ bool FKGSettingsSnapshot::Matches(const FKGSettingsSnapshot& Other) const
 		!FMath::IsNearlyEqual(ResolutionScale, Other.ResolutionScale, 0.5f) ||
 		!FMath::IsNearlyEqual(Sensitivity, Other.Sensitivity, 0.001f) || bInvertY != Other.bInvertY ||
 		!FMath::IsNearlyEqual(FieldOfView, Other.FieldOfView, 0.01f) || ViewmodelPreset != Other.ViewmodelPreset ||
-		bStreamerMode != Other.bStreamerMode || StreamerPeekKey != Other.StreamerPeekKey)
+		bStreamerMode != Other.bStreamerMode || StreamerPeekKey != Other.StreamerPeekKey || bOpenMic != Other.bOpenMic)
 	{
 		return false;
 	}
@@ -863,6 +865,38 @@ TSharedRef<SWidget> SKGSettingsMenu::BuildAudioTab()
 	                                  static_cast<int32>(EKGVolumeChannel::Effects)));
 	SettingsAddRow(Box, MakeVolumeRow(LOCTEXT("Voice", "Voice chat"), LOCTEXT("VoiceDesc", "Other players' voices."),
 	                                  static_cast<int32>(EKGVolumeChannel::Voice)));
+
+	// SPRINT-023: proximity voice.
+	SettingsAddSection(Box, LOCTEXT("SectionVoice", "Voice chat"), false);
+	SettingsAddRow(Box,
+		SNew(SKGSettingRow)
+		.Label(LOCTEXT("OpenMic", "Open microphone"))
+		.Description(LOCTEXT("OpenMicDesc", "Transmit whenever you speak. Off: hold V to talk. Villagers hear you up to 25 m away, the whole square during meetings; ghosts only hear ghosts."))
+		[
+			SNew(SBox)
+			.HAlign(HAlign_Right)
+			[
+				SNew(SKGToggle)
+				.IsChecked_Lambda([]()
+				{
+					const UKGGameUserSettings* Settings = UKGGameUserSettings::Get();
+					return Settings && Settings->GetOpenMic();
+				})
+				.OnToggled_Lambda([this](bool bValue)
+				{
+					if (UKGGameUserSettings* Settings = UKGGameUserSettings::Get())
+					{
+						Settings->SetOpenMic(bValue);
+						OnLiveValueChanged();
+					}
+				})
+			]
+		]);
+	SettingsAddRow(Box, MakeKeysRow(LOCTEXT("PushToTalk", "Push to talk"), {FText::FromString(TEXT("V"))},
+	                                LOCTEXT("PushToTalkDesc", "Hold to speak (when the microphone is not open).")));
+	SettingsAddRow(Box, MakeKeysRow(LOCTEXT("VoiceCommands", "Voice commands"),
+	                                {FText::FromString(TEXT("Z")), FText::FromString(TEXT("X")), FText::FromString(TEXT("C"))},
+	                                LOCTEXT("VoiceCommandsDesc", "Hold for the Calls / Deduction / Social radials, flick or press 1-8, release to say it. /mute <name> silences a player's voice and text.")));
 	return MakePage(Box);
 }
 

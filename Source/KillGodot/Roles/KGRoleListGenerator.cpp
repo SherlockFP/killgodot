@@ -1,4 +1,5 @@
 #include "Roles/KGRoleListGenerator.h"
+#include "HAL/IConsoleManager.h"
 
 namespace KGRoles
 {
@@ -16,8 +17,21 @@ namespace KGRoles
 		return Info;
 	}
 
+	/** Pick weight + ability ids on top of Make (SPRINT-041). */
+	static FKGRoleInfo With(FKGRoleInfo Info, int32 Weight, TArray<FName> Abilities = {})
+	{
+		Info.Weight = Weight;
+		Info.AbilityIds = MoveTemp(Abilities);
+		return Info;
+	}
+
 	static const FName Jailor(TEXT("Jailor"));
 	static const FName Enforcer(TEXT("Enforcer"));
+	static const FName Trapper(TEXT("Trapper"));
+
+	static TAutoConsoleVariable<FString> CVarForceRole(
+		TEXT("kg.Roles.Force"), TEXT(""),
+		TEXT("Dev / balance runs: every generated role list contains this role (e.g. Trapper). Empty = off."));
 }
 
 const TArray<FKGRoleInfo>& FKGRoleListGenerator::GetDefaultCatalog()
@@ -50,9 +64,13 @@ const TArray<FKGRoleInfo>& FKGRoleListGenerator::GetDefaultCatalog()
 		Make(TEXT("BellRinger"), C::TownSupport, F::Town, 6, true),
 		Make(TEXT("Shepherd"), C::TownSupport, F::Town, 6),
 		Make(TEXT("PowderMaster"), C::TownSupport, F::Town, 5),
-		// Clockbreakers (13)
+		// Clockbreakers (14)
 		Make(TEXT("Clockmaster"), C::ClockbreakerLeader, F::Clockbreakers, 9, true),
-		Make(TEXT("Enforcer"), C::ClockbreakerKilling, F::Clockbreakers, 7),
+		// The killing slot (EKGSlotKind::Enforcer) picks Enforcer : Trapper = 2 : 1, so the Trapper shows up in about
+		// one match in three from 8 players (SPRINT-041 acceptance 4; KillGodot.Abilities.TrapperFrequency).
+		KGRoles::With(Make(TEXT("Enforcer"), C::ClockbreakerKilling, F::Clockbreakers, 7), 200),
+		KGRoles::With(Make(TEXT("Trapper"), C::ClockbreakerKilling, F::Clockbreakers, 7, true, 8), 100,
+		              {FName(TEXT("Mimic")), FName(TEXT("Snare")), FName(TEXT("Tripwire"))}),
 		Make(TEXT("Informant"), C::ClockbreakerSupport, F::Clockbreakers, 6),
 		Make(TEXT("Framer"), C::ClockbreakerSupport, F::Clockbreakers, 5),
 		Make(TEXT("Cleaner"), C::ClockbreakerSupport, F::Clockbreakers, 5),
@@ -189,7 +207,7 @@ bool FKGRoleListGenerator::SlotAccepts(EKGSlotKind Slot, const FKGRoleInfo& Role
 	case S::Clockmaster:
 		return Role.Category == C::ClockbreakerLeader;
 	case S::Enforcer:
-		return Role.RoleId == KGRoles::Enforcer;
+		return Role.RoleId == KGRoles::Enforcer || Role.RoleId == KGRoles::Trapper;
 	case S::RandomClockbreaker:
 		return Role.Category == C::ClockbreakerKilling || Role.Category == C::ClockbreakerSupport;
 	case S::SoloKiller:
@@ -235,7 +253,7 @@ void FKGRoleListGenerator::GetBalanceBand(int32 NumPlayers, int32& OutMin, int32
 }
 
 bool FKGRoleListGenerator::TryFill(int32 NumPlayers, const TArray<EKGSlotKind>& Slots, FKGRng& Rng,
-                                   const TArray<FKGRoleInfo>& Catalog, TArray<FName>& OutRoles)
+                                   const TArray<FKGRoleInfo>& Catalog, TArray<FName>& OutRoles, FName ForcedRole)
 {
 	OutRoles.Init(NAME_None, Slots.Num());
 
@@ -264,8 +282,27 @@ bool FKGRoleListGenerator::TryFill(int32 NumPlayers, const TArray<EKGSlotKind>& 
 	FillOrder.StableSort([&](int32 A, int32 B) { return Specificity(Slots[A]) < Specificity(Slots[B]); });
 
 	TArray<FName> Used;
+	// A forced role (kg.Roles.Force) takes the first slot, in fill order, that accepts it (min players ignored).
+	int32 ForcedSlot = INDEX_NONE;
+	if (const FKGRoleInfo* Forced = ForcedRole.IsNone() ? nullptr : FindRole(Catalog, ForcedRole))
+	{
+		for (const int32 SlotIndex : FillOrder)
+		{
+			if (SlotAccepts(Slots[SlotIndex], *Forced))
+			{
+				ForcedSlot = SlotIndex;
+				OutRoles[SlotIndex] = Forced->RoleId;
+				Used.Add(Forced->RoleId);
+				break;
+			}
+		}
+	}
 	for (const int32 SlotIndex : FillOrder)
 	{
+		if (SlotIndex == ForcedSlot)
+		{
+			continue;
+		}
 		TArray<const FKGRoleInfo*> Fresh;
 		TArray<const FKGRoleInfo*> Repeats;
 		for (const FKGRoleInfo& Role : Catalog)
@@ -292,14 +329,54 @@ bool FKGRoleListGenerator::TryFill(int32 NumPlayers, const TArray<EKGSlotKind>& 
 		{
 			return false;
 		}
-		const FKGRoleInfo* Pick = Pool[Rng.RandRange(0, Pool.Num() - 1)];
+		const FKGRoleInfo* Pick = PickWeighted(Pool, Rng);
 		OutRoles[SlotIndex] = Pick->RoleId;
 		Used.Add(Pick->RoleId);
 	}
 	return true;
 }
 
+const FKGRoleInfo* FKGRoleListGenerator::PickWeighted(const TArray<const FKGRoleInfo*>& Pool, FKGRng& Rng)
+{
+	if (Pool.Num() == 0)
+	{
+		return nullptr;
+	}
+	int64 Total = 0;
+	bool bEqual = true;
+	for (const FKGRoleInfo* R : Pool)
+	{
+		Total += FMath::Max(1, R->Weight);
+		bEqual = bEqual && R->Weight == Pool[0]->Weight;
+	}
+	if (bEqual)
+	{
+		return Pool[Rng.RandRange(0, Pool.Num() - 1)];
+	}
+	int64 Roll = Rng.RandRange(0, static_cast<int32>(Total) - 1);
+	for (const FKGRoleInfo* R : Pool)
+	{
+		Roll -= FMath::Max(1, R->Weight);
+		if (Roll < 0)
+		{
+			return R;
+		}
+	}
+	return Pool.Last();
+}
+
+FName FKGRoleListGenerator::GetForcedRole()
+{
+	const FString S = KGRoles::CVarForceRole.GetValueOnAnyThread().TrimStartAndEnd();
+	return S.IsEmpty() ? NAME_None : FName(*S);
+}
+
 FKGRoleListResult FKGRoleListGenerator::Generate(int32 NumPlayers, FKGRng& Rng, const TArray<FKGRoleInfo>& Catalog)
+{
+	return Generate(NumPlayers, Rng, Catalog, GetForcedRole());
+}
+
+FKGRoleListResult FKGRoleListGenerator::Generate(int32 NumPlayers, FKGRng& Rng, const TArray<FKGRoleInfo>& Catalog, FName ForcedRole)
 {
 	const int32 N = FMath::Clamp(NumPlayers, MinPlayers, MaxPlayers);
 	int32 BandMin = 0;
@@ -314,7 +391,7 @@ FKGRoleListResult FKGRoleListGenerator::Generate(int32 NumPlayers, FKGRng& Rng, 
 	for (int32 Attempt = 0; Attempt < MaxRerolls; ++Attempt)
 	{
 		TArray<FName> Roles;
-		if (!TryFill(N, Best.Slots, Rng, Catalog, Roles))
+		if (!TryFill(N, Best.Slots, Rng, Catalog, Roles, ForcedRole))
 		{
 			continue;
 		}

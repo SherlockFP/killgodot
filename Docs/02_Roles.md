@@ -54,7 +54,7 @@
 
 ---
 
-## SABIRSIZLAR — The Impatient (21)
+## SABIRSIZLAR — The Impatient (22)
 
 ### Saat Kırıcılar (takım, "mafya")
 - Takım üyeleri birbirini bilir. Gece **Saat Kırıcı telsizi** açıktır.
@@ -76,7 +76,27 @@
 | 10 | **Sabotajcı** / Saboteur | Sabotaj bekleme süreleri yarıya iner. Özel sabotajları: köprü kırma, kapı sıkıştırma, feneri söndürme. | F | Şüpheli | −5 | 8 |
 | 11 | **Kaçakçı** / Smuggler | Gizli tünel haritasını bilir, maymuncuğu vardır. Maçta 1 kez gizli zuladan takıma **tabanca** çıkarır. | F | Şüpheli | −5 | 5 |
 | 12 | **Pusucu** / Ambusher | Bir noktaya pusu kurar, oraya ilk gelen ölür (Doktor ve Koruma dahil). Pusu kurarken görülürse ifşa olur. | D+F | Şüpheli | −6 | 3 |
+| 12b | **Tuzakçı** / Trapper *(SPRINT-041)* | Tuzak ustası katil. **Mimik** (2/gece): bir sandığı, kasayı ya da fıçıyı mimiğe çevirir; açan/kıran/kaldıran ilk kişi ısırılır. Ayrıntılar aşağıda. **Kapan** ve **Tel** de kurar. | F | Şüpheli | −7 | 3 |
 | 13 | **Bombacı** / Bomber | **Saatli bomba** kurar (Saat Kırıcı temasına uygun). Kurması 3 sn sürer ve görünür. Süreyi 20–60 sn arası kendisi ayarlar. **Tik-tak sesi** 8 m'den duyulur, fitil parlar. Patlama 5 m yarıçaplıdır: öldürür, kapıları uçurur, kırılabilirleri parçalar, ragdoll ve fizik kaosu yaratır. Aynı anda 1 aktif bomba olabilir. Maçta 2 bomba hakkı var (N ≥ 12 ise 3). Bomba biri ölürse Kurban Hakkı harcar. Ayrıntılar aşağıda. | F | Şüpheli | −6 | 17 |
+
+### Tuzakçı / Trapper — sayılar (SPRINT-041; kod: `Abilities/KGAbilityTypes.h` `FKGAbilityCatalog` + `KGTrapperTuning`)
+- **Rol listesi:** Saat Kırıcı öldürme slotu (Tetikçi slotu) **Tetikçi : Tuzakçı = 2 : 1** ağırlıkla seçer (`FKGRoleInfo::Weight` 200/100),
+  N ≥ 8, tek. Sonuç: N ≥ 8 maçların ~⅓'ünde Tuzakçı var (test `KillGodot.Abilities.TrapperFrequency`). Güç −7 (Tetikçi ile aynı: denge bandı değişmez).
+- **Yetenek çerçevesi:** haklar her **şafakta** dolar ("gece başına"), tuzaklar şafakta söner. Gündüz ve gece kullanılır; toplantı, mahkeme,
+  lobi, ısınma ve epilogda kullanılamaz. Tuşlar **Alt+1/2/3** (bir bas = nişan, tekrar bas = kur, sağ tık = vazgeç).
+
+| Yetenek | Hak/gece | Bekleme | Menzil | Kural | Etki |
+|---|---|---|---|---|---|
+| **Mimik** | 2 | 20 sn | 3.2 m, bir kap | 12 m içinde görüş hattı olan kimse yokken | Açan / vuran / kaldıran ilk kişi (Tuzakçı hariç): **55 hasar ama asla 10 HP altına indirmez**, **3 sn yerinde tutar**, 30 m'den duyulan çığlık, "Isırık izleri" yarası. Sonra kap normal sandığa döner, **diş izleri** kalır. |
+| **Kapan** | 2 | 30 sn | 3.5 m, zemin | — | Basan: 25 hasar (5 HP altına indirmez), **4 sn** kök, "Kapan yarası". Tek kullanımlık; kapanmış kapan herkese görünür kalır. |
+| **Tel** | 2 | 10 sn | 3.5 m, zemin (3 m tel) | — | Sessiz alarm: geçeni ve yeri **yalnız Tuzakçı'ya** söyler; 8 sn sonra yeniden kurulur. |
+
+- **Görünürlük:** Kapan ve Tel kurulduktan sonra **2 sn herkese** görünür (dikkatli göz Tuzakçı'yı yakalar), sonra yalnız Tuzakçı görür.
+- **Mimik telegrafı:** 3 m içinde hafif nefes sesi, kapak aralığında diş uçları, dudakta dil ucu, damlayan salya; sandık nefes alır gibi kabarır.
+- **Fırlatma testi:** kaba 1.4 m içine hızla düşen bir nesne (atılan kasa) mimiği **irkiltir** (tuzak bozulmaz).
+- **Deliller:** "Isırık izleri" ve "Kapan yarası" kurbanın ve cesedin üstünde ayrı görünür (bakınca 3.5 m içinde yazı). Çığlık, ısırık, kapan ve tel olayları
+  tuzak olay günlüğüne girer (`UKGTrapSubsystem`, `KG_TRAP ...`).
+- **Botlar:** çığlığı 30 m içinde duyan bot o kabı bir daha açmaz; köylü botlar ara sıra yakındaki bir kabı karıştırır; Tuzakçı bot gündüz görev yollarına kurar.
 
 ### Yalnız katiller ve diğer tehditler (kendi kazanma koşulları var)
 | # | Rol | Yetenek | Uyg. | Şerif | Güç | Grup |

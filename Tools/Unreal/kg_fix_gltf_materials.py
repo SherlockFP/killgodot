@@ -131,6 +131,8 @@ def audit(fix):
         nan = bool(mesh.get_editor_property("nanite_settings").get_editor_property("enabled"))
         if not is_ism and not nan:
             continue
+        if is_ism and c.get_instance_count() == 0:
+            continue   # nothing is drawn with it (e.g. board tables fill their ISMs at runtime, with their own MIDs)
         if is_ism:
             n_comp += 1
             n_inst += c.get_instance_count()

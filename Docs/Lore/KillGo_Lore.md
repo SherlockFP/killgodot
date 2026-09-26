@@ -126,6 +126,7 @@ Rol kartında, rol açıklamasının altında italik gösterilir. Anahtar öneri
 | Saboteur | Bridges break. Doors stick. Lamps go out. Funny, that. | Köprüler kırılır, kapılar sıkışır, lambalar söner. Ne tuhaf. |
 | Smuggler | Morrowmere has two maps. The one on the wall is the boring one. | Morrowmere'in iki haritası var. Duvardaki sıkıcı olanı. |
 | Ambusher | Everyone comes down the Long Ope eventually. | Herkes eninde sonunda Uzun Ope'den iner. |
+| Trapper | Every chest in Morrowmere is hungry. I only remind them. | Morrowmere'deki her sandık açtır. Ben sadece hatırlatırım. |
 | Bomber | Tick. Tock. Now it's everyone's problem. | Tik. Tak. Artık herkesin derdi. |
 
 **Yalnız katiller ve dönüştürenler (8)**

@@ -44,12 +44,21 @@ public:
 	static int32 ComputeBalance(const TArray<FName>& Roles, const TArray<FKGRoleInfo>& Catalog);
 	static void GetBalanceBand(int32 NumPlayers, int32& OutMin, int32& OutMax);
 
+	/** Uses the kg.Roles.Force role (dev / balance runs; empty = none). */
 	static FKGRoleListResult Generate(int32 NumPlayers, FKGRng& Rng, const TArray<FKGRoleInfo>& Catalog);
+	/** ForcedRole (None = off) takes the first slot that accepts it (SPRINT-041 forced-Trapper balance runs). */
+	static FKGRoleListResult Generate(int32 NumPlayers, FKGRng& Rng, const TArray<FKGRoleInfo>& Catalog, FName ForcedRole);
+
+	/** kg.Roles.Force (dev cvar): a role every generated list must contain, or None. */
+	static FName GetForcedRole();
+
+	/** Weighted pick (FKGRoleInfo::Weight); a pool of equal weights uses the plain uniform draw (old seeds keep their lists). */
+	static const FKGRoleInfo* PickWeighted(const TArray<const FKGRoleInfo*>& Pool, FKGRng& Rng);
 
 	static const FKGRoleInfo* FindRole(const TArray<FKGRoleInfo>& Catalog, FName RoleId);
 
 private:
 	static bool SlotAccepts(EKGSlotKind Slot, const FKGRoleInfo& Role);
 	static bool TryFill(int32 NumPlayers, const TArray<EKGSlotKind>& Slots, FKGRng& Rng,
-	                    const TArray<FKGRoleInfo>& Catalog, TArray<FName>& OutRoles);
+	                    const TArray<FKGRoleInfo>& Catalog, TArray<FName>& OutRoles, FName ForcedRole = NAME_None);
 };

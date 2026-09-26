@@ -68,7 +68,7 @@ def banks():
                 n_tree += 1
             elif roll < 0.55:
                 K.clutter(N + "Fern_1", px, py, C.ground(px, py) - 5.0, None, R.uniform(0.4, 0.7))
-                K.clutter(N + "Plant_1", px + 70.0, py + 40.0, C.ground(px, py) - 5.0, None, R.uniform(0.5, 0.8))
+                K.clutter(N + "Plant_1", px + 70.0, py + 40.0, C.ground(px + 70.0, py + 40.0) - 8.0, None, R.uniform(0.5, 0.8))   # z under the plant itself
                 C.claim(px, py, 80.0)
             elif roll < 0.7:
                 sc = R.uniform(0.3, 0.5)             # SPRINT-022: bank rocks sink ~30 % of their height, not 45 cm

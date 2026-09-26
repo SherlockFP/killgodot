@@ -308,6 +308,16 @@ class Tour:
         for name, (x, y, z) in targets:
             zz = (z if z is not None else 20.0) * 100.0 + 60.0
             end = unreal.Vector(x * 100.0, y * 100.0, zz)
+            if name.startswith("forest trail"):
+                # a trail probe = "the trail can be walked to": snap it onto the navmesh within 2 m (a root or a stone
+                # on the exact vertex should not count as an unreachable trail)
+                try:
+                    snapped = unreal.NavigationSystemV1.project_point_to_navigation(self.world, end, None, None,
+                                                                                  unreal.Vector(200.0, 200.0, 300.0))
+                    if snapped:
+                        end = snapped
+                except Exception:
+                    pass
             path = unreal.NavigationSystemV1.find_path_to_location_synchronously(self.world, start, end)
             ok = bool(path and path.is_valid() and not path.is_partial())
             length = path.get_path_length() / 100.0 if path else -1.0

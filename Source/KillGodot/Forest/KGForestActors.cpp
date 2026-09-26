@@ -131,6 +131,8 @@ namespace KGForestLook
 
 using namespace KGForestLook;
 
+int32 GKGForestAutoWalk = 0;
+
 // ================================================================================================ player info
 AKGForestPlayerInfo::AKGForestPlayerInfo()
 {
@@ -140,7 +142,6 @@ AKGForestPlayerInfo::AKGForestPlayerInfo()
 	SetReplicatingMovement(false);
 	SetNetUpdateFrequency(8.0f);
 	PrimaryActorTick.bCanEverTick = true;
-	PrimaryActorTick.TickInterval = 0.2f;
 	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("Root"));
 }
 
@@ -172,6 +173,21 @@ void AKGForestPlayerInfo::BeginPlay()
 void AKGForestPlayerInfo::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
+	// kg.Forest.AutoWalk (smokes, dev): the local player walks (never runs) along the arrow to the nearest path
+	const APlayerController* LocalPC = GetWorld()->GetFirstPlayerController();
+	if (GKGForestAutoWalk != 0 && LocalPC && GetOwner() == LocalPC && !FVector(SafeDir).IsNearlyZero() &&
+	    (GKGForestAutoWalk == 1 || MistStage == uint8(EKGMistStage::Tongue)))
+	{
+		if (APawn* P = LocalPC->GetPawn())
+		{
+			P->AddMovementInput(FVector(SafeDir), 1.0f);
+			if (!bAutoWalkLogged)
+			{
+				bAutoWalkLogged = true;
+				UE_LOG(LogKillGodot, Log, TEXT("KG_FOREST autowalk moving dir=%s authority=%d"), *FVector(SafeDir).ToCompactString(), HasAuthority() ? 1 : 0);
+			}
+		}
+	}
 	if (HasAuthority())
 	{
 		return;

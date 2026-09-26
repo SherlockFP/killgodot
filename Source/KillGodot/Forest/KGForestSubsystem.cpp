@@ -13,6 +13,7 @@
 #include "EngineUtils.h"
 #include "Forest/KGForestActors.h"
 #include "Forest/KGForestMap.h"
+#include "World/KGFoliageField.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/PlayerController.h"
 #include "HAL/IConsoleManager.h"
@@ -20,6 +21,8 @@
 #include "KillGodot.h"
 #include "Navigation/PathFollowingComponent.h"
 #include "NavigationSystem.h"
+#include "NavigationPath.h"
+#include "Components/CapsuleComponent.h"
 #include "Roles/KGRoleListGenerator.h"
 
 static TAutoConsoleVariable<int32> CVarForestEnabled(TEXT("kg.Forest.Enabled"), 1,
@@ -37,11 +40,32 @@ namespace
 	FVector2D M2(const FVector& Cm) { return FVector2D(Cm.X, Cm.Y) / 100.0f; }
 	FVector Cm3(const FVector2D& M, float Z) { return FVector(M.X * 100.0f, M.Y * 100.0f, Z); }
 
-	FVector Ground(const UWorld* World, const FVector& Hint)
+	/** The ground under a point: terrain and props, never the tree canopies (AKGFoliageField) or pawns. */
+	FVector Ground(const UWorld* World, const FVector& Hint, float Up = 3000.0f)
 	{
+		static TWeakObjectPtr<const UWorld> CachedFor;
+		static TArray<TWeakObjectPtr<AActor>> Foliage;
+		if (World && CachedFor.Get() != World)
+		{
+			CachedFor = World;
+			Foliage.Reset();
+			for (TActorIterator<AKGFoliageField> It(const_cast<UWorld*>(World)); It; ++It)
+			{
+				Foliage.Add(*It);
+			}
+		}
 		FHitResult Hit;
 		FCollisionQueryParams Q(TEXT("KGForestGround"), false);
-		if (World && World->LineTraceSingleByChannel(Hit, Hint + FVector(0, 0, 3000), Hint - FVector(0, 0, 6000), ECC_WorldStatic, Q))
+		for (const TWeakObjectPtr<AActor>& F : Foliage)
+		{
+			if (F.IsValid())
+			{
+				Q.AddIgnoredActor(F.Get());
+			}
+		}
+		FCollisionObjectQueryParams Obj;
+		Obj.AddObjectTypesToQuery(ECC_WorldStatic);
+		if (World && World->LineTraceSingleByObjectType(Hit, Hint + FVector(0, 0, Up), Hint - FVector(0, 0, 6000), Obj, Q))
 		{
 			return Hit.ImpactPoint;
 		}
@@ -519,7 +543,8 @@ void UKGForestSubsystem::UpdateTracks(float Dt)
 		In.DayIndex = GS->DayIndex;
 		In.GroupSize = FMath::Max(1, T.Group);
 		In.Health = Body->GetHealth() ? Body->GetHealth()->GetHealth() : 100.0f;
-		float Gain = bLive && !bAfkFrozen ? FKGForestRules::WolfGain(In) : -KGForest::SafeDecay;
+		const bool bLiveWolf = bEnabled && (bPhaseActive || T.ForceWolfGain > 0.0f);   // a forced Mist test keeps the wolves out
+		float Gain = bLiveWolf && !bAfkFrozen ? FKGForestRules::WolfGain(In) : -KGForest::SafeDecay;
 		if (T.ForceWolfGain > 0.0f && bEnabled)
 		{
 			Gain = T.bSafe ? -KGForest::SafeDecay : T.ForceWolfGain;   // dev: the path still saves you
@@ -863,6 +888,14 @@ void UKGForestSubsystem::UpdateWolves(float Dt)
 				}
 			}
 			const FVector Clamped = ClampWolfGoal(WPos, Goal);
+			Wf->DebugLog -= Dt;
+			if (Wf->DebugLog <= 0.0f && Prey)
+			{
+				Wf->DebugLog = 2.0f;
+				UE_LOG(LogKillGodot, Log, TEXT("KG_FOREST wolf %s gait=%d dist=%.1f m goal_dist=%.1f m clamp_cut=%.1f m speed=%.0f status=%d move=%d"),
+				       *Wf->GetName(), Gait, FVector::Dist2D(WPos, Prey->GetActorLocation()) / 100.0f, FVector::Dist2D(WPos, Goal) / 100.0f,
+				       FVector::Dist2D(Goal, Clamped) / 100.0f, Wf->GetVelocity().Size2D(), AI ? int32(AI->GetMoveStatus()) : -1, Wf->MoveKind);
+			}
 			const float Speeds[] = {0.0f, KGForest::WolfSneak, KGForest::WolfTrot, KGForest::WolfLunge, KGForest::WolfTrot};
 			Move->MaxWalkSpeed = Speeds[Gait] * 100.0f;
 			if (Wf->Gait != Gait)
@@ -872,33 +905,65 @@ void UKGForestSubsystem::UpdateWolves(float Dt)
 			if (AI && (Wf->Repath <= 0.0f || Gait == 3))
 			{
 				Wf->Repath = 0.4f;
-				const bool bNear = FVector::Dist2D(WPos, Clamped) < 60.0f;
-				if (bNear)
+				// navmesh first (around the trunks); a path that fails or crosses a village / lit cell -> straight line
+				int32 Kind = 1;
 				{
-					AI->StopMovement();
-					if (Prey)
+					if (UNavigationPath* Path = UNavigationSystemV1::FindPathToLocationSynchronously(W, WPos, Clamped, Wf))
 					{
-						Wf->SetActorRotation(FRotator(0.0f, (Prey->GetActorLocation() - WPos).Rotation().Yaw, 0.0f));
+						if (Path->IsValid() && !Path->IsPartial() && Path->PathPoints.Num() > 0)
+						{
+							Kind = 0;
+							for (const FVector& Pt : Path->PathPoints)
+							{
+								if (!WolfCellOk(Pt))
+								{
+									Kind = 2;
+									break;
+								}
+							}
+						}
+					}
+				}
+				Wf->MoveKind = Kind;
+				if (Kind == 0)
+				{
+					if (Move->MovementMode != MOVE_Walking)
+					{
+						Move->SetMovementMode(MOVE_Walking);
+					}
+					if (FVector::Dist2D(WPos, Clamped) < 60.0f)
+					{
+						AI->StopMovement();
+					}
+					else
+					{
+						AI->MoveToLocation(Clamped, 40.0f, false, true, false, false, nullptr, true);
 					}
 				}
 				else
 				{
-					const EPathFollowingRequestResult::Type R = AI->MoveToLocation(Clamped, 40.0f, false, true, true, false, nullptr, true);
-					bool bBadPath = R == EPathFollowingRequestResult::Failed;
-					if (!bBadPath && AI->GetPathFollowingComponent() && AI->GetPathFollowingComponent()->GetPath().IsValid())
+					AI->StopMovement();
+					Move->SetMovementMode(MOVE_None);   // kinematic below: the server slides it along the ground
+				}
+			}
+			if (Wf->MoveKind != 0)
+			{
+				const float Speed = Speeds[Gait] * 100.0f;
+				const float Left = FVector::Dist2D(WPos, Clamped);
+				const FVector Dir = (Clamped - WPos).GetSafeNormal2D();
+				if (Left > 30.0f && !Dir.IsNearlyZero())
+				{
+					FVector Next = WPos + Dir * FMath::Min(Speed * Dt, Left - 20.0f);
+					Next = Ground(W, Next, 150.0f) + FVector(0.0f, 0.0f, Wf->GetCapsuleComponent()->GetScaledCapsuleHalfHeight());
+					Wf->SetActorLocationAndRotation(Next, FMath::RInterpTo(Wf->GetActorRotation(), Dir.Rotation(), Dt, 8.0f));
+					Move->Velocity = Dir * Speed;
+				}
+				else
+				{
+					Move->Velocity = FVector::ZeroVector;
+					if (Prey)
 					{
-						for (const FNavPathPoint& Pt : AI->GetPathFollowingComponent()->GetPath()->GetPathPoints())
-						{
-							if (!WolfCellOk(Pt.Location))
-							{
-								bBadPath = true;   // the navmesh route cuts through the village / a light: go straight instead
-								break;
-							}
-						}
-					}
-					if (bBadPath)
-					{
-						AI->MoveToLocation(Clamped, 40.0f, false, false, false, false, nullptr, true);
+						Wf->SetActorRotation(FMath::RInterpTo(Wf->GetActorRotation(), FRotator(0.0f, (Prey->GetActorLocation() - WPos).Rotation().Yaw, 0.0f), Dt, 6.0f));
 					}
 				}
 			}

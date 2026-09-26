@@ -158,6 +158,11 @@ M4–M18 maddeleri, milestone başladığında `09_Roadmap_Gauntlet.md`'den bura
 - [ ] VERIFICATION session with the user (Docs/Process/VerificationDebt.md): blocks new feature sprints once the debt is >10 items
 
 ## Proposed (needs approval)
+- [proposal] SPRINT-041 Trapper: real sounds (a human scream, a wet breath, a drool drip, a bear-trap snap) via Tools/Audio/kg_synth_sfx.py; the mimic reuses S_Forest_Howl / S_Forest_Whisper / S_Cave_Drip / S_Fish_Snap
+- [proposal] SPRINT-041: the ability bar and Trapper notes are Canvas text in EN/TR FStrings (KGAbilityHUD); move them to the String Tables (EN/TR/RU) and give the bar icons
+- [proposal] SPRINT-041: the chest "lid ajar" telegraph is faked by the teeth overlay + a breathing scale (the chest meshes are one piece); a split lid/body chest mesh would allow a real ajar lid and a proper chomp
+- [proposal] SPRINT-041: a Coroner / Investigator hook that names "mimic" or "snare" from the wounds (today anyone who looks reads the wound line); per-wound timestamps are already stored (UKGWoundComponent)
+- [proposal] SPRINT-041: the other 50 roles can now get abilities through FKGRoleInfo::AbilityIds + FKGAbilityCatalog + AKGAbilityHolder::AuthUse (one handler per ability); Ambusher / Bomber are the natural next users
 - [proposal] SPRINT-040 Storm Manor: Impatient BOTS never arm traps (Source/KillGodot/AI is outside the sprint scope); add a "sabotage a trap" goal to the Impatient bot next to its world-chore fake
 - [proposal] SPRINT-040: dedicated trap sounds (a long wood creak, a chandelier crash, a lock clunk, a gas-lamp hiss) via Tools/Audio/kg_synth_sfx.py; the traps reuse S_Chore_Crank / S_CrateBreak / S_Gate_Locked / S_Chore_Match / S_Doorbell today
 - [proposal] SPRINT-040: compartment clues, secret prompts and secret-chore texts are English FStrings in the layout: move them to the String Tables (EN/TR/RU); a HUD toast when a secret chore is given (today it just appears in the chore list)

@@ -117,37 +117,12 @@ namespace KGForestCmd
 			UE_LOG(LogKillGodot, Log, TEXT("KG_FOREST goto %s -> %s"), *What, *At.ToCompactString());
 		}));
 
-	/** 0 off, 1 always along the arrow, 2 only while a Mist tongue follows (the smoke's escape by walking). */
-	int32 GAutoWalk = 0;
-	FTSTicker::FDelegateHandle GAutoWalkHandle;
-
 	FAutoConsoleCommandWithWorldAndArgs GAutoWalkCmd(TEXT("kg.Forest.AutoWalk"),
 		TEXT("[client] kg.Forest.AutoWalk 1|2|0: walk (never run) along the arrow to the nearest path (2 = only from a Mist tongue)"),
-		FConsoleCommandWithWorldAndArgsDelegate::CreateLambda([](const TArray<FString>& Args, UWorld* World)
+		FConsoleCommandWithWorldAndArgsDelegate::CreateLambda([](const TArray<FString>& Args, UWorld*)
 		{
-			GAutoWalk = Args.Num() == 0 ? 1 : FCString::Atoi(*Args[0]);
-			if (GAutoWalk && !GAutoWalkHandle.IsValid())
-			{
-				TWeakObjectPtr<UWorld> WeakWorld = World;
-				GAutoWalkHandle = FTSTicker::GetCoreTicker().AddTicker(FTickerDelegate::CreateLambda([WeakWorld](float)
-				{
-					UWorld* W = WeakWorld.Get();
-					APlayerController* PC = W ? W->GetFirstPlayerController() : nullptr;
-					APawn* P = PC ? PC->GetPawn() : nullptr;
-					const AKGForestPlayerInfo* I = W ? AKGForestPlayerInfo::FindLocal(W) : nullptr;
-					const bool bWalk = GAutoWalk == 1 || (GAutoWalk == 2 && I && I->MistStage == uint8(EKGMistStage::Tongue));
-					if (bWalk && P && I && !FVector(I->SafeDir).IsNearlyZero())
-					{
-						P->AddMovementInput(FVector(I->SafeDir), 1.0f);
-					}
-					return GAutoWalk != 0;
-				}));
-			}
-			if (!GAutoWalk)
-			{
-				GAutoWalkHandle.Reset();
-			}
-			UE_LOG(LogKillGodot, Log, TEXT("KG_FOREST autowalk=%d"), GAutoWalk);
+			GKGForestAutoWalk = Args.Num() == 0 ? 1 : FCString::Atoi(*Args[0]);   // AKGForestPlayerInfo::Tick walks
+			UE_LOG(LogKillGodot, Log, TEXT("KG_FOREST autowalk=%d"), GKGForestAutoWalk);
 		}));
 
 	FAutoConsoleCommandWithWorldAndArgs GSmoke(TEXT("kg.Forest.Smoke"), TEXT("[host] run the two-process forest smoke script"),

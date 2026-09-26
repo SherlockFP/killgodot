@@ -37,6 +37,14 @@ struct KILLGODOT_API FKGRoleInfo
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Role")
 	TArray<FName> ExclusiveWith;
 
+	/** Relative pick weight inside a slot's pool (100 = normal). SPRINT-041: the killing slot is Enforcer 200 : Trapper 100. */
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Role")
+	int32 Weight = 100;
+
+	/** Role abilities in ability-bar order (ids of Abilities/KGAbilityTypes.h FKGAbilityCatalog). SPRINT-041. */
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Role")
+	TArray<FName> AbilityIds;
+
 	EKGAlignment GetAlignment() const;
 };
 

@@ -15,6 +15,9 @@ class UTextRenderComponent;
 class UAnimSequence;
 class AKGCharacter;
 
+/** kg.Forest.AutoWalk: 0 off, 1 always, 2 only while a Mist tongue follows (the local player walks along its arrow). */
+extern KILLGODOT_API int32 GKGForestAutoWalk;
+
 /** Damage types: the corpse tells what killed it (the case file reads the class name). */
 UCLASS()
 class KILLGODOT_API UKGDamageType_WolfBite : public UDamageType
@@ -84,6 +87,7 @@ public:
 
 	TWeakObjectPtr<AKGCharacter> Body;
 	FString LastLoggedStage;
+	bool bAutoWalkLogged = false;
 };
 
 /** The replicated forest director (always relevant): trail-head lanterns, the Mist Wall ring, the camp fire state. */
@@ -163,6 +167,9 @@ public:
 	float RepelLeft = 0.0f;
 	float OrbitPhase = 0.0f;
 	float Repath = 0.0f;
+	float DebugLog = 0.0f;
+	/** Last move request: 0 navmesh path, 1 no path (went straight), 2 path crossed a village / lit cell (straight). */
+	int32 MoveKind = 0;
 	bool bSeenLogged = false;
 
 private:

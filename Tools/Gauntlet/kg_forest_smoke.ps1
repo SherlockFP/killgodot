@@ -80,7 +80,7 @@ if (-not (Has $CliLog "KG_FOREST_CLIENT wolf=bite")) { $fail += "client never sa
 if (-not (Has $CliLog "KG_FOREST_CLIENT wolf snarl")) { $fail += "the lunge snarl did not replicate" }
 if (-not (Has $CliLog "KG_FOREST_CLIENT howl heard")) { $fail += "the howl did not reach the client" }
 if (-not (Has $CliLog "KG_FOREST_MIST_SEEN .*authority=0")) { $fail += "the Mist tongue did not replicate to the client" }
-if (-not (Has $CliLog "KG_FOREST_CLIENT wolf=silent mist=2")) { $fail += "the client never saw its own Mist stage" }
+if (-not (Has $CliLog "KG_FOREST_CLIENT wolf=[a-z]+ mist=2")) { $fail += "the client never saw its own Mist stage" }
 foreach ($l in @($SrvLog, $CliLog)) {
     if (Test-Path $l) {
         $bad = @(Select-String -Path $l -Pattern "Fatal error|Ensure condition failed|Unhandled Exception")

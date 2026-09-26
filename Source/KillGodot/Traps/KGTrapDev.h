@@ -14,6 +14,7 @@
 #include "KillGodot.h"
 #include "Traps/KGTrap.h"
 #include "Traps/KGTrapSubsystem.h"
+#include "Abilities/KGAbilityDev.h"
 
 namespace KGTrapDev
 {
@@ -112,6 +113,7 @@ namespace KGTrapDev
 			    }
 			    return FKGDevResult::Ok(FString::Printf(TEXT("%d event(s) (see log)"), Events.Num()));
 		    });
+		KGAbilityDev::AddVerbs(Add);   // SPRINT-041: kg.Ability.*, kg.Trapper.*
 	}
 }
 

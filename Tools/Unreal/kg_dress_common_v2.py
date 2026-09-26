@@ -659,6 +659,18 @@ def _build_reserved():
         pass
     for n, ax, ay, bx, by in _WSEGS:
         _add_res(ax, ay, bx, by, 35.0 if n == "quay_edge" else 60.0, f"wall {n}")
+    # SPRINT-033/034: the forest trails, the vigil camp and the trail-head lanterns stay clear (Tools/Level/gen_forest_bands.py)
+    fp = f"{ROOT}/Tools/Level/morrowmere_forest_v2.json"
+    if os.path.exists(fp):
+        F = json.load(open(fp, encoding="utf-8"))
+        for t in F.get("trails", []):
+            pts = t["points"]
+            for (ax, ay), (bx, by) in zip(pts, pts[1:]):
+                _add_res(ax * M, ay * M, bx * M, by * M, t["width"] * M * 0.5 + 80.0, f"forest trail {t['name']}")
+        cx, cy = F["camp"]["at"]
+        _add_res(cx * M, cy * M, cx * M, cy * M, 1100.0, "forest camp")
+        for l in F.get("lanterns", []):
+            _add_res(l["at"][0] * M, l["at"][1] * M, l["at"][0] * M, l["at"][1] * M, 150.0, "forest lantern")
     for b in LAYOUT["bridges"]:
         x, y = b["at"][0] * M, b["at"][1] * M
         ux, uy = b["along"]

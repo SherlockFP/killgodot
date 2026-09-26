@@ -15,6 +15,7 @@
 #include "Navigation/PathFollowingComponent.h"
 #include "World/KGDoor.h"
 #include "World/KGInteractable.h"
+#include "Abilities/KGTrapperBot.h"
 #include "World/KGMapInfo.h"
 #include "World/KGTaskStation.h"
 #include "Chores/WorldChores/KGWorldChoreComponent.h"
@@ -825,6 +826,12 @@ void AKGBotController::Tick(float DeltaSeconds)
 	}
 	UpdateVotes(DeltaSeconds, GS);
 	if (!Prey.IsValid() && UpdateGather(DeltaSeconds, GS))
+	{
+		bNavMove = false;
+		return;
+	}
+	// SPRINT-041: the Trapper bot arms traps along chore routes; villagers rummage containers but never a known mimic.
+	if (!Prey.IsValid() && KGTrapperBot::Update(this, Me, DeltaSeconds))
 	{
 		bNavMove = false;
 		return;

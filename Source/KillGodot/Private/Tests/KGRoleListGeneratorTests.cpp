@@ -10,7 +10,7 @@ IMPLEMENT_SIMPLE_AUTOMATION_TEST(FKGRoleCatalogTest, "KillGodot.Roles.Catalog",
 bool FKGRoleCatalogTest::RunTest(const FString& Parameters)
 {
 	const TArray<FKGRoleInfo>& Catalog = FKGRoleListGenerator::GetDefaultCatalog();
-	TestEqual(TEXT("Catalog has 51 roles"), Catalog.Num(), 51);
+	TestEqual(TEXT("Catalog has 52 roles (SPRINT-041: + Trapper)"), Catalog.Num(), 52);
 
 	int32 Town = 0, Impatient = 0, Neutral = 0;
 	TSet<FName> Ids;
@@ -26,7 +26,7 @@ bool FKGRoleCatalogTest::RunTest(const FString& Parameters)
 		}
 	}
 	TestEqual(TEXT("22 town roles"), Town, 22);
-	TestEqual(TEXT("21 impatient roles"), Impatient, 21);
+	TestEqual(TEXT("22 impatient roles"), Impatient, 22);
 	TestEqual(TEXT("8 neutral roles"), Neutral, 8);
 	return true;
 }

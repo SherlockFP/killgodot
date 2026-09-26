@@ -858,7 +858,7 @@ def nature():
         ok &= Z > 2.5
         for x, y, z in zip(X[ok], Y[ok], Z[ok]):
             k = ring_rng.random()
-            m = pines[int(ring_rng.integers(0, 5))] if k < 0.45 else (twisted if k > 0.9 else trees)[int(ring_rng.integers(0, 5))]
+            m = pines[int(ring_rng.integers(0, 5))] if k < 0.45 else trees[int(ring_rng.integers(0, 5))]   # no flared twisted trunks on slopes
             sc = float(ring_rng.uniform(1.0, 1.9))
             yaw = float(ring_rng.uniform(0, 360))
             if relief(x, y, 2.0) > 1.6:
@@ -871,8 +871,9 @@ def nature():
         ok2 = (R > 98.0) & (R < 188.0) & (dens_n > -0.1) & shapely.contains_xy(LAND.buffer(-4.0), X, Y) &             ~shapely.contains_xy(keep_out, X, Y) & ~shapely.contains_xy(clear.buffer(-0.8), X, Y)
         for x, y in zip(X[ok2] + 2.3, Y[ok2] + 1.1):
             if ring_rng.random() < 0.55:
-                inst("crops", U[int(ring_rng.integers(0, 3))], x, y, gmin(x, y, 0.6) - 0.08, float(ring_rng.uniform(0, 360)),
-                     float(ring_rng.uniform(0.9, 1.6)))
+                u, yaw, sc = U[int(ring_rng.integers(0, 3))], float(ring_rng.uniform(0, 360)), float(ring_rng.uniform(0.9, 1.6))
+                if relief(x, y, 0.8) <= 0.2:                 # level ground only: neither floating nor sunk
+                    inst("crops", u, x, y, g1(x, y) - 0.05, yaw, sc)
     stats["forest_ring_trees"] = n_ring
     ring_skip = 188.0 if FOREST.get("trails") else 0.0
     # --- outer forest + mountain pines (beyond the core rectangle, inside 300 m)

@@ -1,0 +1,32 @@
+{
+ "props": {
+  "MimicTeeth": {
+   "material": "VC",
+   "collision": "none"
+  },
+  "MimicMarks": {
+   "material": "VC",
+   "collision": "none"
+  },
+  "MimicTongue": {
+   "material": "VC",
+   "collision": "none"
+  },
+  "MimicDrool": {
+   "material": "VC",
+   "collision": "none"
+  },
+  "SnareOpen": {
+   "material": "VC",
+   "collision": "none"
+  },
+  "SnareShut": {
+   "material": "VC",
+   "collision": "none"
+  },
+  "Tripwire": {
+   "material": "VC",
+   "collision": "none"
+  }
+ }
+}

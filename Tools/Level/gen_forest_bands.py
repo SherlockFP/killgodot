@@ -75,7 +75,7 @@ def trails():
         "west_spur": [(-104.0, -18.0), (-116.0, -20.0), on_ring(172)],
         "hollow_spur": [(-92.0, -52.0), (-96.0, -72.0), on_ring(134)],
         "north_spur": [(2.0, -56.5), (0.0, -72.0), (-3.0, -92.0), (-2.0, -112.0), on_ring(91)],
-        "field_spur": [(62.0, -104.0), (66.0, -112.0), on_ring(58)],
+        "field_spur": [(62.0, -104.0), (61.0, -113.0), on_ring(62)],
         "east_spur": [(90.0, -60.0), (106.0, -58.0), on_ring(23)],
     }
     out = [{"name": "ring_trail", "points": [list(p) for p in ring], "width": TRAIL_W, "loop": True}]

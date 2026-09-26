@@ -15,6 +15,7 @@
 #include "Misc/PackageName.h"
 #include "Net/UnrealNetwork.h"
 #include "Online/KGSnapshotComponent.h"
+#include "Traps/KGMimicTrap.h"
 
 #define LOCTEXT_NAMESPACE "KGChest"
 
@@ -247,6 +248,10 @@ void AKGStorageChest::Interact_Implementation(AKGCharacter* By)
 	{
 		Relay->CloseContainer();   // E toggles
 		return;
+	}
+	if (AKGMimicTrap::TryBite(this, By))
+	{
+		return;   // SPRINT-041: the Trapper made this chest a mimic - it bites instead of opening
 	}
 	Relay->OpenContainer(this);
 }

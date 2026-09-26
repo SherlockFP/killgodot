@@ -9,6 +9,9 @@
 #include "World/KGBuoyancyComponent.h"
 #include "Audio/KGAudio.h"
 #include "Inventory/KGLoot.h"
+#include "Character/KGCharacter.h"
+#include "GameFramework/Controller.h"
+#include "Traps/KGMimicTrap.h"
 
 
 AKGBreakable::AKGBreakable()
@@ -53,6 +56,16 @@ float AKGBreakable::TakeDamage(float DamageAmount, const FDamageEvent& DamageEve
 	if (!HasAuthority() || bBroken)
 	{
 		return Applied;
+	}
+	// SPRINT-041: hitting a mimic crate / barrel to break it open wakes it up - it bites instead of bursting.
+	AKGCharacter* Hitter = Cast<AKGCharacter>(DamageCauser);
+	if (!Hitter && EventInstigator)
+	{
+		Hitter = Cast<AKGCharacter>(EventInstigator->GetPawn());
+	}
+	if (Hitter && AKGMimicTrap::TryBite(this, Hitter))
+	{
+		return 0.0f;
 	}
 	if (DamageCauser)
 	{

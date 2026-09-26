@@ -29,7 +29,7 @@ sys.path.insert(0, HERE)
 ROOT = "D:/Kill Godot"
 REPORT = f"{ROOT}/Saved/KG_V2_DressReport.json"
 PLAN = f"{ROOT}/Saved/KG_V2_DressPlan.json"
-ORDER = ["square", "harbour", "streets", "church", "japan", "countryside", "coast", "wilds", "beckside", "town"]
+ORDER = ["square", "tabletop", "harbour", "streets", "church", "japan", "countryside", "coast", "wilds", "beckside", "town"]
 
 try:
     import unreal

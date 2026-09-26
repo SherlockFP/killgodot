@@ -1,6 +1,8 @@
 # HANDOFF — KillGo (2026-09-26)
 
-For the next AI assistant (any tool). Read this first, then `CLAUDE.md` (project rules), then `Docs/Backlog.md`.
+For the next AI assistant (any tool). Read this first, then `CLAUDE.md` (project rules),
+`Docs/Process/AgentPlaybook.md` (how to work: director + parallel workers, ownership map, brief template,
+verification, design direction), then `Docs/Backlog.md`.
 
 ## What this is
 **KillGo** (internal/code name KillGodot): first-person online social deduction game (Town of Salem × GMod Murder ×

@@ -61,6 +61,8 @@
 #include "World/KGMapInfo.h"
 #include "World/KGTaskStation.h"
 #include "Dig/KGDigDev.h"            // KG_DIG hook: Dig.* verbs
+#include "Traps/KGTrapDev.h"        // SPRINT-040 hook: Trap.* verbs
+#include "Manor/KGManorDev.h"       // SPRINT-040 hook: Manor.* verbs
 #include "Dig/KGUndergroundInfo.h"   // KG_DIG hook: GroundAt stays on the surface
 
 namespace KGDevPrivate
@@ -1369,6 +1371,8 @@ namespace KGDevPrivate
 		// ---- Debug (this machine) ----
 		// ---- KG_DIG: digging + the underground (Source/KillGodot/Dig, Docs/01_GDD_Core.md section 16) ----
 		KGDigDev::AddVerbs(Add);
+		KGTrapDev::AddVerbs(Add);    // SPRINT-040 hook
+		KGManorDev::AddVerbs(Add);   // SPRINT-040 hook
 
 		Add(TEXT("Debug.HUDDemo"), TEXT("<0-5>"), TEXT("HUD preview states (kg.HUDDemo)."), Local,
 		    [](const FKGDevContext& C, const TArray<FString>& A)

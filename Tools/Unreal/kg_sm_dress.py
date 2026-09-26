@@ -103,6 +103,15 @@ def room_for(rid, cap=1, style=0, inset_int=22.0):
     pad = inset_int if enclosed else 30.0
     g.x0, g.x1, g.y0, g.y1 = -h.ex + pad, h.ex - pad, -h.ey + pad, h.ey - pad
     g.rects = []
+    # SPRINT-040: an L / U room's bounding-box cells outside its polygon are not its floor (the vault's notch is the
+    # catacomb stair landing)
+    inside = set(Bm.G.cells_of(r["poly"]))
+    for i in range(int(math.floor(x0 / 2.0)), int(math.ceil(x1 / 2.0))):
+        for j in range(int(math.floor(y0 / 2.0)), int(math.ceil(y1 / 2.0))):
+            if (i, j) not in inside and not Bm.GRID.is_void(r["floor"], (i, j)):
+                lx0, ly0 = loc(h, i * 2.0 - 0.3, j * 2.0 - 0.3)
+                lx1, ly1 = loc(h, i * 2.0 + 2.3, j * 2.0 + 2.3)
+                keep_rect(g, lx0, ly0, lx1, ly1)
     reserve(h, g, rid)
     Bm.SHIM.room = rid
     CUR[0] = (h, g)
@@ -166,6 +175,18 @@ def reserve(h, g, rid):
         if prid == rid:
             lx, ly = loc(h, x, y)
             keep_rect(g, lx - 90.0, ly - 90.0, lx + 90.0, ly + 90.0)
+    # SPRINT-040: hidden compartments (reach them), traps (a trapdoor / chandelier zone stays open floor, a witness
+    # portrait keeps its wall), secret-room hides
+    for c in Bm.L.get("compartments", []):
+        if c["room"] == rid:
+            lx, ly = loc(h, *c["at"])
+            keep_rect(g, lx - 80.0, ly - 80.0, lx + 80.0, ly + 80.0)
+    for t in Bm.L.get("traps", []):
+        if t["room"] == rid and t["effect"] in ("Trapdoor", "FallingObject", "Witness", "Alarm"):
+            lx, ly = loc(h, *t["at"])
+            zx, zy = t["zone"]
+            pad = 60.0 if t["effect"] != "Witness" else 90.0
+            keep_rect(g, lx - zx * 100.0 - pad, ly - zy * 100.0 - pad, lx + zx * 100.0 + pad, ly + zy * 100.0 + pad)
 
 
 def done(h, rid):
@@ -177,6 +198,15 @@ def done(h, rid):
             import traceback
             Bm.log(f"dress ext {rid} FAILED:\n{traceback.format_exc()}")
             Bm.stats.setdefault("dress_failed", []).append("ext_" + rid)
+    # SPRINT-040: the luxury layer fills every indoor room up to its density target (layered furniture, pictures,
+    # shelves full of small things); the lights still come from the room's own recipe
+    if CUR[0] and CUR[0][0] is h and Bm.G.enclosed(Bm.R[rid]):
+        try:
+            lux(h, CUR[0][1], rid)
+        except Exception:
+            import traceback
+            Bm.log(f"dress lux {rid} FAILED:\n{traceback.format_exc()}")
+            Bm.stats.setdefault("dress_failed", []).append("lux_" + rid)
     DRESSED[rid] = DRESSED.get(rid, 0) + h.count
 
 
@@ -1699,6 +1729,428 @@ def ext_cliff_path(h, g):
     xscatter(h, g, [KGY("lantern_glass")], 1, pad=10.0)
 
 
+# =================================================================================================== SPRINT-040
+# The luxury layer (every indoor room) and the new wings' rooms. Density target: SPRINT-018 had ~0.24 meshes per m2
+# indoors; the contract asks >= 1.5x, so lux() fills each room to LUX_DENSITY per m2 (corridors a little less), with
+# layered pieces: pictures in two rows, sconces, cabinets and shelves carrying small things, bookcases with full
+# shelves, seating groups, plants, rugs. Everything goes through the same free-space map (doors, stairs, chore
+# spots, secrets, compartments and trap zones stay clear).
+LUX_DENSITY = {"room": 0.44, "circulation": 0.34}
+LUX_ROOM = {"blue_room": 0.62, "nursery": 0.6, "study": 0.6}   # SPRINT-018's sparse rooms: filled up
+LUX_SKIP = {"storm_tower", "clock_room"}       # ladder / winch rooms: the SPRINT-018 dressing only
+CLUTTER = [KKF("book_set"), KKF("book_single"), KKF("lamp_table"), KKR("jar_A_small"), KKR("jar_C_small"),
+           KKR("bowl_small"), KKD("candle_lit"), KKD("candle_triple"), KKD("bottle_A_labeled_brown"),
+           KKD("bottle_B_green"), KKD("coin_stack_small"), KKD("box_small_decorated"), KKF("pictureframe_standing_A"),
+           KKF("cactus_small_A"), P + "Vase_4", P + "CandleStick", P + "Chalice", P + "Book_7", P + "Scroll_1"]
+SHELF_BITS = [KKF("book_set"), KKF("book_single"), KKR("jar_A_small"), KKR("jar_D_small"), KKD("bottle_A_brown"),
+              KKD("candle_melted"), KKD("box_small"), P + "Book_7", P + "Vase_4"]
+LUX_WALL = [KKF("cabinet_medium_decorated"), KKF("cabinet_small_decorated"), KKF("shelf_B_large_decorated"),
+            KKF("shelf_B_small_decorated"), KF("sideTableDrawers"), P + "Bookcase_2", KKF("lamp_standing"),
+            KF("pottedPlant"), QD("Pedestal2"), KKF("cabinet_medium"), KF("bookcaseClosedWide")]
+LUX_SCALE = {KF("sideTableDrawers"): 2.0, KF("pottedPlant"): 1.9, QD("Pedestal2"): 0.55, KF("bookcaseClosedWide"): 2.2}
+FLAT_TOP = (KF("sideTableDrawers"), KKF("cabinet_medium"))      # (decorated tops are not flat: nothing on them)
+LUX_FLOOR = [KKF("rug_oval_A"), KKF("rug_oval_B"), KKF("rug_rectangle_A"), KKF("rug_rectangle_stripes_A")]
+
+
+def _area(rid):
+    x0, y0, x1, y1 = Bm.G.rect_of(Bm.R[rid]["poly"])
+    try:
+        from_cells = len(Bm.G.cells_of(Bm.R[rid]["poly"])) * 4.0
+        return from_cells
+    except Exception:
+        return (x1 - x0) * (y1 - y0)
+
+
+def lux_piece(h, g, walls):
+    """One wall piece of the luxury set + what stands on it. Returns True when something was placed."""
+    path = h.R.choice(LUX_WALL)
+    if not Bm.have(path):
+        return False
+    s = LUX_SCALE.get(path, 1.0)
+    tall = 180.0 if "bookcase" in path or "cabinet_medium" in path else None
+    items = xwall(h, g, path, walls, 1, s=s, gap=3.0, tag="tall" if tall else "block")
+    if not items:
+        return False
+    it = items[0]
+    if "Pedestal" in path:
+        xon(h, it, h.R.choice([PPM(STATUE), P + "Vase_4", KKD("candle_triple")]), 0.0, 0.0,
+            s=0.35 if "Statue" in it.path else 1.0)
+    elif path == P + "Bookcase_2":
+        # the measured shelf boards (kg_interiors.SHELVES): three book groups per board
+        for z in KI.SHELVES[P + "Bookcase_2"][1:]:
+            for u in (-32.0, 0.0, 32.0):
+                if h.R.random() < 0.85:
+                    on(h, it, h.R.choice(KI.BOOKS + KI.SMALL_BOOKS), u + h.R.uniform(-4, 4), 2.0, z=z + 0.2)
+    elif path in FLAT_TOP:
+        xtop(h, it, CLUTTER, h.R.choice((2, 3, 4)), s=0.55)
+    return True
+
+
+CENTRE_DONE = {"great_hall", "ballroom", "dining", "kitchen", "chapel", "billiard", "attic", "wine_cellar", "cistern",
+               "servants_hall", "morning_room", "map_room", "games_room", "orangery", "crypt", "ossuary", "vault",
+               "wine_catacombs", "sewing_room", "music_room", "staircase_hall", "storm_tower", "clock_room"}
+
+
+def centre_group(h, g):
+    """A furnished island in the middle of a big room: a large rug, a table with chairs and things on it, a
+    chandelier over it."""
+    x0, y0, x1, y1 = h.rect
+    cx, cy = (x0 + x1) / 2.0, (y0 + y1) / 2.0
+    lx, ly = loc(h, cx, cy)
+    if g.spot(PPM(RUG), lx, ly, 0.0, scale=S(1.5), pad=0.0):
+        h.put(PPM(RUG), lx, ly, g.z + 0.5, 0.0 if (x1 - x0) >= (y1 - y0) else 90.0, scale=S(1.5), collide=False)
+    table = h.R.choice([KKF("table_medium_long"), KKF("table_low"), KKF("table_medium")])
+    for dx, dy in ((0, 0), (1.5, 0), (-1.5, 0), (0, 1.5), (0, -1.5), (2.5, 2.0), (-2.5, -2.0)):
+        tx, ty = loc(h, cx + dx, cy + dy)
+        yaw = 0.0 if (x1 - x0) >= (y1 - y0) else 90.0
+        if not g.spot(table, tx, ty, yaw, pad=100.0):
+            continue
+        t = g.place(table, tx, ty, yaw)
+        b = KI.bounds(table)
+        hy = (b[4] - b[1]) / 2.0 + 32.0
+        chair = h.R.choice([KKF("chair_B_wood"), KKF("chair_A_wood"), KKF("armchair")])
+        for u in ((-45.0, 45.0) if (b[3] - b[0]) > 120 else (0.0,)):
+            for side in (1.0, -1.0):
+                px, py = t.at(u, side * hy)
+                cyaw = t.lyaw + (180.0 if side > 0 else 0.0)
+                if g.spot(chair, px, py, cyaw):
+                    g.place(chair, px, py, cyaw)
+        xtop(h, t, CLUTTER, 3, s=0.55)
+        break
+    xhang(h, PPM(CHANDELIER2), cx, cy, Bm.H - 75.0, s=1.2)
+
+
+def lux(h, g, rid):
+    r = Bm.R[rid]
+    area = _area(rid)
+    if area < 40.0 or rid in LUX_SKIP:
+        return              # the stair landings / the tower: nothing more in the way of the steps and the ladder
+    dens = LUX_ROOM.get(rid, LUX_DENSITY.get(r["kind"], 0.4))
+    target = int(area * dens)
+    walls = ["front", "back", "left", "right"]
+    if r["kind"] == "room" and area >= 80.0 and rid not in CENTRE_DONE:
+        centre_group(h, g)          # look round 1: the middle of the big rooms read empty
+    # pictures in two rows on closed wall first (cheap: no floor), sconces between them
+    if h.count < target:
+        pictures(h, g, walls, z=175.0, every=300.0)
+    if h.count < target and r["kind"] == "room":
+        xmount(h, g, KKF("pictureframe_small_B"), walls, 120.0, every=340.0)
+    if h.count < target:
+        xmount(h, g, P + "Lantern_Wall", walls, 205.0, every=560.0)
+    fails = 0
+    while h.count < target and fails < 6:
+        ok = lux_piece(h, g, walls)
+        if r["kind"] == "room" and area >= 80.0 and h.count < target and h.R.random() < 0.25:
+            ok = bool(sitting_corner(h, g, walls)) or ok
+        if r["kind"] == "room" and h.count < target and h.R.random() < 0.15 and area > 70:
+            ok = bool(reading_table(h, g, 2, table=KKF("table_small"), s=0.9)) or ok
+        if area >= 80.0 and h.count < target and h.R.random() < 0.2:
+            ok = xscatter(h, g, [KF("pottedPlant"), KKF("cactus_medium_A"), QD("Vase")], 1, s=1.4, pad=20.0) > 0 or ok
+        fails = 0 if ok else fails + 1
+    if r["kind"] == "room" and area > 40:
+        xscatter(h, g, LUX_FLOOR, 1, pad=0.0, collide=False, tag=None, yaw_any=False)
+    Bm.stats.setdefault("lux", {})[rid] = [h.count, target]
+
+
+def new_room(rid, recipe, style, light=True, cap=1, lz=250.0, li=10.0, lr=1100.0):
+    """A SPRINT-040 room: its recipe, one light over the middle (unless light=False: lit by a neighbour's), done()."""
+    h, g = room_for(rid, cap=cap, style=style)
+    recipe(h, g)
+    x0, y0, x1, y1 = h.rect
+    if light and h.lights < 1:
+        h.light(*loc(h, (x0 + x1) / 2, (y0 + y1) / 2), lz, li, lr)
+    done(h, rid)
+    return h, g
+
+
+def salon(colour_rug, sofa=KKF("couch_pillows")):
+    def recipe(h, g):
+        xwall(h, g, sofa, ["back", "front"], 2, gap=5.0)
+        for _ in range(2):
+            sitting_corner(h, g, ["left", "right", "back", "front"])
+        t = reading_table(h, g, 4, table=KKF("table_low"), s=1.2)
+        xwall(h, g, KKF("cabinet_medium_decorated"), ["left", "right"], 2, gap=3.0, tag="tall")
+        xwall(h, g, PPM(CLOCK), ["front", "back"], 1, s=1.4, gap=3.0, tag="tall")
+        xscatter(h, g, [colour_rug], 1, pad=0.0, collide=False, tag=None, yaw_any=False)
+        x0, y0, x1, y1 = h.rect
+        xhang(h, PPM(CHANDELIER), (x0 + x1) / 2, (y0 + y1) / 2, Bm.H - 70.0, s=1.2)
+    return recipe
+
+
+def music_room(h, g):
+    # the grand piano: a black-lacquered long table with its lid propped open, a stool, the harp (a lute, big)
+    x, y = loc(h, -29.0, -35.6)
+    if g.spot(KKF("table_medium_long"), x, y, 90.0, scale=S(1.1)):
+        pn = g.place(KKF("table_medium_long"), x, y, 90.0, scale=S(1.1))
+        Bm.B.recs[-1]["material"] = Bm.MAT.get("Iron")
+        on(h, pn, E + "Cube", 0.0, 0.0, scale=(1.5, 0.95, 0.04), lyaw=0.0)
+        Bm.B.recs[-1]["material"] = Bm.MAT.get("Iron")
+        x2, y2 = pn.at(0.0, 95.0)
+        if g.spot(KKF("chair_stool_wood"), x2, y2, 0.0):
+            g.place(KKF("chair_stool_wood"), x2, y2, 0.0)
+    xscatter(h, g, [PPM(LUTE)], 2, s=2.2, pad=20.0, yaw_any=False)
+    for _ in range(3):
+        xwall(h, g, KKF("chair_B_wood"), ["left", "front"], 2, gap=1.0)
+    hearth_at(h, g, "back", -26.0)
+    xwall(h, g, KKF("shelf_B_large_decorated"), ["back", "front"], 2, gap=2.0)
+
+
+def staircase_hall(h, g):
+    for xm in (-7.0, 7.0):
+        for ym in (-38.0, -30.0):
+            p = xat(h, g, QD("Pedestal2"), xm, ym, s=0.6)
+            xon(h, p, PPM(STATUE), 0.0, 0.0, s=0.4)
+    xmount(h, g, KKD("banner_shield_red"), ["left", "right"], 230.0, every=420.0, s=0.6)
+    xwall(h, g, PPM(CLOCK), ["front"], 1, s=1.6, gap=3.0, tag="tall")
+    xscatter(h, g, [PPM(RUG)], 1, s=1.4, pad=0.0, collide=False, tag=None, yaw_any=False)
+    xwall(h, g, KF("benchCushion"), ["left", "right"], 2, s=2.2, gap=20.0)
+
+
+def gallery_run(h, g):
+    x0, y0, x1, y1 = h.rect
+    if x1 - x0 > y1 - y0:
+        rug_runner(h, g, x0 + 1.5, (y0 + y1) / 2, x1 - 1.5, (y0 + y1) / 2)
+    else:
+        rug_runner(h, g, (x0 + x1) / 2, y0 + 1.5, (x0 + x1) / 2, y1 - 1.5)
+    for wall in ("front", "back", "left", "right"):
+        xmount(h, g, KKF("pictureframe_large_B"), [wall], 185.0, every=260.0)
+    for p in xwall(h, g, QD("Pedestal2"), ["front", "back", "left", "right"], 6, s=0.55, gap=8.0):
+        xon(h, p, h.R.choice([PPM(STATUE), P + "Vase_4"]), 0.0, 0.0, s=0.35)
+    xwall(h, g, KF("benchCushion"), ["front", "back"], 3, s=2.2, gap=40.0)
+    xwall(h, g, PPM(CLOCK), ["front", "back"], 1, s=1.4, gap=3.0, tag="tall")
+
+
+def servants_hall(h, g):
+    x, y = loc(h, -49.0, -39.0)
+    for k, dy in enumerate((-85.0, 85.0)):
+        if g.spot(K + "LongTable", x, y + dy, 0.0):
+            t = g.place(K + "LongTable", x, y + dy, 0.0)
+            for u in (-80.0, -20.0, 40.0):
+                on(h, t, h.R.choice([K + "Plate", K + "Cup", K + "Bowl", P + "Mug"]), u, 0.0)
+    hearth_at(h, g, "left", -38.0)
+    xwall(h, g, KKR("shelf_papertowel_decorated"), ["back", "right"], 1, gap=2.0)
+    for sh in xwall(h, g, KKD("shelves"), ["back", "front"], 2, s=0.8, gap=2.0, tag="tall"):
+        xtop(h, sh, [KKD("plate_stack"), KKD("bottle_A_brown"), KKD("candle")], 3, s=0.5)
+    xwall(h, g, KKD("keyring_hanging"), ["front"], 1, gap=1.0)
+
+
+def housekeeper(h, g):
+    KI.desk(h, g)
+    xwall(h, g, KKF("bed_single_A"), ["back", "left"], 1, gap=3.0)
+    xwall(h, g, KKD("shelf_large"), ["front", "right"], 2, s=0.8, gap=2.0, tag="tall")
+    xmount(h, g, KKD("keyring_hanging"), ["right"], 150.0, every=120.0)
+    sitting_corner(h, g, ["left", "back", "front"])
+    xwall(h, g, K + "Shelf4", ["front", "back"], 1, gap=2.0, tag="tall")
+
+
+def silver_room(h, g):
+    for c in xwall(h, g, KKF("cabinet_medium"), ["back", "front", "left"], 3, gap=2.0, tag="tall"):
+        xtop(h, c, [P + "Chalice", P + "CandleStick", KKD("plate"), P + "CandleStick_Triple"], 3, s=0.7)
+    for b in xwall(h, g, P + "Workbench", ["right"], 1, gap=2.0):
+        for u in (-60.0, -20.0, 20.0, 60.0):
+            on(h, b, h.R.choice([P + "Chalice", P + "CandleStick", P + "Table_Plate"]), u, 0.0)
+
+
+def boiler_room(h, g):
+    x, y = loc(h, -41.0, -26.2)
+    bx = place(h, g, PIR + "Barrel_5", -41.5, -27.0, 0.0, scale=(1.1, 1.1, 1.5))
+    if bx:
+        Bm.B.recs[-1]["material"] = Bm.MAT.get("Copper")
+    lx, ly = loc(h, -41.5, -27.0)
+    for k in range(4):
+        lx, ly = loc(h, -39.0 - k * 1.2, -33.0)
+        h.put(E + "Cylinder", lx, ly, g.z + 240.0, 0.0, roll=90.0, scale=(0.18, 0.18, 1.2), collide=False)
+        Bm.B.recs[-1]["material"] = Bm.MAT.get("Copper")
+    n0 = len(Bm.B.recs)
+    xscatter(h, g, [KKD("rubble_half")], 2, s=0.8, pad=10.0, collide=False)
+    for r_ in Bm.B.recs[n0:]:
+        if "rubble" in r_["m"]:
+            r_["material"] = Bm.MAT.get("Soot")          # the coal heap
+    for sh in xwall(h, g, KKD("shelf_large"), ["left", "front"], 2, s=0.8, gap=2.0, tag="tall"):
+        xtop(h, sh, [P + "Bottle_1", KKD("bottle_C_brown"), KKD("candle")], 3, s=0.6)
+    xscatter(h, g, [QD("Bucket"), KKD("barrel_small")], 3, s=0.8, pad=10.0)
+
+
+def east_room(kind):
+    def recipe(h, g):
+        if kind == "smoking":
+            xwall(h, g, KKF("couch"), ["back", "front"], 2, gap=4.0)
+            for _ in range(3):
+                sitting_corner(h, g, ["left", "right", "back", "front"])
+            for t in xwall(h, g, KKF("table_small"), ["left", "right"], 2, s=0.8, gap=4.0):
+                xtop(h, t, [KKD("box_small_decorated"), KKD("bottle_A_labeled_brown"), KKD("candle_lit")], 3, s=0.4)
+            hearth_at(h, g, "right", -39.0)
+        elif kind == "gun":
+            for ws in xwall(h, g, P + "WeaponStand", ["back", "left", "right"], 4, gap=3.0):
+                pass
+            xmount(h, g, KKD("sword_shield"), ["back", "left", "right"], 170.0, every=180.0, s=0.8)
+            xwall(h, g, P + "Workbench", ["front"], 1, gap=3.0)
+            xwall(h, g, PPM("Armor_Golden_65ltdmlBcy"), ["back", "right"], 1, s=1.2, gap=3.0, tag="tall")
+            xscatter(h, g, [KKD("trunk_medium_A"), KKD("barrel_small")], 3, s=0.7, pad=10.0)
+        elif kind == "map":
+            t = reading_table(h, g, 3, table=KKF("table_medium_long"), s=1.1)
+            xtop(h, t, [P + "Scroll_1", P + "Scroll_2", P + "Book_7"], 4, s=0.8)
+            xscatter(h, g, [PPM(GLOBE)], 2, s=3.0, pad=15.0)
+            xscatter(h, g, [PPM(TELESCOPE)], 1, s=1.2, pad=20.0)
+            xwall(h, g, KKD("chest"), ["back", "left", "right"], 3, s=0.45, gap=3.0)
+        elif kind == "games":
+            t = reading_table(h, g, 2, table=KKF("table_small"), s=1.0)
+            if t:
+                xon(h, t, E + "Cube", 0.0, 0.0, s=(0.5, 0.5, 0.02))
+                Bm.B.recs[-1]["material"] = Bm.MAT.get("Felt")
+            reading_table(h, g, 4, table=KKF("table_medium"), s=1.0)
+            xmount(h, g, P + "Shield_Wooden", ["back"], 170.0, every=400.0)
+            sitting_corner(h, g, ["left", "right", "front"])
+        elif kind == "orangery":
+            xscatter(h, g, [KF("pottedPlant"), DV + "Planter_Pot"], 14, s=1.9, pad=25.0)
+            for r_ in Bm.B.recs[-14:]:
+                if "Planter_Pot" in r_["m"]:
+                    r_["material"] = Bm.MAT.get("Terracotta")
+            xat(h, g, xp("Goblin", "branch_cage"), 52.2, -14.2, 0.0, s=0.7)
+            xwall(h, g, KKH("bench"), ["front", "back"], 3, gap=30.0)
+            xscatter(h, g, [QD("Bucket"), KKF("cactus_medium_B")], 4, s=1.2, pad=12.0)
+        elif kind == "morning":
+            t = reading_table(h, g, 6, table=KKF("table_medium_long"), s=1.2)
+            xtop(h, t, [KKD("plate_food_A"), KKD("plate_food_B"), K + "Cup", KKD("candle_triple")], 5, s=0.5)
+            xwall(h, g, KKF("cabinet_medium_decorated"), ["back"], 1, gap=3.0, tag="tall")
+            xwall(h, g, KKF("couch_pillows"), ["right", "front"], 1, gap=5.0)
+            xscatter(h, g, [KF("pottedPlant")], 3, s=1.9, pad=20.0)
+    return recipe
+
+
+def guest_bed(colour):
+    def recipe(h, g):
+        bed = None
+        for path in (BD + f"DoubleBed{colour}", KKF("bed_double_A"), P + "Bed_Twin1"):
+            bed = g.on_wall(path, ["back", "right", "left", "front"], gap=3.0, tall=90.0)
+            if bed:
+                break
+        if bed:
+            x0, y0, _, x1, y1, _ = KI.bounds(bed.path)
+            for side in (-1, 1):
+                nb = KI.bounds(BD + "BedsideTable")
+                u = (x1 + 6 - nb[0]) if side > 0 else (x0 - 6 - nb[3])
+                x, y = bed.at(u, y0 - nb[1] + 1.0)
+                it = g.place(BD + "BedsideTable", x, y, bed.lyaw) if g.spot(BD + "BedsideTable", x, y, bed.lyaw) else None
+                if it:
+                    on(h, it, P + "CandleStick", 0.0, 0.0)
+        KI.wardrobe(h, g)
+        KI.desk(h, g)
+        KI.corner_set(h, g)
+        ext_bedroom(h, g)
+    return recipe
+
+
+def chinese_room(h, g):
+    for p in xwall(h, g, QD("Pedestal2"), ["front", "back", "left", "right"], 5, s=0.55, gap=6.0):
+        xon(h, p, QD("Vase"), 0.0, 0.0, s=1.2)
+    for c in xwall(h, g, KKF("cabinet_medium"), ["back", "front"], 3, gap=2.0, tag="tall"):
+        Bm.B.recs[-1]["material"] = Bm.MAT.get("Velvet")
+        xtop(h, c, [QD("Vase"), P + "Vase_4", KKD("candle_thin_lit")], 3, s=0.6)
+    xmount(h, g, KKD("banner_patternC_red"), ["left", "right"], 190.0, every=380.0, s=0.5)
+    xwall(h, g, KKF("couch_pillows"), ["left", "right"], 1, gap=5.0)
+    reading_table(h, g, 2, table=KKF("table_low"), s=1.0)
+
+
+def sewing_room(h, g):
+    xscatter(h, g, [PPM(MANNEQUIN)], 4, s=0.2, pad=25.0)
+    for t in xwall(h, g, KKF("table_medium"), ["back", "front"], 3, s=1.0, gap=3.0):
+        xtop(h, t, [KKF("pillow_A"), KKF("pillow_B"), P + "Bag", KKD("box_small")], 3, s=0.5)
+    xwall(h, g, BD + "Wardrobe", ["left", "right"], 2, gap=3.0, tag="tall")
+    xscatter(h, g, [P + "Basket" if Bm.have(P + "Basket") else KKF("pillow_A"), KKF("chair_A_wood")], 4, pad=10.0)
+
+
+def dressing_room(h, g):
+    xwall(h, g, BD + "Wardrobe", ["back", "front", "left"], 4, gap=2.0, tag="tall")
+    xmount(h, g, KF("bathroomMirror"), ["right"], 140.0, every=260.0, s=2.0)
+    xwall(h, g, KKF("shelf_B_small"), ["front", "back"], 2, gap=2.0)
+    xwall(h, g, KKF("couch"), ["right", "back"], 1, gap=4.0)
+    xscatter(h, g, [KKD("trunk_small_A"), KKD("box_large")], 3, s=0.6, pad=10.0)
+
+
+def picture_gallery(h, g):
+    gallery_run(h, g)
+    xmount(h, g, PPM("Painting_rsZqX75a8x"), ["front", "back", "left"], 230.0, every=420.0, s=1.2)
+    xscatter(h, g, [PPM(STATUE), PPM(ANGEL)], 3, s=0.6, pad=40.0, yaw_any=False)
+
+
+def crypt(h, g):
+    xwall(h, g, KKH("coffin_decorated"), ["back", "front"], 4, gap=10.0)
+    xscatter(h, g, [KKH("candle_triple")], 4, s=0.8, pad=8.0, collide=False)
+    xscatter(h, g, [PPM(COFFIN)], 1, s=1.0, pad=30.0, yaw_any=False)
+    xscatter(h, g, [KKH("skull_candle"), KKH("bone_A"), KKH("bone_B"), KKH("candle_melted")], 10, pad=6.0, collide=False)
+    xwall(h, g, KKH("shrine_candles"), ["left", "right"], 2, gap=6.0)
+    xmount(h, g, QD("Cobweb"), ["front", "back", "left", "right"], 210.0, every=400.0)
+    p = xat(h, g, QD("Pedestal2"), 19.0, -12.0, s=0.6)
+    xon(h, p, P + "Vase_4", 0.0, 0.0, s=1.0)                       # the reliquary (secret chore)
+
+
+def observatory(h, g):
+    xat(h, g, PPM(TELESCOPE), 48.5, -40.2, 150.0, s=1.6)
+    xscatter(h, g, [PPM(GLOBE)], 1, s=3.0, pad=20.0)
+    t = reading_table(h, g, 1, table=KKF("table_medium"), s=1.0)
+    xtop(h, t, [P + "Scroll_1", P + "Scroll_2", KKD("candle_lit"), P + "Book_7"], 4, s=0.8)
+    xwall(h, g, KKD("bed_floor"), ["front", "left"], 1, gap=3.0)
+    xwall(h, g, KF("bookcaseOpen"), ["back", "right"], 2, s=2.0, gap=2.0, tag="tall")
+    xmount(h, g, KKF("pictureframe_large_A"), ["front", "left"], 180.0, every=300.0)
+
+
+def wine_catacombs(h, g):
+    for sh in xwall(h, g, KKD("shelf_large"), ["front", "back", "left"], 8, s=0.9, gap=1.0, tag="tall"):
+        xtop(h, sh, [KKD("bottle_A_brown"), KKD("bottle_B_green"), KKD("bottle_C_brown"), KKD("bottle_A_labeled_green")],
+             5, s=0.55)
+    xscatter(h, g, [KKD("barrel_large"), KKD("barrel_small_stack"), KKD("keg"), QD("Barrel")], 8, s=0.8, pad=15.0)
+    xscatter(h, g, [KKD("candle_lit"), KKD("candle_melted")], 6, pad=5.0, collide=False)
+    xmount(h, g, QD("Cobweb2"), ["front", "back", "left", "right"], 210.0, every=380.0)
+
+
+def vault(h, g):
+    xwall(h, g, KKD("chest_gold"), ["front", "back", "left"], 4, s=0.5, gap=3.0)
+    xwall(h, g, QD("Chest_Gold"), ["front", "back", "right"], 2, s=0.9, gap=3.0)
+    for sh in xwall(h, g, KKD("shelf_large"), ["front", "back"], 4, s=0.8, gap=2.0, tag="tall"):
+        xtop(h, sh, [P + "Scroll_1", P + "Scroll_2", KKD("coin_stack_medium"), P + "Book_7"], 4, s=0.6)
+    xscatter(h, g, [QD("Coin_Pile"), QD("Bag_Coins"), KKD("coin_stack_large")], 6, pad=6.0, collide=False)
+    xmount(h, g, KKD("torch_mounted"), ["left", "right"], 150.0, every=500.0, s=0.5)
+
+
+def ossuary(h, g):
+    for sh in xwall(h, g, KKD("shelves"), ["front", "back", "left"], 8, s=0.8, gap=1.0, tag="tall"):
+        xtop(h, sh, [KKH("skull"), QD("Skull"), KKH("bone_C"), KKH("skull_candle")], 5, s=0.7)
+    xscatter(h, g, [KKH("ribcage"), KKH("bone_A"), KKH("bone_B"), KKH("candle_melted")], 10, pad=6.0, collide=False)
+    xwall(h, g, KKH("pillar"), ["left", "right"], 2, gap=10.0, tag="tall")
+
+
+def steps(h, g):
+    xscatter(h, g, [KKH("lantern_standing"), KKD("crates_stacked"), QD("Barrel")], 3, s=0.8, pad=10.0)
+
+
+def guest_bath(h, g):
+    ext_bath(h, g)
+    xwall(h, g, PPM(BATHTUB), ["back", "right", "front"], 1, s=1.2, gap=4.0)
+
+
+NEW_ROOMS = [
+    ("music_room", music_room, 50), ("green_salon", salon(KKF("rug_rectangle_stripes_A")), 51),
+    ("blue_salon", salon(KKF("rug_oval_B"), KKF("couch")), 52), ("staircase_hall", staircase_hall, 53),
+    ("yellow_salon", salon(KKF("rug_rectangle_B")), 54), ("card_room", salon(KKF("rug_rectangle_A"), KKF("couch")), 55),
+    ("trophy_room", east_room("gun"), 56), ("long_gallery", gallery_run, 57),
+    ("west_passage", gallery_run, 58), ("servants_hall", servants_hall, 59), ("housekeeper", housekeeper, 60),
+    ("silver_room", silver_room, 61), ("boiler_room", boiler_room, 62), ("east_hall", gallery_run, 63),
+    ("smoking_room", east_room("smoking"), 64), ("gun_room", east_room("gun"), 65), ("map_room", east_room("map"), 66),
+    ("games_room", east_room("games"), 67), ("orangery", east_room("orangery"), 68),
+    ("morning_room", east_room("morning"), 69), ("north_corridor", gallery_run, 70), ("grand_landing", staircase_hall, 71),
+    ("lilac_room", guest_bed("Red"), 72), ("sewing_room", sewing_room, 73), ("chinese_room", chinese_room, 74),
+    ("dressing_room", dressing_room, 75), ("upper_west", gallery_run, 76), ("picture_gallery", picture_gallery, 77),
+    ("east_corridor", gallery_run, 78), ("green_room", guest_bed("Blue"), 79), ("gold_room", guest_bed("Red"), 80),
+    ("rose_room", guest_bed("Red"), 81), ("ivory_room", guest_bed("Blue"), 82), ("guest_bath", guest_bath, 83),
+    ("observatory", observatory, 84), ("wine_catacombs", wine_catacombs, 85), ("catacomb_steps", steps, 86),
+    ("vault", vault, 87), ("ossuary", ossuary, 88), ("ossuary_steps", steps, 89), ("crypt", crypt, 90),
+]
+# lit by a neighbour's light (shadowless lights reach through the walls) - keeps the manor within 70 lights
+NO_LIGHT = {"silver_room", "catacomb_steps", "ossuary_steps", "upper_west", "gun_room", "games_room", "grand_landing",
+            "rose_room", "west_passage"}
+
+
 EXT = {"great_hall": ext_great_hall, "vestibule": ext_vestibule, "dining": ext_dining, "kitchen": ext_kitchen,
        "pantry": ext_pantry, "laundry": ext_laundry, "chapel": ext_chapel, "library": ext_library,
        "ballroom": ext_ballroom, "servants_corridor": ext_servants_corridor, "wine_cellar": ext_wine_cellar,
@@ -1726,8 +2178,15 @@ def run(builder, kg_interiors):
             lambda: bedroom_room("red_room", "Red", 41, fire=("left", -2.0), hero=True),
             studio, nursery, study,
             lambda: bedroom_room("master", "Red", 42, fire=("front", 26.0), extra=master_extra),
-            billiard, storm_terrace, attic, clock_room, storm_tower, tower_top, roof_walk,
-            courtyard, service_yard, greenhouse, graveyard, cliff_path]
+            billiard, storm_terrace, attic, clock_room, storm_tower, tower_top, roof_walk]
+    # SPRINT-040: the new wings before the grounds (the grounds' lamp posts are the first to go when the 70-light
+    # budget runs out: moonlight and lightning light the outside)
+    for rid, fn, style in NEW_ROOMS:
+        def job(rid=rid, fn=fn, style=style):
+            new_room(rid, fn, style, light=rid not in NO_LIGHT)
+        job.__name__ = rid
+        jobs.append(job)
+    jobs += [courtyard, service_yard, greenhouse, graveyard, cliff_path]
     for job in jobs:
         name = getattr(job, "__name__", "job")
         try:

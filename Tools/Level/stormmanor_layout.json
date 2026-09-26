@@ -17,6 +17,12 @@
  },
  "floors": [
   {
+   "id": "C2",
+   "name_tr": "Alt Mahzen",
+   "name_en": "Lower vaults",
+   "z": -6.0
+  },
+  {
    "id": "C",
    "name_tr": "Mahzen",
    "name_en": "Cellar",
@@ -56,7 +62,9 @@
   "guest": "Misafir katı",
   "master": "Efendi dairesi",
   "upper": "Çatı ve kule",
-  "grounds": "Bahçe ve kıyı"
+  "grounds": "Bahçe ve kıyı",
+  "north": "Kuzey blok (merdiven holü, salonlar, uzun galeri)",
+  "deep": "Alt mahzen"
  },
  "rooms": [
   {
@@ -1709,6 +1717,1771 @@
    "part_of": "storm_tower",
    "purpose": "signal lamp for the Messenger Boy's boat; lightning rod",
    "dressing": "signal lamp, rod, parapet"
+  },
+  {
+   "id": "music_room",
+   "floor": "F0",
+   "poly": [
+    [
+     -34,
+     -40
+    ],
+    [
+     -24,
+     -40
+    ],
+    [
+     -24,
+     -24
+    ],
+    [
+     -34,
+     -24
+    ]
+   ],
+   "name_tr": "Müzik Salonu",
+   "name_en": "Music Room",
+   "kind": "room",
+   "counts": true,
+   "wing": "north",
+   "risk": "orta",
+   "min_n": 8,
+   "surface": "wood",
+   "dead_end_ok": false,
+   "hides": [
+    {
+     "at": [
+      -33,
+      -39
+     ],
+     "what": "behind the harp's cover"
+    }
+   ],
+   "evidence": [
+    "the piano lid shows fresh fingerprints; the metronome still ticking"
+   ],
+   "purpose": "grand piano, harp, the tuning chore",
+   "dressing": "grand piano, harp, music stands, sheet music, gilt chairs in rows, hearth"
+  },
+  {
+   "id": "green_salon",
+   "floor": "F0",
+   "poly": [
+    [
+     -24,
+     -40
+    ],
+    [
+     -16,
+     -40
+    ],
+    [
+     -16,
+     -24
+    ],
+    [
+     -24,
+     -24
+    ]
+   ],
+   "name_tr": "Yeşil Salon",
+   "name_en": "Green Salon",
+   "kind": "room",
+   "counts": true,
+   "wing": "north",
+   "risk": "orta",
+   "min_n": 8,
+   "surface": "carpet",
+   "dead_end_ok": false,
+   "hides": [
+    {
+     "at": [
+      -23,
+      -39
+     ],
+     "what": "behind the palm screen"
+    }
+   ],
+   "evidence": [
+    "tea cups still warm (someone was here < 60 s ago)"
+   ],
+   "purpose": "enfilade salon",
+   "dressing": "green sofas, tea tables, palms, portraits, cabinets"
+  },
+  {
+   "id": "blue_salon",
+   "floor": "F0",
+   "poly": [
+    [
+     -16,
+     -40
+    ],
+    [
+     -8,
+     -40
+    ],
+    [
+     -8,
+     -24
+    ],
+    [
+     -16,
+     -24
+    ]
+   ],
+   "name_tr": "Mavi Salon",
+   "name_en": "Blue Salon",
+   "kind": "room",
+   "counts": true,
+   "wing": "north",
+   "risk": "orta",
+   "min_n": 8,
+   "surface": "carpet",
+   "dead_end_ok": false,
+   "hides": [
+    {
+     "at": [
+      -15,
+      -25
+     ],
+     "what": "curtained window seat"
+    }
+   ],
+   "evidence": [
+    "a card game abandoned mid-hand"
+   ],
+   "purpose": "enfilade salon; ladies' card tables",
+   "dressing": "blue armchairs, card tables, vitrines"
+  },
+  {
+   "id": "staircase_hall",
+   "floor": "F0",
+   "poly": [
+    [
+     -8,
+     -40
+    ],
+    [
+     8,
+     -40
+    ],
+    [
+     8,
+     -24
+    ],
+    [
+     -8,
+     -24
+    ]
+   ],
+   "name_tr": "Büyük Merdiven Holü",
+   "name_en": "Grand Staircase Hall",
+   "kind": "room",
+   "counts": true,
+   "wing": "north",
+   "risk": "orta",
+   "min_n": 8,
+   "surface": "stone",
+   "dead_end_ok": false,
+   "hides": [
+    {
+     "at": [
+      7,
+      -39
+     ],
+     "what": "under the stair"
+    }
+   ],
+   "evidence": [
+    "the chandelier's state; footprints on the stone stairs"
+   ],
+   "purpose": "twin grand stairs to the guest floor; a chandelier (trap)",
+   "dressing": "twin stairs, statues on plinths, a great chandelier, banners, a grandfather clock"
+  },
+  {
+   "id": "yellow_salon",
+   "floor": "F0",
+   "poly": [
+    [
+     8,
+     -40
+    ],
+    [
+     16,
+     -40
+    ],
+    [
+     16,
+     -24
+    ],
+    [
+     8,
+     -24
+    ]
+   ],
+   "name_tr": "Sarı Salon",
+   "name_en": "Yellow Salon",
+   "kind": "room",
+   "counts": true,
+   "wing": "north",
+   "risk": "orta",
+   "min_n": 8,
+   "surface": "carpet",
+   "dead_end_ok": false,
+   "hides": [
+    {
+     "at": [
+      15,
+      -39
+     ],
+     "what": "behind the harpsichord"
+    }
+   ],
+   "evidence": [
+    "the harpsichord's dust shows who touched it"
+   ],
+   "purpose": "enfilade salon",
+   "dressing": "yellow sofas, harpsichord, flower vases, mirrors"
+  },
+  {
+   "id": "card_room",
+   "floor": "F0",
+   "poly": [
+    [
+     16,
+     -40
+    ],
+    [
+     24,
+     -40
+    ],
+    [
+     24,
+     -24
+    ],
+    [
+     16,
+     -24
+    ]
+   ],
+   "name_tr": "Kart Odası",
+   "name_en": "Card Room",
+   "kind": "room",
+   "counts": true,
+   "wing": "north",
+   "risk": "orta",
+   "min_n": 8,
+   "surface": "wood",
+   "dead_end_ok": false,
+   "hides": [
+    {
+     "at": [
+      17,
+      -25
+     ],
+     "what": "curtained alcove"
+    }
+   ],
+   "evidence": [
+    "soot on the hearth plate (S7 used)"
+   ],
+   "purpose": "card tables; the fireplace passage (secret S7)",
+   "dressing": "card tables, chips, decanters, a hearth with a false back"
+  },
+  {
+   "id": "trophy_room",
+   "floor": "F0",
+   "poly": [
+    [
+     24,
+     -40
+    ],
+    [
+     34,
+     -40
+    ],
+    [
+     34,
+     -24
+    ],
+    [
+     24,
+     -24
+    ]
+   ],
+   "name_tr": "Av Odası",
+   "name_en": "Trophy Room",
+   "kind": "room",
+   "counts": true,
+   "wing": "north",
+   "risk": "orta",
+   "min_n": 8,
+   "surface": "wood",
+   "dead_end_ok": false,
+   "hides": [
+    {
+     "at": [
+      33,
+      -25
+     ],
+     "what": "behind the bear"
+    }
+   ],
+   "evidence": [
+    "a missing rifle from the rack; the door that locks"
+   ],
+   "purpose": "hunting trophies; the room that locks itself (trap)",
+   "dressing": "mounted heads, gun racks, a bear rug, leather chairs, cabinets"
+  },
+  {
+   "id": "long_gallery",
+   "floor": "F0",
+   "poly": [
+    [
+     -34,
+     -44
+    ],
+    [
+     34,
+     -44
+    ],
+    [
+     34,
+     -40
+    ],
+    [
+     -34,
+     -40
+    ]
+   ],
+   "name_tr": "Uzun Portre Galerisi",
+   "name_en": "Long Portrait Gallery",
+   "kind": "circulation",
+   "counts": false,
+   "wing": "north",
+   "risk": "tehlikeli",
+   "min_n": 8,
+   "surface": "carpet",
+   "dead_end_ok": false,
+   "hides": [],
+   "evidence": [],
+   "purpose": "68 m portrait corridor behind the salons; creaking boards; lamps that go out",
+   "dressing": "portraits end to end, busts, runner rugs, clocks, benches"
+  },
+  {
+   "id": "west_passage",
+   "floor": "F0",
+   "poly": [
+    [
+     -38,
+     -44
+    ],
+    [
+     -34,
+     -44
+    ],
+    [
+     -34,
+     -24
+    ],
+    [
+     -38,
+     -24
+    ]
+   ],
+   "name_tr": "Batı Hizmet Geçidi",
+   "name_en": "West Service Passage",
+   "kind": "circulation",
+   "counts": false,
+   "wing": "west",
+   "risk": "orta",
+   "min_n": 8,
+   "surface": "stone",
+   "dead_end_ok": false,
+   "hides": [],
+   "evidence": [],
+   "purpose": "servants' passage; stair up",
+   "dressing": "coat hooks, bell board, lamps, crates"
+  },
+  {
+   "id": "servants_hall",
+   "floor": "F0",
+   "poly": [
+    [
+     -54,
+     -44
+    ],
+    [
+     -44,
+     -44
+    ],
+    [
+     -44,
+     -34
+    ],
+    [
+     -54,
+     -34
+    ]
+   ],
+   "name_tr": "Hizmetkâr Salonu",
+   "name_en": "Servants' Hall",
+   "kind": "room",
+   "counts": true,
+   "wing": "west",
+   "risk": "orta",
+   "min_n": 8,
+   "surface": "stone",
+   "dead_end_ok": false,
+   "hides": [
+    {
+     "at": [
+      -53,
+      -43
+     ],
+     "what": "coal cupboard"
+    }
+   ],
+   "evidence": [
+    "the bell board shows the last room that rang"
+   ],
+   "purpose": "the servants' long table; the crawlway (secret S9)",
+   "dressing": "long table, benches, dresser with crockery, bell board, hearth"
+  },
+  {
+   "id": "housekeeper",
+   "floor": "F0",
+   "poly": [
+    [
+     -54,
+     -34
+    ],
+    [
+     -44,
+     -34
+    ],
+    [
+     -44,
+     -24
+    ],
+    [
+     -54,
+     -24
+    ]
+   ],
+   "name_tr": "Kâhya Odası",
+   "name_en": "Housekeeper's Room",
+   "kind": "room",
+   "counts": true,
+   "wing": "west",
+   "risk": "orta",
+   "min_n": 8,
+   "surface": "wood",
+   "dead_end_ok": false,
+   "hides": [
+    {
+     "at": [
+      -53,
+      -25
+     ],
+     "what": "the bed curtain"
+    }
+   ],
+   "evidence": [
+    "the key board: a missing key is visible"
+   ],
+   "purpose": "keys, ledgers, the jam cupboard",
+   "dressing": "desk, key board, ledgers, armchair, jam shelves, a bed in the corner"
+  },
+  {
+   "id": "silver_room",
+   "floor": "F0",
+   "poly": [
+    [
+     -44,
+     -44
+    ],
+    [
+     -38,
+     -44
+    ],
+    [
+     -38,
+     -34
+    ],
+    [
+     -44,
+     -34
+    ]
+   ],
+   "name_tr": "Gümüş Odası",
+   "name_en": "Silver Room",
+   "kind": "room",
+   "counts": true,
+   "wing": "west",
+   "risk": "orta",
+   "min_n": 8,
+   "surface": "wood",
+   "dead_end_ok": false,
+   "hides": [
+    {
+     "at": [
+      -39,
+      -43
+     ],
+     "what": "plate cupboard"
+    }
+   ],
+   "evidence": [
+    "a missing knife from the silver canteen"
+   ],
+   "purpose": "the butler's pantry: silver chest, polishing bench",
+   "dressing": "silver chest, cabinets of plate, polishing bench, candlesticks"
+  },
+  {
+   "id": "boiler_room",
+   "floor": "F0",
+   "poly": [
+    [
+     -44,
+     -34
+    ],
+    [
+     -38,
+     -34
+    ],
+    [
+     -38,
+     -24
+    ],
+    [
+     -44,
+     -24
+    ]
+   ],
+   "name_tr": "Kazan Dairesi",
+   "name_en": "Boiler Room",
+   "kind": "room",
+   "counts": true,
+   "wing": "west",
+   "risk": "orta",
+   "min_n": 8,
+   "surface": "stone",
+   "dead_end_ok": false,
+   "hides": [
+    {
+     "at": [
+      -43,
+      -33
+     ],
+     "what": "behind the boiler"
+    }
+   ],
+   "evidence": [
+    "coal dust on shoes (45 s)"
+   ],
+   "purpose": "the boiler that heats the bath; lamp oil",
+   "dressing": "boiler, pipes, coal heap, lamp shelves, oil cans"
+  },
+  {
+   "id": "east_hall",
+   "floor": "F0",
+   "poly": [
+    [
+     34,
+     -44
+    ],
+    [
+     38,
+     -44
+    ],
+    [
+     38,
+     0
+    ],
+    [
+     34,
+     0
+    ]
+   ],
+   "name_tr": "Doğu Kanat Holü",
+   "name_en": "East Wing Hall",
+   "kind": "circulation",
+   "counts": false,
+   "wing": "east",
+   "risk": "orta",
+   "min_n": 10,
+   "surface": "stone",
+   "dead_end_ok": false,
+   "hides": [],
+   "evidence": [],
+   "purpose": "44 m hall of the guest wing; stair up; creaking floor",
+   "dressing": "runner rugs, console tables, busts, sconces"
+  },
+  {
+   "id": "smoking_room",
+   "floor": "F0",
+   "poly": [
+    [
+     38,
+     -44
+    ],
+    [
+     46,
+     -44
+    ],
+    [
+     46,
+     -34
+    ],
+    [
+     38,
+     -34
+    ]
+   ],
+   "name_tr": "Tütün Odası",
+   "name_en": "Smoking Room",
+   "kind": "room",
+   "counts": true,
+   "wing": "east",
+   "risk": "orta",
+   "min_n": 10,
+   "surface": "carpet",
+   "dead_end_ok": false,
+   "hides": [
+    {
+     "at": [
+      45,
+      -43
+     ],
+     "what": "chesterfield alcove"
+    }
+   ],
+   "evidence": [
+    "fresh ash in the tray"
+   ],
+   "purpose": "gentlemen's smoking room",
+   "dressing": "leather chesterfields, humidor, pipe racks, a wall safe behind a painting"
+  },
+  {
+   "id": "gun_room",
+   "floor": "F0",
+   "poly": [
+    [
+     46,
+     -44
+    ],
+    [
+     54,
+     -44
+    ],
+    [
+     54,
+     -34
+    ],
+    [
+     46,
+     -34
+    ]
+   ],
+   "name_tr": "Silah Odası",
+   "name_en": "Gun Room",
+   "kind": "room",
+   "counts": true,
+   "wing": "east",
+   "risk": "orta",
+   "min_n": 10,
+   "surface": "wood",
+   "dead_end_ok": false,
+   "hides": [
+    {
+     "at": [
+      53,
+      -43
+     ],
+     "what": "boot cupboard"
+    }
+   ],
+   "evidence": [
+    "a gun cabinet ajar"
+   ],
+   "purpose": "gun cabinets (locked), boots, game bags",
+   "dressing": "gun cabinets, boot rack, game bags, antlers, a workbench"
+  },
+  {
+   "id": "map_room",
+   "floor": "F0",
+   "poly": [
+    [
+     38,
+     -34
+    ],
+    [
+     46,
+     -34
+    ],
+    [
+     46,
+     -24
+    ],
+    [
+     38,
+     -24
+    ]
+   ],
+   "name_tr": "Harita Odası",
+   "name_en": "Map Room",
+   "kind": "room",
+   "counts": true,
+   "wing": "east",
+   "risk": "orta",
+   "min_n": 10,
+   "surface": "carpet",
+   "dead_end_ok": false,
+   "hides": [
+    {
+     "at": [
+      45,
+      -25
+     ],
+     "what": "chart chest"
+    }
+   ],
+   "evidence": [
+    "the star chart (secret chore) on the table"
+   ],
+   "purpose": "sea charts of the coast; the star chart goes here",
+   "dressing": "map table, globes, chart chests, a telescope, framed charts"
+  },
+  {
+   "id": "games_room",
+   "floor": "F0",
+   "poly": [
+    [
+     46,
+     -34
+    ],
+    [
+     54,
+     -34
+    ],
+    [
+     54,
+     -24
+    ],
+    [
+     46,
+     -24
+    ]
+   ],
+   "name_tr": "Oyun Odası",
+   "name_en": "Games Room",
+   "kind": "room",
+   "counts": true,
+   "wing": "east",
+   "risk": "orta",
+   "min_n": 10,
+   "surface": "wood",
+   "dead_end_ok": false,
+   "hides": [
+    {
+     "at": [
+      53,
+      -25
+     ],
+     "what": "behind the dart board screen"
+    }
+   ],
+   "evidence": [
+    "the chess position changes"
+   ],
+   "purpose": "the chessboard chore; backgammon, cards",
+   "dressing": "chess table, game boxes, armchairs, a dart board"
+  },
+  {
+   "id": "orangery",
+   "floor": "F0",
+   "poly": [
+    [
+     38,
+     -24
+    ],
+    [
+     54,
+     -24
+    ],
+    [
+     54,
+     -10
+    ],
+    [
+     38,
+     -10
+    ]
+   ],
+   "name_tr": "Portakallık",
+   "name_en": "Orangery",
+   "kind": "room",
+   "counts": true,
+   "wing": "east",
+   "risk": "orta",
+   "min_n": 10,
+   "surface": "stone",
+   "dead_end_ok": false,
+   "hides": [
+    {
+     "at": [
+      39,
+      -23
+     ],
+     "what": "among the orange tubs"
+    }
+   ],
+   "evidence": [
+    "wet soil footprints; the birds screech when startled"
+   ],
+   "purpose": "orange trees in tubs; the aviary",
+   "dressing": "orange trees, aviary cage, benches, a fountain, watering cans"
+  },
+  {
+   "id": "morning_room",
+   "floor": "F0",
+   "poly": [
+    [
+     38,
+     -10
+    ],
+    [
+     54,
+     -10
+    ],
+    [
+     54,
+     0
+    ],
+    [
+     38,
+     0
+    ]
+   ],
+   "name_tr": "Sabah Odası",
+   "name_en": "Morning Room",
+   "kind": "room",
+   "counts": true,
+   "wing": "east",
+   "risk": "orta",
+   "min_n": 10,
+   "surface": "carpet",
+   "dead_end_ok": false,
+   "hides": [
+    {
+     "at": [
+      53,
+      -1
+     ],
+     "what": "behind the sofa"
+    }
+   ],
+   "evidence": [
+    "the breakfast is half eaten"
+   ],
+   "purpose": "breakfast room over the greenhouse",
+   "dressing": "breakfast table, sideboard, sofas, flowers, a writing desk"
+  },
+  {
+   "id": "north_corridor",
+   "floor": "F1",
+   "poly": [
+    [
+     -34,
+     -44
+    ],
+    [
+     34,
+     -44
+    ],
+    [
+     34,
+     -40
+    ],
+    [
+     -34,
+     -40
+    ]
+   ],
+   "name_tr": "Üst Portre Koridoru",
+   "name_en": "Upper Portrait Corridor",
+   "kind": "circulation",
+   "counts": false,
+   "wing": "north",
+   "risk": "orta",
+   "min_n": 8,
+   "surface": "carpet",
+   "dead_end_ok": false,
+   "hides": [],
+   "evidence": [],
+   "purpose": "the guest floor's north spine over the long gallery",
+   "dressing": "portraits, runner, side tables"
+  },
+  {
+   "id": "grand_landing",
+   "floor": "F1",
+   "poly": [
+    [
+     -8,
+     -40
+    ],
+    [
+     8,
+     -40
+    ],
+    [
+     8,
+     -24
+    ],
+    [
+     -8,
+     -24
+    ]
+   ],
+   "name_tr": "Büyük Sahanlık",
+   "name_en": "Grand Landing",
+   "kind": "circulation",
+   "counts": false,
+   "wing": "north",
+   "risk": "orta",
+   "min_n": 8,
+   "surface": "carpet",
+   "dead_end_ok": false,
+   "hides": [],
+   "evidence": [],
+   "purpose": "top of the twin grand stairs",
+   "dressing": "balustrades, statues, sofas, a tall window"
+  },
+  {
+   "id": "lilac_room",
+   "floor": "F1",
+   "poly": [
+    [
+     -34,
+     -40
+    ],
+    [
+     -24,
+     -40
+    ],
+    [
+     -24,
+     -24
+    ],
+    [
+     -34,
+     -24
+    ]
+   ],
+   "name_tr": "Leylak Misafir Odası",
+   "name_en": "Lilac Guest Room",
+   "kind": "room",
+   "counts": true,
+   "wing": "north",
+   "risk": "orta",
+   "min_n": 8,
+   "surface": "carpet",
+   "dead_end_ok": false,
+   "hides": [
+    {
+     "at": [
+      -33,
+      -39
+     ],
+     "what": "wardrobe"
+    }
+   ],
+   "evidence": [
+    "unmade bed"
+   ],
+   "purpose": "guest bedroom",
+   "dressing": "lilac bed, wardrobe, vanity, trunk"
+  },
+  {
+   "id": "sewing_room",
+   "floor": "F1",
+   "poly": [
+    [
+     -24,
+     -40
+    ],
+    [
+     -8,
+     -40
+    ],
+    [
+     -8,
+     -24
+    ],
+    [
+     -24,
+     -24
+    ]
+   ],
+   "name_tr": "Dikiş Odası",
+   "name_en": "Sewing Room",
+   "kind": "room",
+   "counts": true,
+   "wing": "north",
+   "risk": "orta",
+   "min_n": 8,
+   "surface": "wood",
+   "dead_end_ok": false,
+   "hides": [
+    {
+     "at": [
+      -23,
+      -39
+     ],
+     "what": "among the dress forms"
+    }
+   ],
+   "evidence": [
+    "a pair of shears missing (weapon)"
+   ],
+   "purpose": "dress forms, the linen press",
+   "dressing": "dress forms, sewing tables, bolts of cloth, linen press, baskets"
+  },
+  {
+   "id": "chinese_room",
+   "floor": "F1",
+   "poly": [
+    [
+     8,
+     -40
+    ],
+    [
+     24,
+     -40
+    ],
+    [
+     24,
+     -24
+    ],
+    [
+     8,
+     -24
+    ]
+   ],
+   "name_tr": "Çin Odası",
+   "name_en": "Chinese Room",
+   "kind": "room",
+   "counts": true,
+   "wing": "north",
+   "risk": "orta",
+   "min_n": 8,
+   "surface": "carpet",
+   "dead_end_ok": false,
+   "hides": [
+    {
+     "at": [
+      23,
+      -39
+     ],
+     "what": "lacquer screen"
+    }
+   ],
+   "evidence": [
+    "a vase moved: its dust ring"
+   ],
+   "purpose": "Pozzo senior's collection: lacquer, vases",
+   "dressing": "lacquer cabinets, vases, screens, a daybed, silk hangings"
+  },
+  {
+   "id": "dressing_room",
+   "floor": "F1",
+   "poly": [
+    [
+     24,
+     -40
+    ],
+    [
+     34,
+     -40
+    ],
+    [
+     34,
+     -24
+    ],
+    [
+     24,
+     -24
+    ]
+   ],
+   "name_tr": "Giyinme Odası",
+   "name_en": "Dressing Room",
+   "kind": "room",
+   "counts": true,
+   "wing": "north",
+   "risk": "orta",
+   "min_n": 8,
+   "surface": "carpet",
+   "dead_end_ok": false,
+   "hides": [
+    {
+     "at": [
+      25,
+      -25
+     ],
+     "what": "wardrobe"
+    }
+   ],
+   "evidence": [
+    "a wardrobe door ajar (S7)"
+   ],
+   "purpose": "Pozzo's wardrobes; the fireplace passage comes out here",
+   "dressing": "wardrobes, mirrors, shoe racks, a chaise, hat boxes"
+  },
+  {
+   "id": "upper_west",
+   "floor": "F1",
+   "poly": [
+    [
+     -38,
+     -44
+    ],
+    [
+     -34,
+     -44
+    ],
+    [
+     -34,
+     -24
+    ],
+    [
+     -38,
+     -24
+    ]
+   ],
+   "name_tr": "Batı Üst Geçit",
+   "name_en": "Upper West Passage",
+   "kind": "circulation",
+   "counts": false,
+   "wing": "west",
+   "risk": "orta",
+   "min_n": 8,
+   "surface": "wood",
+   "dead_end_ok": false,
+   "hides": [],
+   "evidence": [],
+   "purpose": "top of the service stair",
+   "dressing": "linen shelves, lamps"
+  },
+  {
+   "id": "picture_gallery",
+   "floor": "F1",
+   "poly": [
+    [
+     -54,
+     -44
+    ],
+    [
+     -38,
+     -44
+    ],
+    [
+     -38,
+     -24
+    ],
+    [
+     -54,
+     -24
+    ]
+   ],
+   "name_tr": "Resim Galerisi",
+   "name_en": "Picture Gallery",
+   "kind": "room",
+   "counts": true,
+   "wing": "west",
+   "risk": "orta",
+   "min_n": 8,
+   "surface": "carpet",
+   "dead_end_ok": true,
+   "hides": [
+    {
+     "at": [
+      -53,
+      -25
+     ],
+     "what": "behind a velvet curtain"
+    }
+   ],
+   "evidence": [
+    "the watching portrait remembers who passed"
+   ],
+   "purpose": "the family's great paintings; a portrait that watches",
+   "dressing": "paintings frame to frame, statues, benches, velvet ropes"
+  },
+  {
+   "id": "east_corridor",
+   "floor": "F1",
+   "poly": [
+    [
+     34,
+     -44
+    ],
+    [
+     38,
+     -44
+    ],
+    [
+     38,
+     -4
+    ],
+    [
+     34,
+     -4
+    ]
+   ],
+   "name_tr": "Doğu Misafir Koridoru",
+   "name_en": "East Guest Corridor",
+   "kind": "circulation",
+   "counts": false,
+   "wing": "east",
+   "risk": "orta",
+   "min_n": 10,
+   "surface": "carpet",
+   "dead_end_ok": false,
+   "hides": [],
+   "evidence": [],
+   "purpose": "the guest wing's corridor",
+   "dressing": "runner, guest door plaques, side tables, sconces"
+  },
+  {
+   "id": "green_room",
+   "floor": "F1",
+   "poly": [
+    [
+     38,
+     -44
+    ],
+    [
+     46,
+     -44
+    ],
+    [
+     46,
+     -34
+    ],
+    [
+     38,
+     -34
+    ]
+   ],
+   "name_tr": "Yeşil Misafir Odası",
+   "name_en": "Green Guest Room",
+   "kind": "room",
+   "counts": true,
+   "wing": "east",
+   "risk": "orta",
+   "min_n": 10,
+   "surface": "carpet",
+   "dead_end_ok": false,
+   "hides": [
+    {
+     "at": [
+      45,
+      -43
+     ],
+     "what": "wardrobe"
+    }
+   ],
+   "evidence": [
+    "the door that locks itself"
+   ],
+   "purpose": "guest bedroom; the room that locks (trap)",
+   "dressing": "green bed, wardrobe, desk, trunk"
+  },
+  {
+   "id": "gold_room",
+   "floor": "F1",
+   "poly": [
+    [
+     46,
+     -44
+    ],
+    [
+     54,
+     -44
+    ],
+    [
+     54,
+     -34
+    ],
+    [
+     46,
+     -34
+    ]
+   ],
+   "name_tr": "Altın Misafir Odası",
+   "name_en": "Gold Guest Room",
+   "kind": "room",
+   "counts": true,
+   "wing": "east",
+   "risk": "orta",
+   "min_n": 10,
+   "surface": "carpet",
+   "dead_end_ok": false,
+   "hides": [
+    {
+     "at": [
+      47,
+      -43
+     ],
+     "what": "wardrobe"
+    }
+   ],
+   "evidence": [
+    "a loose panel beside the bed (S10)"
+   ],
+   "purpose": "guest bedroom; a panel to the hidden observatory (secret S10)",
+   "dressing": "gold bed, wardrobe, vanity, a ladder behind the panel"
+  },
+  {
+   "id": "rose_room",
+   "floor": "F1",
+   "poly": [
+    [
+     38,
+     -34
+    ],
+    [
+     46,
+     -34
+    ],
+    [
+     46,
+     -24
+    ],
+    [
+     38,
+     -24
+    ]
+   ],
+   "name_tr": "Gül Misafir Odası",
+   "name_en": "Rose Guest Room",
+   "kind": "room",
+   "counts": true,
+   "wing": "east",
+   "risk": "orta",
+   "min_n": 10,
+   "surface": "carpet",
+   "dead_end_ok": false,
+   "hides": [
+    {
+     "at": [
+      45,
+      -25
+     ],
+     "what": "wardrobe"
+    }
+   ],
+   "evidence": [
+    "unmade bed"
+   ],
+   "purpose": "guest bedroom",
+   "dressing": "rose bed, wardrobe, washstand"
+  },
+  {
+   "id": "ivory_room",
+   "floor": "F1",
+   "poly": [
+    [
+     46,
+     -34
+    ],
+    [
+     54,
+     -34
+    ],
+    [
+     54,
+     -24
+    ],
+    [
+     46,
+     -24
+    ]
+   ],
+   "name_tr": "Fildişi Misafir Odası",
+   "name_en": "Ivory Guest Room",
+   "kind": "room",
+   "counts": true,
+   "wing": "east",
+   "risk": "orta",
+   "min_n": 10,
+   "surface": "carpet",
+   "dead_end_ok": false,
+   "hides": [
+    {
+     "at": [
+      53,
+      -25
+     ],
+     "what": "wardrobe"
+    }
+   ],
+   "evidence": [
+    "letters under the door"
+   ],
+   "purpose": "guest bedroom",
+   "dressing": "ivory bed, wardrobe, writing desk"
+  },
+  {
+   "id": "guest_bath",
+   "floor": "F1",
+   "poly": [
+    [
+     38,
+     -24
+    ],
+    [
+     54,
+     -24
+    ],
+    [
+     54,
+     -16
+    ],
+    [
+     38,
+     -16
+    ]
+   ],
+   "name_tr": "Misafir Hamamı",
+   "name_en": "Guest Bath",
+   "kind": "room",
+   "counts": true,
+   "wing": "east",
+   "risk": "orta",
+   "min_n": 10,
+   "surface": "wet",
+   "dead_end_ok": false,
+   "hides": [
+    {
+     "at": [
+      53,
+      -23
+     ],
+     "what": "behind the screen"
+    }
+   ],
+   "evidence": [
+    "wet footprints"
+   ],
+   "purpose": "the guest wing's bath",
+   "dressing": "bathtubs, basins, mirrors, towel rails"
+  },
+  {
+   "id": "observatory",
+   "floor": "F2",
+   "poly": [
+    [
+     46,
+     -44
+    ],
+    [
+     54,
+     -44
+    ],
+    [
+     54,
+     -36
+    ],
+    [
+     46,
+     -36
+    ]
+   ],
+   "name_tr": "Gizli Rasathane",
+   "name_en": "Hidden Observatory",
+   "kind": "room",
+   "counts": true,
+   "wing": "east",
+   "risk": "orta",
+   "min_n": 10,
+   "surface": "wood",
+   "dead_end_ok": true,
+   "hides": [
+    {
+     "at": [
+      47,
+      -37
+     ],
+     "what": "under the cot"
+    }
+   ],
+   "evidence": [
+    "the telescope's aim"
+   ],
+   "secret": true,
+   "purpose": "Anselm's secret star room: a brass telescope under a slit roof",
+   "dressing": "telescope, star charts, orrery, a cot, notebooks"
+  },
+  {
+   "id": "wine_catacombs",
+   "floor": "C2",
+   "poly": [
+    [
+     -34,
+     -16
+    ],
+    [
+     -22,
+     -16
+    ],
+    [
+     -22,
+     0
+    ],
+    [
+     -34,
+     0
+    ]
+   ],
+   "name_tr": "Şarap Katakombları",
+   "name_en": "Wine Catacombs",
+   "kind": "room",
+   "counts": true,
+   "wing": "deep",
+   "risk": "tehlikeli",
+   "min_n": 12,
+   "surface": "dust",
+   "dead_end_ok": false,
+   "hides": [
+    {
+     "at": [
+      -33,
+      -1
+     ],
+     "what": "empty niche"
+    }
+   ],
+   "evidence": [
+    "dust floor: footprints 120 s"
+   ],
+   "purpose": "racks of old vintages in vaulted niches",
+   "dressing": "wine niches, barrels, candles, cobwebs"
+  },
+  {
+   "id": "catacomb_steps",
+   "floor": "C2",
+   "poly": [
+    [
+     -22,
+     -10
+    ],
+    [
+     -18,
+     -10
+    ],
+    [
+     -18,
+     -2
+    ],
+    [
+     -22,
+     -2
+    ]
+   ],
+   "name_tr": "Katakomb Merdiveni",
+   "name_en": "Catacomb Steps",
+   "kind": "circulation",
+   "counts": false,
+   "wing": "cellar",
+   "risk": "orta",
+   "min_n": 8,
+   "surface": "stone",
+   "dead_end_ok": false,
+   "hides": [],
+   "evidence": [],
+   "purpose": "stair down from the wine cellar",
+   "dressing": "lantern, rope"
+  },
+  {
+   "id": "vault",
+   "floor": "C2",
+   "poly": [
+    [
+     -22,
+     -16
+    ],
+    [
+     -6,
+     -16
+    ],
+    [
+     -6,
+     -4
+    ],
+    [
+     -18,
+     -4
+    ],
+    [
+     -18,
+     -10
+    ],
+    [
+     -22,
+     -10
+    ]
+   ],
+   "name_tr": "Kasa Dairesi",
+   "name_en": "Strong Vault",
+   "kind": "room",
+   "counts": true,
+   "wing": "deep",
+   "risk": "tehlikeli",
+   "min_n": 12,
+   "surface": "stone",
+   "dead_end_ok": false,
+   "hides": [
+    {
+     "at": [
+      -7,
+      -15
+     ],
+     "what": "behind the iron chests"
+    }
+   ],
+   "evidence": [
+    "the floor safe's dial position"
+   ],
+   "purpose": "the family strongroom: a floor safe",
+   "dressing": "iron chests, strongboxes, shelves of deeds, a floor safe"
+  },
+  {
+   "id": "ossuary",
+   "floor": "C2",
+   "poly": [
+    [
+     -6,
+     -16
+    ],
+    [
+     6,
+     -16
+    ],
+    [
+     6,
+     -4
+    ],
+    [
+     -6,
+     -4
+    ]
+   ],
+   "name_tr": "Kemiklik",
+   "name_en": "Ossuary",
+   "kind": "room",
+   "counts": true,
+   "wing": "deep",
+   "risk": "tehlikeli",
+   "min_n": 12,
+   "surface": "dust",
+   "dead_end_ok": false,
+   "hides": [
+    {
+     "at": [
+      5,
+      -15
+     ],
+     "what": "bone niche"
+    }
+   ],
+   "evidence": [
+    "dust floor: footprints 120 s"
+   ],
+   "purpose": "bones of the old monks under the cistern",
+   "dressing": "skull walls, niches, candles"
+  },
+  {
+   "id": "ossuary_steps",
+   "floor": "C2",
+   "poly": [
+    [
+     6,
+     -12
+    ],
+    [
+     10,
+     -12
+    ],
+    [
+     10,
+     -4
+    ],
+    [
+     6,
+     -4
+    ]
+   ],
+   "name_tr": "Kemiklik Merdiveni",
+   "name_en": "Ossuary Steps",
+   "kind": "circulation",
+   "counts": false,
+   "wing": "cellar",
+   "risk": "orta",
+   "min_n": 6,
+   "surface": "stone",
+   "dead_end_ok": false,
+   "hides": [],
+   "evidence": [],
+   "purpose": "stair down from the cistern",
+   "dressing": "lantern, rope rail"
+  },
+  {
+   "id": "crypt",
+   "floor": "C2",
+   "poly": [
+    [
+     10,
+     -20
+    ],
+    [
+     22,
+     -20
+    ],
+    [
+     22,
+     -10
+    ],
+    [
+     10,
+     -10
+    ]
+   ],
+   "name_tr": "Şapel Kriptası",
+   "name_en": "Chapel Crypt",
+   "kind": "room",
+   "counts": true,
+   "wing": "deep",
+   "risk": "orta",
+   "min_n": 6,
+   "surface": "stone",
+   "dead_end_ok": true,
+   "hides": [
+    {
+     "at": [
+      21,
+      -11
+     ],
+     "what": "behind a sarcophagus"
+    }
+   ],
+   "evidence": [
+    "the relic's empty place"
+   ],
+   "secret": true,
+   "purpose": "the Pozzo crypt under the chapel (secret S8): a relic",
+   "dressing": "sarcophagi, candles, a reliquary, bones"
   }
  ],
  "doors": [
@@ -1867,7 +3640,8 @@
    ],
    "width": 2.0,
    "kind": "door",
-   "note": "kitchen back door"
+   "note": "kitchen back door",
+   "gate_min_n": 12
   },
   {
    "id": "d_pantry__laundry",
@@ -1890,7 +3664,8 @@
    ],
    "width": 2.0,
    "kind": "door",
-   "note": "service yard door"
+   "note": "service yard door",
+   "gate_min_n": 8
   },
   {
    "id": "d_laundry__service_yard",
@@ -1901,7 +3676,8 @@
     4
    ],
    "width": 2.0,
-   "kind": "door"
+   "kind": "door",
+   "gate_min_n": 8
   },
   {
    "id": "d_service_yard__courtyard",
@@ -1913,7 +3689,8 @@
    ],
    "width": 4.0,
    "kind": "gate",
-   "note": "iron gate between the yards"
+   "note": "iron gate between the yards",
+   "gate_min_n": 8
   },
   {
    "id": "d_chapel__servants_corridor",
@@ -1968,7 +3745,8 @@
     3
    ],
    "width": 2.0,
-   "kind": "door"
+   "kind": "door",
+   "gate_min_n": 8
   },
   {
    "id": "d_courtyard__greenhouse",
@@ -1979,7 +3757,8 @@
     14
    ],
    "width": 2.0,
-   "kind": "door"
+   "kind": "door",
+   "gate_min_n": 8
   },
   {
    "id": "d_service_yard__graveyard",
@@ -1990,7 +3769,8 @@
     16
    ],
    "width": 2.0,
-   "kind": "gate"
+   "kind": "gate",
+   "gate_min_n": 12
   },
   {
    "id": "d_cliff_path__graveyard",
@@ -2012,7 +3792,8 @@
     -10
    ],
    "width": 2.0,
-   "kind": "door"
+   "kind": "door",
+   "gate_min_n": 8
   },
   {
    "id": "d_spark_room__cistern",
@@ -2056,7 +3837,8 @@
     -17
    ],
    "width": 2.0,
-   "kind": "door"
+   "kind": "door",
+   "gate_min_n": 8
   },
   {
    "id": "d_gallery__corridor_w",
@@ -2122,7 +3904,8 @@
     -12
    ],
    "width": 2.0,
-   "kind": "door"
+   "kind": "door",
+   "gate_min_n": 8
   },
   {
    "id": "d_corridor_w__bath",
@@ -2133,7 +3916,8 @@
     -12
    ],
    "width": 2.0,
-   "kind": "door"
+   "kind": "door",
+   "gate_min_n": 8
   },
   {
    "id": "d_corridor_w__red_room",
@@ -2144,7 +3928,8 @@
     -8
    ],
    "width": 2.0,
-   "kind": "door"
+   "kind": "door",
+   "gate_min_n": 8
   },
   {
    "id": "d_corridor_w__studio",
@@ -2155,7 +3940,8 @@
     -8
    ],
    "width": 2.0,
-   "kind": "door"
+   "kind": "door",
+   "gate_min_n": 8
   },
   {
    "id": "d_blue_room__bath",
@@ -2188,7 +3974,8 @@
     2
    ],
    "width": 2.0,
-   "kind": "door"
+   "kind": "door",
+   "gate_min_n": 8
   },
   {
    "id": "d_nursery__billiard",
@@ -2221,7 +4008,8 @@
     -12
    ],
    "width": 2.0,
-   "kind": "door"
+   "kind": "door",
+   "gate_min_n": 8
   },
   {
    "id": "d_corridor_e__billiard",
@@ -2243,7 +4031,8 @@
     -8
    ],
    "width": 2.0,
-   "kind": "door"
+   "kind": "door",
+   "gate_min_n": 10
   },
   {
    "id": "d_billiard__storm_terrace",
@@ -2254,7 +4043,8 @@
     0
    ],
    "width": 2.0,
-   "kind": "french"
+   "kind": "french",
+   "gate_min_n": 10
   },
   {
    "id": "d_study__master",
@@ -2265,7 +4055,8 @@
     -18
    ],
    "width": 2.0,
-   "kind": "door"
+   "kind": "door",
+   "gate_min_n": 8
   },
   {
    "id": "d_attic__clock_room",
@@ -2299,6 +4090,745 @@
    ],
    "width": 2.0,
    "kind": "door"
+  },
+  {
+   "id": "d_staircase_hall__servants_corridor",
+   "a": "staircase_hall",
+   "b": "servants_corridor",
+   "at": [
+    0,
+    -24
+   ],
+   "width": 4.0,
+   "kind": "double",
+   "note": "gate: opens at 8 players",
+   "gate_min_n": 8
+  },
+  {
+   "id": "d_green_salon__servants_corridor",
+   "a": "green_salon",
+   "b": "servants_corridor",
+   "at": [
+    -19,
+    -24
+   ],
+   "width": 2.0,
+   "kind": "door",
+   "gate_min_n": 8
+  },
+  {
+   "id": "d_yellow_salon__servants_corridor",
+   "a": "yellow_salon",
+   "b": "servants_corridor",
+   "at": [
+    12,
+    -24
+   ],
+   "width": 2.0,
+   "kind": "door",
+   "gate_min_n": 8
+  },
+  {
+   "id": "d_music_room__kitchen",
+   "a": "music_room",
+   "b": "kitchen",
+   "at": [
+    -29,
+    -24
+   ],
+   "width": 2.0,
+   "kind": "door",
+   "gate_min_n": 8
+  },
+  {
+   "id": "d_trophy_room__library",
+   "a": "trophy_room",
+   "b": "library",
+   "at": [
+    28,
+    -24
+   ],
+   "width": 2.0,
+   "kind": "door",
+   "gate_min_n": 8
+  },
+  {
+   "id": "d_music_room__green_salon",
+   "a": "music_room",
+   "b": "green_salon",
+   "at": [
+    -24,
+    -32
+   ],
+   "width": 2.0,
+   "kind": "double"
+  },
+  {
+   "id": "d_green_salon__blue_salon",
+   "a": "green_salon",
+   "b": "blue_salon",
+   "at": [
+    -16,
+    -32
+   ],
+   "width": 2.0,
+   "kind": "double"
+  },
+  {
+   "id": "d_blue_salon__staircase_hall",
+   "a": "blue_salon",
+   "b": "staircase_hall",
+   "at": [
+    -8,
+    -32
+   ],
+   "width": 2.0,
+   "kind": "double"
+  },
+  {
+   "id": "d_staircase_hall__yellow_salon",
+   "a": "staircase_hall",
+   "b": "yellow_salon",
+   "at": [
+    8,
+    -32
+   ],
+   "width": 2.0,
+   "kind": "double"
+  },
+  {
+   "id": "d_yellow_salon__card_room",
+   "a": "yellow_salon",
+   "b": "card_room",
+   "at": [
+    16,
+    -32
+   ],
+   "width": 2.0,
+   "kind": "double"
+  },
+  {
+   "id": "d_card_room__trophy_room",
+   "a": "card_room",
+   "b": "trophy_room",
+   "at": [
+    24,
+    -32
+   ],
+   "width": 2.0,
+   "kind": "double"
+  },
+  {
+   "id": "d_long_gallery__music_room",
+   "a": "long_gallery",
+   "b": "music_room",
+   "at": [
+    -29,
+    -40
+   ],
+   "width": 2.0,
+   "kind": "door"
+  },
+  {
+   "id": "d_long_gallery__blue_salon",
+   "a": "long_gallery",
+   "b": "blue_salon",
+   "at": [
+    -12,
+    -40
+   ],
+   "width": 2.0,
+   "kind": "door"
+  },
+  {
+   "id": "d_long_gallery__staircase_hall",
+   "a": "long_gallery",
+   "b": "staircase_hall",
+   "at": [
+    0,
+    -40
+   ],
+   "width": 4.0,
+   "kind": "arch"
+  },
+  {
+   "id": "d_long_gallery__card_room",
+   "a": "long_gallery",
+   "b": "card_room",
+   "at": [
+    20,
+    -40
+   ],
+   "width": 2.0,
+   "kind": "door"
+  },
+  {
+   "id": "d_long_gallery__trophy_room",
+   "a": "long_gallery",
+   "b": "trophy_room",
+   "at": [
+    29,
+    -40
+   ],
+   "width": 2.0,
+   "kind": "door"
+  },
+  {
+   "id": "d_west_passage__long_gallery",
+   "a": "west_passage",
+   "b": "long_gallery",
+   "at": [
+    -34,
+    -42
+   ],
+   "width": 2.0,
+   "kind": "door"
+  },
+  {
+   "id": "d_west_passage__music_room",
+   "a": "west_passage",
+   "b": "music_room",
+   "at": [
+    -34,
+    -36
+   ],
+   "width": 2.0,
+   "kind": "door"
+  },
+  {
+   "id": "d_west_passage__cliff_path",
+   "a": "west_passage",
+   "b": "cliff_path",
+   "at": [
+    -36,
+    -24
+   ],
+   "width": 2.0,
+   "kind": "door",
+   "note": "the west wing's back door; opens at 8 players",
+   "gate_min_n": 12
+  },
+  {
+   "id": "d_west_passage__silver_room",
+   "a": "west_passage",
+   "b": "silver_room",
+   "at": [
+    -38,
+    -39
+   ],
+   "width": 2.0,
+   "kind": "door"
+  },
+  {
+   "id": "d_west_passage__boiler_room",
+   "a": "west_passage",
+   "b": "boiler_room",
+   "at": [
+    -38,
+    -29
+   ],
+   "width": 2.0,
+   "kind": "door"
+  },
+  {
+   "id": "d_silver_room__servants_hall",
+   "a": "silver_room",
+   "b": "servants_hall",
+   "at": [
+    -44,
+    -39
+   ],
+   "width": 2.0,
+   "kind": "door"
+  },
+  {
+   "id": "d_boiler_room__housekeeper",
+   "a": "boiler_room",
+   "b": "housekeeper",
+   "at": [
+    -44,
+    -29
+   ],
+   "width": 2.0,
+   "kind": "door"
+  },
+  {
+   "id": "d_servants_hall__housekeeper",
+   "a": "servants_hall",
+   "b": "housekeeper",
+   "at": [
+    -49,
+    -34
+   ],
+   "width": 2.0,
+   "kind": "door"
+  },
+  {
+   "id": "d_east_hall__long_gallery",
+   "a": "east_hall",
+   "b": "long_gallery",
+   "at": [
+    34,
+    -42
+   ],
+   "width": 2.0,
+   "kind": "door",
+   "gate_min_n": 10
+  },
+  {
+   "id": "d_east_hall__trophy_room",
+   "a": "east_hall",
+   "b": "trophy_room",
+   "at": [
+    34,
+    -30
+   ],
+   "width": 2.0,
+   "kind": "door",
+   "gate_min_n": 10
+  },
+  {
+   "id": "d_east_hall__ballroom",
+   "a": "east_hall",
+   "b": "ballroom",
+   "at": [
+    34,
+    -5
+   ],
+   "width": 2.0,
+   "kind": "door",
+   "note": "gate: opens at 10 players",
+   "gate_min_n": 10
+  },
+  {
+   "id": "d_east_hall__greenhouse",
+   "a": "east_hall",
+   "b": "greenhouse",
+   "at": [
+    36,
+    0
+   ],
+   "width": 2.0,
+   "kind": "door",
+   "gate_min_n": 10
+  },
+  {
+   "id": "d_east_hall__smoking_room",
+   "a": "east_hall",
+   "b": "smoking_room",
+   "at": [
+    38,
+    -39
+   ],
+   "width": 2.0,
+   "kind": "door"
+  },
+  {
+   "id": "d_east_hall__map_room",
+   "a": "east_hall",
+   "b": "map_room",
+   "at": [
+    38,
+    -29
+   ],
+   "width": 2.0,
+   "kind": "door"
+  },
+  {
+   "id": "d_east_hall__orangery",
+   "a": "east_hall",
+   "b": "orangery",
+   "at": [
+    38,
+    -19
+   ],
+   "width": 2.0,
+   "kind": "door"
+  },
+  {
+   "id": "d_east_hall__morning_room",
+   "a": "east_hall",
+   "b": "morning_room",
+   "at": [
+    38,
+    -3
+   ],
+   "width": 2.0,
+   "kind": "door"
+  },
+  {
+   "id": "d_smoking_room__gun_room",
+   "a": "smoking_room",
+   "b": "gun_room",
+   "at": [
+    46,
+    -39
+   ],
+   "width": 2.0,
+   "kind": "door"
+  },
+  {
+   "id": "d_map_room__games_room",
+   "a": "map_room",
+   "b": "games_room",
+   "at": [
+    46,
+    -29
+   ],
+   "width": 2.0,
+   "kind": "door"
+  },
+  {
+   "id": "d_gun_room__games_room",
+   "a": "gun_room",
+   "b": "games_room",
+   "at": [
+    50,
+    -34
+   ],
+   "width": 2.0,
+   "kind": "door"
+  },
+  {
+   "id": "d_games_room__orangery",
+   "a": "games_room",
+   "b": "orangery",
+   "at": [
+    50,
+    -24
+   ],
+   "width": 2.0,
+   "kind": "door"
+  },
+  {
+   "id": "d_orangery__morning_room",
+   "a": "orangery",
+   "b": "morning_room",
+   "at": [
+    46,
+    -10
+   ],
+   "width": 2.0,
+   "kind": "double"
+  },
+  {
+   "id": "d_morning_room__greenhouse",
+   "a": "morning_room",
+   "b": "greenhouse",
+   "at": [
+    44,
+    0
+   ],
+   "width": 2.0,
+   "kind": "french",
+   "gate_min_n": 10
+  },
+  {
+   "id": "d_north_corridor__upper_west",
+   "a": "north_corridor",
+   "b": "upper_west",
+   "at": [
+    -34,
+    -42
+   ],
+   "width": 2.0,
+   "kind": "door"
+  },
+  {
+   "id": "d_north_corridor__east_corridor",
+   "a": "north_corridor",
+   "b": "east_corridor",
+   "at": [
+    34,
+    -42
+   ],
+   "width": 2.0,
+   "kind": "door",
+   "gate_min_n": 10
+  },
+  {
+   "id": "d_north_corridor__lilac_room",
+   "a": "north_corridor",
+   "b": "lilac_room",
+   "at": [
+    -29,
+    -40
+   ],
+   "width": 2.0,
+   "kind": "door"
+  },
+  {
+   "id": "d_north_corridor__sewing_room",
+   "a": "north_corridor",
+   "b": "sewing_room",
+   "at": [
+    -16,
+    -40
+   ],
+   "width": 2.0,
+   "kind": "door"
+  },
+  {
+   "id": "d_north_corridor__grand_landing",
+   "a": "north_corridor",
+   "b": "grand_landing",
+   "at": [
+    0,
+    -40
+   ],
+   "width": 4.0,
+   "kind": "arch"
+  },
+  {
+   "id": "d_north_corridor__chinese_room",
+   "a": "north_corridor",
+   "b": "chinese_room",
+   "at": [
+    16,
+    -40
+   ],
+   "width": 2.0,
+   "kind": "door"
+  },
+  {
+   "id": "d_north_corridor__dressing_room",
+   "a": "north_corridor",
+   "b": "dressing_room",
+   "at": [
+    29,
+    -40
+   ],
+   "width": 2.0,
+   "kind": "door"
+  },
+  {
+   "id": "d_grand_landing__sewing_room",
+   "a": "grand_landing",
+   "b": "sewing_room",
+   "at": [
+    -8,
+    -30
+   ],
+   "width": 2.0,
+   "kind": "door"
+  },
+  {
+   "id": "d_grand_landing__chinese_room",
+   "a": "grand_landing",
+   "b": "chinese_room",
+   "at": [
+    8,
+    -30
+   ],
+   "width": 2.0,
+   "kind": "door"
+  },
+  {
+   "id": "d_lilac_room__sewing_room",
+   "a": "lilac_room",
+   "b": "sewing_room",
+   "at": [
+    -24,
+    -30
+   ],
+   "width": 2.0,
+   "kind": "door"
+  },
+  {
+   "id": "d_chinese_room__dressing_room",
+   "a": "chinese_room",
+   "b": "dressing_room",
+   "at": [
+    24,
+    -30
+   ],
+   "width": 2.0,
+   "kind": "door"
+  },
+  {
+   "id": "d_lilac_room__blue_room",
+   "a": "lilac_room",
+   "b": "blue_room",
+   "at": [
+    -28,
+    -24
+   ],
+   "width": 2.0,
+   "kind": "door",
+   "note": "the lilac room's door to the old guest floor"
+  },
+  {
+   "id": "d_upper_west__picture_gallery_n",
+   "a": "upper_west",
+   "b": "picture_gallery",
+   "at": [
+    -38,
+    -40
+   ],
+   "width": 2.0,
+   "kind": "door"
+  },
+  {
+   "id": "d_upper_west__picture_gallery_s",
+   "a": "upper_west",
+   "b": "picture_gallery",
+   "at": [
+    -38,
+    -28
+   ],
+   "width": 2.0,
+   "kind": "door"
+  },
+  {
+   "id": "d_east_corridor__corridor_e",
+   "a": "east_corridor",
+   "b": "corridor_e",
+   "at": [
+    34,
+    -10
+   ],
+   "width": 2.0,
+   "kind": "door",
+   "note": "gate: opens at 10 players",
+   "gate_min_n": 10
+  },
+  {
+   "id": "d_east_corridor__green_room",
+   "a": "east_corridor",
+   "b": "green_room",
+   "at": [
+    38,
+    -39
+   ],
+   "width": 2.0,
+   "kind": "door"
+  },
+  {
+   "id": "d_east_corridor__rose_room",
+   "a": "east_corridor",
+   "b": "rose_room",
+   "at": [
+    38,
+    -29
+   ],
+   "width": 2.0,
+   "kind": "door"
+  },
+  {
+   "id": "d_east_corridor__guest_bath",
+   "a": "east_corridor",
+   "b": "guest_bath",
+   "at": [
+    38,
+    -20
+   ],
+   "width": 2.0,
+   "kind": "door"
+  },
+  {
+   "id": "d_green_room__gold_room",
+   "a": "green_room",
+   "b": "gold_room",
+   "at": [
+    46,
+    -39
+   ],
+   "width": 2.0,
+   "kind": "door"
+  },
+  {
+   "id": "d_rose_room__ivory_room",
+   "a": "rose_room",
+   "b": "ivory_room",
+   "at": [
+    46,
+    -29
+   ],
+   "width": 2.0,
+   "kind": "door"
+  },
+  {
+   "id": "d_gold_room__ivory_room",
+   "a": "gold_room",
+   "b": "ivory_room",
+   "at": [
+    50,
+    -34
+   ],
+   "width": 2.0,
+   "kind": "door"
+  },
+  {
+   "id": "d_ivory_room__guest_bath",
+   "a": "ivory_room",
+   "b": "guest_bath",
+   "at": [
+    50,
+    -24
+   ],
+   "width": 2.0,
+   "kind": "door"
+  },
+  {
+   "id": "d_catacomb_steps__wine_catacombs",
+   "a": "catacomb_steps",
+   "b": "wine_catacombs",
+   "at": [
+    -22,
+    -3
+   ],
+   "width": 2.0,
+   "kind": "door",
+   "note": "gate: opens at 12 players",
+   "gate_min_n": 12
+  },
+  {
+   "id": "d_catacomb_steps__vault",
+   "a": "catacomb_steps",
+   "b": "vault",
+   "at": [
+    -18,
+    -7
+   ],
+   "width": 2.0,
+   "kind": "door",
+   "note": "the vault door; opens at 12 players",
+   "gate_min_n": 12
+  },
+  {
+   "id": "d_vault__wine_catacombs",
+   "a": "vault",
+   "b": "wine_catacombs",
+   "at": [
+    -22,
+    -13
+   ],
+   "width": 2.0,
+   "kind": "door"
+  },
+  {
+   "id": "d_vault__ossuary",
+   "a": "vault",
+   "b": "ossuary",
+   "at": [
+    -6,
+    -10
+   ],
+   "width": 2.0,
+   "kind": "door"
+  },
+  {
+   "id": "d_ossuary__ossuary_steps",
+   "a": "ossuary",
+   "b": "ossuary_steps",
+   "at": [
+    6,
+    -5
+   ],
+   "width": 2.0,
+   "kind": "door",
+   "note": "gate: opens at 12 players",
+   "gate_min_n": 12
   }
  ],
  "stairs": [
@@ -2499,6 +5029,114 @@
    "z1": 0.0,
    "width": 4.0,
    "kind": "outdoor"
+  },
+  {
+   "id": "st_grand_nw",
+   "name_tr": "Büyük Merdiven (kuzey-batı)",
+   "lower": "staircase_hall",
+   "upper": "grand_landing",
+   "bottom": [
+    -5,
+    -26
+   ],
+   "top": [
+    -5,
+    -32
+   ],
+   "z0": 0.0,
+   "z1": 3.0,
+   "width": 2.0,
+   "kind": "grand"
+  },
+  {
+   "id": "st_grand_ne",
+   "name_tr": "Büyük Merdiven (kuzey-doğu)",
+   "lower": "staircase_hall",
+   "upper": "grand_landing",
+   "bottom": [
+    5,
+    -26
+   ],
+   "top": [
+    5,
+    -32
+   ],
+   "z0": 0.0,
+   "z1": 3.0,
+   "width": 2.0,
+   "kind": "grand"
+  },
+  {
+   "id": "st_west",
+   "name_tr": "Batı Hizmet Merdiveni",
+   "lower": "west_passage",
+   "upper": "upper_west",
+   "bottom": [
+    -35,
+    -26
+   ],
+   "top": [
+    -35,
+    -32
+   ],
+   "z0": 0.0,
+   "z1": 3.0,
+   "width": 2.0,
+   "kind": "service"
+  },
+  {
+   "id": "st_east",
+   "name_tr": "Doğu Kanat Merdiveni",
+   "lower": "east_hall",
+   "upper": "east_corridor",
+   "bottom": [
+    37,
+    -8
+   ],
+   "top": [
+    37,
+    -14
+   ],
+   "z0": 0.0,
+   "z1": 3.0,
+   "width": 2.0,
+   "kind": "service"
+  },
+  {
+   "id": "st_catacomb",
+   "name_tr": "Katakomb Merdiveni",
+   "lower": "catacomb_steps",
+   "upper": "wine_cellar",
+   "bottom": [
+    -21,
+    -4
+   ],
+   "top": [
+    -21,
+    -10
+   ],
+   "z0": -6.0,
+   "z1": -3.0,
+   "width": 2.0,
+   "kind": "service"
+  },
+  {
+   "id": "st_ossuary",
+   "name_tr": "Kemiklik Merdiveni",
+   "lower": "ossuary_steps",
+   "upper": "cistern",
+   "bottom": [
+    7,
+    -6
+   ],
+   "top": [
+    7,
+    -12
+   ],
+   "z0": -6.0,
+   "z1": -3.0,
+   "width": 2.0,
+   "kind": "service"
   }
  ],
  "secrets": [
@@ -2515,7 +5153,8 @@
     20.8,
     -16
    ],
-   "how": "pull the red book: the shelf turns into the confessional"
+   "how": "pull the red book: the shelf turns into the confessional",
+   "kind": "bookcase"
   },
   {
    "id": "S2",
@@ -2530,7 +5169,8 @@
     -33,
     -22
    ],
-   "how": "climb into the dumbwaiter and haul the rope (2 floors)"
+   "how": "climb into the dumbwaiter and haul the rope (2 floors)",
+   "kind": "dumbwaiter"
   },
   {
    "id": "S3",
@@ -2545,7 +5185,8 @@
     -9,
     -12
    ],
-   "how": "the portrait swings open; a ladder behind the clock face. Its eyes are a peephole over the meeting table"
+   "how": "the portrait swings open; a ladder behind the clock face. Its eyes are a peephole over the meeting table",
+   "kind": "portrait"
   },
   {
    "id": "S4",
@@ -2560,7 +5201,8 @@
     -33,
     -14
    ],
-   "how": "slide the lid of Pozzo senior's tomb; steps down to a false wine rack"
+   "how": "slide the lid of Pozzo senior's tomb; steps down to a false wine rack",
+   "kind": "tomb"
   },
   {
    "id": "S5",
@@ -2575,7 +5217,8 @@
     12.5,
     -3.5
    ],
-   "how": "the old well under the greenhouse drains into the cistern; iron rungs"
+   "how": "the old well under the greenhouse drains into the cistern; iron rungs",
+   "kind": "well"
   },
   {
    "id": "S6",
@@ -2590,7 +5233,72 @@
     33,
     -13
    ],
-   "how": "the back of the nursery wardrobe: a crawl between the walls to Pozzo's bedroom"
+   "how": "the back of the nursery wardrobe: a crawl between the walls to Pozzo's bedroom",
+   "kind": "wardrobe"
+  },
+  {
+   "id": "S7",
+   "name_tr": "Şömine Geçidi",
+   "kind": "fireplace",
+   "a": "card_room",
+   "at_a": [
+    16.8,
+    -27.0
+   ],
+   "b": "dressing_room",
+   "at_b": [
+    33.2,
+    -36.0
+   ],
+   "how": "the card room hearth's back plate swings in: a sooty stair up behind Pozzo's wardrobes"
+  },
+  {
+   "id": "S8",
+   "name_tr": "Kripta Kapağı",
+   "kind": "crypt",
+   "a": "chapel",
+   "at_a": [
+    16.0,
+    -19.0
+   ],
+   "b": "crypt",
+   "at_b": [
+    16.0,
+    -19.0
+   ],
+   "how": "the altar slab slides aside: steps down to the Pozzo crypt"
+  },
+  {
+   "id": "S9",
+   "name_tr": "Uşak Sürünme Yolu",
+   "kind": "crawlway",
+   "a": "servants_hall",
+   "at_a": [
+    -53.2,
+    -36.0
+   ],
+   "b": "music_room",
+   "at_b": [
+    -33.2,
+    -27.0
+   ],
+   "how": "a low hatch behind the servants' dresser: a crawl between the walls to the music room"
+  },
+  {
+   "id": "S10",
+   "name_tr": "Rasathane Merdiveni",
+   "kind": "observatory",
+   "a": "gold_room",
+   "at_a": [
+    53.2,
+    -38.5
+   ],
+   "b": "observatory",
+   "at_b": [
+    53.2,
+    -38.5
+   ],
+   "how": "a panel beside the gold room's bed: a ladder up to Anselm's hidden observatory"
   }
  ],
  "secret_rules": {
@@ -2600,7 +5308,9 @@
   "noise_m": 12,
   "trace": "the panel stays ajar for 20 s and a dust puff hangs at both ends",
   "counter": "any player can wedge a passage shut for the rest of the day (4 s, visible wedge); the Locksmith can lock or unlock it",
-  "not_for_connectivity": true
+  "not_for_connectivity": true,
+  "build": "AKGSecretPassage pairs; discovered state replicated; minimap draws discovered ones only",
+  "secret_rooms": "crypt (S8), observatory (S10)"
  },
  "windows": [
   {
@@ -2659,39 +5369,6 @@
    "rattle": false
   },
   {
-   "room": "kitchen",
-   "floor": "F0",
-   "at": [
-    -32.0,
-    -24.0
-   ],
-   "axis": "h",
-   "kind": "exterior",
-   "rattle": true
-  },
-  {
-   "room": "kitchen",
-   "floor": "F0",
-   "at": [
-    -28.0,
-    -24.0
-   ],
-   "axis": "h",
-   "kind": "exterior",
-   "rattle": false
-  },
-  {
-   "room": "kitchen",
-   "floor": "F0",
-   "at": [
-    -24.0,
-    -24.0
-   ],
-   "axis": "h",
-   "kind": "exterior",
-   "rattle": false
-  },
-  {
    "room": "laundry",
    "floor": "F0",
    "at": [
@@ -2710,105 +5387,6 @@
     4.0
    ],
    "axis": "h",
-   "kind": "exterior",
-   "rattle": false
-  },
-  {
-   "room": "library",
-   "floor": "F0",
-   "at": [
-    24.0,
-    -24.0
-   ],
-   "axis": "h",
-   "kind": "exterior",
-   "rattle": false
-  },
-  {
-   "room": "library",
-   "floor": "F0",
-   "at": [
-    28.0,
-    -24.0
-   ],
-   "axis": "h",
-   "kind": "exterior",
-   "rattle": false
-  },
-  {
-   "room": "library",
-   "floor": "F0",
-   "at": [
-    32.0,
-    -24.0
-   ],
-   "axis": "h",
-   "kind": "exterior",
-   "rattle": false
-  },
-  {
-   "room": "library",
-   "floor": "F0",
-   "at": [
-    34.0,
-    -22.0
-   ],
-   "axis": "v",
-   "kind": "exterior",
-   "rattle": true
-  },
-  {
-   "room": "library",
-   "floor": "F0",
-   "at": [
-    34.0,
-    -18.0
-   ],
-   "axis": "v",
-   "kind": "exterior",
-   "rattle": false
-  },
-  {
-   "room": "library",
-   "floor": "F0",
-   "at": [
-    34.0,
-    -14.0
-   ],
-   "axis": "v",
-   "kind": "exterior",
-   "rattle": false
-  },
-  {
-   "room": "ballroom",
-   "floor": "F0",
-   "at": [
-    34.0,
-    -8.0
-   ],
-   "axis": "v",
-   "kind": "exterior",
-   "rattle": false
-  },
-  {
-   "room": "ballroom",
-   "floor": "F0",
-   "at": [
-    34.0,
-    -4.0
-   ],
-   "axis": "v",
-   "kind": "exterior",
-   "rattle": false
-  },
-  {
-   "room": "ballroom",
-   "floor": "F0",
-   "at": [
-    34.0,
-    0.0
-   ],
-   "axis": "v",
    "kind": "exterior",
    "rattle": false
   },
@@ -2873,50 +5451,6 @@
    "at": [
     12.0,
     6.0
-   ],
-   "axis": "h",
-   "kind": "exterior",
-   "rattle": false
-  },
-  {
-   "room": "greenhouse",
-   "floor": "F0",
-   "at": [
-    36.0,
-    0.0
-   ],
-   "axis": "h",
-   "kind": "exterior",
-   "rattle": true
-  },
-  {
-   "room": "greenhouse",
-   "floor": "F0",
-   "at": [
-    40.0,
-    0.0
-   ],
-   "axis": "h",
-   "kind": "exterior",
-   "rattle": false
-  },
-  {
-   "room": "greenhouse",
-   "floor": "F0",
-   "at": [
-    44.0,
-    0.0
-   ],
-   "axis": "h",
-   "kind": "exterior",
-   "rattle": false
-  },
-  {
-   "room": "greenhouse",
-   "floor": "F0",
-   "at": [
-    48.0,
-    0.0
    ],
    "axis": "h",
    "kind": "exterior",
@@ -3062,17 +5596,6 @@
     8.0
    ],
    "axis": "v",
-   "kind": "exterior",
-   "rattle": false
-  },
-  {
-   "room": "cliff_path",
-   "floor": "F0",
-   "at": [
-    -38.0,
-    -24.0
-   ],
-   "axis": "h",
    "kind": "exterior",
    "rattle": false
   },
@@ -3410,39 +5933,6 @@
    "room": "blue_room",
    "floor": "F1",
    "at": [
-    -32.0,
-    -24.0
-   ],
-   "axis": "h",
-   "kind": "exterior",
-   "rattle": false
-  },
-  {
-   "room": "blue_room",
-   "floor": "F1",
-   "at": [
-    -28.0,
-    -24.0
-   ],
-   "axis": "h",
-   "kind": "exterior",
-   "rattle": false
-  },
-  {
-   "room": "blue_room",
-   "floor": "F1",
-   "at": [
-    -24.0,
-    -24.0
-   ],
-   "axis": "h",
-   "kind": "exterior",
-   "rattle": false
-  },
-  {
-   "room": "blue_room",
-   "floor": "F1",
-   "at": [
     -34.0,
     -14.0
    ],
@@ -3469,39 +5959,6 @@
     -22.0
    ],
    "axis": "v",
-   "kind": "exterior",
-   "rattle": false
-  },
-  {
-   "room": "bath",
-   "floor": "F1",
-   "at": [
-    -20.0,
-    -24.0
-   ],
-   "axis": "h",
-   "kind": "exterior",
-   "rattle": false
-  },
-  {
-   "room": "bath",
-   "floor": "F1",
-   "at": [
-    -16.0,
-    -24.0
-   ],
-   "axis": "h",
-   "kind": "exterior",
-   "rattle": false
-  },
-  {
-   "room": "bath",
-   "floor": "F1",
-   "at": [
-    -12.0,
-    -24.0
-   ],
-   "axis": "h",
    "kind": "exterior",
    "rattle": false
   },
@@ -3685,17 +6142,6 @@
    "room": "corridor_e",
    "floor": "F1",
    "at": [
-    34.0,
-    -10.0
-   ],
-   "axis": "v",
-   "kind": "exterior",
-   "rattle": true
-  },
-  {
-   "room": "corridor_e",
-   "floor": "F1",
-   "at": [
     32.0,
     -8.0
    ],
@@ -3709,39 +6155,6 @@
    "at": [
     24.0,
     -8.0
-   ],
-   "axis": "h",
-   "kind": "exterior",
-   "rattle": false
-  },
-  {
-   "room": "study",
-   "floor": "F1",
-   "at": [
-    12.0,
-    -24.0
-   ],
-   "axis": "h",
-   "kind": "exterior",
-   "rattle": false
-  },
-  {
-   "room": "study",
-   "floor": "F1",
-   "at": [
-    16.0,
-    -24.0
-   ],
-   "axis": "h",
-   "kind": "exterior",
-   "rattle": false
-  },
-  {
-   "room": "study",
-   "floor": "F1",
-   "at": [
-    20.0,
-    -24.0
    ],
    "axis": "h",
    "kind": "exterior",
@@ -3757,72 +6170,6 @@
    "axis": "v",
    "kind": "exterior",
    "rattle": true
-  },
-  {
-   "room": "master",
-   "floor": "F1",
-   "at": [
-    24.0,
-    -24.0
-   ],
-   "axis": "h",
-   "kind": "exterior",
-   "rattle": false
-  },
-  {
-   "room": "master",
-   "floor": "F1",
-   "at": [
-    28.0,
-    -24.0
-   ],
-   "axis": "h",
-   "kind": "exterior",
-   "rattle": false
-  },
-  {
-   "room": "master",
-   "floor": "F1",
-   "at": [
-    32.0,
-    -24.0
-   ],
-   "axis": "h",
-   "kind": "exterior",
-   "rattle": false
-  },
-  {
-   "room": "master",
-   "floor": "F1",
-   "at": [
-    34.0,
-    -22.0
-   ],
-   "axis": "v",
-   "kind": "exterior",
-   "rattle": false
-  },
-  {
-   "room": "master",
-   "floor": "F1",
-   "at": [
-    34.0,
-    -18.0
-   ],
-   "axis": "v",
-   "kind": "exterior",
-   "rattle": false
-  },
-  {
-   "room": "master",
-   "floor": "F1",
-   "at": [
-    34.0,
-    -14.0
-   ],
-   "axis": "v",
-   "kind": "exterior",
-   "rattle": false
   },
   {
    "room": "billiard",
@@ -4182,6 +6529,1194 @@
    "at": [
     26.0,
     -22.0
+   ],
+   "axis": "v",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "long_gallery",
+   "floor": "F0",
+   "at": [
+    -32.0,
+    -44.0
+   ],
+   "axis": "h",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "long_gallery",
+   "floor": "F0",
+   "at": [
+    -28.0,
+    -44.0
+   ],
+   "axis": "h",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "long_gallery",
+   "floor": "F0",
+   "at": [
+    -24.0,
+    -44.0
+   ],
+   "axis": "h",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "long_gallery",
+   "floor": "F0",
+   "at": [
+    -20.0,
+    -44.0
+   ],
+   "axis": "h",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "long_gallery",
+   "floor": "F0",
+   "at": [
+    -16.0,
+    -44.0
+   ],
+   "axis": "h",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "long_gallery",
+   "floor": "F0",
+   "at": [
+    -12.0,
+    -44.0
+   ],
+   "axis": "h",
+   "kind": "exterior",
+   "rattle": true
+  },
+  {
+   "room": "long_gallery",
+   "floor": "F0",
+   "at": [
+    -8.0,
+    -44.0
+   ],
+   "axis": "h",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "long_gallery",
+   "floor": "F0",
+   "at": [
+    -4.0,
+    -44.0
+   ],
+   "axis": "h",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "long_gallery",
+   "floor": "F0",
+   "at": [
+    0.0,
+    -44.0
+   ],
+   "axis": "h",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "long_gallery",
+   "floor": "F0",
+   "at": [
+    4.0,
+    -44.0
+   ],
+   "axis": "h",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "long_gallery",
+   "floor": "F0",
+   "at": [
+    8.0,
+    -44.0
+   ],
+   "axis": "h",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "long_gallery",
+   "floor": "F0",
+   "at": [
+    12.0,
+    -44.0
+   ],
+   "axis": "h",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "long_gallery",
+   "floor": "F0",
+   "at": [
+    16.0,
+    -44.0
+   ],
+   "axis": "h",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "long_gallery",
+   "floor": "F0",
+   "at": [
+    20.0,
+    -44.0
+   ],
+   "axis": "h",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "long_gallery",
+   "floor": "F0",
+   "at": [
+    24.0,
+    -44.0
+   ],
+   "axis": "h",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "long_gallery",
+   "floor": "F0",
+   "at": [
+    28.0,
+    -44.0
+   ],
+   "axis": "h",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "long_gallery",
+   "floor": "F0",
+   "at": [
+    32.0,
+    -44.0
+   ],
+   "axis": "h",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "west_passage",
+   "floor": "F0",
+   "at": [
+    -36.0,
+    -44.0
+   ],
+   "axis": "h",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "servants_hall",
+   "floor": "F0",
+   "at": [
+    -52.0,
+    -44.0
+   ],
+   "axis": "h",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "servants_hall",
+   "floor": "F0",
+   "at": [
+    -48.0,
+    -44.0
+   ],
+   "axis": "h",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "servants_hall",
+   "floor": "F0",
+   "at": [
+    -54.0,
+    -36.0
+   ],
+   "axis": "v",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "servants_hall",
+   "floor": "F0",
+   "at": [
+    -54.0,
+    -40.0
+   ],
+   "axis": "v",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "housekeeper",
+   "floor": "F0",
+   "at": [
+    -46.0,
+    -24.0
+   ],
+   "axis": "h",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "housekeeper",
+   "floor": "F0",
+   "at": [
+    -50.0,
+    -24.0
+   ],
+   "axis": "h",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "housekeeper",
+   "floor": "F0",
+   "at": [
+    -54.0,
+    -26.0
+   ],
+   "axis": "v",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "housekeeper",
+   "floor": "F0",
+   "at": [
+    -54.0,
+    -30.0
+   ],
+   "axis": "v",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "silver_room",
+   "floor": "F0",
+   "at": [
+    -42.0,
+    -44.0
+   ],
+   "axis": "h",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "east_hall",
+   "floor": "F0",
+   "at": [
+    36.0,
+    -44.0
+   ],
+   "axis": "h",
+   "kind": "exterior",
+   "rattle": true
+  },
+  {
+   "room": "smoking_room",
+   "floor": "F0",
+   "at": [
+    40.0,
+    -44.0
+   ],
+   "axis": "h",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "smoking_room",
+   "floor": "F0",
+   "at": [
+    44.0,
+    -44.0
+   ],
+   "axis": "h",
+   "kind": "exterior",
+   "rattle": true
+  },
+  {
+   "room": "gun_room",
+   "floor": "F0",
+   "at": [
+    48.0,
+    -44.0
+   ],
+   "axis": "h",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "gun_room",
+   "floor": "F0",
+   "at": [
+    52.0,
+    -44.0
+   ],
+   "axis": "h",
+   "kind": "exterior",
+   "rattle": true
+  },
+  {
+   "room": "gun_room",
+   "floor": "F0",
+   "at": [
+    54.0,
+    -42.0
+   ],
+   "axis": "v",
+   "kind": "exterior",
+   "rattle": true
+  },
+  {
+   "room": "gun_room",
+   "floor": "F0",
+   "at": [
+    54.0,
+    -38.0
+   ],
+   "axis": "v",
+   "kind": "exterior",
+   "rattle": true
+  },
+  {
+   "room": "games_room",
+   "floor": "F0",
+   "at": [
+    54.0,
+    -32.0
+   ],
+   "axis": "v",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "games_room",
+   "floor": "F0",
+   "at": [
+    54.0,
+    -28.0
+   ],
+   "axis": "v",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "orangery",
+   "floor": "F0",
+   "at": [
+    54.0,
+    -22.0
+   ],
+   "axis": "v",
+   "kind": "exterior",
+   "rattle": true
+  },
+  {
+   "room": "orangery",
+   "floor": "F0",
+   "at": [
+    54.0,
+    -18.0
+   ],
+   "axis": "v",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "orangery",
+   "floor": "F0",
+   "at": [
+    54.0,
+    -14.0
+   ],
+   "axis": "v",
+   "kind": "exterior",
+   "rattle": true
+  },
+  {
+   "room": "morning_room",
+   "floor": "F0",
+   "at": [
+    54.0,
+    -8.0
+   ],
+   "axis": "v",
+   "kind": "exterior",
+   "rattle": true
+  },
+  {
+   "room": "morning_room",
+   "floor": "F0",
+   "at": [
+    54.0,
+    -4.0
+   ],
+   "axis": "v",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "morning_room",
+   "floor": "F0",
+   "at": [
+    52.0,
+    0.0
+   ],
+   "axis": "h",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "morning_room",
+   "floor": "F0",
+   "at": [
+    48.0,
+    0.0
+   ],
+   "axis": "h",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "morning_room",
+   "floor": "F0",
+   "at": [
+    40.0,
+    0.0
+   ],
+   "axis": "h",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "north_corridor",
+   "floor": "F1",
+   "at": [
+    -32.0,
+    -44.0
+   ],
+   "axis": "h",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "north_corridor",
+   "floor": "F1",
+   "at": [
+    -28.0,
+    -44.0
+   ],
+   "axis": "h",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "north_corridor",
+   "floor": "F1",
+   "at": [
+    -24.0,
+    -44.0
+   ],
+   "axis": "h",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "north_corridor",
+   "floor": "F1",
+   "at": [
+    -20.0,
+    -44.0
+   ],
+   "axis": "h",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "north_corridor",
+   "floor": "F1",
+   "at": [
+    -16.0,
+    -44.0
+   ],
+   "axis": "h",
+   "kind": "exterior",
+   "rattle": true
+  },
+  {
+   "room": "north_corridor",
+   "floor": "F1",
+   "at": [
+    -12.0,
+    -44.0
+   ],
+   "axis": "h",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "north_corridor",
+   "floor": "F1",
+   "at": [
+    -8.0,
+    -44.0
+   ],
+   "axis": "h",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "north_corridor",
+   "floor": "F1",
+   "at": [
+    -4.0,
+    -44.0
+   ],
+   "axis": "h",
+   "kind": "exterior",
+   "rattle": true
+  },
+  {
+   "room": "north_corridor",
+   "floor": "F1",
+   "at": [
+    0.0,
+    -44.0
+   ],
+   "axis": "h",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "north_corridor",
+   "floor": "F1",
+   "at": [
+    4.0,
+    -44.0
+   ],
+   "axis": "h",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "north_corridor",
+   "floor": "F1",
+   "at": [
+    8.0,
+    -44.0
+   ],
+   "axis": "h",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "north_corridor",
+   "floor": "F1",
+   "at": [
+    12.0,
+    -44.0
+   ],
+   "axis": "h",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "north_corridor",
+   "floor": "F1",
+   "at": [
+    16.0,
+    -44.0
+   ],
+   "axis": "h",
+   "kind": "exterior",
+   "rattle": true
+  },
+  {
+   "room": "north_corridor",
+   "floor": "F1",
+   "at": [
+    20.0,
+    -44.0
+   ],
+   "axis": "h",
+   "kind": "exterior",
+   "rattle": true
+  },
+  {
+   "room": "north_corridor",
+   "floor": "F1",
+   "at": [
+    24.0,
+    -44.0
+   ],
+   "axis": "h",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "north_corridor",
+   "floor": "F1",
+   "at": [
+    28.0,
+    -44.0
+   ],
+   "axis": "h",
+   "kind": "exterior",
+   "rattle": true
+  },
+  {
+   "room": "north_corridor",
+   "floor": "F1",
+   "at": [
+    32.0,
+    -44.0
+   ],
+   "axis": "h",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "grand_landing",
+   "floor": "F1",
+   "at": [
+    6.0,
+    -24.0
+   ],
+   "axis": "h",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "grand_landing",
+   "floor": "F1",
+   "at": [
+    2.0,
+    -24.0
+   ],
+   "axis": "h",
+   "kind": "exterior",
+   "rattle": true
+  },
+  {
+   "room": "grand_landing",
+   "floor": "F1",
+   "at": [
+    -2.0,
+    -24.0
+   ],
+   "axis": "h",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "grand_landing",
+   "floor": "F1",
+   "at": [
+    -6.0,
+    -24.0
+   ],
+   "axis": "h",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "upper_west",
+   "floor": "F1",
+   "at": [
+    -36.0,
+    -44.0
+   ],
+   "axis": "h",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "upper_west",
+   "floor": "F1",
+   "at": [
+    -36.0,
+    -24.0
+   ],
+   "axis": "h",
+   "kind": "exterior",
+   "rattle": true
+  },
+  {
+   "room": "picture_gallery",
+   "floor": "F1",
+   "at": [
+    -52.0,
+    -44.0
+   ],
+   "axis": "h",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "picture_gallery",
+   "floor": "F1",
+   "at": [
+    -48.0,
+    -44.0
+   ],
+   "axis": "h",
+   "kind": "exterior",
+   "rattle": true
+  },
+  {
+   "room": "picture_gallery",
+   "floor": "F1",
+   "at": [
+    -44.0,
+    -44.0
+   ],
+   "axis": "h",
+   "kind": "exterior",
+   "rattle": true
+  },
+  {
+   "room": "picture_gallery",
+   "floor": "F1",
+   "at": [
+    -40.0,
+    -44.0
+   ],
+   "axis": "h",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "picture_gallery",
+   "floor": "F1",
+   "at": [
+    -40.0,
+    -24.0
+   ],
+   "axis": "h",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "picture_gallery",
+   "floor": "F1",
+   "at": [
+    -44.0,
+    -24.0
+   ],
+   "axis": "h",
+   "kind": "exterior",
+   "rattle": true
+  },
+  {
+   "room": "picture_gallery",
+   "floor": "F1",
+   "at": [
+    -48.0,
+    -24.0
+   ],
+   "axis": "h",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "picture_gallery",
+   "floor": "F1",
+   "at": [
+    -52.0,
+    -24.0
+   ],
+   "axis": "h",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "picture_gallery",
+   "floor": "F1",
+   "at": [
+    -54.0,
+    -26.0
+   ],
+   "axis": "v",
+   "kind": "exterior",
+   "rattle": true
+  },
+  {
+   "room": "picture_gallery",
+   "floor": "F1",
+   "at": [
+    -54.0,
+    -30.0
+   ],
+   "axis": "v",
+   "kind": "exterior",
+   "rattle": true
+  },
+  {
+   "room": "picture_gallery",
+   "floor": "F1",
+   "at": [
+    -54.0,
+    -34.0
+   ],
+   "axis": "v",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "picture_gallery",
+   "floor": "F1",
+   "at": [
+    -54.0,
+    -38.0
+   ],
+   "axis": "v",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "picture_gallery",
+   "floor": "F1",
+   "at": [
+    -54.0,
+    -42.0
+   ],
+   "axis": "v",
+   "kind": "exterior",
+   "rattle": true
+  },
+  {
+   "room": "east_corridor",
+   "floor": "F1",
+   "at": [
+    36.0,
+    -44.0
+   ],
+   "axis": "h",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "east_corridor",
+   "floor": "F1",
+   "at": [
+    38.0,
+    -14.0
+   ],
+   "axis": "v",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "east_corridor",
+   "floor": "F1",
+   "at": [
+    38.0,
+    -10.0
+   ],
+   "axis": "v",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "east_corridor",
+   "floor": "F1",
+   "at": [
+    38.0,
+    -6.0
+   ],
+   "axis": "v",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "east_corridor",
+   "floor": "F1",
+   "at": [
+    36.0,
+    -4.0
+   ],
+   "axis": "h",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "east_corridor",
+   "floor": "F1",
+   "at": [
+    34.0,
+    -6.0
+   ],
+   "axis": "v",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "green_room",
+   "floor": "F1",
+   "at": [
+    40.0,
+    -44.0
+   ],
+   "axis": "h",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "green_room",
+   "floor": "F1",
+   "at": [
+    44.0,
+    -44.0
+   ],
+   "axis": "h",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "gold_room",
+   "floor": "F1",
+   "at": [
+    48.0,
+    -44.0
+   ],
+   "axis": "h",
+   "kind": "exterior",
+   "rattle": true
+  },
+  {
+   "room": "gold_room",
+   "floor": "F1",
+   "at": [
+    52.0,
+    -44.0
+   ],
+   "axis": "h",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "gold_room",
+   "floor": "F1",
+   "at": [
+    54.0,
+    -42.0
+   ],
+   "axis": "v",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "gold_room",
+   "floor": "F1",
+   "at": [
+    54.0,
+    -38.0
+   ],
+   "axis": "v",
+   "kind": "exterior",
+   "rattle": true
+  },
+  {
+   "room": "ivory_room",
+   "floor": "F1",
+   "at": [
+    54.0,
+    -32.0
+   ],
+   "axis": "v",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "ivory_room",
+   "floor": "F1",
+   "at": [
+    54.0,
+    -28.0
+   ],
+   "axis": "v",
+   "kind": "exterior",
+   "rattle": true
+  },
+  {
+   "room": "guest_bath",
+   "floor": "F1",
+   "at": [
+    54.0,
+    -22.0
+   ],
+   "axis": "v",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "guest_bath",
+   "floor": "F1",
+   "at": [
+    54.0,
+    -18.0
+   ],
+   "axis": "v",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "guest_bath",
+   "floor": "F1",
+   "at": [
+    52.0,
+    -16.0
+   ],
+   "axis": "h",
+   "kind": "exterior",
+   "rattle": true
+  },
+  {
+   "room": "guest_bath",
+   "floor": "F1",
+   "at": [
+    48.0,
+    -16.0
+   ],
+   "axis": "h",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "guest_bath",
+   "floor": "F1",
+   "at": [
+    44.0,
+    -16.0
+   ],
+   "axis": "h",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "guest_bath",
+   "floor": "F1",
+   "at": [
+    40.0,
+    -16.0
+   ],
+   "axis": "h",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "observatory",
+   "floor": "F2",
+   "at": [
+    48.0,
+    -44.0
+   ],
+   "axis": "h",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "observatory",
+   "floor": "F2",
+   "at": [
+    52.0,
+    -44.0
+   ],
+   "axis": "h",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "observatory",
+   "floor": "F2",
+   "at": [
+    54.0,
+    -42.0
+   ],
+   "axis": "v",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "observatory",
+   "floor": "F2",
+   "at": [
+    54.0,
+    -38.0
+   ],
+   "axis": "v",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "observatory",
+   "floor": "F2",
+   "at": [
+    52.0,
+    -36.0
+   ],
+   "axis": "h",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "observatory",
+   "floor": "F2",
+   "at": [
+    48.0,
+    -36.0
+   ],
+   "axis": "h",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "observatory",
+   "floor": "F2",
+   "at": [
+    46.0,
+    -38.0
+   ],
+   "axis": "v",
+   "kind": "exterior",
+   "rattle": false
+  },
+  {
+   "room": "observatory",
+   "floor": "F2",
+   "at": [
+    46.0,
+    -42.0
    ],
    "axis": "v",
    "kind": "exterior",
@@ -4569,17 +8104,6 @@
    "r": 1.2
   },
   {
-   "id": "win_master",
-   "room": "master",
-   "at": [
-    33,
-    -20
-   ],
-   "label_tr": "yatak odası penceresi",
-   "kind": "Shutter",
-   "r": 1.2
-  },
-  {
    "id": "laundry_tub",
    "room": "laundry",
    "at": [
@@ -4737,8 +8261,8 @@
    "id": "win_ballroom",
    "room": "ballroom",
    "at": [
-    33,
-    -5
+    32,
+    5.2
    ],
    "label_tr": "balo salonu penceresi",
    "kind": "Shutter",
@@ -4820,6 +8344,534 @@
    "label_tr": "kıvılcım bobini (ikinci şalter)",
    "kind": "SparkCoil",
    "r": 1.6
+  },
+  {
+   "id": "clock_long",
+   "room": "long_gallery",
+   "at": [
+    -24,
+    -43.2
+   ],
+   "label_tr": "uzun galerideki büyük saat",
+   "kind": "Clock",
+   "r": 1.6
+  },
+  {
+   "id": "clock_stair",
+   "room": "staircase_hall",
+   "at": [
+    -6.5,
+    -38.8
+   ],
+   "label_tr": "merdiven holündeki saat",
+   "kind": "Clock",
+   "r": 1.6
+  },
+  {
+   "id": "clock_trophy",
+   "room": "trophy_room",
+   "at": [
+    33.0,
+    -37.0
+   ],
+   "label_tr": "av odasındaki saat",
+   "kind": "Clock",
+   "r": 1.6
+  },
+  {
+   "id": "silver_chest",
+   "room": "silver_room",
+   "at": [
+    -42.8,
+    -43.0
+   ],
+   "label_tr": "gümüş sandığı",
+   "kind": "SilverChest",
+   "r": 1.6
+  },
+  {
+   "id": "silver_bench",
+   "room": "silver_room",
+   "at": [
+    -39.0,
+    -35.0
+   ],
+   "label_tr": "cila tezgâhı",
+   "kind": "Bench",
+   "r": 1.6
+  },
+  {
+   "id": "piano",
+   "room": "music_room",
+   "at": [
+    -29.0,
+    -34.0
+   ],
+   "label_tr": "kuyruklu piyano",
+   "kind": "Piano",
+   "r": 1.6
+  },
+  {
+   "id": "music_cabinet",
+   "room": "blue_salon",
+   "at": [
+    -9.0,
+    -38.8
+   ],
+   "label_tr": "nota dolabı (akort çatalı)",
+   "kind": "Cabinet",
+   "r": 1.6
+  },
+  {
+   "id": "aviary",
+   "room": "orangery",
+   "at": [
+    52.5,
+    -12.0
+   ],
+   "label_tr": "kuşhane",
+   "kind": "Aviary",
+   "r": 1.6
+  },
+  {
+   "id": "seed_sack",
+   "room": "greenhouse",
+   "at": [
+    47.0,
+    5.0
+   ],
+   "label_tr": "kuş yemi çuvalı",
+   "kind": "Sack",
+   "r": 1.6
+  },
+  {
+   "id": "coal_heap",
+   "room": "service_yard",
+   "at": [
+    -32.0,
+    7.0
+   ],
+   "label_tr": "kömür yığını",
+   "kind": "Coal",
+   "r": 1.6
+  },
+  {
+   "id": "boiler",
+   "room": "boiler_room",
+   "at": [
+    -42.8,
+    -26.0
+   ],
+   "label_tr": "kazan",
+   "kind": "Boiler",
+   "r": 1.6
+  },
+  {
+   "id": "chess_box",
+   "room": "card_room",
+   "at": [
+    22.8,
+    -38.8
+   ],
+   "label_tr": "satranç taşı kutusu",
+   "kind": "Box",
+   "r": 1.6
+  },
+  {
+   "id": "chessboard",
+   "room": "games_room",
+   "at": [
+    50.0,
+    -29.0
+   ],
+   "label_tr": "satranç masası",
+   "kind": "Chess",
+   "r": 1.6
+  },
+  {
+   "id": "rack_1",
+   "room": "wine_catacombs",
+   "at": [
+    -33.0,
+    -14.0
+   ],
+   "label_tr": "eski bağ nişi 1",
+   "kind": "WineRack",
+   "r": 1.6
+  },
+  {
+   "id": "rack_2",
+   "room": "wine_catacombs",
+   "at": [
+    -33.0,
+    -5.0
+   ],
+   "label_tr": "eski bağ nişi 2",
+   "kind": "WineRack",
+   "r": 1.6
+  },
+  {
+   "id": "rack_3",
+   "room": "wine_catacombs",
+   "at": [
+    -27.0,
+    -15.0
+   ],
+   "label_tr": "eski bağ nişi 3",
+   "kind": "WineRack",
+   "r": 1.6
+  },
+  {
+   "id": "chapel_cand_w",
+   "room": "chapel",
+   "at": [
+    11.0,
+    -11.2
+   ],
+   "label_tr": "batı şamdanı",
+   "kind": "Candles",
+   "r": 1.6
+  },
+  {
+   "id": "chapel_cand_e",
+   "room": "chapel",
+   "at": [
+    21.0,
+    -13.0
+   ],
+   "label_tr": "doğu şamdanı",
+   "kind": "Candles",
+   "r": 1.6
+  },
+  {
+   "id": "portrait_1",
+   "room": "long_gallery",
+   "at": [
+    -10.0,
+    -43.2
+   ],
+   "label_tr": "tozlu portre 1",
+   "kind": "Frame",
+   "r": 1.6
+  },
+  {
+   "id": "portrait_2",
+   "room": "long_gallery",
+   "at": [
+    14.0,
+    -43.2
+   ],
+   "label_tr": "tozlu portre 2",
+   "kind": "Frame",
+   "r": 1.6
+  },
+  {
+   "id": "portrait_3",
+   "room": "picture_gallery",
+   "at": [
+    -46.0,
+    -43.0
+   ],
+   "label_tr": "tozlu tablo",
+   "kind": "Frame",
+   "r": 1.6
+  },
+  {
+   "id": "win_green",
+   "room": "green_room",
+   "at": [
+    40.0,
+    -43.2
+   ],
+   "label_tr": "Yeşil Oda penceresi",
+   "kind": "Shutter",
+   "r": 1.2
+  },
+  {
+   "id": "win_gold",
+   "room": "gold_room",
+   "at": [
+    52.0,
+    -43.2
+   ],
+   "label_tr": "Altın Oda penceresi",
+   "kind": "Shutter",
+   "r": 1.2
+  },
+  {
+   "id": "win_ivory",
+   "room": "ivory_room",
+   "at": [
+    53.2,
+    -28.0
+   ],
+   "label_tr": "Fildişi Oda penceresi",
+   "kind": "Shutter",
+   "r": 1.2
+  },
+  {
+   "id": "tea_green",
+   "room": "green_salon",
+   "at": [
+    -20.0,
+    -38.8
+   ],
+   "label_tr": "yeşil salondaki çay masası",
+   "kind": "Table",
+   "r": 1.6
+  },
+  {
+   "id": "tea_yellow",
+   "room": "yellow_salon",
+   "at": [
+    12.0,
+    -38.8
+   ],
+   "label_tr": "sarı salondaki çay masası",
+   "kind": "Table",
+   "r": 1.6
+  },
+  {
+   "id": "linen_press",
+   "room": "sewing_room",
+   "at": [
+    -12.0,
+    -38.8
+   ],
+   "label_tr": "çarşaf dolabı",
+   "kind": "Linen",
+   "r": 1.6
+  },
+  {
+   "id": "bed_green",
+   "room": "green_room",
+   "at": [
+    42.0,
+    -36.0
+   ],
+   "label_tr": "Yeşil Oda yatağı",
+   "kind": "Bed",
+   "r": 1.6
+  },
+  {
+   "id": "bed_rose",
+   "room": "rose_room",
+   "at": [
+    42.0,
+    -26.5
+   ],
+   "label_tr": "Gül Oda yatağı",
+   "kind": "Bed",
+   "r": 1.6
+  },
+  {
+   "id": "bed_lilac",
+   "room": "lilac_room",
+   "at": [
+    -29.0,
+    -26.5
+   ],
+   "label_tr": "Leylak Oda yatağı",
+   "kind": "Bed",
+   "r": 1.6
+  },
+  {
+   "id": "bath_e_tub",
+   "room": "guest_bath",
+   "at": [
+    50.0,
+    -22.0
+   ],
+   "label_tr": "misafir küveti",
+   "kind": "Boiler",
+   "r": 1.6
+  },
+  {
+   "id": "vase_chinese",
+   "room": "chinese_room",
+   "at": [
+    16.0,
+    -26.0
+   ],
+   "label_tr": "Çin vazosu",
+   "kind": "Pots",
+   "r": 1.6
+  },
+  {
+   "id": "hall_trophies",
+   "room": "trophy_room",
+   "at": [
+    29.0,
+    -26.0
+   ],
+   "label_tr": "av trofeleri",
+   "kind": "Frame",
+   "r": 1.6
+  },
+  {
+   "id": "housekeeper_keys",
+   "room": "housekeeper",
+   "at": [
+    -49.0,
+    -25.0
+   ],
+   "label_tr": "anahtar panosu",
+   "kind": "Keys",
+   "r": 1.6
+  },
+  {
+   "id": "servants_table",
+   "room": "servants_hall",
+   "at": [
+    -49.0,
+    -39.0
+   ],
+   "label_tr": "hizmetkâr masası",
+   "kind": "Table",
+   "r": 2.0
+  },
+  {
+   "id": "gun_bench",
+   "room": "gun_room",
+   "at": [
+    50.0,
+    -43.0
+   ],
+   "label_tr": "tüfek tezgâhı",
+   "kind": "Bench",
+   "r": 1.6
+  },
+  {
+   "id": "smoking_humidor",
+   "room": "smoking_room",
+   "at": [
+    42.0,
+    -35.0
+   ],
+   "label_tr": "puro kutusu",
+   "kind": "Box",
+   "r": 1.6
+  },
+  {
+   "id": "morning_table",
+   "room": "morning_room",
+   "at": [
+    46.0,
+    -5.0
+   ],
+   "label_tr": "kahvaltı masası",
+   "kind": "Table",
+   "r": 2.0
+  },
+  {
+   "id": "dressing_mirror",
+   "room": "dressing_room",
+   "at": [
+    26.0,
+    -38.8
+   ],
+   "label_tr": "boy aynası",
+   "kind": "Frame",
+   "r": 1.6
+  },
+  {
+   "id": "vault_ledger",
+   "room": "vault",
+   "at": [
+    -12.0,
+    -15.2
+   ],
+   "label_tr": "tapu rafları",
+   "kind": "Shelf",
+   "r": 1.6
+  },
+  {
+   "id": "ossuary_niche",
+   "room": "ossuary",
+   "at": [
+    0.0,
+    -15.2
+   ],
+   "label_tr": "kafatası nişi",
+   "kind": "Shelf",
+   "r": 1.6
+  },
+  {
+   "id": "crypt_relic",
+   "room": "crypt",
+   "at": [
+    19.0,
+    -12.0
+   ],
+   "label_tr": "kriptadaki rölikerlik",
+   "kind": "Relic",
+   "r": 1.6
+  },
+  {
+   "id": "chapel_reliquary",
+   "room": "chapel",
+   "at": [
+    17.8,
+    -19.2
+   ],
+   "label_tr": "şapeldeki boş rölikerlik",
+   "kind": "Relic",
+   "r": 1.6
+  },
+  {
+   "id": "obs_scope",
+   "room": "observatory",
+   "at": [
+    48.5,
+    -41.5
+   ],
+   "label_tr": "pirinç teleskop",
+   "kind": "Scope",
+   "r": 1.6
+  },
+  {
+   "id": "map_table",
+   "room": "map_room",
+   "at": [
+    42.0,
+    -29.0
+   ],
+   "label_tr": "harita masası",
+   "kind": "Table",
+   "r": 2.0
+  },
+  {
+   "id": "smuggler_ledger",
+   "room": "wine_cellar",
+   "at": [
+    -31.0,
+    -15.2
+   ],
+   "label_tr": "sahte raftaki kaçakçı defteri",
+   "kind": "Book",
+   "r": 1.6
+  },
+  {
+   "id": "study_safe",
+   "room": "study",
+   "at": [
+    20.5,
+    -22.6
+   ],
+   "label_tr": "Pozzo'nun kasası",
+   "kind": "Safe",
+   "r": 1.6
+  },
+  {
+   "id": "red_book",
+   "room": "library",
+   "at": [
+    29.0,
+    -11.0
+   ],
+   "label_tr": "kırmızı kitabın rafı",
+   "kind": "Book",
+   "r": 1.6
   }
  ],
  "items": {
@@ -4890,6 +8942,59 @@
    "label_tr": "yanan fitil",
    "speed": 1.0,
    "flame": true
+  },
+  "Silver": {
+   "label_tr": "gümüş takımı",
+   "speed": 1.0,
+   "fragile": true
+  },
+  "Fork": {
+   "label_tr": "akort çatalı",
+   "speed": 1.0
+  },
+  "Seed": {
+   "label_tr": "kuş yemi",
+   "speed": 1.0
+  },
+  "Coal": {
+   "label_tr": "kömür kovası",
+   "speed": 0.85
+  },
+  "Chessmen": {
+   "label_tr": "satranç taşları",
+   "speed": 1.0
+  },
+  "TeaTray": {
+   "label_tr": "çay tepsisi",
+   "speed": 1.0,
+   "fragile": true,
+   "count": 2
+  },
+  "Linen": {
+   "label_tr": "temiz çarşaflar",
+   "speed": 1.0,
+   "count": 3
+  },
+  "Keys": {
+   "label_tr": "kâhyanın anahtarları",
+   "speed": 1.0,
+   "count": 3
+  },
+  "Relic": {
+   "label_tr": "kriptanın röliği",
+   "speed": 0.9
+  },
+  "Chart": {
+   "label_tr": "yıldız haritası",
+   "speed": 1.0
+  },
+  "Ledger": {
+   "label_tr": "kaçakçı defteri",
+   "speed": 1.0
+  },
+  "RedBook": {
+   "label_tr": "kırmızı kitap",
+   "speed": 1.0
   }
  },
  "chores": [
@@ -4913,7 +9018,8 @@
      "label_tr": "Uzun masadaki sürahiyi doldur (koşarsan şişeler şıngırdar)"
     }
    ],
-   "twist": "the Impatient can poison the decanter: the next pourer sees a purple ring and must empty it first"
+   "twist": "the Impatient can poison the decanter: the next pourer sees a purple ring and must empty it first",
+   "min_players": 8
   },
   {
    "id": "CisternWater",
@@ -4956,7 +9062,8 @@
       "dst": "greenhouse_butt"
      }
     }
-   ]
+   ],
+   "min_players": 8
   },
   {
    "id": "Firewood",
@@ -4991,7 +9098,8 @@
       "dst": "library_fire"
      }
     }
-   ]
+   ],
+   "min_players": 8
   },
   {
    "id": "Chandelier",
@@ -5025,7 +9133,8 @@
      }
     }
    ],
-   "twist": "everyone in the hall sees the chandelier come down and the name of whoever lights it"
+   "twist": "everyone in the hall sees the chandelier come down and the name of whoever lights it",
+   "min_players": 10
   },
   {
    "id": "Shutters",
@@ -5064,13 +9173,14 @@
     {
      "name": "east",
      "vars": {
-      "w1": "win_nursery",
-      "w2": "win_billiard",
-      "w3": "win_master"
+      "w1": "win_studio",
+      "w2": "win_nursery",
+      "w3": "win_billiard"
      }
     }
    ],
-   "twist": "the Impatient can throw a shutter open again (noise cover 25 m, rain wets the floor = footprints)"
+   "twist": "the Impatient can throw a shutter open again (noise cover 25 m, rain wets the floor = footprints)",
+   "min_players": 8
   },
   {
    "id": "SignalLamp",
@@ -5092,7 +9202,8 @@
      "label_tr": "Çatı yolundan geç, kuleye tırman, feneri doldur: ışık denize uzanır"
     }
    ],
-   "twist": "the beam sweeps the courtyard and the sea stair every 8 s for the rest of the day"
+   "twist": "the beam sweeps the courtyard and the sea stair every 8 s for the rest of the day",
+   "min_players": 10
   },
   {
    "id": "PozzosSupper",
@@ -5127,7 +9238,8 @@
       "dst": "letter_master"
      }
     }
-   ]
+   ],
+   "min_players": 8
   },
   {
    "id": "GuestLetters",
@@ -5171,7 +9283,8 @@
       "m3": "letter_master"
      }
     }
-   ]
+   ],
+   "min_players": 8
   },
   {
    "id": "BailTheBoat",
@@ -5192,7 +9305,8 @@
      "label_tr": "Kayığın halatını sıkıca bağla"
     }
    ],
-   "twist": "a wave washes in every 20 s: stand on the slip and you get soaked (wet footprints for 60 s)"
+   "twist": "a wave washes in every 20 s: stand on the slip and you get soaked (wet footprints for 60 s)",
+   "min_players": 8
   },
   {
    "id": "PotsIndoors",
@@ -5213,7 +9327,8 @@
      "secs": 1.5,
      "label_tr": "Saksıyı seradaki tezgâha koy"
     }
-   ]
+   ],
+   "min_players": 8
   },
   {
    "id": "SparkJar",
@@ -5235,7 +9350,8 @@
      "label_tr": "Kavanozu mahzendeki kıvılcım panosuna tak (koşarsan boşalır)"
     }
    ],
-   "twist": "a delivered jar ends a running power outage at once; running drains it, like water"
+   "twist": "a delivered jar ends a running power outage at once; running drains it, like water",
+   "min_players": 10
   },
   {
    "id": "MusicBox",
@@ -5257,7 +9373,8 @@
      "label_tr": "Silindiri balo salonundaki orkestriyona tak"
     }
    ],
-   "twist": "the orchestrion plays for 40 s: heard 30 m, it masks footsteps and kill sounds in the ballroom"
+   "twist": "the orchestrion plays for 40 s: heard 30 m, it masks footsteps and kill sounds in the ballroom",
+   "min_players": 6
   },
   {
    "id": "HangTheSheets",
@@ -5292,7 +9409,8 @@
       "dst": "bath_rack"
      }
     }
-   ]
+   ],
+   "min_players": 10
   },
   {
    "id": "HangThePortrait",
@@ -5314,7 +9432,8 @@
      "label_tr": "Galerideki boş çerçeveye as"
     }
    ],
-   "twist": "the portrait shows the face of a random living player: the Impatient can swap it for a framed one"
+   "twist": "the portrait shows the face of a random living player: the Impatient can swap it for a framed one",
+   "min_players": 8
   },
   {
    "id": "LostBook",
@@ -5335,7 +9454,8 @@
      "secs": 1.5,
      "label_tr": "Kütüphanedeki boş rafa koy"
     }
-   ]
+   ],
+   "min_players": 6
   },
   {
    "id": "ClockAndBell",
@@ -5354,7 +9474,8 @@
      "secs": 3.0,
      "label_tr": "Şapelde çan ipini çek: bütün malikâne duyar"
     }
-   ]
+   ],
+   "min_players": 10
   },
   {
    "id": "GParcel",
@@ -5376,7 +9497,8 @@
      "label_tr": "Koliyi giriş holündeki G. köşesine taşı (tek başına yavaş, iki kişiyle hızlı)"
     }
    ],
-   "twist": "two-person carry; opening it is forbidden, and everyone opens it (cosmetic loot)"
+   "twist": "two-person carry; opening it is forbidden, and everyone opens it (cosmetic loot)",
+   "min_players": 8
   },
   {
    "id": "GraveLanterns",
@@ -5403,7 +9525,8 @@
      "any_order": true
     }
    ],
-   "twist": "the taper blows out on the cliff path if you sprint; the graveyard glows for the night"
+   "twist": "the taper blows out on the cliff path if you sprint; the graveyard glows for the night",
+   "min_players": 12
   },
   {
    "id": "SetTheTable",
@@ -5424,7 +9547,967 @@
      "secs": 2.0,
      "label_tr": "Ziyafet masasına diz (koşarsan tabak kırılır)"
     }
-   ]
+   ],
+   "min_players": 6
+  },
+  {
+   "id": "WindTheClocks",
+   "title_tr": "Büyük Saatleri Kur",
+   "title_en": "Wind the grand clocks",
+   "steps": [
+    {
+     "verb": "work",
+     "at": [
+      "clock_long",
+      "clock_stair",
+      "clock_trophy"
+     ],
+     "secs": 2.5,
+     "label_tr": "Üç büyük saati kur (hepsi aynı dakikada durmuş)",
+     "any_order": true
+    }
+   ],
+   "twist": "the clocks chime together for 5 s when the last one is wound: heard all over the north block",
+   "min_players": 8
+  },
+  {
+   "id": "PolishTheSilver",
+   "title_tr": "Gümüşleri Parlat",
+   "title_en": "Polish the silver",
+   "steps": [
+    {
+     "verb": "take",
+     "at": "silver_chest",
+     "item": "Silver",
+     "secs": 2.0,
+     "label_tr": "Gümüş odasındaki sandıktan takımı al"
+    },
+    {
+     "verb": "bring",
+     "at": "$dst",
+     "item": "Silver",
+     "secs": 3.0,
+     "label_tr": "Gümüşleri parlatıp $dst diz (koşarsan şıngırdar)"
+    }
+   ],
+   "variants": [
+    {
+     "name": "dining",
+     "vars": {
+      "dst": "dining_table"
+     }
+    },
+    {
+     "name": "servants",
+     "vars": {
+      "dst": "servants_table"
+     }
+    }
+   ],
+   "min_players": 8
+  },
+  {
+   "id": "TuneThePiano",
+   "title_tr": "Piyanoyu Akort Et",
+   "title_en": "Tune the piano",
+   "steps": [
+    {
+     "verb": "take",
+     "at": "music_cabinet",
+     "item": "Fork",
+     "secs": 1.5,
+     "label_tr": "Mavi salondaki nota dolabından akort çatalını al"
+    },
+    {
+     "verb": "bring",
+     "at": "piano",
+     "item": "Fork",
+     "secs": 4.0,
+     "label_tr": "Müzik salonundaki kuyruklu piyanoyu akort et"
+    }
+   ],
+   "twist": "a tuned piano can be played (E): 20 s of music that masks footsteps in the enfilade",
+   "min_players": 8
+  },
+  {
+   "id": "FeedTheAviary",
+   "title_tr": "Kuşhaneyi Besle",
+   "title_en": "Feed the aviary",
+   "steps": [
+    {
+     "verb": "take",
+     "at": "seed_sack",
+     "item": "Seed",
+     "secs": 1.5,
+     "label_tr": "Seradaki çuvaldan kuş yemi al"
+    },
+    {
+     "verb": "bring",
+     "at": "aviary",
+     "item": "Seed",
+     "secs": 2.5,
+     "label_tr": "Portakallıktaki kuşhaneyi besle"
+    }
+   ],
+   "twist": "fed birds sing; startled birds (someone running past) screech for 3 s",
+   "min_players": 10
+  },
+  {
+   "id": "StokeTheBoiler",
+   "title_tr": "Kazanı Besle",
+   "title_en": "Stoke the boiler",
+   "steps": [
+    {
+     "verb": "take",
+     "at": "coal_heap",
+     "item": "Coal",
+     "secs": 2.0,
+     "label_tr": "Hizmet avlusundaki yığından bir kova kömür al"
+    },
+    {
+     "verb": "bring",
+     "at": "boiler",
+     "item": "Coal",
+     "secs": 2.5,
+     "label_tr": "Batı kanadındaki kazana kömürü at"
+    }
+   ],
+   "twist": "a stoked boiler steams the bath house for the day (sight 5 m there)",
+   "min_players": 8
+  },
+  {
+   "id": "SetTheChessboard",
+   "title_tr": "Satranç Tahtasını Diz",
+   "title_en": "Set the chessboard",
+   "steps": [
+    {
+     "verb": "take",
+     "at": "chess_box",
+     "item": "Chessmen",
+     "secs": 1.5,
+     "label_tr": "Kart odasındaki kutudan satranç taşlarını al"
+    },
+    {
+     "verb": "bring",
+     "at": "chessboard",
+     "item": "Chessmen",
+     "secs": 3.0,
+     "label_tr": "Oyun odasındaki satranç tahtasını diz"
+    }
+   ],
+   "min_players": 10
+  },
+  {
+   "id": "SortTheWine",
+   "title_tr": "Şarapları Ayır",
+   "title_en": "Sort the wine",
+   "steps": [
+    {
+     "verb": "work",
+     "at": [
+      "rack_1",
+      "rack_2",
+      "rack_3"
+     ],
+     "secs": 2.0,
+     "label_tr": "Katakombdaki üç nişte eski şarapları yıllarına göre diz",
+     "any_order": true
+    }
+   ],
+   "min_players": 12
+  },
+  {
+   "id": "LightTheChapel",
+   "title_tr": "Şapeli Aydınlat",
+   "title_en": "Light the chapel",
+   "steps": [
+    {
+     "verb": "take",
+     "at": "chapel_candles",
+     "item": "Taper",
+     "secs": 1.5,
+     "label_tr": "Şapelin mum kutusundan yanan bir fitil al"
+    },
+    {
+     "verb": "work",
+     "at": [
+      "chapel_cand_w",
+      "chapel_cand_e"
+     ],
+     "secs": 1.5,
+     "label_tr": "İki büyük şamdanı yak",
+     "any_order": true
+    }
+   ],
+   "twist": "a lit chapel shows shadows on the stained glass: who is inside is visible from the hall",
+   "min_players": 6
+  },
+  {
+   "id": "DustThePortraits",
+   "title_tr": "Portrelerin Tozunu Al",
+   "title_en": "Dust the portraits",
+   "steps": [
+    {
+     "verb": "work",
+     "at": [
+      "portrait_1",
+      "portrait_2",
+      "portrait_3"
+     ],
+     "secs": 2.0,
+     "label_tr": "Galerilerdeki üç tozlu portreyi sil",
+     "any_order": true
+    }
+   ],
+   "twist": "one portrait's eyes follow you (the witness portrait trap)",
+   "min_players": 8
+  },
+  {
+   "id": "AirTheGuestRooms",
+   "title_tr": "Misafir Odalarını Havalandır",
+   "title_en": "Air the guest rooms",
+   "steps": [
+    {
+     "verb": "work",
+     "at": [
+      "win_green",
+      "win_gold",
+      "win_ivory"
+     ],
+     "secs": 2.0,
+     "label_tr": "Doğu kanadındaki üç pencereyi aç, havalandır, kapat",
+     "any_order": true
+    }
+   ],
+   "min_players": 10
+  },
+  {
+   "id": "MakeTheBeds",
+   "title_tr": "Yatakları Yap",
+   "title_en": "Make the beds",
+   "steps": [
+    {
+     "verb": "take",
+     "at": "linen_press",
+     "item": "Linen",
+     "secs": 2.0,
+     "label_tr": "Dikiş odasındaki dolaptan temiz çarşafları al"
+    },
+    {
+     "verb": "bring",
+     "at": [
+      "bed_lilac",
+      "bed_green",
+      "bed_rose"
+     ],
+     "item": "Linen",
+     "secs": 2.0,
+     "label_tr": "Üç misafir yatağını yap",
+     "any_order": true
+    }
+   ],
+   "min_players": 10
+  },
+  {
+   "id": "HotWater",
+   "title_tr": "Sıcak Su",
+   "title_en": "Hot water",
+   "steps": [
+    {
+     "verb": "take",
+     "at": "boiler",
+     "item": "Bucket",
+     "secs": 2.5,
+     "label_tr": "Kazandan bir kova sıcak su al",
+     "fill": 1.0
+    },
+    {
+     "verb": "bring",
+     "at": "bath_e_tub",
+     "item": "Bucket",
+     "secs": 1.5,
+     "label_tr": "Misafir hamamının küvetine dök (yürü, koşma!)",
+     "min_fill": 0.35
+    }
+   ],
+   "min_players": 10
+  },
+  {
+   "id": "TheDeedCount",
+   "title_tr": "Tapuları Say",
+   "title_en": "Count the deeds",
+   "steps": [
+    {
+     "verb": "work",
+     "at": "vault_ledger",
+     "secs": 3.0,
+     "label_tr": "Kasa dairesindeki tapuları say"
+    },
+    {
+     "verb": "work",
+     "at": "ossuary_niche",
+     "secs": 2.0,
+     "label_tr": "Kemiklikteki nişe sayım defterini koy"
+    }
+   ],
+   "min_players": 12
+  },
+  {
+   "id": "KeyRound",
+   "title_tr": "Anahtar Turu",
+   "title_en": "The key round",
+   "steps": [
+    {
+     "verb": "take",
+     "at": "housekeeper_keys",
+     "item": "Keys",
+     "secs": 1.5,
+     "label_tr": "Kâhyanın panosundan anahtar demetini al"
+    },
+    {
+     "verb": "bring",
+     "at": [
+      "smoking_humidor",
+      "gun_bench",
+      "morning_table"
+     ],
+     "item": "Keys",
+     "secs": 1.5,
+     "label_tr": "Doğu kanadında üç dolabı kilitle",
+     "any_order": true
+    }
+   ],
+   "min_players": 10
+  },
+  {
+   "id": "DustTheChina",
+   "title_tr": "Porselenlerin Tozunu Al",
+   "title_en": "Dust the china",
+   "steps": [
+    {
+     "verb": "work",
+     "at": [
+      "vase_chinese",
+      "dressing_mirror",
+      "hall_trophies"
+     ],
+     "secs": 2.0,
+     "label_tr": "Çin vazosunu, boy aynasını ve trofeleri sil",
+     "any_order": true
+    }
+   ],
+   "min_players": 8
+  },
+  {
+   "id": "AfternoonTea",
+   "title_tr": "İkindi Çayı",
+   "title_en": "Afternoon tea",
+   "steps": [
+    {
+     "verb": "take",
+     "at": "kitchen_pass",
+     "item": "TeaTray",
+     "secs": 2.0,
+     "label_tr": "Mutfaktaki servis tezgâhından çay tepsisini al"
+    },
+    {
+     "verb": "bring",
+     "at": [
+      "tea_green",
+      "tea_yellow"
+     ],
+     "item": "TeaTray",
+     "secs": 1.5,
+     "label_tr": "Yeşil ve sarı salonlara çay bırak",
+     "any_order": true
+    }
+   ],
+   "twist": "the enfilade: carry the tray through the salons without running (fragile)",
+   "min_players": 8
+  },
+  {
+   "id": "CryptRelic",
+   "title_tr": "Kriptanın Röliği",
+   "title_en": "The crypt relic",
+   "steps": [
+    {
+     "verb": "take",
+     "at": "crypt_relic",
+     "item": "Relic",
+     "secs": 2.0,
+     "label_tr": "Kriptadaki röliği al"
+    },
+    {
+     "verb": "bring",
+     "at": "chapel_reliquary",
+     "item": "Relic",
+     "secs": 2.0,
+     "label_tr": "Röliği şapeldeki boş rölikerliğe koy"
+    }
+   ],
+   "secret": "S8",
+   "reward_secret": "S2",
+   "min_players": 6
+  },
+  {
+   "id": "StarChart",
+   "title_tr": "Yıldız Haritası",
+   "title_en": "The star chart",
+   "steps": [
+    {
+     "verb": "take",
+     "at": "obs_scope",
+     "item": "Chart",
+     "secs": 3.0,
+     "label_tr": "Teleskoptan fırtına yıldızlarını haritaya geçir"
+    },
+    {
+     "verb": "bring",
+     "at": "map_table",
+     "item": "Chart",
+     "secs": 2.0,
+     "label_tr": "Haritayı harita odasındaki masaya bırak"
+    }
+   ],
+   "secret": "S10",
+   "reward_compartment": "K9",
+   "min_players": 10
+  },
+  {
+   "id": "SmugglersLedger",
+   "title_tr": "Kaçakçı Defteri",
+   "title_en": "The smugglers' ledger",
+   "steps": [
+    {
+     "verb": "take",
+     "at": "smuggler_ledger",
+     "item": "Ledger",
+     "secs": 1.5,
+     "label_tr": "Sahte şarap rafının arkasındaki defteri al"
+    },
+    {
+     "verb": "bring",
+     "at": "study_safe",
+     "item": "Ledger",
+     "secs": 2.0,
+     "label_tr": "Defteri Pozzo'nun kasasına kilitle"
+    }
+   ],
+   "secret": "S4",
+   "reward_secret": "S7",
+   "min_players": 8
+  },
+  {
+   "id": "LibraryCipher",
+   "title_tr": "Kırmızı Kitabın Şifresi",
+   "title_en": "The red book's cipher",
+   "steps": [
+    {
+     "verb": "take",
+     "at": "red_book",
+     "item": "RedBook",
+     "secs": 1.5,
+     "label_tr": "Dönen kitaplığı açan kırmızı kitabı al"
+    },
+    {
+     "verb": "bring",
+     "at": "study_safe",
+     "item": "RedBook",
+     "secs": 2.0,
+     "label_tr": "Kitaptaki şifreyi kasada dene"
+    }
+   ],
+   "secret": "S1",
+   "reward_compartment": "K4",
+   "min_players": 6
+  }
+ ],
+ "compartments": [
+  {
+   "id": "K1",
+   "room": "wine_catacombs",
+   "at": [
+    -33.4,
+    -9.0
+   ],
+   "kind": "LooseBrick",
+   "prompt": "Tap the loose brick",
+   "loot": null,
+   "clue": "A torn label in the bricks: 'G. - 1893 - not for the committee'.",
+   "yaw": 0.0
+  },
+  {
+   "id": "K2",
+   "room": "study",
+   "at": [
+    13.0,
+    -23.4
+   ],
+   "kind": "FalseDrawer",
+   "prompt": "Pull the desk drawer all the way out",
+   "loot": "Chest",
+   "clue": null,
+   "yaw": 0.0
+  },
+  {
+   "id": "K3",
+   "room": "library",
+   "at": [
+    31.0,
+    -23.4
+   ],
+   "kind": "HollowBook",
+   "prompt": "Open the heavy atlas",
+   "loot": null,
+   "clue": "Pages cut into a hollow. Inside: a list of the guests' rooms, one name circled in red.",
+   "yaw": 0.0
+  },
+  {
+   "id": "K4",
+   "room": "vault",
+   "at": [
+    -12.0,
+    -8.0
+   ],
+   "kind": "FloorSafe",
+   "prompt": "Try the floor safe's dial",
+   "loot": "CryptVault",
+   "clue": null,
+   "yaw": 0.0
+  },
+  {
+   "id": "K5",
+   "room": "kitchen",
+   "at": [
+    -33.4,
+    -15.0
+   ],
+   "kind": "LooseBrick",
+   "prompt": "Tap the loose brick by the range",
+   "loot": "Pot",
+   "clue": null,
+   "yaw": 0.0
+  },
+  {
+   "id": "K6",
+   "room": "housekeeper",
+   "at": [
+    -45.0,
+    -33.4
+   ],
+   "kind": "FalseDrawer",
+   "prompt": "Pull the ledger drawer",
+   "loot": null,
+   "clue": "The housekeeper's ledger: one guest has asked for the key to the gun room twice.",
+   "yaw": 0.0
+  },
+  {
+   "id": "K7",
+   "room": "chinese_room",
+   "at": [
+    9.0,
+    -38.0
+   ],
+   "kind": "LacquerBox",
+   "prompt": "Slide the lacquer box's false bottom",
+   "loot": "Pot",
+   "clue": null,
+   "yaw": 0.0
+  },
+  {
+   "id": "K8",
+   "room": "master",
+   "at": [
+    24.0,
+    -22.8
+   ],
+   "kind": "FloorSafe",
+   "prompt": "Lift the board under the rug",
+   "loot": "Chest",
+   "clue": null,
+   "yaw": 0.0
+  },
+  {
+   "id": "K9",
+   "room": "smoking_room",
+   "at": [
+    39.0,
+    -43.4
+   ],
+   "kind": "WallSafe",
+   "prompt": "Swing the painting aside",
+   "loot": null,
+   "clue": "A letter: 'The boat will not come while the storm holds. Wait. - G.'",
+   "yaw": 0.0
+  },
+  {
+   "id": "K10",
+   "room": "sewing_room",
+   "at": [
+    -23.0,
+    -25.0
+   ],
+   "kind": "SewingBox",
+   "prompt": "Lift the sewing box's tray",
+   "loot": null,
+   "clue": "A scrap of cloth with a dark stain, cut from a coat sleeve.",
+   "yaw": 0.0
+  },
+  {
+   "id": "K11",
+   "room": "ossuary",
+   "at": [
+    0.0,
+    -4.8
+   ],
+   "kind": "LooseBrick",
+   "prompt": "Push the skull in the wall",
+   "loot": "CryptUrn",
+   "clue": null,
+   "yaw": 0.0
+  },
+  {
+   "id": "K12",
+   "room": "green_room",
+   "at": [
+    45.2,
+    -36.0
+   ],
+   "kind": "FalseDrawer",
+   "prompt": "Pull the writing desk's drawer",
+   "loot": "Pot",
+   "clue": null,
+   "yaw": 0.0
+  }
+ ],
+ "traps": [
+  {
+   "id": "T1",
+   "effect": "Trapdoor",
+   "room": "dining",
+   "at": [
+    -20.5,
+    -8.5
+   ],
+   "zone": [
+    1.0,
+    1.0
+   ],
+   "policy": "Impatient",
+   "passive": false,
+   "telegraph_s": 1.2,
+   "active_s": 3.0,
+   "cooldown_s": 45.0,
+   "damage": 10.0,
+   "radius_cm": 600.0,
+   "target": [
+    -26.0,
+    -10.0
+   ],
+   "target_room": "wine_cellar",
+   "note": "the boards groan and sag 1.2 s before they drop"
+  },
+  {
+   "id": "T2",
+   "effect": "Trapdoor",
+   "room": "ballroom",
+   "at": [
+    13.0,
+    -3.0
+   ],
+   "zone": [
+    1.0,
+    1.0
+   ],
+   "policy": "Impatient",
+   "passive": false,
+   "telegraph_s": 1.2,
+   "active_s": 3.0,
+   "cooldown_s": 45.0,
+   "damage": 10.0,
+   "radius_cm": 600.0,
+   "target": [
+    10.5,
+    -7.0
+   ],
+   "target_room": "cistern",
+   "note": "drops into the cistern (knee-deep water)"
+  },
+  {
+   "id": "T3",
+   "effect": "FallingObject",
+   "room": "ballroom",
+   "at": [
+    24.0,
+    -2.0
+   ],
+   "zone": [
+    1.6,
+    1.6
+   ],
+   "policy": "Impatient",
+   "passive": false,
+   "telegraph_s": 2.5,
+   "active_s": 4.0,
+   "cooldown_s": 90.0,
+   "damage": 40.0,
+   "radius_cm": 600.0,
+   "target": null,
+   "target_room": null,
+   "note": "the ballroom chandelier sways and creaks 2.5 s, then falls"
+  },
+  {
+   "id": "T4",
+   "effect": "FallingObject",
+   "room": "staircase_hall",
+   "at": [
+    0.0,
+    -35.0
+   ],
+   "zone": [
+    1.6,
+    1.6
+   ],
+   "policy": "Impatient",
+   "passive": false,
+   "telegraph_s": 2.5,
+   "active_s": 4.0,
+   "cooldown_s": 90.0,
+   "damage": 40.0,
+   "radius_cm": 600.0,
+   "target": null,
+   "target_room": null,
+   "note": "the great chandelier of the staircase hall"
+  },
+  {
+   "id": "T5",
+   "effect": "LockDoors",
+   "room": "trophy_room",
+   "at": [
+    29.0,
+    -32.0
+   ],
+   "zone": [
+    4.6,
+    7.6
+   ],
+   "policy": "Impatient",
+   "passive": false,
+   "telegraph_s": 1.0,
+   "active_s": 20.0,
+   "cooldown_s": 90.0,
+   "damage": 0.0,
+   "radius_cm": 600.0,
+   "target": null,
+   "target_room": null,
+   "note": "the trophy room seals for 20 s (clunk of every lock first)"
+  },
+  {
+   "id": "T6",
+   "effect": "LockDoors",
+   "room": "green_room",
+   "at": [
+    42.0,
+    -39.0
+   ],
+   "zone": [
+    3.6,
+    4.6
+   ],
+   "policy": "Impatient",
+   "passive": false,
+   "telegraph_s": 1.0,
+   "active_s": 20.0,
+   "cooldown_s": 90.0,
+   "damage": 0.0,
+   "radius_cm": 600.0,
+   "target": null,
+   "target_room": null,
+   "note": "the green guest room seals for 20 s"
+  },
+  {
+   "id": "T7",
+   "effect": "LightsOut",
+   "room": "long_gallery",
+   "at": [
+    0.0,
+    -42.0
+   ],
+   "zone": [
+    30.0,
+    1.6
+   ],
+   "policy": "Impatient",
+   "passive": false,
+   "telegraph_s": 1.5,
+   "active_s": 25.0,
+   "cooldown_s": 90.0,
+   "damage": 0.0,
+   "radius_cm": 3600.0,
+   "target": null,
+   "target_room": null,
+   "note": "the gallery's gas lamps flicker, then go out for 25 s"
+  },
+  {
+   "id": "T8",
+   "effect": "LightsOut",
+   "room": "servants_hall",
+   "at": [
+    -49.0,
+    -39.0
+   ],
+   "zone": [
+    4.6,
+    4.6
+   ],
+   "policy": "Impatient",
+   "passive": false,
+   "telegraph_s": 1.5,
+   "active_s": 25.0,
+   "cooldown_s": 90.0,
+   "damage": 0.0,
+   "radius_cm": 1600.0,
+   "target": null,
+   "target_room": null,
+   "note": "the servants' hall lamps go out"
+  },
+  {
+   "id": "T9",
+   "effect": "Alarm",
+   "room": "long_gallery",
+   "at": [
+    -18.0,
+    -42.0
+   ],
+   "zone": [
+    1.0,
+    1.6
+   ],
+   "policy": "None",
+   "passive": true,
+   "telegraph_s": 0.3,
+   "active_s": 8.0,
+   "cooldown_s": 20.0,
+   "damage": 0.0,
+   "radius_cm": 600.0,
+   "target": null,
+   "target_room": null,
+   "note": "a creaking board: pings everyone's minimap for 8 s"
+  },
+  {
+   "id": "T10",
+   "effect": "Alarm",
+   "room": "east_hall",
+   "at": [
+    36.0,
+    -24.0
+   ],
+   "zone": [
+    1.6,
+    1.0
+   ],
+   "policy": "None",
+   "passive": true,
+   "telegraph_s": 0.3,
+   "active_s": 8.0,
+   "cooldown_s": 20.0,
+   "damage": 0.0,
+   "radius_cm": 600.0,
+   "target": null,
+   "target_room": null,
+   "note": "a creaking board in the east wing hall"
+  },
+  {
+   "id": "T11",
+   "effect": "Alarm",
+   "room": "north_corridor",
+   "at": [
+    12.0,
+    -42.0
+   ],
+   "zone": [
+    1.0,
+    1.6
+   ],
+   "policy": "None",
+   "passive": true,
+   "telegraph_s": 0.3,
+   "active_s": 8.0,
+   "cooldown_s": 20.0,
+   "damage": 0.0,
+   "radius_cm": 600.0,
+   "target": null,
+   "target_room": null,
+   "note": "a creaking board on the guest floor"
+  },
+  {
+   "id": "T12",
+   "effect": "Witness",
+   "room": "gallery",
+   "at": [
+    -9.6,
+    -12.0
+   ],
+   "zone": [
+    0.5,
+    0.5
+   ],
+   "policy": "None",
+   "passive": true,
+   "telegraph_s": 2.0,
+   "active_s": 1.0,
+   "cooldown_s": 45.0,
+   "damage": 0.0,
+   "radius_cm": 900.0,
+   "target": null,
+   "target_room": null,
+   "note": "Anselm's portrait: its eyes remember who passed"
+  },
+  {
+   "id": "T13",
+   "effect": "Witness",
+   "room": "picture_gallery",
+   "at": [
+    -53.6,
+    -34.0
+   ],
+   "zone": [
+    0.5,
+    0.5
+   ],
+   "policy": "None",
+   "passive": true,
+   "telegraph_s": 2.0,
+   "active_s": 1.0,
+   "cooldown_s": 45.0,
+   "damage": 0.0,
+   "radius_cm": 1100.0,
+   "target": null,
+   "target_room": null,
+   "note": "the Pozzo matriarch's portrait watches the picture gallery"
+  },
+  {
+   "id": "T14",
+   "effect": "Witness",
+   "room": "long_gallery",
+   "at": [
+    0.0,
+    -43.6
+   ],
+   "zone": [
+    0.5,
+    0.5
+   ],
+   "policy": "None",
+   "passive": true,
+   "telegraph_s": 2.0,
+   "active_s": 1.0,
+   "cooldown_s": 45.0,
+   "damage": 0.0,
+   "radius_cm": 1400.0,
+   "target": null,
+   "target_room": null,
+   "note": "the founder's portrait at the middle of the long gallery"
   }
  ],
  "chokepoints": [

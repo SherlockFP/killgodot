@@ -143,6 +143,42 @@
     0.16
    ],
    "label": "oil can"
+  },
+  "Canvas": {
+   "mesh": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Bag.Bag",
+   "scale": [
+    1.6,
+    0.9,
+    0.6
+   ],
+   "box": [
+    45,
+    25,
+    16
+   ],
+   "mesh_z": -16,
+   "mass": 18,
+   "speed": 0.6,
+   "two_person": true,
+   "label": "rolled tent canvas",
+   "tint": [
+    0.78,
+    0.7,
+    0.52
+   ]
+  },
+  "Herbs": {
+   "mesh": "/Game/KillGodot/Env/KG_Nature/StaticMeshes/Flower_3_Group.Flower_3_Group",
+   "scale": 0.5,
+   "box": [
+    16,
+    16,
+    10
+   ],
+   "mesh_z": -8,
+   "mass": 1,
+   "speed": 1.0,
+   "label": "bunch of herbs"
   }
  },
  "anchors": [
@@ -742,6 +778,383 @@
    ],
    "climb_m": 12.0,
    "yaw": 320.0
+  },
+  {
+   "id": "forest_camp_woodpile",
+   "kind": "CampWoodpile",
+   "at": [
+    -7.44,
+    -78.42
+   ],
+   "z": 13.94,
+   "r": 2.0,
+   "yaw": 0.0,
+   "label": "the camp woodpile",
+   "climb_m": 0.0
+  },
+  {
+   "id": "forest_tent_site",
+   "kind": "TentSite",
+   "at": [
+    -14.94,
+    -83.92
+   ],
+   "z": 13.27,
+   "r": 2.4,
+   "yaw": 0.0,
+   "label": "the camp tent site",
+   "climb_m": 0.0
+  },
+  {
+   "id": "forest_peg_1",
+   "kind": "TentPeg",
+   "at": [
+    -17.44,
+    -84.12
+   ],
+   "z": 13.15,
+   "r": 1.0,
+   "yaw": 0.0,
+   "label": "tent peg 1",
+   "climb_m": 0.0
+  },
+  {
+   "id": "forest_peg_2",
+   "kind": "TentPeg",
+   "at": [
+    -14.94,
+    -87.12
+   ],
+   "z": 12.51,
+   "r": 1.0,
+   "yaw": 0.0,
+   "label": "tent peg 2",
+   "climb_m": 0.0
+  },
+  {
+   "id": "forest_peg_3",
+   "kind": "TentPeg",
+   "at": [
+    -12.44,
+    -83.92
+   ],
+   "z": 13.31,
+   "r": 1.0,
+   "yaw": 0.0,
+   "label": "tent peg 3",
+   "climb_m": 0.0
+  },
+  {
+   "id": "forest_canvas",
+   "kind": "CanvasPile",
+   "at": [
+    -98.0,
+    0.0
+   ],
+   "z": 10.46,
+   "r": 1.8,
+   "yaw": 0.0,
+   "label": "the canvas by the woodcutter's",
+   "climb_m": 0.0
+  },
+  {
+   "id": "forest_herb_table",
+   "kind": "HerbTable",
+   "at": [
+    -6.47,
+    -47.27
+   ],
+   "z": 14.0,
+   "r": 1.6,
+   "yaw": 0.0,
+   "label": "the herb table by the church",
+   "climb_m": 0.0
+  },
+  {
+   "id": "forest_deadwood_n1",
+   "kind": "Deadwood",
+   "at": [
+    10.63,
+    -92.17
+   ],
+   "z": 10.37,
+   "r": 1.6,
+   "yaw": 0.0,
+   "label": "a pile of dry branches",
+   "climb_m": 0.0
+  },
+  {
+   "id": "forest_deadwood_n2",
+   "kind": "Deadwood",
+   "at": [
+    11.79,
+    -97.42
+   ],
+   "z": 9.59,
+   "r": 1.6,
+   "yaw": 0.0,
+   "label": "a pile of dry branches",
+   "climb_m": 0.0
+  },
+  {
+   "id": "forest_deadwood_n3",
+   "kind": "Deadwood",
+   "at": [
+    13.19,
+    -105.36
+   ],
+   "z": 9.39,
+   "r": 1.6,
+   "yaw": 0.0,
+   "label": "a pile of dry branches",
+   "climb_m": 0.0
+  },
+  {
+   "id": "forest_deadwood_w1",
+   "kind": "Deadwood",
+   "at": [
+    -16.38,
+    -94.81
+   ],
+   "z": 10.6,
+   "r": 1.6,
+   "yaw": 0.0,
+   "label": "a pile of dry branches",
+   "climb_m": 0.0
+  },
+  {
+   "id": "forest_deadwood_w2",
+   "kind": "Deadwood",
+   "at": [
+    -16.97,
+    -102.87
+   ],
+   "z": 9.03,
+   "r": 1.6,
+   "yaw": 0.0,
+   "label": "a pile of dry branches",
+   "climb_m": 0.0
+  },
+  {
+   "id": "forest_deadwood_w3",
+   "kind": "Deadwood",
+   "at": [
+    -17.57,
+    -110.89
+   ],
+   "z": 7.49,
+   "r": 1.6,
+   "yaw": 0.0,
+   "label": "a pile of dry branches",
+   "climb_m": 0.0
+  },
+  {
+   "id": "forest_herbs_w1",
+   "kind": "Herbs",
+   "at": [
+    -7.62,
+    -82.35
+   ],
+   "z": 13.51,
+   "r": 1.4,
+   "yaw": 0.0,
+   "label": "a clump of wild herbs",
+   "climb_m": 0.0
+  },
+  {
+   "id": "forest_herbs_w2",
+   "kind": "Herbs",
+   "at": [
+    -10.49,
+    -87.99
+   ],
+   "z": 12.26,
+   "r": 1.4,
+   "yaw": 0.0,
+   "label": "a clump of wild herbs",
+   "climb_m": 0.0
+  },
+  {
+   "id": "forest_herbs_w3",
+   "kind": "Herbs",
+   "at": [
+    -12.83,
+    -95.64
+   ],
+   "z": 10.25,
+   "r": 1.4,
+   "yaw": 0.0,
+   "label": "a clump of wild herbs",
+   "climb_m": 0.0
+  },
+  {
+   "id": "forest_herbs_n1",
+   "kind": "Herbs",
+   "at": [
+    3.4,
+    -99.83
+   ],
+   "z": 9.3,
+   "r": 1.4,
+   "yaw": 0.0,
+   "label": "a clump of wild herbs",
+   "climb_m": 0.0
+  },
+  {
+   "id": "forest_herbs_n2",
+   "kind": "Herbs",
+   "at": [
+    5.7,
+    -105.73
+   ],
+   "z": 9.11,
+   "r": 1.4,
+   "yaw": 0.0,
+   "label": "a clump of wild herbs",
+   "climb_m": 0.0
+  },
+  {
+   "id": "forest_herbs_n3",
+   "kind": "Herbs",
+   "at": [
+    7.9,
+    -113.42
+   ],
+   "z": 9.11,
+   "r": 1.4,
+   "yaw": 0.0,
+   "label": "a clump of wild herbs",
+   "climb_m": 0.0
+  },
+  {
+   "id": "forest_lantern_n1",
+   "kind": "Lamp",
+   "at": [
+    -0.55,
+    -90.49
+   ],
+   "z": 11.63,
+   "r": 1.4,
+   "yaw": 0.0,
+   "label": "trail lantern 1",
+   "climb_m": 0.0
+  },
+  {
+   "id": "forest_lantern_n2",
+   "kind": "Lamp",
+   "at": [
+    -0.52,
+    -97.53
+   ],
+   "z": 9.71,
+   "r": 1.4,
+   "yaw": 0.0,
+   "label": "trail lantern 2",
+   "climb_m": 0.0
+  },
+  {
+   "id": "forest_lantern_n3",
+   "kind": "Lamp",
+   "at": [
+    -0.14,
+    -105.02
+   ],
+   "z": 8.9,
+   "r": 1.4,
+   "yaw": 0.0,
+   "label": "trail lantern 3",
+   "climb_m": 0.0
+  },
+  {
+   "id": "forest_lantern_n4",
+   "kind": "Lamp",
+   "at": [
+    0.1,
+    -112.9
+   ],
+   "z": 8.62,
+   "r": 1.4,
+   "yaw": 0.0,
+   "label": "trail lantern 4",
+   "climb_m": 0.0
+  },
+  {
+   "id": "forest_lantern_n5",
+   "kind": "Lamp",
+   "at": [
+    -0.87,
+    -120.34
+   ],
+   "z": 8.23,
+   "r": 1.4,
+   "yaw": 0.0,
+   "label": "trail lantern 5",
+   "climb_m": 0.0
+  },
+  {
+   "id": "forest_lantern_w1",
+   "kind": "Lamp",
+   "at": [
+    -107.58,
+    -20.83
+   ],
+   "z": 13.84,
+   "r": 1.4,
+   "yaw": 0.0,
+   "label": "trail lantern 1",
+   "climb_m": 0.0
+  },
+  {
+   "id": "forest_lantern_w2",
+   "kind": "Lamp",
+   "at": [
+    -114.98,
+    -22.06
+   ],
+   "z": 14.02,
+   "r": 1.4,
+   "yaw": 0.0,
+   "label": "trail lantern 2",
+   "climb_m": 0.0
+  },
+  {
+   "id": "forest_lantern_w3",
+   "kind": "Lamp",
+   "at": [
+    -122.92,
+    -21.92
+   ],
+   "z": 13.99,
+   "r": 1.4,
+   "yaw": 0.0,
+   "label": "trail lantern 3",
+   "climb_m": 0.0
+  },
+  {
+   "id": "forest_lantern_w4",
+   "kind": "Lamp",
+   "at": [
+    -130.41,
+    -21.6
+   ],
+   "z": 13.89,
+   "r": 1.4,
+   "yaw": 0.0,
+   "label": "trail lantern 4",
+   "climb_m": 0.0
+  },
+  {
+   "id": "forest_lantern_w5",
+   "kind": "Lamp",
+   "at": [
+    -136.38,
+    -21.35
+   ],
+   "z": 13.65,
+   "r": 1.4,
+   "yaw": 0.0,
+   "label": "trail lantern 5",
+   "climb_m": 0.0
   }
  ],
  "chores": [
@@ -1119,6 +1532,194 @@
      "effect": "light+fx:LighthouseGlow",
      "label": "Climb the lighthouse and fill the lamp",
      "cue": "Pour"
+    }
+   ]
+  },
+  {
+   "id": "GatherDeadwood",
+   "title": "Gather deadwood",
+   "blurb": "Dry branches from three piles off the trail, tied into a bundle for the camp woodpile.",
+   "bots": true,
+   "variants": [
+    {
+     "name": "north",
+     "vars": {
+      "p1": "forest_deadwood_n1",
+      "p2": "forest_deadwood_n2",
+      "p3": "forest_deadwood_n3"
+     }
+    },
+    {
+     "name": "north_east",
+     "vars": {
+      "p1": "forest_deadwood_w1",
+      "p2": "forest_deadwood_w2",
+      "p3": "forest_deadwood_w3"
+     }
+    }
+   ],
+   "steps": [
+    {
+     "verb": "work",
+     "at": [
+      "$p1",
+      "$p2",
+      "$p3"
+     ],
+     "secs": 2.0,
+     "spawn": "Bundle",
+     "cue": "Chop",
+     "label": "Snap dry branches off the three piles"
+    },
+    {
+     "verb": "bring",
+     "at": "forest_camp_woodpile",
+     "item": "Bundle",
+     "secs": 0.8,
+     "consume": true,
+     "effect": "stack",
+     "cue": "Thud",
+     "label": "Stack the bundle on the camp woodpile"
+    }
+   ]
+  },
+  {
+   "id": "PitchCamp",
+   "title": "Pitch camp",
+   "blurb": "Carry the canvas out to the camp (easier with a friend), then drive three pegs.",
+   "bots": true,
+   "steps": [
+    {
+     "verb": "take",
+     "at": "forest_canvas",
+     "item": "Canvas",
+     "secs": 0.8,
+     "cue": "Thud",
+     "label": "Pick up the tent canvas at the woodcutter's"
+    },
+    {
+     "verb": "bring",
+     "at": "forest_tent_site",
+     "item": "Canvas",
+     "secs": 1.0,
+     "consume": true,
+     "effect": "stack",
+     "cue": "Whoosh",
+     "label": "Spread the canvas at the camp"
+    },
+    {
+     "verb": "work",
+     "at": [
+      "forest_peg_1",
+      "forest_peg_2",
+      "forest_peg_3"
+     ],
+     "secs": 1.5,
+     "cue": "Thud",
+     "effect": "stack",
+     "label": "Drive the three tent pegs"
+    }
+   ]
+  },
+  {
+   "id": "TrailLanterns",
+   "title": "Light the trail lanterns",
+   "blurb": "A lit taper from the town hall and five lanterns along a forest trail.",
+   "bots": true,
+   "variants": [
+    {
+     "name": "north",
+     "vars": {
+      "l1": "forest_lantern_n1",
+      "l2": "forest_lantern_n2",
+      "l3": "forest_lantern_n3",
+      "l4": "forest_lantern_n4",
+      "l5": "forest_lantern_n5"
+     }
+    },
+    {
+     "name": "west",
+     "vars": {
+      "l1": "forest_lantern_w1",
+      "l2": "forest_lantern_w2",
+      "l3": "forest_lantern_w3",
+      "l4": "forest_lantern_w4",
+      "l5": "forest_lantern_w5"
+     }
+    }
+   ],
+   "steps": [
+    {
+     "verb": "take",
+     "at": "taper_box",
+     "item": "Taper",
+     "secs": 0.6,
+     "cue": "Flame",
+     "label": "Take a lit taper from the town hall box"
+    },
+    {
+     "verb": "bring",
+     "at": [
+      "$l1",
+      "$l2",
+      "$l3",
+      "$l4",
+      "$l5"
+     ],
+     "item": "Taper",
+     "secs": 0.8,
+     "consume": true,
+     "effect": "light",
+     "cue": "Flame",
+     "label": "Light the five trail lanterns"
+    }
+   ]
+  },
+  {
+   "id": "GatherHerbs",
+   "title": "Gather herbs",
+   "blurb": "Three clumps of wild herbs by the trail, for the herb table at the church.",
+   "bots": true,
+   "variants": [
+    {
+     "name": "crown",
+     "vars": {
+      "h1": "forest_herbs_w1",
+      "h2": "forest_herbs_w2",
+      "h3": "forest_herbs_w3"
+     }
+    },
+    {
+     "name": "north",
+     "vars": {
+      "h1": "forest_herbs_n1",
+      "h2": "forest_herbs_n2",
+      "h3": "forest_herbs_n3"
+     }
+    }
+   ],
+   "steps": [
+    {
+     "verb": "work",
+     "at": [
+      "$h1",
+      "$h2",
+      "$h3"
+     ],
+     "secs": 1.5,
+     "spawn": "Herbs",
+     "cue": "Paper",
+     "label": "Pick the three clumps of herbs"
+    },
+    {
+     "verb": "bring",
+     "at": "forest_herb_table",
+     "item": "Herbs",
+     "secs": 0.8,
+     "consume": true,
+     "effect": "stack",
+     "cue": "Thud",
+     "label": "Lay the herbs on the church table"
     }
    ]
   }

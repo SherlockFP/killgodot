@@ -1,4 +1,5 @@
 #include "UI/KGHUD.h"
+#include "UI/Forest/KGForestHUD.h"
 #include "Audio/KGAudio.h"
 #include "Chores/KGChoreComponent.h"
 #include "Chores/KGChoreTypes.h"
@@ -2053,6 +2054,7 @@ void AKGHUD::DrawHUD()
 	UpdateVitals(F);
 	DrawScreenEffects(F);   // under everything
 	DrawFishingVignette(F);
+	KGForestHUD::Draw(this, Canvas, S);   // SPRINT-033: frost, wolf / Mist lines, the arrow back to the path, the vigil line
 	DrawMatchInfo(S);
 	const AKGCharacter* EmoteBody = Cast<AKGCharacter>(GetOwningPawn());
 	const UKGEmoteComponent* Emote = EmoteBody ? EmoteBody->GetEmote() : nullptr;

@@ -136,8 +136,10 @@ def wreck():
             K.prop(DH + "Shipwreck", x, y, max(gz, -260.0) - 60.0, yaw=35.0, roll=14.0, pitch=-6.0, sub="Wreck",
                    cull=0.0, claim=600.0)
             for k in range(3):
-                K.solid(C.N + "Rock_Medium_%d" % (1 + k), x + R.uniform(-600, 600), y + R.uniform(-300, 300),
-                        max(gz, -300.0) - 80.0, R.uniform(0, 360), R.uniform(0.9, 1.4))
+                rx, ry = x + R.uniform(-600, 600), y + R.uniform(-300, 300)   # same RNG order as before
+                # seated on the ground under the rock itself, not the hull's (a rock off the slope floated, 2026-09-26)
+                K.solid(C.N + "Rock_Medium_%d" % (1 + k), rx, ry, min(max(gz, -300.0), C.ground(rx, ry)) - 80.0,
+                        R.uniform(0, 360), R.uniform(0.9, 1.4))
         else:
             K.prop(DH + "ShipwreckMast", x, y, max(gz, -300.0) - 100.0, yaw=R.uniform(0, 360), roll=18.0, sub="Wreck",
                    cull=0.0)

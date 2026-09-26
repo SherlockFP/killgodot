@@ -1074,7 +1074,7 @@ layout = {
     "core": {"polygons": ["quay", "heart", "upper"], "min_coverage": 0.20},
     "district_hubs": {"harbour_row": "quay_promenade", "heart": "rope_walk", "upper_town": "balcony_lane", "crown_hill": "crown_walk", "brookside": "mill_lane", "orchard_upland": "orchard_lane", "sakura_garden": "sakura_walk"},
     "_district_hubs_doc": "validate_layout checks two edge-disjoint routes from the square to the middle of each listed street; Lighthouse Point is a deliberate single spur.",
-    "nav_bounds": {"min": [-120.0, -120.0, -4.0], "max": [120.0, 112.0, 45.0]},
+    "nav_bounds": {"min": [-182.0, -182.0, -4.0], "max": [182.0, 112.0, 70.0]},   # SPRINT-033: the forest ring
     "boats": [rd(A(-3.5, -2.0)), rd(A(3.8, 6.0)), rd(A(-3.8, 12.0)), rd(P(17.0, 52.0)), rd(P(18.0, -55.0)), rd(P(20.0, -70.0))],
 }
 with open(OUT, "w", encoding="utf-8") as f:

@@ -265,7 +265,7 @@ room("dressing_room", "F1", rect(24, 34, -40, -24), "Giyinme Odası", "Dressing 
 room("upper_west", "F1", rect(-38, -34, -44, -24), "Batı Üst Geçit", "Upper West Passage", kind="circulation",
      wing="west", min_n=WEST, surface="wood", purpose="top of the service stair", dressing="linen shelves, lamps")
 room("picture_gallery", "F1", rect(-54, -38, -44, -24), "Resim Galerisi", "Picture Gallery", wing="west",
-     min_n=WEST, surface="carpet", purpose="the family's great paintings; a portrait that watches",
+     min_n=WEST, surface="carpet", dead_end_ok=True, purpose="the family's great paintings; a portrait that watches",
      dressing="paintings frame to frame, statues, benches, velvet ropes")
 room("east_corridor", "F1", rect(34, 38, -44, -4), "Doğu Misafir Koridoru", "East Guest Corridor",
      kind="circulation", wing="east", min_n=EAST, surface="carpet", purpose="the guest wing's corridor",
@@ -293,7 +293,7 @@ room("wine_catacombs", "C2", rect(-34, -22, -16, 0), "Şarap Katakombları", "Wi
      dressing="wine niches, barrels, candles, cobwebs")
 room("catacomb_steps", "C2", rect(-22, -18, -10, -2), "Katakomb Merdiveni", "Catacomb Steps", kind="circulation",
      wing="cellar", min_n=8, surface="stone", purpose="stair down from the wine cellar", dressing="lantern, rope")
-room("vault", "C2", rect(-18, -6, -16, -4), "Kasa Dairesi", "Strong Vault", wing="deep", min_n=DEEP,
+room("vault", "C2", [[-22, -16], [-6, -16], [-6, -4], [-18, -4], [-18, -10], [-22, -10]], "Kasa Dairesi", "Strong Vault", wing="deep", min_n=DEEP,
      risk="tehlikeli", surface="stone", purpose="the family strongroom: a floor safe", dressing="iron chests, "
      "strongboxes, shelves of deeds, a floor safe")
 room("ossuary", "C2", rect(-6, 6, -16, -4), "Kemiklik", "Ossuary", wing="deep", min_n=DEEP, risk="tehlikeli",
@@ -396,7 +396,7 @@ door("long_gallery", "trophy_room", (29, -40))
 # F0 west wing
 door("west_passage", "long_gallery", (-34, -42))
 door("west_passage", "music_room", (-34, -36))
-door("west_passage", "cliff_path", (-36, -24), kind="gate", note="gate: opens at 8 players")
+door("west_passage", "cliff_path", (-36, -24), note="the west wing's back door; opens at 8 players")
 door("west_passage", "silver_room", (-38, -39))
 door("west_passage", "boiler_room", (-38, -29))
 door("silver_room", "servants_hall", (-44, -39))
@@ -444,8 +444,8 @@ door("gold_room", "ivory_room", (50, -34))
 door("ivory_room", "guest_bath", (50, -24))
 # C2
 door("catacomb_steps", "wine_catacombs", (-22, -3), note="gate: opens at 12 players")
-door("catacomb_steps", "vault", (-18, -7), kind="gate", note="iron gate; opens at 12 players")
-door("vault", "wine_catacombs", (-18, -14))
+door("catacomb_steps", "vault", (-18, -7), note="the vault door; opens at 12 players")
+door("vault", "wine_catacombs", (-22, -13))
 door("vault", "ossuary", (-6, -10))
 door("ossuary", "ossuary_steps", (6, -5), note="gate: opens at 12 players")
 
@@ -620,6 +620,8 @@ anchor("portrait_3", "picture_gallery", (-46.0, -43.0), "tozlu tablo", "Frame")
 anchor("win_green", "green_room", (40.0, -43.2), "Yeşil Oda penceresi", "Shutter", r=1.2)
 anchor("win_gold", "gold_room", (52.0, -43.2), "Altın Oda penceresi", "Shutter", r=1.2)
 anchor("win_ivory", "ivory_room", (53.2, -28.0), "Fildişi Oda penceresi", "Shutter", r=1.2)
+anchor("tea_green", "green_salon", (-20.0, -38.8), "yeşil salondaki çay masası", "Table")
+anchor("tea_yellow", "yellow_salon", (12.0, -38.8), "sarı salondaki çay masası", "Table")
 anchor("linen_press", "sewing_room", (-12.0, -38.8), "çarşaf dolabı", "Linen")
 anchor("bed_green", "green_room", (42.0, -36.0), "Yeşil Oda yatağı", "Bed")
 anchor("bed_rose", "rose_room", (42.0, -26.5), "Gül Oda yatağı", "Bed")
@@ -666,6 +668,7 @@ ITEMS = {
     "Seed": {"label_tr": "kuş yemi", "speed": 1.0},
     "Coal": {"label_tr": "kömür kovası", "speed": 0.85},
     "Chessmen": {"label_tr": "satranç taşları", "speed": 1.0},
+    "TeaTray": {"label_tr": "çay tepsisi", "speed": 1.0, "fragile": True, "count": 2},
     "Linen": {"label_tr": "temiz çarşaflar", "speed": 1.0, "count": 3},
     "Keys": {"label_tr": "kâhyanın anahtarları", "speed": 1.0, "count": 3},
     "Relic": {"label_tr": "kriptanın röliği", "speed": 0.9},
@@ -835,6 +838,10 @@ chore("KeyRound", "Anahtar Turu", "The key round",
 chore("DustTheChina", "Porselenlerin Tozunu Al", "Dust the china",
       [work(["vase_chinese", "dressing_mirror", "hall_trophies"], 2.0, "Çin vazosunu, boy aynasını ve trofeleri sil",
             any_order=True)])
+chore("AfternoonTea", "İkindi Çayı", "Afternoon tea",
+      [take("kitchen_pass", "TeaTray", 2.0, "Mutfaktaki servis tezgâhından çay tepsisini al"),
+       bring(["tea_green", "tea_yellow"], "TeaTray", 1.5, "Yeşil ve sarı salonlara çay bırak", any_order=True)],
+      twist="the enfilade: carry the tray through the salons without running (fragile)")
 
 # ---- SPRINT-040 SECRET chores: never dealt; given to whoever discovers their secret. Reward = map knowledge
 # (reward_secret: another passage opens for everyone = a shortcut) or a clue (reward_compartment opens for everyone).
@@ -1008,10 +1015,10 @@ def trap(tid, effect, rid, at, zone, policy="Impatient", passive=False, telegrap
                   "target_room": target_room, "note": note})
 
 
-trap("T1", "Trapdoor", "dining", (-19.0, -16.0), (1.0, 1.0), telegraph=1.2, active=3.0, damage=10.0,
-     target=(-26.0, -12.0), target_room="wine_cellar", note="the boards groan and sag 1.2 s before they drop")
-trap("T2", "Trapdoor", "ballroom", (12.0, -7.0), (1.0, 1.0), telegraph=1.2, active=3.0, damage=10.0,
-     target=(10.0, -12.0), target_room="cistern", note="drops into the cistern (knee-deep water)")
+trap("T1", "Trapdoor", "dining", (-20.5, -8.5), (1.0, 1.0), telegraph=1.2, active=3.0, damage=10.0,
+     target=(-26.0, -10.0), target_room="wine_cellar", note="the boards groan and sag 1.2 s before they drop")
+trap("T2", "Trapdoor", "ballroom", (13.0, -3.0), (1.0, 1.0), telegraph=1.2, active=3.0, damage=10.0,
+     target=(10.5, -7.0), target_room="cistern", note="drops into the cistern (knee-deep water)")
 trap("T3", "FallingObject", "ballroom", (24.0, -2.0), (1.6, 1.6), telegraph=2.5, active=4.0, cooldown=90.0,
      damage=40.0, note="the ballroom chandelier sways and creaks 2.5 s, then falls")
 trap("T4", "FallingObject", "staircase_hall", (0.0, -35.0), (1.6, 1.6), telegraph=2.5, active=4.0, cooldown=90.0,
@@ -1073,7 +1080,7 @@ def math_dist(p, q):
 
 WINDOWS = []
 NO_WINDOWS = {"servants_corridor", "spark_room", "wine_cellar", "cistern", "smugglers_tunnel", "pantry",
-              "clock_room"}
+              "clock_room"} | {r["id"] for r in ROOMS if r["floor"] == "C2"}
 for r in ROOMS:
     if r["kind"] in ("grounds", "outdoor") and r["id"] not in ("greenhouse", "boathouse"):
         continue
@@ -1137,7 +1144,31 @@ WINGS = {
     "hall": "Büyük Salon ve giriş", "west": "Batı kanadı (hizmet)", "east": "Doğu kanadı (tören)",
     "service": "Uşak koridoru", "cellar": "Mahzen", "guest": "Misafir katı", "master": "Efendi dairesi",
     "upper": "Çatı ve kule", "grounds": "Bahçe ve kıyı",
+    # SPRINT-040 (the old "west"/"east" keys name the old house's halves; the new wings use the same words)
+    "north": "Kuzey blok (merdiven holü, salonlar, uzun galeri)", "deep": "Alt mahzen",
 }
+# Region Gates at build time: a door between two areas with different min_n is a wing gate (locked while fewer
+# players are in the lobby, AKGDoor tags KG_WingGate + KG_MinN_<n>); a chore opens at the highest min_n of its
+# rooms (every variant), so a 6-player match is never dealt a chore behind a locked door.
+AN_ROOM = {a["id"]: a["room"] for a in ANCHORS}
+
+
+def _chore_rooms(ch):
+    out = set()
+    for v in ch.get("variants") or [{"vars": {}}]:
+        for st in ch["steps"]:
+            for a in (st["at"] if isinstance(st["at"], list) else [st["at"]]):
+                a = v["vars"].get(a[1:], a) if a.startswith("$") else a
+                out.add(AN_ROOM[a])
+    return out
+
+
+for _c in CHORES:
+    _c["min_players"] = max(R[r]["min_n"] for r in _chore_rooms(_c))
+for _d in DOORS:
+    na, nb = R[_d["a"]]["min_n"], R[_d["b"]]["min_n"]
+    if na != nb:
+        _d["gate_min_n"] = max(na, nb)
 
 L = {
     "_doc": "Storm Manor (map 2) layout, SPRINT-017 design. Generated by Tools/Level/author_stormmanor.py - do not "
@@ -1167,6 +1198,8 @@ L = {
     "anchors": ANCHORS,
     "items": ITEMS,
     "chores": CHORES,
+    "compartments": COMPARTMENTS,
+    "traps": TRAPS,
     "chokepoints": CHOKEPOINTS,
     "spawn": SPAWN,
     "meeting": MEETING,
@@ -1179,4 +1212,5 @@ if __name__ == "__main__":
         json.dump(L, f, ensure_ascii=False, indent=1)
     n_counted = sum(1 for r in ROOMS if r["counts"])
     print(f"wrote {OUT}: {len(ROOMS)} areas ({n_counted} named rooms), {len(DOORS)} doors, {len(STAIRS)} stairs, "
-          f"{len(SECRETS)} secrets, {len(WINDOWS)} windows, {len(CHORES)} chores, {len(ANCHORS)} anchors")
+          f"{len(SECRETS)} secrets, {len(WINDOWS)} windows, {len(CHORES)} chores, {len(ANCHORS)} anchors, "
+          f"{len(COMPARTMENTS)} compartments, {len(TRAPS)} traps")

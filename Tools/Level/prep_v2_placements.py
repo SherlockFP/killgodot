@@ -801,6 +801,16 @@ def nature():
     keep_out = unary_union([TOWN.buffer(2.0), WALK.buffer(4.0), B_RECTS.buffer(4.0), STREAM.buffer(ST["width"] / 2 + 2.5),
                             FIELDS.buffer(2.0), SIGHT, AREAS.buffer(2.0), Point(L["landmarks"]["windmill"]["at"]).buffer(14.0),
                             Point(L["landmarks"]["lighthouse"]["at"]).buffer(10.0)])
+    # SPRINT-033: the forest ring data (trails, camp, dens) - trees keep off the trails everywhere
+    FOREST = json.load(open(os.path.join(HERE, "morrowmere_forest_v2.json"), encoding="utf-8"))         if os.path.exists(os.path.join(HERE, "morrowmere_forest_v2.json")) else {}
+    ring_rng = np.random.default_rng(20260926)
+    n_ring = 0
+    clear = None
+    if FOREST.get("trails"):
+        clear = unary_union([LineString(t["points"]).buffer(t["width"] / 2.0 + 1.6) for t in FOREST["trails"]] +
+                            [Point(FOREST["camp"]["at"]).buffer(11.0)] +
+                            [Point(d["at"]).buffer(4.5) for d in FOREST.get("dens", [])] +
+                            [Point(l["at"]).buffer(2.5) for l in FOREST.get("lanterns", [])])
     # --- groves (inside the 260 m core): clustered by noise, denser to the N / NW / NE to frame the bowl
     step = 5.5
     xs = np.arange(-128.0, 128.0, step)
@@ -826,9 +836,45 @@ def nature():
         if head.contains(Point(x, y)) and (shore.contains(Point(x, y)) or int(abs(x * 7.0 + y * 13.0)) % 3 != 0):
             rng.uniform(0, 360), rng.uniform(0.9, 1.6)
             continue
+        if clear is not None and clear.contains(Point(x, y)):
+            rng.uniform(0, 360), rng.uniform(0.9, 1.6)   # SPRINT-033: off the forest trails (same RNG stream)
+            continue
         inst("forest", m, x, y, gmin(x, y, 0.7) - 0.2, float(rng.uniform(0, 360)), float(rng.uniform(0.9, 1.6)))
         n_tr += 1
     stats["grove_trees"] = n_tr
+    # --- SPRINT-033 forest ring (r ~95-186 m, Tools/Level/morrowmere_forest_v2.json): dense, clumped, trails, the camp
+    # and the wolf dens kept clear; a separate RNG so the rest of the placement stream stays the same
+    if FOREST.get("trails"):
+        step = 4.6
+        xs = np.arange(-192.0, 192.0, step)
+        ys = np.arange(-192.0, 125.0, step)
+        X, Y = np.meshgrid(xs, ys)
+        X = X + ring_rng.uniform(-1.8, 1.8, X.shape)
+        Y = Y + ring_rng.uniform(-1.8, 1.8, Y.shape)
+        R = np.hypot(X, Y)
+        dens_n = T.fbm(X, Y, 22.0, 3, seed=43)
+        ok = (R > 98.0) & (R < 188.0) & (dens_n > -0.28) & shapely.contains_xy(LAND.buffer(-4.0), X, Y) &             ~shapely.contains_xy(keep_out, X, Y) & ~shapely.contains_xy(clear, X, Y)
+        Z = ground(X, Y)
+        ok &= Z > 2.5
+        for x, y, z in zip(X[ok], Y[ok], Z[ok]):
+            k = ring_rng.random()
+            m = pines[int(ring_rng.integers(0, 5))] if k < 0.45 else (twisted if k > 0.9 else trees)[int(ring_rng.integers(0, 5))]
+            sc = float(ring_rng.uniform(1.0, 1.9))
+            yaw = float(ring_rng.uniform(0, 360))
+            if relief(x, y, 2.0) > 1.6:
+                continue
+            sink = 0.55 if m in twisted else 0.25     # twisted trunks flare wide: seat them deeper
+            inst("forest", m, x, y, gmin(x, y, 1.4) - sink, yaw, sc)
+            n_ring += 1
+        # undergrowth: ferns and bushes (no collision) between the trunks
+        U = ["N:Fern_1", "N:Bush_Common", "N:Plant_7"]
+        ok2 = (R > 98.0) & (R < 188.0) & (dens_n > -0.1) & shapely.contains_xy(LAND.buffer(-4.0), X, Y) &             ~shapely.contains_xy(keep_out, X, Y) & ~shapely.contains_xy(clear.buffer(-0.8), X, Y)
+        for x, y in zip(X[ok2] + 2.3, Y[ok2] + 1.1):
+            if ring_rng.random() < 0.55:
+                inst("crops", U[int(ring_rng.integers(0, 3))], x, y, gmin(x, y, 0.6) - 0.08, float(ring_rng.uniform(0, 360)),
+                     float(ring_rng.uniform(0.9, 1.6)))
+    stats["forest_ring_trees"] = n_ring
+    ring_skip = 188.0 if FOREST.get("trails") else 0.0
     # --- outer forest + mountain pines (beyond the core rectangle, inside 300 m)
     step = 8.0
     xs = np.arange(-300.0, 300.0, step)
@@ -840,6 +886,7 @@ def nature():
     Z = ground(X, Y)
     dens = T.fbm(X, Y, 40.0, 3, seed=41)
     ok = outer & (Z > 3.0) & (Z < 62.0) & (dens > -0.15) & (np.hypot(X, Y) < 300) & shapely.contains_xy(LAND.buffer(-5), X, Y)
+    ok &= np.hypot(X, Y) >= ring_skip                 # SPRINT-033: the forest ring above owns r < 188 m
     n_p = 0
     for x, y, z in zip(X[ok], Y[ok], Z[ok]):
         m = pines[int(rng.integers(0, 5))] if (z > 14 or rng.random() < 0.55) else trees[int(rng.integers(0, 5))]
@@ -870,6 +917,8 @@ def nature():
         # SPRINT-022: never on a cliff / wall edge or broken ground (they hung in the air there); seated on the low side
         if hard.contains(Point(x, y)) or relief(x, y, 1.0 * sc) > 0.9 * sc or not LAND.buffer(-6.0).contains(Point(x, y)):
             continue
+        if clear is not None and clear.contains(Point(x, y)):
+            continue                                  # SPRINT-033: no boulders on the forest trails
         inst("forest", rocks[int(rng.integers(0, 3))], x, y, gmin(x, y, 0.6 * sc) - 0.12 * sc, float(rng.uniform(0, 360)), sc)
         n_r += 1
     stats["rocks"] = n_r

@@ -508,7 +508,8 @@ bool FKGWorldChoreStormManorTest::RunTest(const FString& Parameters)
 	}
 	FString Error;
 	TestTrue(TEXT("Storm Manor catalog validates: ") + Error, Manor->Validate(Error));
-	TestEqual(TEXT("All 19 manor chores"), Manor->Chores.Num(), 19);
+	// SPRINT-040: 19 + 16 manor-only chores of the new wings + 4 secret chores
+	TestEqual(TEXT("All 39 manor chores"), Manor->Chores.Num(), 39);
 	for (const FKGWorldChoreDef& D : Manor->Chores)
 	{
 		TestTrue(FString::Printf(TEXT("%s has 1-3 simple steps"), *D.Id.ToString()), D.NumSteps() >= 1 && D.NumSteps() <= 3);

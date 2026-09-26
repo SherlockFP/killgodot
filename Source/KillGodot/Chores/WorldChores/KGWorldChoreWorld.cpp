@@ -96,7 +96,8 @@ namespace KGWorldChoreLook
 	/** Kinds that take E (the others are pure "bring here" spots and must not block the trace to doors). */
 	bool HasHitbox(FName Kind)
 	{
-		static const TSet<FName> NoE = {TEXT("Door"), TEXT("Market"), TEXT("Posts"), TEXT("Woodbox"), TEXT("Letterbox"), TEXT("FlourBin")};
+		static const TSet<FName> NoE = {TEXT("Door"), TEXT("Market"), TEXT("Posts"), TEXT("Woodbox"), TEXT("Letterbox"), TEXT("FlourBin"),
+		                                TEXT("CampWoodpile"), TEXT("TentSite"), TEXT("HerbTable")};   // SPRINT-034a bring targets
 		return !NoE.Contains(Kind);
 	}
 
@@ -451,6 +452,80 @@ void AKGChoreSpot::BuildLook()
 		Light->SetRelativeLocation(FVector(0.0f, 0.0f, 140.0f));
 		Light->RegisterComponent();
 		HalfBox = FVector(45.0f, 45.0f, 80.0f);
+	}
+	// ---- SPRINT-034a forest chores (Tools/Level/gen_forest_bands.py) ------------------------------------------------
+	else if (K == TEXT("Deadwood"))
+	{
+		const TCHAR* Log = TEXT("/Game/KillGodot/Env/Ext/KG_Ext_KNature/StaticMeshes/SM_KG_KNature_log.SM_KG_KNature_log");
+		Jiggle.Add(Asset(Log, FVector(0.0f, 0.0f, 0.0f), FRotator(0.0f, 20.0f, 0.0f), 0.55f));
+		Jiggle.Add(Asset(Log, FVector(10.0f, 25.0f, 12.0f), FRotator(8.0f, -35.0f, 0.0f), 0.45f));
+		Jiggle.Add(Asset(Log, FVector(-15.0f, -20.0f, 8.0f), FRotator(-6.0f, 75.0f, 0.0f), 0.4f));
+		for (int32 i = 0; i < 5; ++i)
+		{
+			Part(Cyl, FVector(-30.0f + 15.0f * i, (i % 2) ? 18.0f : -14.0f, 12.0f + 4.0f * (i % 3)), FRotator(80.0f, 30.0f * i, 0.0f),
+			     FVector(0.04f, 0.04f, 0.9f), DarkWood);   // snapped dry sticks
+		}
+		JiggleAmp = 6.0f;
+		HalfBox = FVector(55.0f, 55.0f, 35.0f);
+		BoxZ = 35.0f;
+	}
+	else if (K == TEXT("Herbs"))
+	{
+		Jiggle.Add(Asset(TEXT("/Game/KillGodot/Env/KG_Nature/StaticMeshes/Flower_3_Group.Flower_3_Group"), FVector::ZeroVector, FRotator::ZeroRotator, 1.1f));
+		Jiggle.Add(Asset(TEXT("/Game/KillGodot/Env/KG_Nature/StaticMeshes/Plant_7.Plant_7"), FVector(25.0f, 10.0f, 0.0f), FRotator(0.0f, 40.0f, 0.0f), 0.8f));
+		Jiggle.Add(Asset(TEXT("/Game/KillGodot/Env/KG_Nature/StaticMeshes/Flower_3_Group.Flower_3_Group"), FVector(-20.0f, -15.0f, 0.0f), FRotator(0.0f, 110.0f, 0.0f), 0.9f));
+		JiggleAmp = 4.0f;
+		HalfBox = FVector(45.0f, 45.0f, 30.0f);
+		BoxZ = 30.0f;
+	}
+	else if (K == TEXT("CampWoodpile"))
+	{
+		Asset(TEXT("/Game/KillGodot/Env/Ext/KG_Ext_KNature/StaticMeshes/SM_KG_KNature_log.SM_KG_KNature_log"), FVector(0.0f, 0.0f, 0.0f), FRotator(0.0f, 90.0f, 0.0f), 0.8f);
+		for (int32 i = 0; i < 6; ++i)
+		{
+			Stacked.Add(Asset(*Interior(TEXT("SM_KG_Firewood")), FVector(-40.0f + 40.0f * (i % 3), 30.0f, 15.0f + 28.0f * (i / 3)), FRotator(0.0f, 10.0f * i, 0.0f), 0.75f));
+		}
+	}
+	else if (K == TEXT("TentSite"))
+	{
+		for (int32 i = 0; i < 6; ++i)
+		{
+			const float Ang = i * 60.0f;
+			Part(Sphere, FVector(150.0f * FMath::Cos(FMath::DegreesToRadians(Ang)), 150.0f * FMath::Sin(FMath::DegreesToRadians(Ang)), 4.0f),
+			     FRotator::ZeroRotator, FVector(0.25f, 0.25f, 0.12f), FLinearColor(0.45f, 0.44f, 0.42f));   // a ring of stones marks the pitch
+		}
+		Stacked.Add(Asset(TEXT("/Game/KillGodot/Env/Dress/KG_DressWilds_Clean/StaticMeshes/SM_KG_Tent_A.SM_KG_Tent_A"), FVector::ZeroVector, FRotator(0.0f, 180.0f, 0.0f), 1.0f));
+	}
+	else if (K == TEXT("TentPeg"))
+	{
+		Part(Cyl, FVector(0.0f, 0.0f, 6.0f), FRotator::ZeroRotator, FVector(0.05f, 0.05f, 0.12f), Wood);   // the marked spot
+		Stacked.Add(Part(Cyl, FVector(0.0f, 0.0f, 20.0f), FRotator(12.0f, 0.0f, 0.0f), FVector(0.06f, 0.06f, 0.4f), DarkWood));
+		Jiggle.Add(Part(Cube, FVector(0.0f, 0.0f, 45.0f), FRotator::ZeroRotator, FVector(0.14f, 0.08f, 0.08f), Iron));   // mallet head
+		JiggleAmp = 10.0f;
+		HalfBox = FVector(35.0f, 35.0f, 40.0f);
+		BoxZ = 40.0f;
+	}
+	else if (K == TEXT("CanvasPile"))
+	{
+		Asset(*P(TEXT("Crate_Wooden")), FVector(0.0f, 0.0f, 0.0f), FRotator(0.0f, 10.0f, 0.0f), 0.6f);
+		UStaticMeshComponent* Roll = Asset(*P(TEXT("Bag")), FVector(0.0f, 0.0f, 62.0f), FRotator(0.0f, 0.0f, 90.0f), 1.0f);
+		if (Roll)
+		{
+			Roll->SetRelativeScale3D(FVector(1.6f, 0.9f, 0.6f));
+		}
+		HalfBox = FVector(50.0f, 50.0f, 50.0f);
+	}
+	else if (K == TEXT("HerbTable"))
+	{
+		Part(Cube, FVector(0.0f, 0.0f, 78.0f), FRotator::ZeroRotator, FVector(1.2f, 0.6f, 0.06f), Wood);
+		for (const FVector2D L : {FVector2D(-52.0f, -24.0f), FVector2D(52.0f, -24.0f), FVector2D(-52.0f, 24.0f), FVector2D(52.0f, 24.0f)})
+		{
+			Part(Cube, FVector(L.X, L.Y, 38.0f), FRotator::ZeroRotator, FVector(0.06f, 0.06f, 0.76f), DarkWood);
+		}
+		for (int32 i = 0; i < 3; ++i)
+		{
+			Stacked.Add(Asset(TEXT("/Game/KillGodot/Env/KG_Nature/StaticMeshes/Flower_3_Group.Flower_3_Group"), FVector(-40.0f + 40.0f * i, 0.0f, 82.0f), FRotator(0.0f, 50.0f * i, 0.0f), 0.45f));
+		}
 	}
 	Jiggle.RemoveAll([](const TObjectPtr<UStaticMeshComponent>& C) { return C == nullptr; });
 	for (const UStaticMeshComponent* C : Jiggle)

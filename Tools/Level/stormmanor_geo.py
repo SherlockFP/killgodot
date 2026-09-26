@@ -8,8 +8,9 @@ Pure Python (no unreal, no shapely), so it runs inside UE's embedded Python and 
 
 Build fixes on top of the SPRINT-017 design (the design doc keeps its numbers; these only make it buildable with the
 2 m kit and the 1 m-per-2 m stair slope):
-  * Z0 = +5 m: the whole manor stands 5 m over the world origin because FKGWaves::SeaLevel is 0 (everything under
-    z 0 swims). The cellar floor is then 2 m over the sea, the boathouse slip reaches down to it.
+  * Z0 = +8 m (SPRINT-040; +5 m before): the whole manor stands over the world origin because FKGWaves::SeaLevel is 0
+    (everything under z 0 swims). The second basement (C2, the lower vaults) is then 2 m over the sea, the cellar and
+    the boathouse 5 m (the boathouse opens onto a rock shelf with a parapet over the storm sea).
   * Stairs: every straight stair runs 6 m for its 3 m rise on whole 2 m cells (floor holes are cell-exact). The two
     "spiral" stairs become straight runs along a wall (library -> master bedroom, master bedroom -> storm tower);
     the tower ladder moves to the tower's east wall.
@@ -23,10 +24,10 @@ import os
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 LAYOUT_FILE = os.path.join(ROOT, "Tools", "Level", "stormmanor_layout.json")
 
-Z0 = 500.0                       # cm: ground floor over the world origin (sea level 0)
+Z0 = 800.0                       # cm: ground floor over the world origin (sea level 0); SPRINT-040: 5 -> 8 m
 STOREY = 300.0
-FLOORS = {"C": -1, "F0": 0, "F1": 1, "F2": 2, "F3": 3}
-ORDER = ["C", "F0", "F1", "F2", "F3"]
+FLOORS = {"C2": -2, "C": -1, "F0": 0, "F1": 1, "F2": 2, "F3": 3}
+ORDER = ["C2", "C", "F0", "F1", "F2", "F3"]
 CELL = 2.0                       # m
 
 # stair id -> (bottom, top) in metres (width from the layout)

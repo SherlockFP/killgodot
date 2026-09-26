@@ -203,10 +203,19 @@ def analyse(L):
             link(("an", a["id"]), a["room"], a["at"], "anchor " + a["id"])
     mt = L["meeting"]
     link(("meet",), mt["room"], mt["at"], "meeting")
+    SECRET_ROOMS = {rid for rid, r in RM.items() if r.get("secret")}
+    travel_s = L.get("secret_rules", {}).get("travel_s", 3.0)
     for s in L["secrets"]:
         for k in ("a", "b"):
             if s[k] in RM:
                 link(("sec", s["id"], k), s[k], s["at_" + k], "secret " + s["id"])
+        # SPRINT-040: a secret ROOM is reached through its passage only (the only secret edges in the walk graph,
+        # so the shortcuts never flatter the normal gather times)
+        if s["a"] in SECRET_ROOMS or s["b"] in SECRET_ROOMS:
+            G.add_edge(("sec", s["id"], "a"), ("sec", s["id"], "b"), t=travel_s, secret=s["id"])
+    for rid in SECRET_ROOMS:
+        if not any(rid in (s["a"], s["b"]) for s in L["secrets"]):
+            err.append(f"secret room {rid} has no secret passage")
 
     T = nx.single_source_dijkstra_path_length(G, ("meet",), weight="t")
     room_max = {}
@@ -229,17 +238,17 @@ def analyse(L):
 
     # ---- room graph: dead ends, bridges
     RG = nx.MultiGraph()
-    RG.add_nodes_from(RM)
+    RG.add_nodes_from(r for r in RM if r not in SECRET_ROOMS)      # secret rooms: checked through their passage
     for d in L["doors"]:
         RG.add_edge(d["a"], d["b"], key=d["id"])
     for s in L["stairs"]:
         RG.add_edge(s["lower"], s["upper"], key=s["id"])
-    for rid in RM:
+    for rid in RG.nodes:
         deg = len(set(RG.neighbors(rid)) - {rid})
         if deg <= 1 and not RM[rid].get("dead_end_ok"):
             err.append(f"{rid}: dead end (1 neighbour) without dead_end_ok")
     simple = nx.Graph()
-    simple.add_nodes_from(RM)
+    simple.add_nodes_from(RG.nodes)
     for u, v in RG.edges():
         simple.add_edge(u, v, n=RG.number_of_edges(u, v))
     bridges = []
@@ -258,13 +267,21 @@ def analyse(L):
     # ---- Region Gates
     gate_rows = []
     for N in GATES:
-        open_ = {rid for rid, r in RM.items() if r["min_n"] <= N}
+        open_ = {rid for rid, r in RM.items() if r["min_n"] <= N and rid not in SECRET_ROOMS}
         sub = simple.subgraph(open_)
         ok = nx.is_connected(sub) and mt["room"] in open_
         if not ok:
             err.append(f"N={N}: open rooms are not one connected piece")
+        # SPRINT-040: open areas stay within the gather limit of the meeting room using open doors/stairs only
+        open_nodes = [n for n in G.nodes if (len(n) == 3 and n[0] in open_) or n[0] in ("door", "stb", "stt", "meet")]
+        Tn = nx.single_source_dijkstra_path_length(G.subgraph(open_nodes), ("meet",), weight="t")
+        far = max((Tn.get(n, math.inf) for n in open_nodes if len(n) == 3), default=0.0)
+        if far > gmax:
+            err.append(f"N={N}: the farthest open point is {far:.1f} s from the meeting room (> {gmax:.0f} s)")
         n_ch = 0
         for ch in L["chores"]:
+            if ch.get("secret"):
+                continue
             for v in variants(ch):
                 rooms = {AN[a]["room"] for st in ch["steps"] for a in resolve(st["at"], v["vars"]) if a in AN}
                 if rooms <= open_:
@@ -272,7 +289,8 @@ def analyse(L):
                     break
         area = sum(PG[r].area for r in open_)
         gate_rows.append({"N": N, "areas": len(open_), "rooms": sum(1 for r in open_ if RM[r]["counts"]),
-                          "chores": n_ch, "area_m2": round(area), "m2_per_player": round(area / N)})
+                          "chores": n_ch, "area_m2": round(area), "m2_per_player": round(area / N),
+                          "far_s": round(far, 1)})
     if gate_rows and gate_rows[0]["chores"] < 8:
         err.append(f"N=6 has only {gate_rows[0]['chores']} chores open (< 8)")
 
@@ -325,6 +343,26 @@ def analyse(L):
     # ---- interactions per named room
     chore_rooms = {AN[a]["room"] for a in AN}
     sec_rooms = {s[k] for s in L["secrets"] for k in ("a", "b")}
+    # SPRINT-040: compartments and traps are things to do too; both must sit inside their rooms
+    for c in L.get("compartments", []):
+        if c["room"] not in RM or not PG[c["room"]].contains(Point(c["at"])):
+            err.append(f"compartment {c['id']} not inside {c['room']}")
+        sec_rooms.add(c["room"])
+    for t in L.get("traps", []):
+        if t["room"] not in RM or not PG[t["room"]].contains(Point(t["at"])):
+            err.append(f"trap {t['id']} not inside {t['room']}")
+        if t.get("target") and (t.get("target_room") not in RM or not PG[t["target_room"]].contains(Point(t["target"]))):
+            err.append(f"trap {t['id']}: target not inside {t.get('target_room')}")
+        if t.get("target_room") and FORDER.index(RM[t["target_room"]]["floor"]) >= FORDER.index(RM[t["room"]]["floor"]):
+            err.append(f"trap {t['id']}: a trapdoor must drop to a lower floor")
+        sec_rooms.add(t["room"])
+    for ch in L["chores"]:
+        if ch.get("secret") and ch["secret"] not in {s["id"] for s in L["secrets"]}:
+            err.append(f"{ch['id']}: unknown secret {ch['secret']}")
+        if ch.get("reward_secret") and ch["reward_secret"] not in {s["id"] for s in L["secrets"]}:
+            err.append(f"{ch['id']}: unknown reward secret {ch['reward_secret']}")
+        if ch.get("reward_compartment") and ch["reward_compartment"] not in {c["id"] for c in L.get("compartments", [])}:
+            err.append(f"{ch['id']}: unknown reward compartment {ch['reward_compartment']}")
     for r in L["rooms"]:
         if not r["counts"]:
             continue
@@ -339,12 +377,21 @@ def analyse(L):
     # ---- brief counts
     n_named = sum(1 for r in L["rooms"] if r["counts"])
     floors_used = {r["floor"] for r in L["rooms"] if r["counts"]}
-    if not 18 <= n_named <= 24:
-        err.append(f"{n_named} named rooms (brief: 18-24)")
-    if not {"C", "F0", "F1", "F2"} <= floors_used:
-        err.append(f"named rooms only on {sorted(floors_used)} (need cellar + 3 floors)")
-    if len(L["secrets"]) < 3:
-        err.append("fewer than 3 secret passages")
+    # SPRINT-040 brief: >= 45 named rooms on the cellar, the second basement and 3 floors; >= 8 secret passages;
+    # >= 10 hidden compartments; >= 6 trap kinds; >= 3 secret chores
+    if n_named < 45:
+        err.append(f"{n_named} named rooms (SPRINT-040 brief: >= 45)")
+    if not {"C2", "C", "F0", "F1", "F2"} <= floors_used:
+        err.append(f"named rooms only on {sorted(floors_used)} (need both basements + 3 floors)")
+    if len(L["secrets"]) < 8:
+        err.append("fewer than 8 secret passages")
+    if len(L.get("compartments", [])) < 10:
+        err.append("fewer than 10 hidden compartments")
+    kinds = {t["effect"] for t in L.get("traps", [])}
+    if len(kinds) < 6:
+        err.append(f"only {len(kinds)} trap kinds (need 6)")
+    if sum(1 for c in L["chores"] if c.get("secret")) < 3:
+        err.append("fewer than 3 secret chores")
     if len(L["chores"]) < 15:
         err.append("fewer than 15 chores")
     n_rattle = sum(1 for w in L["windows"] if w.get("rattle"))
@@ -379,7 +426,7 @@ def main():
         print("\nRegion Gates:")
         for g in res["gates"]:
             print(f"  N={g['N']:2d}: {g['areas']:2d} areas, {g['rooms']:2d} named rooms, {g['chores']:2d} chores, "
-                  f"{g['area_m2']} m2 ({g['m2_per_player']} m2/player)")
+                  f"{g['area_m2']} m2 ({g['m2_per_player']} m2/player), farthest {g['far_s']} s")
         print("\nBridges (single links):", [(u, v) for u, v, _ in res["bridges"]] or "none")
     for s in res["warn"]:
         print("WARN", s)

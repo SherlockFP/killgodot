@@ -42,6 +42,11 @@ public:
 	/** Authority: a character died (player or bot). Marks the ghost, reveals the role, checks the win. */
 	void OnCharacterDied(AKGCharacter* Victim, AActor* Killer);
 
+	/** SPRINT-034b: the Camp Vigil adds Units task-equivalents to the Preparation bar (side-blind). Returns the units added. */
+	int32 AddVigilReward(int32 Units);
+	/** Open chores of living Town players: the most the bar can still get from them (the vigil never goes past it). */
+	int32 CountOpenLivingTownTasks() const;
+
 	/** Phase lengths scale with lobby size (Docs/01_GDD_Core.md §1). */
 	UFUNCTION(BlueprintPure, Category = "KillGodot|Match")
 	static float GetPhaseDuration(EKGPhase Phase, int32 NumPlayers);

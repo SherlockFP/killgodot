@@ -806,6 +806,46 @@ void AKGGameMode::OnTaskCompleted(AKGPlayerState* Who, FName TaskId)
 	}
 }
 
+int32 AKGGameMode::CountOpenLivingTownTasks() const
+{
+	int32 Open = 0;
+	for (APlayerState* Raw : GameState->PlayerArray)
+	{
+		const AKGPlayerState* PS = Cast<AKGPlayerState>(Raw);
+		const FKGRoleInfo* RoleInfo = PS ? FKGRoleListGenerator::FindRole(FKGRoleListGenerator::GetDefaultCatalog(),
+		                                                                PS->GetPrivateRoleId()) : nullptr;
+		if (!PS || !PS->IsAlive() || (RoleInfo && RoleInfo->GetAlignment() == EKGAlignment::Impatient))
+		{
+			continue;
+		}
+		for (int32 i = 0; i < PS->TaskIds.Num(); ++i)
+		{
+			Open += PS->TaskDone.IsValidIndex(i) && !PS->TaskDone[i] ? 1 : 0;
+		}
+	}
+	return Open;
+}
+
+int32 AKGGameMode::AddVigilReward(int32 Units)
+{
+	AKGGameState* GS = GetKGGameState();
+	const int32 Room = FMath::Max(0, TownTasksTotal - TownTasksDone);
+	const int32 Add = FMath::Clamp(FMath::Min(Units, CountOpenLivingTownTasks()), 0, Room);
+	if (!GS || Add <= 0)
+	{
+		return 0;
+	}
+	TownTasksDone += Add;
+	GS->Preparation = TownTasksTotal > 0 ? FMath::Clamp(float(TownTasksDone) / TownTasksTotal, 0.0f, 1.0f) : 0.0f;
+	GS->ForceNetUpdate();
+	UE_LOG(LogKillGodot, Log, TEXT("KG_VIGIL reward units=%d bar=%.2f"), Add, GS->Preparation);
+	if (GS->Preparation >= 0.999f && !bIlluminated)
+	{
+		LighthouseIllumination();
+	}
+	return Add;
+}
+
 void AKGGameMode::LighthouseIllumination()
 {
 	AKGGameState* GS = GetKGGameState();

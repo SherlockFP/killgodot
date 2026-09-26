@@ -102,5 +102,15 @@ a cancel end it for both.
 ### Tools
 - `Tools/Unreal/kg_voice_smoke.ps1` (I3), `kg_partner_smoke.ps1` (I3), `kg_voice_shots.ps1` (offscreen renders to
   `Saved/Screenshots/Voice/`), `kg_import_barks.py`, `Tools/Audio/kg_synth_barks.py`.
-- Dev verbs: `kg.Voice.Tone`, `kg.Voice.Mute`, `kg.Bark`, `kg.Bark.Bots`, `kg.Mouth.Pin`, `kg.Partner`,
-  `kg.Partner.Bots`.
+- Dev verbs: `kg.Voice.Tone`, `kg.Voice.Mute`, `kg.Voice.Wheel <0|1|2|close> [slot]` (radial held open without the
+  key, `kg.Voice.WheelPin`), `kg.Bark`, `kg.Bark.Bots`, `kg.Mouth.Pin`, `kg.Partner`, `kg.Partner.Bots`.
+
+### Evidence run (2026-09-26, headless)
+- `kg_voice_smoke.ps1` PASSED, `kg_partner_smoke.ps1` PASSED (the checker unrolled a single `KG_PARTNER_START` line to a
+  string; `@()` fix), both in `run_invariants.ps1` I3.
+- `Saved/Screenshots/Voice/`: `mouth_closed.png` / `mouth_open.png` (slit on the lip line vs a 3 cm oval under the lips;
+  `kg.Mouth.Up` 4.0 -> 2.5 cm after look round 1, where the oval sat under the nostrils), `bark_1..3.png`, `bark_ui.png`
+  (bubble + NEAR lines), `talking_ui.png` (mic pill), `radial_ui.png` (X Deduction wheel), `partner_highfive/rps/danceoff.png`,
+  `partner_offer_ui.png`, `partner_rps_result_ui.png`.
+- Open: the mouth offset is one number for all heads; male heads (Head bone 5 cm higher) carry it slightly lower than
+  female heads. A per-skeleton offset is a proposal, not a blocker.

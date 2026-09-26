@@ -116,7 +116,7 @@ In-game **F1** (or `kg.Dev`) opens the dev panel (dev builds only; `Source/KillG
   Minigame code: `Source/KillGodot/Chores/` (a global `using namespace KGMg;` trips C4459 in engine templates - don't).
 - Emotes: `kg.Emote wave|dance|sit|stop|list`, `kg.Emote.Bots dance|all|stop` [host], `kg.Emote.Cam 1` (look at your own body), `kg.Emote.Favorites` (Shift+1..4); headless net check `Tools/Unreal/kg_emote_smoke.ps1`
 - Voice/social (SPRINT-023, `Source/KillGodot/Voice/`): push-to-talk V (Accuse = middle mouse), radials Z/X/C, partner emotes E;
-  `kg.Voice.Tone 1` (synthetic voice, no mic), `kg.Voice.Mute <Name>`, `kg.Bark <id|list>`, `kg.Bark.Bots all` [host],
+  `kg.Voice.Tone 1` (synthetic voice, no mic), `kg.Voice.Mute <Name>`, `kg.Voice.Wheel 1 2|close` (radial for shots), `kg.Bark <id|list>`, `kg.Bark.Bots all` [host],
   `kg.Mouth.Pin 0..1` (pin mouths), `kg.Partner highfive|handshake|rps|danceoff|accept|cancel`, `kg.Partner.Bots rps` [host];
   smokes `kg_voice_smoke.ps1`, `kg_partner_smoke.ps1`; renders `kg_voice_shots.ps1`; barks `Tools/Audio/kg_synth_barks.py` + `kg_import_barks.py`
 - Fishing: `kg.Fish.Give [Rod|Salmon 5]`, `kg.Fish.Cast [0.6|out]`, `kg.Fish.Bite [Species]`, `kg.Fish.Hook`, `kg.Fish.Land`,

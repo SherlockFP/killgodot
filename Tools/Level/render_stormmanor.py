@@ -27,7 +27,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import validate_stormmanor as V  # noqa: E402
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
-X0, X1, Y0, Y1 = -56.0, 54.0, -28.0, 53.0
+X0, X1, Y0, Y1 = -58.0, 58.0, -48.0, 53.0
 
 INK, INK2, PAPER = "#1f1d1a", "#5b5750", "#f5f1e8"
 SEA, SEA2, ROCK = "#3d6f8e", "#5a8aa6", "#8c8378"
@@ -40,8 +40,9 @@ CHORE, HIDE, SECRET, WIN, WIN_RATTLE, STAIR = "#f08a00", "#1f8a4c", "#7a2fbf", "
 HALO = [pe.withStroke(linewidth=3.2, foreground="white")]
 HALO2 = [pe.withStroke(linewidth=2.2, foreground="white")]
 
-PANELS = [("F0", "ZEMİN KAT + BAHÇE  (z 0)"), ("F1", "BİRİNCİ KAT  (z +3)"),
-          ("C", "MAHZEN + DENİZ SEVİYESİ  (z −3)"), ("F2", "ÇATI KATI + KULE  (z +6 / +9)")]
+PANELS = [("F0", "ZEMİN KAT + BAHÇE  (z 0)"), ("F1", "BİRİNCİ KAT  (z +3)"), ("F2", "ÇATI KATI + KULE  (z +6 / +9)"),
+          ("C", "MAHZEN + KAYIKHANE  (z −3)"), ("C2", "ALT MAHZEN  (z −6)")]
+TRAP_C, COMP_C = "#c0392b", "#8e6b1f"
 
 
 def edges(poly):
@@ -87,11 +88,11 @@ def draw_panel(ax, L, fid, title, res, chore_no):
     # sea swell lines + the rock under the whole manor
     for k in range(-30, 60, 6):
         ax.plot([X0, X1], [k + 1.5, k - 1.0], color=SEA2, lw=0.8, alpha=0.5, zorder=0)
-    rock = unary_union([Polygon(r["poly"]) for r in L["rooms"] if r["floor"] in ("F0", "C")]).buffer(3.5, join_style=2)
+    rock = unary_union([Polygon(r["poly"]) for r in L["rooms"] if r["floor"] in ("F0", "C", "C2")]).buffer(3.5, join_style=2)
     for g in getattr(rock, "geoms", [rock]):
         ax.add_patch(MPoly(list(g.exterior.coords), closed=True, fc=ROCK, ec="#6d655c", lw=1.2, zorder=1))
     # ghost of the ground floor under the upper floors
-    if fid in ("F1", "F2", "C"):
+    if fid in ("F1", "F2", "C", "C2"):
         base = unary_union([Polygon(r["poly"]) for r in L["rooms"] if r["floor"] == "F0" and r["kind"] != "grounds"])
         for g in getattr(base, "geoms", [base]):
             ax.add_patch(MPoly(list(g.exterior.coords), closed=True, fc="#d8d2c6", ec="#9d968a", lw=1.0, ls="--",
@@ -176,6 +177,18 @@ def draw_panel(ax, L, fid, title, res, chore_no):
             txt = s["id"] if of == RM[rid]["floor"] else f"{s['id']}→{of}"
             ax.text(p[0] + 0.9, p[1] - 1.0, txt, fontsize=8, color=SECRET, weight="bold", path_effects=HALO2,
                     zorder=15)
+    # SPRINT-040: traps (triangles) and hidden compartments (squares)
+    RMF = {r["id"]: r["floor"] for r in L["rooms"]}
+    for t in L.get("traps", []):
+        if RMF[t["room"]] in fl:
+            ax.plot(*t["at"], marker="^", ms=11, mfc=TRAP_C, mec="white", mew=1.0, zorder=14)
+            ax.text(t["at"][0] + 0.8, t["at"][1] + 1.4, t["id"], fontsize=7, color=TRAP_C, weight="bold",
+                    path_effects=HALO2, zorder=15)
+    for k in L.get("compartments", []):
+        if RMF[k["room"]] in fl:
+            ax.plot(*k["at"], marker="s", ms=8, mfc=COMP_C, mec="white", mew=1.0, zorder=14)
+            ax.text(k["at"][0] + 0.8, k["at"][1] + 1.4, k["id"], fontsize=7, color=COMP_C, weight="bold",
+                    path_effects=HALO2, zorder=15)
     # hides
     for r in L["rooms"]:
         if r["floor"] in fl:
@@ -270,7 +283,9 @@ def draw_info(ax, L, res, chore_no_list):
         (Patch(fc="#ddd", ec=INK, hatch="////"), "Koridor (dolaşım)"),
         (Line2D([], [], color="#8a5a2b", lw=4), "Kapı"), (Line2D([], [], color=WIN, lw=4), "Pencere"),
         (Line2D([], [], color=WIN_RATTLE, lw=4), "Takırdayan pencere"),
-        (Line2D([], [], marker="*", ls="", ms=13, mfc=SECRET, mec="white"), "Gizli geçit (S1–S6)"),
+        (Line2D([], [], marker="*", ls="", ms=13, mfc=SECRET, mec="white"), "Gizli geçit (S1–S10)"),
+             (Line2D([], [], marker="^", ls="", ms=11, mfc=TRAP_C, mec="white"), "Tuzak (T1–T14)"),
+             (Line2D([], [], marker="s", ls="", ms=8, mfc=COMP_C, mec="white"), "Gizli bölme (K1–K12)"),
         (Line2D([], [], marker="o", ls="", ms=11, mfc=CHORE, mec="white"), "Görev noktası (no.)"),
         (Line2D([], [], marker="v", ls="", ms=9, mfc=HIDE, mec="white"), "Saklanma yeri"),
         (Line2D([], [], marker="D", ls="", ms=8, mfc="#d23b3b", mec="white"), "Darboğaz"),
@@ -345,15 +360,16 @@ def main():
     for s in L["storm"]["outage"]["fix_spots"]:
         chore_no.setdefault(s, [])
     fig = plt.figure(figsize=(33, 20.5), facecolor=PAPER)
-    gs = fig.add_gridspec(2, 3, width_ratios=[1, 1, 0.52], left=0.012, right=0.992, top=0.915, bottom=0.012,
-                          wspace=0.035, hspace=0.07)
-    pos = [(0, 0), (0, 1), (1, 0), (1, 1)]
+    fig.set_size_inches(44, 20.5)
+    gs = fig.add_gridspec(2, 4, width_ratios=[1, 1, 1, 0.62], left=0.01, right=0.994, top=0.915, bottom=0.012,
+                          wspace=0.03, hspace=0.07)
+    pos = [(0, 0), (0, 1), (0, 2), (1, 0), (1, 1)]
     for (fid, title), (r, c) in zip(PANELS, pos):
         draw_panel(fig.add_subplot(gs[r, c]), L, fid, title, res, chore_no)
-    draw_info(fig.add_subplot(gs[:, 2]), L, res, chore_no)
+    draw_info(fig.add_subplot(gs[:, 3]), L, res, chore_no)
     fig.suptitle("FIRTINALI MALİKÂNE  ·  Storm Manor (harita 2)  —  kat kat plan", x=0.012, ha="left", fontsize=26,
                  weight="bold", color=INK, y=0.985)
-    fig.text(0.012, 0.952, "Pozzo'nun Kuzgun Kayası'ndaki malikânesi · 24 adlandırılmış oda, 3 kat + mahzen + bahçe · "
+    fig.text(0.012, 0.952, f"Pozzo'nun Kuzgun Kayası'ndaki malikânesi · {sum(1 for r in L['rooms'] if r['counts'])} adlandırılmış oda, 3 kat + 2 mahzen + bahçe · "
              "toplantı: Büyük Salon · ölçek her panelde aynı · üretildi: Tools/Level/render_stormmanor.py",
              fontsize=11.5, color=INK2)
     os.makedirs(os.path.dirname(out), exist_ok=True)

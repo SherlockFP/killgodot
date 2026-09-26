@@ -36,6 +36,8 @@ except ImportError:
 HERE = os.path.dirname(os.path.abspath(__file__))
 LAYOUT_FILE = os.path.join(HERE, "..", "Level", "morrowmere_layout_v2.json")
 L = json.load(open(LAYOUT_FILE, encoding="utf-8"))
+FOREST_FILE = os.path.join(HERE, "..", "Level", "morrowmere_forest_v2.json")   # SPRINT-033 trails (optional)
+FOREST = json.load(open(FOREST_FILE, encoding="utf-8")) if os.path.exists(FOREST_FILE) else {}
 
 CORE = (-130.0, -125.0, 130.0, 125.0)   # UE metres, multiples of 2.5
 CORE_STEP = 0.5
@@ -515,7 +517,11 @@ class Field:
         h = 4.0 + 0.5 * fbm(px, py, 40.0, 4, seed=1)
         h = h + smooth(45, 110, r) * (3.0 + 5.0 * fbm(px + 300, py, 60.0, 4, seed=2))
         open_south = smooth(50, 110, py) * (1.0 - smooth(90, 160, np.abs(px)))
-        ring = smooth(120, 210, r) * (1.0 - open_south)
+        # SPRINT-033 (user 2026-09-26, "make the forest bigger"): the mountain ring starts at r 172 m instead of 120 m,
+        # so a walkable forest ring (r ~100-178 m) with a gently rolling floor wraps the village on the land sides.
+        floor = smooth(100, 160, r) * (1.0 - open_south)
+        h = h + floor * (2.5 + 2.5 * fbm(px - 40, py + 90, 45.0, 3, seed=7))
+        ring = smooth(172, 250, r) * (1.0 - open_south)
         h = h + ring * (38.0 + 34.0 * fbm(px, py + 500, 90.0, 5, seed=3))
         # raise the rim toward the grid edge on the land sides so no sea shows past the mountains
         rim = smooth(235.0, 318.0, np.maximum(np.abs(px), -py)) * (1.0 - smooth(40.0, 90.0, py))
@@ -573,6 +579,15 @@ class Field:
             elif s == "gravel":
                 paint((tid == k) & walk, GRAVEL, 0.9)
         paint(self.corridor, FLAGS, 0.9)
+        # SPRINT-033: forest trails (Tools/Level/morrowmere_forest_v2.json, gen_forest_bands.py) as packed dirt
+        for t in FOREST.get("trails", []):
+            bb = bbox_mask(px, py, t["points"], t["width"] + 2.0)
+            if bb.any():
+                m = np.zeros(shape, dtype=bool)
+                d = np.full(shape, 99.0)
+                d[bb] = polyline_dist(px[bb], py[bb], t["points"])
+                m[bb] = d[bb] <= t["width"] / 2.0 + 0.6
+                paint(m & ~walk, PATH, np.clip(1.15 - d / (t["width"] / 2.0 + 0.6), 0.0, 0.85))
         # sea bed / beach / stream
         sea = kind == 3
         sand = (z < 1.4) & ~flat & ~self.corridor

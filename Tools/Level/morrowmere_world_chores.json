@@ -3,112 +3,1575 @@
  "map": "L_Morrowmere_v2",
  "walk_speed": 3.2,
  "climb_speed": 2.6,
- "hub": [12.48, 3.76, 5.0],
+ "hub": [
+  12.48,
+  3.76,
+  5.0
+ ],
  "items": {
-  "Bucket":  {"mesh": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Bucket_Wooden_1.Bucket_Wooden_1", "scale": 1.0, "box": [20, 18, 15], "mesh_z": -15, "mass": 7, "speed": 1.0, "liquid": true, "label": "bucket"},
-  "Crate":   {"mesh": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Crate_Wooden.Crate_Wooden", "scale": 0.62, "box": [27, 29, 27], "mesh_z": -27, "mass": 32, "speed": 0.55, "two_person": true, "label": "fish crate"},
-  "Loaves":  {"mesh": "/Game/KillGodot/Env/KG_Props/StaticMeshes/FarmCrate_Empty.FarmCrate_Empty", "scale": 0.8, "box": [28, 17, 9], "mesh_z": -9, "mass": 4, "speed": 1.0, "count": 3, "label": "bread basket"},
-  "Taper":   {"mesh": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Candle_2.Candle_2", "scale": [1.3, 1.3, 3.6], "box": [5, 5, 45], "mesh_z": -45, "mass": 1, "speed": 1.0, "flame": true, "label": "lit taper"},
-  "Net":     {"mesh": "/Game/KillGodot/Env/Dress/KG_DressHarbour_Clean/StaticMeshes/SM_KG_NetPile.SM_KG_NetPile", "scale": 0.45, "box": [26, 26, 12], "mesh_z": -12, "mass": 6, "speed": 1.0, "label": "fishing net"},
-  "Bundle":  {"mesh": "/Game/KillGodot/Env/Furniture/KG_InteriorProps/StaticMeshes/SM_KG_Firewood.SM_KG_Firewood", "scale": 0.9, "box": [25, 27, 20], "mesh_z": -20, "mass": 14, "speed": 0.85, "label": "firewood bundle"},
-  "Letters": {"mesh": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Book_5.Book_5", "scale": 1.2, "box": [14, 18, 6], "mesh_z": -4, "mass": 1, "speed": 1.0, "count": 3, "label": "sealed letters"},
-  "Sack":    {"mesh": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Bag.Bag", "scale": 0.7, "box": [23, 19, 28], "mesh_z": -28, "mass": 20, "speed": 0.85, "label": "grain sack"},
-  "OilCan":  {"mesh": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Bottle_1.Bottle_1", "scale": [2.2, 2.2, 1.4], "box": [12, 12, 25], "mesh_z": -25, "mass": 5, "speed": 1.0, "tint": [0.55, 0.38, 0.16], "label": "oil can"}
+  "Bucket": {
+   "mesh": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Bucket_Wooden_1.Bucket_Wooden_1",
+   "scale": 1.0,
+   "box": [
+    20,
+    18,
+    15
+   ],
+   "mesh_z": -15,
+   "mass": 7,
+   "speed": 1.0,
+   "liquid": true,
+   "label": "bucket"
+  },
+  "Crate": {
+   "mesh": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Crate_Wooden.Crate_Wooden",
+   "scale": 0.62,
+   "box": [
+    27,
+    29,
+    27
+   ],
+   "mesh_z": -27,
+   "mass": 32,
+   "speed": 0.55,
+   "two_person": true,
+   "label": "fish crate"
+  },
+  "Loaves": {
+   "mesh": "/Game/KillGodot/Env/KG_Props/StaticMeshes/FarmCrate_Empty.FarmCrate_Empty",
+   "scale": 0.8,
+   "box": [
+    28,
+    17,
+    9
+   ],
+   "mesh_z": -9,
+   "mass": 4,
+   "speed": 1.0,
+   "count": 3,
+   "label": "bread basket"
+  },
+  "Taper": {
+   "mesh": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Candle_2.Candle_2",
+   "scale": [
+    1.3,
+    1.3,
+    3.6
+   ],
+   "box": [
+    5,
+    5,
+    45
+   ],
+   "mesh_z": -45,
+   "mass": 1,
+   "speed": 1.0,
+   "flame": true,
+   "label": "lit taper"
+  },
+  "Net": {
+   "mesh": "/Game/KillGodot/Env/Dress/KG_DressHarbour_Clean/StaticMeshes/SM_KG_NetPile.SM_KG_NetPile",
+   "scale": 0.45,
+   "box": [
+    26,
+    26,
+    12
+   ],
+   "mesh_z": -12,
+   "mass": 6,
+   "speed": 1.0,
+   "label": "fishing net"
+  },
+  "Bundle": {
+   "mesh": "/Game/KillGodot/Env/Furniture/KG_InteriorProps/StaticMeshes/SM_KG_Firewood.SM_KG_Firewood",
+   "scale": 0.9,
+   "box": [
+    25,
+    27,
+    20
+   ],
+   "mesh_z": -20,
+   "mass": 14,
+   "speed": 0.85,
+   "label": "firewood bundle"
+  },
+  "Letters": {
+   "mesh": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Book_5.Book_5",
+   "scale": 1.2,
+   "box": [
+    14,
+    18,
+    6
+   ],
+   "mesh_z": -4,
+   "mass": 1,
+   "speed": 1.0,
+   "count": 3,
+   "label": "sealed letters"
+  },
+  "Sack": {
+   "mesh": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Bag.Bag",
+   "scale": 0.7,
+   "box": [
+    23,
+    19,
+    28
+   ],
+   "mesh_z": -28,
+   "mass": 20,
+   "speed": 0.85,
+   "label": "grain sack"
+  },
+  "OilCan": {
+   "mesh": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Bottle_1.Bottle_1",
+   "scale": [
+    2.2,
+    2.2,
+    1.4
+   ],
+   "box": [
+    12,
+    12,
+    25
+   ],
+   "mesh_z": -25,
+   "mass": 5,
+   "speed": 1.0,
+   "tint": [
+    0.55,
+    0.38,
+    0.16
+   ],
+   "label": "oil can"
+  },
+  "Canvas": {
+   "mesh": "/Game/KillGodot/Env/KG_Props/StaticMeshes/Bag.Bag",
+   "scale": [
+    1.6,
+    0.9,
+    0.6
+   ],
+   "box": [
+    45,
+    25,
+    16
+   ],
+   "mesh_z": -16,
+   "mass": 18,
+   "speed": 0.6,
+   "two_person": true,
+   "label": "rolled tent canvas",
+   "tint": [
+    0.78,
+    0.7,
+    0.52
+   ]
+  },
+  "Herbs": {
+   "mesh": "/Game/KillGodot/Env/KG_Nature/StaticMeshes/Flower_3_Group.Flower_3_Group",
+   "scale": 0.5,
+   "box": [
+    16,
+    16,
+    10
+   ],
+   "mesh_z": -8,
+   "mass": 1,
+   "speed": 1.0,
+   "label": "bunch of herbs"
+  }
  },
  "anchors": [
-  {"id": "well", "kind": "Well", "at": [-32.35, -13.75], "z": 8.0, "r": 2.3, "stand": [-31.78, -12.97], "label": "the well"},
-  {"id": "fountain_trough", "kind": "Trough", "at": [6.9, 3.9], "z": 5.0, "yaw": 90, "r": 1.8, "label": "the fountain trough", "sabotage": "poison"},
-  {"id": "bakery_butt", "kind": "Butt", "at": [-0.8, 8.9], "z": 5.0, "r": 1.6, "label": "the bakery water butt", "sabotage": "poison"},
-  {"id": "inn_trough", "kind": "Trough", "at": [21.6, 3.0], "z": 5.0, "yaw": 166.5, "r": 1.9, "label": "the inn horse trough", "sabotage": "poison"},
-  {"id": "jetty_crates", "kind": "CrateStack", "at": [19.5, 37.8], "z": 2.0, "yaw": 13, "r": 1.8, "label": "the catch on the quay head"},
-  {"id": "brine_table", "kind": "Market", "at": [42.2, 34.6], "z": 2.0, "yaw": 209.5, "r": 2.2, "label": "Madam Brine's table"},
-  {"id": "bread_rack", "kind": "BreadRack", "at": [-1.2, 4.9], "z": 5.0, "yaw": 76.5, "r": 1.6, "label": "the bakery"},
-  {"id": "knock_H02", "kind": "Door", "door": ["H02", 0.0, 0.0], "r": 1.7, "label": "Home 2"},
-  {"id": "knock_H03", "kind": "Door", "door": ["H03", 0.0, 0.0], "r": 1.7, "label": "Home 3"},
-  {"id": "knock_H05", "kind": "Door", "door": ["H05", 0.0, 0.0], "r": 1.7, "label": "Home 5"},
-  {"id": "knock_H06", "kind": "Door", "door": ["H06", 0.0, 0.0], "r": 1.7, "label": "Home 6"},
-  {"id": "knock_H09", "kind": "Door", "door": ["H09", 0.0, 0.0], "r": 1.7, "label": "Home 9"},
-  {"id": "knock_H11", "kind": "Door", "door": ["H11", 0.0, 0.0], "r": 1.7, "label": "Home 11"},
-  {"id": "knock_H12", "kind": "Door", "door": ["H12", 0.0, 0.0], "r": 1.7, "label": "Home 12"},
-  {"id": "knock_H14", "kind": "Door", "door": ["H14", 0.0, 0.0], "r": 1.7, "label": "Home 14"},
-  {"id": "taper_box", "kind": "TaperBox", "at": [-2.3, -5.9], "z": 5.0, "yaw": 166.5, "r": 1.6, "label": "the town hall taper box"},
-  {"id": "lamp_1", "kind": "Lamp", "lane": ["balcony_lane", 16.0, 1.35], "r": 1.5, "label": "lamp 1", "sabotage": "snuff"},
-  {"id": "lamp_2", "kind": "Lamp", "lane": ["balcony_lane", 20.5, 1.35], "r": 1.5, "label": "lamp 2", "sabotage": "snuff"},
-  {"id": "lamp_3", "kind": "Lamp", "lane": ["balcony_lane", 25.0, 1.35], "r": 1.5, "label": "lamp 3", "sabotage": "snuff"},
-  {"id": "lamp_4", "kind": "Lamp", "lane": ["balcony_lane", 29.5, 1.35], "r": 1.5, "label": "lamp 4", "sabotage": "snuff"},
-  {"id": "lamp_5", "kind": "Lamp", "lane": ["balcony_lane", 34.0, 1.35], "r": 1.5, "label": "lamp 5", "sabotage": "snuff"},
-  {"id": "clock_winder", "kind": "Winder", "tower_top": ["clock_tower", 4, -80, -80], "r": 1.4, "label": "the clock works (tower top)"},
-  {"id": "bell_rope", "kind": "Bell", "tower_top": ["bell_tower", 4, -80, -80], "r": 1.4, "label": "the bell (tower top)"},
-  {"id": "net_pile", "kind": "NetPile", "at": [36.2, 28.4], "z": 2.0, "yaw": 20, "r": 1.6, "stand": [37.4, 27.6], "label": "the Net Stairs"},
-  {"id": "net_rack", "kind": "NetRack", "at": [0.91, 52.15], "z": 2.0, "yaw": 60, "r": 1.8, "stand": [-0.59, 52.15], "label": "the mending rack"},
-  {"id": "quay_posts", "kind": "Posts", "at": [13.6, 41.2], "z": 2.0, "yaw": 118, "r": 1.8, "label": "the quay posts"},
-  {"id": "chop_block", "kind": "ChopBlock", "at": [-100.2, -3.3], "z": 11.4, "r": 1.6, "stand": [-99.0, -2.6], "label": "the woodcutter's block"},
-  {"id": "forge_woodbox", "kind": "Woodbox", "at": [-92.3, 12.2], "z": 8.83, "yaw": 180.0, "r": 1.7, "label": "the smithy forge"},
-  {"id": "letter_satchel", "kind": "Satchel", "at": [2.7, -6.3], "z": 5.0, "yaw": 150, "r": 1.5, "label": "the notice board"},
-  {"id": "box_H01", "kind": "Letterbox", "door": ["H01", 1.15, 0.2], "r": 1.6, "label": "the Messenger Boy's box", "name": "MESSENGER BOY"},
-  {"id": "box_H04", "kind": "Letterbox", "door": ["H04", 1.15, 0.2], "r": 1.6, "label": "Riza the Tea-Man's box", "name": "RIZA"},
-  {"id": "box_H07", "kind": "Letterbox", "door": ["H07", 1.15, 0.2], "r": 1.6, "label": "the Drummer's box", "name": "THE DRUMMER"},
-  {"id": "box_H13", "kind": "Letterbox", "door": ["H13", 1.15, 0.2], "r": 1.6, "label": "Madam Vellum's box", "name": "MADAM VELLUM"},
-  {"id": "box_H14", "kind": "Letterbox", "door": ["H14", 1.15, 0.2], "r": 1.6, "label": "Mr Thimble's box", "name": "MR THIMBLE"},
-  {"id": "box_H16", "kind": "Letterbox", "door": ["H16", 1.15, 0.2], "r": 1.6, "label": "Mr Pozzo's box", "name": "MR POZZO"},
-  {"id": "barn_sacks", "kind": "Sacks", "at": [63.1, -76.7], "z": 9.5, "yaw": 270, "r": 1.6, "label": "the barn"},
-  {"id": "mill_hopper", "kind": "Hopper", "at": [91.95, -64.1], "z": 9.6, "yaw": 252, "r": 1.8, "label": "the windmill hopper"},
-  {"id": "oil_shelf", "kind": "OilShelf", "door": ["lighthouse", 1.6, 1.0], "r": 1.5, "label": "the oil crate at the lighthouse door"},
-  {"id": "lighthouse_lamp", "kind": "LighthouseLamp", "tower_top": ["lighthouse", 5, -80, -80], "r": 1.5, "label": "the lighthouse lamp (top)", "sabotage": "snuff"}
+  {
+   "id": "well",
+   "kind": "Well",
+   "at": [
+    -32.35,
+    -13.75
+   ],
+   "z": 8.0,
+   "r": 2.3,
+   "stand": [
+    -31.78,
+    -12.97
+   ],
+   "label": "the well"
+  },
+  {
+   "id": "fountain_trough",
+   "kind": "Trough",
+   "at": [
+    6.9,
+    3.9
+   ],
+   "z": 5.0,
+   "yaw": 90,
+   "r": 1.8,
+   "label": "the fountain trough",
+   "sabotage": "poison"
+  },
+  {
+   "id": "bakery_butt",
+   "kind": "Butt",
+   "at": [
+    -0.8,
+    8.9
+   ],
+   "z": 5.0,
+   "r": 1.6,
+   "label": "the bakery water butt",
+   "sabotage": "poison"
+  },
+  {
+   "id": "inn_trough",
+   "kind": "Trough",
+   "at": [
+    21.6,
+    3.0
+   ],
+   "z": 5.0,
+   "yaw": 166.5,
+   "r": 1.9,
+   "label": "the inn horse trough",
+   "sabotage": "poison"
+  },
+  {
+   "id": "jetty_crates",
+   "kind": "CrateStack",
+   "at": [
+    19.5,
+    37.8
+   ],
+   "z": 2.0,
+   "yaw": 13,
+   "r": 1.8,
+   "label": "the catch on the quay head"
+  },
+  {
+   "id": "brine_table",
+   "kind": "Market",
+   "at": [
+    42.2,
+    34.6
+   ],
+   "z": 2.0,
+   "yaw": 209.5,
+   "r": 2.2,
+   "label": "Madam Brine's table"
+  },
+  {
+   "id": "bread_rack",
+   "kind": "BreadRack",
+   "at": [
+    -1.2,
+    4.9
+   ],
+   "z": 5.0,
+   "yaw": 76.5,
+   "r": 1.6,
+   "label": "the bakery"
+  },
+  {
+   "id": "knock_H02",
+   "kind": "Door",
+   "door": [
+    "H02",
+    0.0,
+    0.0
+   ],
+   "r": 1.7,
+   "label": "Home 2"
+  },
+  {
+   "id": "knock_H03",
+   "kind": "Door",
+   "door": [
+    "H03",
+    0.0,
+    0.0
+   ],
+   "r": 1.7,
+   "label": "Home 3"
+  },
+  {
+   "id": "knock_H05",
+   "kind": "Door",
+   "door": [
+    "H05",
+    0.0,
+    0.0
+   ],
+   "r": 1.7,
+   "label": "Home 5"
+  },
+  {
+   "id": "knock_H06",
+   "kind": "Door",
+   "door": [
+    "H06",
+    0.0,
+    0.0
+   ],
+   "r": 1.7,
+   "label": "Home 6"
+  },
+  {
+   "id": "knock_H09",
+   "kind": "Door",
+   "door": [
+    "H09",
+    0.0,
+    0.0
+   ],
+   "r": 1.7,
+   "label": "Home 9"
+  },
+  {
+   "id": "knock_H11",
+   "kind": "Door",
+   "door": [
+    "H11",
+    0.0,
+    0.0
+   ],
+   "r": 1.7,
+   "label": "Home 11"
+  },
+  {
+   "id": "knock_H12",
+   "kind": "Door",
+   "door": [
+    "H12",
+    0.0,
+    0.0
+   ],
+   "r": 1.7,
+   "label": "Home 12"
+  },
+  {
+   "id": "knock_H14",
+   "kind": "Door",
+   "door": [
+    "H14",
+    0.0,
+    0.0
+   ],
+   "r": 1.7,
+   "label": "Home 14"
+  },
+  {
+   "id": "taper_box",
+   "kind": "TaperBox",
+   "at": [
+    -2.3,
+    -5.9
+   ],
+   "z": 5.0,
+   "yaw": 166.5,
+   "r": 1.6,
+   "label": "the town hall taper box"
+  },
+  {
+   "id": "lamp_1",
+   "kind": "Lamp",
+   "lane": [
+    "balcony_lane",
+    16.0,
+    1.35
+   ],
+   "r": 1.5,
+   "label": "lamp 1",
+   "sabotage": "snuff"
+  },
+  {
+   "id": "lamp_2",
+   "kind": "Lamp",
+   "lane": [
+    "balcony_lane",
+    20.5,
+    1.35
+   ],
+   "r": 1.5,
+   "label": "lamp 2",
+   "sabotage": "snuff"
+  },
+  {
+   "id": "lamp_3",
+   "kind": "Lamp",
+   "lane": [
+    "balcony_lane",
+    25.0,
+    1.35
+   ],
+   "r": 1.5,
+   "label": "lamp 3",
+   "sabotage": "snuff"
+  },
+  {
+   "id": "lamp_4",
+   "kind": "Lamp",
+   "lane": [
+    "balcony_lane",
+    29.5,
+    1.35
+   ],
+   "r": 1.5,
+   "label": "lamp 4",
+   "sabotage": "snuff"
+  },
+  {
+   "id": "lamp_5",
+   "kind": "Lamp",
+   "lane": [
+    "balcony_lane",
+    34.0,
+    1.35
+   ],
+   "r": 1.5,
+   "label": "lamp 5",
+   "sabotage": "snuff"
+  },
+  {
+   "id": "clock_winder",
+   "kind": "Winder",
+   "tower_top": [
+    "clock_tower",
+    4,
+    -80,
+    -80
+   ],
+   "r": 1.4,
+   "label": "the clock works (tower top)"
+  },
+  {
+   "id": "bell_rope",
+   "kind": "Bell",
+   "tower_top": [
+    "bell_tower",
+    4,
+    -80,
+    -80
+   ],
+   "r": 1.4,
+   "label": "the bell (tower top)"
+  },
+  {
+   "id": "net_pile",
+   "kind": "NetPile",
+   "at": [
+    36.2,
+    28.4
+   ],
+   "z": 2.0,
+   "yaw": 20,
+   "r": 1.6,
+   "stand": [
+    37.4,
+    27.6
+   ],
+   "label": "the Net Stairs"
+  },
+  {
+   "id": "net_rack",
+   "kind": "NetRack",
+   "at": [
+    0.91,
+    52.15
+   ],
+   "z": 2.0,
+   "yaw": 60,
+   "r": 1.8,
+   "stand": [
+    -0.59,
+    52.15
+   ],
+   "label": "the mending rack"
+  },
+  {
+   "id": "quay_posts",
+   "kind": "Posts",
+   "at": [
+    13.6,
+    41.2
+   ],
+   "z": 2.0,
+   "yaw": 118,
+   "r": 1.8,
+   "label": "the quay posts"
+  },
+  {
+   "id": "chop_block",
+   "kind": "ChopBlock",
+   "at": [
+    -100.2,
+    -3.3
+   ],
+   "z": 11.4,
+   "r": 1.6,
+   "stand": [
+    -99.0,
+    -2.6
+   ],
+   "label": "the woodcutter's block"
+  },
+  {
+   "id": "forge_woodbox",
+   "kind": "Woodbox",
+   "at": [
+    -92.3,
+    12.2
+   ],
+   "z": 8.83,
+   "yaw": 180.0,
+   "r": 1.7,
+   "label": "the smithy forge"
+  },
+  {
+   "id": "letter_satchel",
+   "kind": "Satchel",
+   "at": [
+    2.7,
+    -6.3
+   ],
+   "z": 5.0,
+   "yaw": 150,
+   "r": 1.5,
+   "label": "the notice board"
+  },
+  {
+   "id": "box_H01",
+   "kind": "Letterbox",
+   "door": [
+    "H01",
+    1.15,
+    0.2
+   ],
+   "r": 1.6,
+   "label": "the Messenger Boy's box",
+   "name": "MESSENGER BOY"
+  },
+  {
+   "id": "box_H04",
+   "kind": "Letterbox",
+   "door": [
+    "H04",
+    1.15,
+    0.2
+   ],
+   "r": 1.6,
+   "label": "Riza the Tea-Man's box",
+   "name": "RIZA"
+  },
+  {
+   "id": "box_H07",
+   "kind": "Letterbox",
+   "door": [
+    "H07",
+    1.15,
+    0.2
+   ],
+   "r": 1.6,
+   "label": "the Drummer's box",
+   "name": "THE DRUMMER"
+  },
+  {
+   "id": "box_H13",
+   "kind": "Letterbox",
+   "door": [
+    "H13",
+    1.15,
+    0.2
+   ],
+   "r": 1.6,
+   "label": "Madam Vellum's box",
+   "name": "MADAM VELLUM"
+  },
+  {
+   "id": "box_H14",
+   "kind": "Letterbox",
+   "door": [
+    "H14",
+    1.15,
+    0.2
+   ],
+   "r": 1.6,
+   "label": "Mr Thimble's box",
+   "name": "MR THIMBLE"
+  },
+  {
+   "id": "box_H16",
+   "kind": "Letterbox",
+   "door": [
+    "H16",
+    1.15,
+    0.2
+   ],
+   "r": 1.6,
+   "label": "Mr Pozzo's box",
+   "name": "MR POZZO"
+  },
+  {
+   "id": "barn_sacks",
+   "kind": "Sacks",
+   "at": [
+    63.1,
+    -76.7
+   ],
+   "z": 9.5,
+   "yaw": 270,
+   "r": 1.6,
+   "label": "the barn"
+  },
+  {
+   "id": "mill_hopper",
+   "kind": "Hopper",
+   "at": [
+    91.95,
+    -64.1
+   ],
+   "z": 9.6,
+   "yaw": 252,
+   "r": 1.8,
+   "label": "the windmill hopper"
+  },
+  {
+   "id": "oil_shelf",
+   "kind": "OilShelf",
+   "door": [
+    "lighthouse",
+    1.6,
+    1.0
+   ],
+   "r": 1.5,
+   "label": "the oil crate at the lighthouse door"
+  },
+  {
+   "id": "lighthouse_lamp",
+   "kind": "LighthouseLamp",
+   "tower_top": [
+    "lighthouse",
+    5,
+    -80,
+    -80
+   ],
+   "r": 1.5,
+   "label": "the lighthouse lamp (top)",
+   "sabotage": "snuff"
+  },
+  {
+   "id": "forest_camp_woodpile",
+   "kind": "CampWoodpile",
+   "at": [
+    -7.44,
+    -78.42
+   ],
+   "z": 13.94,
+   "r": 2.0,
+   "yaw": 0.0,
+   "label": "the camp woodpile"
+  },
+  {
+   "id": "forest_tent_site",
+   "kind": "TentSite",
+   "at": [
+    -14.94,
+    -83.92
+   ],
+   "z": 13.27,
+   "r": 2.4,
+   "yaw": 0.0,
+   "label": "the camp tent site"
+  },
+  {
+   "id": "forest_peg_1",
+   "kind": "TentPeg",
+   "at": [
+    -17.44,
+    -84.12
+   ],
+   "z": 13.15,
+   "r": 1.0,
+   "yaw": 0.0,
+   "label": "tent peg 1"
+  },
+  {
+   "id": "forest_peg_2",
+   "kind": "TentPeg",
+   "at": [
+    -14.94,
+    -87.12
+   ],
+   "z": 12.51,
+   "r": 1.0,
+   "yaw": 0.0,
+   "label": "tent peg 2"
+  },
+  {
+   "id": "forest_peg_3",
+   "kind": "TentPeg",
+   "at": [
+    -12.44,
+    -83.92
+   ],
+   "z": 13.31,
+   "r": 1.0,
+   "yaw": 0.0,
+   "label": "tent peg 3"
+  },
+  {
+   "id": "forest_canvas",
+   "kind": "CanvasPile",
+   "at": [
+    -98.0,
+    0.0
+   ],
+   "z": 10.46,
+   "r": 1.8,
+   "yaw": 0.0,
+   "label": "the canvas by the woodcutter's"
+  },
+  {
+   "id": "forest_herb_table",
+   "kind": "HerbTable",
+   "at": [
+    -6.47,
+    -47.27
+   ],
+   "z": 14.0,
+   "r": 1.6,
+   "yaw": 0.0,
+   "label": "the herb table by the church"
+  },
+  {
+   "id": "forest_deadwood_n1",
+   "kind": "Deadwood",
+   "at": [
+    10.63,
+    -92.17
+   ],
+   "z": 10.37,
+   "r": 1.6,
+   "yaw": 0.0,
+   "label": "a pile of dry branches"
+  },
+  {
+   "id": "forest_deadwood_n2",
+   "kind": "Deadwood",
+   "at": [
+    11.79,
+    -97.42
+   ],
+   "z": 9.59,
+   "r": 1.6,
+   "yaw": 0.0,
+   "label": "a pile of dry branches"
+  },
+  {
+   "id": "forest_deadwood_n3",
+   "kind": "Deadwood",
+   "at": [
+    13.19,
+    -105.36
+   ],
+   "z": 9.39,
+   "r": 1.6,
+   "yaw": 0.0,
+   "label": "a pile of dry branches"
+  },
+  {
+   "id": "forest_deadwood_w1",
+   "kind": "Deadwood",
+   "at": [
+    -16.38,
+    -94.81
+   ],
+   "z": 10.6,
+   "r": 1.6,
+   "yaw": 0.0,
+   "label": "a pile of dry branches"
+  },
+  {
+   "id": "forest_deadwood_w2",
+   "kind": "Deadwood",
+   "at": [
+    -16.97,
+    -102.87
+   ],
+   "z": 9.03,
+   "r": 1.6,
+   "yaw": 0.0,
+   "label": "a pile of dry branches"
+  },
+  {
+   "id": "forest_deadwood_w3",
+   "kind": "Deadwood",
+   "at": [
+    -17.57,
+    -110.89
+   ],
+   "z": 7.49,
+   "r": 1.6,
+   "yaw": 0.0,
+   "label": "a pile of dry branches"
+  },
+  {
+   "id": "forest_herbs_w1",
+   "kind": "Herbs",
+   "at": [
+    -7.62,
+    -82.35
+   ],
+   "z": 13.51,
+   "r": 1.4,
+   "yaw": 0.0,
+   "label": "a clump of wild herbs"
+  },
+  {
+   "id": "forest_herbs_w2",
+   "kind": "Herbs",
+   "at": [
+    -10.49,
+    -87.99
+   ],
+   "z": 12.26,
+   "r": 1.4,
+   "yaw": 0.0,
+   "label": "a clump of wild herbs"
+  },
+  {
+   "id": "forest_herbs_w3",
+   "kind": "Herbs",
+   "at": [
+    -12.83,
+    -95.64
+   ],
+   "z": 10.25,
+   "r": 1.4,
+   "yaw": 0.0,
+   "label": "a clump of wild herbs"
+  },
+  {
+   "id": "forest_herbs_n1",
+   "kind": "Herbs",
+   "at": [
+    3.4,
+    -99.83
+   ],
+   "z": 9.3,
+   "r": 1.4,
+   "yaw": 0.0,
+   "label": "a clump of wild herbs"
+  },
+  {
+   "id": "forest_herbs_n2",
+   "kind": "Herbs",
+   "at": [
+    5.7,
+    -105.73
+   ],
+   "z": 9.11,
+   "r": 1.4,
+   "yaw": 0.0,
+   "label": "a clump of wild herbs"
+  },
+  {
+   "id": "forest_herbs_n3",
+   "kind": "Herbs",
+   "at": [
+    7.9,
+    -113.42
+   ],
+   "z": 9.11,
+   "r": 1.4,
+   "yaw": 0.0,
+   "label": "a clump of wild herbs"
+  },
+  {
+   "id": "forest_lantern_n1",
+   "kind": "Lamp",
+   "at": [
+    -0.55,
+    -90.49
+   ],
+   "z": 11.63,
+   "r": 1.4,
+   "yaw": 0.0,
+   "label": "trail lantern 1"
+  },
+  {
+   "id": "forest_lantern_n2",
+   "kind": "Lamp",
+   "at": [
+    -0.52,
+    -97.53
+   ],
+   "z": 9.71,
+   "r": 1.4,
+   "yaw": 0.0,
+   "label": "trail lantern 2"
+  },
+  {
+   "id": "forest_lantern_n3",
+   "kind": "Lamp",
+   "at": [
+    -0.14,
+    -105.02
+   ],
+   "z": 8.9,
+   "r": 1.4,
+   "yaw": 0.0,
+   "label": "trail lantern 3"
+  },
+  {
+   "id": "forest_lantern_n4",
+   "kind": "Lamp",
+   "at": [
+    0.1,
+    -112.9
+   ],
+   "z": 8.62,
+   "r": 1.4,
+   "yaw": 0.0,
+   "label": "trail lantern 4"
+  },
+  {
+   "id": "forest_lantern_n5",
+   "kind": "Lamp",
+   "at": [
+    -0.87,
+    -120.34
+   ],
+   "z": 8.23,
+   "r": 1.4,
+   "yaw": 0.0,
+   "label": "trail lantern 5"
+  },
+  {
+   "id": "forest_lantern_w1",
+   "kind": "Lamp",
+   "at": [
+    -107.58,
+    -20.83
+   ],
+   "z": 13.84,
+   "r": 1.4,
+   "yaw": 0.0,
+   "label": "trail lantern 1"
+  },
+  {
+   "id": "forest_lantern_w2",
+   "kind": "Lamp",
+   "at": [
+    -114.98,
+    -22.06
+   ],
+   "z": 14.02,
+   "r": 1.4,
+   "yaw": 0.0,
+   "label": "trail lantern 2"
+  },
+  {
+   "id": "forest_lantern_w3",
+   "kind": "Lamp",
+   "at": [
+    -122.92,
+    -21.92
+   ],
+   "z": 13.99,
+   "r": 1.4,
+   "yaw": 0.0,
+   "label": "trail lantern 3"
+  },
+  {
+   "id": "forest_lantern_w4",
+   "kind": "Lamp",
+   "at": [
+    -130.41,
+    -21.6
+   ],
+   "z": 13.89,
+   "r": 1.4,
+   "yaw": 0.0,
+   "label": "trail lantern 4"
+  },
+  {
+   "id": "forest_lantern_w5",
+   "kind": "Lamp",
+   "at": [
+    -136.38,
+    -21.35
+   ],
+   "z": 13.65,
+   "r": 1.4,
+   "yaw": 0.0,
+   "label": "trail lantern 5"
+  }
  ],
  "chores": [
-  {"id": "WaterRun", "title": "Water run", "blurb": "Crank a full bucket up the well and carry it to a trough - walk, don't run, or it sloshes out.", "replaces": ["DrawWater"], "bots": true,
+  {
+   "id": "WaterRun",
+   "title": "Water run",
+   "blurb": "Crank a full bucket up the well and carry it to a trough - walk, don't run, or it sloshes out.",
+   "replaces": [
+    "DrawWater"
+   ],
+   "bots": true,
    "variants": [
-    {"name": "fountain", "vars": {"dst": "fountain_trough"}},
-    {"name": "bakery", "vars": {"dst": "bakery_butt"}},
-    {"name": "inn", "vars": {"dst": "inn_trough"}}],
+    {
+     "name": "fountain",
+     "vars": {
+      "dst": "fountain_trough"
+     }
+    },
+    {
+     "name": "bakery",
+     "vars": {
+      "dst": "bakery_butt"
+     }
+    },
+    {
+     "name": "inn",
+     "vars": {
+      "dst": "inn_trough"
+     }
+    }
+   ],
    "steps": [
-    {"verb": "take", "at": "well", "item": "Bucket", "secs": 3.0, "fill": 1.0, "label": "Crank a full bucket up the well", "cue": "Crank"},
-    {"verb": "bring", "at": "$dst", "item": "Bucket", "secs": 1.5, "min_fill": 0.35, "effect": "water", "label": "Pour it into $dst - walk, don't run!", "cue": "Pour"}]},
-  {"id": "FishToMarket", "title": "Fish to market", "blurb": "A heavy, flopping crate: alone you shuffle, with a helper you walk.", "replaces": ["UnloadFish"], "bots": true,
+    {
+     "verb": "take",
+     "at": "well",
+     "item": "Bucket",
+     "secs": 3.0,
+     "fill": 1.0,
+     "label": "Crank a full bucket up the well",
+     "cue": "Crank"
+    },
+    {
+     "verb": "bring",
+     "at": "$dst",
+     "item": "Bucket",
+     "secs": 1.5,
+     "min_fill": 0.35,
+     "effect": "water",
+     "label": "Pour it into $dst - walk, don't run!",
+     "cue": "Pour"
+    }
+   ]
+  },
+  {
+   "id": "FishToMarket",
+   "title": "Fish to market",
+   "blurb": "A heavy, flopping crate: alone you shuffle, with a helper you walk.",
+   "replaces": [
+    "UnloadFish"
+   ],
+   "bots": true,
    "steps": [
-    {"verb": "take", "at": "jetty_crates", "item": "Crate", "secs": 1.0, "label": "Lift a crate of the fresh catch on the quay head", "cue": "Thud"},
-    {"verb": "bring", "at": "brine_table", "item": "Crate", "secs": 1.2, "consume": true, "effect": "stack", "label": "Haul it to Madam Brine's table (a helper doubles your speed)", "cue": "Thud"}]},
-  {"id": "BreadDelivery", "title": "Bread delivery", "blurb": "Fresh, steaming loaves: knock on three marked doors.", "bots": true,
+    {
+     "verb": "take",
+     "at": "jetty_crates",
+     "item": "Crate",
+     "secs": 1.0,
+     "label": "Lift a crate of the fresh catch on the quay head",
+     "cue": "Thud"
+    },
+    {
+     "verb": "bring",
+     "at": "brine_table",
+     "item": "Crate",
+     "secs": 1.2,
+     "consume": true,
+     "effect": "stack",
+     "label": "Haul it to Madam Brine's table (a helper doubles your speed)",
+     "cue": "Thud"
+    }
+   ]
+  },
+  {
+   "id": "BreadDelivery",
+   "title": "Bread delivery",
+   "blurb": "Fresh, steaming loaves: knock on three marked doors.",
+   "bots": true,
    "variants": [
-    {"name": "west", "vars": {"d1": "knock_H05", "d2": "knock_H09", "d3": "knock_H12"}},
-    {"name": "east", "vars": {"d1": "knock_H02", "d2": "knock_H03", "d3": "knock_H11"}},
-    {"name": "uphill", "vars": {"d1": "knock_H06", "d2": "knock_H09", "d3": "knock_H14"}}],
+    {
+     "name": "west",
+     "vars": {
+      "d1": "knock_H05",
+      "d2": "knock_H09",
+      "d3": "knock_H12"
+     }
+    },
+    {
+     "name": "east",
+     "vars": {
+      "d1": "knock_H02",
+      "d2": "knock_H03",
+      "d3": "knock_H11"
+     }
+    },
+    {
+     "name": "uphill",
+     "vars": {
+      "d1": "knock_H06",
+      "d2": "knock_H09",
+      "d3": "knock_H14"
+     }
+    }
+   ],
    "steps": [
-    {"verb": "take", "at": "bread_rack", "item": "Loaves", "secs": 0.8, "label": "Grab the steaming bread basket at the bakery", "cue": "Thud"},
-    {"verb": "bring", "at": ["$d1", "$d2", "$d3"], "item": "Loaves", "secs": 1.0, "consume": true, "effect": "stack", "label": "Knock and leave a loaf at the marked doors", "cue": "Knock"}]},
-  {"id": "Lamplighter", "title": "Lamplighter", "blurb": "A lit taper and five lamps on Balcony Lane - the taper burns out at the last one.", "bots": true,
+    {
+     "verb": "take",
+     "at": "bread_rack",
+     "item": "Loaves",
+     "secs": 0.8,
+     "label": "Grab the steaming bread basket at the bakery",
+     "cue": "Thud"
+    },
+    {
+     "verb": "bring",
+     "at": [
+      "$d1",
+      "$d2",
+      "$d3"
+     ],
+     "item": "Loaves",
+     "secs": 1.0,
+     "consume": true,
+     "effect": "stack",
+     "label": "Knock and leave a loaf at the marked doors",
+     "cue": "Knock"
+    }
+   ]
+  },
+  {
+   "id": "Lamplighter",
+   "title": "Lamplighter",
+   "blurb": "A lit taper and five lamps on Balcony Lane - the taper burns out at the last one.",
+   "bots": true,
    "steps": [
-    {"verb": "take", "at": "taper_box", "item": "Taper", "secs": 0.6, "label": "Take a lit taper from the town hall box", "cue": "Flame"},
-    {"verb": "bring", "at": ["lamp_1", "lamp_2", "lamp_3", "lamp_4", "lamp_5"], "item": "Taper", "secs": 0.8, "consume": true, "effect": "light", "label": "Light the street lamps on Balcony Lane", "cue": "Flame"}]},
-  {"id": "BellAndClock", "title": "Bell and clock", "blurb": "Climb the clock tower to wind it, then climb the bell tower and ring it for the whole village.", "replaces": ["WindClock", "RingBell"], "bots": false,
+    {
+     "verb": "take",
+     "at": "taper_box",
+     "item": "Taper",
+     "secs": 0.6,
+     "label": "Take a lit taper from the town hall box",
+     "cue": "Flame"
+    },
+    {
+     "verb": "bring",
+     "at": [
+      "lamp_1",
+      "lamp_2",
+      "lamp_3",
+      "lamp_4",
+      "lamp_5"
+     ],
+     "item": "Taper",
+     "secs": 0.8,
+     "consume": true,
+     "effect": "light",
+     "label": "Light the street lamps on Balcony Lane",
+     "cue": "Flame"
+    }
+   ]
+  },
+  {
+   "id": "BellAndClock",
+   "title": "Bell and clock",
+   "blurb": "Climb the clock tower to wind it, then climb the bell tower and ring it for the whole village.",
+   "replaces": [
+    "WindClock",
+    "RingBell"
+   ],
+   "bots": false,
    "steps": [
-    {"verb": "work", "at": "clock_winder", "secs": 3.0, "effect": "fx:ClockChime", "label": "Climb the clock tower and wind the clock", "cue": "Crank"},
-    {"verb": "work", "at": "bell_rope", "secs": 2.0, "effect": "fx:BellRing", "label": "Climb the bell tower and pull the rope", "cue": "Knot"}]},
-  {"id": "Nets", "title": "Mend and hang the nets", "blurb": "A torn net from the Net Stairs: knot it at the rack, hang it on the quay posts.", "replaces": ["MendNets"], "bots": true,
+    {
+     "verb": "work",
+     "at": "clock_winder",
+     "secs": 3.0,
+     "effect": "fx:ClockChime",
+     "label": "Climb the clock tower and wind the clock",
+     "cue": "Crank"
+    },
+    {
+     "verb": "work",
+     "at": "bell_rope",
+     "secs": 2.0,
+     "effect": "fx:BellRing",
+     "label": "Climb the bell tower and pull the rope",
+     "cue": "Knot"
+    }
+   ]
+  },
+  {
+   "id": "Nets",
+   "title": "Mend and hang the nets",
+   "blurb": "A torn net from the Net Stairs: knot it at the rack, hang it on the quay posts.",
+   "replaces": [
+    "MendNets"
+   ],
+   "bots": true,
    "steps": [
-    {"verb": "take", "at": "net_pile", "item": "Net", "secs": 0.8, "label": "Grab the torn net at the Net Stairs", "cue": "Knot"},
-    {"verb": "panel", "at": "net_rack", "panel": "MendNets", "stage": 0, "bot_secs": 7.0, "label": "Mend the net at the rack (E)"},
-    {"verb": "bring", "at": "quay_posts", "item": "Net", "secs": 1.5, "consume": true, "effect": "stack", "label": "Hang the mended net on the quay posts", "cue": "Knot"}]},
-  {"id": "Firewood", "title": "Firewood", "blurb": "Three swings at the woodcutter's block, then feed the smithy forge (tossing it in counts).", "replaces": ["ChopWood"], "bots": true,
+    {
+     "verb": "take",
+     "at": "net_pile",
+     "item": "Net",
+     "secs": 0.8,
+     "label": "Grab the torn net at the Net Stairs",
+     "cue": "Knot"
+    },
+    {
+     "verb": "panel",
+     "at": "net_rack",
+     "panel": "MendNets",
+     "stage": 0,
+     "bot_secs": 7.0,
+     "label": "Mend the net at the rack (E)"
+    },
+    {
+     "verb": "bring",
+     "at": "quay_posts",
+     "item": "Net",
+     "secs": 1.5,
+     "consume": true,
+     "effect": "stack",
+     "label": "Hang the mended net on the quay posts",
+     "cue": "Knot"
+    }
+   ]
+  },
+  {
+   "id": "Firewood",
+   "title": "Firewood",
+   "blurb": "Three swings at the woodcutter's block, then feed the smithy forge (tossing it in counts).",
+   "replaces": [
+    "ChopWood"
+   ],
+   "bots": true,
    "steps": [
-    {"verb": "work", "at": "chop_block", "secs": 1.6, "repeat": 3, "spawn": "Bundle", "effect": "chop", "label": "Chop three logs at the woodcutter's block (E each swing)", "cue": "Chop"},
-    {"verb": "bring", "at": "forge_woodbox", "item": "Bundle", "secs": 1.0, "consume": true, "effect": "stack+fx:ChimneySmoke", "label": "Feed the bundle to the smithy forge", "cue": "Thud"}]},
-  {"id": "Letters", "title": "Letters", "blurb": "Sealed letters from the notice board, each into the right letterbox.", "bots": true,
+    {
+     "verb": "work",
+     "at": "chop_block",
+     "secs": 1.6,
+     "repeat": 3,
+     "spawn": "Bundle",
+     "effect": "chop",
+     "label": "Chop three logs at the woodcutter's block (E each swing)",
+     "cue": "Chop"
+    },
+    {
+     "verb": "bring",
+     "at": "forge_woodbox",
+     "item": "Bundle",
+     "secs": 1.0,
+     "consume": true,
+     "effect": "stack+fx:ChimneySmoke",
+     "label": "Feed the bundle to the smithy forge",
+     "cue": "Thud"
+    }
+   ]
+  },
+  {
+   "id": "Letters",
+   "title": "Letters",
+   "blurb": "Sealed letters from the notice board, each into the right letterbox.",
+   "bots": true,
    "variants": [
-    {"name": "uptown", "vars": {"d1": "box_H13", "d2": "box_H14", "d3": "box_H04"}},
-    {"name": "square", "vars": {"d1": "box_H04", "d2": "box_H01", "d3": "box_H07"}},
-    {"name": "mixed", "vars": {"d1": "box_H01", "d2": "box_H16", "d3": "box_H14"}}],
+    {
+     "name": "uptown",
+     "vars": {
+      "d1": "box_H13",
+      "d2": "box_H14",
+      "d3": "box_H04"
+     }
+    },
+    {
+     "name": "square",
+     "vars": {
+      "d1": "box_H04",
+      "d2": "box_H01",
+      "d3": "box_H07"
+     }
+    },
+    {
+     "name": "mixed",
+     "vars": {
+      "d1": "box_H01",
+      "d2": "box_H16",
+      "d3": "box_H14"
+     }
+    }
+   ],
    "steps": [
-    {"verb": "take", "at": "letter_satchel", "item": "Letters", "secs": 0.8, "label": "Take the sealed letters at the notice board", "cue": "Paper"},
-    {"verb": "bring", "at": ["$d1", "$d2", "$d3"], "item": "Letters", "secs": 1.0, "consume": true, "effect": "stack", "label": "Post each letter in the right letterbox", "cue": "Paper"}]},
-  {"id": "GrainToMill", "title": "Grain to the windmill", "blurb": "Shoulder a grain sack at the barn and tip it into the windmill hopper.", "replaces": ["GrindFlour"], "bots": true,
+    {
+     "verb": "take",
+     "at": "letter_satchel",
+     "item": "Letters",
+     "secs": 0.8,
+     "label": "Take the sealed letters at the notice board",
+     "cue": "Paper"
+    },
+    {
+     "verb": "bring",
+     "at": [
+      "$d1",
+      "$d2",
+      "$d3"
+     ],
+     "item": "Letters",
+     "secs": 1.0,
+     "consume": true,
+     "effect": "stack",
+     "label": "Post each letter in the right letterbox",
+     "cue": "Paper"
+    }
+   ]
+  },
+  {
+   "id": "GrainToMill",
+   "title": "Grain to the windmill",
+   "blurb": "Shoulder a grain sack at the barn and tip it into the windmill hopper.",
+   "replaces": [
+    "GrindFlour"
+   ],
+   "bots": true,
    "steps": [
-    {"verb": "take", "at": "barn_sacks", "item": "Sack", "secs": 0.8, "label": "Shoulder a grain sack at the barn", "cue": "Thud"},
-    {"verb": "bring", "at": "mill_hopper", "item": "Sack", "secs": 1.5, "consume": true, "effect": "stack", "label": "Tip the grain into the windmill hopper", "cue": "Grind"}]},
-  {"id": "LighthouseOil", "title": "Lighthouse oil", "blurb": "An oil can from the lighthouse door, up the ladder, into the lamp - and the beam blazes.", "replaces": ["FuelLighthouse"], "bots": false,
+    {
+     "verb": "take",
+     "at": "barn_sacks",
+     "item": "Sack",
+     "secs": 0.8,
+     "label": "Shoulder a grain sack at the barn",
+     "cue": "Thud"
+    },
+    {
+     "verb": "bring",
+     "at": "mill_hopper",
+     "item": "Sack",
+     "secs": 1.5,
+     "consume": true,
+     "effect": "stack",
+     "label": "Tip the grain into the windmill hopper",
+     "cue": "Grind"
+    }
+   ]
+  },
+  {
+   "id": "LighthouseOil",
+   "title": "Lighthouse oil",
+   "blurb": "An oil can from the lighthouse door, up the ladder, into the lamp - and the beam blazes.",
+   "replaces": [
+    "FuelLighthouse"
+   ],
+   "bots": false,
    "steps": [
-    {"verb": "take", "at": "oil_shelf", "item": "OilCan", "secs": 0.6, "label": "Take an oil can at the lighthouse door", "cue": "Thud"},
-    {"verb": "bring", "at": "lighthouse_lamp", "item": "OilCan", "secs": 2.0, "consume": true, "effect": "light+fx:LighthouseGlow", "label": "Climb the lighthouse and fill the lamp", "cue": "Pour"}]}
+    {
+     "verb": "take",
+     "at": "oil_shelf",
+     "item": "OilCan",
+     "secs": 0.6,
+     "label": "Take an oil can at the lighthouse door",
+     "cue": "Thud"
+    },
+    {
+     "verb": "bring",
+     "at": "lighthouse_lamp",
+     "item": "OilCan",
+     "secs": 2.0,
+     "consume": true,
+     "effect": "light+fx:LighthouseGlow",
+     "label": "Climb the lighthouse and fill the lamp",
+     "cue": "Pour"
+    }
+   ]
+  },
+  {
+   "id": "GatherDeadwood",
+   "title": "Gather deadwood",
+   "blurb": "Dry branches from three piles off the trail, tied into a bundle for the camp woodpile.",
+   "bots": true,
+   "variants": [
+    {
+     "name": "north",
+     "vars": {
+      "p1": "forest_deadwood_n1",
+      "p2": "forest_deadwood_n2",
+      "p3": "forest_deadwood_n3"
+     }
+    },
+    {
+     "name": "north_east",
+     "vars": {
+      "p1": "forest_deadwood_w1",
+      "p2": "forest_deadwood_w2",
+      "p3": "forest_deadwood_w3"
+     }
+    }
+   ],
+   "steps": [
+    {
+     "verb": "work",
+     "at": [
+      "$p1",
+      "$p2",
+      "$p3"
+     ],
+     "secs": 2.0,
+     "spawn": "Bundle",
+     "cue": "Chop",
+     "label": "Snap dry branches off the three piles"
+    },
+    {
+     "verb": "bring",
+     "at": "forest_camp_woodpile",
+     "item": "Bundle",
+     "secs": 0.8,
+     "consume": true,
+     "effect": "stack",
+     "cue": "Thud",
+     "label": "Stack the bundle on the camp woodpile"
+    }
+   ]
+  },
+  {
+   "id": "PitchCamp",
+   "title": "Pitch camp",
+   "blurb": "Carry the canvas out to the camp (easier with a friend), then drive three pegs.",
+   "bots": true,
+   "steps": [
+    {
+     "verb": "take",
+     "at": "forest_canvas",
+     "item": "Canvas",
+     "secs": 0.8,
+     "cue": "Thud",
+     "label": "Pick up the tent canvas at the woodcutter's"
+    },
+    {
+     "verb": "bring",
+     "at": "forest_tent_site",
+     "item": "Canvas",
+     "secs": 1.0,
+     "consume": true,
+     "effect": "stack",
+     "cue": "Whoosh",
+     "label": "Spread the canvas at the camp"
+    },
+    {
+     "verb": "work",
+     "at": [
+      "forest_peg_1",
+      "forest_peg_2",
+      "forest_peg_3"
+     ],
+     "secs": 1.5,
+     "cue": "Thud",
+     "effect": "stack",
+     "label": "Drive the three tent pegs"
+    }
+   ]
+  },
+  {
+   "id": "TrailLanterns",
+   "title": "Light the trail lanterns",
+   "blurb": "A lit taper from the town hall and five lanterns along a forest trail.",
+   "bots": true,
+   "variants": [
+    {
+     "name": "north",
+     "vars": {
+      "l1": "forest_lantern_n1",
+      "l2": "forest_lantern_n2",
+      "l3": "forest_lantern_n3",
+      "l4": "forest_lantern_n4",
+      "l5": "forest_lantern_n5"
+     }
+    },
+    {
+     "name": "west",
+     "vars": {
+      "l1": "forest_lantern_w1",
+      "l2": "forest_lantern_w2",
+      "l3": "forest_lantern_w3",
+      "l4": "forest_lantern_w4",
+      "l5": "forest_lantern_w5"
+     }
+    }
+   ],
+   "steps": [
+    {
+     "verb": "take",
+     "at": "taper_box",
+     "item": "Taper",
+     "secs": 0.6,
+     "cue": "Flame",
+     "label": "Take a lit taper from the town hall box"
+    },
+    {
+     "verb": "bring",
+     "at": [
+      "$l1",
+      "$l2",
+      "$l3",
+      "$l4",
+      "$l5"
+     ],
+     "item": "Taper",
+     "secs": 0.8,
+     "consume": true,
+     "effect": "light",
+     "cue": "Flame",
+     "label": "Light the five trail lanterns"
+    }
+   ]
+  },
+  {
+   "id": "GatherHerbs",
+   "title": "Gather herbs",
+   "blurb": "Three clumps of wild herbs by the trail, for the herb table at the church.",
+   "bots": true,
+   "variants": [
+    {
+     "name": "crown",
+     "vars": {
+      "h1": "forest_herbs_w1",
+      "h2": "forest_herbs_w2",
+      "h3": "forest_herbs_w3"
+     }
+    },
+    {
+     "name": "north",
+     "vars": {
+      "h1": "forest_herbs_n1",
+      "h2": "forest_herbs_n2",
+      "h3": "forest_herbs_n3"
+     }
+    }
+   ],
+   "steps": [
+    {
+     "verb": "work",
+     "at": [
+      "$h1",
+      "$h2",
+      "$h3"
+     ],
+     "secs": 1.5,
+     "spawn": "Herbs",
+     "cue": "Paper",
+     "label": "Pick the three clumps of herbs"
+    },
+    {
+     "verb": "bring",
+     "at": "forest_herb_table",
+     "item": "Herbs",
+     "secs": 0.8,
+     "consume": true,
+     "effect": "stack",
+     "cue": "Thud",
+     "label": "Lay the herbs on the church table"
+    }
+   ]
+  }
  ]
 }

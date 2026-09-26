@@ -755,6 +755,9 @@ void DrawDigLayer(const FKGHudFrame& F);
 const AKGMapInfo* DigResolvePlan(const FKGHudFrame& F, FKGMapFx& M, const AKGMapInfo* Surface);
 void DigMapMarks(const FKGHudFrame& F, TFunctionRef<FVector2D(const FVector2D&)> ToScreen, float Size, float Opacity,
                  const FVector2D* ClipCentre, float ClipRadius);
+// SPRINT-040 hook: discovered secret passages + pinging traps (Manor/KGManorHud.inl, included at the end).
+void ManorMapMarks(const FKGHudFrame& F, TFunctionRef<FVector2D(const FVector2D&)> ToScreen, float Size, float Opacity,
+                   const FVector2D* ClipCentre, float ClipRadius);
 
 // -------------------------------------------------------------------------------------------------------------------
 // Corner minimap (top right): rotates with the view, you in the centre, nearby names, your chores
@@ -901,6 +904,7 @@ void DrawMinimap(const FKGHudFrame& F, FKGMapFx& M, const AKGMapInfo& Info, cons
 		}
 	}
 	DigMapMarks(F, [&X](const FVector2D& W) { return X.ToScreen(W); }, 20.0f * S, Opacity, &Ctr, R);   // KG_DIG hook
+	ManorMapMarks(F, [&X](const FVector2D& W) { return X.ToScreen(W); }, 20.0f * S, Opacity, &Ctr, R);   // SPRINT-040 hook
 
 	// You: view cone + arrow (always up: the map turns, you don't).
 	FPts Cone;
@@ -1081,6 +1085,7 @@ void DrawFullMap(const FKGHudFrame& F, FKGMapFx& M, const AKGMapInfo& Info, cons
 		}
 	}
 	DigMapMarks(F, [&ToScreen](const FVector2D& W) { return ToScreen(W); }, 26.0f * S, A, nullptr, 0.0f);   // KG_DIG hook
+	ManorMapMarks(F, [&ToScreen](const FVector2D& W) { return ToScreen(W); }, 26.0f * S, A, nullptr, 0.0f);   // SPRINT-040 hook
 	if (Me)
 	{
 		const FVector2D You = ToScreen(*Me);
@@ -1237,6 +1242,9 @@ void DrawMapLayer(const FKGHudFrame& F, bool bLoadingCard)
 
 // KG_DIG hook: digging HUD + underground plan (leaves and re-opens the anonymous namespace for its includes).
 #include "Dig/KGDigHud.inl"
+
+// SPRINT-040 hook: manor secrets + trap pings on the maps (same namespace trick).
+#include "Manor/KGManorHud.inl"
 
 // SPRINT-016 hook: world chore HUD (same namespace trick).
 #include "Chores/WorldChores/KGWorldChoreHud.inl"

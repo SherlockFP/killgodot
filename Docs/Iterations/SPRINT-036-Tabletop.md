@@ -161,3 +161,19 @@ screen; you drag pieces in the world.
 - Out of scope → proposals: table whisper mode, flipping the table, spectator side bets, a card game.
 
 **Depends on:** 036b, Roadmap 020b, 021, 024.
+
+---
+
+## Evidence run (2026-09-26, headless; 036a/036b code committed in 7121034)
+- `Tools/Unreal/kg_table_smoke.ps1` PASSED: unseated / out-of-turn / illegal moves refused (`why=not seated|not your turn|illegal`),
+  the client's `KG_TABLE_NOTICE illegal` arrives, both machines end `WhiteWins reason=Checkmate` on the same FEN
+  `r1bqkb1r/pppp1Qpp/2n2n2/4p3/2B1P3/8/PPPP1PPP/RNB1K1NR b KQkq - 0 4`. Fixes: the host holds White's first move 4 s after
+  seating so the client's out-of-turn probe cannot race e2e4 (it was being accepted as Black's real reply); a
+  `KG_TABLE_SMOKE Client wait ...` progress line; the checker's `Fen()` unrolled a single line to a string (`@()`).
+- `Tools/Unreal/kg_table_shots.ps1` -> `Saved/UIShots/table_chess_mid|chess_mate|draughts_mid|strip_1280x720.png`. Panel fix:
+  the opponent chip and the footer hint are ellipsised (`Fit`) instead of overlapping the clock / Draw button.
+- `Tools/Unreal/dressing/v2/dress_tabletop.py` dry run (after `square`): `tables=2, seats=4` (Latecomer garden + Fountain
+  Square). Note: `kg_dress_v2.py --dry` filters zone names through its own `ORDER`, which lacks `tabletop`; run it through
+  `dress_zones(C, ["square", "tabletop"])` or add the zone to the v2 builder's order (the builder owns that list).
+- Open (not gated): the client's `KG_TABLE_FINAL ... moves=0` (move count is not replicated, cosmetic); the table smoke is
+  not yet in `run_invariants.ps1` I3 (036b acceptance 5, serial file).

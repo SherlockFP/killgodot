@@ -90,7 +90,14 @@ bir cinayeti kurt saldırısı gibi **sahneleyebilir** ya da birini sise **yaln�
 ## 2. Orman: coğrafya, bantlar, sınır
 
 ### 2.1 Mevcut zemin (v2)
-- Oynanabilir alan: `nav_bounds` x −120…120, y −120…112 m (`Tools/Level/morrowmere_layout_v2.json`).
+- **SPRINT-033a sonucu (2026-09-26, O10 = seçenek b):** orman büyütüldü. Dağ halkası r 120 → 172 m'ye itildi
+  (`kg_build_terrain_v2.py natural()`), `nav_bounds` x −182…182, y −182…112, z ≤ 70 m. Oynanabilir orman r ≈ 100–178 m
+  (Sis Duvarı r 178). Bantlar değişmedi (12 / 30 / 45 m). `Tools/Level/gen_forest_bands.py` →
+  `morrowmere_forest_v2.json`: yürünebilir orman 48.244 m² (Kıyı 24.104, Orta 3.504, Derin 18.552), en kötü güvenli
+  mesafe 44,0 m (≤ 45), kamp yolu meydandan ~92 m, kamp–sokak 26,6 m, 4 in (Batı, Mağara Sırtı, Kuzey, Doğu Sırtı),
+  halka patika r ≈ 136 m + 5 kol patika (805 m), 10 patika başı feneri; halka ağacı 1.693. Rapor:
+  `Saved/KG_ForestBands_Report.json`, resim `Saved/Screenshots/Forest/KG_Cap_forest_bands.png`.
+- (eski) Oynanabilir alan: `nav_bounds` x −120…120, y −120…112 m (`Tools/Level/morrowmere_layout_v2.json`).
 - Orman halkası: havza merkezinden r ≈ 95 m'nin ötesi, zemin 7 m'den 40–55 m'ye yükselir; dışta dağ halkası
   (`Docs/Level/v2_iconic.md`). Koruluklar ve dış çam halkası: 2.189 örnek (`v2_Build_Report.md`).
 - Orman patikaları: `woods_path` (demirhane → oduncu açıklığı → değirmen gölü → Hollow Way), `hollow_way` (ormandan

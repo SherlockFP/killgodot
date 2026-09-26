@@ -1,4 +1,5 @@
 #include "AI/KGBotController.h"
+#include "Forest/KGForestSubsystem.h"
 #include "Character/KGCharacter.h"
 #include "Core/KGGameState.h"
 #include "Core/KGPlayerState.h"
@@ -693,6 +694,11 @@ void AKGBotController::Tick(float DeltaSeconds)
 	}
 	const AKGGameState* GS = GetWorld()->GetGameState<AKGGameState>();
 	if (GS && GS->GetPhase() == EKGPhase::Epilogue)
+	{
+		return;
+	}
+	// SPRINT-033/034: walk back to a path from wolves / the Mist, keep the Camp Vigil (Forest/KGForestSubsystem.cpp).
+	if (UKGForestSubsystem::UpdateBot(this, Me, DeltaSeconds))
 	{
 		return;
 	}

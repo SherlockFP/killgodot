@@ -293,6 +293,15 @@ class Tour:
         for a in unreal.GameplayStatics.get_all_actors_of_class(self.world, unreal.PlayerStart):
             p = a.get_actor_location()
             targets.append(("start " + a.get_name(), (p.x / 100.0, p.y / 100.0, p.z / 100.0 - 1.0)))
+        # SPRINT-033/034: the forest ring - the vigil camp (<= 110 m path from the square) and every trail's far end
+        fp = "D:/Kill Godot/Tools/Level/morrowmere_forest_v2.json"
+        if os.path.exists(fp):
+            F = json.load(open(fp, encoding="utf-8"))
+            targets.append(("forest camp", (F["camp"]["at"][0], F["camp"]["at"][1], F["camp"]["z"])))
+            for t in F.get("trails", []):
+                q = t["points"][len(t["points"]) // 2]
+                zz = t.get("mid_z", 20.0)
+                targets.append(("forest trail " + t["name"], (q[0], q[1], zz)))
         f = L["landmarks"]["fountain"]
         start = unreal.Vector(f["at"][0] * 100.0 + 250.0, f["at"][1] * 100.0, f["z"] * 100.0 + 60.0)
         res, bad = {}, []

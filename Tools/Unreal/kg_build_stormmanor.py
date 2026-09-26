@@ -52,12 +52,13 @@ DT = "/Game/KillGodot/Env/Dress/KG_DressTerrace_Clean/StaticMeshes/SM_KG_"
 DU = "/Game/KillGodot/Env/Dress/KG_DressUnder_Clean/StaticMeshes/SM_KG_"
 DW = "/Game/KillGodot/Env/Dress/KG_DressWilds_Clean/StaticMeshes/SM_KG_"
 E = "/Engine/BasicShapes/"
+XP = "/Game/KillGodot/Env/Ext/KG_Ext_"     # SPRINT-040: external kits (Tools/Unreal/dressing/pack_ext_index.md)
 AUDIO = "/Game/KillGodot/Audio/"
 M = 100.0
 H = G.STOREY
 WALL_OUT = 21.0          # exterior walls: slab from 10 cm inside to 31 cm outside the room edge (v2 builder)
 WALL_MID = 10.5          # interior walls: slab centred on the edge (+-20.5 cm)
-LIGHT_BUDGET = 60
+LIGHT_BUDGET = 70          # SPRINT-040 budget (<= 70 lights, <= 5 shadowed)
 
 T0 = time.time()
 L = G.layout()
@@ -80,7 +81,7 @@ def fz(fid):
 
 
 def fid_of_z(z):
-    best = "C"
+    best = G.ORDER[0]
     for f in G.ORDER:
         if z >= fz(f) - 60.0:
             best = f
@@ -149,31 +150,34 @@ class Batcher:
                 b = bounds(r["m"])
                 if (b[5] - b[2]) * r["s"][2] < 30.0:
                     r["collide"] = False
-            special = r["hidden"] or r["material"] or r["label"] or not r["nav"] or not r["shadow"]
+            # (SPRINT-040: a material override batches too - one field per material - so the recoloured white props
+            # and the flat-coloured repeats stay inside the plain-actor budget)
+            special = r["hidden"] or r["label"] or not r["nav"] or not r["shadow"]
             f = fid_of_z(r["z"])
-            key = (r["m"], bool(r["collide"]), f)
+            key = (r["m"], bool(r["collide"]), f, r["material"] or "")
             if special:
                 self._actor(r, f)
                 continue
             groups.setdefault(key, []).append(r)
-        for (path, collide, f), rs in groups.items():
+        for (path, collide, f, matp), rs in groups.items():
             if (rs[0]["kind"] == "arch" or len(rs) >= 3 or any(r["kind"] == "arch" for r in rs)) and ism_ok(path):
-                self._hism(path, collide, f, rs)
+                self._hism(path, collide, f, rs, matp)
             else:
                 for r in rs:
                     self._actor(r, f)
         log(f"flush: {len(self.recs)} meshes -> {self.instances} instances + {sum(self.plain.values())} actors "
             f"{json.dumps(self.plain)}")
 
-    def _hism(self, path, collide, f, rs):
-        key = (f, collide)
+    def _hism(self, path, collide, f, rs, matp=""):
+        key = (f, collide, matp)
         fld = self.fields.get(key)
         if fld is None:
             cls = unreal.load_class(None, "/Script/KillGodot.KGFoliageField")
             # at the origin: the field's HISMs are not attached to its root after a save/load, so instances stored
             # relative to a raised actor ended up fz(f) too low in -game (F0 walls in the cellar, floors under it)
             fld = _real.spawn_actor_from_class(cls, unreal.Vector(0.0, 0.0, 0.0))
-            fld.set_actor_label(f"KG_SM_{f}_{'Solid' if collide else 'Clutter'}")
+            tag = matp.split("/")[-1].replace("MI_KG_SM_", "") if matp else ""
+            fld.set_actor_label(f"KG_SM_{f}_{'Solid' if collide else 'Clutter'}{'_' + tag if tag else ''}")
             fld.set_folder_path(f"StormManor/Instanced")
             self.fields[key] = fld
             self.plain[f] += 1
@@ -183,6 +187,12 @@ class Batcher:
         b = bounds(path)
         small = max(b[3] - b[0], b[4] - b[1], b[5] - b[2]) < 45.0
         fld.add_instances(mesh(path), tr, collide, 3500.0 if small else 0.0)
+        if matp:
+            mat = unreal.load_asset(matp)
+            for comp in fld.get_components_by_class(unreal.InstancedStaticMeshComponent):
+                if mat and comp.get_editor_property("static_mesh") == mesh(path):
+                    for i in range(max(1, comp.get_num_materials())):
+                        comp.set_material(i, mat)
         self.instances += len(tr)
         for r in rs:
             r["hism"] = True
@@ -327,6 +337,10 @@ def light(x, y, z, intensity=10.0, radius=900.0, color=(255, 170, 95), folder="S
     lc.set_editor_property("light_color", unreal.Color(r=color[0], g=color[1], b=color[2], a=255))
     lc.set_editor_property("cast_shadows", bool(hero))
     a.set_folder_path(folder)
+    if SHIM.room:                           # SPRINT-040: the LightsOut trap switches a room's lights by this tag
+        a.tags = [unreal.Name("KG_Room_" + SHIM.room)]
+    by = stats.setdefault("lights_by_room", {})
+    by[SHIM.room or "-"] = by.get(SHIM.room or "-", 0) + 1
     stats["lights"] += 1
     stats["hero_lights"] += 1 if hero else 0
     B.plain[fid_of_z(z)] += 1
@@ -375,7 +389,14 @@ def flat_materials():
                                    ("Brass", (0.60, 0.42, 0.14), 0.35, 0.0), ("Copper", (0.55, 0.26, 0.12), 0.35, 0.0),
                                    ("Sheet", (0.78, 0.78, 0.74), 0.9, 0.0), ("Spark", (0.35, 0.65, 1.0), 0.4, 6.0),
                                    ("Ember", (1.0, 0.45, 0.12), 0.6, 4.0), ("Soot", (0.03, 0.03, 0.035), 0.9, 0.0),
-                                   ("Portrait", (0.30, 0.18, 0.12), 0.7, 0.0), ("Moss", (0.12, 0.16, 0.08), 0.95, 0.0)):
+                                   ("Portrait", (0.30, 0.18, 0.12), 0.7, 0.0), ("Moss", (0.12, 0.16, 0.08), 0.95, 0.0),
+                                   # SPRINT-040: the white-prop fix palette (fix_white) + vault/crypt accents
+                                   ("Wood", (0.28, 0.15, 0.07), 0.8, 0.0), ("Bread", (0.62, 0.36, 0.12), 0.85, 0.0),
+                                   ("Velvet", (0.36, 0.05, 0.07), 0.9, 0.0), ("Linen", (0.78, 0.72, 0.60), 0.9, 0.0),
+                                   ("Wax", (0.85, 0.78, 0.55), 0.6, 0.0), ("Leather", (0.30, 0.10, 0.06), 0.7, 0.0),
+                                   ("Terracotta", (0.52, 0.22, 0.10), 0.85, 0.0), ("Leaf", (0.10, 0.28, 0.07), 0.9, 0.0),
+                                   ("Iron", (0.10, 0.10, 0.11), 0.5, 0.0), ("Gilt", (0.65, 0.46, 0.14), 0.35, 0.0),
+                                   ("Marble", (0.62, 0.60, 0.56), 0.4, 0.0), ("Bone", (0.70, 0.64, 0.50), 0.8, 0.0)):
         p = f"{MAT_DIR}/MI_KG_SM_{name}"
         mi = unreal.load_asset(p) if eal.does_asset_exist(p) else None
         if not mi:
@@ -543,9 +564,15 @@ def island_and_sea():
         n += 1
     # the rock body under the cellar level (everything), down into the sea
     allc = plateau | lower
-    for i0, j0, i1, j1 in rects_from_cells(allc):
-        box(i0 * 2.0 - 0.6, j0 * 2.0 - 0.6, (i1 + 1) * 2.0 + 0.6, (j1 + 1) * 2.0 + 0.6, fz("C") - 2.0, 1400.0,
+    # SPRINT-040: the lower vaults (C2) are carved out of it: under their cells the rock starts below the C2 floor
+    deep = set(GRID.occ.get("C2", {}))
+    for i0, j0, i1, j1 in rects_from_cells(allc - deep):
+        pad = 0.0 if deep else 0.6         # (a padded box would bulge 60 cm into a vault's edge cells)
+        box(i0 * 2.0 - pad, j0 * 2.0 - pad, (i1 + 1) * 2.0 + pad, (j1 + 1) * 2.0 + pad, fz("C") - 2.0, 1400.0,
             "RockDark", "StormManor/Island")
+        n += 1
+    for i0, j0, i1, j1 in rects_from_cells(deep):
+        box(i0 * 2.0, j0 * 2.0, (i1 + 1) * 2.0, (j1 + 1) * 2.0, fz("C2") - 2.0, 1100.0, "RockDark", "StormManor/Island")
         n += 1
     # cliff skirt: the plateau's outer faces between the cellar level and the ground floor (boxes on the rim cells)
     # (a stair hole through the ground floor is not the plateau's edge: rim boxes there filled the cellar round the
@@ -914,6 +941,12 @@ def door(fid, orient, coord, tc, nsign, off, z, d, typ):
         a.set_actor_label(f"Door_{d['id']}_{int(tc * 10)}")
         for comp in a.get_components_by_class(unreal.StaticMeshComponent):
             comp.set_editor_property("can_ever_affect_navigation", False)
+        # SPRINT-040: room tags (the LockDoors trap) and wing gates (UKGManorSubsystem locks them in small lobbies)
+        tags = [unreal.Name("KG_Room_" + d["a"]), unreal.Name("KG_Room_" + d["b"])]
+        if d.get("gate_min_n"):
+            tags += [unreal.Name("KG_WingGate"), unreal.Name(f"KG_MinN_{d['gate_min_n']}")]
+            stats["wing_gates"] = stats.get("wing_gates", 0) + 1
+        a.tags = tags
         stats["doors"] += 1
     DOOR_REG.append({"fid": fid, "x": px, "y": py, "nx": nx, "ny": ny, "rooms": [d["a"], d["b"]], "width": 2.0,
                      "kind": d["kind"], "id": d["id"]})
@@ -1013,7 +1046,21 @@ FLOOR_MAT = {"great_hall": "Floor_Brick", "vestibule": "checker", "chapel": "Flo
              "nursery": "Floor_WoodLight", "study": "Floor_WoodDark", "master": "Floor_WoodDark",
              "billiard": "Floor_WoodDark", "attic": "Floor_WoodLight", "clock_room": "Floor_WoodDark",
              "storm_tower": "Floor_UnevenBrick", "greenhouse": "Floor_RedBrick", "boathouse": "Floor_WoodDark",
-             "storm_terrace": "Floor_UnevenBrick", "roof_walk": "Floor_WoodDark", "tower_top": "Floor_UnevenBrick"}
+             "storm_terrace": "Floor_UnevenBrick", "roof_walk": "Floor_WoodDark", "tower_top": "Floor_UnevenBrick",
+             # SPRINT-040: each new room its own floor (chequered halls, brick service rooms, stone vaults)
+             "staircase_hall": "checker", "long_gallery": "checker", "north_corridor": "Floor_WoodLight",
+             "music_room": "Floor_WoodLight", "green_salon": "Floor_WoodDark", "blue_salon": "Floor_WoodLight",
+             "yellow_salon": "Floor_WoodLight", "card_room": "Floor_WoodDark", "trophy_room": "Floor_WoodDark",
+             "west_passage": "Floor_Brick", "servants_hall": "Floor_Brick", "housekeeper": "Floor_WoodDark",
+             "silver_room": "Floor_RedBrick", "boiler_room": "Floor_UnevenBrick", "east_hall": "checker",
+             "smoking_room": "Floor_WoodDark", "gun_room": "Floor_Brick", "map_room": "Floor_WoodLight",
+             "games_room": "Floor_WoodDark", "orangery": "Floor_RedBrick", "morning_room": "Floor_WoodLight",
+             "grand_landing": "Floor_WoodDark", "lilac_room": "Floor_WoodLight", "sewing_room": "Floor_WoodLight",
+             "chinese_room": "Floor_RedBrick", "dressing_room": "Floor_WoodDark", "upper_west": "Floor_WoodDark",
+             "picture_gallery": "checker", "east_corridor": "Floor_WoodDark", "guest_bath": "checker",
+             "observatory": "Floor_WoodDark", "wine_catacombs": "Floor_UnevenBrick",
+             "catacomb_steps": "Floor_UnevenBrick", "vault": "Floor_Brick", "ossuary": "Floor_UnevenBrick",
+             "ossuary_steps": "Floor_UnevenBrick", "crypt": "Floor_RedBrick"}
 DECKS = {f: set() for f in G.ORDER}
 FLOOR_CELLS = {f: set() for f in G.ORDER}
 CHIMNEY_ROOMS = ("great_hall", "library", "kitchen", "red_room", "master", "dining")
@@ -1089,6 +1136,12 @@ def build_floors():
             fid, c = best
             put(V + "Prop_Chimney", c[0] * 200.0 + 100.0, c[1] * 200.0 + 100.0, fz(fid), 0.0, scale=(1.3, 1.3, 1.1),
                 folder="StormManor/Roofs/Chimneys", kind="prop")
+
+
+# SPRINT-040: tiled roofs over the new wings' top rooms (the gold room stays flat: the hidden observatory sits on it)
+WING_ROOFS = [("picture_gallery", "y"), ("lilac_room", "y"), ("sewing_room", "x"), ("chinese_room", "x"),
+              ("dressing_room", "y"), ("green_room", "y"), ("rose_room", "y"), ("ivory_room", "y"),
+              ("guest_bath", "x"), ("observatory", "y")]
 
 
 def pitched_roof(rid, ridge_axis):
@@ -1241,6 +1294,8 @@ def bot_spots():
     """One KG_BotSpot at the middle of every walkable room / garden (bots roam the whole manor, every floor)."""
     n = 0
     for r in L["rooms"]:
+        if r.get("secret"):
+            continue            # SPRINT-040: bots never walk into the secret rooms (reached through a passage only)
         cells = [c for c in G.cells_of(r["poly"]) if c not in GRID.holes[r["floor"]] and c not in GRID.stair_cells[r["floor"]]
                  and not GRID.is_void(r["floor"], c)]
         if not cells:
@@ -1278,9 +1333,88 @@ SECRET_LOOK = {"S1": ("Rotating bookcase: pull the red book", "Squeeze out of th
                "S6": ("Crawl in behind the wardrobe", "Crawl back between the walls")}
 
 
+SECRET_LOOK.update({"S7": ("Push the hearth's back plate", "Step out behind the wardrobes"),
+                    "S8": ("Slide the altar slab aside", "Climb the crypt steps"),
+                    "S9": ("Crawl in behind the dresser", "Crawl back between the walls"),
+                    "S10": ("Climb the ladder behind the panel", "Climb down to the gold room")})
+# SPRINT-040: how an undiscovered end looks when examined (E): the seam you noticed
+SECRET_EXAMINE = {"S1": "Examine the red book", "S2": "Examine the dumbwaiter hatch", "S3": "Examine Anselm's portrait",
+                  "S4": "Examine the tomb lid", "S5": "Examine the old well cover", "S6": "Examine the wardrobe's back",
+                  "S7": "Examine the hearth's back plate", "S8": "Examine the altar slab",
+                  "S9": "Examine the dresser's back", "S10": "Examine the panel by the bed"}
+
+
+# (secret, end) -> (mesh, scale, cm behind the end point, yaw offset): what the SPRINT-040 seams hide behind
+SECRET_PROP = {("S7", "a"): ("/Game/KillGodot/Env/Furniture/KG_Interior/StaticMeshes/SM_KG_Hearth", 1.0, 45.0, -90.0),
+               ("S7", "b"): ("/Game/KillGodot/Env/Furniture/KG_Bedroom/StaticMeshes/Bedroom_Wardrobe", 1.0, 40.0, -90.0),
+               ("S8", "a"): (XP + "KKHalloween/StaticMeshes/SM_KG_KKHalloween_shrine_candles", 1.0, 60.0, -90.0),
+               ("S8", "b"): (XP + "KKHalloween/StaticMeshes/SM_KG_KKHalloween_coffin_decorated", 1.0, 60.0, 0.0),
+               ("S9", "a"): (XP + "KKDungeon/StaticMeshes/SM_KG_KKDungeon_shelves", 0.8, 45.0, -90.0),
+               ("S9", "b"): (XP + "KKFurniture/StaticMeshes/SM_KG_KKFurniture_cabinet_medium", 1.0, 45.0, -90.0),
+               ("S10", "a"): (XP + "KFurniture/StaticMeshes/SM_KG_KFurniture_bookcaseClosedDoors", 2.0, 45.0, -90.0),
+               ("S10", "b"): (XP + "KKDungeon/StaticMeshes/SM_KG_KKDungeon_trunk_large_A", 0.7, 50.0, -90.0)}
+
+
+def setp(obj, name, value):
+    """set_editor_property that logs instead of failing the step (SPRINT-040 C++ names)."""
+    try:
+        obj.set_editor_property(name, value)
+        return True
+    except Exception as ex:
+        log(f"setp {obj.get_name() if hasattr(obj, 'get_name') else obj}.{name} FAILED: {ex}")
+        stats.setdefault("setp_failed", []).append(name)
+        return False
+
+
+WHITE_HINTS = (("Firewood", "Wood"), ("Log", "Wood"), ("Bread", "Bread"), ("Rug", "Velvet"), ("Carpet", "Velvet"),
+               ("Cushion", "Velvet"), ("Pillow", "Linen"), ("Sheet", "Linen"), ("Bed", "Linen"), ("Cloth", "Linen"),
+               ("Candle", "Wax"), ("Book", "Leather"), ("Scroll", "Canvas"), ("Paper", "Canvas"), ("Pot", "Terracotta"),
+               ("Vase", "Terracotta"), ("Plant", "Leaf"), ("Leaf", "Leaf"), ("Iron", "Iron"), ("Metal", "Iron"),
+               ("Key", "Brass"), ("Chandelier", "Brass"), ("Lamp", "Brass"), ("Frame", "Gilt"), ("Statue", None),
+               ("Bust", None), ("Angel", None), ("Cobweb", None), ("Bath", None), ("Sink", None), ("Toilet", None))
+_white = {}
+
+
+# The white meshes: an audit of the packed sources (Art/Packed/*.glb, COLOR_0 per mesh; SPRINT-040) found the
+# vertex-coloured kits clean except pieces whose baked colours are all white (1.0) and props the render tours show
+# plain white. In a commandlet has_vertex_colors() reads False for every mesh, so the list is explicit:
+# mesh name -> flat colour. Porcelain (baths, sinks) and cobwebs are white on purpose and stay.
+WHITE_FIX = {"Bedroom_ChestRoundIron": "Wood", "SM_KG_KFurniture_bathroomCabinetDrawer": "Wood"}
+
+
+def is_white(path):
+    name = path.split("/")[-1]
+    verdict = name in WHITE_FIX
+    _white[path] = verdict
+    return verdict
+
+
+def fix_white():
+    """SPRINT-040: give every white-rendering prop a flat colour that fits its name (pack colours fixed)."""
+    fixed = {}
+    for r in B.recs:
+        if r.get("material") or r.get("hidden") or not r["m"].startswith("/Game/"):
+            continue
+        if not is_white(r["m"]):
+            continue
+        name = r["m"].split("/")[-1]
+        pick = WHITE_FIX.get(name) or next((mat for key, mat in WHITE_HINTS if key.lower() in name.lower()), "Wood")
+        if pick and MAT.get(pick):
+            r["material"] = MAT[pick]
+            fixed[name] = pick
+    stats["white_fixed"] = fixed
+    stats["white_meshes"] = sorted(p.split("/")[-1] for p, v in _white.items() if v)
+    log(f"white props recoloured: {len(fixed)} meshes {sorted(fixed)[:20]}")
+
+
 def secrets():
-    """AKGPassage pairs (E at one end: travel to the other, door creak at both ends)."""
+    """AKGSecretPassage pairs (SPRINT-040; AKGPassage before): undiscovered, E examines the seam and opens the pair
+    for everyone; discovered, E travels to the other end."""
     n = 0
+    cls = "/Script/KillGodot.KGSecretPassage"
+    if unreal.load_class(None, cls) is None:
+        log("KGSecretPassage missing: falling back to KGPassage")
+        cls = "/Script/KillGodot.KGPassage"
     for s in L["secrets"]:
         ends = []
         for end in ("a", "b"):
@@ -1294,7 +1428,7 @@ def secrets():
             ends.append((rid, fid, x, y, yaw))
         for k, (rid, fid, x, y, yaw) in enumerate(ends):
             me, other = f"{s['id']}_{'ab'[k]}", f"{s['id']}_{'ab'[1 - k]}"
-            p = spawn_class("/Script/KillGodot.KGPassage", x * M, y * M, fz(fid) + 2.0, yaw, folder="StormManor/Secrets")
+            p = spawn_class(cls, x * M, y * M, fz(fid) + 2.0, yaw, folder="StormManor/Secrets")
             if not p:
                 continue
             p.set_actor_label(f"Secret_{me}_{rid}")
@@ -1307,8 +1441,141 @@ def secrets():
             p.set_editor_property("arrival_yaw", 0.0)
             p.set_editor_property("sound_name", "S_Passage_Ladder" if s["id"] in ("S2", "S5") else "S_Passage_Door")
             p.tags = ["KG_Secret", s["id"]]
+            look = SECRET_PROP.get((s["id"], "ab"[k]))
+            if look and have(look[0]):
+                # the thing the seam hides behind, against the wall behind the end (visual; no collision on the E spot)
+                c_, s_ = math.cos(math.radians(yaw)), math.sin(math.radians(yaw))
+                put(look[0], x * M - c_ * look[2], y * M - s_ * look[2], fz(fid) + 1.0, yaw + look[3],
+                    scale=look[1], folder="StormManor/Secrets", collide=False, kind="prop", room=rid)
+            if cls.endswith("KGSecretPassage"):
+                setp(p, "secret_id", s["id"])
+                setp(p, "secret_kind", s.get("kind", "panel"))
+                setp(p, "discover_prompt", unreal.Text(SECRET_EXAMINE.get(s["id"], "Examine the wall")))
+                setp(p, "discovered", False)
             n += 1
     stats["passages"] = n
+
+
+# =================================================================================================== SPRINT-040
+def _face_in(rid, x, y):
+    """Yaw (deg) from (x, y) m towards the room's middle: the side a wall-mounted thing faces."""
+    x0, y0, x1, y1 = G.rect_of(R[rid]["poly"])
+    cx, cy = (x0 + x1) / 2.0, (y0 + y1) / 2.0
+    dx, dy = cx - x, cy - y
+    # snap to the nearest wall normal
+    return 0.0 if abs(dx) >= abs(dy) and dx > 0 else 180.0 if abs(dx) >= abs(dy) else 90.0 if dy > 0 else -90.0
+
+
+COMP_LOOK = {   # kind -> (mesh, scale, z cm, open offset (local), open rotation (pitch, yaw, roll))
+    "LooseBrick": (XP + "QDungeon/StaticMeshes/SM_KG_QDungeon_Brick", 0.6, 70.0, (28.0, 0.0, 0.0), (0.0, 0.0, 0.0)),
+    "FalseDrawer": (XP + "KFurniture/StaticMeshes/SM_KG_KFurniture_sideTableDrawers", 2.0, 0.0, (35.0, 0.0, 0.0),
+                    (0.0, 0.0, 0.0)),
+    "HollowBook": (XP + "KKFurniture/StaticMeshes/SM_KG_KKFurniture_book_single", 2.0, 95.0, (0.0, 0.0, 6.0),
+                   (0.0, 0.0, 70.0)),
+    "FloorSafe": (XP + "QDungeon/StaticMeshes/SM_KG_QDungeon_Trapdoor", 0.45, 1.0, (0.0, 0.0, 2.0),
+                  (0.0, 0.0, 80.0)),
+    "WallSafe": (XP + "KKFurniture/StaticMeshes/SM_KG_KKFurniture_pictureframe_large_A", 1.0, 140.0, (0.0, 0.0, 0.0),
+                 (0.0, 75.0, 0.0)),
+    "LacquerBox": (XP + "KKDungeon/StaticMeshes/SM_KG_KKDungeon_chest", 0.35, 0.0, (0.0, 0.0, 8.0), (0.0, 0.0, -40.0)),
+    "SewingBox": (XP + "KKDungeon/StaticMeshes/SM_KG_KKDungeon_chest", 0.3, 0.0, (0.0, 0.0, 8.0), (0.0, 0.0, -40.0)),
+}
+
+
+def compartments():
+    """AKGHiddenCompartment: E on the odd brick / drawer / book opens it for everyone; loot or a readable clue."""
+    cls = unreal.load_class(None, "/Script/KillGodot.KGHiddenCompartment")
+    n = 0
+    for c in L.get("compartments", []):
+        if cls is None:
+            log("KGHiddenCompartment missing")
+            break
+        mesh_p, sc, zc, off, rot = COMP_LOOK.get(c["kind"], COMP_LOOK["LooseBrick"])
+        fid = R[c["room"]]["floor"]
+        x, y = c["at"]
+        yaw = _face_in(c["room"], x, y)
+        a = spawn_class("/Script/KillGodot.KGHiddenCompartment", x * M, y * M, fz(fid) + zc, yaw,
+                        folder="StormManor/Secrets/Compartments")
+        if not a:
+            continue
+        a.set_actor_label(f"Compartment_{c['id']}_{c['room']}")
+        a.tags = ["KG_Compartment", c["id"], "KG_Room_" + c["room"]]
+        setp(a, "compartment_id", c["id"])
+        setp(a, "kind", c["kind"])
+        setp(a, "room", c["room"])
+        setp(a, "search_prompt", unreal.Text(c["prompt"]))
+        setp(a, "clue_text", c.get("clue") or "")
+        setp(a, "loot_table", c.get("loot") or "None")
+        setp(a, "lid_open_offset", unreal.Vector(*off))
+        setp(a, "lid_open_rotation", unreal.Rotator(roll=rot[2], pitch=rot[0], yaw=rot[1]))
+        setp(a, "hitbox_extent", unreal.Vector(45.0, 45.0, 45.0))
+        lid = next((cp for cp in a.get_components_by_class(unreal.StaticMeshComponent) if cp.get_name() == "Lid"), None)
+        if lid and have(mesh_p):
+            lid.set_static_mesh(mesh(mesh_p))
+            lid.set_editor_property("relative_scale3d", unreal.Vector(sc, sc, sc))
+            if c["kind"] in ("LooseBrick", "FalseDrawer", "LacquerBox", "SewingBox", "FloorSafe", "HollowBook"):
+                pass
+        n += 1
+    stats["compartments"] = n
+
+
+TRAP_LOOK = {   # effect -> (mesh, scale, z cm of the Visual)
+    "Trapdoor": (XP + "QDungeon/StaticMeshes/SM_KG_QDungeon_Trapdoor", 1.0, 1.5),
+    "FallingObject": (XP + "PPManor/StaticMeshes/SM_KG_PPManor_Light_Chandelier_q3k8I8YYX9", 2.0, 180.0),
+    "Witness": (XP + "PPManor/StaticMeshes/SM_KG_PPManor_Painting_rsZqX75a8x", 1.2, 150.0),
+}
+
+
+def traps():
+    """AKGTrap (the generic SPRINT-040 framework): arm -> telegraph -> trigger -> cooldown, from the layout's data."""
+    cls = unreal.load_class(None, "/Script/KillGodot.KGTrap")
+    if cls is None:
+        log("KGTrap missing")
+        return
+    n = 0
+    for t in L.get("traps", []):
+        fid = R[t["room"]]["floor"]
+        x, y = t["at"]
+        yaw = _face_in(t["room"], x, y) if t["effect"] == "Witness" else 0.0
+        a = spawn_class("/Script/KillGodot.KGTrap", x * M, y * M, fz(fid) + 2.0, yaw, folder="StormManor/Traps")
+        if not a:
+            continue
+        a.set_actor_label(f"Trap_{t['id']}_{t['effect']}_{t['room']}")
+        a.tags = ["KG_Trap", t["id"], "KG_Room_" + t["room"]]
+        setp(a, "trap_id", t["id"])
+        setp(a, "room", t["room"])
+        eff = getattr(unreal.KGTrapEffect, {"FallingObject": "FALLING_OBJECT", "LockDoors": "LOCK_DOORS",
+                                            "LightsOut": "LIGHTS_OUT"}.get(t["effect"], t["effect"].upper()), None)
+        if eff is not None:
+            setp(a, "effect", eff)
+        else:
+            log(f"trap {t['id']}: no enum value for {t['effect']}")
+        try:
+            d = a.get_editor_property("trap_def")
+            for k, v in (("kind", t["effect"]), ("arm_policy", t["policy"]), ("passive", bool(t["passive"])),
+                         ("telegraph_secs", t["telegraph_s"]), ("active_secs", t["active_s"]),
+                         ("cooldown_secs", t["cooldown_s"]), ("damage", t["damage"]),
+                         ("effect_radius_cm", t["radius_cm"])):
+                try:
+                    d.set_editor_property(k, v)
+                except Exception as ex:
+                    log(f"trap_def.{k}: {ex}")
+            a.set_editor_property("trap_def", d)
+        except Exception as ex:
+            log(f"trap {t['id']} trap_def FAILED: {ex}")
+        zx, zy = t["zone"]
+        setp(a, "zone_extent", unreal.Vector(zx * M, zy * M, 110.0))
+        setp(a, "zone_offset", unreal.Vector(0.0, 0.0, 110.0))
+        if t.get("target"):
+            tfid = R[t["target_room"]]["floor"]
+            setp(a, "teleport_target", unreal.Vector(t["target"][0] * M, t["target"][1] * M, fz(tfid) + 100.0))
+        look = TRAP_LOOK.get(t["effect"])
+        vis = next((cp for cp in a.get_components_by_class(unreal.StaticMeshComponent) if cp.get_name() == "Visual"), None)
+        if vis and look and have(look[0]):
+            vis.set_static_mesh(mesh(look[0]))
+            vis.set_editor_property("relative_scale3d", unreal.Vector(look[1], look[1], look[1]))
+            vis.set_editor_property("relative_location", unreal.Vector(0.0, 0.0, look[2]))
+        n += 1
+    stats["traps"] = n
 
 
 PANELS = [("FileReports", "File Pozzo's letters", "study", (12.0, -22.0)),
@@ -1340,8 +1607,8 @@ def panel_stations():
 
 
 def navigation():
-    lo = (-62.0, -34.0, (fz("C") - 250.0) / 100.0)
-    hi = (62.0, 58.0, (fz("F3") + 400.0) / 100.0)
+    lo = (-64.0, -52.0, (fz(G.ORDER[0]) - 250.0) / 100.0)      # SPRINT-040: north block, wings, lower vaults
+    hi = (64.0, 58.0, (fz("F3") + 400.0) / 100.0)
     c = [(lo[i] + hi[i]) / 2.0 * M for i in range(3)]
     e = [(hi[i] - lo[i]) / 2.0 for i in range(3)]
     vol = _real.spawn_actor_from_class(unreal.NavMeshBoundsVolume, unreal.Vector(*c))
@@ -1451,6 +1718,8 @@ def precheck():
         for s, x0, y0, x1, y1 in stairs:
             if fid not in (fid_of_z(s["z0"]), fid_of_z(s["z1"])):
                 continue
+            if r["room"] not in (s["lower"], s["upper"]):
+                continue            # SPRINT-040: a prop across the wall from a stair does not block it
             if x0 - rad * 0.7 < r["x"] < x1 + rad * 0.7 and y0 - rad * 0.7 < r["y"] < y1 + rad * 0.7 and fid == fid_of_z(s["z0"]):
                 bad.append({"why": "stair", "m": r["m"].split("/")[-1], "at": [round(r["x"]), round(r["y"]), round(r["z"])],
                             "stair": s["id"]})
@@ -1465,7 +1734,7 @@ MOUNTED = ("Banner", "Lantern_Wall", "Peg_Rack", "Shelf_Simple", "Shelf_Arch", "
            "Planks", "Chain_Coil", "Axe_", "Sword_", "Cannon_Ball", "WellMouth", "Rowboat",
            # external kits hung on walls / from ceilings by kg_sm_dress (ext layer)
            "pictureframe_large", "pictureframe_medium", "pictureframe_small", "Cobweb", "_banner_", "torch_mounted",
-           "bathroomMirror")
+           "bathroomMirror", "sword_shield", "keyring_hanging", "Painting_", "banner_")
 
 
 def dump_props():
@@ -1545,15 +1814,19 @@ def build():
     step("island", island_and_sea)
     step("floors", build_floors)
     step("walls", build_walls)
-    step("roofs", lambda: [pitched_roof("attic", "x"), pitched_roof("clock_room", "x"), pitched_roof("boathouse", "x")])
+    step("roofs", lambda: [pitched_roof("attic", "x"), pitched_roof("clock_room", "x"), pitched_roof("boathouse", "x")]
+         + [pitched_roof(rid, ax) for rid, ax in WING_ROOFS])
     step("stairs", build_stairs)
     step("dress", dress)
     step("secrets", secrets)
+    step("compartments", compartments)
+    step("traps", traps)
     step("panels", panel_stations)
     step("meeting", meeting_and_starts)
     step("botspots", bot_spots)
     step("sound", soundscape)
     step("capture_cam", capture_camera)
+    step("white", fix_white)
     step("flush", B.flush)
     for r in B.recs:
         if r.get("bounds_scale"):

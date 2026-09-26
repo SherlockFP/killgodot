@@ -539,12 +539,14 @@ TArray<FName> FKGWorldChoreRules::Deal(const TArray<FName>& Pool, const FKGWorld
 {
 	TArray<FName> World;
 	TArray<FName> Panel;
+	bool bSkipped = false;   // SPRINT-040 hook
 	for (const FName Id : Pool)
 	{
 		if (const FKGWorldChoreDef* Def = Catalog.FindChore(Id))
 		{
 			if (!Def->SecretId.IsNone() || (DealFilter && !DealFilter(*Def)))
 			{
+				bSkipped = true;
 				continue;   // SPRINT-040 hook: secret chores are given, never dealt; the manor filter may veto
 			}
 			if (!bBot || (Def->bBots && !Def->NeedsClimb()))
@@ -559,8 +561,8 @@ TArray<FName> FKGWorldChoreRules::Deal(const TArray<FName>& Pool, const FKGWorld
 	}
 	if (World.Num() == 0)
 	{
-		// No world chores on this level (greybox, v1): exactly the SPRINT-014 deal.
-		TArray<FName> Mine = Pool;
+		// No world chores on this level (greybox, v1): exactly the SPRINT-014 deal (minus SPRINT-040 skipped chores).
+		TArray<FName> Mine = bSkipped ? Panel : Pool;
 		Rng.Shuffle(Mine);
 		Mine.SetNum(FMath::Min(Count, Mine.Num()));
 		return Mine;

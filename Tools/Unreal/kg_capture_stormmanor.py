@@ -25,13 +25,15 @@ W, H = 1600, 900
 WARMUP_S = float(os.environ.get("KG_WARMUP", "16"))
 PER_SHOT_S = 2.5
 ROOT = "D:/Kill Godot"
-Z0 = 5.0         # m (stormmanor_geo.Z0)
+Z0 = 8.0         # m (stormmanor_geo.Z0; SPRINT-040 raised it from 5 m for the second basement)
+ZSHIFT = Z0 - 5.0   # the SHOTS table below keeps the SPRINT-018 world heights (Z0 = 5); aim() adds this
+FLOOR_REL = {"C2": -6, "C": -3, "F0": 0, "F1": 3, "F2": 6, "F3": 9}
 
 # name: (eye (x, y, z) m, target (x, y, z) m, fov); z relative to the world (floor tops: C 2, F0 5, F1 8, F2 11, F3 14)
 SHOTS = {
     "aerial_se": ((62.0, 78.0, 44.0), (0.0, 0.0, 6.0), 55.0),
     "aerial_nw": ((-70.0, -60.0, 40.0), (0.0, 5.0, 6.0), 55.0),
-    "top": ("ortho", (-2.0, 12.0), 125.0),
+    "top": ("ortho", (0.0, 3.0), 185.0),
     "courtyard": ((24.0, 31.0, 6.8), (0.0, 8.0, 8.0), 75.0),
     "great_hall": ((5.5, -1.0, 7.2), (-1.0, -15.0, 6.0), 80.0),
     "great_hall_gallery": ((-8.0, -18.5, 9.8), (2.0, -6.0, 5.5), 80.0),
@@ -59,6 +61,50 @@ SHOTS = {
     "graveyard": ((-35.5, 6.0, 7.2), (-48.0, 22.0, 6.0), 75.0),
     "tower_top": ((24.0, -28.0, 16.5), (30.0, -20.0, 14.5), 70.0),
     "sea_front": ((0.0, 95.0, 9.0), (0.0, 20.0, 9.0), 55.0),
+    # ---- SPRINT-040 (same height convention: floor tops C2 -1, C 2, F0 5, F1 8, F2 11)
+    "aerial_ne": ((72.0, -78.0, 46.0), (0.0, -14.0, 6.0), 55.0),
+    "aerial_w": ((-92.0, -10.0, 34.0), (-10.0, -20.0, 6.0), 55.0),
+    "staircase_hall": ((0.0, -25.2, 7.2), (0.0, -38.0, 7.4), 80.0),
+    "long_gallery": ((-33.0, -42.0, 6.6), (20.0, -42.0, 6.3), 70.0),
+    "music_room": ((-25.0, -25.0, 6.9), (-31.0, -37.0, 5.6), 80.0),
+    "green_salon": ((-17.0, -25.0, 6.9), (-23.0, -39.0, 5.6), 80.0),
+    "blue_salon": ((-9.0, -25.0, 6.9), (-15.0, -39.0, 5.6), 80.0),
+    "yellow_salon": ((9.0, -25.0, 6.9), (15.0, -39.0, 5.6), 80.0),
+    "card_room": ((23.2, -25.0, 6.9), (17.0, -39.0, 5.6), 80.0),
+    "trophy_room": ((25.0, -25.0, 6.9), (33.0, -39.0, 5.6), 80.0),
+    "servants_hall": ((-44.8, -34.8, 6.9), (-53.0, -43.0, 5.6), 80.0),
+    "housekeeper": ((-44.8, -24.8, 6.9), (-53.0, -33.0, 5.6), 80.0),
+    "boiler_room": ((-38.8, -24.8, 6.9), (-43.0, -33.0, 5.6), 80.0),
+    "east_hall": ((36.0, -1.0, 6.7), (36.0, -43.0, 6.2), 70.0),
+    "smoking_room": ((45.2, -34.8, 6.9), (39.0, -43.0, 5.6), 80.0),
+    "gun_room": ((46.8, -34.8, 6.9), (53.0, -43.0, 5.6), 80.0),
+    "map_room": ((45.2, -24.8, 6.9), (39.0, -33.0, 5.6), 80.0),
+    "games_room": ((46.8, -24.8, 6.9), (53.0, -33.0, 5.6), 80.0),
+    "orangery": ((38.8, -10.8, 6.9), (53.0, -23.0, 5.6), 80.0),
+    "morning_room": ((38.8, -0.8, 6.9), (53.0, -9.0, 5.6), 80.0),
+    "grand_landing": ((0.0, -25.2, 10.2), (0.0, -39.0, 8.8), 80.0),
+    "picture_gallery": ((-38.8, -24.8, 9.9), (-53.0, -43.0, 8.6), 80.0),
+    "lilac_room": ((-24.8, -24.8, 9.9), (-33.0, -39.0, 8.6), 80.0),
+    "sewing_room": ((-8.8, -24.8, 9.9), (-23.0, -39.0, 8.6), 80.0),
+    "chinese_room": ((8.8, -24.8, 9.9), (23.0, -39.0, 8.6), 80.0),
+    "dressing_room": ((24.8, -24.8, 9.9), (33.0, -39.0, 8.6), 80.0),
+    "gold_room": ((46.8, -34.8, 9.9), (53.0, -43.0, 8.6), 80.0),
+    "ivory_room": ((46.8, -24.8, 9.9), (53.0, -33.0, 8.6), 80.0),
+    "guest_bath": ((38.8, -16.8, 9.9), (53.0, -23.0, 8.6), 80.0),
+    "wine_catacombs": ((-22.8, -0.8, 0.7), (-33.0, -15.0, -0.2), 80.0),
+    "vault": ((-6.8, -4.8, 0.7), (-20.0, -15.0, -0.2), 80.0),
+    "ossuary": ((5.2, -4.8, 0.7), (-5.0, -15.0, -0.2), 80.0),
+    # the secrets (S7 fireplace, S9 crawlway, S8 crypt, S10 observatory)
+    "secret_fireplace": ((21.0, -30.5, 6.4), (16.6, -27.0, 5.8), 70.0),
+    "secret_crawlway": ((-47.5, -40.0, 6.5), (-53.4, -36.0, 5.8), 70.0),
+    "secret_crypt": ((10.8, -10.8, 0.8), (21.0, -19.0, -0.2), 80.0),
+    "secret_observatory": ((46.8, -36.8, 12.7), (53.0, -43.0, 11.8), 80.0),
+    # the traps (a 4th item = console command run before the shot + seconds to wait)
+    "trap_trapdoor": ((-20.5, -14.0, 7.2), (-20.5, -8.5, 5.0), 70.0),
+    "trap_chandelier": ((4.0, -26.0, 6.2), (0.0, -35.0, 6.8), 75.0),
+    "trap_chandelier_fall": ((4.0, -26.0, 6.2), (0.0, -35.0, 5.6), 75.0, ("kg.Trap.Fire T4", 3.6)),
+    "trap_portrait": ((0.0, -40.4, 6.7), (0.0, -43.6, 6.5), 70.0),
+    "trap_ballroom": ((14.0, 4.0, 6.6), (24.0, -2.0, 7.2), 75.0),
 }
 
 
@@ -122,6 +168,8 @@ class Session:
                                                      unreal.Rotator(roll=0.0, pitch=-90.0, yaw=-90.0), False, False)
         else:
             eye, tgt, fov = spec[:3]
+            eye = (eye[0], eye[1], eye[2] + ZSHIFT)
+            tgt = (tgt[0], tgt[1], tgt[2] + ZSHIFT)
             cc.set_editor_property("projection_mode", unreal.CameraProjectionMode.PERSPECTIVE)
             cc.set_editor_property("field_of_view", fov)
             self.cam.set_actor_location_and_rotation(unreal.Vector(eye[0] * 100, eye[1] * 100, eye[2] * 100),
@@ -165,6 +213,11 @@ class Session:
                 self.aim(self.cur)
                 self.state = "shoot"
                 self.next_t = now + 1.6
+                pre = SHOTS[self.cur][3] if len(SHOTS[self.cur]) > 3 else None
+                if pre:         # SPRINT-040: e.g. fire a trap, then shoot while it acts
+                    unreal.SystemLibrary.execute_console_command(self.world, pre[0])
+                    log(f"pre {self.cur}: {pre[0]}")
+                    self.next_t = now + pre[1]
             elif self.state == "shoot":
                 unreal.SystemLibrary.execute_console_command(self.world, f"HighResShot {W}x{H} filename=SM_{self.cur}")
                 log(f"shot {self.cur}")
@@ -191,7 +244,12 @@ class Session:
         for a in unreal.GameplayStatics.get_all_actors_with_tag(w, "KG_BotSpot"):
             p = a.get_actor_location()
             targets.append(("room " + a.get_actor_label()[8:] if hasattr(a, "get_actor_label") else "room", p))
+        lay = json.load(open(f"{ROOT}/Tools/Level/stormmanor_layout.json", encoding="utf-8"))
+        secret_rooms = {r["id"] for r in lay["rooms"] if r.get("secret")}
+        secret_ends = {f"{s['id']}_{k}" for s in lay["secrets"] for k in ("a", "b") if s[k] in secret_rooms}
         for an in L["anchors"]:
+            if an.get("room") in secret_rooms:
+                continue        # SPRINT-040: the crypt / observatory are reached through their passage only
             st = an.get("stand")
             if st:
                 targets.append(("chore " + an["id"] + " (stand)", unreal.Vector(st[0] * 100, st[1] * 100, st[2] * 100 + 60)))
@@ -201,6 +259,8 @@ class Session:
             targets.append(("start " + a.get_name(), a.get_actor_location()))
         pcls = unreal.load_class(None, "/Script/KillGodot.KGPassage")
         for a in unreal.GameplayStatics.get_all_actors_of_class(w, pcls):
+            if str(a.get_editor_property("passage_id")) in secret_ends:
+                continue
             p = a.get_actor_location()
             f = a.get_actor_forward_vector()
             targets.append(("secret " + str(a.get_editor_property("passage_id")),
@@ -209,7 +269,7 @@ class Session:
             for sgn in (-1, 1):
                 targets.append((f"door {d['id']} {'+' if sgn > 0 else '-'}",
                                 unreal.Vector(d["x"] + d["nx"] * sgn * 90.0, d["y"] + d["ny"] * sgn * 90.0,
-                                              (Z0 + {"C": -3, "F0": 0, "F1": 3, "F2": 6, "F3": 9}[d["fid"]]) * 100 + 60)))
+                                              (Z0 + FLOOR_REL[d["fid"]]) * 100 + 60)))
         start = unreal.Vector(-400.0, -900.0, Z0 * 100.0 + 60.0)
         res, bad = {}, []
         for name, p in targets:

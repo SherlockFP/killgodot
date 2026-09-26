@@ -46,6 +46,19 @@ ITEMS = {
     "Pot": (DV + "Planter_Pot", 0.55, 16, {"speed": 0.7, "label": "lemon pot"}),
     "Parcel": (P + "Crate_Wooden", 0.62, 32, {"speed": 0.55, "two_person": True, "label": "G. parcel"}),
     "Taper": (P + "Candle_2", [1.3, 1.3, 3.6], 1, {"flame": True, "label": "lit taper"}),
+    # SPRINT-040
+    "Silver": (P + "Table_Plate", [1.6, 1.6, 3.0], 5, {"label": "silver service", "tint": [0.80, 0.82, 0.86]}),
+    "Fork": (P + "CandleStick", [0.6, 0.6, 0.8], 1, {"label": "tuning fork", "tint": [0.78, 0.80, 0.84]}),
+    "Seed": (P + "Bag", 0.45, 4, {"label": "bag of bird seed", "tint": [0.85, 0.72, 0.45]}),
+    "Coal": (P + "Bucket_Metal", 1.0, 12, {"speed": 0.85, "label": "coal scuttle", "tint": [0.18, 0.17, 0.16]}),
+    "Chessmen": (P + "Crate_Wooden", 0.22, 2, {"label": "box of chessmen", "tint": [0.35, 0.22, 0.12]}),
+    "TeaTray": (K + "Plate", [2.0, 2.0, 2.0], 3, {"count": 2, "label": "tea tray", "tint": [0.90, 0.86, 0.78]}),
+    "Linen": (P + "Bag", 0.6, 5, {"count": 3, "label": "clean linen", "tint": [0.96, 0.95, 0.90]}),
+    "Keys": (P + "Pouch_Large", 0.9, 1, {"count": 3, "label": "the housekeeper's keys", "tint": [0.75, 0.62, 0.25]}),
+    "Relic": (P + "Vase_4", 0.8, 3, {"speed": 0.9, "label": "the crypt relic", "tint": [0.85, 0.70, 0.30]}),
+    "Chart": (P + "Scroll_1", 1.4, 1, {"label": "star chart"}),
+    "Ledger": (P + "Book_5", 1.3, 1, {"label": "smugglers' ledger"}),
+    "RedBook": (P + "Book_7", 1.3, 1, {"label": "the red book", "tint": [0.70, 0.12, 0.10]}),
 }
 
 # anchor id -> (engine kind, English label, extra)
@@ -106,6 +119,55 @@ ANCHORS = {
     "grave_3": ("Lamp", "grave lantern 3", {"sabotage": "snuff"}),
     "grave_4": ("Lamp", "grave lantern 4", {"sabotage": "snuff"}),
     "fuse_coil": ("SparkCoil", "the spark coil", {}),
+    # SPRINT-040
+    "clock_long": ("Winder", "the long gallery's grand clock", {}),
+    "clock_stair": ("Winder", "the staircase hall clock", {}),
+    "clock_trophy": ("Winder", "the trophy room clock", {}),
+    "silver_chest": ("CrateStack", "the silver chest", {}),
+    "silver_bench": ("Bench", "the polishing bench", {}),
+    "piano": ("Piano", "the grand piano", {}),
+    "music_cabinet": ("Satchel", "the music cabinet", {}),
+    "aviary": ("Aviary", "the aviary", {}),
+    "seed_sack": ("Satchel", "the seed sack", {}),
+    "coal_heap": ("ChopBlock", "the coal heap", {}),
+    "boiler": ("Butt", "the boiler", {"sabotage": "poison"}),
+    "chess_box": ("Satchel", "the box of chessmen", {}),
+    "chessboard": ("Table", "the chess table", {}),
+    "rack_1": ("WineRack", "catacomb niche 1", {}),
+    "rack_2": ("WineRack", "catacomb niche 2", {}),
+    "rack_3": ("WineRack", "catacomb niche 3", {}),
+    "chapel_cand_w": ("Lamp", "the west candelabra", {"sabotage": "snuff"}),
+    "chapel_cand_e": ("Lamp", "the east candelabra", {"sabotage": "snuff"}),
+    "portrait_1": ("Frame", "a dusty portrait", {}),
+    "portrait_2": ("Frame", "a dusty portrait", {}),
+    "portrait_3": ("Frame", "a dusty painting", {}),
+    "win_green": ("Shutter", "the Green Room window", {}),
+    "win_gold": ("Shutter", "the Gold Room window", {}),
+    "win_ivory": ("Shutter", "the Ivory Room window", {}),
+    "tea_green": ("Table", "the green salon's tea table", {}),
+    "tea_yellow": ("Table", "the yellow salon's tea table", {}),
+    "linen_press": ("BreadRack", "the linen press", {}),
+    "bed_green": ("Door", "the Green Room bed", {}),
+    "bed_rose": ("Door", "the Rose Room bed", {}),
+    "bed_lilac": ("Door", "the Lilac Room bed", {}),
+    "bath_e_tub": ("Butt", "the guest bathtub", {}),
+    "vase_chinese": ("Pots", "the Chinese vase", {}),
+    "hall_trophies": ("Frame", "the hunting trophies", {}),
+    "housekeeper_keys": ("Satchel", "the key board", {}),
+    "servants_table": ("Table", "the servants' table", {}),
+    "gun_bench": ("Door", "the gun cabinet", {}),
+    "smoking_humidor": ("Door", "the humidor cabinet", {}),
+    "morning_table": ("Door", "the morning room sideboard", {}),
+    "dressing_mirror": ("Frame", "the long mirror", {}),
+    "vault_ledger": ("Shelf", "the deed shelves", {}),
+    "ossuary_niche": ("Shelf", "the skull niche", {}),
+    "crypt_relic": ("Relic", "the reliquary in the crypt", {}),
+    "chapel_reliquary": ("Relic", "the empty reliquary", {}),
+    "obs_scope": ("Scope", "the brass telescope", {}),
+    "map_table": ("Table", "the map table", {}),
+    "smuggler_ledger": ("Book", "the false wine rack", {}),
+    "study_safe": ("Safe", "Pozzo's safe", {}),
+    "red_book": ("Book", "the red book's shelf", {}),
 }
 
 # chore id -> (title, blurb, bots, replaces, [(label, effect, cue)] per step)
@@ -175,6 +237,69 @@ CHORES = {
                     [("Take a stack of china in the pantry", "", "Thud"),
                      ("Lay it on the banquet table", "stack", "Thud")]),
 }
+CHORES.update({
+    # SPRINT-040 manor-only chores
+    "WindTheClocks": ("Wind the grand clocks", "Three grand clocks, all stopped at the same minute: wind them, any order.",
+                      True, [], [("Wind the three grand clocks", "fx:ClockChime", "Crank")]),
+    "PolishTheSilver": ("Polish the silver", "The silver service from the silver room, polished and laid out.", True, [],
+                        [("Take the silver service in the silver room", "", "Thud"),
+                         ("Polish it and lay it on $dst", "stack", "Scrape")]),
+    "TuneThePiano": ("Tune the piano", "The tuning fork from the music cabinet, then tune the grand piano.", True, [],
+                     [("Take the tuning fork from the music cabinet", "", "Pluck"),
+                      ("Tune the grand piano in the music room", "", "Pluck")]),
+    "FeedTheAviary": ("Feed the aviary", "Bird seed from the greenhouse for the orangery's aviary.", True, [],
+                      [("Take a bag of seed in the greenhouse", "", "Thud"),
+                       ("Feed the birds in the orangery aviary", "stack", "Pour")]),
+    "StokeTheBoiler": ("Stoke the boiler", "A scuttle of coal from the yard into the west wing boiler.", True, [],
+                       [("Fill a coal scuttle at the yard heap", "", "Scrape"),
+                        ("Stoke the boiler in the boiler room", "fx:ChimneySmoke", "Thud")]),
+    "SetTheChessboard": ("Set the chessboard", "The chessmen from the card room onto the games room board.", True, [],
+                         [("Take the box of chessmen in the card room", "", "Thud"),
+                          ("Set up the board in the games room", "stack", "Knock")]),
+    "SortTheWine": ("Sort the wine", "Three catacomb niches of old vintages, sorted by year.", True, [],
+                    [("Sort the three catacomb niches", "", "Thud")]),
+    "LightTheChapel": ("Light the chapel", "A lit taper from the candle box for the chapel's two candelabras.", True, [],
+                       [("Take a lit taper from the chapel candle box", "", "Flame"),
+                        ("Light both candelabras", "light", "Flame")]),
+    "DustThePortraits": ("Dust the portraits", "Three dusty portraits in the galleries.", True, [],
+                         [("Dust the three portraits", "", "Brush")]),
+    "AirTheGuestRooms": ("Air the guest rooms", "Open, air and shut three windows in the east guest wing.", True, [],
+                         [("Air the three guest-room windows", "stack", "Thud")]),
+    "MakeTheBeds": ("Make the beds", "Clean linen from the sewing room for three guest beds.", True, [],
+                    [("Take the clean linen from the linen press", "", "Thud"),
+                     ("Make each marked bed", "stack", "Brush")]),
+    "HotWater": ("Hot water", "A bucket of hot water from the boiler to the guest bath - walk, don't run.", True, [],
+                 [("Draw a bucket of hot water at the boiler", "", "Pour"),
+                  ("Pour it into the guest bathtub - walk, don't run!", "water", "Pour")]),
+    "TheDeedCount": ("Count the deeds", "Count the deeds in the strong vault, then file the tally in the ossuary.", True,
+                     [], [("Count the deeds in the vault", "", "Paper"),
+                          ("File the tally in the skull niche", "", "Paper")]),
+    "KeyRound": ("The key round", "The housekeeper's keys: lock three cabinets in the east wing.", True, [],
+                 [("Take the keys from the housekeeper's board", "", "Knot"),
+                  ("Lock each marked cabinet", "stack", "Knock")]),
+    "DustTheChina": ("Dust the china", "The Chinese vase, the long mirror and the trophies.", True, [],
+                     [("Dust the vase, the mirror and the trophies", "", "Brush")]),
+    "AfternoonTea": ("Afternoon tea", "A tea tray from the servery through the salons - it rattles if you run.", True, [],
+                     [("Take the tea tray at the servery hatch", "", "Thud"),
+                      ("Leave tea in the green and the yellow salons", "stack", "Knock")]),
+    # SPRINT-040 secret chores (never dealt: given to whoever discovers the secret)
+    "CryptRelic": ("The crypt relic", "Found in the secret crypt: carry the relic up to the chapel's empty reliquary. "
+                   "Reward: the dumbwaiter shortcut opens for everyone.", False, [],
+                   [("Take the relic in the crypt", "", "Thud"),
+                    ("Set it in the chapel's empty reliquary", "stack", "Thud")]),
+    "StarChart": ("The star chart", "Copy the storm stars at the hidden telescope and leave the chart in the map room. "
+                  "Reward: a clue in the smoking room's wall safe.", False, [],
+                  [("Copy the stars at the telescope", "", "Paper"),
+                   ("Leave the chart on the map table", "stack", "Paper")]),
+    "SmugglersLedger": ("The smugglers' ledger", "Behind the false wine rack: a ledger for Pozzo's safe. Reward: the "
+                        "fireplace passage opens for everyone.", False, [],
+                        [("Take the ledger behind the false rack", "", "Paper"),
+                         ("Lock it in Pozzo's safe in the study", "stack", "Knock")]),
+    "LibraryCipher": ("The red book's cipher", "The red book that turns the bookcase holds a cipher: try it on the "
+                      "study safe. Reward: the vault's floor safe opens.", False, [],
+                      [("Take the red book", "", "Paper"),
+                       ("Try the cipher on Pozzo's safe", "stack", "Knock")]),
+})
 
 
 def item_def(name):
@@ -230,13 +355,17 @@ def main():
             ch["replaces"] = replaces
         if c.get("variants"):
             ch["variants"] = c["variants"]
+        # SPRINT-040: wing gates (min_players) and secret chores + their rewards (Source/KillGodot/Manor)
+        for k in ("secret", "reward_secret", "reward_compartment", "min_players"):
+            if c.get(k):
+                ch[k] = c[k]
         chores.append(ch)
     items = {k: item_def(k) for k in ITEMS}
     meet = L["meeting"]["at"]
     D = {
         "_doc": "SPRINT-018 world chores for Storm Manor (Docs/Level/StormManor_Plan.md section 6). GENERATED by "
                 "Tools/Level/gen_stormmanor_chores.py from Tools/Level/stormmanor_layout.json - edit the generator, not "
-                "this file. Same format as morrowmere_world_chores.json: metres, UE frame, z = floor tops (Z0 = +5 m).",
+                "this file. Same format as morrowmere_world_chores.json: metres, UE frame, z = floor tops (Z0 = +8 m since SPRINT-040).",
         "map": "L_StormManor",
         "walk_speed": 3.2,
         "climb_speed": 2.6,

@@ -9849,18 +9849,7 @@
   "sakura_garden": "sakura_walk"
  },
  "_district_hubs_doc": "validate_layout checks two edge-disjoint routes from the square to the middle of each listed street; Lighthouse Point is a deliberate single spur.",
- "nav_bounds": {
-  "min": [
-   -120.0,
-   -120.0,
-   -4.0
-  ],
-  "max": [
-   120.0,
-   112.0,
-   45.0
-  ]
- },
+ "nav_bounds": {"min": [-182.0, -182.0, -4.0], "max": [182.0, 112.0, 70.0]},
  "boats": [
   [
    21.95,

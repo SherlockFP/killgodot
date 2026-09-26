@@ -62,3 +62,17 @@ automatic: it should use strafe logic."
   stamina / hop-streak / `TimeSinceJumpPressed` into a custom `FSavedMove_Character` and charge hops inside the CMC.
 - **Open (acceptance 2, tuning):** the good strafe reaches 1138 uu/s = 1.96x sprint against the "about 1.35x" soft cap;
   the taper (floor 0.08) only bites near 1.9x cap. Proposal: a steeper taper or a hard ceiling at ~1.5x cap.
+
+### Stabilisation result (2026-09-26, second pass)
+- Predicted state finished: stamina (sprint drain, jump + chain-hop charges), `HopStreak` and `TimeSinceJumpPressed`
+  change only inside simulated moves (`UKGCharacterMovement::UpdateCharacterStateBeforeMovement` / `DoJump` / the
+  landing hook); `FKGSavedMove` snapshots them per move (restored on combine), sprint travels as `FLAG_Custom_0`, and
+  corrections carry the server's values (`FKGMoveResponseDataContainer`), so replays never charge twice.
+  `AKGCharacter::Tick` only feeds context (blade, carry, rod, chore) and mirrors `HopCounter` for the viewmodel kick.
+- Smoke lane: good phase holds sprint for its first hop (6.0-6.9 s) so the chain runs dry inside the lane and the
+  exhaustion gate is exercised under the network; the CSV line now also logs stamina and the predicted streak.
+- `kg_move_smoke.ps1` (100 ms ping, 120 fps): **0 corrections** (settle 0 / bad 0 / good 0; was 15), 0 saved-move
+  overflows, 0 server position errors.
+- Speeds (`Docs/Level/SPRINT-026_speed_curve.png`): bad strafe 320 uu/s; good strafe passes the 783 soft cap at 7.0 s
+  and holds 840-870 uu/s = **1.45-1.5x sprint** (was 1138 = 1.96x). Chain charges 100 -> 84 -> 67 -> 53 -> 36 -> 19;
+  the 5th chain hop is unaffordable at 10.25 s -> exhausted, streak 0, speed drops to 793 and no longer grows.

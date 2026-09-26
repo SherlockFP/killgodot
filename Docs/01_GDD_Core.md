@@ -97,6 +97,9 @@ zıt A/D) gerektirsin, ve katiller (Sabırsız) bu sayede herkesi sonsuza dek ge
   Neden: SPRINT-026'nın ilk ölçümünde iyi strafe 1138 uu/s'ye (koşunun 1.96 katı) çıktı — bir katil herkesten
   kaçabilir, herkese yetişebilirdi. Kalıcı hız artık **1.35–1.5×** bandında: iyi strafe'çi bir koşucudan ~%35–50 hızlı
   ama kısa süreli (stamina, aşağıda), sonsuza dek değil.
+  Ölçüm (2026-09-26, `kg_move_smoke.ps1`, 100 ms ping): iyi strafe 1 sn'de 783'ü geçip 840–870 uu/s'de
+  (koşunun **1.45–1.5 katı**) kalıyor; 4 zincirden sonra stamina bitince 793 uu/s'ye düşüp artık kazanmıyor. Ağ
+  düzeltmesi: **0** (önceden 15).
 - **Bağlama göre ceza/kapama (`AKGCharacter::Tick` → `HopGainScale` / `bAirStrafeDisabled`; tükenme hareket
   simülasyonunun içinde):**
   | Bağlam | Etki | Efektif tavan |

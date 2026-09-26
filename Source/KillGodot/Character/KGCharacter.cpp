@@ -1681,6 +1681,10 @@ void AKGCharacter::TickMoveSmoke(float DeltaSeconds)
 	const TArray<FStep> Steps = {
 		{1.0f, [&]() { JumpStart(); }},         // the one and only press of the bad phase
 		{1.15f, [&]() { JumpEnd(); }},          // release: bad phase never presses again, so it cannot auto-chain
+		// Sprint held through the first good-phase hop: exercises the predicted sprint flag (FLAG_Custom_0) and drains
+		// ~16 stamina, so the chain runs dry (exhaustion blocks the 5th chain hop) inside the lane, under the network.
+		{6.0f, [&]() { StartSprint(); }},
+		{6.9f, [&]() { StopSprint(); }},
 		{11.0f, [&]() { JumpEnd(); }},
 		{11.2f, [&]()
 		{
@@ -1697,8 +1701,11 @@ void AKGCharacter::TickMoveSmoke(float DeltaSeconds)
 
 	if (T >= 1.0f && T < 11.0f)
 	{
-		UE_LOG(LogKillGodot, Log, TEXT("KG_MOVE_CSV,%.3f,%s,%.1f"), T, bGoodPhase ? TEXT("good_strafe") : bBadPhase ? TEXT("bad_strafe") : TEXT("settle"),
-		       GetHorizontalSpeed());
+		// Extra columns (stamina, predicted hop streak) are ignored by kg_move_curve.py's speed regex; they show the
+		// predicted chain-hop charges in the raw log.
+		const UKGCharacterMovement* KGMove = Cast<UKGCharacterMovement>(GetCharacterMovement());
+		UE_LOG(LogKillGodot, Log, TEXT("KG_MOVE_CSV,%.3f,%s,%.1f,%.1f,%d"), T, bGoodPhase ? TEXT("good_strafe") : bBadPhase ? TEXT("bad_strafe") : TEXT("settle"),
+		       GetHorizontalSpeed(), Stamina.Current, KGMove ? KGMove->HopStreak : -1);
 	}
 #endif
 }

@@ -19,7 +19,9 @@ The owner speaks Turkish, reply in Turkish. They delegate everything and judge p
   relaunch it.
 - Git: local commits are fine, end the message with a co-author line of your own. Remote since 2026-09-26:
   `origin` = https://gitlab.com/sologp-group/sherkillgodot (private, Git LFS). The real branch is `master`; the remote
-  `main` only holds GitLab's initial commit. Push only when the owner asks; never force-push.
+  `main` only holds GitLab's initial commit. Second remote `github` = https://github.com/SherlockFP/killgodot (private,
+  for Claude Code cloud sessions; in the cloud environment set `GIT_LFS_SKIP_SMUDGE=1`, since the free LFS bandwidth
+  is 10 GB/month and the assets are ~2.6 GB). Push only when the owner asks; never force-push.
 - Free assets are allowed (any licence, record the risk in the docs); no purchases, accounts or logins.
 - Role secrecy: appearance is per player, never per role.
 - "Keep it simple but fun": chores 1–3 steps, 25–50 s.

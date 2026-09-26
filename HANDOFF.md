@@ -17,7 +17,9 @@ The owner speaks Turkish, reply in Turkish. They delegate everything and judge p
 - Work in the background: nothing may open a window or steal focus (they play games meanwhile). Headless only
   (`UnrealEditor-Cmd`, `-game -nullrhi -RenderOffScreen`, Blender `--background`). If they closed the editor, do not
   relaunch it.
-- Git: local commits are fine, end the message with a co-author line of your own. **Never push.**
+- Git: local commits are fine, end the message with a co-author line of your own. Remote since 2026-09-26:
+  `origin` = https://gitlab.com/sologp-group/sherkillgodot (private, Git LFS). The real branch is `master`; the remote
+  `main` only holds GitLab's initial commit. Push only when the owner asks; never force-push.
 - Free assets are allowed (any licence, record the risk in the docs); no purchases, accounts or logins.
 - Role secrecy: appearance is per player, never per role.
 - "Keep it simple but fun": chores 1–3 steps, 25–50 s.

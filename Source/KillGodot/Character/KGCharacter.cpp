@@ -269,6 +269,8 @@ AKGCharacter::AKGCharacter(const FObjectInitializer& ObjectInitializer)
 	AnimFalling = FindAnim(TEXT("A_KG_Jump_Loop"));
 	AnimAttack = FindAnim(TEXT("A_KG_Sword_Attack"));
 	AnimDeath = FindAnim(TEXT("A_KG_Death01"));
+	AnimHitChest = FindAnim(TEXT("A_KG_Hit_Chest"));
+	AnimHitHead = FindAnim(TEXT("A_KG_Hit_Head"));
 	auto FindArmsAnim = [](const TCHAR* Clip) -> UAnimSequence*
 	{
 		ConstructorHelpers::FObjectFinder<UAnimSequence> Finder(*KGFP2::AnimPath(Clip));
@@ -499,6 +501,7 @@ void AKGCharacter::CalcCamera(float DeltaTime, FMinimalViewInfo& OutResult)
 
 void AKGCharacter::UpdateBodyAnimation(float DeltaSeconds)
 {
+	HitMarkerTime = FMath::Max(0.0f, HitMarkerTime - DeltaSeconds);
 	if (ArmsOneShotRemaining > 0.0f)
 	{
 		// When it runs out, Tick's arms state machine blends back into the right loop (knife/fists/carry/hands).
@@ -1440,7 +1443,50 @@ float AKGCharacter::TakeDamage(float DamageAmount, const FDamageEvent& DamageEve
 	{
 		Emote->ServerStop(EKGEmoteStop::Damaged);   // being hit ends any emote
 	}
-	return Health->ApplyDamage(Incoming, DamageCauser, Type);
+	const float Applied = Health->ApplyDamage(Incoming, DamageCauser, Type);
+	if (Applied > 0.0f)
+	{
+		if (!IsDead())
+		{
+			MulticastHitReact(DamageCauser ? DamageCauser->GetActorLocation() : GetActorLocation());
+		}
+		// Only a villager's own swing earns a marker (traps, wolves and the Mist have no one to tell).
+		if (AKGCharacter* Attacker = Cast<AKGCharacter>(DamageCauser); Attacker && Attacker != this && Attacker->IsPlayerControlled())
+		{
+			Attacker->ClientHitConfirm(IsDead());
+		}
+		UE_LOG(LogKillGodot, Log, TEXT("KG_HEALTH %s took %.0f from %s -> %.0f"), *GetName(), Applied, *GetNameSafe(DamageCauser),
+		       Health->GetHealth());
+	}
+	return Applied;
+}
+
+void AKGCharacter::MulticastHitReact_Implementation(FVector_NetQuantize From)
+{
+	if (IsDead())
+	{
+		return;
+	}
+	// Hit from the front snaps the head back; from the side or behind the chest takes it.
+	const FVector ToSource = (FVector(From) - GetActorLocation()).GetSafeNormal2D();
+	UAnimSequence* Clip = FVector::DotProduct(ToSource, GetActorForwardVector()) > 0.5f && AnimHitHead ? AnimHitHead.Get() : AnimHitChest.Get();
+	if (Clip && !IsLocallyControlled())
+	{
+		CurrentBodyAnim = Clip;
+		PlayBodyClip(Clip, false, 0.05f);
+		BodyOneShotRemaining = FMath::Min(Clip->GetPlayLength(), 0.6f);
+	}
+	KGAudio::At(this, TEXT("S_Punch"), GetActorLocation() + FVector(0.0f, 0.0f, 60.0f), IsLocallyControlled() ? 0.9f : 0.7f);
+	if (IsLocallyControlled() && Viewmodel)
+	{
+		Viewmodel->AddRecoil(FVector(-30.0, 0.0, 0.0), FVector(25.0, 0.0, 0.0));   // the victim's view jolts
+	}
+}
+
+void AKGCharacter::ClientHitConfirm_Implementation(bool bKilled)
+{
+	HitMarkerTime = bKilled ? 0.55f : 0.3f;
+	bHitMarkerKill = bKilled;
 }
 
 void AKGCharacter::HandleDeath(AActor* Killer, FName DamageType)

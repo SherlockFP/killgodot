@@ -1343,6 +1343,23 @@ namespace
 			P.Poly(MakeArrayView(Arrow), WithAlpha(ImpatientColor, 0.95f * A), WithAlpha(ImpatientColor, 0.95f * A));
 		}
 
+		// Hit marker: four short diagonal ticks when our swing landed (crimson and wider when it killed).
+		if (const float HitT = F.Pawn->GetHitMarkerTime(); HitT > 0.0f)
+		{
+			const bool bKill = F.Pawn->WasHitMarkerKill();
+			const float A = Saturate(HitT / 0.15f);
+			const float Grow = 1.0f + (bKill ? 0.35f : 0.2f) * (1.0f - Saturate(HitT / (bKill ? 0.55f : 0.3f)));
+			const float In = 9.0f * S * Grow;
+			const float Out = (bKill ? 22.0f : 17.0f) * S * Grow;
+			const FLinearColor Col = WithAlpha(bKill ? ImpatientColor : FLinearColor::White, 0.95f * A);
+			for (int32 Q = 0; Q < 4; ++Q)
+			{
+				const float Ang = PI * 0.25f + Q * PI * 0.5f;
+				const FVector2D D(FMath::Cos(Ang), FMath::Sin(Ang));
+				P.Line(Ctr + D * In, Ctr + D * Out, FMath::Max(2.0f, 2.6f * S), Col, true);
+			}
+		}
+
 		// Chore in progress: radial ring + label.
 		const AKGTaskStation* Task = F.Pawn->GetActiveTask();
 		FString TaskName = Task ? Task->TaskName : FString();

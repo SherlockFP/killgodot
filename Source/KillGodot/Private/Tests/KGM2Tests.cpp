@@ -45,6 +45,13 @@ bool FKGHealthTest::RunTest(const FString& Parameters)
 	TestEqual(TEXT("Never below zero"), UKGHealthComponent::ComputeHealth(20.0f, 1000.0f, 100.0f), 0.0f);
 	TestEqual(TEXT("Heal is capped"), UKGHealthComponent::ComputeHealth(90.0f, -40.0f, 100.0f), 100.0f);
 
+	// Second wind: nothing before the delay, Rate x Dt after it, never above the cap, never for the dead.
+	TestEqual(TEXT("No regen right after a hit"), UKGHealthComponent::RegenStep(40.0f, 5.0f, 1.0f, 12.0f, 1.5f, 60.0f), 40.0f);
+	TestEqual(TEXT("Regen after the delay"), UKGHealthComponent::RegenStep(40.0f, 12.0f, 2.0f, 12.0f, 1.5f, 60.0f), 43.0f);
+	TestEqual(TEXT("Regen stops at the cap"), UKGHealthComponent::RegenStep(59.5f, 30.0f, 1.0f, 12.0f, 1.5f, 60.0f), 60.0f);
+	TestEqual(TEXT("No regen above the cap"), UKGHealthComponent::RegenStep(80.0f, 30.0f, 1.0f, 12.0f, 1.5f, 60.0f), 80.0f);
+	TestEqual(TEXT("The dead stay dead"), UKGHealthComponent::RegenStep(0.0f, 30.0f, 1.0f, 12.0f, 1.5f, 60.0f), 0.0f);
+
 	UKGHealthComponent* Health = NewObject<UKGHealthComponent>();
 	TestEqual(TEXT("Applied damage returned"), Health->ApplyDamage(35.0f, nullptr, NAME_None), 35.0f);
 	Health->ApplyDamage(35.0f, nullptr, NAME_None);

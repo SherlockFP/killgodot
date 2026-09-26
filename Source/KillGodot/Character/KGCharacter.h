@@ -84,6 +84,9 @@ public:
 
 	UFUNCTION(BlueprintPure, Category = "KillGodot|Character")
 	UKGHealthComponent* GetHealth() const { return Health; }
+	/** Owner HUD: seconds left on the crosshair hit marker (0 = none) and whether that hit killed. */
+	float GetHitMarkerTime() const { return HitMarkerTime; }
+	bool WasHitMarkerKill() const { return bHitMarkerKill; }
 
 	UFUNCTION(BlueprintPure, Category = "KillGodot|Character")
 	UKGEmoteComponent* GetEmote() const { return Emote; }
@@ -193,6 +196,10 @@ protected:
 	/** After death: the player's controller becomes a free-flying ghost spectator. */
 	void BecomeGhost();
 	UFUNCTION(NetMulticast, Unreliable) void MulticastSwing(bool bBackstab);
+	/** Non-lethal hit: everyone sees the body flinch (A_KG_Hit_Chest / A_KG_Hit_Head) and hears the thud. */
+	UFUNCTION(NetMulticast, Unreliable) void MulticastHitReact(FVector_NetQuantize From);
+	/** To the attacker only: their hit landed (crosshair hit marker; red when it killed). */
+	UFUNCTION(Client, Unreliable) void ClientHitConfirm(bool bKilled);
 
 	/** Server: the camera origin a client claims must be near where we think its head is. */
 	FVector ValidatedViewStart(const FVector& Claimed) const;
@@ -341,6 +348,8 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "Animation") TObjectPtr<UAnimSequence> AnimFalling;
 	UPROPERTY(EditAnywhere, Category = "Animation") TObjectPtr<UAnimSequence> AnimAttack;
 	UPROPERTY(EditAnywhere, Category = "Animation") TObjectPtr<UAnimSequence> AnimDeath;
+	UPROPERTY(EditAnywhere, Category = "Animation") TObjectPtr<UAnimSequence> AnimHitChest;
+	UPROPERTY(EditAnywhere, Category = "Animation") TObjectPtr<UAnimSequence> AnimHitHead;
 	/** First-person arms: the villager mesh in its "holding a weapon" pose, head and legs hidden. */
 	UPROPERTY(EditAnywhere, Category = "Animation") TObjectPtr<UAnimSequence> AnimArmsIdle;
 	UPROPERTY(EditAnywhere, Category = "Animation") TObjectPtr<UAnimSequence> AnimArmsAttack;
@@ -363,6 +372,8 @@ private:
 
 	float BodyOneShotRemaining = 0.0f;
 	float ArmsOneShotRemaining = 0.0f;
+	float HitMarkerTime = 0.0f;
+	bool bHitMarkerKill = false;
 	int32 AttackAlternate = 0;
 	void PlayArmsOneShot(UAnimSequence* Anim);
 	UAnimSequence* CurrentArmsIdle() const { return (bShowingBlade || !AnimArmsEmptyIdle) ? AnimArmsIdle : AnimArmsEmptyIdle; }

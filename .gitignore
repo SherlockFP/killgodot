@@ -24,3 +24,6 @@ Tools/**/__pycache__/
 # Only processed, palette-fitted assets under Content/ are versioned.
 Art/Source/
 Saved/
+
+# Raw chat transcripts (large, local only)
+Handoff/History/

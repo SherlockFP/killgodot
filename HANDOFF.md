@@ -4,6 +4,9 @@ For the next AI assistant (any tool). Read this first, then `CLAUDE.md` (project
 `Docs/Process/AgentPlaybook.md` (how to work: director + parallel workers, ownership map, brief template,
 verification, design direction), then `Docs/Backlog.md`.
 
+**Where it stopped and what the owner asked for over time:** `Handoff/ChatHistory.md`. Raw chat transcripts (local, not
+in git): `Handoff/History/`.
+
 ## What this is
 **KillGo** (internal/code name KillGodot): first-person online social deduction game (Town of Salem × GMod Murder ×
 Among Us), 6–20 players, listen-server P2P (EOS later). **UE 5.8.3**, C++ in `Source/KillGodot/`, Blender 5.2 for

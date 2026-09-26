@@ -215,7 +215,9 @@ bool KGTrapperBot::Update(AKGBotController* Bot, AKGCharacter* Me, float DeltaSe
 	{
 		G.Elapsed += DeltaSeconds;
 		AActor* C = G.Container.Get();
-		if (G.Elapsed > 18.0f || (!G.AbilityId.IsNone() && !H) || (G.AbilityId == TEXT("Mimic") && !C) || (G.AbilityId.IsNone() && !AKGMimicTrap::IsContainer(C)))
+		// Goals are only planned by day: one still unfinished when the night comes is dropped, not resumed after the
+		// meeting (a villager wandering off to rummage in the dark, the Trapper walking back to a stale stand).
+		if (GS->GetPhase() != EKGPhase::Day || G.Elapsed > 18.0f || (!G.AbilityId.IsNone() && !H) || (G.AbilityId == TEXT("Mimic") && !C) || (G.AbilityId.IsNone() && !AKGMimicTrap::IsContainer(C)))
 		{
 			G.bActive = false;   // give up quietly
 			Bot->StopMovement();

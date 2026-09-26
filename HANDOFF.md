@@ -60,6 +60,12 @@ the code is in, but the balance run is missing. Uncommitted: `Source/KillGodot/A
 2. Two-process network smoke (arm → victim opens → bite → reset) and the shots.
 3. Write the Result section, then commit.
 
+**Cloud session 2026-09-26 (no UE, code read only):** `Docs/Iterations/SPRINT-041-BalanceAnalysis.md` and
+`SPRINT-041-CodeAudit.md`. The main finding: at `kg.Match.Speed 20` the phase clock is scaled but the bot vote delay
+(`KGBotController.cpp` ~917, 4–14 real seconds) is not. Meetings end before any bot accuses, so the Impatient win by
+attrition *whatever the killer is*. Run the Enforcer control first. If it also gives ~0 % Town, apply patch P1 (speed
+3 in the script) and P2 (vote timing/latch) from the analysis before judging the Trapper. P3–P5 need the owner's OK.
+
 ## Queue (in the owner's priority order)
 1. Finish SPRINT-041 (above).
 2. SPRINT-042 `Docs/Iterations/SPRINT-042-PhysicalChess.md`: a 3D board at the tables, hold-E pieces (Source style),

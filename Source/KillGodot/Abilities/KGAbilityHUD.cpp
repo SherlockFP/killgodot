@@ -21,6 +21,12 @@ namespace KGAbilityHUDPrivate
 	const FLinearColor Dim(0.62f, 0.58f, 0.55f, 1.0f);
 	const FLinearColor Good(0.45f, 0.9f, 0.5f, 1.0f);
 
+	/** Never instantiated: only names AHUD::Canvas from a derived context (the one legal way to reach a protected member). */
+	struct FHudCanvasAccess : public AHUD
+	{
+		static TObjectPtr<UCanvas> AHUD::* Member() { return &FHudCanvasAccess::Canvas; }
+	};
+
 	void Box(UCanvas* C, float X, float Y, float W, float H, const FLinearColor& Col)
 	{
 		FCanvasTileItem T(FVector2D(X, Y), FVector2D(W, H), Col);
@@ -96,8 +102,13 @@ namespace KGAbilityHUDPrivate
 void KGAbilityHUD::Draw(AHUD* Hud, UCanvas* PostCanvas)
 {
 	using namespace KGAbilityHUDPrivate;
-	// AHUD::Canvas is protected, so the canvas handed to the post-render hook is used.
-	UCanvas* Canvas = PostCanvas;
+	// OnHUDPostRender hands out the DebugCanvas (drawn in front of Slate, but missing from HighResShot); the HUD's own
+	// Canvas is protected, so it is read through a derived-class member pointer, with the debug canvas as a fallback.
+	UCanvas* Canvas = Hud ? (Hud->*KGAbilityHUDPrivate::FHudCanvasAccess::Member()).Get() : nullptr;
+	if (!Canvas)
+	{
+		Canvas = PostCanvas;
+	}
 	APlayerController* PC = Hud ? Hud->PlayerOwner.Get() : nullptr;
 	if (!PC || !Canvas || !GEngine || !PC->IsLocalController())
 	{

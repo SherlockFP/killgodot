@@ -54,7 +54,7 @@ class Shots:
             (1.5, lambda: self.turn(90)),
             (0.5, lambda: self.cmd("kg.Trapper.Stage snare")),
             (1.8, lambda: self.shot("snare")),
-            (1.0, lambda: self.turn(90)),
+            (1.0, lambda: self.turn(45)),   # 90 would land back on the rest chest (360 degrees)
             (0.5, lambda: self.cmd("kg.Trapper.Stage ui")),
             (1.5, lambda: self.shot("ui")),
             (3.0, lambda: self.cmd("quit")),

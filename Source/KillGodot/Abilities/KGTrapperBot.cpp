@@ -33,6 +33,7 @@ namespace KGTrapperBotPrivate
 		float NextRummage = 0.0f;
 		TArray<TWeakObjectPtr<AActor>> Rummaged;
 		TSet<TWeakObjectPtr<const AActor>> Avoided;
+		TMap<FName, float> RetryAt;            // an ability denied (seen / no target) rests so the others get a turn
 	};
 
 	TMap<TWeakObjectPtr<AKGBotController>, FBrain>& Brains()
@@ -91,13 +92,14 @@ namespace KGTrapperBotPrivate
 		return Best;
 	}
 
-	bool PlanTrapper(AKGBotController* Bot, AKGCharacter* Me, AKGAbilityHolder* H, FBrain& Brain)
+	bool PlanTrapper(AKGBotController* Bot, AKGCharacter* Me, AKGAbilityHolder* H, FBrain& Brain, float Now)
 	{
 		UWorld* World = Me->GetWorld();
 		const FVector Here = Me->GetActorLocation();
 		for (const FKGAbilityState& S : H->GetStates())
 		{
-			if (S.Charges <= 0 || S.Cooldown.RemainingSeconds > 0.0f)
+			const float* Retry = Brain.RetryAt.Find(S.AbilityId);
+			if (S.Charges <= 0 || S.Cooldown.RemainingSeconds > 0.0f || (Retry && Now < *Retry))
 			{
 				continue;
 			}
@@ -246,7 +248,11 @@ bool KGTrapperBot::Update(AKGBotController* Bot, AKGCharacter* Me, float DeltaSe
 		{
 			++Stats().Arms;
 		}
-		Brain.Think = V == EKGAbilityDeny::None ? 3.0f : 8.0f;   // seen / no target: try elsewhere later
+		else
+		{
+			Brain.RetryAt.Add(G.AbilityId, Now + 25.0f);   // seen / no target: the next ability gets a turn first
+		}
+		Brain.Think = V == EKGAbilityDeny::None ? 3.0f : 4.0f;
 		return true;
 	}
 
@@ -258,7 +264,7 @@ bool KGTrapperBot::Update(AKGBotController* Bot, AKGCharacter* Me, float DeltaSe
 	Brain.Think = 2.0f;
 	if (H && H->GetStates().Num() > 0 && GS->GetPhase() == EKGPhase::Day)
 	{
-		return PlanTrapper(Bot, Me, H, Brain);
+		return PlanTrapper(Bot, Me, H, Brain, Now);
 	}
 	if (!IsImpatient(Me) && GS->GetPhase() == EKGPhase::Day)
 	{

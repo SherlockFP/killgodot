@@ -498,7 +498,20 @@ void UKGAbilitySubsystem::TickSmoke(float DeltaTime)
 		{
 			UE_LOG(LogKillGodot, Log, TEXT("KG_TRAPPER_SMOKE Host unseen-rule FAILED (armed in plain sight)"));
 		}
-		Other->TeleportTo(SmokeSpot + FVector(-3000.0, -2400.0, 200.0), FRotator::ZeroRotator);   // far away
+		{
+			// Far away: TeleportTo refuses a blocked spot (the map keeps changing), so try ground points until one takes.
+			bool bMoved = false;
+			for (int32 k = 0; k < 16 && !bMoved; ++k)
+			{
+				const double Ang = 3.8 + k * 0.785;
+				const double Rad = 3000.0 + 500.0 * (k / 8);
+				const FVector G = FKGDev::GroundAt(World, FVector2D(SmokeSpot.X + Rad * FMath::Cos(Ang), SmokeSpot.Y + Rad * FMath::Sin(Ang)), SmokeSpot.Z);
+				bMoved = Other->TeleportTo(G + FVector(0.0, 0.0, 100.0), FRotator::ZeroRotator) &&
+				         FVector::Dist2D(Other->GetActorLocation(), SmokeSpot) > 2000.0;
+			}
+			UE_LOG(LogKillGodot, Log, TEXT("KG_TRAPPER_SMOKE Host client sent away moved=%d dist=%.0f"), bMoved ? 1 : 0,
+			       FVector::Dist2D(Other->GetActorLocation(), SmokeSpot));
+		}
 		Next(3);
 		return;
 	case 3:
@@ -508,6 +521,14 @@ void UKGAbilitySubsystem::TickSmoke(float DeltaTime)
 		}
 		if (Use(TEXT("Mimic"), Chest->GetComponentsBoundingBox(true).GetCenter()) != EKGAbilityDeny::None)
 		{
+			for (TActorIterator<AKGCharacter> It(World); It; ++It)
+			{
+				if (*It != Me && !It->IsDead() && FVector::Dist(It->GetActorLocation(), Me->GetActorLocation()) < 1500.0)
+				{
+					UE_LOG(LogKillGodot, Log, TEXT("KG_TRAPPER_SMOKE Host watcher %s at %.0f cm"), *It->GetName(),
+					       FVector::Dist(It->GetActorLocation(), Me->GetActorLocation()));
+				}
+			}
 			Finish(false, TEXT("could not arm the mimic"));
 			return;
 		}

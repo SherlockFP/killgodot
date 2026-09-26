@@ -25,5 +25,3 @@ Tools/**/__pycache__/
 Art/Source/
 Saved/
 
-# Raw chat transcripts (large, local only)
-Handoff/History/

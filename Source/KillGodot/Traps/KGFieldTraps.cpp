@@ -176,7 +176,7 @@ void AKGSnareTrap::OnFire()
 	{
 		if (UKGHealthComponent* H = V->GetHealth())
 		{
-			const float Amount = FMath::Min(TrapDef.Damage, H->GetHealth() - 5.0f);
+			const float Amount = FMath::Min(TrapDef.Damage, H->GetHealth() - KGTrapperTuning::SnareMinHealthLeft);
 			if (Amount > 0.0f)
 			{
 				H->ApplyDamage(Amount, this, TEXT("Snare"));

@@ -135,6 +135,8 @@ namespace KGTrapperTuning
 	constexpr float FlinchSpeedCmS = 250.0f;
 	constexpr float FlinchRadiusCm = 140.0f;
 	constexpr float SnareDamage = 25.0f;
+	/** A snare never takes the victim below this (Docs/02_Roles.md "Tuzakçı": "5 HP altına indirmez"). */
+	constexpr float SnareMinHealthLeft = 5.0f;
 	constexpr float SnareHoldSecs = 4.0f;
 	constexpr float TripwireRearmSecs = 8.0f;
 	/** Snares and tripwires show to everyone for this long after arming, then only to the Trapper. */
